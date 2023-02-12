@@ -18,7 +18,7 @@ function Vendor() {
           <Component.Sildebar />
           <motion.div
             animate={{
-              width: isOpen ? `calc(100% - 300px)` : `calc( 100% - 60px )`,
+              width: isOpen ? `calc(100% - 270px)` : `calc( 100% - 60px )`,
               transition: {
                 duration: 0.5,
                 type: "spring",

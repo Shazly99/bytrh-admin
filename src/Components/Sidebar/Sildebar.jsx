@@ -39,7 +39,7 @@ const Sidebar = ({ children }) => {
       <div className="main-container ">
         <motion.div
           animate={{
-            width: isOpen ? "300px" : "50px",
+            width: isOpen ? "270px" : "50px",
             transition: {
               duration: 0.5,
               type: "spring",
@@ -62,6 +62,7 @@ const Sidebar = ({ children }) => {
                     key={img.logo}
                   >
                     <img src={img.logo} className="w-100" />
+                    <h3>Baytrh</h3>
                   </motion.h1>
                 )}
                 <div className="bars">

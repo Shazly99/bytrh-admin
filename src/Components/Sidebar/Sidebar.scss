@@ -26,6 +26,14 @@
         .logo {
             font-size: 18px;
             line-height: 0;
+            padding: 30px 60px 0px 60px;
+            width: 170px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: $colorRed-0;
+            user-select: none;
         }
 
         .bars {
