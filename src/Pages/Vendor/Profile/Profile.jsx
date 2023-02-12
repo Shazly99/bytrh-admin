@@ -65,7 +65,7 @@ function Profile() {
               </Col>
             </Row>
             <div className='d-flex justify-content-center align-content-center my-5'>
-              <Component.ButtonBase title={"Update Information"} bg={"danger"} path="/venderProfile " />
+              <Component.ButtonBase title={"Update Information"} bg={"primary"} path="/venderProfile " />
             </div>
 
           </Form>
@@ -98,7 +98,7 @@ function Profile() {
               </Form>
             </Modal.Body>
             <Modal.Footer className='d-flex justify-content-center align-items-center  p-0 m-0 '>
-                <Component.ButtonBase onclick={handleClose} title={'Update Password'} bg={'danger'} /> 
+                <Component.ButtonBase onclick={handleClose} title={'Update Password'} bg={'primary'} /> 
             </Modal.Footer>
           </Modal>
         </div>

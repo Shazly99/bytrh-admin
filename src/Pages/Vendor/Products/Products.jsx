@@ -16,7 +16,7 @@ function Products() {
   return (
     <>
       <div className="app__products ">
-        <Component.ButtonBase onclick={test} title={"Add new product"}  bg={"danger"} icon={<Icons.add />} path="/venderProducts/addProduct" />
+        <Component.ButtonBase onclick={test} title={"Add new product"}  bg={"primary"} icon={<Icons.add />} path="/venderProducts/addProduct" />
         <div className="app__products-table">
           <Component.ProductsTable />
         </div>

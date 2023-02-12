@@ -11,7 +11,7 @@ function SubUsers() {
   return (
     <>
       <div className="app__order">
-        <Component.ButtonBase title={"Add Sub User"} bg={"danger"} icon={<Icons.add />} path="/venderSubuser/addUser" />
+        <Component.ButtonBase title={"Add Sub User"} bg={"primary"} icon={<Icons.add />} path="/venderSubuser/addUser" />
         <div className="app__order-table">
           <Component.UserTable />
         </div>

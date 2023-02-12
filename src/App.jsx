@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Component from './constants/Component';
 import './style/App.scss';
+import VenderContext  from './context/Store';
 
 function App() {
 
@@ -49,8 +50,10 @@ function App() {
     }
   ])
   return (
-    <> 
-      <RouterProvider router={root} />
+    <>
+      <VenderContext>
+        <RouterProvider router={root} />
+      </VenderContext>
     </>
   );
 }

@@ -59,7 +59,7 @@ const AddUser = () => {
                                 </Col>
                             </Row>
                             <div className='d-flex justify-content-center align-content-center my-5'>
-                                <Component.ButtonBase title={"Add Sub User"} bg={"danger"} icon={<Icons.add />} path="/venderProducts/addProduct" />
+                                <Component.ButtonBase title={"Add Sub User"} bg={"primary"} icon={<Icons.add />} path="/venderProducts/addProduct" />
                             </div>
 
                         </Form>

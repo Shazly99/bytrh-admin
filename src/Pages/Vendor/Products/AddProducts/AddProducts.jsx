@@ -144,7 +144,7 @@ const AddProducts = () => {
                                         </Col>
                                     </Row>
                                     <div className='d-flex justify-content-center align-content-center my-5'>
-                                        <Component.ButtonBase title={"Add new product"} bg={"danger"} icon={<Icons.add />} path="/venderProducts/addProduct" />
+                                        <Component.ButtonBase title={"Add new product"} bg={"primary"} icon={<Icons.add />} path="/venderProducts/addProduct" />
                                     </div>
 
                                 </Form>

@@ -3,18 +3,19 @@ import { AnimatePresence, motion } from "framer-motion";
 import './Sidebar.scss'
 import img from '../../assets/Img'
 import routes from './route.js';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import { icons } from 'react-icons';
 import Icons from "../../constants/Icons";
+import { VendersContext } from "../../context/Store";
 
 
 
 
 const Sidebar = ({ children }) => {
-  const [isOpen, setIsOpen] = useState(true);
-  const toggle = () => setIsOpen(!isOpen);
+  let {  isOpen, toggle } = useContext(VendersContext);
+ 
 
 
   const showAnimation = {
@@ -86,7 +87,7 @@ const Sidebar = ({ children }) => {
                         {root.icon}
                       </div>
                       {
-                        !isOpen && <ReactTooltip anchorId={root.name} data-tip={root.name} place="right" style={{ zIndex: 88888888, background: '#BF1E30' }} />
+                        !isOpen && <ReactTooltip anchorId={root.name} data-tip={root.name} place="right" style={{ zIndex: 88888888, background: '#1B578D' }} />
                       }
 
                       <AnimatePresence>

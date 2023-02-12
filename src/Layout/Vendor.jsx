@@ -1,19 +1,38 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
 import Component from '../constants/Component';
+import { VendersContext } from '../context/Store';
+import { motion } from 'framer-motion';
 
 function Vendor() {
+  let { isOpen } = useContext(VendersContext);
+
+  useEffect(() => {
+    console.log(isOpen);
+  }, [isOpen])
   return (
     <>
       <div className="vender overflow-hidden">
         <div className='d-flex'>
           <Component.Sildebar />
-          <main className='w-100  m-0 p-0'>
-            <Component.Navber />
-            <div className='p-2'>
-              <Outlet></Outlet>
-            </div>
-          </main>
+          <motion.div
+            animate={{
+              width: isOpen ? `calc(100% - 300px)` : `calc( 100% - 60px )`,
+              transition: {
+                duration: 0.5,
+                type: "spring",
+                damping: 10,
+              },
+            }}
+          >
+            <main className='w-100  m-0 p-0'>
+              <Component.Navber />
+              <div className='p-2'>
+                <Outlet></Outlet>
+              </div>
+            </main>
+          </motion.div>
         </div>
       </div>
     </>
