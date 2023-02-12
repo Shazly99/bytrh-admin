@@ -1,0 +1,128 @@
+@import './varibale';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&family=Roboto+Mono:wght@200;300;400;500;600;700&family=Roboto:wght@700;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap');
+
+.color-red {
+    color: $colorRed-0 !important;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+
+// button in folder (component / button ) shared in all project 
+.baseBtn {
+    padding: 20px;
+
+    button {
+        font-family: $fontBase !important;
+        font-style: normal;
+        font-weight: 400 !important;
+        font-size: 18px !important;
+        line-height: 27px;
+        color: #FFFFFF;
+        gap: 12px;
+        padding: 12px 45px !important;
+    }
+}
+
+// h1 h2 base style ( component / header ) shared in all project when wonted
+.app__baseHeader { 
+    h2,
+    h1 {
+        font-family: $fontBase;
+        font-style: normal;
+        color: $colorDark;
+    }
+
+    h1 {
+        font-weight: 500;
+        font-size: 31px;
+        line-height: 46px;
+        margin-top: 40px !important;
+
+    }
+
+    h2 {
+        margin-top: 20px !important;
+        font-weight: 400;
+        font-size: 21px;
+        line-height: 32px;
+    }
+}
+
+// input textarea select option 
+input,
+textarea,
+select,
+option {
+    background: rgba($color: $colorGrey-1, $alpha: 0.1) !important;
+    border: none !important;
+    border-radius: $radius-sm !important;
+
+}
+
+
+// table style
+
+thead {
+    overflow: hidden;
+
+    >tr {
+        border-radius: 15px !important;
+
+        >th {
+            font-family: $fontBase;
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px !important;
+            line-height: 27px !important; 
+
+            text-align: center;
+            color: #4A4A4A;
+            padding: 15px 0 !important;
+        }
+    }
+}
+
+td {
+    >div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        margin: auto;
+        // height: 100px !important;
+        gap: 30px;
+        font-family: $fontBase;
+        font-style: normal;
+        font-weight: 400 !important;
+        font-size: 21px !important;
+        line-height: 32px !important;
+        /* identical to box height */
+
+        text-align: center;
+
+        /* Black */
+
+        color: #000000;
+
+        >svg {
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        svg:first-child {
+            color: $colorGreen;
+        }
+        
+        svg:last-child {
+            color: $colorRed-0;
+        }
+    }
+}
+
+
+td{
+    white-space: nowrap !important;
+}

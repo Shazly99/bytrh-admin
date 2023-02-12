@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto+Mono:wght@200;300;400;500;600;700&family=Roboto:wght@700;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap');
+// colors
+$colorRed-0: #BF1E30;
+$colorGrey-0: #4A4A4A;
+$colorGrey-1: #999999;
+$colorDark: #000000;
+$colorLight: #F9F9F9;
+$colorLight-0: #FFFFFF;
+$colorLight-1: #F7F9FB;
+// Status Colors
+$colorGreen: #40AB45;
+$colorRed-1: #E20000;
+$colorBlue-0: #3182CE;
+
+
+// font size
+$fontSize: 39px;
+$fontBase: 'Poppins', sans-serif;
+// shadow
+$shadow: 0px 6px 7px rgba(188, 188, 188, 0.16);
+;
+$shadow-navbar: 0px 4px 4px rgba(183, 183, 183, 0.47);
+// border radius
+$radius-sm: 5px;
+$radius-lg: 10px;
+
+
+@mixin flex($display, $justify, $align, $dir) {
+    display: $display;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $dir ;
+}
+
+@mixin size($w, $h) {
+    width: $w;
+    height: $h;
+}
+
+
+.txt_delivery,
+.txt_delivered,
+.txt_pending,
+.txt_shipped,
+.txt_rejected {
+    /* Button */
+    font-family:$fontBase;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    /* identical to box height */
+    text-align: center;
+
+}
+
+.txt_pending {
+    color: #FFC107;
+}
+
+.txt_shipped {
+    color: #9804F0;
+}
+
+.txt_delivery {
+    color: #006300;
+}
+
+.txt_delivered {
+    color: #40AB45;
+}
+
+.txt_rejected {
+    color: #E20000;
+}
+
+/** 
+<Col xl={3} lg={4} md={6} sm={12}   className='bg-danger'>
+    <h1>shzloka</h1>
+</Col>
+ */

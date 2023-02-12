@@ -1,0 +1,77 @@
+@import '../../../style/varibale';
+
+
+.app__dashboard {
+    .app__dashboard_summary {
+        margin-top: 16px !important;
+
+        .app__summary {
+            background-color: $colorDark;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            padding: 16px;
+            border-radius: $radius-lg;
+
+            h5 {
+                font-family: $fontBase;
+                font-style: normal;
+                font-weight: 400 !important;
+                font-size: 25px !important;
+                line-height: 38px !important;
+                color: $colorLight-0;
+            }
+
+            span {
+                font-family: $fontBase;
+                font-style: normal;
+                font-weight: 500;
+                font-size: 31px;
+                line-height: 46px;
+                color: $colorRed-0;
+            }
+        }
+    }
+
+    .app__dashboard_chart {
+        .container {
+            width: 100% !important;
+        }
+
+        margin-top: 48px !important;
+        background-color: $colorLight-1;
+        padding: 24px 0px !important;
+        border-radius: 16px;
+
+        h1 {
+            font-family: $fontBase !important;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 20px;
+            /* Black/100% */
+            color: #1C1C1C;
+        }
+
+        h2 {
+            font-family: $fontBase !important;  
+            font-style: normal;
+            font-weight: 400;
+            font-size: 20.52px;
+            line-height: 31px;  
+            color: #BF1E30; 
+        }
+    }
+
+    .app__dashboard_today-order {}
+}
+
+.apexcharts-bar-series.apexcharts-plot-series .apexcharts-series:nth-child(2) path {
+    clip-path: inset(0% 0% -11% 0% round 16px);
+}
+
+.apexcharts-legend-marker {
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50% !important;
+}

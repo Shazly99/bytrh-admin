@@ -1,0 +1,30 @@
+@import '../../../style/varibale';
+
+
+.app__profile-model-a {
+    font-family: $fontBase;
+    font-style: normal;
+    font-weight: 400 !important;
+    font-size: 18px !important;
+    line-height: 27px !important;
+    /* identical to box height */
+    text-decoration-line: underline;
+    color: $colorRed-0;
+    cursor: pointer;
+    text-decoration: underline !important;
+    &:hover{
+        color: $colorRed-0;
+    }
+}
+.modal-content{
+    
+    .btn-close{ 
+        border-radius: 50% !important;
+        border: 1px solid #000;
+        font-size: 15px !important;
+        color: #000 !important;
+        opacity: 1 !important;
+    }
+
+}
+ 

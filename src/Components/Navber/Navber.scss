@@ -1,0 +1,64 @@
+@import '../../style/varibale';
+
+.navbar {
+    box-shadow: $shadow-navbar;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .nav__notification {
+        background-color: $colorRed-0 ;
+        color: $colorLight;
+        border-radius: 5px;
+        padding: 8px 10px;
+        cursor: pointer;
+
+        &:hover {
+            color: $colorLight;
+        }
+    }
+}
+
+.btn__search {
+    border: none;
+    background-color: $colorRed-0;
+    border-radius: 5px !important;
+    position: relative;
+    left: 10px;
+    z-index: 999;
+    padding: 8px 18px;
+
+    svg {
+        color: $colorLight;
+        font-size: 25px;
+    }
+}
+
+.input__search {
+    padding-left: 20px !important;
+    background: #F1F1F1 !important;
+    border: none !important;
+    outline: none !important;
+    border-radius: 5px;
+}
+
+.form-control:focus {
+    outline: 0;
+    box-shadow: none !important;
+    border-color: $colorRed-0
+}
+
+.subNav{
+    .nav-link {
+        font-family: $fontBase;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 27px;
+        /* identical to box height */
+    }
+
+    .active {
+        color: $colorRed-0 !important;
+    }
+}

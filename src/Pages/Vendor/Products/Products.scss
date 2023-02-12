@@ -1,0 +1,96 @@
+@import '../../../style/varibale';
+
+
+.app__products {
+
+
+    .app__products-table {
+        margin-top: 22px;
+    }
+}
+
+.app__products-table {
+    
+}
+
+.pagination {
+    margin-bottom: 50px !important;
+
+    .Mui-selected {
+        color: $colorRed-0 !important;
+    }
+}
+
+.app__addprodects {
+
+
+    .app__addprodects__header-images {
+        .app__addprodects__img {
+            height: 210px;
+            background: rgba($color: $colorGrey-1, $alpha: 0.1) !important;
+            border-radius: $radius-sm;
+            color: $colorDark !important;
+            display: flex;
+            flex-direction: column;
+            margin-top: 15px;
+
+            svg {
+                color: $colorRed-0;
+            }
+
+            a {
+                font-family: $fontBase;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 27px;
+                color: $colorRed-0;
+                text-decoration: none;
+            }
+        }
+    }
+
+    .app__addprodects-form {
+        .app__addprodects-form-en {
+            margin-top: 32px;
+        }
+
+        .app__addprodects-form-ar {
+            margin-top: 32px;
+        }
+    }
+    input, select,option{
+        background: rgba($color: $colorGrey-1, $alpha: 0.1) !important;
+        border: none !important;
+        border-radius: $radius-sm !important; 
+        height: 50px !important;
+    
+    }
+    label {
+        font-family: $fontBase !important;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 21px !important;
+        line-height: 32px !important;
+        /* identical to box height */
+
+
+        /* Black */
+
+        color: #000000;
+
+    }
+}
+
+.app__products{
+    .app__products-table{ 
+        padding: 0 20px !important;
+        td {
+            >div {
+         
+                height: 100px !important;
+         
+            }
+        }
+    }
+}
