@@ -50,12 +50,15 @@ function App() {
     }
   ])
   return (
-    <>
+    <div>
       <VenderContext>
         <RouterProvider router={root} />
       </VenderContext>
-    </>
+    </div>
   );
 }
 
 export default App;
+
+
+// shazly
