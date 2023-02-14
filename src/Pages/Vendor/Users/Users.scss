@@ -1,15 +1,15 @@
 @import '../../../style/varibale';
 
 
-.app__products {
+.app__Users {
 
 
-    .app__products-table {
+    .app__Users-table {
         margin-top: 22px;
     }
 }
 
-.app__products-table {
+.app__Users-table {
     
 }
 
@@ -82,8 +82,8 @@
     }
 }
 
-.app__products{
-    .app__products-table{ 
+.app__Users{
+    .app__Users-table{ 
         padding: 0 20px !important;
         td {
             >div {
@@ -91,6 +91,30 @@
                 height: 100px !important;
          
             }
+        }
+    }
+}
+.app__Users{
+    .dropdown-toggle{
+        background-color: transparent !important;
+        color: rgba($color: $colorGrey-1, $alpha: 0.1) !important;
+        padding: calc(0.7rem + 1px) calc(1.25rem + 1px) !important;
+        // padding: 1.2rem 0.7rem !important;
+        border-radius: 0.425rem !important;
+        font-size: 0.8rem !important;
+        border-radius: 0.4rem;
+        outline: none !important;
+        border: none !important;
+        color: #7E8299 !important;
+        background-color: #eff2f5 !important;
+        font-weight: 600 !important;
+        box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+        &:hover{
+            color: #009ef7 !important;
+            border-color: var(--kt-primary-light);
+            background-color:#f1faff !important;
+            transition: color 0.2s ease;
+
         }
     }
 }
