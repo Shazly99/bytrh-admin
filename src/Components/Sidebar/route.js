@@ -7,8 +7,8 @@ const routes = [
       icon: <Icons.Dashboard size={20}/>,
     },
     {
-      path: "/venderProducts",
-      name: "Products",
+      path: "/user",
+      name: "Users",
       icon: <Icons.shop size={20}/>,
     },
     {

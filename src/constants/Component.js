@@ -3,14 +3,13 @@ import Vendor from '../Layout/Vendor';
 import Dashboard from './../Pages/Vendor/Dashboard/Dashboard.jsx';
 import DashboardClient from './../Pages/Client/Dashbord/Dashbord.jsx';
 import Orders from './../Pages/Vendor/Orders/Orders.jsx';
-import Products from './../Pages/Vendor/Products/Products';
+import Users from './../Pages/Vendor/Users/Users';
 import Profile from './../Pages/Vendor/Profile/Profile';
 import SubUsers from './../Pages/Vendor/SubUsers/SubUsers';
 import Navber from './../Components/Navber/Navber';
 import Sildebar from './../Components/Sidebar/Sildebar';
 import ButtonBase from './../Components/Button/ButtonBase';
-import ProductsTable from './../Pages/Vendor/Products/ProductsTable';
-import AddProducts from './../Pages/Vendor/Products/AddProducts/AddProducts'; 
+import UsersTable from './../Pages/Vendor/Users/UsersTable';  
 import SubNav from './../Components/Navber/SubNav';
 import BaseHeader from './../Components/Header/BaseHeader';
 import AddUser from './../Pages/Vendor/SubUsers/AddUser/AddUser';
@@ -30,6 +29,7 @@ import ProductReport from './../Pages/Client/Reports/Product/Product';
 import SideClient from './../Components/Sidebar/sideclient/SideClient';
 import Auth from './../Layout/Auth';
 import Login from './../Pages/auth/Login/Login';
+import AddNewUser from '../Pages/Vendor/Users/AddUser/AddNewUser';
 
 export default {
     // Layout
@@ -43,11 +43,11 @@ export default {
     ChartColumn,
     ChartLine,
     Orders, 
-    AddUser,
+    AddNewUser,
     UserTable,
-    Products,
-    ProductsTable,
-    AddProducts, 
+    Users,
+    UsersTable,
+    AddUser, 
     Profile,
     SubUsers,
     // Client Components user 2

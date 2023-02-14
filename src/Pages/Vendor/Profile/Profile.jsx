@@ -18,7 +18,7 @@ function Profile() {
   const handleShow = () => setShow(true);
 
   const userProfileGet = async () => {
-    let resp = await GetData(`https://bytrh.com/api/admin/users/profile/${localStorage.getItem("IDUser")}`, apiheader);
+    let resp = await GetData(`https://bytrh.com/api/admin/users/profile/${userId}`, apiheader);
     setUserProfile(resp.Response);
   }
 

@@ -19,9 +19,9 @@ function App() {
       path: '/', element: <Component.Vendor   />, children: [
         { index: true, element:<ProtectedRoutes>  <Component.Dashboard /></ProtectedRoutes>    },
         {
-          path: '/venderProducts', children: [
-            { index: true, element:<ProtectedRoutes>  <Component.Products /> </ProtectedRoutes>},
-            { path: 'addProduct', element: <ProtectedRoutes> <Component.AddProducts /></ProtectedRoutes> },
+          path: '/user', children: [
+            { index: true, element:<ProtectedRoutes>  <Component.Users /> </ProtectedRoutes>},
+            { path: 'addUser', element: <ProtectedRoutes> <Component.AddNewUser /></ProtectedRoutes> },
           ]
         },
 
@@ -42,15 +42,15 @@ function App() {
     // {
     //   path: '/client/', element: <Component.Client />, children: [
     //     { index: true, element: <Component.DashboardClient /> },
-    //     { path: 'productsCatalog', element: <Component.ProductsCatalog /> },
-    //     { path: 'productList', element: <Component.ProductsList /> },
+    //     { path: 'UsersCatalog', element: <Component.UsersCatalog /> },
+    //     { path: 'productList', element: <Component.UsersList /> },
     //     { path: 'orders', element: <Component.OrdersClient /> },
     //     {
     //       path: 'reports', children: [
     //         { index: true, element: <Component.Reports /> },
     //         { path: 'orders', element: <Component.OrdersReport /> },
     //         { path: 'customers', element: <Component.Customer /> },
-    //         { path: 'products', element: <Component.ProductReport /> },
+    //         { path: 'Users', element: <Component.ProductReport /> },
     //       ]
     //     },
     //     { path: 'profile', element: <Component.ProfileClient /> },
