@@ -18,8 +18,10 @@ import { CiShop as shop } from "react-icons/ci";
 import { SlNotebook as list } from "react-icons/sl";
 import { TbReportAnalytics as report } from "react-icons/tb";
 import { RxDotFilled as dote } from "react-icons/rx";
+import { CiLogout as logout } from "react-icons/ci";
 export default{
     check,
+    logout,
     Dashboard,
     notification,
     Search,

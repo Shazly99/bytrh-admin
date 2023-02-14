@@ -1,0 +1,132 @@
+@import '../../../style/varibale';
+
+.app__auth { 
+    background-color: #000000;
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    justify-content: center;
+    // justify-content: end;
+
+    .app__login {
+        width: 100%;
+
+        .app__login-left {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            img {
+                width: 227px !important;
+                height: 172px !important;
+            }
+
+            .email {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                margin-top: 15px;
+                label {
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 20px;
+                    line-height: 27px;
+                    /* identical to box height */
+
+                    letter-spacing: -0.165px;
+
+                    /* White */
+
+                    color: #FFFFFF;
+                }
+                .error__handel{
+                    color: $colorRed-1;
+                }
+                input {
+                    background: #F9F9F9 !important;
+                    height: 50px !important;
+                    /* Shadow */
+                    box-shadow: 0px 4px 4px rgba(167, 167, 167, 0.1) !important;
+                    border-radius: 25px !important;
+                    padding: 20px;
+                    outline: none;
+                }
+
+                .password__input {
+                    position: relative;
+
+                    .password__show {
+                        position: absolute;
+                        right: 0;
+                        border-radius: 25px;
+                        height: 100%;
+                        background-color: transparent;
+                        color: #4A4A4A;
+                        border: none;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: white !important;
+                    }
+                }
+            }
+
+            .app__login-btn {
+                background: $colorRed-0;
+                border-radius: 25px;
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 16px;
+                line-height: 24px;
+                /* identical to box height */
+
+                text-align: center;
+                letter-spacing: -0.165px;
+
+                /* White */
+                width: 100%;
+                padding: 13px;
+                margin-top: 56px;
+                color: #FFFFFF; 
+                border: $colorRed-0;
+                transition: all 0.4s;
+
+                &:hover {
+                    box-shadow: none;
+
+                }
+            }
+        }
+    }
+
+    .avatar {
+        height: 100vh;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        // align-items: end;
+
+        @media screen and (max-width:991px) {
+            display: none !important;
+        }
+    }
+}
+
+.anther_way_toLgoin{
+    color: $colorRed-0;
+    text-align: center;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    padding: 10px 0px;
+}
+
+.logoBaytrh{
+    color: $colorRed-0 !important;
+    font-weight: 700 !important;
+    font-size: larger;
+    user-select: none;
+}

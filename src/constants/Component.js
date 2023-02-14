@@ -1,5 +1,5 @@
 import Client from '../Layout/Client.jsx';
-import Vendor from './../Layout/Vendor';
+import Vendor from '../Layout/Vendor';
 import Dashboard from './../Pages/Vendor/Dashboard/Dashboard.jsx';
 import DashboardClient from './../Pages/Client/Dashbord/Dashbord.jsx';
 import Orders from './../Pages/Vendor/Orders/Orders.jsx';
@@ -28,11 +28,14 @@ import Customer from './../Pages/Client/Reports/Customer/Customer';
 import OrdersReport from './../Pages/Client/Reports/Orders/Orders';
 import ProductReport from './../Pages/Client/Reports/Product/Product';
 import SideClient from './../Components/Sidebar/sideclient/SideClient';
+import Auth from './../Layout/Auth';
+import Login from './../Pages/auth/Login/Login';
 
 export default {
     // Layout
     Client,
     Vendor,
+    Auth,
     // Vendor Components User 1
     Dashboard,
     Summary,
@@ -57,7 +60,9 @@ export default {
     Customer,
     OrdersReport,
     ProductReport,
-
+    // Auth
+    Login,
+    
     // Components
     Navber,
     SubNav,
