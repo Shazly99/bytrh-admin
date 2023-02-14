@@ -30,6 +30,9 @@ import SideClient from './../Components/Sidebar/sideclient/SideClient';
 import Auth from './../Layout/Auth';
 import Login from './../Pages/auth/Login/Login';
 import AddNewUser from '../Pages/Vendor/Users/AddUser/AddNewUser';
+import Edit from './../Pages/Vendor/Users/Edit/Edit';
+import ClientTable from './../Pages/Vendor/Client/ClientTable';
+import Clients from './../Pages/Vendor/Client/Client';
 
 export default {
     // Layout
@@ -50,6 +53,9 @@ export default {
     AddUser, 
     Profile,
     SubUsers,
+    Edit,
+    Clients,
+    ClientTable,
     // Client Components user 2
     DashboardClient,
     OrdersClient,

@@ -1,24 +1,22 @@
+import { Container } from 'react-bootstrap'
+import Component from '../../../../constants/Component'
 import React, { useRef } from 'react';
 import { useState, useEffect } from "react";
 import { Button, Col, Row } from 'react-bootstrap';
-import Container from 'react-bootstrap/Container';
-import Component from '../../../../constants/Component';
-import Icons from '../../../../constants/Icons';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import Form from 'react-bootstrap/Form';
 import { apiheader, PostData } from '../../../../utils/fetchData';
+import { useParams } from 'react-router-dom';
 
-const AddNewUser = () => {
-    const [data, setData] = useState({});
-
+const Edit = () => {
+    let {id}=useParams() 
+    const [data, setData] = useState({}); 
     const [phoneNumber, setPhoneNumber] = useState('');
     const [Country, setCountry] = useState({});
     const username = useRef();
     const email = useRef();
-    const password = useRef();
-
-
+    const password = useRef(); 
     const onChangeHandler = (phone, country, e) => {
         console.log(phone);
         console.log(country);
@@ -34,7 +32,8 @@ const AddNewUser = () => {
             UserPhone: '+' + phoneNumber,
             UserPhoneFlag: '+' + Country,
             UserName: username.current.value,
-            IDCity: 1
+            IDCity: 1,
+            IDUser:id
         })
         console.log({
             UserEmail: email.current.value,
@@ -48,25 +47,19 @@ const AddNewUser = () => {
     }
 
     async function addNewUser() {
-        return await PostData(`https://bytrh.com/api/admin/users/add`, data, apiheader);
-
+        return await PostData(`https://bytrh.com/api/admin/users/edit`, data, apiheader); 
     }
-    useEffect(() => {
-        addNewUser().then(res => {
-            console.log(res);
-        }).catch(err => {
-
-        });
+    
+    useEffect(() => { 
     }, [data, phoneNumber])
-
     return (
         <>
             <Container fluid>
                 <div className="app__addprodects">
-                    <Component.SubNav sub__nav={[{ name: "Users", path: '/user' }, { name: "Add User", path: '/user/addUser' }]} />
+                    <Component.SubNav sub__nav={[{ name: "Users", path: '/user' }, { name: "Edit User", path: `/user/editUser/${id}` }]} />
                     <div className="app__addprodects__header ">
-                        <Component.BaseHeader h1={'Add New Users'} />
-                        <div className="app__addOrder-form"> 
+                        <Component.BaseHeader h1={'Edit User'} />
+                        <div className="app__addOrder-form">
                             <div className="app__addprodects-form">
                                 <form onSubmit={submit}>
                                     <Row>
@@ -122,7 +115,7 @@ const AddNewUser = () => {
                                         <div className='d-flex justify-content-center align-content-center my-5'>
                                             <div className='baseBtn'>
                                                 <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                                    Add New User
+                                                    Update User
                                                 </Button>
                                             </div>
                                         </div>
@@ -138,4 +131,4 @@ const AddNewUser = () => {
     )
 }
 
-export default AddNewUser
+export default Edit
