@@ -24,3 +24,55 @@ body {
 ::-webkit-scrollbar-corner {
   background-color: black;
  }
+
+
+ .txt_delivery,
+.txt_delivered,
+.txt_pending,
+.txt_shipped,
+.txt_rejected {
+    /* Button */
+    font-weight: 600 !important;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.95rem !important;
+    width: fit-content; 
+    padding: 0.225rem 1rem;
+    border-radius: 0.425rem;
+    white-space: nowrap;
+    vertical-align: baseline; 
+}
+
+.txt_pending {
+    color: #FFC107;
+    background-color: rgba($color:#FFC107, $alpha: 0.1);
+    // background-color: #fff5f8;
+}
+
+.txt_shipped {
+    color: #9804F0;
+    background-color: rgba($color:#9804F0, $alpha: 0.1);
+    
+
+}
+
+.txt_delivery {
+    color: #006300;
+        background-color: rgba($color:#006300, $alpha: 0.1);
+
+
+}
+
+.txt_delivered {
+    color: #40AB45;
+        background-color: rgba($color:#40AB45, $alpha: 0.1);
+
+
+}
+
+.txt_rejected {
+    color: #E20000;
+        background-color: rgba($color:#E20000, $alpha: 0.1);
+
+
+}

@@ -5,21 +5,21 @@ import { useEffect } from 'react';
 import { Table, DropdownButton, Dropdown } from "react-bootstrap";
 import { apiheader, PostData } from '../../../utils/fetchData.js';
 
-function UsersTable({ usersList,userList }) {
-    const [data, setData] = useState({});
-    const handleActionSelect = async(id, action) => {
-        if (action === "PENDING") { 
+function UsersTable({ usersList, userList }) {
+    // const [data, setData] = useState({});
+    const handleActionSelect = async (id, action) => {
+        if (action === "PENDING") {
             await userstatus({ IDUser: id, UserStatus: action })
-            await  userList()
+            await userList()
         } else if (action === "ACTIVE") {
-            await userstatus({ IDUser: id, UserStatus: action }) 
-            await  userList()
+            await userstatus({ IDUser: id, UserStatus: action })
+            await userList()
         } else if (action === "INACTIVE") {
             await userstatus({ IDUser: id, UserStatus: action })
-            await  userList() 
+            await userList()
         } else if (action === "DELETED") {
-            await userstatus({ IDUser: id, UserStatus: action }) 
-            await  userList()
+            await userstatus({ IDUser: id, UserStatus: action })
+            await userList()
         }
     };
 
@@ -27,12 +27,12 @@ function UsersTable({ usersList,userList }) {
         let { data } = await PostData(`https://bytrh.com/api/admin/users/status`, status, apiheader)
         console.log(data);
     }
-    useEffect(() => { 
+    useEffect(() => {
     }, [usersList])
 
     return (
         <>
-            <Table striped responsive={true} className='rounded-3 '>
+            <Table   responsive={true} className='rounded-3 '>
                 <thead>
                     <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
                         <th>User Name</th>
@@ -63,9 +63,16 @@ function UsersTable({ usersList,userList }) {
                                         {item?.UserPhone}
                                     </div>
                                 </td>
-                                <td className='text-center'>
+                                <td className='text-center  d-flex '>
                                     <div>
-                                        {item?.UserStatus}
+                                        <span style={{ height: 'fit-content !important' }} className={`
+                                          ${item.UserStatus == 'PENDING' && 'txt_pending'} 
+                                          ${item.UserStatus == 'Shipped' && 'txt_shipped'}
+                                          ${item.UserStatus == 'Out For Delivery' && 'txt_delivery'}
+                                          ${item.UserStatus == 'ACTIVE' && 'txt_delivered'}
+                                          ${item.UserStatus == 'INACTIVE' && 'txt_rejected'}`} >
+                                            {item?.UserStatus.toLowerCase()}
+                                        </span>
                                     </div>
                                 </td>
                                 <td className='text-center'>
@@ -75,19 +82,25 @@ function UsersTable({ usersList,userList }) {
                                 </td>
 
                                 <td>
-                                    <DropdownButton
-                                        id={`dropdown-${item.IDUser}`}
-                                        title="Action"
-                                        variant="outline-success"
-                                        onSelect={(eventKey) => handleActionSelect(item.IDUser, eventKey)}
-                                    >
+                                    <div>
 
-                                        <Dropdown.Item eventKey="PENDING">Pending</Dropdown.Item>
-                                        <Dropdown.Item eventKey="ACTIVE">Action</Dropdown.Item>
-                                        <Dropdown.Item eventKey="INACTIVE">InAction</Dropdown.Item>
-                                        <Dropdown.Item eventKey="DELETED">Deleted</Dropdown.Item>
-                                        <Dropdown.Item eventKey="Edite">Edite</Dropdown.Item>
-                                    </DropdownButton>
+                                    <span>
+                                        <DropdownButton
+                                            id={`dropdown-${item.IDUser}`}
+                                            title="Action"
+                                            variant="outline-success"    
+                                            onSelect={(eventKey) => handleActionSelect(item.IDUser, eventKey)}
+                                            className="DropdownButton "
+                                        >
+
+                                            <Dropdown.Item eventKey="PENDING" >Pending</Dropdown.Item>
+                                            <Dropdown.Item eventKey="ACTIVE">Action</Dropdown.Item>
+                                            <Dropdown.Item eventKey="INACTIVE">InAction</Dropdown.Item>
+                                            <Dropdown.Item eventKey="DELETED">Deleted</Dropdown.Item>
+                                            <Dropdown.Item eventKey="Edite">Edite</Dropdown.Item>
+                                        </DropdownButton>
+                                    </span>
+                                    </div>
                                 </td>
 
                             </tr>
