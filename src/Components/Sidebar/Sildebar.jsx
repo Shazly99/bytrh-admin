@@ -10,13 +10,8 @@ import { icons } from 'react-icons';
 import Icons from "../../constants/Icons";
 import { VendersContext } from "../../context/Store";
 
-
-
-
 const Sidebar = ({ children }) => {
   let { isOpen, toggle, LogOut } = useContext(VendersContext);
-
-
 
   const showAnimation = {
     hidden: {
@@ -114,7 +109,7 @@ const Sidebar = ({ children }) => {
                 ))
               }
 
-              <motion.div
+              {/* <motion.div
                 animate={{
                   transition: {
                     duration: 2,
@@ -147,7 +142,7 @@ const Sidebar = ({ children }) => {
                   </AnimatePresence>
                 </NavLink>
 
-              </motion.div>
+              </motion.div> */}
             </section>
           </div>
 

@@ -1,15 +1,36 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import Component from '../../../constants/Component';
 import { Col, FloatingLabel, Modal, Row } from 'react-bootstrap';
 import './Profile.scss'
 import { Button } from 'react-bootstrap/';
+import axios from 'axios';
+import { apiheader, GetData } from '../../../utils/fetchData';
+import { VendersContext } from '../../../context/Store';
 
 function Profile() {
+  let { userId } = useContext(VendersContext);
+
   const [show, setShow] = useState(false);
+  const [userProfile, setUserProfile] = useState(null);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const userProfileGet = async () => {
+    let resp = await GetData(`https://bytrh.com/api/admin/users/profile/${localStorage.getItem("IDUser")}`, apiheader);
+    setUserProfile(resp.Response);
+  }
+
+  useEffect(() => {
+    // console.log(localStorage.getItem("IDUser"));
+    userProfileGet()
+  }, [userProfile])
+  useEffect(() => {
+    // console.log(localStorage.getItem("IDUser"));
+
+  }, [userProfile])
+
   return (
     <>
       <div className="app__profile px-2">
@@ -21,15 +42,15 @@ function Profile() {
 
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Full Name  </Form.Label>
-                  <Form.Control type="text" />
+                  <Form.Control type="text" value={userProfile?.UserName} disabled={true} />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicEmail" className='mt-2' >
                   <Form.Label> Mobile  </Form.Label>
-                  <Form.Control type="number" />
+                  <Form.Control value={userProfile?.UserPhone} disabled />
                 </Form.Group>
 
-                <div className="mt-2">
+                {/* <div className="mt-2">
                   <Form.Label>Country</Form.Label>
                   <Form.Select aria-label="Default select example">
                     <option>Country </option>
@@ -37,7 +58,7 @@ function Profile() {
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                   </Form.Select>
-                </div>
+                </div> */}
 
               </Col>
 
@@ -45,15 +66,15 @@ function Profile() {
 
                 <Form.Group controlId="formBasicEmail">
                   <Form.Label>Email</Form.Label>
-                  <Form.Control type="email" />
+                  <Form.Control type="email" value={userProfile?.UserEmail} disabled />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicEmail" className="mt-2">
-                  <Form.Label>Language</Form.Label>
-                  <Form.Control type="text  " />
+                  <Form.Label>User Rank</Form.Label>
+                  <Form.Control type="text" value={userProfile?.UserRank} />
                 </Form.Group>
 
-                <div className="mt-2">
+                {/* <div className="mt-2">
                   <Form.Label>City</Form.Label>
                   <Form.Select aria-label="Default select example">
                     <option>City </option>
@@ -61,27 +82,27 @@ function Profile() {
                     <option value="2">Two</option>
                     <option value="3">Three</option>
                   </Form.Select>
-                </div>
+                </div> */}
               </Col>
             </Row>
             <div className='d-flex justify-content-center align-content-center my-5'>
-              <Component.ButtonBase title={"Update Information"} bg={"primary"} path="/venderProfile " />
+              <Component.ButtonBase title={"Update Information"} bg={"primary"} path="/venderProfile " onclick={handleShow} /> 
             </div>
 
           </Form>
         </div>
 
         <div className="pp__profile-model">
-          <a className='app__profile-model-a' onClick={handleShow}>
+          {/* <a className='app__profile-model-a' onClick={handleShow}>
             Change Password
-          </a>
+          </a> */}
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton className=' d-flex justify-content-center align-items-center'>
               <Modal.Title className=' w-100 text-center' >Change Password</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form>
-              <Form.Group controlId="formBasicEmail">
+                <Form.Group controlId="formBasicEmail">
                   <Form.Label>Old Password</Form.Label>
                   <Form.Control type="password" />
                 </Form.Group>
@@ -98,7 +119,7 @@ function Profile() {
               </Form>
             </Modal.Body>
             <Modal.Footer className='d-flex justify-content-center align-items-center  p-0 m-0 '>
-                <Component.ButtonBase onclick={handleClose} title={'Update Password'} bg={'primary'} /> 
+              <Component.ButtonBase onclick={handleClose} title={'confirmation'} bg={'primary'} />
             </Modal.Footer>
           </Modal>
         </div>

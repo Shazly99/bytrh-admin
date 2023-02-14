@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
-import Component from '../constants/Component';
-import { VendersContext } from '../context/Store';
+import Component from '../constants/Component'; 
 import { motion } from 'framer-motion';
+import { VendersContext } from '../context/Store';
 
 function Vendor( ) {
   let { isOpen } = useContext(VendersContext);
 
   useEffect(() => {
-    console.log(isOpen);
+    // console.log(isOpen);
   }, [isOpen])
   return (
     <>
