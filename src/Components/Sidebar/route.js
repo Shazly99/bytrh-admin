@@ -21,11 +21,11 @@ const routes = [
       name: "Sub Users",
       icon: <Icons.user size={20}/>,
     },
-    {
-      path: "/venderProfile",
-      name: "Profile",
-      icon: <Icons.profile size={20}/>,
-    },
+    // {
+    //   path: "/venderProfile",
+    //   name: "Profile",
+    //   icon: <Icons.profile size={20}/>,
+    // },
  
   ];
 

@@ -33,10 +33,10 @@ const Login = () => {
             console.log(values);
             if (values) {
                 let { data } = await axios.post(`https://bytrh.com/api/admin/login`, values);
-                console.log(data);
-                if (data.Success == true) {
-                    console.log(data.Response.AccessToken);
+                if (data.Success == true) { 
+                    // console.log(data.Response.AccessToken);
                     localStorage.setItem("token", data.Response.AccessToken);
+                    localStorage.setItem("IDUser", data.Response.IDUser);
                     toast.success(data.ApiMsg);
                     navigate('/');
                 } else {
@@ -61,6 +61,8 @@ const Login = () => {
                 if (data.Success == true) {
                     console.log(data.Response.AccessToken);
                     localStorage.setItem("token", data.Response.AccessToken);
+                    localStorage.setItem("IDUser", data.Response.IDUser);
+
                     toast.success(data.ApiMsg);
                     navigate('/');
                 } else {
