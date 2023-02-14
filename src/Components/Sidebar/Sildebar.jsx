@@ -14,8 +14,8 @@ import { VendersContext } from "../../context/Store";
 
 
 const Sidebar = ({ children }) => {
-  let {  isOpen, toggle } = useContext(VendersContext);
- 
+  let { isOpen, toggle, LogOut } = useContext(VendersContext);
+
 
 
   const showAnimation = {
@@ -53,7 +53,7 @@ const Sidebar = ({ children }) => {
             <div className="top_section  ">
               <AnimatePresence>
                 {isOpen && (
-                  <motion.h1
+                  <motion.div
                     variants={showAnimation}
                     initial="hidden"
                     animate="show"
@@ -63,7 +63,7 @@ const Sidebar = ({ children }) => {
                   >
                     <img src={img.logo} className="w-100" />
                     <h3>Baytrh</h3>
-                  </motion.h1>
+                  </motion.div>
                 )}
                 <div className="bars">
                   <FaBars onClick={toggle} size={20} />
@@ -104,7 +104,7 @@ const Sidebar = ({ children }) => {
                               className="link_text"
                             >
                               {root.name}
-                            </motion.div> 
+                            </motion.div>
                           </>
                         }
                       </AnimatePresence>
@@ -113,6 +113,41 @@ const Sidebar = ({ children }) => {
                   </motion.div>
                 ))
               }
+
+              <motion.div
+                animate={{
+                  transition: {
+                    duration: 2,
+                    damping: 10
+                  }
+                }}
+              >
+                <NavLink onClick={LogOut} to={'/auth/login'} className="link" >
+                <div className="icon" id={'LogOut'} data-tooltip-content={'LogOut'}>
+                    <Icons.logout size={20} />
+                  </div>
+                  {
+                    !isOpen && <ReactTooltip anchorId={'LogOut'} data-tip={'LogOut'} place="right" style={{ zIndex: 88888888, background: '#1B578D' }} />
+                  }
+                  <AnimatePresence>
+                    {
+                      isOpen &&
+                      <>
+                        <motion.div
+                          variants={showAnimation}
+                          initial={"hidden"}
+                          animate={"show"}
+                          exit={"hidden"}
+                          className="link_text"
+                        >
+                          Log Out
+                        </motion.div>
+                      </>
+                    }
+                  </AnimatePresence>
+                </NavLink>
+
+              </motion.div>
             </section>
           </div>
 

@@ -5,7 +5,7 @@ import Component from '../constants/Component';
 import { VendersContext } from '../context/Store';
 import { motion } from 'framer-motion';
 
-function Vendor() {
+function Vendor( ) {
   let { isOpen } = useContext(VendersContext);
 
   useEffect(() => {
