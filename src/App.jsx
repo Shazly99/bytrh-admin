@@ -22,6 +22,13 @@ function App() {
           path: '/user', children: [
             { index: true, element:<ProtectedRoutes>  <Component.Users /> </ProtectedRoutes>},
             { path: 'addUser', element: <ProtectedRoutes> <Component.AddNewUser /></ProtectedRoutes> },
+            { path: 'editUser/:id', element:<ProtectedRoutes>  <Component.Edit /> </ProtectedRoutes> },
+
+          ]
+        },
+        {
+          path: '/client', children: [
+            { index: true, element:<ProtectedRoutes>  <Component.Clients /> </ProtectedRoutes>}, 
           ]
         },
 

@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import data from './data.js';
+// import data from './data.js';
 import Icons from "../../../constants/Icons.js";
 import { useEffect } from 'react';
-import { Table, DropdownButton, Dropdown } from "react-bootstrap";
+import { Table, DropdownButton, Dropdown, NavDropdown } from "react-bootstrap";
 import { apiheader, PostData } from '../../../utils/fetchData.js';
+import { Link } from 'react-router-dom';
 
 function UsersTable({ usersList, userList }) {
     // const [data, setData] = useState({});
@@ -32,7 +33,7 @@ function UsersTable({ usersList, userList }) {
 
     return (
         <>
-            <Table   responsive={true} className='rounded-3 '>
+            <Table responsive={true} className='rounded-3 '>
                 <thead>
                     <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
                         <th>User Name</th>
@@ -84,22 +85,26 @@ function UsersTable({ usersList, userList }) {
                                 <td>
                                     <div>
 
-                                    <span>
-                                        <DropdownButton
-                                            id={`dropdown-${item.IDUser}`}
-                                            title="Action"
-                                            variant="outline-success"    
-                                            onSelect={(eventKey) => handleActionSelect(item.IDUser, eventKey)}
-                                            className="DropdownButton "
-                                        >
+                                        <span>
+                                            <DropdownButton
+                                                id={`dropdown-${item.IDUser}`}
+                                                title="Action"
+                                                variant="outline-success"
+                                                onSelect={(eventKey) => handleActionSelect(item.IDUser, eventKey)}
+                                                className="DropdownButton "
+                                            >
+                                                <Dropdown.Item eventKey="Edite">
+                                                    <Link className='text-dark d-block' to={`/user/editUser/${item.IDUser}`}>
+                                                        Edit    
+                                                    </Link>
+                                                </Dropdown.Item>
+                                                <Dropdown.Item eventKey="DELETED">Deleted</Dropdown.Item>
+                                                <Dropdown.Item eventKey="PENDING" >Pending</Dropdown.Item>
+                                                <Dropdown.Item eventKey="ACTIVE">Action</Dropdown.Item>
+                                                <Dropdown.Item eventKey="INACTIVE">InAction</Dropdown.Item>
 
-                                            <Dropdown.Item eventKey="PENDING" >Pending</Dropdown.Item>
-                                            <Dropdown.Item eventKey="ACTIVE">Action</Dropdown.Item>
-                                            <Dropdown.Item eventKey="INACTIVE">InAction</Dropdown.Item>
-                                            <Dropdown.Item eventKey="DELETED">Deleted</Dropdown.Item>
-                                            <Dropdown.Item eventKey="Edite">Edite</Dropdown.Item>
-                                        </DropdownButton>
-                                    </span>
+                                            </DropdownButton>
+                                        </span>
                                     </div>
                                 </td>
 
