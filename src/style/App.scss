@@ -5,11 +5,20 @@
     color: $colorRed-0 !important;
 }
 
-a{
+a {
     text-decoration: none !important;
 }
-.btn-primary{
+
+.btn-primary {
     background-color: $colorRed-0 !important;
+}
+.btn-outline-primary{
+    color: $colorRed-0  !important ;
+    border-color: $colorRed-0 !important;
+    &:hover{ 
+    background-color: transparent !important;
+
+    }
 }
 
 // button in folder (component / button ) shared in all project 
@@ -29,7 +38,8 @@ a{
 }
 
 // h1 h2 base style ( component / header ) shared in all project when wonted
-.app__baseHeader { 
+.app__baseHeader {
+
     h2,
     h1 {
         font-family: $fontBase;
@@ -78,7 +88,7 @@ thead {
             font-style: normal;
             font-weight: 500;
             font-size: 18px !important;
-            line-height: 27px !important; 
+            line-height: 27px !important;
 
             text-align: center;
             color: #4A4A4A;
@@ -102,9 +112,7 @@ td {
         font-size: 21px !important;
         line-height: 32px !important;
         /* identical to box height */
-
         text-align: center;
-
         /* Black */
 
         color: #000000;
@@ -117,7 +125,7 @@ td {
         svg:first-child {
             color: $colorGreen;
         }
-        
+
         svg:last-child {
             color: $colorRed-0;
         }
@@ -125,6 +133,6 @@ td {
 }
 
 
-td{
+td {
     white-space: nowrap !important;
 }
