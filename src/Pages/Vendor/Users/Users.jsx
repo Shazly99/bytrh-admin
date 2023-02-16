@@ -10,6 +10,7 @@ import { apiheader } from './../../../utils/fetchData';
 function Users() {
   const [page, setPage] = React.useState(1);
   const [usersList, setuserList] = React.useState([]);
+  const [PagesNumber, setPagesNumber] = React.useState('')
 
   const handleChange = (event, value) => {
     setPage(value);
@@ -18,14 +19,15 @@ function Users() {
 
   }
 
-  const userList = async () => {
-    let { data } = await PostData(`https://bytrh.com/api/admin/users`, { IDPage: 1 }, apiheader)
+  const userList = async (page) => {
+    let { data } = await PostData(`https://bytrh.com/api/admin/users`, { IDPage: page }, apiheader)
     setuserList(data.Response.Users)
+    setPagesNumber(data.Response.Pages);
+
   }
   useEffect(() => {
-    userList()
-  }, [])
-
+    userList(page)
+  }, [page, PagesNumber])
   return (
     <>
       <div className="app__Users ">
@@ -36,7 +38,7 @@ function Users() {
       </div>
       <div className="pagination ">
         <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-          <Pagination count={10} page={page} onChange={handleChange} />
+          <Pagination count={PagesNumber} page={page} onChange={handleChange} />
         </Box>
       </div>
     </>
