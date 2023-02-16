@@ -1,29 +1,27 @@
 import React, { useEffect } from 'react'
-import Component from '../../../constants/Component'
-// import './Clients.scss'
-import Icons from "../../../constants/Icons.js";
-import { Pagination, Typography } from "@mui/material";
+import Component from '../../../constants/Component' 
+import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import { GetData, PostData } from '../../../utils/fetchData';
+import {   PostData } from '../../../utils/fetchData';
 import { apiheader } from './../../../utils/fetchData';
+
 const Clients = () => {
   const [page, setPage] = React.useState(1);
   const [usersList, setuserList] = React.useState([]);
+  const [PagesNumber, setPagesNumber] = React.useState('')
 
   const handleChange = (event, value) => {
     setPage(value);
   };
-  const test = () => { 
-  }
 
-  const userList = async () => {
-    let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { IDPage: 1 }, apiheader)
+  const userList = async (page) => {
+    let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { IDPage: page }, apiheader)
     setuserList(data.Response.Clients)
-    // console.log(data);
+    setPagesNumber(data.Response.Pages);
   }
   useEffect(() => {
-    userList()
-  }, [])
+    userList(page)
+  }, [page, PagesNumber])
   return (
     <>
       <div className="app__Users ">
@@ -34,7 +32,7 @@ const Clients = () => {
       </div>
       <div className="pagination ">
         <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-          <Pagination count={10} page={page} onChange={handleChange} />
+          <Pagination count={PagesNumber} page={page} onChange={handleChange} />
         </Box>
       </div>
     </>
