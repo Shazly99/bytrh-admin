@@ -28,7 +28,6 @@ function Users() {
   useEffect(() => {
     userList(page)
   }, [page, PagesNumber])
-
   return (
     <>
       <div className="app__Users ">
