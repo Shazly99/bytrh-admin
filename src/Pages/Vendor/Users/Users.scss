@@ -9,9 +9,7 @@
     }
 }
 
-.app__Users-table {
-    
-}
+.app__Users-table {}
 
 .pagination {
     margin-bottom: 50px !important;
@@ -59,13 +57,17 @@
             margin-top: 32px;
         }
     }
-    input, select,option{
+
+    input,
+    select,
+    option {
         background: rgba($color: $colorGrey-1, $alpha: 0.1) !important;
         border: none !important;
-        border-radius: $radius-sm !important; 
+        border-radius: $radius-sm !important;
         height: 50px !important;
-    
+
     }
+
     label {
         font-family: $fontBase !important;
         font-style: normal;
@@ -82,20 +84,31 @@
     }
 }
 
-.app__Users{
-    .app__Users-table{ 
+.app__Users {
+    .app__Users-table {
         padding: 0 20px !important;
+
         td {
             >div {
-         
+                color: #4e505d !important;
                 height: 100px !important;
-        
+                font-size: 1.1rem !important;
+                font-weight: 500 !important;
+                gap: 1px;
+
+                .ClientPhone {
+                    font-size: 1rem !important;
+                    font-weight: normal;
+                    color: #025585;
+                }
             }
         }
     }
 }
-.app__Users{
-    .dropdown-toggle{
+
+.app__Users {
+
+    .dropdown-toggle {
         background-color: transparent !important;
         color: rgba($color: $colorGrey-1, $alpha: 0.1) !important;
         padding: calc(0.7rem + 1px) calc(1.25rem + 1px) !important;
@@ -108,11 +121,14 @@
         color: #7E8299 !important;
         background-color: #eff2f5 !important;
         font-weight: 600 !important;
-        box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
-        &:hover{
+        transition: all 0.5s;
+
+        &:hover {
+
+            box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
             color: #009ef7 !important;
             border-color: var(--kt-primary-light);
-            background-color:#f1faff !important;
+            background-color: #f1faff !important;
             transition: color 0.2s ease;
 
         }

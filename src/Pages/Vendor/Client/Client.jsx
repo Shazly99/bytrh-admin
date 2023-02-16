@@ -19,7 +19,7 @@ const Clients = () => {
   const userList = async () => {
     let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { IDPage: 1 }, apiheader)
     setuserList(data.Response.Clients)
-    console.log(data);
+    // console.log(data);
   }
   useEffect(() => {
     userList()
@@ -27,7 +27,7 @@ const Clients = () => {
   return (
     <>
       <div className="app__Users ">
-        <Component.ButtonBase onclick={test} title={"Add new Clients"} bg={"primary"} icon={<Icons.add />}  />
+        {/* <Component.ButtonBase onclick={test} title={"Add new Clients"} bg={"primary"} icon={<Icons.add />}  /> */}
         <div className="app__Users-table">
           <Component.ClientTable usersList={usersList} userList={userList} />
         </div>

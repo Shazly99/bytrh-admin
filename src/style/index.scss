@@ -37,10 +37,11 @@ body {
     align-items: center;
     font-size: 0.95rem !important;
     width: fit-content; 
-    padding: 0.225rem 1rem;
+    padding: 0.1rem .4rem;
     border-radius: 0.425rem;
     white-space: nowrap;
     vertical-align: baseline; 
+    line-height:normal !important
 }
 
 .txt_pending {
@@ -62,8 +63,6 @@ body {
 .txt_delivery {
     color: #006300;
         background-color: rgba($color:#006300, $alpha: 0.1);
-
-
 }
 
 .txt_delivered {
