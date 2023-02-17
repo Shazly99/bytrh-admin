@@ -28,6 +28,9 @@ function Users() {
   useEffect(() => {
     userList(page)
   }, [page, PagesNumber])
+    // to fixed problem because Pagination count need a number 
+    const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
+
   return (
     <>
       <div className="app__Users ">
@@ -38,7 +41,7 @@ function Users() {
       </div>
       <div className="pagination ">
         <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-          <Pagination count={PagesNumber} page={page} onChange={handleChange} />
+          <Pagination count={pageCount} page={page} onChange={handleChange} />
         </Box>
       </div>
     </>

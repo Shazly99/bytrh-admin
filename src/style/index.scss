@@ -76,3 +76,19 @@ body {
     color: #E20000;
         background-color: rgba($color:#E20000, $alpha: 0.1); 
 }
+
+// navbar fixed 
+.navMain{
+  position: relative;
+  .navSubMain{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 9;
+  }
+}
+.main__Body{
+  margin-top: 70px !important;
+}

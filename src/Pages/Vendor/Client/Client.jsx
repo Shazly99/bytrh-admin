@@ -17,11 +17,15 @@ const Clients = () => {
   const userList = async (page) => {
     let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { IDPage: page }, apiheader)
     setuserList(data.Response.Clients)
-    setPagesNumber(data.Response.Pages);
+    setPagesNumber( data.Response.Pages);
   }
   useEffect(() => {
     userList(page)
   }, [page, PagesNumber])
+
+  // to fixed problem because Pagination count need a number 
+  const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
+
   return (
     <>
       <div className="app__Users ">
@@ -32,7 +36,7 @@ const Clients = () => {
       </div>
       <div className="pagination ">
         <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-          <Pagination count={PagesNumber} page={page} onChange={handleChange} />
+          <Pagination count={pageCount} page={page} onChange={ handleChange} />
         </Box>
       </div>
     </>

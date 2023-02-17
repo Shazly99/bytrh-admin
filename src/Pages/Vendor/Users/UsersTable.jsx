@@ -93,16 +93,22 @@ function UsersTable({ usersList, userList }) {
                                                 onSelect={(eventKey) => handleActionSelect(item.IDUser, eventKey)}
                                                 className="DropdownButton "
                                             >
-                                                <Dropdown.Item eventKey="Edite">
-                                                    <Link className='text-dark d-block' to={`/user/editUser/${item.IDUser}`}>
-                                                        Edit    
-                                                    </Link>
+                                                <Dropdown.Item eventKey="Edite" as={Link} to={`/user/editUser/${item.IDUser}`}>
+                                                    Edit
                                                 </Dropdown.Item>
                                                 <Dropdown.Item eventKey="DELETED">Deleted</Dropdown.Item>
-                                                <Dropdown.Item eventKey="PENDING" >Pending</Dropdown.Item>
-                                                <Dropdown.Item eventKey="ACTIVE">Action</Dropdown.Item>
-                                                <Dropdown.Item eventKey="INACTIVE">InAction</Dropdown.Item>
-
+                                                {/* <Dropdown.Item eventKey="PENDING" >Pending</Dropdown.Item> */}
+                                                {/* <Dropdown.Item eventKey="ACTIVE">Action</Dropdown.Item> */}
+                                                {/* <Dropdown.Item eventKey="INACTIVE">InAction</Dropdown.Item> */}
+                                                {
+                                                    item?.UserStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Action</Dropdown.Item>
+                                                }
+                                                {
+                                                    item?.UserStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InAction</Dropdown.Item>
+                                                }
+                                                {
+                                                    item?.UserStatus === "BLOCKED" ? '' : <Dropdown.Item eventKey="BLOCKED">Blocked</Dropdown.Item>
+                                                }
                                             </DropdownButton>
                                         </span>
                                     </div>

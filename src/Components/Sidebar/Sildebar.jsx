@@ -17,18 +17,20 @@ const Sidebar = ({ children }) => {
     hidden: {
       width: 0,
       opacity: 0,
-      transition: { duration: 0.4, when: "afterChildren" },
+      transition: {
+      // duration: 0.5, ease: 'backOut'
+        
+      },
     },
     show: {
       opacity: 1,
       width: "auto",
       transition: {
-        duration: 0.3,
-        when: "beforeChildren",
+      // duration: 0.5, ease: 'backOut'
+        
       },
     },
   };
-
   return (
     <>
       <div className="main-container ">
@@ -36,9 +38,9 @@ const Sidebar = ({ children }) => {
           animate={{
             width: isOpen ? "270px" : "50px",
             transition: {
-              duration: 0.5,
+      /*         duration: 0.5,
               type: "spring",
-              damping: 10,
+              damping: 10, */
             },
           }}
           className={`sidebar  `}
@@ -83,7 +85,7 @@ const Sidebar = ({ children }) => {
                         {root.icon}
                       </div>
                       {
-                        !isOpen && <ReactTooltip anchorId={root.name} data-tip={root.name} place="right" style={{ zIndex: 88888888, background: '#1B578D' }} />
+                        !isOpen && <ReactTooltip anchorId={root.name} data-tip={root.name} place="right" style={{ zIndex: 88888888, background: '#313bac' }} />
                       }
 
                       <AnimatePresence>

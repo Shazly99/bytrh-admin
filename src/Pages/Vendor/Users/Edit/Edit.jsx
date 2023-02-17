@@ -6,17 +6,19 @@ import { Button, Col, Row } from 'react-bootstrap';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import Form from 'react-bootstrap/Form';
-import { apiheader, PostData } from '../../../../utils/fetchData';
+import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
 import { useParams } from 'react-router-dom';
 
 const Edit = () => {
-    let {id}=useParams() 
-    const [data, setData] = useState({}); 
+    let { id } = useParams()
+    const [userData, setUserData] = useState({});
+
+    // const [data, setData] = useState({});
     const [phoneNumber, setPhoneNumber] = useState('');
     const [Country, setCountry] = useState({});
     const username = useRef();
     const email = useRef();
-    const password = useRef(); 
+    const password = useRef();
     const onChangeHandler = (phone, country, e) => {
         console.log(phone);
         console.log(country);
@@ -26,32 +28,51 @@ const Edit = () => {
 
     const submit = e => {
         e.preventDefault()
-        setData({
+ /*        setData({
             UserEmail: email.current.value,
             UserPassword: password.current.value,
             UserPhone: '+' + phoneNumber,
             UserPhoneFlag: '+' + Country,
             UserName: username.current.value,
             IDCity: 1,
-            IDUser:id
-        })
-        console.log({
+            IDUser: id
+        }) */
+        // console.log({
+        //     UserEmail: email.current.value,
+        //     UserPassword: password.current.value,
+        //     UserPhone: '+' + phoneNumber,
+        //     UserPhoneFlag: '+' + Country,
+        //     UserName: username.current.value,
+        //     IDCity: 1
+        // });
+        addNewUser({
             UserEmail: email.current.value,
             UserPassword: password.current.value,
             UserPhone: '+' + phoneNumber,
             UserPhoneFlag: '+' + Country,
             UserName: username.current.value,
-            IDCity: 1
-        });
-        addNewUser()
+            IDCity: 1,
+            IDUser: id
+        }).then(res=>{
+            
+        }).catch(err=>{
+            console.log(err);
+        })
     }
 
-    async function addNewUser() {
-        return await PostData(`https://bytrh.com/api/admin/users/edit`, data, apiheader); 
+    async function addNewUser(data) {
+        let aa= await PostData(`https://bytrh.com/api/admin/users/edit`, data, apiheader);
+        console.log(aa);
     }
-    
-    useEffect(() => { 
-    }, [data, phoneNumber])
+
+    const diplayUserData = async () => {
+        let data = await GetData(`https://bytrh.com/api/admin/users/profile/${id}`, apiheader) 
+        setUserData(data.Response);
+
+    }
+    useEffect(() => {
+        diplayUserData()
+    }, [    phoneNumber])
     return (
         <>
             <Container fluid>
@@ -67,12 +88,12 @@ const Edit = () => {
 
                                             <Form.Group controlId="formBasicEmail">
                                                 <Form.Label>Users Name</Form.Label>
-                                                <Form.Control type="text" name='firstname' ref={username} />
+                                                <Form.Control type="text" name='firstname' ref={username} defaultValue={userData.UserName} />
                                             </Form.Group>
 
                                             <Form.Group controlId="formBasicEmail" className='mt-3'>
                                                 <Form.Label>Email</Form.Label>
-                                                <Form.Control type="email" name='email' ref={email} />
+                                                <Form.Control type="email" name='email' ref={email} defaultValue={userData.UserEmail} />
                                             </Form.Group>
 
 
@@ -92,10 +113,12 @@ const Edit = () => {
                                             <Form.Group controlId="formBasicEmail"  >
                                                 <Form.Label>Mobile</Form.Label>
                                                 <PhoneInput
-                                                    country='sa'
+                                                    country={'+20'} 
+                                                    value={userData?.UserPhone}
+                                                    // country='sa'
                                                     // onlyCountries={['eg', 'sa']} 
                                                     preferredCountries={['eg', 'sa', "ae"]}
-                                                    value={phoneNumber}
+                                                    // value={phoneNumber}
                                                     onChange={onChangeHandler}
                                                     enableSearch={true}
                                                     inputClass={'w-100'}
@@ -108,7 +131,7 @@ const Edit = () => {
                                             </Form.Group>
                                             <Form.Group controlId="formBasicEmail" className='mt-3'>
                                                 <Form.Label>Password</Form.Label>
-                                                <Form.Control type="password" ref={password} />
+                                                <Form.Control type="password" ref={password} defaultValue={userData.UserPassword} />
                                             </Form.Group>
 
                                         </Col>
