@@ -17,8 +17,9 @@ function Vendor( ) {
         <div className='d-flex'>
           <Component.Sildebar />
           <motion.div
+          className='adminLayout'
             animate={{
-              width: isOpen ? `calc(100% - 270px)` : `calc( 100% - 60px )`,
+              width: isOpen ? `calc(100% - 270px)` : `calc( 100% - 50px )`,
               transition: {
                 duration: 0.5,
                 type: "spring",
@@ -26,7 +27,7 @@ function Vendor( ) {
               },
             }}
           >
-            <main className='w-100  m-0 p-0'>
+            <main className='w-100  m-0 p-0 '>
               <Component.Navber />
               <div className='p-2'>
                 <Outlet></Outlet>

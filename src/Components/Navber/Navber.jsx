@@ -1,37 +1,55 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import './Navber.scss'
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import Avatar from '@mui/material/Avatar';
-import Icons from '../../constants/Icons';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import { Link } from 'react-router-dom';
 import { VendersContext } from './../../context/Store';
+import { HiMenuAlt4, HiX } from 'react-icons/hi';
+import { motion } from 'framer-motion';
+import routes from './../Sidebar/route';
+import { Form, Nav, NavDropdown } from 'react-bootstrap';
+import { FaUserCircle, FaCog, FaPowerOff } from 'react-icons/fa';
+import { IoMdNotificationsOutline } from 'react-icons/io';
+import Img from '../../assets/Img';
+import { LinkContainer } from 'react-router-bootstrap';
+import Icons from '../../constants/Icons';
+import { InputGroup } from 'react-bootstrap';
 
-const settings = ['Profile', 'Logout'];
 function Navber() {
   let { LogOut } = useContext(VendersContext);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-  
+
+  const [Toggle, setToggle] = useState(false);
+
   return (
     <>
-      <Navbar className='bg-light '>
+      <Navbar className='bg-light navSubMain'>
         <Container fluid  >
           <Navbar.Collapse  >
-            <InputGroup  >
+            <div className="app__navbar-menu">
+
+              <HiMenuAlt4 onClick={() => setToggle(!Toggle)} />
+
+              {
+                Toggle && (
+                  <motion.div whileInView={{ x: [-300, 0] }} transition={{ duration: 1.5, ease: 'backOut' }} >
+                    <HiX onClick={() => setToggle(!Toggle)} />
+                    <ul >
+                      {routes.map((item, index) =>
+                      (<li key={index}>
+                        <Link to={item.path} onClick={() => setToggle(false)} className='d-flex' >
+                          {item.icon}
+                          {item.name}
+                        </Link>
+                      </li>
+                      ))}
+                    </ul>
+
+                  </motion.div>
+                )
+              }
+            </div>
+
+      {/*       <InputGroup  >
               <button id="basic-addon1" className='btn__search'>
                 <Icons.Search />
               </button>
@@ -41,58 +59,51 @@ function Navber() {
                 aria-describedby="basic-addon1"
                 className='input__search'
               />
-            </InputGroup>
+            </InputGroup> */}
           </Navbar.Collapse>
 
           <Navbar.Toggle />
 
           <Navbar.Collapse className="justify-content-end">
+            <Nav>
+              <NavDropdown title={<img src={Img.avatar1} width="40" height="40" style={{ borderRadius: '10px' }} />} id="basic-nav-dropdown"  >
+                <div style={{ maxHeight: '60vh', overflowY: 'auto' }}>
 
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Icons.profile size={25} color={"#1B578D"} />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">
-                    <Link to={'/venderProfile'}>
-                      Profile
-                    </Link>
-                  </Typography>
-                </MenuItem>
+                  <LinkContainer to="/venderProfile">
+                    <NavDropdown.Item  >
+                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <img src={Icons.profile} alt="" srcset="" style={{ marginRight: 10 }} width={18} height={18} />
+                        {/* <Icons.profile size={20} /> */}
+                        <span>My Profile</span>
+                      </div>
+                    </NavDropdown.Item>
+                  </LinkContainer>
 
-                <MenuItem onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">
-                    <Link onClick={LogOut} to={'/auth/login'}>
-                      Logout
-                    </Link>
-                  </Typography>
-                </MenuItem>
 
-              </Menu>
-            </Box>
-            {/* <Navbar.Text>
-              <a className='nav__notification'>
-                <Icons.notification size={25} />
-              </a>
-            </Navbar.Text> */}
+                  <NavDropdown.Item>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <Icons.settings size={18} style={{ marginRight: 10 }} />
+                      <span>Settings & Privacy</span>
+                    </div>
+                  </NavDropdown.Item>
+
+                  <NavDropdown.Divider />
+
+                  <LinkContainer onClick={LogOut} to={'/auth/login'}>
+                    <NavDropdown.Item  >
+                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <img src={Icons.logout} alt="" srcset="" style={{ marginRight: 10 }} width={18} height={18} />
+                        <span>  Logout  </span>
+                      </div>
+                    </NavDropdown.Item>
+                  </LinkContainer>
+
+
+                </div>
+              </NavDropdown>
+
+            </Nav>
+
           </Navbar.Collapse>
 
         </Container>
