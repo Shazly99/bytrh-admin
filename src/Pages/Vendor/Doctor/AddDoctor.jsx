@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, {   useState } from 'react';
 import $ from 'jquery';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import { Button, Container } from 'react-bootstrap';
+import {  Container } from 'react-bootstrap';
 import Component from '../../../constants/Component';
 
 
@@ -55,6 +55,7 @@ function AddDoctor({ getTokenDoctors, fetchCountriesBytra }) {
       $('.repaassword .input-group input').attr('type', 'text');
     }
   }
+
   const [DoctorPhone, setDoctorPhone] = useState('');
   const [DoctorPhoneFlag, setDoctorPhoneFlag] = useState('966');
   const [user, setUser] = useState({

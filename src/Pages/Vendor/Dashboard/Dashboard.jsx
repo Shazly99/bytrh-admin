@@ -24,10 +24,7 @@ function Dashboard() {
             </Container>
           </div>
 
-
-          <div className="app__dashboard_today-order">
-            <Component.LastOrder />
-          </div>
+ 
         </div>
       </Container>
     </>
