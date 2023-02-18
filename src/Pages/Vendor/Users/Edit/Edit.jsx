@@ -12,8 +12,7 @@ import { useParams } from 'react-router-dom';
 const Edit = () => {
     let { id } = useParams()
     const [userData, setUserData] = useState({});
-
-    // const [data, setData] = useState({});
+ 
     const [phoneNumber, setPhoneNumber] = useState('');
     const [Country, setCountry] = useState({});
     const username = useRef();
@@ -88,12 +87,12 @@ const Edit = () => {
 
                                             <Form.Group controlId="formBasicEmail">
                                                 <Form.Label>Users Name</Form.Label>
-                                                <Form.Control type="text" name='firstname' ref={username} defaultValue={userData.UserName} />
+                                                <Form.Control type="text" name='firstname' ref={username} defaultValue={userData?.UserName} />
                                             </Form.Group>
 
                                             <Form.Group controlId="formBasicEmail" className='mt-3'>
                                                 <Form.Label>Email</Form.Label>
-                                                <Form.Control type="email" name='email' ref={email} defaultValue={userData.UserEmail} />
+                                                <Form.Control type="email" name='email' ref={email} defaultValue={userData?.UserEmail} />
                                             </Form.Group>
 
 
@@ -131,7 +130,7 @@ const Edit = () => {
                                             </Form.Group>
                                             <Form.Group controlId="formBasicEmail" className='mt-3'>
                                                 <Form.Label>Password</Form.Label>
-                                                <Form.Control type="password" ref={password} defaultValue={userData.UserPassword} />
+                                                <Form.Control type="password" ref={password} defaultValue={userData?.UserPassword} />
                                             </Form.Group>
 
                                         </Col>

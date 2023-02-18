@@ -46,7 +46,7 @@ function UsersTable({ usersList, userList }) {
                 </thead>
                 <tbody className='text-center'>
                     {
-                        usersList.map((item, index) => (
+                        usersList?.map((item, index) => (
                             <tr key={index}>
 
                                 <td >

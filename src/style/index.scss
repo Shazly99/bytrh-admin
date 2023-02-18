@@ -1,5 +1,5 @@
 @import '../style/varibale';
- 
+
 body {
   background: $colorLight;
 }
@@ -9,7 +9,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: $colorDark;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -22,65 +22,68 @@ body {
 }
 
 ::-webkit-scrollbar-corner {
-  background-color: black;
- }
+  background-color: transparent;
+}
 
 .txt_blocked,
- .txt_delivery,
+.txt_delivery,
 .txt_delivered,
 .txt_pending,
 .txt_shipped,
 .txt_rejected {
-    /* Button */
-    font-weight: 600 !important;
-    display: inline-flex;
-    align-items: center;
-    font-size: 0.95rem !important;
-    width: fit-content; 
-    padding: 0.1rem .4rem;
-    border-radius: 0.425rem;
-    white-space: nowrap;
-    vertical-align: baseline; 
-    line-height:normal !important
+  /* Button */
+  font-weight: 600 !important;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.95rem !important;
+  width: fit-content;
+  padding: 0.1rem .4rem;
+  border-radius: 0.425rem;
+  white-space: nowrap;
+  vertical-align: baseline;
+  line-height: normal !important
 }
 
 .txt_pending {
-    color: #FFC107;
-    background-color: rgba($color:#FFC107, $alpha: 0.1);
-    // background-color: #fff5f8;
+  color: #FFC107;
+  background-color: rgba($color: #FFC107, $alpha: 0.1);
+  // background-color: #fff5f8;
 }
-.txt_blocked{
+
+.txt_blocked {
   color: black;
-  background-color: rgba($color:#000, $alpha: 0.2);
+  background-color: rgba($color: #000, $alpha: 0.2);
 }
+
 .txt_shipped {
-    color: #9804F0;
-    background-color: rgba($color:#9804F0, $alpha: 0.1);
-    
+  color: #9804F0;
+  background-color: rgba($color: #9804F0, $alpha: 0.1);
+
 
 }
 
 .txt_delivery {
-    color: #006300;
-        background-color: rgba($color:#006300, $alpha: 0.1);
+  color: #006300;
+  background-color: rgba($color: #006300, $alpha: 0.1);
 }
 
 .txt_delivered {
-    color: #40AB45;
-        background-color: rgba($color:#40AB45, $alpha: 0.1);
+  color: #40AB45;
+  background-color: rgba($color: #40AB45, $alpha: 0.1);
 
 
 }
 
 .txt_rejected {
-    color: #E20000;
-        background-color: rgba($color:#E20000, $alpha: 0.1); 
+  color: #E20000;
+  background-color: rgba($color: #E20000, $alpha: 0.1);
 }
 
 // navbar fixed 
-.navMain{
+.navMain {
   position: relative;
-  .navSubMain{
+
+  .navSubMain {
     position: fixed;
     top: 0;
     left: 0;
@@ -89,6 +92,7 @@ body {
     z-index: 9;
   }
 }
-.main__Body{
+
+.main__Body {
   margin-top: 70px !important;
 }

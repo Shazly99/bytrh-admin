@@ -33,12 +33,20 @@ import AddNewUser from '../Pages/Vendor/Users/AddUser/AddNewUser';
 import Edit from './../Pages/Vendor/Users/Edit/Edit';
 import ClientTable from './../Pages/Vendor/Client/ClientTable';
 import Clients from './../Pages/Vendor/Client/Client';
+import Chat from './../Layout/Chat';
+import ChatClient from './../Pages/Chat/Client/ChatClient';
+import ChatDoctors from './../Pages/Chat/Doctors/ChatDoctors';
+import Doctors from './../Pages/Vendor/Doctor/Doctors';
+import AddDoctor from './../Pages/Vendor/Doctor/AddDoctor';
+import EditDoctor from './../Pages/Vendor/Doctor/EditDoctor';
+import DoctorFields from './../Pages/Vendor/Doctor/DoctorFields';
 
 export default {
     // Layout
     Client,
     Vendor,
     Auth,
+    Chat,
     // Vendor Components User 1
     Dashboard,
     Summary,
@@ -68,7 +76,14 @@ export default {
     ProductReport,
     // Auth
     Login,
-    
+    // chat component
+    ChatClient,
+    ChatDoctors,
+    // Doctore
+    Doctors,
+    AddDoctor,
+    EditDoctor,
+    DoctorFields,
     // Components
     Navber,
     SubNav,
