@@ -145,6 +145,7 @@ export default function Doctors({ fetchDoctors, pagesCountDoctors, countDoctors,
 
                   />
                 </div>
+                
                 <table className="table text-center table-hover ">
                   <thead className="bg-input">
                     <tr>

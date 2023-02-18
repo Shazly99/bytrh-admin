@@ -10,6 +10,7 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { Container } from 'react-bootstrap';
 import Component from '../../../constants/Component';
+import { apiheader } from './../../../utils/fetchData';
 
 const EditDoctor = ({ getTokenDoctors, fetchCountriesBytra }) => {
   const { id } = useParams();
@@ -27,11 +28,7 @@ const EditDoctor = ({ getTokenDoctors, fetchCountriesBytra }) => {
 
   async function getDoctorData() {
     await axios.get(apiInfos, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYnl0cmguY29tXC9hcGlcL2FkbWluXC9sb2dpbiIsImlhdCI6MTY3NjA4NzM2MCwiZXhwIjozNTQyMzI3MzYwLCJuYmYiOjE2NzYwODczNjAsImp0aSI6InZiYVRFUEhSMDZJd21oMUMiLCJzdWIiOjEsInBydiI6ImZkOWU0ZjkyODg3OWNjMWEwZWM5MGFjMzA5ZjdhZWY2MDJkYTY0NzkifQ.AnC0BpTQUIMCJPXydsSbZzoMOOj1jDWHLCN17RfzxG4',
-      }
+   apiheader
     })
       .then(res => {
         if (res.status === 200 && res.request.readyState === 4) {
