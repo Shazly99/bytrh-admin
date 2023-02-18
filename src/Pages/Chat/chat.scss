@@ -1,0 +1,202 @@
+@import '../../style/varibale';
+
+.app__chat {
+    margin: auto;
+    width: 95%;
+    background-color: #F5F8FA;
+
+    .app__chat__container {
+        @include flex(flex, center, center, row);
+        height: calc(100vh - 70px);
+        padding: 10px;
+        border-radius: 16px;
+
+    }
+
+    .app__chat_list-Users {
+        height: 100% !important;
+
+        .app__chat_list-card {
+            background-color: #FFFFFF;
+            height: 100% !important;
+            border-radius: 15px;
+            padding: 22px 29px;
+
+            // overflow-y: scroll;
+
+            .app__chat_list-cards {
+                padding-bottom: 29px;
+            }
+
+            .app__chat_list {
+                overflow-y: scroll;
+                max-height: 540px;
+
+                margin-top: 15px;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+
+                .user {
+                    width: 100%;
+
+                    @include flex(flex, left, center, row);
+                    gap: 15px;
+
+                    .img {}
+
+                    .content {
+
+                        .name {
+                            font-weight: 700 !important;
+                            font-size: 1.15rem !important;
+                            text-decoration: none;
+                        }
+
+                        .email {
+                            color: #B5B5C3;
+                            font-weight: 600 !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .app__chat_messages {
+        height: 100% !important;
+
+        .app__chat_list-card {
+            padding: 20px !important;
+            height: 100% !important;
+            border-radius: 15px;
+            padding: 5px;
+            background-color: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            align-content: space-between;
+            gap: 20px;
+
+            .app__Live_chat {
+                background: #D9D9D9;
+                border-radius: 16px;
+                height: calc(100% - 10%) !important;
+                padding: 50px 20px;
+            }
+
+            .app__send {
+                height: 10%;
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                background: #D9D9D9;
+                border-radius: 12px;
+                gap: 10px;
+
+                input {
+                    background-color: #FFFFFF !important;
+                }
+
+                button {
+                    background-color: $colorBlue-0;
+                    border: $colorBlue-0;
+                }
+            }
+        }
+    }
+}
+
+
+.chat-body {
+    height: calc(450px - (45px + 70px));
+    border: 1px solid #263238;
+    background: #fff;
+
+    position: relative;
+}
+
+.chat-header p {
+    display: block;
+    padding: 0 1em 0 2em;
+    color: #fff;
+    font-weight: 700;
+    line-height: 45px;
+}
+
+.chat-body .message-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.chat-body .message-container::-webkit-scrollbar {
+    display: none;
+}
+
+.chat-body .message {
+    height: auto;
+    padding: 10px;
+    display: flex;
+}
+
+.chat-body .message .message-content {
+    width: auto;
+    height: auto;
+    // min-height: 40px;
+    min-width: 120px;
+    border-radius: 5px;
+    display: flex;
+    padding:10px 10px;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+#you {
+    justify-content: flex-start;
+}
+
+#you .message-content {
+    align-items: center;
+    justify-content: flex-start;
+    background: #FFFFFF;
+    padding-left: 10px;
+    padding-top: 5px;
+    border-radius: 31.5px 31.5px 0px 31.5px
+}
+
+#you .message-meta {
+    justify-content: flex-start;
+    margin-left: 5px;
+}
+
+#other {
+    justify-content: flex-end;
+}
+
+#other .message-content {
+    justify-content: flex-end;
+    background: #FFFFFF;
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 31.5px 31.5px 0px 31.5px;
+    color: #000000;
+}
+
+#other .message-meta {
+    justify-content: flex-end;
+    margin-right: 5px;
+}
+
+.message-meta #author {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.chat-window .chat-body .message .message-meta {
+    display: flex;
+    font-size: 12px;
+}

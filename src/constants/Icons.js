@@ -20,13 +20,19 @@ import { CiShop as shop } from "react-icons/ci";
 import { SlNotebook as list } from "react-icons/sl";
 import { TbReportAnalytics as report } from "react-icons/tb";
 import { RxDotFilled as dote } from "react-icons/rx";
-// import { CiLogout as logout } from "react-icons/ci";
-import logout   from "../assets/Images/svg/logout.svg";
 import { IoSettingsOutline as settings } from "react-icons/io5";
+import { RiUserVoiceFill as Chatuser } from "react-icons/ri";
+import { FaUserMd as ChatDoc } from "react-icons/fa";
+import { RiSendPlaneFill as send } from "react-icons/ri";
+
+import logout   from "../assets/Images/svg/logout.svg";
 import  profile  from "../assets/Images/Vector.svg";
-
-
+import { SiAsciidoctor as doctor } from 'react-icons/si';
+import { BsChatSquareTextFill as chat } from "react-icons/bs";
 export default{
+    send,
+    ChatDoc,
+    Chatuser,
     check,
     logout,
     Dashboard,
@@ -48,5 +54,7 @@ export default{
     upload,
     shop,
     settings,
-    Clients
+    Clients,
+    chat,
+    doctor
 }

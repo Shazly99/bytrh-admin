@@ -20,10 +20,18 @@ function Users() {
   }
 
   const userList = async (page) => {
-    let { data } = await PostData(`https://bytrh.com/api/admin/users`, { IDPage: page }, apiheader)
-    setuserList(data.Response.Users)
-    setPagesNumber(data.Response.Pages);
-
+    try {
+      let { data } = await PostData(`https://bytrh.com/api/admin/users`, { IDPage: page }, apiheader);
+      setuserList(data.Response.Users);
+      setPagesNumber(data.Response.Pages);
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        const retryAfter = error.response.headers['retry-after'];
+        setTimeout(() => {
+          userList(page);
+        }, (retryAfter || 1) * 1000);  
+      }
+    } 
   }
   useEffect(() => {
     userList(page)

@@ -6,12 +6,15 @@
     justify-content: center;
     align-items: center;
     height: 60px !important;
+
     .active {
-    background-color: #F1F1F1 !important;
-  }
-a{
-    color: #030303 !important;
-}
+        background-color: #F1F1F1 !important;
+    }
+
+    a {
+        color: #030303 !important;
+    }
+
     .nav__notification {
         background-color: $colorRed-0 ;
         color: $colorLight;
@@ -108,7 +111,7 @@ a{
         position: fixed;
         top: 0;
         bottom: 0;
-        left:  0;
+        left: 0;
         z-index: 5;
         padding: 1rem;
         width: 50%;
@@ -116,7 +119,7 @@ a{
         @media screen and (max-width:767px) {
             width: 80%;
         }
-        
+
 
         height: 100vh;
         display: flex;
@@ -151,7 +154,8 @@ a{
             flex-direction: column;
 
             li {
-                margin: 1rem; 
+                margin: 1rem;
+
                 a {
                     color: var(--gray-color);
                     text-decoration: none;
@@ -164,6 +168,7 @@ a{
                     justify-content: center;
                     align-items: center;
                     font-size: larger;
+
                     &:hover {
                         color: var(--secondary-color);
                     }
@@ -181,12 +186,83 @@ a{
         display: none;
     }
 }
+
 .navbar-expand .navbar-nav .dropdown-menu {
     position: absolute;
-    left: -135px; 
-    background-color: rgba((248,249,250),var(--bs-bg-opacity))!important;
-    /* right: -10px; */
+    left: -135px;
+    // top: 55px;
+    background-color: rgba((248, 249, 250), var(--bs-bg-opacity)) !important;
+    /* right: -10px; */; 
 }
+
 .dropdown-toggle::after {
-    display: none !important; 
+    display: none !important;
+}
+
+.navEnd {
+    gap: 18px;
+
+    .chat__icon {
+        border-radius: 5px;
+        background-color: transparent !important;
+        position: relative;
+        svg {
+            color: #B5B5C3  ;
+        }
+
+        transition: all 0.5s;
+
+        &:hover {
+            background-color: #a9defd !important;
+
+            svg {
+                // color: #f4f4f6 !important;
+            }
+        }
+
+        // padding: 20px;
+    }
+
+    .bg-success {
+        color: rgb(80, 205, 137);
+        background-color: #50cd89 !important;
+    }
+    .bullet-dot {
+        width: 4px;
+        height: 4px;
+        border-radius: 100% !important;
+    }
+    .bullet {
+        display: inline-block; 
+        border-radius: 6px;
+        width: 8px;
+        height: 4px;
+        flex-shrink: 0;
+        z-index: 999999;
+    }   
+    .h-6px {
+        height: 6px !important;
+    }
+    .w-6px {
+        width: 6px !important;
+    }
+    .translate-middle {
+        transform: translate(-50%, -50%) !important;
+    }
+    .start-50 {
+        left: 50% !important;
+    }
+    .top-0 {
+        top: 0px !important;
+    } 
+    // Blink
+    .animation-blink {
+        animation: animationBlink 1s steps(5, start) infinite;
+    }
+
+    @keyframes animationBlink {
+        to {
+            visibility: hidden;
+        }
+    }
 }

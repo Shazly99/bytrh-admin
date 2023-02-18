@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
-import Component from '../constants/Component'; 
+import Component from '../constants/Component';
 import { motion } from 'framer-motion';
 import { VendersContext } from '../context/Store';
 
-function Vendor( ) {
+function Vendor() {
   let { isOpen } = useContext(VendersContext);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ function Vendor( ) {
         <div className='d-flex'>
           <Component.Sildebar />
           <motion.div
-          className='adminLayout'
+            className='adminLayout'
             animate={{
               width: isOpen ? `calc(100% - 270px)` : `calc( 100% - 50px )`,
               transition: {
