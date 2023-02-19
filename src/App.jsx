@@ -82,7 +82,7 @@ function App() {
         },
         {
           path: '/doctors', children: [
-            { index: true, element: <ProtectedRoutes><Component.Doctors fetchDoctors={fetchDoctors} pagesCountDoctors={pagesCountDoctors} countDoctors={countDoctors} setCountDoctors={setCountDoctors} setSearchKeyDoctors={setSearchKeyDoctors} loadingDoctors={loadingDoctors} /> </ProtectedRoutes> },
+            { index: true, element: <ProtectedRoutes><Component.Doctors getTokenDoctors={getTokenDoctors} fetchDoctors={fetchDoctors} pagesCountDoctors={pagesCountDoctors} countDoctors={countDoctors} setCountDoctors={setCountDoctors} setSearchKeyDoctors={setSearchKeyDoctors} loadingDoctors={loadingDoctors} /> </ProtectedRoutes> },
             { path: 'addDoctor', element: <ProtectedRoutes> <Component.AddDoctor getTokenDoctors={getTokenDoctors} fetchCountriesBytra={fetchCountriesBytra} /></ProtectedRoutes> },
             { path: 'editDoctor/:id', element: <ProtectedRoutes> <Component.EditDoctor getTokenDoctors={getTokenDoctors} fetchCountriesBytra={fetchCountriesBytra} /></ProtectedRoutes> },
             { path: 'doctorfields/:id', element: <ProtectedRoutes> <Component.DoctorFields /></ProtectedRoutes> },

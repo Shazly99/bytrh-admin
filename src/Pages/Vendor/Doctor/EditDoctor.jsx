@@ -11,6 +11,8 @@ import 'react-phone-input-2/lib/style.css';
 import { Container } from 'react-bootstrap';
 import Component from '../../../constants/Component';
 import { apiheader } from './../../../utils/fetchData';
+import { Callbacks } from 'jquery';
+import { Button } from 'react-bootstrap/';
 
 const EditDoctor = ({ getTokenDoctors, fetchCountriesBytra }) => {
   const { id } = useParams();
@@ -27,9 +29,7 @@ const EditDoctor = ({ getTokenDoctors, fetchCountriesBytra }) => {
   // const [expire, setExpire] = useState('');
 
   async function getDoctorData() {
-    await axios.get(apiInfos, {
-   apiheader
-    })
+    await axios.get(apiInfos,  apiheader )
       .then(res => {
         if (res.status === 200 && res.request.readyState === 4) {
           setName(res.data.Response.UserName);
@@ -37,7 +37,8 @@ const EditDoctor = ({ getTokenDoctors, fetchCountriesBytra }) => {
           setPhone(res.data.Response.UserPhone);
           setCountryCode(res.data.Response.UserPhoneFlag);
           setCountry(res.data.Response.IDCountry);
-          setCity(res.data.Response.IDCity);
+          setCity(res.data.Response.IDCity); 
+          getCitiesBytra(res.data.Response.IDCity);
         }
       })
       .catch(err => {
@@ -62,9 +63,9 @@ const EditDoctor = ({ getTokenDoctors, fetchCountriesBytra }) => {
         console.log(err);
       })
   }
-  useEffect(() => {
-    getCitiesBytra(country);
-  }, [country])
+  // useEffect(() => {
+  //   // getCitiesBytra(country);
+  // }, [country])
 
 
 
@@ -224,9 +225,8 @@ const EditDoctor = ({ getTokenDoctors, fetchCountriesBytra }) => {
                   {message.length > 0 ? <p id="alertSave" className={`alert ${apiCode === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 mb-0 mt-3 w-50 text-center mx-auto`}>{message}</p> : ''}
 
                   <div className="submitAdd-buttons mt-4 d-flex justify-content-center align-items-center">
-                    {/*<Button type='submit' className="btn black-btn p-2 me-4">{loadind ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}</Button>*/}
-                   
-                    <Component.ButtonBase title={"Save"} bg={"primary"} />
+                    <Button type='submit' className="btn black-btn p-2 me-4">{loadind ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}</Button>
+                    
                     <Component.ButtonBase title={"Cancel"} bg={"primary"} path="/doctors " />
                     
                   </div>
