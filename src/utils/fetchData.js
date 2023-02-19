@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const apiheader = {
     headers: {
+        'Content-Type': 'multipart/form-data',
         'Authorization': 'Bearer ' + localStorage.getItem('token'),
     }
 

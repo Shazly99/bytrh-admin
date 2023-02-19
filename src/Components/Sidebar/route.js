@@ -12,30 +12,15 @@ const routes = [
       icon: <Icons.Clients size={20}/>,
     },
     {
-      path: "/user",
-      name: "Users",
-      icon: <Icons.user size={20}/>,
-    },
-    {
       path: "/doctors",
       name: "Doctors",
       icon: <Icons.doctor size={20}/>,
+    }, 
+    {
+      path: "/user",
+      name: "Admin",
+      icon: <Icons.user size={20}/>,
     },
-    // {
-    //   path: "/venderOrder",
-    //   name: "Orders",
-    //   icon: <Icons.Products size={20}/>,
-    // },
-    // {
-    //   path: "/venderSubuser",
-    //   name: "Sub Users",
-    //   icon: <Icons.user size={20}/>,
-    // },
-    // {
-    //   path: "/venderProfile",
-    //   name: "Profile",
-    //   icon: <Icons.profile size={20}/>,
-    // },
  
   ];
 

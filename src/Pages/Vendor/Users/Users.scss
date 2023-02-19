@@ -2,14 +2,11 @@
 
 
 .app__Users {
-
-
     .app__Users-table {
         margin-top: 22px;
     }
 }
 
-.app__Users-table {}
 
 .pagination {
     margin-bottom: 50px !important;
@@ -20,8 +17,6 @@
 }
 
 .app__addprodects {
-
-
     .app__addprodects__header-images {
         .app__addprodects__img {
             height: 210px;
@@ -106,8 +101,8 @@
     }
 }
 
-.app__Users {
-
+.app__Users,
+.app__doctor {
     .dropdown-toggle {
         background-color: transparent !important;
         color: rgba($color: $colorGrey-1, $alpha: 0.1) !important;
@@ -133,4 +128,51 @@
 
         }
     }
+}
+
+
+.search-container {
+    display: inline-block !important;
+    margin-bottom: 20px !important;
+    width: 100% !important;
+    // background-color: red;
+}
+
+.search__group {
+    width: 70% !important;
+    position: relative; 
+    @media screen and (max-width:400px) {
+    width: 100%;
+        
+    }
+}
+
+.search-container input[type="text"] {
+    padding: 10px;
+    font-size: 17px;
+    border: none;
+    min-width: 100% !important;
+    border-bottom: 2px solid #ccc;
+}
+
+.search-container input[type="text"]:focus {
+    outline: none;
+    border-bottom: 2px solid #aaa;
+}
+
+.search-container button[type="submit"] {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border-radius: 0 5px 5px 0;
+    height: 100%;
+    min-width: 90px;
+    background: $colorRed-0;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+.search-container button[type="submit"]:hover {
+    background: rgba($color:  $colorRed-0, $alpha: 0.8);
 }

@@ -1,11 +1,12 @@
-import React, {   useState } from 'react';
+import React, { useState } from 'react';
 import $ from 'jquery';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import {  Container } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import Component from '../../../constants/Component';
+import { apiheader } from './../../../utils/fetchData';
 
 
 function AddDoctor({ getTokenDoctors, fetchCountriesBytra }) {
@@ -100,8 +101,8 @@ function AddDoctor({ getTokenDoctors, fetchCountriesBytra }) {
         data: { ...user, DoctorPhoneFlag, DoctorPhone },
         headers: {
           'Content-Type': 'multipart/form-data',
-          'Authorization': 'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYnl0cmguY29tXC9hcGlcL2FkbWluXC9sb2dpbiIsImlhdCI6MTY3NjI3MzI4NSwiZXhwIjozNTQyNTEzMjg1LCJuYmYiOjE2NzYyNzMyODUsImp0aSI6InV6QURwTVV5b1BhWndFTlQiLCJzdWIiOjEsInBydiI6ImZkOWU0ZjkyODg3OWNjMWEwZWM5MGFjMzA5ZjdhZWY2MDJkYTY0NzkifQ.-ebAjkSFDE2naB5X-yxF5YDGmz15dey8QtSf3APbWaU',
-        },
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      },
       });
 
       setMessage(data.ApiMsg);
@@ -254,10 +255,10 @@ function AddDoctor({ getTokenDoctors, fetchCountriesBytra }) {
                 {message.length > 0 ? <p id="alertSave" className={`alert ${apiCode === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 mb-0 mt-3 w-50 text-center mx-auto`}>{message}</p> : ''}
 
                 <div className="submitAdd-buttons mt-4 d-flex justify-content-center align-items-center">
-    {/*               <Button type='submit' className="btn black-btn p-2 me-4">{loadind ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}</Button>
-     */}
-                  <Component.ButtonBase title={"Save"} bg={"primary"}    />
-                  <Component.ButtonBase title={"Cancel"} bg={"primary"}   path="/doctors " />
+                  <Button type='submit' className="btn black-btn p-2 me-4">{loadind ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}</Button>
+
+                  {/* <Component.ButtonBase title={"Save"} bg={"primary"}    /> */}
+                  <Component.ButtonBase title={"Cancel"} bg={"primary"} path="/doctors " />
 
                 </div>
 
