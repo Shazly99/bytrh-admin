@@ -73,8 +73,11 @@ const ClientTable = ({ usersList, userList }) => {
   useEffect(() => {
   }, [usersList])
 
+
+
   return (
     <>
+
       <Table responsive={true} className='rounded-3 '>
         <thead>
           <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
@@ -92,7 +95,7 @@ const ClientTable = ({ usersList, userList }) => {
             usersList?.map((item, index) => (
               <tr key={index}>
                 <td>
-                  <div className='d-flex flex-column justify-content-center align-content-center'>
+                  <div className='d-flex flex-column justify-content-center align-content-center' style={{gap:'0'}}>
                     <span className='ClientName'>{item?.ClientName}</span>
                     <span className='ClientPhone'>{item?.ClientPhone}</span>
                   </div>
@@ -151,7 +154,7 @@ const ClientTable = ({ usersList, userList }) => {
                           </Modal.Header>
                           <Modal.Body>
                             <Form.Control type="number" value={changeBalance} onChange={handleChangeBalance} />
-                            <div className='d-flex justify-content-center align-items-center mt-3' style={{gap:'15px'}}>
+                            <div className='d-flex justify-content-center align-items-center mt-3' style={{ gap: '15px' }}>
                               <Button variant="outline-primary" onClick={() => setChangeBalance(changeBalance + 1)}>Balance add </Button>
                               <Button variant="outline-primary" onClick={() => setChangeBalance(changeBalance - 1)}>Balance deduction</Button>
                             </div>

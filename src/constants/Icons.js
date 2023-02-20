@@ -29,6 +29,8 @@ import logout   from "../assets/Images/svg/logout.svg";
 import  profile  from "../assets/Images/Vector.svg";
 import { SiAsciidoctor as doctor } from 'react-icons/si';
 import { BsChatSquareTextFill as chat } from "react-icons/bs";
+import { BsImage as imageUpload } from "react-icons/bs";
+
 export default{
     send,
     ChatDoc,
@@ -56,5 +58,6 @@ export default{
     settings,
     Clients,
     chat,
-    doctor
+    doctor,
+    imageUpload
 }

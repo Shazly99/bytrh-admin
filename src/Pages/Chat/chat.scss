@@ -11,6 +11,11 @@
         padding: 10px;
         border-radius: 16px;
 
+        @media screen and (max-width:770px) {
+            min-height: calc(100vh - 70px) !important;
+
+        }
+
     }
 
     .app__chat_list-Users {
@@ -78,7 +83,7 @@
             gap: 20px;
 
             .app__Live_chat {
-                background: #D9D9D9;
+                background: #d9d9d998;
                 border-radius: 16px;
                 height: calc(100% - 10%) !important;
                 padding: 50px 20px;
@@ -147,7 +152,7 @@
     min-width: 120px;
     border-radius: 5px;
     display: flex;
-    padding:10px 10px;
+    padding: 10px 10px;
     align-items: center;
     display: flex;
     align-items: center;
@@ -165,10 +170,18 @@
     background: #FFFFFF;
     padding-left: 10px;
     padding-top: 5px;
-    border-radius: 31.5px 31.5px 0px 31.5px
+    border-radius: 31.5px 31.5px 31.5px 0px;
+}
+
+.message-content {
+    p {
+        margin: 0 !important;
+    }
 }
 
 #you .message-meta {
+    display: flex;
+
     justify-content: flex-start;
     margin-left: 5px;
 }
@@ -180,13 +193,13 @@
 #other .message-content {
     justify-content: flex-end;
     background: #FFFFFF;
-
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 31.5px 31.5px 0px 31.5px;
     color: #000000;
 }
 
 #other .message-meta {
+    display: flex;
     justify-content: flex-end;
     margin-right: 5px;
 }
@@ -200,3 +213,18 @@
     display: flex;
     font-size: 12px;
 }
+
+.empty_chat {
+    font-size: larger;
+    padding-top: 5px;
+}
+
+.bgChatBtn{
+    background-color:  $colorRed-0 !important;
+    border: none !important;
+    transition: all 0.8s;
+    &:hover{
+        background-color: rgba($color: $colorRed-0 , $alpha: 0.8) !important;
+        box-shadow: none !important;
+    }
+  }

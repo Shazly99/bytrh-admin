@@ -138,7 +138,7 @@ export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDocto
                   </div>
                   <div className="app__Users-table  ">
                     <table className="table text-center    ">
-                      <thead className="bg-input">
+                      <thead className="table-light bg-input">
                         <tr>
                           <th scope="col">Name</th>
                           {/* <th scope="col">Email</th> */}

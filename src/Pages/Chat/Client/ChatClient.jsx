@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import '../chat.scss'
 import { Form, Nav, NavDropdown } from 'react-bootstrap';
@@ -6,228 +6,124 @@ import { InputGroup } from 'react-bootstrap';
 import Icons from '../../../constants/Icons';
 import Img from '../../../assets/Img';
 import ScrollToBottom from 'react-scroll-to-bottom';
+import Component from '../../../constants/Component';
+import { PostData, apiheader } from './../../../utils/fetchData';
+import { Outlet, useParams } from 'react-router-dom';
+import { ChatContext } from '../../../context/ChatStore';
 
 const ChatClient = () => {
+  const { id } = useParams();
+  let { setUserReplied, userReplied } = useContext(ChatContext);
+  const [clientChatSupport, setClientChatSupport] = useState([])
+  const clientlist = async () => {
+    let { data } = await PostData(`https://bytrh.com/api/admin/chat/client/list`, {}, apiheader)
+    // console.log(data.Response.ClientChatSupport);
+    setClientChatSupport(data.Response.ClientChatSupport)
+  }
+
+  const adminSendMess = async (value) => {
+    let data = await PostData(`https://bytrh.com/api/admin/chat/client/reply`,
+      {
+        IDClientChatSupport: id,
+        ChatSupportMessage: value,
+        ChatSupportType: 'TEXT'
+      }
+      , apiheader);
+    // console.log(data);
+  }
+  useEffect(() => {
+    clientlist()
+  }, [id])
+
+
+  const inputRef = useRef(null);
+  const [inputValue, setInputValue] = useState('');
+
+  const handeAdminMess = () => {
+    const value = inputRef.current.value;
+    // console.log(value);
+    // TODO: Send the value to the server
+    adminSendMess(value)
+    setInputValue('');
+    inputRef.current.value = '';
+  };
+
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  async function handleFileSelect(event) {
+    console.log(event.target.files);
+    setSelectedFile();
+    if (selectedFile !== null) {  
+      let data = await PostData(`https://bytrh.com/api/admin/chat/client/reply`,
+      {
+        IDClientChatSupport: id,
+        ChatSupportMessage:event.target.files[0]  ,
+        ChatSupportType: 'IMAGE'
+      }
+      , apiheader);
+      console.log(data);
+    }
+  }
+
+  
+
   return (
     <div className='app__chat'>
       <Row className="app__chat__container ">
-        <Col xl={4} lg={4} md={6} sm={12} className='app__chat_list-Users '>
-          <div className='shadow app__chat_list-card '>
-            <span className="app__chat_list-search">
-              <Form.Control
-                placeholder=" Search By Name or Email or Phone"
-                aria-label="Username"
-                aria-describedby="basic-addon1"
-                className='input__search'
-              />
-            </span>
-            <div className='d-flex flex-column gap-3 app__chat_list'>
-
-              <div className="user">
-                <div className="img">
-                  <img src={Img.avatar1} width="50" height="50" style={{ borderRadius: '50% ' }} />
-                </div>
-                <div className="content">
-                  <div className="name">
-                    Ahmed Elshazly
-                  </div>
-                  <div className="email">
-                    ahmed@gmail.com
-                  </div>
-                </div>
-
-              </div>
-
-              <div className="user">
-                <div className="img">
-                  <img src={Img.avatar2} width="50" height="50" style={{ borderRadius: '50% ' }} />
-                </div>
-                <div className="content">
-                  <div className="name">
-                    Ahmed Elshazly
-                  </div>
-                  <div className="email">
-                    ahmed@gmail.com
-                  </div>
-                </div>
-
-              </div>
-
-
-              <div className="user">
-                <div className="img">
-                  <img src={Img.avatar3} width="50" height="50" style={{ borderRadius: '50% ' }} />
-                </div>
-                <div className="content">
-                  <div className="name">
-                    Ahmed Elshazly
-                  </div>
-                  <div className="email">
-                    ahmed@gmail.com
-                  </div>
-                </div>
-
-              </div>
-              <div className="user">
-                <div className="img">
-                  <img src={Img.avatar4} width="50" height="50" style={{ borderRadius: '50% ' }} />
-                </div>
-                <div className="content">
-                  <div className="name">
-                    Ahmed Elshazly
-                  </div>
-                  <div className="email">
-                    ahmed@gmail.com
-                  </div>
-                </div>
-
-              </div>
-              <div className="user">
-                <div className="img">
-                  <img src={Img.avatar5} width="50" height="50" style={{ borderRadius: '50% ' }} />
-                </div>
-                <div className="content">
-                  <div className="name">
-                    Ahmed Elshazly
-                  </div>
-                  <div className="email">
-                    ahmed@gmail.com
-                  </div>
-                </div>
-
-              </div>
-              <div className="user">
-                <div className="img">
-                  <img src={Img.avatar6} width="50" height="50" style={{ borderRadius: '50% ' }} />
-                </div>
-                <div className="content">
-                  <div className="name">
-                    Ahmed Elshazly
-                  </div>
-                  <div className="email">
-                    ahmed@gmail.com
-                  </div>
-                </div>
-
-              </div>
-              <div className="user">
-                <div className="img">
-                  <img src={Img.avatar7} width="50" height="50" style={{ borderRadius: '50% ' }} />
-                </div>
-                <div className="content">
-                  <div className="name">
-                    Ahmed Elshazly
-                  </div>
-                  <div className="email">
-                    ahmed@gmail.com
-                  </div>
-                </div>
-
-              </div>
-              <div className="user">
-                <div className="img">
-                  <img src={Img.avatar8} width="50" height="50" style={{ borderRadius: '50% ' }} />
-                </div>
-                <div className="content">
-                  <div className="name">
-                    Ahmed Elshazly
-                  </div>
-                  <div className="email">
-                    ahmed@gmail.com
-                  </div>
-                </div>
-
-              </div>
-              <div className="user">
-                <div className="img">
-                  <img src={Img.avatar6} width="50" height="50" style={{ borderRadius: '50% ' }} />
-                </div>
-                <div className="content">
-                  <div className="name">
-                    Ahmed Elshazly
-                  </div>
-                  <div className="email">
-                    ahmed@gmail.com
-                  </div>
-                </div>
-
-              </div>
-              <div className="user">
-                <div className="img">
-                  <img src={Img.avatar7} width="50" height="50" style={{ borderRadius: '50% ' }} />
-                </div>
-                <div className="content">
-                  <div className="name">
-                    Ahmed Elshazly
-                  </div>
-                  <div className="email">
-                    ahmed@gmail.com
-                  </div>
-                </div>
-
-              </div>
-              <div className="user">
-                <div className="img">
-                  <img src={Img.avatar8} width="50" height="50" style={{ borderRadius: '50% ' }} />
-                </div>
-                <div className="content">
-                  <div className="name">
-                    Ahmed Elshazly
-                  </div>
-                  <div className="email">
-                    ahmed@gmail.com
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </Col>
+        <Component.ClientList clientChatSupport={clientChatSupport} />
         <Col xl={8} lg={8} md={6} sm={12} className='app__chat_messages '>
           <div className='shadow app__chat_list-card'>
-            <div className='app__Live_chat chat-body'>
-              <ScrollToBottom className="message-container">
-
-                <div
-                  className="message"
-                  id={"you"}
-                >
-                  <div>
-                    <div className="message-content">
-                      <p >Hi my name is shazly</p>
-                    </div>
-                    <div className="message-meta">
-                      <p id="time">2023-02-16</p>
-                    </div>
-                  </div> 
-                </div>
-
-                <div
-                  className="message"
-                  id={"other"}
-                >
-                  <div>
-                    <div className="message-content">
-                      <p >Hi my name is shazly</p>
-                    </div>
-                    <div className="message-meta">
-                      <p id="time">2023-02-16</p>
-                    </div>
-                  </div> 
-                </div>
-              </ScrollToBottom>
+            <div className={`app__Live_chat chat-body  ${id ? '' : 'bg-dark'}`} style={{ background: '#d9d9d998' }}>
+              {
+                id ?
+                  <Outlet></Outlet> :
+                  <div className="empty_chat   w-100 h-100 d-flex justify-content-center align-items-center flex-column">
+                    <img src={Img.empty_chat} className='w-50' />
+                    <h2 className={` ${id ? '' : 'text-light'}`}>
+                      Welcome, <span style={{ color: '#313bac' }}>admin!</span>
+                    </h2>
+                    <h4 className={` ${id ? '' : 'text-light'}`}>Please select a chat to Start messaging.</h4>
+                  </div>
+              }
             </div>
-            <div className="app__send">
-              <input type="text" class="form-control" />
-              <button className='btn btn-info'>
-                <Icons.send color='#fff' size={20} />
-              </button>
-            </div>
+            {
+              userReplied === 0 ?
+                <>
+                  {
+                    id ?
+                      <div className="app__send">
+                        <input type="text" className="form-control" ref={inputRef} />
+                        <button className='btn shadow-lg bgChatBtn' onClick={handeAdminMess} >
+                          <Icons.send color='#fff' size={20} />
+                        </button>
+
+                        <input type="file" id="file-input" accept="image/*" onChange={handleFileSelect} style={{ display: 'none' }} />
+                        <label htmlFor="file-input" className="btn btn-info bgChatBtn shadow" style={{ pointerEvents: 'all' }}>
+                          <Icons.imageUpload color='#fff' size={20} />
+                        </label> 
+
+                      </div>
+                      :
+                      ''
+                  }
+                </> :
+                <>
+                  {
+                    id ?
+                      <div className="app__send d-flex justify-content-center align-items-center">
+                        <h6> Another user already replied</h6>
+                      </div> : ''
+                  }
+                </>
+            }
+
+
           </div>
-        </Col>
 
-      </Row>
-    </div>
+        </Col >
+
+      </Row >
+    </div >
   )
 }
 

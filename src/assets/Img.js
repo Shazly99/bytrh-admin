@@ -11,6 +11,7 @@ import avatar5 from "./Images/users/300-3.jpg";
 import avatar6 from "./Images/users/300-4.jpg";
 import avatar7 from "./Images/users/300-5.jpg";
 import avatar8 from "./Images/users/300-6.jpg";
+import empty_chat from "./Images/robot.gif";
 
 export default{ 
     logo,
@@ -26,4 +27,5 @@ export default{
     avatar6,
     avatar7,
     avatar8,
+    empty_chat
 }

@@ -6,6 +6,7 @@ import { Toaster } from 'react-hot-toast';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { apiheader } from './utils/fetchData';
+import ChatStore from './context/ChatStore';
 
 function App() {
   const URL_Doctors = `https://bytrh.com/api/admin/doctors`;
@@ -37,7 +38,7 @@ function App() {
       getTokenDoctors();
     }
   }, [token, countDoctors, pagesCountDoctors, searchKeyDoctors]);
-  
+
   // get countries Bytra
   const [fetchCountriesBytra, setFetchCountriesBytra] = useState([]);
   async function getCountriesBytra() {
@@ -96,7 +97,11 @@ function App() {
     {
       path: '/chat', element: <Component.Chat />, children: [
         { index: true, element: <ProtectedRoutes>  <Component.ChatClient /></ProtectedRoutes> },
-        { path: '/chat/clients', element: <ProtectedRoutes>  <Component.ChatClient /></ProtectedRoutes> },
+        {
+          path: '/chat/clients', element: <ProtectedRoutes>  <Component.ChatClient /></ProtectedRoutes>, children: [
+            { path: '/chat/clients/:id', element: <ProtectedRoutes> <Component.LiveChat /> </ProtectedRoutes> }
+          ]
+        },
         { path: '/chat/doctors', element: <ProtectedRoutes><Component.ChatDoctors /></ProtectedRoutes> }
       ],
     },
@@ -127,9 +132,12 @@ function App() {
           top: 60
         }}
       />
-      <VenderContext>
-        <RouterProvider router={root} />
-      </VenderContext>
+      <ChatStore>
+        <VenderContext>
+          <RouterProvider router={root} />
+        </VenderContext>
+      </ChatStore>
+
     </>
   );
 }
