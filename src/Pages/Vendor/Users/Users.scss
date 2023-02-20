@@ -83,20 +83,21 @@
     .app__Users-table {
         padding: 0 20px !important;
 
-        td {
-            >div {
-                color: #4e505d !important;
-                height: 100px !important;
-                font-size: 1.1rem !important;
-                font-weight: 500 !important;
-                gap: 1px;
+    }
+}
 
-                .ClientPhone {
-                    font-size: 1rem !important;
-                    font-weight: normal;
-                    color: #025585;
-                }
-            }
+td {
+    >div {
+        color: #4e505d !important;
+        height: 100px !important;
+        font-size: 1.1rem !important;
+        font-weight: 500 !important;
+        gap: 1px;
+
+        .ClientPhone {
+            font-size: 1rem !important;
+            font-weight: normal;
+            color: #025585;
         }
     }
 }
@@ -140,10 +141,11 @@
 
 .search__group {
     width: 70% !important;
-    position: relative; 
+    position: relative;
+
     @media screen and (max-width:400px) {
-    width: 100%;
-        
+        width: 100%;
+
     }
 }
 
@@ -174,5 +176,5 @@
 }
 
 .search-container button[type="submit"]:hover {
-    background: rgba($color:  $colorRed-0, $alpha: 0.8);
+    background: rgba($color: $colorRed-0, $alpha: 0.8);
 }

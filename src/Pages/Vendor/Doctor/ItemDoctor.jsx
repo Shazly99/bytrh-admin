@@ -1,8 +1,8 @@
-import React ,{useState}from 'react';
+import React, { useState } from 'react';
 import { FiEdit3 } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { DropdownButton, Dropdown, Modal, Form ,Button} from 'react-bootstrap';
+import { DropdownButton, Dropdown, Modal, Form, Button } from 'react-bootstrap';
 import { useEffect } from 'react';
 import { apiheader, PostData } from '../../../utils/fetchData';
 
@@ -11,9 +11,9 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
     // const [data, setData] = useState({});
     const [showModal, setShowModal] = useState(false);
     const [changeBalance, setChangeBalance] = useState(null);
-  
+
     function handleChangeBalance(event) {
-      setChangeBalance(parseInt(event.target.value) || null);
+        setChangeBalance(parseInt(event.target.value) || null);
     }
     const [idDoc, setId] = useState(null);
     const handleShowModal = () => setShowModal(true);
@@ -34,22 +34,22 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
         } else if (action === "DELETED") {
             await userstatus({ IDDoctor: id, DoctorStatus: action })
             await getTokenDoctors()
-        }else if (action === "balance") {
+        } else if (action === "balance") {
             setId(id)
             setChangeBalance(null)
-          }
+        }
     };
     async function name() {
         await changeWallet({ IDDoctor: idDoc, Amount: changeBalance })
         await getTokenDoctors()
-      }
- 
-    
-      const changeWallet = async (wallet) => {
+    }
+
+
+    const changeWallet = async (wallet) => {
         let data = await PostData(`https://bytrh.com/api/admin/doctors/wallet/add`, wallet, apiheader)
         await getTokenDoctors()
         console.log(data);
-      }
+    }
     const userstatus = async (status) => {
         let { data } = await PostData(`https://bytrh.com/api/admin/doctors/status`, status, apiheader)
         console.log(data);
@@ -62,12 +62,23 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
     return (
         <>
             <tr>
-                <td>{nameDoc} <br /> {phone}</td>
+                <td>
+                    <div className='d-flex flex-column justify-content-center align-content-center' style={{gap:'0'}}>
+                        <span className='ClientName'>  {nameDoc}    </span>
+                        <span className='ClientPhone'> {phone} </span>
+                    </div>
+                </td>
                 {/* <td>{email}</td> */}
                 {/* <td>{phone}</td> */}
-                <td>{country}</td>
-                <td>{type}</td>
-                <td>{balance}</td> 
+                <td>
+                    <div> {country}   </div>
+                </td>
+                <td>
+                    <div>{type}</div>
+                </td>
+                <td>
+                    <div>{balance}</div>
+                </td>
                 <td className='text-center  d-flex '>
                     <div>
                         <span style={{ height: 'fit-content !important' }} className={`
