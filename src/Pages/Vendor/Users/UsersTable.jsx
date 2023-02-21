@@ -5,21 +5,62 @@ import { useEffect } from 'react';
 import { Table, DropdownButton, Dropdown, NavDropdown } from "react-bootstrap";
 import { apiheader, PostData } from '../../../utils/fetchData.js';
 import { Link } from 'react-router-dom';
+import { Toaster, toast } from 'react-hot-toast';
 
 function UsersTable({ usersList, userList }) {
     // const [data, setData] = useState({});
     const handleActionSelect = async (id, action) => {
         if (action === "PENDING") {
-            await userstatus({ IDUser: id, UserStatus: action })
+            await userstatus({ IDUser: id, UserStatus: action }).then((res) => {
+                toast.success('Status up to date', {
+                    duration: 4000,
+                    position: 'top-center',
+                    icon: <Icons.uploadItem color='#3182CE' size={16} />,
+                    iconTheme: {
+                        primary: '#0a0',
+                        secondary: '#fff',
+                    },
+                });
+            })
             await userList()
         } else if (action === "ACTIVE") {
-            await userstatus({ IDUser: id, UserStatus: action })
+            await userstatus({ IDUser: id, UserStatus: action }).then((res) => {
+                toast.success('Status up to date', {
+                    duration: 4000,
+                    position: 'top-center',
+                    icon: <Icons.uploadItem color='#3182CE' size={25} />,
+                    iconTheme: {
+                        primary: '#0a0',
+                        secondary: '#fff',
+                    },
+                });
+            })
             await userList()
         } else if (action === "INACTIVE") {
-            await userstatus({ IDUser: id, UserStatus: action })
+            await userstatus({ IDUser: id, UserStatus: action }).then((res) => {
+                toast.success('Status up to date', {
+                    duration: 4000,
+                    position: 'top-center',
+                    icon: <Icons.uploadItem color='#3182CE' size={25} />,
+                    iconTheme: {
+                        primary: '#0a0',
+                        secondary: '#fff',
+                    },
+                });
+            })
             await userList()
         } else if (action === "DELETED") {
-            await userstatus({ IDUser: id, UserStatus: action })
+            await userstatus({ IDUser: id, UserStatus: action }).then((res) => {
+                toast.success('Status up to date', {
+                    duration: 4000,
+                    position: 'top-center',
+                    icon: <Icons.bin color='#E20000' size={17} />,
+                    iconTheme: {
+                        primary: '#0a0',
+                        secondary: '#fff',
+                    },
+                });
+            })
             await userList()
         }
     };
@@ -101,14 +142,17 @@ function UsersTable({ usersList, userList }) {
                                                 {/* <Dropdown.Item eventKey="ACTIVE">Action</Dropdown.Item> */}
                                                 {/* <Dropdown.Item eventKey="INACTIVE">InAction</Dropdown.Item> */}
                                                 {
+                                                    item?.UserStatus === "PENDING" ? '' : <Dropdown.Item eventKey="PENDING">Pending</Dropdown.Item>
+                                                }
+                                                {
                                                     item?.UserStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Action</Dropdown.Item>
                                                 }
                                                 {
                                                     item?.UserStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InAction</Dropdown.Item>
                                                 }
-                                                {
+                                                {/* {
                                                     item?.UserStatus === "BLOCKED" ? '' : <Dropdown.Item eventKey="BLOCKED">Blocked</Dropdown.Item>
-                                                }
+                                                } */}
                                             </DropdownButton>
                                         </span>
                                     </div>

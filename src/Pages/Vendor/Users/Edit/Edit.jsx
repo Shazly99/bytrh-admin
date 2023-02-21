@@ -8,11 +8,16 @@ import 'react-phone-input-2/lib/style.css'
 import Form from 'react-bootstrap/Form';
 import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { Toaster, toast } from 'react-hot-toast';
+import Icons from '../../../../constants/Icons';
 
 const Edit = () => {
+    let navigate = useNavigate();
+
     let { id } = useParams()
     const [userData, setUserData] = useState({});
- 
+
     const [phoneNumber, setPhoneNumber] = useState('');
     const [Country, setCountry] = useState({});
     const username = useRef();
@@ -27,15 +32,15 @@ const Edit = () => {
 
     const submit = e => {
         e.preventDefault()
- /*        setData({
-            UserEmail: email.current.value,
-            UserPassword: password.current.value,
-            UserPhone: '+' + phoneNumber,
-            UserPhoneFlag: '+' + Country,
-            UserName: username.current.value,
-            IDCity: 1,
-            IDUser: id
-        }) */
+        /*        setData({
+                   UserEmail: email.current.value,
+                   UserPassword: password.current.value,
+                   UserPhone: '+' + phoneNumber,
+                   UserPhoneFlag: '+' + Country,
+                   UserName: username.current.value,
+                   IDCity: 1,
+                   IDUser: id
+               }) */
         // console.log({
         //     UserEmail: email.current.value,
         //     UserPassword: password.current.value,
@@ -52,26 +57,42 @@ const Edit = () => {
             UserName: username.current.value,
             IDCity: 1,
             IDUser: id
-        }).then(res=>{
-            
-        }).catch(err=>{
+        }).then(res => {
+
+        }).catch(err => {
             console.log(err);
         })
     }
 
-    async function addNewUser(data) {
-        let aa= await PostData(`https://bytrh.com/api/admin/users/edit`, data, apiheader);
-        console.log(aa);
+    async function addNewUser(editUserData) {
+        let {data} = await PostData(`https://bytrh.com/api/admin/users/edit`, editUserData, apiheader);
+        console.log(data);
+        if ( data.Success === true) {
+            toast.success('User data has been updated!', {
+                duration: 4000,
+                position: 'top-center',
+                icon: <Icons.Added color='#40AB45' size={25} />,
+                iconTheme: {
+                    primary: '#0a0',
+                    secondary: '#fff',
+                },
+            });
+            setTimeout(() => {
+                navigate('/user');
+            }, 2000);
+        } else {
+            toast.error( data.ApiMsg)
+        }
     }
 
     const diplayUserData = async () => {
-        let data = await GetData(`https://bytrh.com/api/admin/users/profile/${id}`, apiheader) 
+        let data = await GetData(`https://bytrh.com/api/admin/users/profile/${id}`, apiheader)
         setUserData(data.Response);
 
     }
     useEffect(() => {
         diplayUserData()
-    }, [    phoneNumber])
+    }, [phoneNumber])
     return (
         <>
             <Container fluid>
@@ -112,7 +133,7 @@ const Edit = () => {
                                             <Form.Group controlId="formBasicEmail"  >
                                                 <Form.Label>Mobile</Form.Label>
                                                 <PhoneInput
-                                                    country={'+20'} 
+                                                    country={'+20'}
                                                     value={userData?.UserPhone}
                                                     // country='sa'
                                                     // onlyCountries={['eg', 'sa']} 

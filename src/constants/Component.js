@@ -26,6 +26,8 @@ import EditDoctor from './../Pages/Vendor/Doctor/EditDoctor';
 import DoctorFields from './../Pages/Vendor/Doctor/DoctorFields';
 import ClientList from './../Pages/Chat/Client/ClientList';
 import LiveChat from './../Pages/Chat/Client/LiveChat';
+import DoctorList from './../Pages/Chat/Doctors/DoctorList';
+import LiveChatDoc from './../Pages/Chat/Doctors/LiveChatDoc';
 
 export default {
     // Layout 
@@ -52,8 +54,11 @@ export default {
     // chat component
     ChatClient,
     ClientList,
-    ChatDoctors, 
     LiveChat,
+    
+    ChatDoctors,
+    DoctorList,
+    LiveChatDoc, 
     // Doc
     Doctors,
     AddDoctor,

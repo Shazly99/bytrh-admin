@@ -11,7 +11,7 @@ import { TbBorderAll as order } from "react-icons/tb";
 import { AiOutlineMenuUnfold as menu } from "react-icons/ai";
 import { AiOutlineMenuFold as menuL } from "react-icons/ai";
 import { IoIosAddCircleOutline as add } from "react-icons/io";
-import { RiDeleteBinLine as bin } from "react-icons/ri";
+import { IoTrashBin as bin } from "react-icons/io5";
 import { FiEdit as edit } from "react-icons/fi";
 import { IoIosArrowForward as arrow } from "react-icons/io";
 import { AiOutlineCloudUpload as upload } from "react-icons/ai";
@@ -30,8 +30,12 @@ import  profile  from "../assets/Images/Vector.svg";
 import { SiAsciidoctor as doctor } from 'react-icons/si';
 import { BsChatSquareTextFill as chat } from "react-icons/bs";
 import { BsImage as imageUpload } from "react-icons/bs";
+import { RxUpdate as uploadItem } from "react-icons/rx";
+import { MdBookmarkAdded as Added } from "react-icons/md";
 
 export default{
+    uploadItem,
+    Added,
     send,
     ChatDoc,
     Chatuser,
