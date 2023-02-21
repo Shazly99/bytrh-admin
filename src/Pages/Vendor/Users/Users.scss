@@ -144,7 +144,7 @@ td {
     position: relative;
 
     @media screen and (max-width:400px) {
-        width: 100%;
+        width: 90% !important;
 
     }
 }
@@ -155,6 +155,14 @@ td {
     border: none;
     min-width: 100% !important;
     border-bottom: 2px solid #ccc;
+}
+
+@media screen and (max-width:500px) {
+    .search-container input[type="text"]::placeholder {
+        font-size: 12px !important;
+        // background-color: red !important;
+    }
+
 }
 
 .search-container input[type="text"]:focus {
@@ -173,6 +181,14 @@ td {
     font-size: 17px;
     border: none;
     cursor: pointer;
+
+    @media screen and (max-width:650px) {
+        right: -51px !important;
+    }
+
+    // @media screen and (max-width:375px) {
+    //     right: -90px !important;
+    // }
 }
 
 .search-container button[type="submit"]:hover {

@@ -86,7 +86,69 @@
                 background: #d9d9d998;
                 border-radius: 16px;
                 height: calc(100% - 10%) !important;
-                padding: 50px 20px;
+                padding: 10px 20px;
+                padding-top: 15px !important;
+                position: relative;
+                .turn__off {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    z-index: 9999;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    // padding-bottom: 5px;
+                
+                    .power-button {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 1rem;
+                        border: none;
+                        border-radius: 50%;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                        transition: all 0.2s ease;
+                        background-color: #f0f0f0;
+                
+                        transition: transform 0.2s ease;
+                
+                    }
+                
+                    .power-button:hover {
+                        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                    }
+                
+                    .power-button:focus {
+                        outline: none;
+                    }
+                
+                    .power-button.on {
+                        background-color: #63d471;
+                        color: white;
+                    }
+                
+                    .power-button.off {
+                        background-color: #e74c3c;
+                        color: white;
+                    }
+                
+                    .icon {
+                        width: 1.2rem;
+                        height: 1.2rem;
+                    } 
+                    .power-button:hover {
+                        cursor: pointer;
+                    }
+                
+                    .power-button:focus {
+                        outline: none;
+                    }
+                
+                    .power-button.scaled {
+                        transform: scale(0.8);
+                    }
+                
+                }
             }
 
             .app__send {
@@ -116,7 +178,6 @@
     height: calc(450px - (45px + 70px));
     border: 1px solid #263238;
     background: #fff;
-
     position: relative;
 }
 
@@ -219,12 +280,14 @@
     padding-top: 5px;
 }
 
-.bgChatBtn{
-    background-color:  $colorRed-0 !important;
+.bgChatBtn {
+    background-color: $colorRed-0 !important;
     border: none !important;
     transition: all 0.8s;
-    &:hover{
+
+    &:hover {
         background-color: rgba($color: $colorRed-0 , $alpha: 0.8) !important;
         box-shadow: none !important;
     }
-  }
+}
+
