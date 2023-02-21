@@ -15,7 +15,7 @@ import Icons from '../../../constants/Icons';
 import './Doctor.scss'
 
 import $ from 'jquery'
-import { Container } from 'react-bootstrap';
+import { Container, Table } from 'react-bootstrap';
 
 export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDoctors, countDoctors, setCountDoctors, setSearchKeyDoctors, loadingDoctors }) {
 
@@ -137,7 +137,7 @@ export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDocto
                     />
                   </div>
                   <div className="app__Users-table  ">
-                    <table className="table text-center    ">
+                    <Table responsive={true} className='rounded-3 '>
                       <thead className="table-light bg-input">
                         <tr>
                           <th scope="col">Name</th>
@@ -168,7 +168,7 @@ export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDocto
                         ))
                         }
                       </tbody>
-                    </table>
+                    </Table>
                   </div>
 
                 </>
