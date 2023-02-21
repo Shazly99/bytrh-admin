@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import { Outlet, useParams } from 'react-router-dom';
+import {   useParams } from 'react-router-dom';
 import ScrollToBottom from 'react-scroll-to-bottom';
-import { apiheader, GetData } from '../../../utils/fetchData';
+import { apiheader } from '../../../utils/fetchData';
 import axios from 'axios';
 import { PostData } from './../../../utils/fetchData';
 import { ChatContext } from '../../../context/ChatStore';
@@ -27,12 +27,12 @@ function LiveChat() {
             const IdLastMessage = data.Response.ChatDetails[data.Response.ChatDetails.length - 1].IDChatSupportDetails;
             setIdChatSupportDetails(IdLastMessage);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             if (error.response && error.response.status === 429) {
                 const retryAfter = error.response.headers['retry-after'];
                 setTimeout(() => {
                     fetchClientDetail();
-                }, (retryAfter || 1) * 1000);
+                }, (retryAfter || 60) * 1000);
             }
         }
     };

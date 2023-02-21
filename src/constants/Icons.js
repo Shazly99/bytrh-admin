@@ -32,8 +32,10 @@ import { BsChatSquareTextFill as chat } from "react-icons/bs";
 import { BsImage as imageUpload } from "react-icons/bs";
 import { RxUpdate as uploadItem } from "react-icons/rx";
 import { MdBookmarkAdded as Added } from "react-icons/md";
+import { FaPowerOff as poweroff } from "react-icons/fa";
 
 export default{
+    poweroff,
     uploadItem,
     Added,
     send,
