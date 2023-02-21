@@ -8,8 +8,12 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import Form from 'react-bootstrap/Form';
 import { apiheader, PostData } from '../../../../utils/fetchData';
+import { useNavigate } from 'react-router-dom';
+import { Toaster, toast } from 'react-hot-toast';
 
 const AddNewUser = () => {
+    let navigate = useNavigate();
+
     const [data, setData] = useState({});
 
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -28,14 +32,14 @@ const AddNewUser = () => {
 
     const submit = e => {
         e.preventDefault()
-        setData({
-            UserEmail: email.current.value,
-            UserPassword: password.current.value,
-            UserPhone: '+' + phoneNumber,
-            UserPhoneFlag: '+' + Country,
-            UserName: username.current.value,
-            IDCity: 1
-        })
+        // setData({
+        //     UserEmail: email.current.value,
+        //     UserPassword: password.current.value,
+        //     UserPhone: '+' + phoneNumber,
+        //     UserPhoneFlag: '+' + Country,
+        //     UserName: username.current.value,
+        //     IDCity: 1
+        // })
         console.log({
             UserEmail: email.current.value,
             UserPassword: password.current.value,
@@ -44,19 +48,39 @@ const AddNewUser = () => {
             UserName: username.current.value,
             IDCity: 1
         });
-        addNewUser()
+        addNewUser({
+            UserEmail: email.current.value,
+            UserPassword: password.current.value,
+            UserPhone: '+' + phoneNumber,
+            UserPhoneFlag: '+' + Country,
+            UserName: username.current.value,
+            IDCity: 1
+        })
     }
 
-    async function addNewUser() {
-        return await PostData(`https://bytrh.com/api/admin/users/add`, data, apiheader);
-
-    }
-    useEffect(() => {
-        addNewUser().then(res => {
-            console.log(res);
-        }).catch(err => {
-
+    async function addNewUser(newUser) {
+        await PostData(`https://bytrh.com/api/admin/users/add`, newUser, apiheader).then((res) => {
+            console.log(res.data);
+            if (res.data.Success === true) {
+                toast.success('New user added successfully!', {
+                    duration: 4000,
+                    position: 'top-center',  
+                    icon: <Icons.Added color='#40AB45' size={25}/>, 
+                    iconTheme: {
+                      primary: '#0a0',
+                      secondary: '#fff',
+                    }, 
+                  });
+                setTimeout(() => {
+                    navigate('/user');
+                }, 2000);
+            }else{
+                toast.error(res.data.ApiMsg)
+            }
         });
+    }
+
+    useEffect(() => {
     }, [data, phoneNumber])
 
     return (
@@ -66,7 +90,7 @@ const AddNewUser = () => {
                     <Component.SubNav sub__nav={[{ name: "Users", path: '/user' }, { name: "Add User", path: '/user/addUser' }]} />
                     <div className="app__addprodects__header ">
                         <Component.BaseHeader h1={'Add New Users'} />
-                        <div className="app__addOrder-form"> 
+                        <div className="app__addOrder-form">
                             <div className="app__addprodects-form">
                                 <form onSubmit={submit}>
                                     <Row>

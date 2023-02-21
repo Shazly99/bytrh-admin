@@ -102,7 +102,12 @@ function App() {
             { path: '/chat/clients/:id', element: <ProtectedRoutes> <Component.LiveChat /> </ProtectedRoutes> }
           ]
         },
-        { path: '/chat/doctors', element: <ProtectedRoutes><Component.ChatDoctors /></ProtectedRoutes> }
+        {
+          path: '/chat/doctors', element: <ProtectedRoutes>  <Component.ChatDoctors /></ProtectedRoutes>, children: [
+            { path: '/chat/doctors/:id', element: <ProtectedRoutes> <Component.LiveChatDoc /> </ProtectedRoutes> }
+          ]
+        }, 
+        {path:'*' , element:<h1>test</h1>}
       ],
     },
 

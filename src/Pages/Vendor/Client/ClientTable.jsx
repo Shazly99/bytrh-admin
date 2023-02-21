@@ -1,7 +1,6 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 // import data from './data.js';
 import Icons from "../../../constants/Icons.js";
-import { useEffect } from 'react';
 import { Table, DropdownButton, Dropdown, NavDropdown, Form } from "react-bootstrap";
 import { apiheader, GetData, PostData } from '../../../utils/fetchData.js';
 import { Link } from 'react-router-dom';
@@ -12,10 +11,12 @@ import Modal from 'react-bootstrap/Modal';
 
 const ClientTable = ({ usersList, userList }) => {
   const [showModal, setShowModal] = useState(false);
-  const [changeBalance, setChangeBalance] = useState(null);
+  const [changeBalance, setChangeBalance] = useState(0);
 
+  let test = useRef()
   function handleChangeBalance(event) {
-    setChangeBalance(parseInt(event.target.value) || null);
+    console.log(test.current);
+    setChangeBalance(parseInt(event.target.value) || 0);
   }
 
 
@@ -26,17 +27,57 @@ const ClientTable = ({ usersList, userList }) => {
 
   const handleActionSelect = async (id, action) => {
     if (action === "BLOCKED") {
-      await userstatus({ IDClient: id, ClientStatus: action })
+      await userstatus({ IDClient: id, ClientStatus: action }).then((res) => {
+        toast.success('Status up to date', {
+          duration: 4000,
+          position: 'top-center',  
+          icon: <Icons.uploadItem color='#3182CE' size={25}/>, 
+          iconTheme: {
+            primary: '#0a0',
+            secondary: '#fff',
+          }, 
+        });
+      })
       await userList()
     } else if (action === "ACTIVE") {
-      await userstatus({ IDClient: id, ClientStatus: action })
+      await userstatus({ IDClient: id, ClientStatus: action }).then((res) => {
+        toast.success('Status up to date', {
+          duration: 4000,
+          position: 'top-center',  
+          icon: <Icons.uploadItem color='#3182CE' size={25}/>, 
+          iconTheme: {
+            primary: '#0a0',
+            secondary: '#fff',
+          }, 
+        });
+      })
       await userList()
     } else if (action === "DELETED") {
-      await userstatus({ IDClient: id, ClientStatus: action })
+      await userstatus({ IDClient: id, ClientStatus: action }).then((res) => {
+        toast.success('Client is deleted', {
+          duration: 4000,
+          position: 'top-center',  
+          icon: <Icons.bin color='#E20000' size={20}/>, 
+          iconTheme: {
+            primary: '#0a0',
+            secondary: '#fff',
+          }, 
+        });
+      })
       await userList()
     }
     else if (action === "INACTIVE") {
-      await userstatus({ IDClient: id, ClientStatus: action })
+      await userstatus({ IDClient: id, ClientStatus: action }).then((res) => {
+        toast.success('Status up to date', {
+          duration: 4000,
+          position: 'top-center',  
+          icon: <Icons.uploadItem color='#3182CE' size={25}/>, 
+          iconTheme: {
+            primary: '#0a0',
+            secondary: '#fff',
+          }, 
+        });
+      })
       await userList()
     } else if (action === "reset") {
       await resetPassword(id)
@@ -46,20 +87,27 @@ const ClientTable = ({ usersList, userList }) => {
       setChangeBalance(null)
     }
   };
-  async function name() {
-    await changeWallet({ IDClient: id, Amount: changeBalance })
-    await userList()
-  }
   const userstatus = async (status) => {
     return await PostData(`https://bytrh.com/api/admin/clients/status`, status, apiheader)
   }
 
+  // clients wallet api Balance
+  async function detailsWallet() {
+    await changeWallet({ IDClient: id, Amount: changeBalance })
+    await userList()
+  }
   const changeWallet = async (wallet) => {
     let data = await PostData(`https://bytrh.com/api/admin/clients/wallet/add`, wallet, apiheader)
+    if (data.Success === true) {
+      toast.error('Failed !');
+    } else {
+      toast.success('wallet updated !');
 
+    }
     console.log(data);
   }
 
+  // client reset Password api Balance
   const resetPassword = async (idClient) => {
     let data = await GetData(`https://bytrh.com/api/admin/clients/password/reset/${idClient}`, apiheader)
 
@@ -95,7 +143,7 @@ const ClientTable = ({ usersList, userList }) => {
             usersList?.map((item, index) => (
               <tr key={index}>
                 <td>
-                  <div className='d-flex flex-column justify-content-center align-content-center' style={{gap:'0'}}>
+                  <div className='d-flex flex-column justify-content-center align-content-center' style={{ gap: '0' }}>
                     <span className='ClientName'>{item?.ClientName}</span>
                     <span className='ClientPhone'>{item?.ClientPhone}</span>
                   </div>
@@ -163,8 +211,8 @@ const ClientTable = ({ usersList, userList }) => {
                             <Button variant="outline-primary" onClick={handleCloseModal}>
                               Cancel
                             </Button>
-                            <Button eventKey="balance" variant="primary" onClick={name}>
-                              Save Changes
+                            <Button eventKey="balance" variant="primary" onClick={detailsWallet}>
+                              wallet updated
                             </Button>
                           </Modal.Footer>
                         </Modal>
