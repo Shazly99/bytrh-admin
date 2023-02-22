@@ -7,12 +7,15 @@ import Component from '../../../constants/Component';
 import { PostData, apiheader, GetData } from './../../../utils/fetchData';
 import { Outlet, useParams } from 'react-router-dom';
 import { ChatContext } from '../../../context/ChatStore';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
 
 const ChatClient = () => {
   const { id } = useParams();
   const inputRef = useRef(null);
   let { userReplied } = useContext(ChatContext);
   const [inputValue, setInputValue] = useState('');
+
   const [clientChatSupport, setClientChatSupport] = useState([])
 
   const clientlist = async () => {
@@ -30,7 +33,7 @@ const ChatClient = () => {
       }
       , apiheader);
     // console.log(data);
-  } 
+  }
 
 
   const handeAdminMess = () => {
@@ -58,9 +61,10 @@ const ChatClient = () => {
     }
   }
 
-
-
+  const [power, setpower] = useState()
   useEffect(() => {
+    setpower(localStorage.getItem('power'));
+    console.log(localStorage.getItem('power'));
     clientlist()
   }, [id])
   return (
@@ -73,7 +77,6 @@ const ChatClient = () => {
               {
                 id ?
                   <>
-
                     <Outlet></Outlet>
                   </>
                   :
@@ -87,32 +90,41 @@ const ChatClient = () => {
               }
             </div>
             {
-              userReplied === 0 ?
+              localStorage.getItem('chatStatus') === 'ENDED' ?
+                <Stack sx={{ width: '100%' }} spacing={2}>
+                  <Alert severity="error">Chat has been closed!</Alert>
+                </Stack>
+                :
                 <>
                   {
-                    id ?
-                      <div className="app__send">
-                        <input type="text" className="form-control" ref={inputRef} />
-                        <button className='btn shadow-lg bgChatBtn' onClick={handeAdminMess} >
-                          <Icons.send color='#fff' size={20} />
-                        </button>
+                    userReplied === 0 ?
+                      <>
+                        {
+                          id ?
+                            <div className="app__send">
+                              <input type="text" className="form-control" ref={inputRef} />
+                              <button className='btn shadow-lg bgChatBtn' onClick={handeAdminMess} >
+                                <Icons.send color='#fff' size={20} />
+                              </button>
 
-                        <input type="file" id="file-input" accept="image/*" onChange={handleFileSelect} style={{ display: 'none' }} />
-                        <label htmlFor="file-input" className="btn btn-info bgChatBtn shadow" style={{ pointerEvents: 'all' }}>
-                          <Icons.imageUpload color='#fff' size={20} />
-                        </label>
+                              <input type="file" id="file-input" accept="image/*" onChange={handleFileSelect} style={{ display: 'none' }} />
+                              <label htmlFor="file-input" className="btn btn-info bgChatBtn shadow" style={{ pointerEvents: 'all' }}>
+                                <Icons.imageUpload color='#fff' size={20} />
+                              </label>
 
-                      </div>
-                      :
-                      ''
-                  }
-                </> :
-                <>
-                  {
-                    id ?
-                      <div className="app__send d-flex justify-content-center align-items-center">
-                        <h6> Another user already replied</h6>
-                      </div> : ''
+                            </div>
+                            :
+                            ''
+                        }
+                      </> :
+                      <>
+                        {
+                          id ?
+                            <div className="app__send d-flex justify-content-center align-items-center">
+                              <h6> Another user already replied</h6>
+                            </div> : ''
+                        }
+                      </>
                   }
                 </>
             }

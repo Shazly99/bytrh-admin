@@ -4,7 +4,9 @@
     margin: auto;
     width: 95%;
     background-color: #F5F8FA;
-
+    @media screen and (max-width:400px) {
+        width: 100% !important;
+    }
     .app__chat__container {
         @include flex(flex, center, center, row);
         height: calc(100vh - 70px);
@@ -20,9 +22,11 @@
 
     .app__chat_list-Users {
         height: 100% !important;
+
         @media screen and (max-width:1000px) {
             display: none !important;
         }
+
         .app__chat_list-card {
             background-color: #FFFFFF;
             height: 100% !important;
@@ -72,9 +76,17 @@
 
     .app__chat_messages {
         height: 100% !important;
-@media screen and (max-width:1000px) {
-    width: 100% !important;
-}
+
+        @media screen and (max-width:1000px) {
+            width: 100% !important;
+        }
+
+        @media screen and (max-width:400px) {
+            width: 100% !important;
+            margin: 0;
+            padding: 0;
+        }
+
         .app__chat_list-card {
             padding: 20px !important;
             height: 100% !important;
@@ -91,11 +103,10 @@
                 border-radius: 16px;
                 height: calc(100% - 10%) !important;
                 padding: 10px 20px;
-                padding-top: 15px !important; 
+                padding-top: 15px !important;
                 position: relative;
-                .chat__header{
-                    h6{
-                    }
+
+                .chat__header {
                     padding: 0 15px !important;
                     background-color: #D9D9D9 !important;
                     position: absolute;
@@ -109,7 +120,8 @@
                     z-index: 9999;
                     left: 0;
                     right: 0;
-                    border-radius: 16px 16px  0 0  !important;
+                    border-radius: 16px 16px 0 0 !important;
+
                     .turn__off {
                         top: 0;
                         right: 0;
@@ -117,9 +129,11 @@
                         display: flex;
                         justify-content: center;
                         align-items: center;
+
                         // padding-bottom: 5px; 
                         .power-button {
                             display: flex;
+                            gap: 15px;
                             align-items: center;
                             justify-content: center;
                             padding: 1rem;
@@ -128,45 +142,46 @@
                             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
                             transition: all 0.2s ease;
                             background-color: #f0f0f0;
-                    
                             transition: transform 0.2s ease;
-                    
+                            transform: scale(0.8);
+
                         }
-                    
+
                         .power-button:hover {
                             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
                         }
-                    
+
                         .power-button:focus {
                             outline: none;
                         }
-                    
+
                         .power-button.on {
                             background-color: #63d471;
                             color: white;
                         }
-                    
+
                         .power-button.off {
                             background-color: #e74c3c;
                             color: white;
                         }
-                    
+
                         .icon {
                             width: 1.2rem;
                             height: 1.2rem;
-                        } 
+                        }
+
                         .power-button:hover {
                             cursor: pointer;
                         }
-                    
+
                         .power-button:focus {
                             outline: none;
                         }
-                    
+
                         .power-button.scaled {
-                            transform: scale(0.8);
+                            transform: scale(0.7);
                         }
-                    
+
                     }
                 }
             }
@@ -240,6 +255,7 @@
     align-items: center;
     overflow-wrap: break-word;
     word-break: break-word;
+    
 }
 
 #you {
@@ -253,11 +269,15 @@
     padding-left: 10px;
     padding-top: 5px;
     border-radius: 31.5px 31.5px 31.5px 0px;
+    width: 77% !important;
 }
 
 .message-content {
     p {
         margin: 0 !important;
+    }
+    img{
+        width: 100% !important;
     }
 }
 
@@ -269,7 +289,10 @@
 }
 
 #other {
-    justify-content: flex-end;
+    margin-left: auto !important;
+    max-width: 65% !important; 
+    display: flex;
+    justify-content: end;
 }
 
 #other .message-content {
@@ -312,3 +335,15 @@
     }
 }
 
+ 
+.react-scroll-to-bottom--css-ddhjs-1n7m0yu {
+    height: 100%;
+    overflow-y: auto;
+    width: 100%;
+    overflow-x: hidden !important;
+}
+
+#other .message{
+    display: flex;
+    justify-content: end !important;
+}

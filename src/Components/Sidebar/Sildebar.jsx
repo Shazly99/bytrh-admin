@@ -13,34 +13,34 @@ import { VendersContext } from "../../context/Store";
 const Sidebar = ({ children }) => {
   let { isOpen, toggle, LogOut } = useContext(VendersContext);
 
+
   const showAnimation = {
     hidden: {
       width: 0,
       opacity: 0,
-      transition: {
-      // duration: 0.5, ease: 'backOut'
-        
-      },
+      transition: { duration: 0.4, when: "afterChildren" },
     },
     show: {
       opacity: 1,
       width: "auto",
       transition: {
-      // duration: 0.5, ease: 'backOut'
-        
+        duration: 0.3,
+        when: "beforeChildren",
       },
     },
   };
+
   return (
     <>
       <div className="main-container ">
         <motion.div
           animate={{
             width: isOpen ? "270px" : "50px",
+            background:'#000',
             transition: {
-      /*         duration: 0.5,
+               duration: 0.5,
               type: "spring",
-              damping: 10, */
+              damping: 10, 
             },
           }}
           className={`sidebar  `}
@@ -58,7 +58,7 @@ const Sidebar = ({ children }) => {
                     className="logo"
                     key={img.logo}
                   >
-                    <img src={img.logo} className="w-100" />
+                    {/* <img src={img.logo} className="w-100" /> */}
                     <h3>Baytrh</h3>
                   </motion.div>
                 )}

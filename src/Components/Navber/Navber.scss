@@ -94,7 +94,7 @@
     height: 35px;
     border-radius: 50%;
     position: relative;
-
+    z-index: 9999999999999 !important;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -193,8 +193,9 @@
     // top: 55px;
     background-color: rgba((248, 249, 250), var(--bs-bg-opacity)) !important;
     /* right: -10px; */; 
+    z-index: 999999999999999999;
 }
-
+ 
 .dropdown-toggle::after {
     display: none !important;
 }

@@ -16,7 +16,6 @@
 /* Sidebar */
 .sidebar {
     color: white;
-
     // background-color: $colorDark;
     .top_section {
         display: flex;
@@ -24,6 +23,12 @@
         justify-content: space-between;
         padding: 15px 18px;
 
+        // .logo {
+        //     font-size: 18px;
+        //     line-height: 0;
+        //     padding: 30px 60px 0px 60px;
+
+        // }
         .logo {
             font-size: 18px;
             line-height: 0;
@@ -175,6 +180,7 @@
 
 .side {
     height: 100%;
+    width: inherit;
     position: fixed;
     top: 0;
     left: 0;
