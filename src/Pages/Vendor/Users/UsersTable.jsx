@@ -129,7 +129,7 @@ function UsersTable({ usersList, userList }) {
                                         <span>
                                             <DropdownButton
                                                 id={`dropdown-${item.IDUser}`}
-                                                title="Action"
+                                                title="Actions"
                                                 variant="outline-success"
                                                 onSelect={(eventKey) => handleActionSelect(item.IDUser, eventKey)}
                                                 className="DropdownButton "
@@ -145,10 +145,10 @@ function UsersTable({ usersList, userList }) {
                                                     item?.UserStatus === "PENDING" ? '' : <Dropdown.Item eventKey="PENDING">Pending</Dropdown.Item>
                                                 }
                                                 {
-                                                    item?.UserStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Action</Dropdown.Item>
+                                                    item?.UserStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
                                                 }
                                                 {
-                                                    item?.UserStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InAction</Dropdown.Item>
+                                                    item?.UserStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">Active</Dropdown.Item>
                                                 }
                                                 {/* {
                                                     item?.UserStatus === "BLOCKED" ? '' : <Dropdown.Item eventKey="BLOCKED">Blocked</Dropdown.Item>

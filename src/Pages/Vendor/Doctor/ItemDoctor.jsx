@@ -96,7 +96,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                         <span>
                             <DropdownButton
                                 id={`dropdown-${id}`}
-                                title="Action"
+                                title="Actions"
                                 variant="outline-success"
                                 onSelect={(eventKey) => handleActionSelect(id, eventKey)}
                                 className="DropdownButton "
@@ -132,7 +132,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                 {/* <Dropdown.Item eventKey="ACTIVE">Action</Dropdown.Item> */}
                                 {/* <Dropdown.Item eventKey="INACTIVE">InAction</Dropdown.Item> */}
                                 {
-                                    status === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Action</Dropdown.Item>
+                                    status === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
                                 }
                                 {
                                     status === "OFFLINE" ? '' : <Dropdown.Item eventKey="OFFLINE">Offline</Dropdown.Item>

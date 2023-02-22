@@ -24,8 +24,7 @@ const AddNewUser = () => {
 
 
     const onChangeHandler = (phone, country, e) => {
-        console.log(phone);
-        console.log(country);
+ 
         setPhoneNumber(phone)
         setCountry(country.dialCode)
     }
@@ -40,14 +39,14 @@ const AddNewUser = () => {
         //     UserName: username.current.value,
         //     IDCity: 1
         // })
-        console.log({
-            UserEmail: email.current.value,
-            UserPassword: password.current.value,
-            UserPhone: '+' + phoneNumber,
-            UserPhoneFlag: '+' + Country,
-            UserName: username.current.value,
-            IDCity: 1
-        });
+        // console.log({
+        //     UserEmail: email.current.value,
+        //     UserPassword: password.current.value,
+        //     UserPhone: '+' + phoneNumber,
+        //     UserPhoneFlag: '+' + Country,
+        //     UserName: username.current.value,
+        //     IDCity: 1
+        // });
         addNewUser({
             UserEmail: email.current.value,
             UserPassword: password.current.value,
@@ -60,7 +59,7 @@ const AddNewUser = () => {
 
     async function addNewUser(newUser) {
         await PostData(`https://bytrh.com/api/admin/users/add`, newUser, apiheader).then((res) => {
-            console.log(res.data);
+       
             if (res.data.Success === true) {
                 toast.success('New user added successfully!', {
                     duration: 4000,
