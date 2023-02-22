@@ -1,18 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FiPlusSquare } from 'react-icons/fi';
-import { AiOutlineClose } from 'react-icons/ai';
-import { BiX } from 'react-icons/bi';
 import ItemDoctor from './ItemDoctor';
-import axios from 'axios';
-import { useContext } from 'react';
 import { useEffect } from 'react';
-import { FaBars } from 'react-icons/fa';
-import { BsSearch } from 'react-icons/bs';
-import { Pagination } from 'antd';
+// import { Pagination } from 'antd';
 import Component from '../../../constants/Component';
 import Icons from '../../../constants/Icons';
 import './Doctor.scss'
+import { Pagination } from "@mui/material";
+import Box from "@mui/material/Box";
 
 import $ from 'jquery'
 import { Container, Table } from 'react-bootstrap';
@@ -21,7 +15,12 @@ export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDocto
 
 
   const token = localStorage.getItem('userToken');
-
+  const [page, setPage] = useState(1); 
+  const handleChange = (event, value) => {
+    console.log(value);
+    setPage(value);
+    setCountDoctors(value); 
+  };
   const [valueSearch, setValueSearch] = useState('')
 
   const handelSearch = () => {
@@ -38,7 +37,7 @@ export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDocto
   }
   useEffect(() => {
     $('html , body').animate({ scrollTop: 0 }, 200);
-  }, []);
+  }, [page]);
 
   return (
     <>
@@ -72,8 +71,8 @@ export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDocto
           <img src={userImg2} alt="user" />
         </div>
       </div>   */}
-      <Container fluid> 
-        <section className='   app__doctor  position-relative'> 
+      <Container fluid>
+        <section className='   app__doctor  position-relative'>
           <div className="app__Users ">
             <Component.ButtonBase title={"Add new user"} bg={"primary"} icon={<Icons.add />} path="/doctors/addDoctor" />
           </div>
@@ -97,7 +96,7 @@ export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDocto
               </button>
             </div>
           </div>
-  
+
           {loadingDoctors ?
             <div className="sk-chase">
               <div className="sk-chase-dot"></div>
@@ -111,31 +110,9 @@ export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDocto
             <div className="total-table">
 
               {Object.keys(fetchDoctors).length > 0 ?
-                <>
-                  <div className="pagi text-center mb-4">
-                    <Pagination
-                      total={pagesCountDoctors}
-                      pageSize={1}
-                      showLessItems={true}
-                      itemRender={(page, type) => {
-                        if (type === 'next') {
-                          return <span>{'>>'}</span>
-                        }
-                        else if (type === 'prev') {
-                          return <span>{'<<'}</span>
-                        }
-                        else if (type === 'page') {
-                          return <span>{page}</span>
-                        }
-                      }}
-                      current={countDoctors}
-                      onChange={(page) => {
-                        setCountDoctors(page);
+                <> 
+     
 
-                      }}
-
-                    />
-                  </div>
                   <div className="app__Users-table  ">
                     <Table responsive={true} className='rounded-3 '>
                       <thead className="table-light bg-input">
@@ -170,7 +147,11 @@ export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDocto
                       </tbody>
                     </Table>
                   </div>
-
+                  <div className="pagination ">
+                    <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
+                      <Pagination count={pagesCountDoctors} page={page} onChange={handleChange} />
+                    </Box>
+                  </div>
                 </>
                 :
                 <h2 className='text-center mt-fixed py-4'>Your Table is Empty..</h2>

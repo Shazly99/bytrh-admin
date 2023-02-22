@@ -218,10 +218,10 @@ const ClientTable = ({ usersList, userList }) => {
                         </Modal>
                         <Dropdown.Item eventKey="DELETED">Deleted</Dropdown.Item>
                         {
-                          item?.ClientStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Action</Dropdown.Item>
+                          item?.ClientStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
                         }
                         {
-                          item?.ClientStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InAction</Dropdown.Item>
+                          item?.ClientStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
                         }
                         {
                           item?.ClientStatus === "BLOCKED" ? '' : <Dropdown.Item eventKey="BLOCKED">Blocked</Dropdown.Item>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Component from '../../../constants/Component'
 import './Users.scss'
 import Icons from "../../../constants/Icons.js";
-import { Pagination, Typography } from "@mui/material";
+import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import { GetData, PostData } from '../../../utils/fetchData';
 import { apiheader } from './../../../utils/fetchData';

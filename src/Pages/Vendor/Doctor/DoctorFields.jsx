@@ -8,12 +8,7 @@ import { apiheader } from './../../../utils/fetchData';
 
 
 
-export default function DoctorFields() {
-
-
-
-
-
+export default function DoctorFields() { 
   // get doctor info
   const { id } = useParams();
   const apiInfos = `https://bytrh.com/api/admin/doctors/doctorfields/${id}`;
@@ -22,13 +17,7 @@ export default function DoctorFields() {
 
   async function getDoctorData() {
     setLoadind(true);
-    await axios.get(apiInfos, {
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYnl0cmguY29tXC9hcGlcL2FkbWluXC9sb2dpbiIsImlhdCI6MTY3NjA4NzM2MCwiZXhwIjozNTQyMzI3MzYwLCJuYmYiOjE2NzYwODczNjAsImp0aSI6InZiYVRFUEhSMDZJd21oMUMiLCJzdWIiOjEsInBydiI6ImZkOWU0ZjkyODg3OWNjMWEwZWM5MGFjMzA5ZjdhZWY2MDJkYTY0NzkifQ.AnC0BpTQUIMCJPXydsSbZzoMOOj1jDWHLCN17RfzxG4',
-      }
-    })
+    await axios.get(apiInfos,   apiheader  )
       .then(res => {
         if (res.status === 200 && res.request.readyState === 4) {
           setFields(res.data.Response);
