@@ -6,10 +6,12 @@ import axios from 'axios';
 import { PostData } from './../../../utils/fetchData';
 import { ChatContext } from '../../../context/ChatStore';
 import Icons from '../../../constants/Icons';
+import useLocalStorage from './../../../context/useLocalStorage';
 
 function LiveChat() {
     const { id } = useParams();
     let { setUserReplied, userReplied } = useContext(ChatContext);
+    const [isOn, setIsOn] = useLocalStorage('power', true);
 
     const [clientChatSupport, setClientChatSupport] = useState([]);
     const [IdChatSupport, setIdChatSupportDetails] = useState([]);
@@ -57,8 +59,7 @@ function LiveChat() {
         }
     };
 
-
-    const [isOn, setIsOn] = useState();
+ 
 
     const handlePowerClick = async () => {
         setIsOn(false);
@@ -66,7 +67,7 @@ function LiveChat() {
         //   console.log(fil);
         if (isOn === true) {
             let data = await GetData(`https://bytrh.com/api/admin/chat/client/end/${id}`, apiheader)
-            // console.log(data);
+            
         }
 
     };
@@ -75,12 +76,13 @@ function LiveChat() {
         if (chatStatus === 'ONGOING') {
             setIsOn(true)
             console.log('ONGOING', isOn);
+            localStorage.setItem('chatStatus','ONGOING')
         } else if (chatStatus === 'ENDED') {
             setIsOn(false)
             console.log('ENDED', isOn);
+            localStorage.setItem('chatStatus','ENDED')
         }
-        fetchClientDetail();
-        chatReceive()
+        fetchClientDetail(); 
 
         const interval = setInterval(() => {
             chatReceive()
@@ -95,7 +97,7 @@ function LiveChat() {
                 <h6>{chatName}</h6>
                 <div className="turn__off">
                     <button className={`power-button ${isOn ? "on " : "off scaled"} `} onClick={handlePowerClick} >
-                        <Icons.poweroff className="icon" /> End chat
+                        <Icons.poweroff className="icon" />{isOn?'End chat':'Chat Ended'} 
                     </button>
                 </div>
             </div>
@@ -108,7 +110,7 @@ function LiveChat() {
                             id={messageContent.ChatSupportSender === "USER" ? "other" : "you"}
                         >
                             <div>
-                                <div className="message-content">
+                                <div className="message-content"  >
                                     {
                                         messageContent.ChatSupportType === "TEXT" &&
                                         <p>{messageContent.ChatSupportMessage}</p>
@@ -123,9 +125,7 @@ function LiveChat() {
                                             <source src={messageContent.ChatSupportMessage} type="audio/ogg" />
                                             <source src={messageContent.ChatSupportMessage} type="audio/mpeg" />
                                             Your browser does not support the audio element.
-                                        </audio>
-
-
+                                        </audio> 
                                     }
                                 </div>
                                 <div className="message-meta">

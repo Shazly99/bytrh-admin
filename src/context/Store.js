@@ -7,6 +7,7 @@ export const VendersContext = createContext([])
 function VenderContext({ children }) {
   const [isOpen, setIsOpen] = useState(true);
   const [userId, setUser] = useState('');
+  
   const toggle = () => setIsOpen(!isOpen);
   function LogOut() {
     localStorage.removeItem('token')
