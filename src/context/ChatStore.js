@@ -8,7 +8,7 @@ function ChatStore({ children }) {
   const [userReplied, setUserReplied] = useState(null); 
   
   useEffect(() => {
-    console.log(userReplied);
+    // console.log(userReplied);
   }, [])
 
 

@@ -17,9 +17,8 @@ const ChatClient = () => {
 
   const clientlist = async () => {
     let { data } = await PostData(`https://bytrh.com/api/admin/chat/client/list`, {}, apiheader)
-    console.log(data.Response.ClientChatSupport);
+    // console.log(data.Response.ClientChatSupport);
     setClientChatSupport(data.Response.ClientChatSupport)
-
   }
 
   const adminSendMess = async (value) => {
@@ -45,7 +44,7 @@ const ChatClient = () => {
 
   const [selectedFile, setSelectedFile] = useState(null);
   async function handleFileSelect(event) {
-    console.log(event.target.files);
+    // console.log(event.target.files);
     setSelectedFile();
     if (selectedFile !== null) {
       let data = await PostData(`https://bytrh.com/api/admin/chat/client/reply`,
@@ -55,26 +54,14 @@ const ChatClient = () => {
           ChatSupportType: 'IMAGE'
         }
         , apiheader);
-      console.log(data);
+      // console.log(data);
     }
   }
 
-  const [isOn, setIsOn] = useState(true);
 
-  const handlePowerClick = async () => {
-    setIsOn(false);
-    if (isOn === true) {
-      let data = await GetData(`https://bytrh.com/api/admin/chat/client/end/${id}`, apiheader)
-      console.log(data);
-    } 
-
-    let fil=clientChatSupport.filter((item)=>item.IDClientChatSupport === id)
-    console.log(fil);
-  };
 
   useEffect(() => {
     clientlist()
-    handlePowerClick()
   }, [id])
   return (
     <div className='app__chat'>
@@ -86,11 +73,7 @@ const ChatClient = () => {
               {
                 id ?
                   <>
-                    <div className="turn__off">
-                      <button className={`power-button ${isOn ? "on " : "off scaled"} `} onClick={handlePowerClick} >
-                        <Icons.poweroff className="icon" />
-                      </button>
-                    </div>
+
                     <Outlet></Outlet>
                   </>
                   :

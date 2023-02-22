@@ -23,9 +23,7 @@ const Edit = () => {
     const username = useRef();
     const email = useRef();
     const password = useRef();
-    const onChangeHandler = (phone, country, e) => {
-        console.log(phone);
-        console.log(country);
+    const onChangeHandler = (phone, country, e) => { 
         setPhoneNumber(phone)
         setCountry(country.dialCode)
     }
@@ -66,7 +64,7 @@ const Edit = () => {
 
     async function addNewUser(editUserData) {
         let {data} = await PostData(`https://bytrh.com/api/admin/users/edit`, editUserData, apiheader);
-        console.log(data);
+    
         if ( data.Success === true) {
             toast.success('User data has been updated!', {
                 duration: 4000,
