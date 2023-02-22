@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import {   useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ScrollToBottom from 'react-scroll-to-bottom';
-import { apiheader } from '../../../utils/fetchData';
+import { apiheader, GetData } from '../../../utils/fetchData';
 import axios from 'axios';
 import { PostData } from './../../../utils/fetchData';
 import { ChatContext } from '../../../context/ChatStore';
+import Icons from '../../../constants/Icons';
 
 function LiveChat() {
     const { id } = useParams();
@@ -12,6 +13,8 @@ function LiveChat() {
 
     const [clientChatSupport, setClientChatSupport] = useState([]);
     const [IdChatSupport, setIdChatSupportDetails] = useState([]);
+    const [chatStatus, setChatStatus] = useState('');
+    const [chatName, setChatName] = useState('');
     const [chat, setChat] = useState([]);
     const audioRef = useRef(null);
 
@@ -23,7 +26,8 @@ function LiveChat() {
             const { data } = await axios(`https://bytrh.com/api/admin/chat/client/details/${id}`, apiheader);
             setClientChatSupport(data.Response.ChatDetails);
             setUserReplied(data.Response.UserReplied)
-            console.log(userReplied);
+            setChatStatus(data.Response.ChatSupportStatus);
+            setChatName(data.Response.ClientName)
             const IdLastMessage = data.Response.ChatDetails[data.Response.ChatDetails.length - 1].IDChatSupportDetails;
             setIdChatSupportDetails(IdLastMessage);
         } catch (error) {
@@ -44,17 +48,37 @@ function LiveChat() {
                 setChat([...clientChatSupport, ...data.Response]);
             }
         } catch (error) {
-            /* if (error.response && error.response.status === 429) {
-                       const retryAfter = error.response.headers['retry-after'];
-                       setTimeout(() => {
-                           chatReceive();
-                       }, (retryAfter || 60) * 1000);
-                     } */
+            if (error.response && error.response.status === 429) {
+                const retryAfter = error.response.headers['retry-after'];
+                setTimeout(() => {
+                    chatReceive();
+                }, (retryAfter || 60) * 1000);
+            }
         }
     };
 
-    useEffect(() => {
 
+    const [isOn, setIsOn] = useState();
+
+    const handlePowerClick = async () => {
+        setIsOn(false);
+        let fil = clientChatSupport
+        //   console.log(fil);
+        if (isOn === true) {
+            let data = await GetData(`https://bytrh.com/api/admin/chat/client/end/${id}`, apiheader)
+            // console.log(data);
+        }
+
+    };
+
+    useEffect(() => {
+        if (chatStatus === 'ONGOING') {
+            setIsOn(true)
+            console.log('ONGOING', isOn);
+        } else if (chatStatus === 'ENDED') {
+            setIsOn(false)
+            console.log('ENDED', isOn);
+        }
         fetchClientDetail();
         chatReceive()
 
@@ -67,7 +91,14 @@ function LiveChat() {
 
     return (
         <>
-
+            <div className='chat__header'>
+                <h6>{chatName}</h6>
+                <div className="turn__off">
+                    <button className={`power-button ${isOn ? "on " : "off scaled"} `} onClick={handlePowerClick} >
+                        <Icons.poweroff className="icon" /> End chat
+                    </button>
+                </div>
+            </div>
             <ScrollToBottom className="message-container">
                 {chat?.map((messageContent, index) => {
                     return (
@@ -88,12 +119,12 @@ function LiveChat() {
                                     }
                                     {
                                         messageContent.ChatSupportType === "AUDIO" &&
-                                       <audio ref={audioRef} controls>
+                                        <audio ref={audioRef} controls>
                                             <source src={messageContent.ChatSupportMessage} type="audio/ogg" />
                                             <source src={messageContent.ChatSupportMessage} type="audio/mpeg" />
                                             Your browser does not support the audio element.
-                                        </audio> 
-                                   
+                                        </audio>
+
 
                                     }
                                 </div>

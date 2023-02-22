@@ -1,7 +1,7 @@
 import React from 'react'
-import { Form,   Col } from 'react-bootstrap'; 
+import { Form, Col } from 'react-bootstrap';
 import Img from '../../../assets/Img';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 
 const ClientList = ({ clientChatSupport }) => {
     return (

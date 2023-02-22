@@ -20,7 +20,9 @@
 
     .app__chat_list-Users {
         height: 100% !important;
-
+        @media screen and (max-width:1000px) {
+            display: none !important;
+        }
         .app__chat_list-card {
             background-color: #FFFFFF;
             height: 100% !important;
@@ -70,7 +72,9 @@
 
     .app__chat_messages {
         height: 100% !important;
-
+@media screen and (max-width:1000px) {
+    width: 100% !important;
+}
         .app__chat_list-card {
             padding: 20px !important;
             height: 100% !important;
@@ -87,67 +91,83 @@
                 border-radius: 16px;
                 height: calc(100% - 10%) !important;
                 padding: 10px 20px;
-                padding-top: 15px !important;
+                padding-top: 15px !important; 
                 position: relative;
-                .turn__off {
+                .chat__header{
+                    h6{
+                    }
+                    padding: 0 15px !important;
+                    background-color: #D9D9D9 !important;
                     position: absolute;
                     top: 0;
-                    right: 0;
-                    z-index: 9999;
                     display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    // padding-bottom: 5px;
-                
-                    .power-button {
+                    margin: 0;
+                    padding: 0;
+                    align-items: center !important;
+                    justify-content: space-between !important;
+                    width: 100%;
+                    z-index: 9999;
+                    left: 0;
+                    right: 0;
+                    border-radius: 16px 16px  0 0  !important;
+                    .turn__off {
+                        top: 0;
+                        right: 0;
+                        z-index: 9999;
                         display: flex;
-                        align-items: center;
                         justify-content: center;
-                        padding: 1rem;
-                        border: none;
-                        border-radius: 50%;
-                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-                        transition: all 0.2s ease;
-                        background-color: #f0f0f0;
-                
-                        transition: transform 0.2s ease;
-                
+                        align-items: center;
+                        // padding-bottom: 5px; 
+                        .power-button {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            padding: 1rem;
+                            border: none;
+                            border-radius: 16px;
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                            transition: all 0.2s ease;
+                            background-color: #f0f0f0;
+                    
+                            transition: transform 0.2s ease;
+                    
+                        }
+                    
+                        .power-button:hover {
+                            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                        }
+                    
+                        .power-button:focus {
+                            outline: none;
+                        }
+                    
+                        .power-button.on {
+                            background-color: #63d471;
+                            color: white;
+                        }
+                    
+                        .power-button.off {
+                            background-color: #e74c3c;
+                            color: white;
+                        }
+                    
+                        .icon {
+                            width: 1.2rem;
+                            height: 1.2rem;
+                        } 
+                        .power-button:hover {
+                            cursor: pointer;
+                        }
+                    
+                        .power-button:focus {
+                            outline: none;
+                        }
+                    
+                        .power-button.scaled {
+                            transform: scale(0.8);
+                        }
+                    
                     }
-                
-                    .power-button:hover {
-                        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-                    }
-                
-                    .power-button:focus {
-                        outline: none;
-                    }
-                
-                    .power-button.on {
-                        background-color: #63d471;
-                        color: white;
-                    }
-                
-                    .power-button.off {
-                        background-color: #e74c3c;
-                        color: white;
-                    }
-                
-                    .icon {
-                        width: 1.2rem;
-                        height: 1.2rem;
-                    } 
-                    .power-button:hover {
-                        cursor: pointer;
-                    }
-                
-                    .power-button:focus {
-                        outline: none;
-                    }
-                
-                    .power-button.scaled {
-                        transform: scale(0.8);
-                    }
-                
                 }
             }
 
@@ -176,7 +196,7 @@
 
 .chat-body {
     height: calc(450px - (45px + 70px));
-    border: 1px solid #263238;
+    border: 1px solid #D9D9D9;
     background: #fff;
     position: relative;
 }
@@ -190,6 +210,7 @@
 }
 
 .chat-body .message-container {
+    padding-top: 2.4rem !important;
     width: 100%;
     height: 100%;
     overflow-y: scroll;
