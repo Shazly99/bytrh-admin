@@ -6,15 +6,16 @@ export const ChatContext = createContext([])
 
 function ChatStore({ children }) {
   const [userReplied, setUserReplied] = useState(null); 
+  const [chatEnd, setchatEnd] = useState(''); 
   
   useEffect(() => {
-    // console.log(userReplied);
-  }, [])
+    
+  }, [chatEnd])
 
 
   return (
     <>
-      <ChatContext.Provider value={{setUserReplied ,userReplied}}>
+      <ChatContext.Provider value={{chatEnd,setchatEnd,setUserReplied ,userReplied}}>
         {children}
       </ChatContext.Provider>
     </>

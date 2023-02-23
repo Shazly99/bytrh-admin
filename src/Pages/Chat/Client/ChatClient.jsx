@@ -13,14 +13,14 @@ import Stack from '@mui/material/Stack';
 const ChatClient = () => {
   const { id } = useParams();
   const inputRef = useRef(null);
-  let { userReplied } = useContext(ChatContext);
+  let { userReplied,chatEnd } = useContext(ChatContext);
   const [inputValue, setInputValue] = useState('');
 
   const [clientChatSupport, setClientChatSupport] = useState([])
 
   const clientlist = async () => {
     let { data } = await PostData(`https://bytrh.com/api/admin/chat/client/list`, {}, apiheader)
-    // console.log(data.Response.ClientChatSupport);
+    console.log(data.Response.ClientChatSupport);
     setClientChatSupport(data.Response.ClientChatSupport)
   }
 
@@ -61,12 +61,9 @@ const ChatClient = () => {
     }
   }
 
-  const [power, setpower] = useState()
-  useEffect(() => {
-    setpower(localStorage.getItem('power'));
-    console.log(localStorage.getItem('power'));
+  useEffect(() => {  
     clientlist()
-  }, [id])
+  }, [id,chatEnd])
   return (
     <div className='app__chat'>
       <Row className="app__chat__container ">
@@ -89,15 +86,16 @@ const ChatClient = () => {
                   </div>
               }
             </div>
+
+
             {
-              localStorage.getItem('chatStatus') === 'ENDED' ?
-                <Stack sx={{ width: '100%' }} spacing={2}>
-                  <Alert severity="error">Chat has been closed!</Alert>
-                </Stack>
-                :
+              userReplied === 0 ?
                 <>
                   {
-                    userReplied === 0 ?
+                    chatEnd === 'ENDED' ?
+                      <Stack sx={{ width: '100%' }} spacing={2}>
+                        <Alert severity="error">Chat has been closed!</Alert>
+                      </Stack> :
                       <>
                         {
                           id ?
@@ -116,18 +114,21 @@ const ChatClient = () => {
                             :
                             ''
                         }
-                      </> :
-                      <>
-                        {
-                          id ?
-                            <div className="app__send d-flex justify-content-center align-items-center">
-                              <h6> Another user already replied</h6>
-                            </div> : ''
-                        }
                       </>
+                  }
+
+                </> :
+                <>
+                  {
+                    id ?
+                      <div className="app__send d-flex justify-content-center align-items-center">
+                        <h6> Another user already replied</h6>
+                      </div> : ''
                   }
                 </>
             }
+
+
 
 
           </div>

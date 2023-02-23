@@ -10,7 +10,7 @@ import useLocalStorage from './../../../context/useLocalStorage';
 
 function LiveChat() {
     const { id } = useParams();
-    let { setUserReplied, userReplied } = useContext(ChatContext);
+    let { setUserReplied, userReplied , setchatEnd} = useContext(ChatContext);
     const [isOn, setIsOn] = useLocalStorage('power', true);
 
     const [clientChatSupport, setClientChatSupport] = useState([]);
@@ -29,6 +29,7 @@ function LiveChat() {
             setClientChatSupport(data.Response.ChatDetails);
             setUserReplied(data.Response.UserReplied)
             setChatStatus(data.Response.ChatSupportStatus);
+            setchatEnd(data.Response.ChatSupportStatus)
             setChatName(data.Response.ClientName)
             const IdLastMessage = data.Response.ChatDetails[data.Response.ChatDetails.length - 1].IDChatSupportDetails;
             setIdChatSupportDetails(IdLastMessage);
@@ -67,7 +68,6 @@ function LiveChat() {
         //   console.log(fil);
         if (isOn === true) {
             let data = await GetData(`https://bytrh.com/api/admin/chat/client/end/${id}`, apiheader)
-            
         }
 
     };
@@ -75,12 +75,15 @@ function LiveChat() {
     useEffect(() => {
         if (chatStatus === 'ONGOING') {
             setIsOn(true)
-            console.log('ONGOING', isOn);
+            // console.log('ONGOING', isOn);
             localStorage.setItem('chatStatus','ONGOING')
         } else if (chatStatus === 'ENDED') {
             setIsOn(false)
-            console.log('ENDED', isOn);
+            // console.log('ENDED', isOn);
             localStorage.setItem('chatStatus','ENDED')
+        }else if (chatStatus === 'PENDING') {
+            setIsOn(true) 
+            localStorage.setItem('chatStatus','PENDING')
         }
         fetchClientDetail(); 
 
