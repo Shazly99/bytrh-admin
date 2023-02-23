@@ -9,7 +9,7 @@ import { apiheader } from './../../../utils/fetchData';
 
 function Users() {
   const [page, setPage] = useState(1);
-  const [usersList, setuserList] = useState([]);
+  const [usersList, setuserList] = useState(null);
   const [PagesNumber, setPagesNumber] = useState('')
 
   const handleChange = (event, value) => {
@@ -62,6 +62,10 @@ function Users() {
   };
   return (
     <>
+    {
+      usersList?
+      <>
+      
       <div className="app__Users ">
         <Component.ButtonBase onclick={test} title={"Add new user"} bg={"primary"} icon={<Icons.add />} path="/user/addUser" />
         <div className="app__Users-table">
@@ -82,6 +86,8 @@ function Users() {
           <Pagination count={pageCount} page={page} onChange={handleChange} />
         </Box>
       </div>
+      </>:'Loader.............'
+    }
     </>
   )
 }

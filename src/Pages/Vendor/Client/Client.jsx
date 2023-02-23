@@ -8,7 +8,7 @@ import Icons from "../../../constants/Icons.js";
 
 const Clients = () => {
   const [page, setPage] = React.useState(1);
-  const [usersList, setuserList] = React.useState([]);
+  const [usersList, setuserList] = React.useState(null);
   const [PagesNumber, setPagesNumber] = React.useState('')
 
   const handleChange = (event, value) => {
@@ -51,6 +51,9 @@ const Clients = () => {
   };
   return (
     <>
+    {
+      usersList?
+      <>      
       <div className="app__Users ">
         {/* <Component.ButtonBase onclick={test} title={"Add new Clients"} bg={"primary"} icon={<Icons.add />}  /> */}
         <div className="app__Users-table">
@@ -70,6 +73,9 @@ const Clients = () => {
           <Pagination count={pageCount} page={page} onChange={ handleChange} />
         </Box>
       </div>
+      
+      </>:'loader..................'
+    }
     </>
   )
 }
