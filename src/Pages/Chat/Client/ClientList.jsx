@@ -4,7 +4,12 @@ import Img from '../../../assets/Img';
 import { Link } from 'react-router-dom';
 
 const ClientList = ({ clientChatSupport }) => {
-    const colors = ['#40AB45', '#006300', '#E20000', '#9804F0'];
+    const colors = [
+        { color: '#ffc700', rgba: '255, 199, 0' },
+        { color: '#f1416c', rgba: '241, 65, 108' },
+        { color: '#009ef7', rgba: '0, 158, 247' },
+        { color: '#50cd89', rgba: '80, 205, 137' },
+    ];
 
     return (
         <>
@@ -22,26 +27,18 @@ const ClientList = ({ clientChatSupport }) => {
                         {
                             clientChatSupport?.map((chat, index) => (
                                 <React.Fragment key={index} >
-
                                     <div className='app__chat_list-grid'>
-
                                         <Link to={`/chat/clients/${chat?.IDClientChatSupport}`} className="user text-dark">
-                                            <div className="img">
-                                                {/*             {chat?.IDClientChatSupport === 1 ?
-                                                    <img src={Img.avatar4} width="50" height="50" style={{ borderRadius: '50% ' }} /> :
-                                                    <img src={Img.avatar2} width="50" height="50" style={{ borderRadius: '50% ' }} />
-                                                } */}
-
-                                                <div
-                                                    className="circle"
-                                                    style={{
-                                                        backgroundColor: colors[Math.floor(Math.random() * colors.length)],
-                                                        // color: colors[Math.floor(Math.random() * colors.length)],
-                                                    }}
-                                                >
-                                                    {chat?.ClientName.split(" ").map(word => word.charAt(0).toUpperCase()).join("")}
-                                                </div>
+                                            <div
+                                                style={{
+                                                    // color: colors[index % colors.length].color,
+                                                    // backgroundColor: `rgba(${colors[index % colors.length].rgba}, 0.1)`,
+                                                }}
+                                                className="circle symbol-label"
+                                            >
+                                                {chat?.ClientName.split(" ").map(word => word.charAt(0).toUpperCase()).join("")}
                                             </div>
+
                                             <div className="content">
                                                 <div className="name">
                                                     {chat?.ClientName}
@@ -61,8 +58,9 @@ const ClientList = ({ clientChatSupport }) => {
                                           ${chat?.ChatSupportStatus == 'ONGOING' && 'txt_delivered'}
                                           ${chat?.ChatSupportStatus == 'ENDED' && 'txt_rejected'}`} >
                                             {chat?.ChatSupportStatus.toLowerCase()}
-                                        </span>
+                                        </span> 
 
+                                        {/* <span className='chatSupportStatus'> {chat?.ChatSupportStatus.toLowerCase()}</span> */}
                                     </div>
                                 </React.Fragment>
                             ))

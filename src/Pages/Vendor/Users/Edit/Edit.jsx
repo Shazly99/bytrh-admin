@@ -85,8 +85,7 @@ const Edit = () => {
 
     const diplayUserData = async () => {
         let data = await GetData(`https://bytrh.com/api/admin/users/profile/${id}`, apiheader)
-        setUserData(data.Response);
-
+        setUserData(data.Response); 
     }
     useEffect(() => {
         diplayUserData()

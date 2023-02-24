@@ -33,9 +33,13 @@ import { BsImage as imageUpload } from "react-icons/bs";
 import { RxUpdate as uploadItem } from "react-icons/rx";
 import { MdBookmarkAdded as Added } from "react-icons/md";
 import { FaPowerOff as poweroff } from "react-icons/fa";
+import { BiCategoryAlt as category } from "react-icons/bi";
+import { MdOutlineLocationOn as location } from "react-icons/md";
 
 export default{
+    location,
     poweroff,
+    category,
     uploadItem,
     Added,
     send,

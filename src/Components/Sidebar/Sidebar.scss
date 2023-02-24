@@ -6,8 +6,7 @@
 
     @media screen and (max-width:600px) {
         // display: none;
-    }
-
+    } 
     main {
         padding: 10px;
     }
@@ -63,7 +62,7 @@
         text-decoration: none;
         border-right: 4px solid transparent;
         transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
-
+        cursor: pointer;
         &:hover {
             // border-left: 4px solid $colorRed-0;
             transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
@@ -87,7 +86,6 @@
             white-space: nowrap;
             text-decoration: none !important;
             text-decoration: underline;
-
             font-family: $fontBase;
             font-style: normal;
             font-weight: 400;
@@ -186,8 +184,8 @@
     left: 0;
     background-color: #000;
     z-index: 99;
-    // overflow: scroll;
-    // overflow-x: hidden;
+    overflow: scroll;
+    overflow-x: hidden;
     // display: none;
 }
 
@@ -203,3 +201,5 @@
         width: 100% !important;
     }
 }
+
+ 

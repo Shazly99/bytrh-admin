@@ -73,7 +73,6 @@ function App() {
             { index: true, element: <ProtectedRoutes>  <Component.Users /> </ProtectedRoutes> },
             { path: 'addUser', element: <ProtectedRoutes> <Component.AddNewUser /></ProtectedRoutes> },
             { path: 'editUser/:id', element: <ProtectedRoutes>  <Component.Edit /> </ProtectedRoutes> },
-
           ]
         },
         {
@@ -88,9 +87,40 @@ function App() {
             { path: 'editDoctor/:id', element: <ProtectedRoutes> <Component.EditDoctor getTokenDoctors={getTokenDoctors} fetchCountriesBytra={fetchCountriesBytra} /></ProtectedRoutes> },
             { path: 'doctorfields/:id', element: <ProtectedRoutes> <Component.DoctorFields /></ProtectedRoutes> },
           ]
-
         },
         { path: '/venderProfile', element: <ProtectedRoutes>  <Component.Profile /></ProtectedRoutes> },
+        {
+          path: '/categ/animals', children: [
+            { index: true, element: <ProtectedRoutes>  <Component.AnimalCat /> </ProtectedRoutes> },
+            { path: 'addAnimal', element: <ProtectedRoutes> <Component.AddCountry /></ProtectedRoutes> },
+            { path: 'editAnimal/:id', element: <ProtectedRoutes>  <Component.EditAnimalCat /> </ProtectedRoutes> },
+          ]
+        },
+        {
+          path: '/location', children: [
+            {
+              path: 'country',children: [
+                {index:true, element: <ProtectedRoutes> <Component.Country /></ProtectedRoutes>},
+                { path: 'addcountry', element: <ProtectedRoutes> <Component.AddCountry /></ProtectedRoutes> },
+                { path: 'editcountry/:id', element: <ProtectedRoutes>  <Component.EditCountry /> </ProtectedRoutes> },
+              ]
+            },
+            {
+              path: 'cities',  children: [
+                {index:true, element: <ProtectedRoutes>  <Component.Cities /> </ProtectedRoutes>},
+                { path: 'addcity', element: <ProtectedRoutes>  <Component.AddCities /> </ProtectedRoutes> },
+                { path: 'editcity/:id', element: <ProtectedRoutes>  <Component.EditCities /> </ProtectedRoutes> },
+              ]
+            },
+            {
+              path: 'areas', children: [
+                {index:true, element: <ProtectedRoutes>  <Component.Areas /> </ProtectedRoutes>, },
+                { path: 'addareas', element: <ProtectedRoutes>  <Component.AddAreas /> </ProtectedRoutes> },
+                { path: 'editareas/:id', element: <ProtectedRoutes>  <Component.EditArea /> </ProtectedRoutes> },
+              ]
+            },
+          ]
+        },
       ],
     },
 
@@ -106,10 +136,11 @@ function App() {
           path: '/chat/doctors', element: <ProtectedRoutes>  <Component.ChatDoctors /></ProtectedRoutes>, children: [
             { path: '/chat/doctors/:id', element: <ProtectedRoutes> <Component.LiveChatDoc /> </ProtectedRoutes> }
           ]
-        }, 
-        {path:'*' , element:<h1>test</h1>}
+        },
+        { path: '*', element: <h1>test</h1> }
       ],
     },
+
 
     {
       path: '/auth/', element: <Component.Auth />, children: [
@@ -119,7 +150,7 @@ function App() {
 
   ])
   return (
-    <>
+    <div>
       <Toaster
         position="top-center"
         reverseOrder={false}
@@ -143,7 +174,7 @@ function App() {
         </VenderContext>
       </ChatStore>
 
-    </>
+    </div>
   );
 }
 

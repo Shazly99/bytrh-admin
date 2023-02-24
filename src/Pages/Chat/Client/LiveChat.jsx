@@ -86,12 +86,17 @@ function LiveChat() {
             localStorage.setItem('chatStatus','PENDING')
         }
         fetchClientDetail(); 
+        chatReceive()
 
         const interval = setInterval(() => {
             chatReceive()
         }, 5000);
 
-        return () => clearInterval(interval);
+        return () => {
+            clearInterval(interval);
+            chatReceive()
+
+        };
     }, [id, IdChatSupport]);
 
     return (

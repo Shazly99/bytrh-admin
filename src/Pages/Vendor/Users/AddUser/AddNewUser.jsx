@@ -23,8 +23,7 @@ const AddNewUser = () => {
     const password = useRef();
 
 
-    const onChangeHandler = (phone, country, e) => {
- 
+    const onChangeHandler = (phone, country, e) => { 
         setPhoneNumber(phone)
         setCountry(country.dialCode)
     }

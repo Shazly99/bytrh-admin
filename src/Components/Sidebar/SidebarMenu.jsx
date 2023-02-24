@@ -35,11 +35,13 @@ const menuItemAnimation = {
   }),
 };
 
-const SidebarMenu = ({ route, showAnimation, isOpen, setIsOpen }) => {
+const SidebarMenu = ({ route,open, showAnimation, isOpen, setIsOpen }) => {
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
     setIsOpen(true);
+    
   };
 
   useEffect(() => {
@@ -51,7 +53,7 @@ const SidebarMenu = ({ route, showAnimation, isOpen, setIsOpen }) => {
     <>
       <div className="menu" onClick={toggleMenu}>
         <div className="menu_item">
-          <NavLink to={route.path} className="link">
+          <span className={`link ${isMenuOpen?'link_text':''}`}>
             <div className="icon">{route.icon}</div>
             <AnimatePresence>
               {isOpen && (
@@ -66,20 +68,20 @@ const SidebarMenu = ({ route, showAnimation, isOpen, setIsOpen }) => {
                 </motion.div>
               )}
             </AnimatePresence>
-          </NavLink>
+          </span>
         </div>
         {isOpen && (
           <motion.div
-          className="angleDown"
+            className="angleDown"
             animate={
-              isMenuOpen
+              !isMenuOpen
                 ? {
                   rotate: -90,
                 }
                 : { rotate: 0 }
             }
           >
-            <FaAngleDown size={20}/>
+            <FaAngleDown size={20} />
           </motion.div>
         )}
       </div>{" "}
@@ -95,7 +97,7 @@ const SidebarMenu = ({ route, showAnimation, isOpen, setIsOpen }) => {
             {route.subRoutes.map((subRoute, i) => (
               <motion.div variants={menuItemAnimation} key={i} custom={i}>
                 <NavLink to={subRoute.path} className="link">
-                  {console.log(subRoute.path)}
+                  
                   <div className="icon">{subRoute.icon}</div>
                   <motion.div className="link_text">{subRoute.name}</motion.div>
                 </NavLink>
