@@ -73,6 +73,8 @@ const AnimalCat = () => {
   }, [])
 
   return (
+
+    
     <>
       <div className="app__Users ">
         <Component.ButtonBase title={"Add new Animal"} bg={"primary"} icon={<Icons.add />} path="/categ/animals/addAnimal" />
