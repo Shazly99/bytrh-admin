@@ -70,7 +70,7 @@ const ChatClient = () => {
         <Component.ClientList clientChatSupport={clientChatSupport} />
         <Col xl={8} lg={8} md={6} sm={12} className='app__chat_messages '>
           <div className='shadow app__chat_list-card'>
-            <div className={`app__Live_chat chat-body  ${id ? '' : 'bg-dark'}`} style={{ background: '#d9d9d998' }}>
+            <div className={`app__Live_chat chat-body  ${id ? '' : 'bg-dark'}`} style={{ background: 'rgb(217 217 217 / 28%)' }}>
               {
                 id ?
                   <>

@@ -28,6 +28,18 @@ import ClientList from './../Pages/Chat/Client/ClientList';
 import LiveChat from './../Pages/Chat/Client/LiveChat';
 import DoctorList from './../Pages/Chat/Doctors/DoctorList';
 import LiveChatDoc from './../Pages/Chat/Doctors/LiveChatDoc';
+import AnimalCat from './../Pages/Vendor/Categories/AnimalCat';
+import AddAnimalCat from './../Pages/Vendor/Categories/AddAnimalCat';
+import EditAnimalCat from './../Pages/Vendor/Categories/EditAnimalCat'; 
+import Cities from './../Pages/Vendor/Location/Cities/Cities';
+import AddCities from './../Pages/Vendor/Location/Cities/AddCities';
+import EditCities from './../Pages/Vendor/Location/Cities/EditCities';
+import Areas from './../Pages/Vendor/Location/Areas/Areas';
+import AddAreas from './../Pages/Vendor/Location/Areas/AddAreas';
+import Country from './../Pages/Vendor/Location/Country/Country';
+import AddCountry from './../Pages/Vendor/Location/Country/AddCountry';
+import EditCountry from './../Pages/Vendor/Location/Country/EditCountry';
+import EditArea from './../Pages/Vendor/Location/Areas/EditArea';
 
 export default {
     // Layout 
@@ -64,7 +76,20 @@ export default {
     AddDoctor,
     EditDoctor,
     DoctorFields,
-
+    //AnimalCat
+    AnimalCat, 
+    AddAnimalCat,
+    EditAnimalCat,
+    // location
+    Country,
+    AddCountry,
+    EditCountry,
+     Cities,
+    AddCities,
+    EditCities,
+    Areas,
+    AddAreas,
+    EditArea,
     // Components
     Navber,
     SubNav,
