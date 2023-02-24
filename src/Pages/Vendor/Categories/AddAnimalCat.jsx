@@ -45,9 +45,9 @@ const AddAnimalCat = () => {
     return (
         <Container fluid>
             <div className="app__addprodects">
-                <Component.SubNav sub__nav={[{ name: "Animal Categories", path: '/categ/animals' }, { name: "Add Categorie ", path: '/categ/animals/addAnimal' }]} />
+                <Component.SubNav sub__nav={[{ name: "Animal Categories", path: '/categ/animals' }, { name: "Add Category ", path: '/categ/animals/addAnimal' }]} />
                 <div className="app__addprodects__header ">
-                    <Component.BaseHeader h1={'Add New Users'} />
+                    <Component.BaseHeader h1={'Add New Category'} />
                     <div className="app__addOrder-form">
                         <div className="app__addprodects-form">
                             <form onSubmit={submit}>

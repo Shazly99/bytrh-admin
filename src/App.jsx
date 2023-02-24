@@ -92,7 +92,7 @@ function App() {
         {
           path: '/categ/animals', children: [
             { index: true, element: <ProtectedRoutes>  <Component.AnimalCat /> </ProtectedRoutes> },
-            { path: 'addAnimal', element: <ProtectedRoutes> <Component.AddCountry /></ProtectedRoutes> },
+            { path: 'addAnimal', element: <ProtectedRoutes> <Component.AddAnimalCat /></ProtectedRoutes> },
             { path: 'editAnimal/:id', element: <ProtectedRoutes>  <Component.EditAnimalCat /> </ProtectedRoutes> },
           ]
         },
