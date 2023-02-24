@@ -4,13 +4,7 @@ import Img from '../../../assets/Img';
 import { Link } from 'react-router-dom';
 
 const ClientList = ({ clientChatSupport }) => {
-    const colors = [
-        { color: '#ffc700', rgba: '255, 199, 0' },
-        { color: '#f1416c', rgba: '241, 65, 108' },
-        { color: '#009ef7', rgba: '0, 158, 247' },
-        { color: '#50cd89', rgba: '80, 205, 137' },
-    ];
-
+ 
     return (
         <>
             <Col xl={4} lg={4} md={6} sm={12} className='app__chat_list-Users '>

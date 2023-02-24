@@ -82,7 +82,7 @@ const ChatClient = () => {
                     <h2 className={` ${id ? '' : 'text-light'}`}>
                       Welcome, <span style={{ color: '#313bac' }}>admin!</span>
                     </h2>
-                    <h4 className={` ${id ? '' : 'text-light'}`}>Please select a chat to Start messaging.</h4>
+                    <h4 className={` ${id ? 'text-center' : 'text-light text-center'}`}>Please select a chat to Start messaging.</h4>
                   </div>
               }
             </div>
