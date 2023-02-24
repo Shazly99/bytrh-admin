@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState ,useRef} from 'react';
 import { FiEdit3 } from 'react-icons/fi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import { DropdownButton, Dropdown, Modal, Form, Button } from 'react-bootstrap';
 import { useEffect } from 'react';
 import { apiheader, PostData } from '../../../utils/fetchData';
+import { toast } from 'react-hot-toast';
+import Icons from '../../../constants/Icons';
 
 
 export default function ItemDoctor({ nameDoc, email, phone, country, type, balance, status, item, id, getTokenDoctors }) {
     // const [data, setData] = useState({});
-    const [showModal, setShowModal] = useState(false);
-    const [changeBalance, setChangeBalance] = useState(null);
-
-    function handleChangeBalance(event) {
-        setChangeBalance(parseInt(event.target.value) || null);
-    }
+    const [showModal, setShowModal] = useState(false); 
+    let changeBalance = useRef()
+ 
     const [idDoc, setId] = useState(null);
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
@@ -35,21 +34,32 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
             await userstatus({ IDDoctor: id, DoctorStatus: action })
             await getTokenDoctors()
         } else if (action === "balance") {
-            setId(id)
-            setChangeBalance(null)
+            setId(id) 
         }
     };
-    async function name() {
-        await changeWallet({ IDDoctor: idDoc, Amount: changeBalance })
-        await getTokenDoctors()
-    }
+ 
 
 
-    const changeWallet = async (wallet) => {
-        let data = await PostData(`https://bytrh.com/api/admin/doctors/wallet/add`, wallet, apiheader)
-        await getTokenDoctors()
-        console.log(data);
-    }
+    
+    const changeWallet = async () => {
+        await PostData(`https://bytrh.com/api/admin/doctors/wallet/add`, { IDDoctor: id, Amount: changeBalance.current.value }, apiheader).then((res) => {
+          if (res.data.Success === true) {
+            toast.success('wallet updated !', {
+              duration: 4000,
+              position: 'top-center',
+              icon: <Icons.uploadItem color='#3182CE' size={20} />,
+              iconTheme: {
+                primary: '#0a0',
+                secondary: '#fff',
+              },
+            }); 
+            getTokenDoctors()
+            handleCloseModal()
+          } else {
+            toast.error(res.data.ApiMsg)
+          }
+        }) 
+      }
     const userstatus = async (status) => {
         let { data } = await PostData(`https://bytrh.com/api/admin/doctors/status`, status, apiheader)
         console.log(data);
@@ -110,21 +120,17 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                 <Dropdown.Item eventKey="balance" onClick={handleShowModal}>Balance check</Dropdown.Item>
                                 <Modal show={showModal} onHide={handleCloseModal} centered >
                                     <Modal.Header closeButton>
-                                        <Modal.Title>Add in wallet {name} </Modal.Title>
+                                        <Modal.Title>Add in wallet  </Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
-                                        <Form.Control type="number" value={changeBalance} onChange={handleChangeBalance} />
-                                        <div className='d-flex justify-content-center align-items-center mt-3' style={{ gap: '15px' }}>
-                                            <Button variant="outline-primary" onClick={() => setChangeBalance(changeBalance + 1)}>Balance add </Button>
-                                            <Button variant="outline-primary" onClick={() => setChangeBalance(changeBalance - 1)}>Balance deduction</Button>
-                                        </div>
+                                        <Form.Control type="number" defaultValue={balance} ref={changeBalance} /> 
                                     </Modal.Body>
                                     <Modal.Footer className="d-flex justify-content-center align-items-center">
                                         <Button variant="outline-primary" onClick={handleCloseModal}>
                                             Cancel
                                         </Button>
-                                        <Button eventKey="balance" variant="primary" onClick={name}>
-                                            Save Changes
+                                        <Button eventKey="balance" variant="primary" onClick={changeWallet}>
+                                            Set Wellet
                                         </Button>
                                     </Modal.Footer>
                                 </Modal>

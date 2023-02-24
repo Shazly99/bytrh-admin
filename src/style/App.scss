@@ -12,11 +12,13 @@ a {
 .btn-primary {
     background-color: $colorRed-0 !important;
 }
-.btn-outline-primary{
-    color: $colorRed-0  !important ;
+
+.btn-outline-primary {
+    color: $colorRed-0 !important;
     border-color: $colorRed-0 !important;
-    &:hover{ 
-    background-color: transparent !important;
+
+    &:hover {
+        background-color: transparent !important;
 
     }
 }
@@ -98,6 +100,8 @@ thead {
 }
 
 td {
+    white-space: nowrap !important;
+
     >div {
         display: flex;
         justify-content: center;
@@ -132,7 +136,12 @@ td {
     }
 }
 
+// pagination style
+.pagination {
+    margin-top: 35px !important;
 
-td {
-    white-space: nowrap !important;
+    .css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+        background-color: $colorRed-0 !important;
+        color: #FFFFFF !important;
+    }
 }

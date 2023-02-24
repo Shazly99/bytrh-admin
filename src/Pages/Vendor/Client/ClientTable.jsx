@@ -11,18 +11,10 @@ import Modal from 'react-bootstrap/Modal';
 
 const ClientTable = ({ usersList, userList }) => {
   const [showModal, setShowModal] = useState(false);
-  const [changeBalance, setChangeBalance] = useState(0);
-
-  let test = useRef()
-  function handleChangeBalance(event) {
-    console.log(test.current);
-    setChangeBalance(parseInt(event.target.value) || 0);
-  }
-
-
   const [id, setId] = useState(null);
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
+  let changeBalance = useRef()
 
 
   const handleActionSelect = async (id, action) => {
@@ -30,12 +22,12 @@ const ClientTable = ({ usersList, userList }) => {
       await userstatus({ IDClient: id, ClientStatus: action }).then((res) => {
         toast.success('Status up to date', {
           duration: 4000,
-          position: 'top-center',  
-          icon: <Icons.uploadItem color='#3182CE' size={25}/>, 
+          position: 'top-center',
+          icon: <Icons.uploadItem color='#3182CE' size={20} />,
           iconTheme: {
             primary: '#0a0',
             secondary: '#fff',
-          }, 
+          },
         });
       })
       await userList()
@@ -43,12 +35,12 @@ const ClientTable = ({ usersList, userList }) => {
       await userstatus({ IDClient: id, ClientStatus: action }).then((res) => {
         toast.success('Status up to date', {
           duration: 4000,
-          position: 'top-center',  
-          icon: <Icons.uploadItem color='#3182CE' size={25}/>, 
+          position: 'top-center',
+          icon: <Icons.uploadItem color='#3182CE' size={20} />,
           iconTheme: {
             primary: '#0a0',
             secondary: '#fff',
-          }, 
+          },
         });
       })
       await userList()
@@ -56,12 +48,12 @@ const ClientTable = ({ usersList, userList }) => {
       await userstatus({ IDClient: id, ClientStatus: action }).then((res) => {
         toast.success('Client is deleted', {
           duration: 4000,
-          position: 'top-center',  
-          icon: <Icons.bin color='#E20000' size={20}/>, 
+          position: 'top-center',
+          icon: <Icons.bin color='#E20000' size={20} />,
           iconTheme: {
             primary: '#0a0',
             secondary: '#fff',
-          }, 
+          },
         });
       })
       await userList()
@@ -70,12 +62,12 @@ const ClientTable = ({ usersList, userList }) => {
       await userstatus({ IDClient: id, ClientStatus: action }).then((res) => {
         toast.success('Status up to date', {
           duration: 4000,
-          position: 'top-center',  
-          icon: <Icons.uploadItem color='#3182CE' size={25}/>, 
+          position: 'top-center',
+          icon: <Icons.uploadItem color='#3182CE' size={20} />,
           iconTheme: {
             primary: '#0a0',
             secondary: '#fff',
-          }, 
+          },
         });
       })
       await userList()
@@ -83,34 +75,38 @@ const ClientTable = ({ usersList, userList }) => {
       await resetPassword(id)
       await userList()
     } else if (action === "balance") {
-      setId(id)
-      setChangeBalance(null)
+      setId(id) 
     }
   };
+
   const userstatus = async (status) => {
     return await PostData(`https://bytrh.com/api/admin/clients/status`, status, apiheader)
   }
 
-  // clients wallet api Balance
-  async function detailsWallet() {
-    await changeWallet({ IDClient: id, Amount: changeBalance })
-    await userList()
-  }
-  const changeWallet = async (wallet) => {
-    let data = await PostData(`https://bytrh.com/api/admin/clients/wallet/add`, wallet, apiheader)
-    if (data.Success === true) {
-      toast.error('Failed !');
-    } else {
-      toast.success('wallet updated !');
 
-    }
-    console.log(data);
+  const changeWallet = async () => {
+    await PostData(`https://bytrh.com/api/admin/clients/wallet/add`, { IDClient: id, Amount: changeBalance.current.value }, apiheader).then((res) => {
+      if (res.data.Success === true) {
+        toast.success('wallet updated !', {
+          duration: 4000,
+          position: 'top-center',
+          icon: <Icons.uploadItem color='#3182CE' size={20} />,
+          iconTheme: {
+            primary: '#0a0',
+            secondary: '#fff',
+          },
+        }); 
+        userList()
+        handleCloseModal()
+      } else {
+        toast.error(res.data.ApiMsg)
+      }
+    }) 
   }
 
   // client reset Password api Balance
   const resetPassword = async (idClient) => {
     let data = await GetData(`https://bytrh.com/api/admin/clients/password/reset/${idClient}`, apiheader)
-
     if (data.Success === true) {
       toast.success('Password reset successfully!');
     } else {
@@ -178,8 +174,7 @@ const ClientTable = ({ usersList, userList }) => {
                                         ${item.ClientStatus == 'ACTIVE' && 'txt_delivered'}
                                         ${item.ClientStatus == 'INACTIVE' && 'txt_rejected'}
                                         ${item.ClientStatus == 'BLOCKED' && 'txt_blocked'}
-                                        `}
-                    >
+                                        `}  >
                       {item?.ClientStatus.toLowerCase()}
                     </span>
                   </div>
@@ -195,24 +190,22 @@ const ClientTable = ({ usersList, userList }) => {
                         className="DropdownButton "
                       >
                         <Dropdown.Item eventKey="reset">Reset password</Dropdown.Item>
+                        
                         <Dropdown.Item eventKey="balance" onClick={handleShowModal}>Balance check</Dropdown.Item>
+
                         <Modal show={showModal} onHide={handleCloseModal} centered >
                           <Modal.Header closeButton>
                             <Modal.Title>Add in wallet {item?.ClientName} </Modal.Title>
                           </Modal.Header>
                           <Modal.Body>
-                            <Form.Control type="number" value={changeBalance} onChange={handleChangeBalance} />
-                            <div className='d-flex justify-content-center align-items-center mt-3' style={{ gap: '15px' }}>
-                              <Button variant="outline-primary" onClick={() => setChangeBalance(changeBalance + 1)}>Balance add </Button>
-                              <Button variant="outline-primary" onClick={() => setChangeBalance(changeBalance - 1)}>Balance deduction</Button>
-                            </div>
+                            <Form.Control type="number" defaultValue={item.ClientBalance} ref={changeBalance} />
                           </Modal.Body>
                           <Modal.Footer className="d-flex justify-content-center align-items-center">
                             <Button variant="outline-primary" onClick={handleCloseModal}>
                               Cancel
                             </Button>
-                            <Button eventKey="balance" variant="primary" onClick={detailsWallet}>
-                              wallet updated
+                            <Button   variant="primary" onClick={changeWallet}>
+                              set wallet
                             </Button>
                           </Modal.Footer>
                         </Modal>
