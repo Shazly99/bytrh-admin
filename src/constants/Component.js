@@ -39,8 +39,7 @@ import AddAreas from './../Pages/Vendor/Location/Areas/AddAreas';
 import Country from './../Pages/Vendor/Location/Country/Country';
 import AddCountry from './../Pages/Vendor/Location/Country/AddCountry';
 import EditCountry from './../Pages/Vendor/Location/Country/EditCountry';
-import EditArea from './../Pages/Vendor/Location/Areas/EditArea';
-import ConsultList from './../Pages/Chat/Consult/ConsultList';
+import EditArea from './../Pages/Vendor/Location/Areas/EditArea'; 
 import ChatConsult from './../Pages/Chat/Consult/ChatConsult';
 import LiveConsult from './../Pages/Chat/Consult/LiveConsult';
 
@@ -74,8 +73,7 @@ export default {
     ChatDoctors,
     DoctorList,
     LiveChatDoc, 
-
-    ConsultList,
+ 
     ChatConsult,
     LiveConsult,
     // Doc

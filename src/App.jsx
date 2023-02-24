@@ -137,6 +137,12 @@ function App() {
             { path: '/chat/doctors/:id', element: <ProtectedRoutes> <Component.LiveChatDoc /> </ProtectedRoutes> }
           ]
         },
+        {
+          path: '/chat/consult', children: [
+            { index:true, element: <ProtectedRoutes> <Component.ChatConsult /> </ProtectedRoutes> },
+            { path: 'details/:id', element: <ProtectedRoutes> <Component.LiveConsult /> </ProtectedRoutes> }
+          ]
+        },
         { path: '*', element: <h1>test</h1> }
       ],
     },

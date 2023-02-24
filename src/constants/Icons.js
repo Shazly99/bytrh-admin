@@ -35,8 +35,12 @@ import { MdBookmarkAdded as Added } from "react-icons/md";
 import { FaPowerOff as poweroff } from "react-icons/fa";
 import { BiCategoryAlt as category } from "react-icons/bi";
 import { MdOutlineLocationOn as location } from "react-icons/md";
+import { IoChatboxEllipsesOutline as consult } from "react-icons/io5";
+
+
 
 export default{
+    consult,
     location,
     poweroff,
     category,

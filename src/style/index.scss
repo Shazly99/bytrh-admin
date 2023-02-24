@@ -30,7 +30,9 @@ body {
 .txt_delivered,
 .txt_pending,
 .txt_shipped,
-.txt_rejected {
+.txt_cancel,
+.txt_rejected ,
+.txt__status{
   /* Button */
   font-weight: 600 !important;
   display: inline-flex;
@@ -70,14 +72,19 @@ body {
 .txt_delivered {
   color: #40AB45;
   background-color: rgba($color: #40AB45, $alpha: 0.1);
+}  
 
-
-
+.txt__status{
+  color: #009ef7;
+  background-color: rgba($color: #009ef7, $alpha: 0.1);  
 }
-
 .txt_rejected {
   color: #E20000;
   background-color: rgba($color: #E20000, $alpha: 0.1);
+}
+.txt_cancel {
+  color: #f1416c;
+  background-color: rgba($color: #f1416c, $alpha: 0.1);
 }
 
 // navbar fixed 

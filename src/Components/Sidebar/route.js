@@ -54,7 +54,12 @@ const routes = [
       },
 
     ],
-  } 
+  },  
+  {
+    path: "/chat/consult",
+    name: "Consults",
+    icon: <Icons.consult size={20} />,
+  },
 
 ];
 
