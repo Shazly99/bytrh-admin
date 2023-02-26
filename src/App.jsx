@@ -121,6 +121,16 @@ function App() {
             },
           ]
         },
+        {
+          path: '/settings', children: [
+            {
+              path: 'general',children: [
+                {index:true, element: <ProtectedRoutes> <Component.GeneralSettings /></ProtectedRoutes>},
+              ]
+            }
+          ]
+        }
+        
       ],
     },
 

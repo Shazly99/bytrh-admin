@@ -40,7 +40,6 @@ const ChatConsult = () => {
   return (
     <>
       <div className="app__Users ">
-        <Component.ButtonBase title={"Add new Animal"} bg={"primary"} icon={<Icons.add />} path="/categ/animals/addAnimal" />
         <div className="app__Users-table">
 
           <Table responsive={true} className='rounded-3 '>

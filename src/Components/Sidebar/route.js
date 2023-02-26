@@ -54,13 +54,24 @@ const routes = [
       },
 
     ],
-  },  
+  },
   {
     path: "/chat/consult",
     name: "Consults",
     icon: <Icons.consult size={20} />,
   },
+  {
+    name: "Settings",
+    icon: <Icons.settings size={20} />,
+    subRoutes: [
+      {
+        path: "/settings/general",
+        name: "General ",
+        icon: <Icons.dote size={20} />,
+      }, 
 
+    ],
+  },
 ];
 
 export default routes
