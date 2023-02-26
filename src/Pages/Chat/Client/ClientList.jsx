@@ -23,13 +23,7 @@ const ClientList = ({ clientChatSupport }) => {
                                 <React.Fragment key={index} >
                                     <div className='app__chat_list-grid'>
                                         <Link to={`/chat/clients/${chat?.IDClientChatSupport}`} className="user text-dark">
-                                            <div
-                                                style={{
-                                                    // color: colors[index % colors.length].color,
-                                                    // backgroundColor: `rgba(${colors[index % colors.length].rgba}, 0.1)`,
-                                                }}
-                                                className="circle symbol-label"
-                                            >
+                                            <div  className="circle symbol-label" >
                                                 {chat?.ClientName.split(" ").map(word => word.charAt(0).toUpperCase()).join("")}
                                             </div>
 
@@ -45,12 +39,12 @@ const ClientList = ({ clientChatSupport }) => {
 
                                         </Link>
 
-                                        <span style={{ height: 'fit-content !important' }} className={`
+                                        <span   className={`
                                           ${chat?.ChatSupportStatus == 'PENDING' && 'txt_pending'} 
                                           ${chat?.ChatSupportStatus == 'Shipped' && 'txt_shipped'}
                                           ${chat?.ChatSupportStatus == 'Out For Delivery' && 'txt_delivery'}
                                           ${chat?.ChatSupportStatus == 'ONGOING' && 'txt_delivered'}
-                                          ${chat?.ChatSupportStatus == 'ENDED' && 'txt_rejected'}`} >
+                                          ${chat?.ChatSupportStatus == 'ENDED' && 'txt_rejected'} `} style={{backgroundColor:'transparent !important', height: 'fit-content !important'}} >
                                             {chat?.ChatSupportStatus.toLowerCase()}
                                         </span> 
 

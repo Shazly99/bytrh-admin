@@ -29,7 +29,7 @@ function Vendor() {
           >
             <main className='w-100  m-0 p-0 '>
               <Component.Navber />
-              <div className='p-2'>
+              <div className='p-2 ' style={{background:'red'}}>
                 <Outlet></Outlet>
               </div>
             </main>

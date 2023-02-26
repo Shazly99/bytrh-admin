@@ -7,6 +7,7 @@ import { FaBars } from 'react-icons/fa';
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 import { VendersContext } from "../../context/Store";
 import SidebarMenu from './SidebarMenu';
+import Img from "../../assets/Img";
 
 const Sidebar = ({ children }) => {
   let { isOpen, toggle, LogOut, setIsOpen } = useContext(VendersContext);
@@ -56,7 +57,8 @@ const Sidebar = ({ children }) => {
                     className="logo"
                     key={1}
                   >
-                    <h3>Baytrh</h3>
+                    <img src={Img.logo} className="w-100"/>
+                    {/* <h3>Baytrh</h3> */}
                   </motion.div>
                 )}
                 <div className="bars">

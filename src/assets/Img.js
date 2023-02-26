@@ -4,6 +4,7 @@ import error from "./Images/error.png";
 import avatar from "./Images/vector (2).png";
 import avatar1 from "./Images/300-21.jpg"; 
 import empty_chat from "./Images/robot.gif";
+import logo from "./Images/logo.png";
 
 export default{ 
     // logo, 
@@ -11,5 +12,6 @@ export default{
     error,
     avatar,
     avatar1, 
-    empty_chat
+    empty_chat,
+    logo
 }
