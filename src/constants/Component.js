@@ -42,6 +42,7 @@ import EditCountry from './../Pages/Vendor/Location/Country/EditCountry';
 import EditArea from './../Pages/Vendor/Location/Areas/EditArea'; 
 import ChatConsult from './../Pages/Chat/Consult/ChatConsult';
 import LiveConsult from './../Pages/Chat/Consult/LiveConsult';
+import GeneralSettings from './../Pages/Settings/General/GeneralSettings';
 
 export default {
     // Layout 
@@ -95,6 +96,9 @@ export default {
     Areas,
     AddAreas,
     EditArea,
+    // Sitting
+    GeneralSettings,
+    
     // Components
     Navber,
     SubNav,

@@ -410,9 +410,11 @@
         padding: 20px;
         width: 70%;
         margin-bottom: 30px !important;
+
         @media screen and (max-width:900px) {
             width: 100%;
         }
+
         .client,
         .doctor {
             display: flex;
@@ -425,10 +427,12 @@
             justify-content: start;
             flex-direction: column;
             gap: 4px;
+
             @media screen and (max-width:757px) {
                 margin-top: 10px !important;
                 justify-content: center;
             }
+
             label {
                 font-family: 'Poppins';
                 font-style: normal;
@@ -454,16 +458,25 @@
             }
         }
     }
-    .app__chat__container{
-        padding: 10px 0  !important;
+
+    .app__chat__container {
+        padding: 10px 0 !important;
     }
 
-    .app__Live_chat {
-    }
+    .app__Live_chat {}
+
     .app__chat .app__chat_messages .app__chat_list-card .app__Live_chat {
         border-radius: 12px !important;
-        padding: 10px  !important;
-        position: relative; 
+        padding: 10px !important;
+        position: relative;
         height: 100% !important;
+    }
+
+    .empty_chat {
+        img {
+            @media screen and (max-width:767px) {
+                width: 50% !important;
+            }
+        }
     }
 }

@@ -82,18 +82,18 @@ const LiveConsult = () => {
         <Row className="app__chat__container ">
           <Col xl={12} lg={12} md={12} sm={12} className='app__chat_messages '>
             <div className='shadow app__chat_list-card'>
-              <div className={`app__Live_chat chat-body   ${chat.length === 0  ? 'bg-dark' : ''} `} style={{ background: 'rgb(217 217 217 / 28%)' }}>
+              <div className={`app__Live_chat chat-body   ${chat.length === 0 ? 'bg-dark' : ''} `} style={{ background: 'rgb(217 217 217 / 28%)' }}>
                 <ScrollToBottom className="message-container">
                   {
                     chat.length === 0 ?
 
-                    <div className="empty_chat   w-100 h-100 d-flex justify-content-center align-items-center flex-column">
-                    <img src={Img.empty_chat} className='w-25' />
-                    <h2 className={` ${chat.length === 0  ? 'text-light' : ''}`}>
-                      Welcome, <span style={{ color: '#313bac' }}>admin!</span>
-                    </h2>
-                    <h4 className={` ${chat.length === 0  ? 'text-light text-center' : ' text-center'}`}>This Consults Is Empty.</h4>
-                  </div>
+                      <div className="empty_chat   w-100 h-100 d-flex justify-content-center align-items-center flex-column">
+                        <img src={Img.empty_chat} className='w-25' />
+                        <h2 className={` ${chat.length === 0 ? 'text-light' : ''}`}>
+                          Welcome, <span style={{ color: '#313bac' }}>admin!</span>
+                        </h2>
+                        <h4 className={` ${chat.length === 0 ? 'text-light text-center' : ' text-center'}`}>This Consults Is Empty.</h4>
+                      </div>
                       :
                       <>
                         {chat?.map((messageContent, index) => {
