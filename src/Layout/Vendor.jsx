@@ -8,9 +8,6 @@ import { VendersContext } from '../context/Store';
 function Vendor() {
   let { isOpen } = useContext(VendersContext);
 
-  useEffect(() => {
-    // console.log(isOpen);
-  }, [isOpen])
   return (
     <>
       <div className="vender overflow-hidden">

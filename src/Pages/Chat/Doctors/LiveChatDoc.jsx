@@ -23,7 +23,6 @@ const LiveChatDoc = () => {
       const { data } = await axios(`https://bytrh.com/api/admin/chat/doctor/details/${id}`, apiheader);
       setClientChatSupport(data.Response.ChatDetails);
       setUserReplied(data.Response.UserReplied)
-      console.log(userReplied);
       const IdLastMessage = data.Response.ChatDetails[data.Response.ChatDetails.length - 1].IDChatSupportDetails;
       setIdChatSupportDetails(IdLastMessage);
     } catch (error) {
@@ -40,7 +39,6 @@ const LiveChatDoc = () => {
     try {
       const { data } = await PostData(`https://bytrh.com/api/admin/chat/doctor/receive`, { IDDoctorChatSupport: id, IDChatSupportDetails: IdChatSupport }, apiheader);
       if (clientChatSupport !== []) {
-        // console.log(data.Response);
         setChat([...clientChatSupport, ...data.Response]);
       }
     } catch (error) {

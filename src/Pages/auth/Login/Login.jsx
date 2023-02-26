@@ -30,17 +30,14 @@ const Login = () => {
         },
         validationSchema:validationSchemaPhone,
         onSubmit: async (values) => {
-            console.log(values);
             if (values) {
                 let { data } = await axios.post(`https://bytrh.com/api/admin/login`, values);
                 if (data.Success == true) { 
-                    // console.log(data.Response.AccessToken);
                     localStorage.setItem("token", data.Response.AccessToken);
                     localStorage.setItem("IDUser", data.Response.IDUser);
                     toast.success(data.ApiMsg);
                     navigate('/');
                 } else {
-                    console.log('error');
                     toast.error(data.ApiMsg);
                 }
             }
@@ -54,19 +51,15 @@ const Login = () => {
         },
         validationSchema:validationSchemaEmail,
         onSubmit: async (values) => {
-            console.log(values);
             if (values) {
                 let { data } = await axios.post(`https://bytrh.com/api/admin/login`, values);
-                console.log(data);
                 if (data.Success == true) {
-                    console.log(data.Response.AccessToken);
                     localStorage.setItem("token", data.Response.AccessToken);
                     localStorage.setItem("IDUser", data.Response.IDUser);
 
                     toast.success(data.ApiMsg);
                     navigate('/');
                 } else {
-                    console.log('error');
                     toast.error(data.ApiMsg);
                 }
             }

@@ -43,12 +43,10 @@ function Users() {
   const [searchValue, setSearchValue] = React.useState('');
 
   const handleSearchClick = () => {
-    console.log(searchValue);
     searchGetData(searchValue)
   };
   const searchGetData = async (searchValue) => {
     let { data } = await PostData(`https://bytrh.com/api/admin/users`, { SearchKey: searchValue }, apiheader)
-    console.log(data);
     setuserList(data.Response.Users)
   }
   const handleInputChange = (event) => {
@@ -57,7 +55,6 @@ function Users() {
     } else {
       searchGetData(searchValue)
     }
-    console.log(event.target.value);
     setSearchValue(event.target.value);
   };
   return (

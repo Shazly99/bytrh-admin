@@ -33,7 +33,6 @@ function LiveChat() {
             const IdLastMessage = data.Response.ChatDetails[data.Response.ChatDetails.length - 1].IDChatSupportDetails;
             setIdChatSupportDetails(IdLastMessage);
         } catch (error) {
-            // console.log(error);
             if (error.response && error.response.status === 429) {
                 const retryAfter = error.response.headers['retry-after'];
                 setTimeout(() => {
@@ -46,7 +45,6 @@ function LiveChat() {
         try {
             const { data } = await PostData(`https://bytrh.com/api/admin/chat/client/receive`, { IDClientChatSupport: id, IDChatSupportDetails: IdChatSupport }, apiheader);
             if (clientChatSupport !== []) {
-                // console.log(data.Response);
                 setChat([...clientChatSupport, ...data.Response]);
             }
         } catch (error) {
@@ -64,7 +62,6 @@ function LiveChat() {
     const handlePowerClick = async () => {
         setIsOn(false);
         let fil = clientChatSupport
-        //   console.log(fil);
         if (isOn === true) {
             let data = await GetData(`https://bytrh.com/api/admin/chat/client/end/${id}`, apiheader)
             
@@ -75,11 +72,9 @@ function LiveChat() {
     useEffect(() => {
         if (chatStatus === 'ONGOING') {
             setIsOn(true)
-            console.log('ONGOING', isOn);
             localStorage.setItem('chatStatus','ONGOING')
         } else if (chatStatus === 'ENDED') {
             setIsOn(false)
-            console.log('ENDED', isOn);
             localStorage.setItem('chatStatus','ENDED')
         }
         fetchClientDetail(); 

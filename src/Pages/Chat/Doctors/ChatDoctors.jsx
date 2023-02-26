@@ -17,7 +17,6 @@ const ChatDoctors = () => {
   const [clientChatSupport, setClientChatSupport] = useState([])
   const clientlist = async () => {
     let { data } = await PostData(`https://bytrh.com/api/admin/chat/doctor/list`, {}, apiheader)
-    console.log(data.Response);
     setClientChatSupport(data.Response.DoctorChatSupport)
   }
 
@@ -29,7 +28,6 @@ const ChatDoctors = () => {
         ChatSupportType: 'TEXT'
       }
       , apiheader);
-    // console.log(data);
   }
   useEffect(() => {
     clientlist()
@@ -41,7 +39,6 @@ const ChatDoctors = () => {
 
   const handeAdminMess = () => {
     const value = inputRef.current.value;
-    // console.log(value);
     // TODO: Send the value to the server
     adminSendMess(value)
     setInputValue('');
@@ -51,7 +48,6 @@ const ChatDoctors = () => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   async function handleFileSelect(event) {
-    console.log(event.target.files);
     setSelectedFile();
     if (selectedFile !== null) {  
       let data = await PostData(`https://bytrh.com/api/admin/chat/doctor/reply`,
@@ -61,7 +57,6 @@ const ChatDoctors = () => {
         ChatSupportType: 'IMAGE'
       }
       , apiheader);
-      console.log(data);
     }
   }
 

@@ -31,22 +31,18 @@ const Clients = () => {
   const [searchValue, setSearchValue] = useState('');
 
   const handleSearchClick = () => {
-    // console.log(searchValue);
     searchGetData(searchValue)
   };
   const searchGetData = async (searchValue) => {
     let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { SearchKey: searchValue }, apiheader)
- /*    console.log(data); */
     setuserList(data.Response.Clients)
   }
   const handleInputChange = (event) => {
     if (event.target.value === '') {
       userList(page)
     } else {
-      console.log(searchValue);
       searchGetData(searchValue)
     }
-    console.log(event.target.value);
     setSearchValue(event.target.value);
   };
   return (
@@ -54,7 +50,7 @@ const Clients = () => {
       <div className="app__Users ">
         {/* <Component.ButtonBase onclick={test} title={"Add new Clients"} bg={"primary"} icon={<Icons.add />}  /> */}
         <div className="app__Users-table">
-        <div className="search-container">
+          <div className="search-container">
             <div className='search__group'>
               <input type="text" placeholder="Search by name or email or phone....." name="search" value={searchValue} onChange={handleInputChange} />
               <button type="submit" onClick={handleSearchClick}>

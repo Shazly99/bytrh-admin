@@ -15,7 +15,6 @@ const ClientTable = ({ usersList, userList }) => {
 
   let test = useRef()
   function handleChangeBalance(event) {
-    console.log(test.current);
     setChangeBalance(parseInt(event.target.value) || 0);
   }
 
@@ -104,7 +103,6 @@ const ClientTable = ({ usersList, userList }) => {
       toast.success('wallet updated !');
 
     }
-    console.log(data);
   }
 
   // client reset Password api Balance

@@ -63,9 +63,6 @@ const EditDoctor = ({ getTokenDoctors, fetchCountriesBytra }) => {
         console.log(err);
       })
   }
-  // useEffect(() => {
-  //   // getCitiesBytra(country);
-  // }, [country])
 
 
 

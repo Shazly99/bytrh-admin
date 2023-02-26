@@ -6,7 +6,7 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { Button, Container } from 'react-bootstrap';
 import Component from '../../../constants/Component';
-import { apiheader } from './../../../utils/fetchData';
+// import { apiheader } from './../../../utils/fetchData';
 
 
 function AddDoctor({ getTokenDoctors, fetchCountriesBytra }) {
@@ -31,6 +31,7 @@ function AddDoctor({ getTokenDoctors, fetchCountriesBytra }) {
   const [loadind, setLoadind] = useState(false);
 
   const [apiCode, setApiCode] = useState(null);
+  
   const showHidePass = () => {
     if ($('.password .input-group i').hasClass('fa-eye-slash')) {
       $('.password .input-group i').removeClass('fa-eye-slash');

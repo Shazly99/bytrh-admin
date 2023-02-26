@@ -18,18 +18,16 @@ function Profile() {
   const handleShow = () => setShow(true);
 
   const userProfileGet = async () => {
+
     let resp = await GetData(`https://bytrh.com/api/admin/users/profile/${userId}`, apiheader);
     setUserProfile(resp.Response);
+
   }
 
   useEffect(() => {
-    // console.log(localStorage.getItem("IDUser"));
     userProfileGet()
   }, [userProfile])
-  useEffect(() => {
-    // console.log(localStorage.getItem("IDUser"));
 
-  }, [userProfile])
 
   return (
     <>

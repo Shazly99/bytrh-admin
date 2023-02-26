@@ -9,6 +9,7 @@ import { apiheader } from './utils/fetchData';
 import ChatStore from './context/ChatStore';
 
 function App() {
+
   const URL_Doctors = `https://bytrh.com/api/admin/doctors`;
   let token = localStorage.getItem('token')
   const [pagesCountDoctors, setPagesCountDoctors] = useState(0);
@@ -16,7 +17,6 @@ function App() {
   const [searchKeyDoctors, setSearchKeyDoctors] = useState(null);
   const [loadingDoctors, setLoadingDoctors] = useState(false)
   const [fetchDoctors, setFetchDoctors] = useState([])
-
   async function getTokenDoctors() {
 
     setLoadingDoctors(true);
@@ -38,6 +38,7 @@ function App() {
       getTokenDoctors();
     }
   }, [token, countDoctors, pagesCountDoctors, searchKeyDoctors]);
+
 
   // get countries Bytra
   const [fetchCountriesBytra, setFetchCountriesBytra] = useState([]);
@@ -64,6 +65,8 @@ function App() {
       return <Navigate to="/auth/login" replace={true} />
     }
   }
+
+
   const root = createBrowserRouter([
     {
       path: '/', element: <Component.Vendor />, children: [

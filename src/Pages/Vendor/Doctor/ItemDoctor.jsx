@@ -48,15 +48,11 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
     const changeWallet = async (wallet) => {
         let data = await PostData(`https://bytrh.com/api/admin/doctors/wallet/add`, wallet, apiheader)
         await getTokenDoctors()
-        console.log(data);
     }
     const userstatus = async (status) => {
         let { data } = await PostData(`https://bytrh.com/api/admin/doctors/status`, status, apiheader)
-        console.log(data);
-        console.log(status);
     }
-    useEffect(() => {
-    }, [])
+
 
 
     return (

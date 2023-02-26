@@ -7,20 +7,20 @@ import Icons from '../../../constants/Icons';
 import './Doctor.scss'
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-
 import $ from 'jquery'
 import { Container, Table } from 'react-bootstrap';
+import Loader from '../../../Components/Shared/Loader/Loader';
+
 
 export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDoctors, countDoctors, setCountDoctors, setSearchKeyDoctors, loadingDoctors }) {
 
 
-  const token = localStorage.getItem('userToken');
-  const [page, setPage] = useState(1); 
+  // const token = localStorage.getItem('userToken');
+
   const handleChange = (event, value) => {
-    console.log(value);
-    setPage(value);
     setCountDoctors(value); 
   };
+
   const [valueSearch, setValueSearch] = useState('')
 
   const handelSearch = () => {
@@ -31,13 +31,23 @@ export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDocto
 
   const handelClickSearch = (e) => {
     if (e.keyCode === 13) {
-      // console.log('enter key pressed');
       handelSearch();
     }
   }
+
   useEffect(() => {
     $('html , body').animate({ scrollTop: 0 }, 200);
-  }, [page]);
+  }, [countDoctors]);
+
+  useEffect(() => {
+    if(loadingDoctors) {
+      $('body').addClass('d-none');
+      $('body').removeClass('d-block')
+    }
+    $('body').addClass('d-block');
+    $('body').removeClass('d-none')
+  }, [loadingDoctors]);
+
 
   return (
     <>
@@ -98,21 +108,14 @@ export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDocto
           </div>
 
           {loadingDoctors ?
-            <div className="sk-chase">
-              <div className="sk-chase-dot"></div>
-              <div className="sk-chase-dot"></div>
-              <div className="sk-chase-dot"></div>
-              <div className="sk-chase-dot"></div>
-              <div className="sk-chase-dot"></div>
-              <div className="sk-chase-dot"></div>
-            </div>
+            <Loader /> 
+
             :
+
             <div className="total-table">
 
               {Object.keys(fetchDoctors).length > 0 ?
                 <> 
-     
-
                   <div className="app__Users-table  ">
                     <Table responsive={true} className='rounded-3 '>
                       <thead className="table-light bg-input">
@@ -147,9 +150,10 @@ export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDocto
                       </tbody>
                     </Table>
                   </div>
-                  <div className="pagination ">
+
+                  <div className="pagination">
                     <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-                      <Pagination count={pagesCountDoctors} page={page} onChange={handleChange} />
+                      <Pagination count={pagesCountDoctors} page={countDoctors} onChange={handleChange}  />
                     </Box>
                   </div>
                 </>
