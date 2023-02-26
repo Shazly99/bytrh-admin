@@ -43,6 +43,9 @@ import EditArea from './../Pages/Vendor/Location/Areas/EditArea';
 import ChatConsult from './../Pages/Chat/Consult/ChatConsult';
 import LiveConsult from './../Pages/Chat/Consult/LiveConsult';
 import GeneralSettings from './../Pages/Settings/General/GeneralSettings';
+import MedicalFields from './../Pages/Vendor/MedicalFields/MedicalFields';
+import AddMedicalFields from './../Pages/Vendor/MedicalFields/AddMedicalFields';
+import EditMedicalFields from './../Pages/Vendor/MedicalFields/EditMedicalFields';
 
 export default {
     // Layout 
@@ -70,7 +73,10 @@ export default {
     ChatClient,
     ClientList,
     LiveChat,
-    
+    // MedicalFields
+    MedicalFields,
+    AddMedicalFields,
+    EditMedicalFields,
     ChatDoctors,
     DoctorList,
     LiveChatDoc, 

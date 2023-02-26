@@ -129,7 +129,15 @@ function App() {
               ]
             }
           ]
-        }
+        },
+        {
+          path: '/medicalfields', children: [
+            { index: true, element: <ProtectedRoutes><Component.MedicalFields    /> </ProtectedRoutes> },
+            { path: 'add', element: <ProtectedRoutes> <Component.AddMedicalFields   /></ProtectedRoutes> },
+            { path: 'edit/:id', element: <ProtectedRoutes> <Component.EditMedicalFields   /></ProtectedRoutes> },
+ 
+          ]
+        },
         
       ],
     },

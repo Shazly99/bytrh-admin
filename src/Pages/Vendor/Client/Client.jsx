@@ -42,10 +42,7 @@ const Clients = () => {
   const handleInputChange = (event) => {
     if (event.target.value === '') {
       userList(page)
-    } else {
-      console.log(searchValue);
-      searchGetData(searchValue)
-    }
+    }  
     console.log(event.target.value);
     setSearchValue(event.target.value);
   };

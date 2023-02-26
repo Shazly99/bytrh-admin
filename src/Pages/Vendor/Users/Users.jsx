@@ -53,9 +53,7 @@ function Users() {
   const handleInputChange = (event) => {
     if (event.target.value === '') {
       userList(page)
-    } else {
-      searchGetData(searchValue)
-    }
+    }  
     console.log(event.target.value);
     setSearchValue(event.target.value);
   };
