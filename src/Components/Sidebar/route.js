@@ -22,6 +22,17 @@ const routes = [
     icon: <Icons.user size={20} />,
   },
   {
+    path: "/medicalfields",
+    name: "Medical Fields",
+    icon: <Icons.medical size={20} />
+  },
+  {
+    path: "/settings/general",
+    name: "Settings",
+    icon: <Icons.settings size={20} />
+  },
+
+  {
     name: "Categories ",
     icon: <Icons.category size={20} />,
     subRoutes: [
@@ -33,6 +44,7 @@ const routes = [
 
     ],
   },
+
   {
     name: "Locations ",
     icon: <Icons.location size={20} />,
@@ -60,18 +72,8 @@ const routes = [
     name: "Consults",
     icon: <Icons.consult size={20} />,
   },
-  {
-    name: "Settings",
-    icon: <Icons.settings size={20} />,
-    subRoutes: [
-      {
-        path: "/settings/general",
-        name: "General ",
-        icon: <Icons.dote size={20} />,
-      }, 
 
-    ],
-  },
+
 ];
 
 export default routes
