@@ -14,6 +14,9 @@ const ClientTable = ({ usersList, userList }) => {
   const [id, setId] = useState(null);
   const handleShowModal = () => setShowModal(true);
   const handleCloseModal = () => setShowModal(false);
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState({});
   let changeBalance = useRef()
 
 
@@ -45,18 +48,9 @@ const ClientTable = ({ usersList, userList }) => {
       })
       await userList()
     } else if (action === "DELETED") {
-      await userstatus({ IDClient: id, ClientStatus: action }).then((res) => {
-        toast.success('Client is deleted', {
-          duration: 4000,
-          position: 'top-center',
-          icon: <Icons.bin color='#E20000' size={20} />,
-          iconTheme: {
-            primary: '#0a0',
-            secondary: '#fff',
-          },
-        });
-      })
-      await userList()
+      setSelectedUserId({ IDClient: id, ClientStatus: action });
+      setShowDeleteModal(true);
+ 
     }
     else if (action === "INACTIVE") {
       await userstatus({ IDClient: id, ClientStatus: action }).then((res) => {
@@ -75,7 +69,7 @@ const ClientTable = ({ usersList, userList }) => {
       await resetPassword(id)
       await userList()
     } else if (action === "balance") {
-      setId(id) 
+      setId(id)
     }
   };
 
@@ -95,13 +89,13 @@ const ClientTable = ({ usersList, userList }) => {
             primary: '#0a0',
             secondary: '#fff',
           },
-        }); 
+        });
         userList()
         handleCloseModal()
       } else {
         toast.error(res.data.ApiMsg)
       }
-    }) 
+    })
   }
 
   // client reset Password api Balance
@@ -114,6 +108,24 @@ const ClientTable = ({ usersList, userList }) => {
 
     }
   }
+
+  const handleDeleteUser = async () => {
+    // Logic for deleting user with ID `selectedUserId`
+    setShowDeleteModal(false);
+    
+    await userstatus(selectedUserId).then((res) => {
+        toast.success('user has been deleted', {
+            duration: 4000,
+            position: 'top-center',
+            icon: <Icons.bin color='#E20000' size={17} />,
+            iconTheme: {
+                primary: '#0a0',
+                secondary: '#fff',
+            },
+        });
+    })
+    await userList()
+}
   useEffect(() => {
   }, [usersList])
 
@@ -190,7 +202,7 @@ const ClientTable = ({ usersList, userList }) => {
                         className="DropdownButton "
                       >
                         <Dropdown.Item eventKey="reset">Reset password</Dropdown.Item>
-                        
+
                         <Dropdown.Item eventKey="balance" onClick={handleShowModal}>Balance check</Dropdown.Item>
 
                         <Modal show={showModal} onHide={handleCloseModal} centered >
@@ -204,12 +216,28 @@ const ClientTable = ({ usersList, userList }) => {
                             <Button variant="outline-primary" onClick={handleCloseModal}>
                               Cancel
                             </Button>
-                            <Button   variant="primary" onClick={changeWallet}>
+                            <Button variant="primary" onClick={changeWallet}>
                               set wallet
                             </Button>
                           </Modal.Footer>
                         </Modal>
                         <Dropdown.Item eventKey="DELETED">Deleted</Dropdown.Item>
+                        <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
+                          <Modal.Header closeButton>
+                            <Modal.Title>Delete Client</Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                            Are you sure you want to delete this client?
+                          </Modal.Body>
+                          <Modal.Footer className='  d-flex justify-content-center'>
+                            <Button variant="outline-primary" onClick={() => setShowDeleteModal(false)}>
+                              Cancel
+                            </Button>
+                            <Button variant="danger" onClick={() => handleDeleteUser(item.IDUser)}>
+                              Delete Now
+                            </Button>
+                          </Modal.Footer>
+                        </Modal>
                         {
                           item?.ClientStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
                         }
