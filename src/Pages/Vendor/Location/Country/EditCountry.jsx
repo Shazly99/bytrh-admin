@@ -1,4 +1,4 @@
-import React, { useEffect, useRef ,useState} from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
@@ -49,10 +49,10 @@ const EditCountry = () => {
     });
   }
 
-    const countryDetail = async () => {
-      let data  = await GetData(`${process.env.REACT_APP_API_URL}/admin/location/countries/edit/page/${id}`, apiheader)
-      setcountryDetail(data.Response);
-      console.log(data.Response ); 
+  const countryDetail = async () => {
+    let data = await GetData(`${process.env.REACT_APP_API_URL}/admin/location/countries/edit/page/${id}`, apiheader)
+    setcountryDetail(data.Response);
+    console.log(data.Response);
   }
   useEffect(() => {
     countryDetail()
@@ -62,7 +62,7 @@ const EditCountry = () => {
       <div className="app__addprodects">
         <Component.SubNav sub__nav={[{ name: "Countries", path: '/location/country' }, { name: "Edit Country ", path: `/location/country/editcountry/${id}` }]} />
         <div className="app__addprodects__header ">
-          <Component.BaseHeader h1={'Add New Users'} />
+          <Component.BaseHeader h1={'Edit Country'} />
           <div className="app__addOrder-form">
             <div className="app__addprodects-form">
               <form onSubmit={submit}>
@@ -77,10 +77,10 @@ const EditCountry = () => {
 
                     <Form.Group controlId="formBasicEmail">
                       <Form.Label>Country Time Zone  </Form.Label>
-                      <Form.Control type="number" name='firstname' ref={CountryTimeZone} defaultValue={editPage?.CountryTimeZone}  />
+                      <Form.Control type="number" name='firstname' ref={CountryTimeZone} defaultValue={editPage?.CountryTimeZone} />
                     </Form.Group>
 
- 
+
 
                   </Col>
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
@@ -92,7 +92,7 @@ const EditCountry = () => {
 
                     <Form.Group controlId="formBasicEmail">
                       <Form.Label>Country Code</Form.Label>
-                      <Form.Control type="text" name='firstname' ref={CountryCode} defaultValue={editPage?.CountryCode}/>
+                      <Form.Control type="text" name='firstname' ref={CountryCode} defaultValue={editPage?.CountryCode} />
                     </Form.Group>
 
                   </Col>
