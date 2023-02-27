@@ -152,15 +152,15 @@ function UsersTable({ usersList, userList }) {
                                                 <Dropdown.Item eventKey="DELETED">Deleted</Dropdown.Item>
 
 
-                                                <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+                                                <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
                                                     <Modal.Header closeButton>
                                                         <Modal.Title>Delete User</Modal.Title>
                                                     </Modal.Header>
                                                     <Modal.Body>
                                                         Are you sure you want to delete this user?
                                                     </Modal.Body>
-                                                    <Modal.Footer>
-                                                        <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+                                                    <Modal.Footer className='  d-flex justify-content-center'>
+                                                        <Button variant="outline-primary" onClick={() => setShowDeleteModal(false)}>
                                                             Cancel
                                                         </Button>
                                                         <Button variant="danger" onClick={()=>handleDeleteUser(item.IDUser)}>
