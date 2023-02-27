@@ -15,6 +15,7 @@ const Country = () => {
     const [country, setCountry] = useState(null)
     const [page, setPage] = useState(1);
     const [PagesNumber, setPagesNumber] = useState('')
+    const [searchValue, setSearchValue] = useState('');
 
     const CountrycList = async () => {
         await PostData(`${process.env.REACT_APP_API_URL}/admin/location/countries`, { IDPage: page }, apiheader).then(({ data }) => {
@@ -69,6 +70,44 @@ const Country = () => {
     const CountrycategoriesStatus = async (id) => {
         return await GetData(`${process.env.REACT_APP_API_URL}/admin/location/countries/status/${id}`, apiheader)
     }
+    
+  // search and filter 
+
+  const handleSearchClick = () => {
+    searchGetData(searchValue)
+  };
+
+  const handleInputChange = (event) => {
+    if (event.target.value === '') {
+        CountrycList(page)
+    }
+    console.log(event.target.value);
+    setSearchValue(event.target.value);
+  };
+
+  const searchGetData = async (searchValue) => {
+    let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, { SearchKey: searchValue }, apiheader)
+    console.log(data);
+    setCountry(data.Response.Countries)
+  }
+  // filter
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleOptionChange = async (event) => {
+    const selectedValue = event.target.value;
+    setSelectedOption(selectedValue);
+    // filter your content based on the selected option 
+    if (selectedValue === "ACTIVE") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, { CountryStatus: selectedValue }, apiheader)
+      setCountry(data.Response.Countries)
+    } else if (selectedValue === "INACTIVE") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, { CountryStatus: selectedValue }, apiheader)
+      setCountry(data.Response.Countries)
+    } else if (selectedValue === "All") {
+        CountrycList()
+    }
+  };
+
     useEffect(() => {
         CountrycList()
     }, [])
@@ -77,7 +116,53 @@ const Country = () => {
             <div className="app__Users ">
                 <Component.ButtonBase title={"Add New Country"} bg={"primary"} icon={<Icons.add />} path="/location/country/addcountry" />
                 <div className="app__Users-table">
+                    <div className="search-container">
+                        <div className='search__group'>
+                            <input type="text" placeholder="Search by country....." name="search" value={searchValue} onChange={handleInputChange} />
+                            <button type="submit" onClick={handleSearchClick}>
+                                <Icons.Search color='#fff' size={25} />
+                            </button>
+                        </div>
 
+                        <div className='filter__group'>
+                            <label className='active'>
+                                <input
+                                    type="radio"
+                                    name="filter"
+                                    value="ACTIVE"
+                                    checked={selectedOption === "ACTIVE"}
+                                    onChange={handleOptionChange}
+                                    className="active-radio form-check-input"
+
+                                />
+                                Active
+                            </label>
+
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="filter"
+                                    value="INACTIVE"
+                                    checked={selectedOption === "INACTIVE"}
+                                    onChange={handleOptionChange}
+                                    className="inactive-radio form-check-input"
+
+                                />
+                                InActive
+                            </label>
+                            <label>
+                                <input
+                                    type="radio"
+                                    name="filter"
+                                    value="All"
+                                    checked={selectedOption === "All"}
+                                    onChange={handleOptionChange}
+                                    className="inactive-radio form-check-input"
+                                />
+                                All
+                            </label>
+                        </div>
+                    </div>
                     <Table responsive={true} className='rounded-3 '>
                         <thead>
                             <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
@@ -132,10 +217,10 @@ const Country = () => {
                                                             Edit
                                                         </Dropdown.Item>
                                                         {
-                                                            item?.CountryActive === 1 ? '' : item?.UserStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>        
+                                                            item?.CountryActive === 1 ? '' : item?.UserStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
                                                         }
                                                         {
-                                                          item?.CountryActive === 0 ? '':  item?.UserStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
+                                                            item?.CountryActive === 0 ? '' : item?.UserStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
                                                         }
                                                     </DropdownButton>
                                                 </span>

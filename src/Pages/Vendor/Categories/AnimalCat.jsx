@@ -19,7 +19,7 @@ const AnimalCat = () => {
 
   const animalcategories = async () => {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/animalcategories`, { IDPage: page }, apiheader).then(({ data }) => {
- 
+
       setAnimal(data.Response.AnimalCategories)
       setPagesNumber(data.Response.Pages);
     }).then((error) => {
@@ -37,7 +37,7 @@ const AnimalCat = () => {
     setPage(value);
   };
   const handleActionSelect = async (id, action) => {
-    if (action === "ACTIVE") { 
+    if (action === "ACTIVE") {
       await animalcategoriesStatus(id).then((res) => {
         console.log(res);
         toast.success('Status up to date', {
@@ -67,11 +67,11 @@ const AnimalCat = () => {
     }
   };
   const animalcategoriesStatus = async (id) => {
-    let { data } = await GetData(`${process.env.REACT_APP_API_URL}/admin/animalcategories/status/${id}`, apiheader) 
+    let { data } = await GetData(`${process.env.REACT_APP_API_URL}/admin/animalcategories/status/${id}`, apiheader)
   }
 
   // search and filter 
-  
+
   const handleSearchClick = () => {
     searchGetData(searchValue)
   };
@@ -79,7 +79,7 @@ const AnimalCat = () => {
   const handleInputChange = (event) => {
     if (event.target.value === '') {
       animalcategories(page)
-    }  
+    }
     console.log(event.target.value);
     setSearchValue(event.target.value);
   };
@@ -98,11 +98,11 @@ const AnimalCat = () => {
     // filter your content based on the selected option 
     if (selectedValue === "ACTIVE") {
       let { data } = await PostData(`https://bytrh.com/api/admin/animalcategories`, { AnimalCategoryStatus: selectedValue }, apiheader)
-      setAnimal(data.Response.AnimalCategories) 
-    } else if (selectedValue === "INACTIVE") { 
+      setAnimal(data.Response.AnimalCategories)
+    } else if (selectedValue === "INACTIVE") {
       let { data } = await PostData(`https://bytrh.com/api/admin/animalcategories`, { AnimalCategoryStatus: selectedValue }, apiheader)
       setAnimal(data.Response.AnimalCategories)
-    } else if (selectedValue === "All") { 
+    } else if (selectedValue === "All") {
       animalcategories()
     }
   };
@@ -112,20 +112,20 @@ const AnimalCat = () => {
 
   return (
 
-    
+
     <>
       <div className="app__Users ">
         <Component.ButtonBase title={"Add new Animal"} bg={"primary"} icon={<Icons.add />} path="/categ/animals/addAnimal" />
         <div className="app__Users-table">
-        <div className="search-container">
+          <div className="search-container">
             <div className='search__group'>
-              <input type="text" placeholder="Search by name or email or phone....." name="search" value={searchValue} onChange={handleInputChange} />
+              <input type="text" placeholder="Search by animal category....." name="search" value={searchValue} onChange={handleInputChange} />
               <button type="submit" onClick={handleSearchClick}>
                 <Icons.Search color='#fff' size={25} />
               </button>
             </div>
 
-             <div className='filter__group'>
+            <div className='filter__group'>
               <label className='active'>
                 <input
                   type="radio"
@@ -161,9 +161,9 @@ const AnimalCat = () => {
                   className="inactive-radio form-check-input"
 
                 />
-                All 
+                All
               </label>
-            </div> 
+            </div>
           </div>
           <Table responsive={true} className='rounded-3 '>
             <thead>
@@ -206,8 +206,8 @@ const AnimalCat = () => {
                             <Dropdown.Item eventKey="Edite" as={Link} to={`/categ/animals/editAnimal/${item.IDAnimalCategory}`}>
                               Edit
                             </Dropdown.Item>
- 
-                                                        {
+
+                            {
                               item?.AnimalCategoryActive === 1 ? '' : item?.AnimalCategoryActive === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
                             }
                             {

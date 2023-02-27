@@ -26,11 +26,7 @@ const routes = [
     name: "Medical Fields",
     icon: <Icons.medical size={20} />
   },
-  {
-    path: "/settings/general",
-    name: "Settings",
-    icon: <Icons.settings size={20} />
-  },
+
 
   {
     name: "Categories ",
@@ -72,7 +68,11 @@ const routes = [
     name: "Consults",
     icon: <Icons.consult size={20} />,
   },
-
+  {
+    path: "/settings/general",
+    name: "Settings",
+    icon: <Icons.settings size={20} />
+  },
 
 ];
 

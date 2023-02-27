@@ -14,26 +14,91 @@ const ChatConsult = () => {
   const [consult, setConsultList] = useState(null)
   const [page, setPage] = useState(1);
   const [PagesNumber, setPagesNumber] = useState('')
+  const [searchClient, setSearchClient] = useState('');
+  const [searchDoctor, setSearchDoctot] = useState('');
 
   const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
-  const handleChange = (event, value) => {
-    setPage(value);
-  };
+  const handleChange = (event, value) => setPage(value);
 
   const consultList = async (page) => {
-    await PostData(`${process.env.REACT_APP_API_URL}/admin/consult`, { IDPage: page }, apiheader).then(({data})=>{
+    await PostData(`${process.env.REACT_APP_API_URL}/admin/consult`, { IDPage: page }, apiheader).then(({ data }) => {
       setPagesNumber(data.Response.Pages);
       setConsultList(data.Response.Consults);
-    }); 
+    });
   }
   const handleActionSelect = async (id, action) => {
     if (action === "End") {
-      await GetData(`${process.env.REACT_APP_API_URL}/admin/consult/chat/end/${id}`,apiheader).then((res) => {
+      await GetData(`${process.env.REACT_APP_API_URL}/admin/consult/chat/end/${id}`, apiheader).then((res) => {
         toast.error('Chat has been ended');
       })
       await consultList(page)
     }
   }
+
+  // search and filter 
+
+  const handleSearchClick = () => searchGetClient(searchClient)
+  const handleSearchClick1 = () => searchByDoctor(searchDoctor)
+
+  const handleInputChange = (event) => {
+    if (event.target.value === '') {
+      consultList(page)
+    }
+    setSearchClient(event.target.value);
+  };
+  const handleInputChange1 = (event) => {
+    if (event.target.value === '') {
+      consultList(page)
+    }
+    setSearchDoctot(event.target.value);
+  };
+
+  const searchGetClient = async (searchValue) => {
+    let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ClientSearchKey: searchValue }, apiheader)
+    setConsultList(data.Response.Consults)
+  }
+  const searchByDoctor = async (searchValue1) => {
+    let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { DoctorSearchKey: searchValue1 }, apiheader)
+    setConsultList(data.Response.Consults)
+  }
+  // Filter
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleOptionChange = async (event) => {
+    const selectedValue = event.target.value;
+    setSelectedOption(selectedValue);
+    // filter your content based on the selected option 
+    if (selectedValue === "ONGOING") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
+      setConsultList(data.Response.Consults)
+    } else if (selectedValue === "ENDED") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
+      setConsultList(data.Response.Consults)
+    }else if (selectedValue === "PENDING") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
+      setConsultList(data.Response.Consults)
+    } else if (selectedValue === "CANCELLED") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
+      setConsultList(data.Response.Consults)
+    }else if (selectedValue === "EXPIRED") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
+      setConsultList(data.Response.Consults)
+    }else if (selectedValue === "NO_RESPONSE") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
+      setConsultList(data.Response.Consults)
+    } else if (selectedValue === "SKIPPED") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
+      setConsultList(data.Response.Consults)
+    }  else if (selectedValue === "REJECTED") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
+      setConsultList(data.Response.Consults)
+    } else if (selectedValue === "ACCEPTED") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
+      setConsultList(data.Response.Consults)
+    } else if (selectedValue === "All") {
+      consultList()
+    }
+  };
   useEffect(() => {
     consultList(page)
   }, [page, PagesNumber])
@@ -41,7 +106,143 @@ const ChatConsult = () => {
     <>
       <div className="app__Users ">
         <div className="app__Users-table">
+          <div className="search-container " style={{ display: 'flex', gap: '15px' }}>
+            <div className='search__group'>
+              <input type="text" placeholder="Search by client....." name="search" value={searchClient} onChange={handleInputChange} />
+              <button type="submit" onClick={handleSearchClick} >
+                <Icons.Search color='#fff' size={25} />
+              </button>
+            </div>
 
+            <div className='search__group'>
+              <input type="text" placeholder="Search by doctor....." name="search" value={searchDoctor} onChange={handleInputChange1} />
+              <button type="submit"  >
+                <Icons.Search color='#fff' size={25} onClick={handleSearchClick1} />
+              </button>
+            </div>
+          </div>
+          <h5 style={{marginBottom:'15px',color:'#4A4A4A'}}>Filter by consult status :	</h5>
+          <div className='filter__group__stats  'style={{display:'flex' , gap:'20px', marginBottom:'25px'}}>
+            <label className='active'>
+              <input
+                type="radio"
+                name="filter"
+                value="ONGOING"
+                checked={selectedOption === "ONGOING"}
+                onChange={handleOptionChange}
+                className="active-radio form-check-input"
+
+              />
+              Ongoing
+            </label> 
+            <label>
+              <input
+                type="radio"
+                name="filter"
+                value="ENDED"
+                checked={selectedOption === "ENDED"}
+                onChange={handleOptionChange}
+                className="inactive-radio form-check-input"
+
+              />
+              Ended
+            </label>
+            <label className='active'>
+              <input
+                type="radio"
+                name="filter"
+                value="PENDING"
+                checked={selectedOption === "PENDING"}
+                onChange={handleOptionChange}
+                className="active-radio form-check-input"
+
+              />
+              Pending
+            </label>
+            <label className='active'>
+              <input
+                type="radio"
+                name="filter"
+                value="CANCELLED"
+                checked={selectedOption === "CANCELLED"}
+                onChange={handleOptionChange}
+                className="active-radio form-check-input"
+
+              />
+              Cancelled
+            </label>
+            <label className='active'>
+              <input
+                type="radio"
+                name="filter"
+                value="EXPIRED"
+                checked={selectedOption === "EXPIRED"}
+                onChange={handleOptionChange}
+                className="active-radio form-check-input"
+
+              />
+              Expired 
+            </label>
+            <label className='active'>
+              <input
+                type="radio"
+                name="filter"
+                value="NO_RESPONSE"
+                checked={selectedOption === "NO_RESPONSE"}
+                onChange={handleOptionChange}
+                className="active-radio form-check-input"
+
+              />
+              No Response 
+            </label>
+            <label className='active'>
+              <input
+                type="radio"
+                name="filter"
+                value="SKIPPED"
+                checked={selectedOption === "SKIPPED"}
+                onChange={handleOptionChange}
+                className="active-radio form-check-input"
+
+              />
+              Skipped  
+            </label>
+            <label className='active'>
+              <input
+                type="radio"
+                name="filter"
+                value="REJECTED"
+                checked={selectedOption === "REJECTED"}
+                onChange={handleOptionChange}
+                className="active-radio form-check-input"
+
+              />
+              Rejected  
+            </label>
+            <label className='active'>
+              <input
+                type="radio"
+                name="filter"
+                value="ACCEPTED"
+                checked={selectedOption === "ACCEPTED"}
+                onChange={handleOptionChange}
+                className="active-radio form-check-input"
+
+              />
+              Accepted  
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="filter"
+                value="All"
+                checked={selectedOption === "All"}
+                onChange={handleOptionChange}
+                className="inactive-radio form-check-input"
+              />
+              All
+            </label>
+          </div>
           <Table responsive={true} className='rounded-3 '>
             <thead>
               <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
@@ -75,7 +276,7 @@ const ChatConsult = () => {
                     <td className='text-center  d-flex '>
                       <div>
                         <span style={{ height: 'fit-content !important' }} className={`
-                                          ${item.ConsultType == 'NORMAL' && 'txt_pending'} 
+                                          ${item.ConsultType == 'NORMAL' && 'txt_delivered'} 
                                           ${item.ConsultType == 'URGENT' && 'txt_shipped'}
                                           ${item.ConsultType == 'Out For Delivery' && 'txt_delivery'}
                                           ${item.ConsultType == 'ACTIVE' && 'txt_delivered'}
@@ -86,16 +287,16 @@ const ChatConsult = () => {
                     </td>
                     <td>
                       <div className='d-flex flex-column justify-content-center align-content-center' style={{ gap: '0' }}>
-                        <span className='ClientName'>{item?.ConsultAmount}</span> 
+                        <span className='ClientName'>{item?.ConsultAmount}</span>
                       </div>
                     </td>
 
                     <td className='text-center  d-flex '>
-                      <div> 
+                      <div>
                         <span style={{ height: 'fit-content !important' }} className={`
                                           ${item.ConsultStatus == 'PENDING' && 'txt_pending'} 
                                           ${item.ConsultStatus == 'ONGOING' && 'txt_delivered'} 
-                                          ${item.ConsultStatus == 'ENDED' && 'txt_cancel'}
+                                          ${item.ConsultStatus == 'ENDED' && 'txt_rejected'}
                                           ${item.ConsultStatus == 'EXPIRED' && 'txt_delivery'}
                                           ${item.ConsultStatus == 'CANCELLED' && 'txt_cancel'}
                                           ${item.ConsultStatus == 'NO_RESPONSE' && 'txt_pending'} 
@@ -115,16 +316,16 @@ const ChatConsult = () => {
                             id={`dropdown-${item.IDConsult}`}
                             title="Actions"
                             variant="outline-success"
-                          onSelect={(eventKey) => handleActionSelect(item.IDConsult, eventKey)}
+                            onSelect={(eventKey) => handleActionSelect(item.IDConsult, eventKey)}
                             className="DropdownButton "
                             drop={'down-centered'}
-                          > 
+                          >
                             <Dropdown.Item eventKey="Edite" as={Link} to={`/chat/consult/details/${item.IDConsult}`}>  Counseling </Dropdown.Item>
-                           
+
                             {item.ConsultStatus !== 'ENDED' &&
-                          
-                            <Dropdown.Item eventKey="End" as={Link}  > End Chat  </Dropdown.Item>
-                          }
+
+                              <Dropdown.Item eventKey="End" as={Link}  > End Chat  </Dropdown.Item>
+                            }
                           </DropdownButton>
                         </span>
                       </div>
@@ -142,7 +343,7 @@ const ChatConsult = () => {
       <div className="pagination ">
         <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
           <Pagination count={pageCount} page={page} onChange={handleChange} />
-        </Box> 
+        </Box>
       </div>
     </>
   )
