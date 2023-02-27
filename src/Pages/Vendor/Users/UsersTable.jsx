@@ -2,13 +2,16 @@ import React, { useState } from 'react'
 // import data from './data.js';
 import Icons from "../../../constants/Icons.js";
 import { useEffect } from 'react';
-import { Table, DropdownButton, Dropdown, NavDropdown } from "react-bootstrap";
+import { Table, DropdownButton, Dropdown, NavDropdown, Modal ,Button} from "react-bootstrap";
 import { apiheader, PostData } from '../../../utils/fetchData.js';
 import { Link } from 'react-router-dom';
 import { Toaster, toast } from 'react-hot-toast';
 
 function UsersTable({ usersList, userList }) {
     // const [data, setData] = useState({});
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [selectedUserId, setSelectedUserId] = useState({});
+
     const handleActionSelect = async (id, action) => {
         if (action === "PENDING") {
             await userstatus({ IDUser: id, UserStatus: action }).then((res) => {
@@ -37,6 +40,7 @@ function UsersTable({ usersList, userList }) {
             })
             await userList()
         } else if (action === "INACTIVE") {
+            
             await userstatus({ IDUser: id, UserStatus: action }).then((res) => {
                 toast.success('Status up to date', {
                     duration: 4000,
@@ -50,18 +54,9 @@ function UsersTable({ usersList, userList }) {
             })
             await userList()
         } else if (action === "DELETED") {
-            await userstatus({ IDUser: id, UserStatus: action }).then((res) => {
-                toast.success('Status up to date', {
-                    duration: 4000,
-                    position: 'top-center',
-                    icon: <Icons.bin color='#E20000' size={17} />,
-                    iconTheme: {
-                        primary: '#0a0',
-                        secondary: '#fff',
-                    },
-                });
-            })
-            await userList()
+            setSelectedUserId({ IDUser: id, UserStatus: action });
+            setShowDeleteModal(true);
+
         }
     };
 
@@ -69,8 +64,25 @@ function UsersTable({ usersList, userList }) {
         let { data } = await PostData(`https://bytrh.com/api/admin/users/status`, status, apiheader)
         console.log(data);
     }
+
+    const handleDeleteUser = async () => {
+        // Logic for deleting user with ID `selectedUserId`
+        setShowDeleteModal(false);
+        await userstatus(selectedUserId).then((res) => {
+            toast.success('user has been deleted', {
+                duration: 4000,
+                position: 'top-center',
+                icon: <Icons.bin color='#E20000' size={17} />,
+                iconTheme: {
+                    primary: '#0a0',
+                    secondary: '#fff',
+                },
+            });
+        })
+        await userList()
+    }
     useEffect(() => {
-    }, [usersList])
+    }, [usersList,selectedUserId])
 
     return (
         <>
@@ -138,9 +150,24 @@ function UsersTable({ usersList, userList }) {
                                                     Edit
                                                 </Dropdown.Item>
                                                 <Dropdown.Item eventKey="DELETED">Deleted</Dropdown.Item>
-                                                {/* <Dropdown.Item eventKey="PENDING" >Pending</Dropdown.Item> */}
-                                                {/* <Dropdown.Item eventKey="ACTIVE">Action</Dropdown.Item> */}
-                                                {/* <Dropdown.Item eventKey="INACTIVE">InAction</Dropdown.Item> */}
+
+
+                                                <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)}>
+                                                    <Modal.Header closeButton>
+                                                        <Modal.Title>Delete User</Modal.Title>
+                                                    </Modal.Header>
+                                                    <Modal.Body>
+                                                        Are you sure you want to delete this user?
+                                                    </Modal.Body>
+                                                    <Modal.Footer>
+                                                        <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+                                                            Cancel
+                                                        </Button>
+                                                        <Button variant="danger" onClick={()=>handleDeleteUser(item.IDUser)}>
+                                                            Delete
+                                                        </Button>
+                                                    </Modal.Footer>
+                                                </Modal>
                                                 {
                                                     item?.UserStatus === "PENDING" ? '' : <Dropdown.Item eventKey="PENDING">Pending</Dropdown.Item>
                                                 }
