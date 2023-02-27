@@ -60,7 +60,9 @@
         border: none !important;
         border-radius: $radius-sm !important;
         height: 50px !important;
-
+        >*{
+            height: 100% !important; 
+        }
     }
 
     label {
@@ -311,3 +313,9 @@ td {
 .search-container button[type="submit"]:hover {
     background: rgba($color: $colorRed-0, $alpha: 0.8);
 }
+
+input[type="file"] {
+    height: 50% !important; 
+    display: flex !important;
+    align-items: center !important; 
+} 

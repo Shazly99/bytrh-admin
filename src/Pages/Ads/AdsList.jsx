@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import Component from '../../constants/Component';
 import Icons from '../../constants/Icons';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Img from '../../assets/Img';
 
 const AdsList = () => {
   const [ads, setAds] = useState(null)
@@ -34,6 +36,26 @@ const AdsList = () => {
   const handleChange = (event, value) => {
     setPage(value);
   };
+
+  const handleActionSelect = async (id, action) => {
+    console.log(id);
+    console.log(action);
+    if (action === "DELETE") {
+      console.log(id);
+      await GetData(`${process.env.REACT_APP_API_URL}/admin/advertisements/status/${id}`,apiheader).then((res)=>{
+          toast.success('The ads has been removed', {
+            duration: 4000,
+            position: 'top-center',
+            icon: <Icons.bin color='#E20000' size={20} />,
+            iconTheme: {
+              primary: '#0a0',
+              secondary: '#fff',
+            },
+          });
+      })
+      await AdsList()
+    } 
+  };
   useEffect(() => {
     AdsList()
   }, [])
@@ -41,7 +63,7 @@ const AdsList = () => {
     <>
 
       <div className="app__Users ">
-        <Component.ButtonBase title={"Add New Area"} bg={"primary"} icon={<Icons.add />} path="/location/areas/addareas" />
+        <Component.ButtonBase title={"Add New Ads"} bg={"primary"} icon={<Icons.add />} path="/ads/add" />
         <div className="app__Users-table">
           {/* <div className="search-container">
             <div className='search__group'>
@@ -94,40 +116,55 @@ const AdsList = () => {
           <Table responsive={true} className='rounded-3 '>
             <thead>
               <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                <th>advertisements Image</th>
-                <th>Ads Service</th>
-                <th>Ads Start-Date</th>
-                <th>Ads End-Date  </th>
-                <th>Ads Location</th>
+                <th> Image</th>
+                <th> Service</th>
+                <th>Start-Date</th>
+                <th> End-Date  </th>
+                <th> Location</th>
                 <th>Action</th>
               </tr>
-            </thead> 
+            </thead>
 
             <tbody className='text-center'>
               {
                 ads?.map((item, index) => (
                   <tr key={index}>
-                    <td >
-                      <img src={item.AdvertisementImage} alt='example' className='w-100 rounded-2' />
+                    <td className='img'>
+                      {
+                        item?.AdvertisementImage ?
+                          <LazyLoadImage
+                            src={item.AdvertisementImage} // use normal <img> attributes as props
+                            className="w-75 rounded-2"
+                            effect="blur"
+                          /> :
+
+                          <LazyLoadImage
+                            src={Img.ads} // use normal <img> attributes as props
+                            className="w-75 rounded-2"
+                            effect="blur"
+                          />
+
+                      }
+                      {/* <img src={item.AdvertisementImage} alt='example' className='w-100 rounded-2' /> */}
                     </td>
                     <td >
                       <div>
-                        {item?.AdvertisementService}
+                        {item?.AdvertisementService.charAt(0).toUpperCase() + item?.AdvertisementService.slice(1).toLowerCase()}
                       </div>
                     </td>
                     <td >
                       <div>
-                        {item?.AdvertisementStartDate?.split()[0]}
+                        {item?.AdvertisementStartDate?.split(" ")[0]}
                       </div>
                     </td>
                     <td >
                       <div>
-                        {item?.AdvertisementEndDate?.split()[0]}
+                        {item?.AdvertisementEndDate?.split(" ")[0]}
                       </div>
                     </td>
                     <td >
                       <div>
-                        {item?.AdvertisementLocation}
+                        {item?.AdvertisementLocation.charAt(0).toUpperCase() + item?.AdvertisementLocation.slice(1).toLowerCase()}
                       </div>
                     </td>
 
@@ -140,12 +177,16 @@ const AdsList = () => {
                             id={`dropdown-${item.IDAdvertisement}`}
                             title="Actions"
                             variant="outline-success"
-                            // onSelect={(eventKey) => handleActionSelect(item.IDAdvertisement, eventKey)}
+                            onSelect={(eventKey) => handleActionSelect(item.IDAdvertisement, eventKey)}
                             className="DropdownButton "
                             drop={'down-centered'}
                           >
-                            <Dropdown.Item eventKey="Edite" as={Link} to={`/location/areas/editareas/${item.IDAdvertisement}`}>
+                            <Dropdown.Item eventKey="Edite" as={Link} to={`/ads/edit/${item.IDAdvertisement}`}>
                               Edit
+                            </Dropdown.Item>
+
+                            <Dropdown.Item eventKey="DELETE"   >
+                              Delete
                             </Dropdown.Item>
 
                           </DropdownButton>

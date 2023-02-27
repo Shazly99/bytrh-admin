@@ -81,9 +81,13 @@ option {
 
 thead {
     overflow: hidden;
-
+    // white-space: nowrap !important;
+    .img{
+        background-color: red !important;
+    }
     >tr {
         border-radius: 15px !important;
+        white-space: nowrap !important;
 
         >th {
             font-family: $fontBase;
@@ -98,7 +102,12 @@ thead {
         }
     }
 }
-
+tbody{
+    white-space: nowrap !important;
+    .img{ 
+        width: 30%;
+    }
+}
 td {
     white-space: nowrap !important;
 
