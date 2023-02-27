@@ -14,6 +14,7 @@ const Cities = () => {
   const [Cities, setCities] = useState(null)
   const [page, setPage] = useState(1);
   const [PagesNumber, setPagesNumber] = useState('')
+  const [searchValue, setSearchValue] = useState('');
 
   const CitiescList = async () => {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/location/cities`, { IDPage: page }, apiheader).then(({ data }) => {
@@ -69,6 +70,44 @@ const Cities = () => {
   const CitiescategoriesStatus = async (id) => {
     return await GetData(`${process.env.REACT_APP_API_URL}/admin/location/cities/status/${id}`, apiheader)
   }
+
+
+  // search and filter 
+
+  const handleSearchClick = () => {
+    searchGetData(searchValue)
+  };
+
+  const handleInputChange = (event) => {
+    if (event.target.value === '') {
+      CitiescList(page)
+    }
+    console.log(event.target.value);
+    setSearchValue(event.target.value);
+  };
+
+  const searchGetData = async (searchValue) => {
+    let { data } = await PostData(`https://bytrh.com/api/admin/location/cities`, { SearchKey: searchValue }, apiheader)
+    console.log(data);
+    setCities(data.Response.Cities)
+  }
+  // filter
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  const handleOptionChange = async (event) => {
+    const selectedValue = event.target.value;
+    setSelectedOption(selectedValue);
+    // filter your content based on the selected option 
+    if (selectedValue === "ACTIVE") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/location/cities`, { CityStatus: selectedValue }, apiheader)
+      setCities(data.Response.Cities)
+    } else if (selectedValue === "INACTIVE") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/location/cities`, { CityStatus: selectedValue }, apiheader)
+      setCities(data.Response.Cities)
+    } else if (selectedValue === "All") {
+      CitiescList()
+    }
+  };
   useEffect(() => {
     CitiescList()
   }, [])
@@ -78,13 +117,59 @@ const Cities = () => {
       <div className="app__Users ">
         <Component.ButtonBase title={"Add New City"} bg={"primary"} icon={<Icons.add />} path="/location/cities/addcity" />
         <div className="app__Users-table">
+          <div className="search-container">
+            <div className='search__group'>
+              <input type="text" placeholder="Search by city....." name="search" value={searchValue} onChange={handleInputChange} />
+              <button type="submit" onClick={handleSearchClick}>
+                <Icons.Search color='#fff' size={25} />
+              </button>
+            </div>
 
+            <div className='filter__group'>
+              <label className='active'>
+                <input
+                  type="radio"
+                  name="filter"
+                  value="ACTIVE"
+                  checked={selectedOption === "ACTIVE"}
+                  onChange={handleOptionChange}
+                  className="active-radio form-check-input"
+
+                />
+                Active
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="filter"
+                  value="INACTIVE"
+                  checked={selectedOption === "INACTIVE"}
+                  onChange={handleOptionChange}
+                  className="inactive-radio form-check-input"
+
+                />
+                InActive
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="filter"
+                  value="All"
+                  checked={selectedOption === "All"}
+                  onChange={handleOptionChange}
+                  className="inactive-radio form-check-input"
+                />
+                All
+              </label>
+            </div>
+          </div>
           <Table responsive={true} className='rounded-3 '>
             <thead>
               <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
                 <th>Country Name</th>
                 <th>City Name</th>
-                <th>City status</th> 
+                <th>City status</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -102,7 +187,7 @@ const Cities = () => {
                       <div>
                         {item?.CityName}
                       </div>
-                    </td> 
+                    </td>
 
                     <td >
                       <div>

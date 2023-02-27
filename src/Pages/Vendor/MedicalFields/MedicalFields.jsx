@@ -124,7 +124,7 @@ const MedicalFields = () => {
         <div className="app__Users-table">
           <div className="search-container">
             <div className='search__group'>
-              <input type="text" placeholder="Search by name or email or phone....." name="search" value={searchValue} onChange={handleInputChange} />
+              <input type="text" placeholder="Search by medical field....." name="search" value={searchValue} onChange={handleInputChange} />
               <button type="submit" onClick={handleSearchClick}>
                 <Icons.Search color='#fff' size={25} />
               </button>
