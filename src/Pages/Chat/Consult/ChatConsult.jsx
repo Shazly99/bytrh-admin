@@ -74,22 +74,22 @@ const ChatConsult = () => {
     } else if (selectedValue === "ENDED") {
       let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
       setConsultList(data.Response.Consults)
-    }else if (selectedValue === "PENDING") {
+    } else if (selectedValue === "PENDING") {
       let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
       setConsultList(data.Response.Consults)
     } else if (selectedValue === "CANCELLED") {
       let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
       setConsultList(data.Response.Consults)
-    }else if (selectedValue === "EXPIRED") {
+    } else if (selectedValue === "EXPIRED") {
       let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
       setConsultList(data.Response.Consults)
-    }else if (selectedValue === "NO_RESPONSE") {
+    } else if (selectedValue === "NO_RESPONSE") {
       let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
       setConsultList(data.Response.Consults)
     } else if (selectedValue === "SKIPPED") {
       let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
       setConsultList(data.Response.Consults)
-    }  else if (selectedValue === "REJECTED") {
+    } else if (selectedValue === "REJECTED") {
       let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
       setConsultList(data.Response.Consults)
     } else if (selectedValue === "ACCEPTED") {
@@ -121,8 +121,8 @@ const ChatConsult = () => {
               </button>
             </div>
           </div>
-          <h5 style={{marginBottom:'15px',color:'#4A4A4A'}}>Filter by consult status :	</h5>
-          <div className='filter__group__stats  'style={{display:'flex' , gap:'20px', marginBottom:'25px'}}>
+          <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }}>Filter by consult status :	</h5>
+          <div className='filter__group__stats  ' style={{ display: 'flex', gap: '20px', marginBottom: '25px' }}>
             <label className='active'>
               <input
                 type="radio"
@@ -134,7 +134,7 @@ const ChatConsult = () => {
 
               />
               Ongoing
-            </label> 
+            </label>
             <label>
               <input
                 type="radio"
@@ -181,7 +181,7 @@ const ChatConsult = () => {
                 className="active-radio form-check-input"
 
               />
-              Expired 
+              Expired
             </label>
             <label className='active'>
               <input
@@ -193,7 +193,7 @@ const ChatConsult = () => {
                 className="active-radio form-check-input"
 
               />
-              No Response 
+              No Response
             </label>
             <label className='active'>
               <input
@@ -205,7 +205,7 @@ const ChatConsult = () => {
                 className="active-radio form-check-input"
 
               />
-              Skipped  
+              Skipped
             </label>
             <label className='active'>
               <input
@@ -217,7 +217,7 @@ const ChatConsult = () => {
                 className="active-radio form-check-input"
 
               />
-              Rejected  
+              Rejected
             </label>
             <label className='active'>
               <input
@@ -229,7 +229,7 @@ const ChatConsult = () => {
                 className="active-radio form-check-input"
 
               />
-              Accepted  
+              Accepted
             </label>
             <label>
               <input
@@ -308,28 +308,41 @@ const ChatConsult = () => {
                       </div>
                     </td>
 
-                    <td>
-                      <div>
+                    {item.ConsultStatus == 'ONGOING'
+                      &&
+                      <td>
+                        <div> 
+                          <span>
+                            <DropdownButton
+                              id={`dropdown-${item.IDConsult}`}
+                              title="Actions"
+                              variant="outline-success"
+                              onSelect={(eventKey) => handleActionSelect(item.IDConsult, eventKey)}
+                              className="DropdownButton "
+                              drop={'down-centered'}
+                            >
+                              <Dropdown.Item eventKey="Edite" as={Link} to={`/chat/consult/details/${item.IDConsult}`}>  Chat </Dropdown.Item>
 
-                        <span>
-                          <DropdownButton
-                            id={`dropdown-${item.IDConsult}`}
-                            title="Actions"
-                            variant="outline-success"
-                            onSelect={(eventKey) => handleActionSelect(item.IDConsult, eventKey)}
-                            className="DropdownButton "
-                            drop={'down-centered'}
-                          >
-                            <Dropdown.Item eventKey="Edite" as={Link} to={`/chat/consult/details/${item.IDConsult}`}>  Counseling </Dropdown.Item>
+                              {item.ConsultStatus !== 'ENDED' &&
 
-                            {item.ConsultStatus !== 'ENDED' &&
+                                <Dropdown.Item eventKey="End" as={Link}  > End Chat  </Dropdown.Item>
+                              }
+                            </DropdownButton>
+                          </span>
+                        </div>
+                      </td>
+                    }
+                    {item.ConsultStatus == 'ENDED'
+                      &&
+                      <td>
+                        <div>
 
-                              <Dropdown.Item eventKey="End" as={Link}  > End Chat  </Dropdown.Item>
-                            }
-                          </DropdownButton>
-                        </span>
-                      </div>
-                    </td>
+                          <span>
+                            <DropdownButton title="Chat" eventKey="Edite" as={Link} to={`/chat/consult/details/${item.IDConsult}`}>  Chat </DropdownButton>
+                          </span>
+                        </div>
+                      </td>
+                    }
                   </tr>
                 ))
               }
