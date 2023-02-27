@@ -102,6 +102,25 @@ const ChatConsult = () => {
   useEffect(() => {
     consultList(page)
   }, [page, PagesNumber])
+  const [startDate, setStartDate] = useState(new Date("2022-01-01"));
+  const [endDate, setEndDate] = useState(new Date("2022-12-31"));
+  const [filteredData, setFilteredData] = useState([]);
+
+  const myData = [
+    { id: 1, date: "2022-02-01" },
+    { id: 2, date: "2022-03-15" },
+    { id: 3, date: "2022-05-10" },
+    { id: 4, date: "2022-09-30" },
+    { id: 5, date: "2022-12-10" },
+  ];
+
+  const handleFilter = () => {
+    const filtered = myData.filter((item) => {
+      const itemDate = new Date(item.date);
+      return itemDate >= startDate && itemDate <= endDate;
+    });
+    setFilteredData(filtered);
+  };
   return (
     <>
       <div className="app__Users ">
@@ -119,6 +138,9 @@ const ChatConsult = () => {
               <button type="submit"  >
                 <Icons.Search color='#fff' size={25} onClick={handleSearchClick1} />
               </button>
+            </div>
+            <div>
+
             </div>
           </div>
           <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }}>Filter by consult status :	</h5>
@@ -311,7 +333,7 @@ const ChatConsult = () => {
                     {item.ConsultStatus == 'ONGOING'
                       &&
                       <td>
-                        <div> 
+                        <div>
                           <span>
                             <DropdownButton
                               id={`dropdown-${item.IDConsult}`}

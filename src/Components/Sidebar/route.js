@@ -73,6 +73,11 @@ const routes = [
     name: "Settings",
     icon: <Icons.settings size={20} />
   },
+  {
+    path: "/ads",
+    name: "Ads",
+    icon: <Icons.ads size={20} />
+  },
 
 ];
 

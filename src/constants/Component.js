@@ -46,6 +46,9 @@ import GeneralSettings from './../Pages/Settings/General/GeneralSettings';
 import MedicalFields from './../Pages/Vendor/MedicalFields/MedicalFields';
 import AddMedicalFields from './../Pages/Vendor/MedicalFields/AddMedicalFields';
 import EditMedicalFields from './../Pages/Vendor/MedicalFields/EditMedicalFields';
+import AdsList from './../Pages/Ads/AdsList';
+import AddAds from './../Pages/Ads/AddAds';
+import EditAds from './../Pages/Ads/EditAds';
 
 export default {
     // Layout 
@@ -104,6 +107,10 @@ export default {
     EditArea,
     // Sitting
     GeneralSettings,
+    // Advertisements
+    AdsList,
+    AddAds,
+    EditAds,
     
     // Components
     Navber,

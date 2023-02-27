@@ -138,6 +138,14 @@ function App() {
  
           ]
         },
+        {
+          path: '/ads', children: [
+            { index: true, element: <ProtectedRoutes><Component.AdsList    /> </ProtectedRoutes> },
+            { path: 'add', element: <ProtectedRoutes> <Component.AddAds   /></ProtectedRoutes> },
+            { path: 'edit/:id', element: <ProtectedRoutes> <Component.EditAds   /></ProtectedRoutes> },
+ 
+          ]
+        },
         
       ],
     },
@@ -165,7 +173,6 @@ function App() {
       ],
     },
 
-
     {
       path: '/auth/', element: <Component.Auth />, children: [
         { path: 'login', element: <Component.Login /> },
@@ -175,6 +182,7 @@ function App() {
   ])
   return (
     <div>
+      
       <Toaster
         position="top-center"
         reverseOrder={false}

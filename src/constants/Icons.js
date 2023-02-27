@@ -37,10 +37,12 @@ import { BiCategoryAlt as category } from "react-icons/bi";
 import { MdOutlineLocationOn as location } from "react-icons/md";
 import { IoChatboxEllipsesOutline as consult } from "react-icons/io5";
 import { CiMedicalCross as medical } from "react-icons/ci";
+import { RiAdvertisementLine as ads } from "react-icons/ri";
 
 
 
 export default{
+    ads,
     medical,
     consult,
     location,
