@@ -68,6 +68,7 @@ function App() {
     {
       path: '/', element: <Component.Vendor />, children: [
         { index: true, element: <ProtectedRoutes>  <Component.Dashboard /></ProtectedRoutes> },
+        // ?User 
         {
           path: '/user', children: [
             { index: true, element: <ProtectedRoutes>  <Component.Users /> </ProtectedRoutes> },
@@ -75,11 +76,13 @@ function App() {
             { path: 'editUser/:id', element: <ProtectedRoutes>  <Component.Edit /> </ProtectedRoutes> },
           ]
         },
+        // ?client
         {
           path: '/client', children: [
             { index: true, element: <ProtectedRoutes>  <Component.Clients /> </ProtectedRoutes> },
           ]
         },
+        // ! Rashed Doctor component
         {
           path: '/doctors', children: [
             { index: true, element: <ProtectedRoutes><Component.Doctors getTokenDoctors={getTokenDoctors} fetchDoctors={fetchDoctors} pagesCountDoctors={pagesCountDoctors} countDoctors={countDoctors} setCountDoctors={setCountDoctors} setSearchKeyDoctors={setSearchKeyDoctors} loadingDoctors={loadingDoctors} /> </ProtectedRoutes> },
@@ -88,7 +91,9 @@ function App() {
             { path: 'doctorfields/:id', element: <ProtectedRoutes> <Component.DoctorFields /></ProtectedRoutes> },
           ]
         },
+        // ToDo user profile
         { path: '/venderProfile', element: <ProtectedRoutes>  <Component.Profile /></ProtectedRoutes> },
+        // ToDo Animal Categoryclient
         {
           path: '/categ/animals', children: [
             { index: true, element: <ProtectedRoutes>  <Component.AnimalCat /> </ProtectedRoutes> },
@@ -96,6 +101,7 @@ function App() {
             { path: 'editAnimal/:id', element: <ProtectedRoutes>  <Component.EditAnimalCat /> </ProtectedRoutes> },
           ]
         },
+        // ToDo :: Locations
         {
           path: '/location', children: [
             {
@@ -121,6 +127,7 @@ function App() {
             },
           ]
         },
+        // ToDo :: settings
         {
           path: '/settings', children: [
             {
@@ -130,6 +137,7 @@ function App() {
             }
           ]
         },
+        // ToDo :: Medical Fields
         {
           path: '/medicalfields', children: [
             { index: true, element: <ProtectedRoutes><Component.MedicalFields    /> </ProtectedRoutes> },
@@ -138,6 +146,7 @@ function App() {
  
           ]
         },
+        // ToDo :: Ads
         {
           path: '/ads', children: [
             { index: true, element: <ProtectedRoutes><Component.AdsList    /> </ProtectedRoutes> },
@@ -146,12 +155,30 @@ function App() {
  
           ]
         },
+        // ToDO :: Blogs
         {
           path: '/blogs', children: [
-            { index: true, element: <ProtectedRoutes><Component.ClientAds    /> </ProtectedRoutes> }, 
+            {
+              path:'client',children:[
+                {index:true,element:<ProtectedRoutes> <Component.BlogClient/> </ProtectedRoutes>},
+                {path:'details/:id',element:<ProtectedRoutes><Component.BlogClientDetails/></ProtectedRoutes>}
+              ]
+            }, 
+            {
+              path:'doctor',children:[
+                {index:true,element:<ProtectedRoutes> <Component.BlogDoctor/> </ProtectedRoutes>},
+                {path:'details/:id',element:<ProtectedRoutes><Component.BlogDoctorDetails/></ProtectedRoutes>}
+              ]
+            }, 
           ]
         },
-        
+        // ToDO :: consult
+        {
+          path: '/consult', children: [
+            { index:true, element: <ProtectedRoutes> <Component.ChatConsult /> </ProtectedRoutes> },
+            { path: 'chat/:id', element: <ProtectedRoutes> <Component.LiveConsult /> </ProtectedRoutes> }
+          ]
+        },
       ],
     },
 

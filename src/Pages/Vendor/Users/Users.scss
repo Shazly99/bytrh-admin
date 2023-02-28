@@ -199,41 +199,34 @@ td {
 .filter__group__stats {
     display: flex;
     height: 100%;
-
     gap: 15px;
-
+    width: 100%;
     >label {
         display: flex;
         gap: 5px;
         font-size: 18px !important;
         font-weight: 500 !important;
         cursor: pointer !important;
-        &:nth-child(1),&:nth-child(9){ 
+        &:nth-child(2),&:nth-child(10){ 
             .form-check-input:checked {
                 background-color:$colorGreen !important;
                 border-color:$colorGreen !important;
             }
         }
 
-        &:nth-child(2),&:nth-child(4),&:nth-child(5),&:nth-child(8){ 
+        &:nth-child(5),&:nth-child(6),&:nth-child(7),&:nth-child(9){ 
             .form-check-input:checked {
                 background-color:#E20000 !important;
                 border-color:#E20000 !important;
             }
-        }
-        &:nth-child(2){ 
-            .form-check-input:checked {
-                background-color:#E20000 !important;
-                border-color:#E20000 !important;
-            }
-        }
-        &:nth-child(6){ 
+        } 
+        &:nth-child(7){ 
             .form-check-input:checked {
                 background-color:#9804F0 !important;
                 border-color:#9804F0 !important;
             }
         }
-        &:nth-child(3){ 
+        &:nth-child(4){ 
             .form-check-input:checked {
                 background-color:#FFC107!important;
                 border-color:#FFC107!important;

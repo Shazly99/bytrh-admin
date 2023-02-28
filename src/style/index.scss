@@ -78,13 +78,16 @@ body {
 }
 .txt_rejected {
   color: #E20000;
-  background-color: rgba($color: #E20000, $alpha: 0.1);
+  background-color: rgba($color: #E20000, $alpha: 0.1) !important;
 }
 .txt_cancel {
   color: #f1416c;
   background-color: rgba($color: #f1416c, $alpha: 0.1);
 }
+.bgComplain{
+  background-color: rgba($color: #E20000, $alpha: 0.1) !important;
 
+}
 // navbar fixed 
 .navMain {
   position: relative;
