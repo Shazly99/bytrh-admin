@@ -7,8 +7,10 @@ import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
 import { VendersContext } from '../../../../context/Store';
 import { useEffect } from 'react';
+import useFetch from './../../../../utils/useFetch';
 const AddCities = () => {
-  let { countries ,cities} = useContext(VendersContext);
+  // let { countries ,cities} = useContext(VendersContext);
+  let {countries, cities ,getCities} = useFetch()
 
   let navigate = useNavigate();
   const CityNameEn = useRef();

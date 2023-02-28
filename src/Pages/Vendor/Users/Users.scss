@@ -313,9 +313,11 @@ td {
 .search-container button[type="submit"]:hover {
     background: rgba($color: $colorRed-0, $alpha: 0.8);
 }
+.app__addprodects{
 
-input[type="file"] {
-    height: 50% !important; 
-    display: flex !important;
-    align-items: center !important; 
-} 
+    input[type="file"] {
+        height: 50% !important; 
+        display: flex !important;
+        align-items: center !important; 
+    } 
+}

@@ -7,12 +7,15 @@ import Component from '../../constants/Component';
 import Icons from '../../constants/Icons';
 import { VendersContext } from '../../context/Store';
 import { apiheader, GetData, PostData } from '../../utils/fetchData';
+import useFetch from './../../utils/useFetch';
 
 const EditAds = () => {
   let { id } = useParams()
   let navigate = useNavigate();
 
-  let { countries, cities, getCities } = useContext(VendersContext);
+  // let { countries, cities, getCities } = useContext(VendersContext);
+  let {countries, cities ,getCities} = useFetch()
+
   //TODO:: start date end date use ref   
   const startDateRef = useRef(null);
   const endDateRef = useRef(null);
@@ -75,7 +78,7 @@ const EditAds = () => {
     let data = await PostData(`${process.env.REACT_APP_API_URL}/admin/advertisements/edit`,editAds, apiheader).then((res) => {
 
       if (res.data.Success === true) {
-        toast.success('Ads data has been modified successfully', {
+        toast.success('Ads data has been modified', {
           duration: 4000,
           position: 'top-center',
           icon: <Icons.upload color='#40AB45' size={25} />,
@@ -158,7 +161,7 @@ const EditAds = () => {
                       <Form.Group controlId="formBasicStartDate" className='mt-3'>
                         <Form.Label>Start date:</Form.Label>
                         <InputGroup>
-                          <FormControl type="date" ref={startDateRef} value={editPage?.AdvertisementStartDate?.split(" ")[0]} />
+                          <FormControl type="date" ref={startDateRef} defaultValue={editPage?.AdvertisementStartDate?.split(" ")[0]} />
                         </InputGroup>
                       </Form.Group>
 
@@ -202,7 +205,7 @@ const EditAds = () => {
                       <Form.Group controlId="formBasicStartDate" className='mt-3'>
                         <Form.Label>Start date:</Form.Label>
                         <InputGroup>
-                          <FormControl type="date" ref={endDateRef} value={editPage?.AdvertisementEndDate?.split(" ")[0]} />
+                          <FormControl type="date" ref={endDateRef} defaultValue={editPage?.AdvertisementEndDate?.split(" ")[0]} />
                         </InputGroup>
                       </Form.Group>
 

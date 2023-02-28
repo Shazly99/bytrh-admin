@@ -49,6 +49,7 @@ import EditMedicalFields from './../Pages/Vendor/MedicalFields/EditMedicalFields
 import AdsList from './../Pages/Ads/AdsList';
 import AddAds from './../Pages/Ads/AddAds';
 import EditAds from './../Pages/Ads/EditAds';
+import ClientAds from './../Pages/Blogs/Client/ClientAds';
 
 export default {
     // Layout 
@@ -111,7 +112,7 @@ export default {
     AdsList,
     AddAds,
     EditAds,
-    
+    ClientAds,
     // Components
     Navber,
     SubNav,

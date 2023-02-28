@@ -7,11 +7,13 @@ import { PostData, apiheader } from './../../utils/fetchData';
 import { toast } from 'react-hot-toast';
 import Icons from '../../constants/Icons';
 import { useNavigate } from 'react-router-dom';
+import useFetch from './../../utils/useFetch';
 
 const AddAds = () => {
   let navigate = useNavigate();
 
-  let { countries, cities, getCities } = useContext(VendersContext);
+  // let { countries } = useContext(VendersContext);
+  let {countries, cities ,getCities} = useFetch()
   const countriesRef = useRef(null);
   const doctorRef = useRef(null);
   const AdsService = useRef(null);

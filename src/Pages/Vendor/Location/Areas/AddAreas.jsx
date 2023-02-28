@@ -7,11 +7,14 @@ import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
 import { VendersContext } from '../../../../context/Store';
 import { useEffect } from 'react';
+import useFetch from './../../../../utils/useFetch';
 
 
 const AddAreas = () => {
   let navigate = useNavigate();
-  let { countries, cities, getCities } = useContext(VendersContext);
+  // let { countries, cities, getCities } = useContext(VendersContext);
+  let {countries, cities ,getCities} = useFetch()
+  
   const [selectedCountry, setSelectedCountry] = useState("");
 
   const AreasNameEn = useRef();

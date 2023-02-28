@@ -146,6 +146,11 @@ function App() {
  
           ]
         },
+        {
+          path: '/blogs', children: [
+            { index: true, element: <ProtectedRoutes><Component.ClientAds    /> </ProtectedRoutes> }, 
+          ]
+        },
         
       ],
     },

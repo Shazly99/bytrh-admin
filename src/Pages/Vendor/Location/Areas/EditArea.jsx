@@ -6,11 +6,13 @@ import { Col, Container, Row, Form, Button } from 'react-bootstrap';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
 import { VendersContext } from '../../../../context/Store';
+import useFetch from './../../../../utils/useFetch';
 
 
 const EditArea = () => {
   let { id } = useParams()
-  let { countries, cities,getCities } = useContext(VendersContext);
+  // let { countries, cities,getCities } = useContext(VendersContext);
+  let {countries, cities ,getCities} = useFetch()
 
   let navigate = useNavigate();
   const AreaNameEn = useRef();
