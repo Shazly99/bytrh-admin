@@ -78,7 +78,24 @@ const routes = [
     name: "Ads",
     icon: <Icons.ads size={19} />
   },
+  {
+    name: "Blogs ",
+    icon: <Icons.blog size={19} />,
+    subRoutes: [
+      {
+        path: "/blogs/client",
+        name: "Blog Client ",
+        icon: <Icons.dote size={19} />,
+      },
+      {
+        path: "/blogs/doctor",
+        name: "Blog Doctor ",
+        icon: <Icons.dote size={19} />,
+      }, 
 
+    ],
+  },
+ 
 ];
 
 export default routes
