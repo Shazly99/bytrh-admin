@@ -1,6 +1,6 @@
+import React, { useEffect, useRef, useState } from 'react';
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import React, { useEffect, useRef, useState } from 'react';
 import { Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -14,6 +14,7 @@ const BlogClient = () => {
     const [blogs, setBlogs] = useState(null)
     const [PagesNumber, setPagesNumber] = useState('')
     const [page, setPage] = useState(1);
+    const [showDropdown, setShowDropdown] = useState(false);
 
 
     const BlogsList = async () => {
@@ -182,6 +183,8 @@ const BlogClient = () => {
                             <Col xl={6} lg={6} md={6} sm={12} xs={12} className='Filter_by_Animal' >
                                 <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }}>Filter by Animal Category :	</h5>
                                 <Form.Select aria-label="Default select example" ref={animalRef} onClick={handelSelectAnimalCategory}>
+                                <option >Animal Category </option>
+
                                     {
                                         animal?.map((item, index) => (
                                             <option key={index} value={item?.IDAnimalCategory}>{item?.AnimalCategoryName}</option>
@@ -196,7 +199,7 @@ const BlogClient = () => {
                     <Table responsive={true} className='rounded-3 '>
                         <thead>
                             <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                                <th>View Blog</th>
+
                                 <th>Client Name</th>
                                 <th>Blog Title</th>
                                 <th>Animal Category</th>
@@ -204,20 +207,14 @@ const BlogClient = () => {
                                 <th>Blog Visibility</th>
                                 <th>Blog Date</th>
                                 <th>Blog Stats</th>
-                                <th>Action  </th>
+                                <th>View Blog</th>
                             </tr>
                         </thead>
                         <tbody className='text-center'>
                             {
                                 blogs?.map((item, index) => (
                                     <tr key={index}>
-                                        <td >
-                                            <div>
-                                                <Link to={`/blogs/client/details/${item?.IDClientBlog}`}>
-                                                    <img src={Img.view} />
-                                                </Link>
-                                            </div>
-                                        </td>
+
                                         <td >
                                             <div>
                                                 {item?.ClientName}
@@ -236,49 +233,21 @@ const BlogClient = () => {
                                         </td>
                                         <td >
 
-                                            <div>
+                                            <div className='blog__status'>
                                                 <span style={{ height: 'fit-content !important' }} className={`
                                                                 ${item.BlogStatus == 'PENDING' && 'txt_pending'} 
                                                                 ${item.BlogStatus == 'REJECTED' && 'txt_rejected'} 
                                                                 ${item.BlogStatus == 'POSTED' && 'txt_delivered'}
                                                                 ${item.BlogStatus == 'REMOVED' && 'txt_cancel'}`} >
                                                     {item?.BlogStatus.charAt(0).toUpperCase() + item?.BlogStatus.slice(1).toLowerCase()}
+
                                                 </span>
-                                            </div>
-                                        </td>
-
-
-                                        <td >
-                                            <div>
-                                                <span   >
-                                                    {item?.BlogVisibility}
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td >
-                                            <div className='d-flex justify-content-center align-item-center m-0 p-0 flex-column gap-0' >
-                                                <span   > {item?.BlogDate.split(' ')[0]}  </span>
-                                                <span className='ClientPhone'> {item?.BlogDate.split(' ')[1]}  </span>
-                                            </div>
-                                        </td>
-
-                                        <td >
-                                            <div className='d-flex' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                                                <div className=' d-flex justify-content-center align-item-center gap-3' >
-                                                    <span><Icons.like size={19} color='#3182CE' /> </span><span>{item?.BlogLikes}</span>
-                                                </div>
-                                                <div className=' d-flex justify-content-center align-item-center gap-3' >
-                                                    <span><Icons.comments size={19} color='#40AB45' /> </span><span>{item?.BlogComments}</span>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <span>
+                                                <div className="delete">
                                                     <DropdownButton
-                                                        id={`dropdown-${item.IDClientBlog}`}
-                                                        title="Actions"
+                                                        title={<img src={Img.dropdown} />}
+                                                        id="dropdown-menu"
                                                         variant="outline-success"
+                                                        onClick={() => setShowDropdown(!showDropdown)}
                                                         onSelect={(eventKey) => handleActionSelect(item.IDClientBlog, eventKey)}
                                                         className="DropdownButton "
                                                         drop={'down-centered'}
@@ -303,10 +272,43 @@ const BlogClient = () => {
                                                             <Dropdown.Item eventKey="REMOVED">Removed</Dropdown.Item>
                                                         }
                                                     </DropdownButton>
-                                                </span>
+
+                                                </div>
                                             </div>
                                         </td>
 
+
+                                        <td >
+                                            <div>
+                                                <span   >
+                                                    {item?.BlogVisibility.charAt(0).toUpperCase() + item?.BlogVisibility.slice(1).toLowerCase()}
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td >
+                                            <div className='d-flex justify-content-center align-item-center m-0 p-0 flex-column gap-0' >
+                                                <span   > {item?.BlogDate.split(' ')[0]}  </span>
+                                                <span className='ClientPhone'> {item?.BlogDate.split(' ')[1]}  </span>
+                                            </div>
+                                        </td>
+
+                                        <td >
+                                            <div className='d-flex' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                                                <div className=' d-flex justify-content-center align-item-center gap-3' >
+                                                    <span><Icons.like size={19} color='#3182CE' /> </span><span>{item?.BlogLikes}</span>
+                                                </div>
+                                                <div className=' d-flex justify-content-center align-item-center gap-3' >
+                                                    <span><Icons.comments size={19} color='#40AB45' /> </span><span>{item?.BlogComments}</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td >
+                                            <div>
+                                                <Link to={`/blogs/client/details/${item?.IDClientBlog}`}>
+                                                    <img src={Img.view} />
+                                                </Link>
+                                            </div>
+                                        </td>
                                     </tr>
                                 ))
                             }
