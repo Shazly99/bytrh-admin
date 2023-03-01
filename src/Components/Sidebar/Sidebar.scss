@@ -12,8 +12,7 @@
     }
 }
 main {
-    background-color: white !important
-    ;
+    background-color: white !important ;
 }
 /* Sidebar */
 .sidebar {
@@ -55,7 +54,7 @@ main {
     margin-top: 15px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 8px;
 
     .link {
         display: flex;
@@ -64,7 +63,7 @@ main {
         padding: 5px 18px;
         text-decoration: none;
         border-right: 4px solid transparent;
-        transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+        transition: all 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
         cursor: pointer;
         &:hover {
             // border-left: 4px solid $colorRed-0;
@@ -92,17 +91,23 @@ main {
             font-family: $fontBase;
             font-style: normal;
             font-weight: 400;
-            font-size: 20px;
+            font-size: 19px;
             line-height: 30px;
+            // color:;
         }
 
-    }
+        // transition: all 1s !important;
+        width: 0% !important;
+    } 
 
     .active {
+        // transition: all 1s !important;
+
+        // background-color: #faa9402f;
+        width: 100% !important;
         color: $colorRed-0 !important;
         width: 20px;
         position: relative;
-
         &::after {
             content: '';
             height: 100%;

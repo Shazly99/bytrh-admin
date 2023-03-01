@@ -17,7 +17,9 @@ import { IoIosArrowForward as arrow } from "react-icons/io";
 import { AiOutlineCloudUpload as upload } from "react-icons/ai";
 
 import { CiShop as shop } from "react-icons/ci";
-import { SlNotebook as list } from "react-icons/sl";
+import {   SlLike, SlNotebook as list } from "react-icons/sl";
+import {   SlLike as like } from "react-icons/sl";
+
 import { TbReportAnalytics as report } from "react-icons/tb";
 import { RxDotFilled as dote } from "react-icons/rx";
 import { IoSettingsOutline as settings } from "react-icons/io5";
@@ -38,10 +40,14 @@ import { MdOutlineLocationOn as location } from "react-icons/md";
 import { IoChatboxEllipsesOutline as consult } from "react-icons/io5";
 import { CiMedicalCross as medical } from "react-icons/ci";
 import { RiAdvertisementLine as ads } from "react-icons/ri";
-
+import { FaBloggerB as blog } from "react-icons/fa"; 
+import { TfiCommentAlt as comments } from "react-icons/tfi"; 
 
 
 export default{
+    comments,
+    like,
+    blog,
     ads,
     medical,
     consult,

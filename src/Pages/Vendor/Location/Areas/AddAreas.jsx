@@ -142,6 +142,7 @@ const AddAreas = () => {
             </div>
           </div>
         </div>
+        
       </div>
     </Container >
   )

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, DropdownButton, Dropdown, NavDropdown } from "react-bootstrap";
+import { Table, DropdownButton, Dropdown, NavDropdown, Modal, Form, Button } from "react-bootstrap";
 import Component from '../../../constants/Component'
 import Icons from '../../../constants/Icons'
 import { GetData, PostData, apiheader } from './../../../utils/fetchData';
@@ -9,6 +9,7 @@ import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import Complain from './Complain';
 
 const ChatConsult = () => {
   const [consult, setConsultList] = useState(null)
@@ -16,7 +17,29 @@ const ChatConsult = () => {
   const [PagesNumber, setPagesNumber] = useState('')
   const [searchClient, setSearchClient] = useState('');
   const [searchDoctor, setSearchDoctot] = useState('');
+  //**Modal Complain */
+  const [modalShow, setModalShow] = React.useState(false);
+  const [modalIndex, setModalIndex] = React.useState(0);
+  function handleModalClose() {
+    setModalShow(false);
+  }
 
+  function handleModalOpen(index) {
+    setModalIndex(index);
+    setModalShow(true);
+  }
+
+  const [modalShowDoc, setModalShowDoc] = React.useState(false);
+  const [modalIndexDoc, setModalIndexDoc] = React.useState(0);
+  function handleModalCloseDoc() {
+    setModalShowDoc(false);
+  }
+
+  function handleModalOpenDoc(index) {
+    setModalIndexDoc(index);
+    setModalShowDoc(true);
+  }
+  //**Modal Complain */
   const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
   const handleChange = (event, value) => setPage(value);
 
@@ -68,31 +91,7 @@ const ChatConsult = () => {
     const selectedValue = event.target.value;
     setSelectedOption(selectedValue);
     // filter your content based on the selected option 
-    if (selectedValue === "ONGOING") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
-      setConsultList(data.Response.Consults)
-    } else if (selectedValue === "ENDED") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
-      setConsultList(data.Response.Consults)
-    } else if (selectedValue === "PENDING") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
-      setConsultList(data.Response.Consults)
-    } else if (selectedValue === "CANCELLED") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
-      setConsultList(data.Response.Consults)
-    } else if (selectedValue === "EXPIRED") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
-      setConsultList(data.Response.Consults)
-    } else if (selectedValue === "NO_RESPONSE") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
-      setConsultList(data.Response.Consults)
-    } else if (selectedValue === "SKIPPED") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
-      setConsultList(data.Response.Consults)
-    } else if (selectedValue === "REJECTED") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
-      setConsultList(data.Response.Consults)
-    } else if (selectedValue === "ACCEPTED") {
+    if (selectedValue === "ONGOING" || selectedValue === "ACCEPTED" || selectedValue === "REJECTED" || selectedValue === "SKIPPED" || selectedValue === "NO_RESPONSE" || selectedValue === "EXPIRED" || selectedValue === "ENDED" || selectedValue === "PENDING" || selectedValue === "CANCELLED") {
       let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
       setConsultList(data.Response.Consults)
     } else if (selectedValue === "All") {
@@ -102,30 +101,12 @@ const ChatConsult = () => {
   useEffect(() => {
     consultList(page)
   }, [page, PagesNumber])
-  const [startDate, setStartDate] = useState(new Date("2022-01-01"));
-  const [endDate, setEndDate] = useState(new Date("2022-12-31"));
-  const [filteredData, setFilteredData] = useState([]);
 
-  const myData = [
-    { id: 1, date: "2022-02-01" },
-    { id: 2, date: "2022-03-15" },
-    { id: 3, date: "2022-05-10" },
-    { id: 4, date: "2022-09-30" },
-    { id: 5, date: "2022-12-10" },
-  ];
-
-  const handleFilter = () => {
-    const filtered = myData.filter((item) => {
-      const itemDate = new Date(item.date);
-      return itemDate >= startDate && itemDate <= endDate;
-    });
-    setFilteredData(filtered);
-  };
   return (
     <>
       <div className="app__Users ">
         <div className="app__Users-table">
-          <div className="search-container " style={{ display: 'flex', gap: '15px' }}>
+          <div className="search-container  " style={{ display: 'flex', gap: '15px' }}>
             <div className='search__group'>
               <input type="text" placeholder="Search by client....." name="search" value={searchClient} onChange={handleInputChange} />
               <button type="submit" onClick={handleSearchClick} >
@@ -143,129 +124,132 @@ const ChatConsult = () => {
 
             </div>
           </div>
-          <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }}>Filter by consult status :	</h5>
-          <div className='filter__group__stats  ' style={{ display: 'flex', gap: '20px', marginBottom: '25px' }}>
-            <label className='active'>
-              <input
-                type="radio"
-                name="filter"
-                value="ONGOING"
-                checked={selectedOption === "ONGOING"}
-                onChange={handleOptionChange}
-                className="active-radio form-check-input"
+          <div className="app__addOrder-form ">
+            <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }}>Filter by consult status :	</h5>
+            <div className='filter__group__stats row ' style={{ display: 'flex', gap: '20px', marginBottom: '25px' }}>
+              <label className='col active'>
+                <input
+                  type="radio"
+                  name="filter"
+                  value="All"
+                  checked={selectedOption === "All"}
+                  onChange={handleOptionChange}
+                  className="inactive-radio form-check-input"
+                />
+                All
+              </label>
+              <label className='col active'>
+                <input
+                  type="radio"
+                  name="filter"
+                  value="ONGOING"
+                  checked={selectedOption === "ONGOING"}
+                  onChange={handleOptionChange}
+                  className="active-radio form-check-input"
+                />
+                Ongoing
+              </label  >
+              <label className='col active'>
+                <input
+                  type="radio"
+                  name="filter"
+                  value="ENDED"
+                  checked={selectedOption === "ENDED"}
+                  onChange={handleOptionChange}
+                  className="inactive-radio form-check-input"
 
-              />
-              Ongoing
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="filter"
-                value="ENDED"
-                checked={selectedOption === "ENDED"}
-                onChange={handleOptionChange}
-                className="inactive-radio form-check-input"
+                />
+                Ended
+              </label>
+              <label className='col active'>
+                <input
+                  type="radio"
+                  name="filter"
+                  value="PENDING"
+                  checked={selectedOption === "PENDING"}
+                  onChange={handleOptionChange}
+                  className="active-radio form-check-input"
 
-              />
-              Ended
-            </label>
-            <label className='active'>
-              <input
-                type="radio"
-                name="filter"
-                value="PENDING"
-                checked={selectedOption === "PENDING"}
-                onChange={handleOptionChange}
-                className="active-radio form-check-input"
+                />
+                Pending
+              </label>
+              <label className='col active'>
+                <input
+                  type="radio"
+                  name="filter"
+                  value="CANCELLED"
+                  checked={selectedOption === "CANCELLED"}
+                  onChange={handleOptionChange}
+                  className="active-radio form-check-input"
 
-              />
-              Pending
-            </label>
-            <label className='active'>
-              <input
-                type="radio"
-                name="filter"
-                value="CANCELLED"
-                checked={selectedOption === "CANCELLED"}
-                onChange={handleOptionChange}
-                className="active-radio form-check-input"
+                />
+                Cancelled
+              </label>
+              <label className='col active'>
+                <input
+                  type="radio"
+                  name="filter"
+                  value="EXPIRED"
+                  checked={selectedOption === "EXPIRED"}
+                  onChange={handleOptionChange}
+                  className="active-radio form-check-input"
 
-              />
-              Cancelled
-            </label>
-            <label className='active'>
-              <input
-                type="radio"
-                name="filter"
-                value="EXPIRED"
-                checked={selectedOption === "EXPIRED"}
-                onChange={handleOptionChange}
-                className="active-radio form-check-input"
+                />
+                Expired
+              </label>
 
-              />
-              Expired
-            </label>
-            <label className='active'>
-              <input
-                type="radio"
-                name="filter"
-                value="NO_RESPONSE"
-                checked={selectedOption === "NO_RESPONSE"}
-                onChange={handleOptionChange}
-                className="active-radio form-check-input"
+              <label className='col active'>
+                <input
+                  type="radio"
+                  name="filter"
+                  value="SKIPPED"
+                  checked={selectedOption === "SKIPPED"}
+                  onChange={handleOptionChange}
+                  className="active-radio form-check-input"
 
-              />
-              No Response
-            </label>
-            <label className='active'>
-              <input
-                type="radio"
-                name="filter"
-                value="SKIPPED"
-                checked={selectedOption === "SKIPPED"}
-                onChange={handleOptionChange}
-                className="active-radio form-check-input"
+                />
+                Skipped
+              </label>
+              <label className='col active'>
+                <input
+                  type="radio"
+                  name="filter"
+                  value="REJECTED"
+                  checked={selectedOption === "REJECTED"}
+                  onChange={handleOptionChange}
+                  className="active-radio form-check-input"
 
-              />
-              Skipped
-            </label>
-            <label className='active'>
-              <input
-                type="radio"
-                name="filter"
-                value="REJECTED"
-                checked={selectedOption === "REJECTED"}
-                onChange={handleOptionChange}
-                className="active-radio form-check-input"
+                />
+                Rejected
+              </label>
+              <label className='col active'>
+                <input
+                  type="radio"
+                  name="filter"
+                  value="ACCEPTED"
+                  checked={selectedOption === "ACCEPTED"}
+                  onChange={handleOptionChange}
+                  className="active-radio form-check-input"
 
-              />
-              Rejected
-            </label>
-            <label className='active'>
-              <input
-                type="radio"
-                name="filter"
-                value="ACCEPTED"
-                checked={selectedOption === "ACCEPTED"}
-                onChange={handleOptionChange}
-                className="active-radio form-check-input"
+                />
+                Accepted
+              </label>
+              <label className='col active'>
+                <input
+                  type="radio"
+                  name="filter"
+                  value="NO_RESPONSE"
+                  checked={selectedOption === "NO_RESPONSE"}
+                  onChange={handleOptionChange}
+                  className="active-radio form-check-input"
 
-              />
-              Accepted
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="filter"
-                value="All"
-                checked={selectedOption === "All"}
-                onChange={handleOptionChange}
-                className="inactive-radio form-check-input"
-              />
-              All
-            </label>
+                />
+                No_Response
+              </label>
+            </div>
+            <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }}>Filter by  Complain :	</h5>
           </div>
-          <Table responsive={true} className='rounded-3 '>
+          <Table responsive={true} className='rounded-3  '>
             <thead>
               <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
                 <th>Client Info</th>
@@ -280,19 +264,43 @@ const ChatConsult = () => {
               {
                 consult?.map((item, index) => (
                   <tr key={index}>
-                    <td>
+                    <td className={`${item.ClientComplainBody === "" ? '' : 'bgComplain'}`}>
                       <div className='d-flex flex-column justify-content-center align-content-center' style={{ gap: '0' }}>
-                        <span className='ClientName'>{item?.ClientName}</span>
+                        {
+                          item.ClientComplainBody === "" ?
+                            <span className='ClientName'>{item?.ClientName}</span> :
+                            <span className='ClientName ' style={{ cursor: 'pointer' }} onClick={() => handleModalOpen(index)}>{item?.ClientName}</span>
+                        }
                         <span className='ClientPhone'>{item?.ClientPhone}</span>
                       </div>
                     </td>
+                    <Complain
+                      Complain={item?.ClientComplainBody}
+                      Name={item?.ClientName}
+                      index={index}
+                      handleModalClose={handleModalClose}
+                      modalShow={modalShow}
+                      user={"Client : "}
+                      modalIndex={modalIndex} />
 
-                    <td>
+                    <td className={`${item.DoctorComplainBody === "" ? '' : 'bgComplain'}`}>
                       <div className='d-flex flex-column justify-content-center align-content-center' style={{ gap: '0' }}>
-                        <span className='ClientName'>{item?.DoctorName}</span>
+                        {
+                          item.DoctorComplainBody === "" ?
+                            <span className='ClientName'>{item?.DoctorName}</span> :
+                            <span className='ClientName ' style={{ cursor: 'pointer' }} onClick={() => handleModalOpenDoc(index)}>{item?.DoctorName}</span>
+                        }
                         <span className='ClientPhone'>{item?.DoctorPhone}</span>
                       </div>
                     </td>
+                    <Complain
+                      Complain={item?.DoctorComplainBody}
+                      Name={item?.DoctorName}
+                      index={index}
+                      handleModalClose={handleModalCloseDoc}
+                      modalShow={modalShowDoc}
+                      user={"Dr."}
+                      modalIndex={modalIndexDoc} />
 
 
                     <td className='text-center  d-flex '>
@@ -344,10 +352,8 @@ const ChatConsult = () => {
                               drop={'down-centered'}
                             >
                               <Dropdown.Item eventKey="Edite" as={Link} to={`/chat/consult/details/${item.IDConsult}`}>  Chat </Dropdown.Item>
-
                               {item.ConsultStatus !== 'ENDED' &&
-
-                                <Dropdown.Item eventKey="End" as={Link}  > End Chat  </Dropdown.Item>
+                                <Dropdown.Item eventKey="End" as={Link}> End Chat  </Dropdown.Item>
                               }
                             </DropdownButton>
                           </span>
@@ -358,9 +364,8 @@ const ChatConsult = () => {
                       &&
                       <td>
                         <div>
-
                           <span>
-                            <DropdownButton title="Chat" eventKey="Edite" as={Link} to={`/chat/consult/details/${item.IDConsult}`}>  Chat </DropdownButton>
+                            <DropdownButton title="Chat" eventKey="Edite" as={Link} to={`/consult/chat/${item.IDConsult}`}>  Chat </DropdownButton>
                           </span>
                         </div>
                       </td>

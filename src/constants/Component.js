@@ -49,7 +49,10 @@ import EditMedicalFields from './../Pages/Vendor/MedicalFields/EditMedicalFields
 import AdsList from './../Pages/Ads/AdsList';
 import AddAds from './../Pages/Ads/AddAds';
 import EditAds from './../Pages/Ads/EditAds';
-import ClientAds from './../Pages/Blogs/Client/ClientAds';
+import BlogClient from './../Pages/Blogs/Client/BlogClient';
+import { BlogDoctor } from './../Pages/Blogs/Doc/BlogDoctor';
+import BlogClientDetails from './../Pages/Blogs/Client/BlogClientDetails';
+import BlogDoctorDetails from './../Pages/Blogs/Doc/BlogDoctorDetails';
 
 export default {
     // Layout 
@@ -106,13 +109,17 @@ export default {
     Areas,
     AddAreas,
     EditArea,
+    // Blogs
+    BlogClient,
+    BlogDoctor,
+    BlogClientDetails,
+    BlogDoctorDetails,
     // Sitting
     GeneralSettings,
     // Advertisements
     AdsList,
     AddAds,
-    EditAds,
-    ClientAds,
+    EditAds, 
     // Components
     Navber,
     SubNav,

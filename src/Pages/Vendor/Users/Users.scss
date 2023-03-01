@@ -60,8 +60,9 @@
         border: none !important;
         border-radius: $radius-sm !important;
         height: 50px !important;
-        >*{
-            height: 100% !important; 
+
+        >* {
+            height: 100% !important;
         }
     }
 
@@ -143,10 +144,12 @@ td {
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
+
     @media screen and (max-width:767px) {
         flex-direction: column;
         gap: 10px;
     }
+
     .filter__group {
         display: flex;
         height: 100%;
@@ -159,48 +162,50 @@ td {
             font-size: 18px !important;
             font-weight: 500 !important;
             cursor: pointer !important;
-            &:nth-child(1){
-                // color: $colorGreen !important;
+
+            &:nth-child(1) {
                 .form-check-input:checked {
-                    background-color:$colorGreen !important;
-                    border-color:$colorGreen !important;
+                    background-color: $colorGreen !important;
+                    border-color: $colorGreen !important;
                 }
             }
 
-            &:nth-child(2){
-                // color: #E20000!important;
+            &:nth-child(2) { 
                 .form-check-input:checked {
-                    background-color:#E20000 !important;
-                    border-color:#E20000 !important;
+                    background-color: #E20000 !important;
+                    border-color: #E20000 !important;
                 }
             }
 
-            &:nth-child(3){
-                // color: #E20000!important;
+            &:nth-child(3) { 
                 .form-check-input:checked {
                     background-color: #0d6efd !important;
                     border-color: #0d6efd !important;
                 }
             }
-            input{
+
+            input {
                 cursor: pointer !important;
 
             }
+
             .form-check-input:checked[type=radio] {
                 background-image: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%272%27 fill=%27%23fff%27/%3e%3c/svg%3e') !important;
             }
-            
+
 
         }
-        .active{
-        }
+
+        .active {}
     }
 }
+ 
+
 .filter__group__stats {
     display: flex;
     height: 100%;
-
     gap: 15px;
+    width: 100%;
 
     >label {
         display: flex;
@@ -208,63 +213,67 @@ td {
         font-size: 18px !important;
         font-weight: 500 !important;
         cursor: pointer !important;
-        &:nth-child(1),&:nth-child(9){ 
+
+        &:nth-child(2),
+        &:nth-child(10) {
             .form-check-input:checked {
-                background-color:$colorGreen !important;
-                border-color:$colorGreen !important;
+                background-color: $colorGreen !important;
+                border-color: $colorGreen !important;
             }
         }
 
-        &:nth-child(2),&:nth-child(4),&:nth-child(5),&:nth-child(8){ 
+        &:nth-child(5),
+        &:nth-child(3),
+        &:nth-child(6),
+        &:nth-child(7),
+        &:nth-child(9) {
             .form-check-input:checked {
-                background-color:#E20000 !important;
-                border-color:#E20000 !important;
+                background-color: #E20000 !important;
+                border-color: #E20000 !important;
             }
         }
-        &:nth-child(2){ 
-            .form-check-input:checked {
-                background-color:#E20000 !important;
-                border-color:#E20000 !important;
-            }
-        }
-        &:nth-child(6){ 
-            .form-check-input:checked {
-                background-color:#9804F0 !important;
-                border-color:#9804F0 !important;
-            }
-        }
-        &:nth-child(3){ 
-            .form-check-input:checked {
-                background-color:#FFC107!important;
-                border-color:#FFC107!important;
-            }
-        }
- 
-            .form-check-input:checked {
-                background-color: #0d6efd !important;
-                border-color: #0d6efd !important;
-            }
-      
 
-        input{
+        &:nth-child(7) {
+            .form-check-input:checked {
+                background-color: #9804F0 !important;
+                border-color: #9804F0 !important;
+            }
+        }
+
+        &:nth-child(4) {
+            .form-check-input:checked {
+                background-color: #FFC107 !important;
+                border-color: #FFC107 !important;
+            }
+        }
+
+        .form-check-input:checked {
+            background-color: #0d6efd !important;
+            border-color: #0d6efd !important;
+        }
+
+
+        input {
             cursor: pointer !important;
         }
+
         .form-check-input:checked[type=radio] {
             background-image: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%272%27 fill=%27%23fff%27/%3e%3c/svg%3e') !important;
-        } 
-    } 
+        }
+    }
 }
+
 .form-check-input:checked {
     background-color: #0d6efd !important;
     border-color: #0d6efd !important;
 }
+
 .search__group {
     width: 70% !important;
     position: relative;
 
     @media screen and (max-width:400px) {
         width: 90% !important;
-
     }
 }
 
@@ -313,11 +322,11 @@ td {
 .search-container button[type="submit"]:hover {
     background: rgba($color: $colorRed-0, $alpha: 0.8);
 }
-.app__addprodects{
 
+.app__addprodects {
     input[type="file"] {
-        height: 50% !important; 
+        height: 50% !important;
         display: flex !important;
-        align-items: center !important; 
-    } 
+        align-items: center !important;
+    }
 }

@@ -1,14 +1,12 @@
-import React from 'react'
-import { Table, DropdownButton, Dropdown, NavDropdown } from "react-bootstrap";
-import { GetData, PostData, apiheader } from '../../../../utils/fetchData';
-import { useEffect } from 'react';
-import { useState } from 'react';
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Dropdown, DropdownButton, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
+import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
 
 
 const Country = () => {
@@ -22,14 +20,13 @@ const Country = () => {
             setCountry(data.Response.Countries)
             console.log(data);
             setPagesNumber(data.Response.Pages);
-        }).then((error) => {
-
-            /*         if (error.response && error.response.status === 429) {
-                        const retryAfter = error.response.headers['retry-after'];
-                        setTimeout(() => {
-                            CountrycList();
-                        }, (retryAfter || 60) * 1000);
-                    } */
+        }).catch((error) => {
+            if (error.response && error.response.status === 429) {
+                const retryAfter = error.response.headers['retry-after'];
+                setTimeout(() => {
+                    CountrycList();
+                }, (retryAfter || 60) * 1000);
+            }
         })
     }
 
@@ -70,43 +67,43 @@ const Country = () => {
     const CountrycategoriesStatus = async (id) => {
         return await GetData(`${process.env.REACT_APP_API_URL}/admin/location/countries/status/${id}`, apiheader)
     }
-    
-  // search and filter 
 
-  const handleSearchClick = () => {
-    searchGetData(searchValue)
-  };
+    // search and filter 
 
-  const handleInputChange = (event) => {
-    if (event.target.value === '') {
-        CountrycList(page)
+    const handleSearchClick = () => {
+        searchGetData(searchValue)
+    };
+
+    const handleInputChange = (event) => {
+        if (event.target.value === '') {
+            CountrycList(page)
+        }
+        console.log(event.target.value);
+        setSearchValue(event.target.value);
+    };
+
+    const searchGetData = async (searchValue) => {
+        let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, { SearchKey: searchValue }, apiheader)
+        console.log(data);
+        setCountry(data.Response.Countries)
     }
-    console.log(event.target.value);
-    setSearchValue(event.target.value);
-  };
+    // filter
+    const [selectedOption, setSelectedOption] = useState(null);
 
-  const searchGetData = async (searchValue) => {
-    let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, { SearchKey: searchValue }, apiheader)
-    console.log(data);
-    setCountry(data.Response.Countries)
-  }
-  // filter
-  const [selectedOption, setSelectedOption] = useState(null);
-
-  const handleOptionChange = async (event) => {
-    const selectedValue = event.target.value;
-    setSelectedOption(selectedValue);
-    // filter your content based on the selected option 
-    if (selectedValue === "ACTIVE") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, { CountryStatus: selectedValue }, apiheader)
-      setCountry(data.Response.Countries)
-    } else if (selectedValue === "INACTIVE") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, { CountryStatus: selectedValue }, apiheader)
-      setCountry(data.Response.Countries)
-    } else if (selectedValue === "All") {
-        CountrycList()
-    }
-  };
+    const handleOptionChange = async (event) => {
+        const selectedValue = event.target.value;
+        setSelectedOption(selectedValue);
+        // filter your content based on the selected option 
+        if (selectedValue === "ACTIVE") {
+            let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, { CountryStatus: selectedValue }, apiheader)
+            setCountry(data.Response.Countries)
+        } else if (selectedValue === "INACTIVE") {
+            let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, { CountryStatus: selectedValue }, apiheader)
+            setCountry(data.Response.Countries)
+        } else if (selectedValue === "All") {
+            CountrycList()
+        }
+    };
 
     useEffect(() => {
         CountrycList()

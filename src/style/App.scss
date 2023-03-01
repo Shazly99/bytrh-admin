@@ -58,10 +58,13 @@ a {
     }
 
     h2 {
-        margin-top: 20px !important;
-        font-weight: 400;
-        font-size: 21px;
-        line-height: 32px;
+/* En (25 M) */
+
+font-family: 'Poppins';
+font-style: normal;
+font-weight: 500;
+font-size: 25px;
+line-height: 38px;
     }
 }
 
@@ -159,6 +162,21 @@ td {
     border-radius: 5px;
     margin-top: 16px !important;
     padding: 32px 16px 10px;
+    margin-bottom: 20px !important;
 }
 
   
+.active__hover{
+    cursor: pointer;
+    transition: all 0.4s !important;
+    &:hover{
+        background-color: #f9f9f9b3 !important;
+    }
+}
+
+.Filter_by_Animal{
+    @media screen and (max-width:767px) {
+     margin-top: 25px !important;   
+    }
+
+}
