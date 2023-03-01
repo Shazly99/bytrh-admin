@@ -1,17 +1,14 @@
-import { Container, Row, Col } from 'react-bootstrap';
-import Component from '../../../constants/Component';
-import { useParams } from 'react-router-dom';
-import './blog.scss'
-import React, { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
+import React, { useEffect, useState } from 'react';
+import { Col, Container, Dropdown, DropdownButton, Row } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
-import Img from '../../../assets/Img';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { apiheader, GetData } from '../../../utils/fetchData';
-import { Dropdown, DropdownButton } from 'react-bootstrap';
-import { BsThreeDotsVertical } from 'react-icons/bs';
 import { toast } from 'react-hot-toast';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { useParams } from 'react-router-dom';
+import Img from '../../../assets/Img';
+import Component from '../../../constants/Component';
 import Icons from '../../../constants/Icons';
+import { apiheader, GetData } from '../../../utils/fetchData';
+import '../blog.scss';
 
 
 const BlogClientDetails = () => {
@@ -168,7 +165,7 @@ const BlogClientDetails = () => {
                   <span className='body'>Comments</span>
                 </Col>
                 <Col className="summary_blog">
-                  <span className='title'>{blogsDetails?.BlogVisibility}</span>
+                  <span className='title'>{blogsDetails?.BlogVisibility.charAt(0).toUpperCase() + blogsDetails?.BlogVisibility.slice(1).toLowerCase()}</span>
                   <span className='body'>Visibility</span>
                 </Col>
 
