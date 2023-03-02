@@ -9,29 +9,41 @@ import Component from '../../constants/Component';
 import Icons from '../../constants/Icons';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Img from '../../assets/Img';
+import axios from 'axios';
+import _ from 'lodash';
 
 const AdsList = () => {
+
   const [ads, setAds] = useState(null)
   const [page, setPage] = useState(1);
   const [PagesNumber, setPagesNumber] = useState('')
   const [searchValue, setSearchValue] = useState('');
 
-  const AdsList = async () => {
+  const [isLoading, setIsLoading] = useState(false);
 
-    await PostData(`${process.env.REACT_APP_API_URL}/admin/advertisements`, { IDPage: page }, apiheader).then(({ data }) => {
-      setAds(data.Response.Advertisements)
-      console.log(data.Response.Advertisements);
-      setPagesNumber(data.Response.Pages);
-    }).then((error) => {
+  const advertisements = _.debounce(async () => {
+    setIsLoading(true);
+    try {
+      await axios.post(`${process.env.REACT_APP_API_URL}/admin/advertisements`, { IDPage: page }, apiheader).then((res) => {
+        if (res.status === 200 && res.request.readyState === 4) {
+          console.log(res);
+          setAds(res.data.Response.Advertisements);
+          setPagesNumber(res.data.Response.Pages);
+          setIsLoading(false);
 
-      /*         if (error.response && error.response.status === 429) {
-                  const retryAfter = error.response.headers['retry-after'];
-                  setTimeout(() => {
-                      AdscList();
-                  }, (retryAfter || 60) * 1000);
-              } */
-    })
-  }
+        }
+      })
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        const retryAfter = error.response.headers['retry-after'];
+        setTimeout(() => {
+          advertisements();
+        }, (retryAfter || 30) * 1000);
+      }
+    }
+    setIsLoading(false);
+  }, 1000);
+
   const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
   const handleChange = (event, value) => {
     setPage(value);
@@ -42,23 +54,25 @@ const AdsList = () => {
     console.log(action);
     if (action === "DELETE") {
       console.log(id);
-      await GetData(`${process.env.REACT_APP_API_URL}/admin/advertisements/status/${id}`,apiheader).then((res)=>{
-          toast.success('The ads has been removed', {
-            duration: 4000,
-            position: 'top-center',
-            icon: <Icons.bin color='#E20000' size={20} />,
-            iconTheme: {
-              primary: '#0a0',
-              secondary: '#fff',
-            },
-          });
+      await GetData(`${process.env.REACT_APP_API_URL}/admin/advertisements/status/${id}`, apiheader).then((res) => {
+        toast.success('The ads has been removed', {
+          duration: 4000,
+          position: 'top-center',
+          icon: <Icons.bin color='#E20000' size={20} />,
+          iconTheme: {
+            primary: '#0a0',
+            secondary: '#fff',
+          },
+        });
       })
-      await AdsList()
-    } 
+      await advertisements()
+    }
   };
+
   useEffect(() => {
-    AdsList()
-  }, [])
+    advertisements();
+  }, [page]);
+
   return (
     <>
 
@@ -134,13 +148,13 @@ const AdsList = () => {
                         item?.AdvertisementImage ?
                           <LazyLoadImage
                             src={item.AdvertisementImage} // use normal <img> attributes as props
-                            className="w-75 rounded-2"
+                            className="w-100 rounded-2"
                             effect="blur"
                           /> :
 
                           <LazyLoadImage
                             src={Img.ads} // use normal <img> attributes as props
-                            className="w-75 rounded-2"
+                            className="w-100 rounded-2"
                             effect="blur"
                           />
 
