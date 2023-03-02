@@ -14,7 +14,7 @@ const EditAds = () => {
   let navigate = useNavigate();
 
   // let { countries, cities, getCities } = useContext(VendersContext);
-  let {countries, cities ,getCities} = useFetch()
+  let { countries, cities, getCities } = useFetch()
 
   //TODO:: start date end date use ref   
   const startDateRef = useRef(null);
@@ -24,23 +24,54 @@ const EditAds = () => {
   const AdsService = useRef(null);
   const AdsLocation = useRef(null);
   //** Doctor list
-  const [doctor, setDoctor] = useState(null)
+  const [data, setData] = useState({
+    doctor: null,
+    blog: null,
+    blogDoc: null,
+    adoption: null
+  });
+
   const handelSelectService = async (event) => {
     const service = event.target.value;
     if (service === 'NONE') {
-      console.log(service);
+      setData({
+        doctor: null,
+        blog: null,
+        blogDoc: null,
+        adoption: null
+      });
     } else if (service === 'URGENT_CONSULT' || service === 'CONSULT') {
-      let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors`, { IDPage: 1 }, apiheader)
-      console.log(service);
-      setDoctor(data.Response.Doctors);
+      const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/ajax`, {}, apiheader);
+      setData({
+        doctor: data.Response,
+        blog: null,
+        blogDoc: null,
+        adoption: null
+      });
     } else if (service === 'CLIENT_BLOG') {
-      console.log(service);
-
+      const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs/ajax`, {}, apiheader);
+      setData({
+        doctor: null,
+        blog: data.Response,
+        blogDoc: null,
+        adoption: null
+      });
     } else if (service === 'DOCTOR_BLOG') {
-      console.log(service);
-
+      const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs/ajax`, {}, apiheader);
+      setData({
+        doctor: null,
+        blog: null,
+        blogDoc: data.Response,
+        adoption: null
+      });
     } else if (service === 'ADOPTION') {
-      console.log(service);
+      const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/adoptions/ajax`, {}, apiheader);
+      setData({
+        doctor: null,
+        blog: null,
+        blogDoc: null,
+        adoption: data.Response
+      });
     }
   }
   const [editPage, setAdsDetail] = useState(null)
@@ -56,7 +87,6 @@ const EditAds = () => {
     const selectedCountryId = event.target.value;
     getCities(selectedCountryId)
   }
-
   const adsDetail = async () => {
     let data = await GetData(`${process.env.REACT_APP_API_URL}/admin/advertisements/edit/page/${id}`, apiheader)
     setAdsDetail(data.Response);
@@ -75,7 +105,7 @@ const EditAds = () => {
     })
   }
   const adsedit = async (editAds) => {
-    let data = await PostData(`${process.env.REACT_APP_API_URL}/admin/advertisements/edit`,editAds, apiheader).then((res) => {
+    let data = await PostData(`${process.env.REACT_APP_API_URL}/admin/advertisements/edit`, editAds, apiheader).then((res) => {
 
       if (res.data.Success === true) {
         toast.success('Ads data has been modified', {
@@ -99,6 +129,7 @@ const EditAds = () => {
   useEffect(() => {
     adsDetail()
   }, [id])
+
   return (
     <>
       <Container fluid>
@@ -178,15 +209,15 @@ const EditAds = () => {
                       </Form.Group>
 
                       <Form.Group controlId="formBasicEmail" className='mt-3'>
-                      <Form.Label>Ads Location</Form.Label>
-                      <Form.Select aria-label="Default select example" ref={AdsLocation} >
-                        {
-                          ['HOME', 'PAGES', 'INNER_PAGES']?.map((item, index) => (
-                            <option key={index} value={item}  selected={editPage?.AdvertisementLocation === item && item} >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase()}</option>
-                          ))
-                        }
-                      </Form.Select>
-                    </Form.Group>
+                        <Form.Label>Ads Location</Form.Label>
+                        <Form.Select aria-label="Default select example" ref={AdsLocation} >
+                          {
+                            ['HOME', 'PAGES', 'INNER_PAGES']?.map((item, index) => (
+                              <option key={index} value={item} selected={editPage?.AdvertisementLocation === item && item} >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase()}</option>
+                            ))
+                          }
+                        </Form.Select>
+                      </Form.Group>
                     </Col>
                     <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
                       <Form.Group controlId="formBasicEmail" className='mt-3' >
@@ -210,20 +241,25 @@ const EditAds = () => {
                       </Form.Group>
 
                       <Form.Group controlId="formBasicEmail" className='mt-3'>
-                      <Form.Label>ID Link  </Form.Label>
-                      <Form.Select aria-label="Default select example" ref={doctorRef} >
-                        {
-                          doctor?.map((item, index) => (
-                            <option key={index} value={item.IDDoctor} selected={editPage?.IDLink === item.IDDoctor && item.DoctorName}  defaultValue={item.DoctorName} >{item.DoctorName}</option>
-                          ))
-                        }
-                      </Form.Select>
-                    </Form.Group>
+                        <Form.Label>ID Link  </Form.Label>
+                        <Form.Select aria-label="Default select example" ref={doctorRef} >
+                          {/* {
+                            doctor?.map((item, index) => (
+                              <option key={index} value={item.IDDoctor} selected={editPage?.IDLink === item.IDDoctor && item.DoctorName} defaultValue={item.DoctorName} >{item.DoctorName}</option>
+                            ))
+                          } */}
+
+                          {data.doctor?.map((item, index) => (<option key={index} value={item.IDDoctor} selected={editPage?.IDLink === item.IDDoctor && item.DoctorName} defaultValue={item.DoctorName}>{'  '}{item.DoctorName}</option>))}
+                          {data.blog?.map((item, index) => (<option key={index} value={item.IDClientBlog} selected={editPage?.IDLink === item.IDClientBlog && item.ClientName} defaultValue={item.ClientName}> {item.BlogTitle}{' (  '}{item.ClientName}{' )  '}</option>))}
+                          {data.blogDoc?.map((item, index) => (<option key={index} value={item.IDDoctorBlog} selected={editPage?.IDLink === item.IDDoctorBlog && item.DoctorName} defaultValue={item.ClientName}>{item.BlogTitle}{' (   '} {item.DoctorName}{' ) '} </option>))}
+                          {data.adoption?.map((item, index) => (<option key={index} value={item.IDAdoption} selected={editPage?.IDLink === item.IDAdoption && item.PetName} defaultValue={item.PetName}> {item.PetStrain}{'/   '} {item.PetName}{' (  '} {item.ClientName}{' )  '}</option>))}
+                        </Form.Select>
+                      </Form.Group>
                     </Col>
                     <div className='d-flex justify-content-center align-content-center my-5'>
                       <div className='baseBtn'>
                         <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                          Add New Country
+                          Update Ads
                         </Button>
                       </div>
                     </div>

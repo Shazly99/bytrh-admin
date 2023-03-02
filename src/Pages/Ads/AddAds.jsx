@@ -13,7 +13,7 @@ const AddAds = () => {
   let navigate = useNavigate();
 
   // let { countries } = useContext(VendersContext);
-  let {countries, cities ,getCities} = useFetch()
+  let { countries, cities, getCities } = useFetch()
   const countriesRef = useRef(null);
   const doctorRef = useRef(null);
   const AdsService = useRef(null);
@@ -39,26 +39,56 @@ const AddAds = () => {
   }
 
   //** Doctor list
-  const [doctor, setDoctor] = useState(null)
+  const [data, setData] = useState({
+    doctor: null,
+    blog: null,
+    blogDoc: null,
+    adoption: null
+  });
+
   const handelSelectService = async (event) => {
     const service = event.target.value;
     if (service === 'NONE') {
-      console.log(service);
+      setData({
+        doctor: null,
+        blog: null,
+        blogDoc: null,
+        adoption: null
+      });
     } else if (service === 'URGENT_CONSULT' || service === 'CONSULT') {
-      let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors`, { IDPage: 1 }, apiheader)
-      console.log(service);
-      setDoctor(data.Response.Doctors);
+      const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/ajax`, {}, apiheader);
+      setData({
+        doctor: data.Response,
+        blog: null,
+        blogDoc: null,
+        adoption: null
+      });
     } else if (service === 'CLIENT_BLOG') {
-      console.log(service);
-
+      const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs/ajax`, {}, apiheader);
+      setData({
+        doctor: null,
+        blog: data.Response,
+        blogDoc: null,
+        adoption: null
+      });
     } else if (service === 'DOCTOR_BLOG') {
-      console.log(service);
-
+      const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs/ajax`, {}, apiheader);
+      setData({
+        doctor: null,
+        blog: null,
+        blogDoc: data.Response,
+        adoption: null
+      });
     } else if (service === 'ADOPTION') {
-      console.log(service);
+      const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/adoptions/ajax`, {}, apiheader);
+      setData({
+        doctor: null,
+        blog: null,
+        blogDoc: null,
+        adoption: data.Response
+      });
     }
   }
-
 
   const submit = e => {
     e.preventDefault()
@@ -205,16 +235,16 @@ const AddAds = () => {
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
                       <Form.Label>ID Link  </Form.Label>
                       <Form.Select aria-label="Default select example" ref={doctorRef} >
-                        {
-                          doctor?.map((item, index) => (
-                            <option key={index} value={item.IDDoctor}   >{item.DoctorName}</option>
-                          ))
-                        }
+                        {data.doctor?.map((item, index) => (<option key={index} value={item.IDDoctor}>{ '  '}{item.DoctorName}</option>))}
+                        {data.blog?.map((item, index) => (<option key={index} value={item.IDClientBlog}> {item.BlogTitle}{ ' (  '}{item.ClientName}{' )  '}</option>))}
+                        {data.blogDoc?.map((item, index) => (<option key={index} value={item.IDDoctorBlog}>{item.BlogTitle}{ ' (   '} {item.DoctorName}{' ) '} </option>))}
+                        {data.adoption?.map((item, index) => (<option key={index} value={item.IDAdoption}> {item.PetStrain}{ '/   '} {item.PetName}{ ' (  '} {item.ClientName}{ ' )  '}</option>))}
                       </Form.Select>
                     </Form.Group>
                   </Col>
-
-
+                  {/* 
+                  const [blogDoc, setBlogDoc] = useState(null)
+  const [adoption, setAdoption] = useState(null) */}
                   <div className='d-flex justify-content-center align-content-center my-5'>
                     <div className='baseBtn'>
                       <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>

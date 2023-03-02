@@ -17,6 +17,8 @@ function App() {
   const [loadingDoctors, setLoadingDoctors] = useState(false)
   const [fetchDoctors, setFetchDoctors] = useState([])
 
+ 
+
   async function getTokenDoctors() {
 
     setLoadingDoctors(true);
@@ -27,7 +29,7 @@ function App() {
       .then(res => {
         setFetchDoctors(res.data.Response.Doctors);
         setPagesCountDoctors(res.data.Response.Pages);
-        setLoadingDoctors(false);
+        setLoadingDoctors(false); 
       })
       .catch((error) => {
         console.log(error)
