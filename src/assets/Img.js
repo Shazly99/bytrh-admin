@@ -9,6 +9,8 @@ import ads from "./Images/ads.png";
 import view from "./Images/svg/view.svg";
 import dropdown from "./Images/svg/more-square.svg";
 import icon from "./Images/Ellipse 38.png";
+import search from "./Images/kisspng-mt-gox-chief-executive-management-system-business-searching-5b3ba1034696c2.1059044815306344992891.png";
+import searchNotFound from "./Images/50b508673f1bd07bc3022c3b62c3a3a7.webp";
 
 export default{ 
     // logo, 
@@ -21,5 +23,7 @@ export default{
     logo,
     ads,
     view,
-    icon
+    icon,
+    search,
+    searchNotFound
 }

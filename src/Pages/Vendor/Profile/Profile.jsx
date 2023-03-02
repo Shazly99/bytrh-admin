@@ -26,9 +26,8 @@ function Profile() {
     // console.log(localStorage.getItem("IDUser"));
     userProfileGet()
   }, [userProfile])
-  useEffect(() => {
-    // console.log(localStorage.getItem("IDUser"));
-
+  
+  useEffect(() => { 
   }, [userProfile])
 
   return (
@@ -86,43 +85,13 @@ function Profile() {
               </Col>
             </Row>
             <div className='d-flex justify-content-center align-content-center my-5'>
-              <Component.ButtonBase title={"Update Information"} bg={"primary"} path="/venderProfile " onclick={handleShow} /> 
+              <Component.ButtonBase title={"Update Information"} bg={"primary"} path={`/user/editUser/${userId}`} /> 
             </div>
 
           </Form>
         </div>
 
-        <div className="pp__profile-model">
-          {/* <a className='app__profile-model-a' onClick={handleShow}>
-            Change Password
-          </a> */}
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton className=' d-flex justify-content-center align-items-center'>
-              <Modal.Title className=' w-100 text-center' >Change Password</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Form>
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Old Password</Form.Label>
-                  <Form.Control type="password" />
-                </Form.Group>
-
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>New Password</Form.Label>
-                  <Form.Control type="password" />
-                </Form.Group>
-
-                <Form.Group controlId="formBasicEmail">
-                  <Form.Label>Confirm Password</Form.Label>
-                  <Form.Control type="password" />
-                </Form.Group>
-              </Form>
-            </Modal.Body>
-            <Modal.Footer className='d-flex justify-content-center align-items-center  p-0 m-0 '>
-              <Component.ButtonBase onclick={handleClose} title={'confirmation'} bg={'primary'} />
-            </Modal.Footer>
-          </Modal>
-        </div>
+ 
       </div>
     </>
   )

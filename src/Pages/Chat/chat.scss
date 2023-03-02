@@ -2,8 +2,8 @@
 
 .app__chat {
     margin: auto;
-    width: 95%;
-    background-color: #F5F8FA;
+    width: 100%;
+    background-color: #F5F8FA !important;
 
     @media screen and (max-width:400px) {
         width: 100% !important;
@@ -32,7 +32,7 @@
             background-color: #FFFFFF;
             height: 100% !important;
             border-radius: 15px;
-            padding: 22px 29px;
+            padding: 10px  15px;
             // overflow-y: scroll;
 
             .app__chat_list-cards {
@@ -41,20 +41,30 @@
 
             .app__chat_list {
                 overflow-y: scroll;
-                max-height: 540px;
-
+                max-height: 540px; 
                 margin-top: 15px;
                 display: flex;
                 flex-direction: column;
                 gap: 15px;
-
+                .nav-link {
+                    padding: 8px 10px; 
+                    background-color: #fff;
+                }
+                
+                .nav-link:active,
+                .nav-link:focus,
+                .nav-link:hover {
+                    background-color: rgba($color: #009ef7, $alpha: 0.1);  
+                    border-radius: 5px;
+                    color: #fff;
+                    outline: none;
+                }
+                
                 .user {
                     width: 100%;
 
-                    @include flex(flex, left, center, row);
-                    gap: 15px;
-
-                    .img {}
+                    @include flex(flex, space-between, center, row);
+                    gap: 15px; 
 
                     .content {
 

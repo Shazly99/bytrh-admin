@@ -9,20 +9,22 @@ import { Outlet, useParams } from 'react-router-dom';
 import { ChatContext } from '../../../context/ChatStore';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
+import _ from 'lodash';
 
 const ChatClient = () => {
   const { id } = useParams();
   const inputRef = useRef(null);
-  let { userReplied,chatEnd } = useContext(ChatContext);
+  let { userReplied, chatEnd,setCChatSupport,cChatSupport } = useContext(ChatContext);
   const [inputValue, setInputValue] = useState('');
 
   const [clientChatSupport, setClientChatSupport] = useState([])
 
-  const clientlist = async () => {
+  const clientlist = _.debounce(async () => {
     let { data } = await PostData(`https://bytrh.com/api/admin/chat/client/list`, {}, apiheader)
     console.log(data.Response.ClientChatSupport);
-    setClientChatSupport(data.Response.ClientChatSupport)
-  }
+    // setClientChatSupport(data.Response.ClientChatSupport)
+    setCChatSupport(data.Response.ClientChatSupport)
+  }, 1000)
 
   const adminSendMess = async (value) => {
     let data = await PostData(`https://bytrh.com/api/admin/chat/client/reply`,
@@ -32,6 +34,7 @@ const ChatClient = () => {
         ChatSupportType: 'TEXT'
       }
       , apiheader);
+
     // console.log(data);
   }
 
@@ -61,13 +64,13 @@ const ChatClient = () => {
     }
   }
 
-  useEffect(() => {  
+  useEffect(() => {
     clientlist()
-  }, [id,chatEnd])
+  }, [id, chatEnd])
   return (
     <div className='app__chat'>
       <Row className="app__chat__container ">
-        <Component.ClientList clientChatSupport={clientChatSupport} />
+        <Component.ClientList cChatSupport={cChatSupport} />
         <Col xl={8} lg={8} md={6} sm={12} className='app__chat_messages '>
           <div className='shadow app__chat_list-card'>
             <div className={`app__Live_chat chat-body  ${id ? '' : 'bg-dark'}`} style={{ background: 'rgb(217 217 217 / 28%)' }}>
@@ -91,32 +94,31 @@ const ChatClient = () => {
             {
               userReplied === 0 ?
                 <>
-                  {
-                    chatEnd === 'ENDED' ?
-                      <Stack sx={{ width: '100%' }} spacing={2}>
-                        <Alert severity="error">Chat has been closed!</Alert>
-                      </Stack> :
-                      <>
-                        {
-                          id ?
-                            <div className="app__send">
-                              <input type="text" className="form-control" ref={inputRef} />
-                              <button className='btn shadow-lg bgChatBtn' onClick={handeAdminMess} >
-                                <Icons.send color='#fff' size={20} />
-                              </button>
+                  { 
+                      chatEnd === 'ENDED' ?
+                        <Stack sx={{ width: '100%' }} spacing={2}>
+                          <Alert severity="error">Chat has been closed!</Alert>
+                        </Stack> :
+                        <>
+                          {
+                            id ?
+                              <div className="app__send">
+                                <input type="text" className="form-control" ref={inputRef} />
+                                <button className='btn shadow-lg bgChatBtn' onClick={handeAdminMess} >
+                                  <Icons.send color='#fff' size={20} />
+                                </button>
 
-                              <input type="file" id="file-input" accept="image/*" onChange={handleFileSelect} style={{ display: 'none' }} />
-                              <label htmlFor="file-input" className="btn btn-info bgChatBtn shadow" style={{ pointerEvents: 'all' }}>
-                                <Icons.imageUpload color='#fff' size={20} />
-                              </label>
+                                <input type="file" id="file-input" accept="image/*" onChange={handleFileSelect} style={{ display: 'none' }} />
+                                <label htmlFor="file-input" className="btn btn-info bgChatBtn shadow" style={{ pointerEvents: 'all' }}>
+                                  <Icons.imageUpload color='#fff' size={20} />
+                                </label>
 
-                            </div>
-                            :
-                            ''
-                        }
-                      </>
+                              </div>
+                              :
+                              ''
+                          }
+                        </>
                   }
-
                 </> :
                 <>
                   {
