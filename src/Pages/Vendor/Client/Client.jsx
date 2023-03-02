@@ -5,23 +5,30 @@ import Box from "@mui/material/Box";
 import { PostData } from '../../../utils/fetchData';
 import { apiheader } from './../../../utils/fetchData';
 import Icons from "../../../constants/Icons.js";
+import _ from 'lodash';
 
 const Clients = () => {
   const [page, setPage] = React.useState(1);
   const [usersList, setuserList] = React.useState(null);
   const [PagesNumber, setPagesNumber] = React.useState('')
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (event, value) => {
     setPage(value);
   };
 
-  const userList = async (page) => {
+  const userList = _.debounce(async (page) => {
+    setIsLoading(true);
+    // if (isLoading === true) {      
     let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { IDPage: page }, apiheader)
     setuserList(data.Response.Clients)
     setPagesNumber(data.Response.Pages);
-  }
+    // }
+  }, 1000)
   useEffect(() => {
     userList(page)
+    // if (isLoading === true) {
+    // }
   }, [page, PagesNumber])
 
   // to fixed problem because Pagination count need a number 
@@ -46,26 +53,26 @@ const Clients = () => {
     console.log(event.target.value);
     setSearchValue(event.target.value);
   };
-    // filter
-    const [selectedOption, setSelectedOption] = useState(null);
+  // filter
+  const [selectedOption, setSelectedOption] = useState(null);
 
-    const handleOptionChange = async (event) => {
-      const selectedValue = event.target.value;
-      setSelectedOption(selectedValue);
-      // filter your content based on the selected option 
-      if (selectedValue === "ACTIVE") {
-        let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { ClientStatus: selectedValue }, apiheader)
-        setuserList(data.Response.Clients)
-      } else if (selectedValue === "INACTIVE") {
-        let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { ClientStatus: selectedValue }, apiheader)
-        setuserList(data.Response.Clients)
-      } else if (selectedValue === "BLOCKED") {
-        let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { ClientStatus: selectedValue }, apiheader)
-        setuserList(data.Response.Clients)
-      } else if (selectedValue === "All") {
-        userList()
-      }
-    };
+  const handleOptionChange = async (event) => {
+    const selectedValue = event.target.value;
+    setSelectedOption(selectedValue);
+    // filter your content based on the selected option 
+    if (selectedValue === "ACTIVE") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { ClientStatus: selectedValue }, apiheader)
+      setuserList(data.Response.Clients)
+    } else if (selectedValue === "INACTIVE") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { ClientStatus: selectedValue }, apiheader)
+      setuserList(data.Response.Clients)
+    } else if (selectedValue === "BLOCKED") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { ClientStatus: selectedValue }, apiheader)
+      setuserList(data.Response.Clients)
+    } else if (selectedValue === "All") {
+      userList()
+    }
+  };
   return (
     <>
       {

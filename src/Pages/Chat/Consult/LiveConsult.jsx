@@ -34,7 +34,7 @@ const LiveConsult = () => {
 
   return (
 
-    <div className="app__chat__Consult">
+    <div className="app__chat__Consult  ">
       <div className='app__chat'>
         <div >
           <Component.SubNav sub__nav={[{ name: "Consults List", path: '/chat/consult' }, { name: "Consult ", path: `/chat/consult/details/${id}` }]} />
