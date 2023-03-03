@@ -1,15 +1,15 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { Col, Row } from 'react-bootstrap'
-import '../chat.scss'
-import Icons from '../../../constants/Icons';
-import Img from '../../../assets/Img';
-import Component from '../../../constants/Component';
-import { PostData, apiheader, GetData } from './../../../utils/fetchData';
-import { Outlet, useParams } from 'react-router-dom';
-import { ChatContext } from '../../../context/ChatStore';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import _ from 'lodash';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
+import { Outlet, useParams } from 'react-router-dom';
+import Img from '../../../assets/Img';
+import Component from '../../../constants/Component';
+import Icons from '../../../constants/Icons';
+import { ChatContext } from '../../../context/ChatStore';
+import '../chat.scss';
+import { apiheader, PostData } from './../../../utils/fetchData';
 
 const ChatClient = () => {
   const { id } = useParams();
