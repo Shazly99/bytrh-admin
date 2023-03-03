@@ -113,6 +113,28 @@ const ClientList = () => {
                 </div>
 
             </Col>
+            {/* <React.Fragment key={index} >
+                                    <Link to={`/chat/doctors/${chat?.IDDoctorChatSupport}`} className="user text-dark"> 
+                                        <div
+                                            style={{
+                                                color: colors[index % colors.length].color,
+                                                backgroundColor: `rgba(${colors[index % colors.length].rgba}, 0.1)`,
+                                            }}
+                                            className="circle symbol-label"
+                                        >
+                                            {chat?.DoctorName.split(" ").map(word => word.charAt(0).toUpperCase()).join("")}
+                                        </div>
+                                        <div className="content">
+                                            <div className="name">
+                                                {chat?.DoctorName}
+                                            </div>
+                                            <div className="email">
+                                                {chat?.DoctorPhone}
+                                            </div>
+                                        </div>
+
+                                    </Link>
+                                </React.Fragment> */}
         </>
     )
 }
