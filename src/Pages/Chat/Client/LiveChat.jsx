@@ -55,7 +55,7 @@ function LiveChat() {
 
                 const { data } = await PostData(`https://bytrh.com/api/admin/chat/client/receive`, { IDClientChatSupport: id, IDChatSupportDetails: IdChatSupport }, apiheader);
                 if (clientChatSupport !== []) {
-                    setChat([...clientChatSupport, ...data.Response]);
+                    setClientChatSupport([...clientChatSupport, ...data.Response]);
                 }
             } catch (error) {
                 if (error.response && error.response.status === 429) {
@@ -63,7 +63,7 @@ function LiveChat() {
                     setTimeout(async () => {
                         const { data } = await PostData(`https://bytrh.com/api/admin/chat/client/receive`, { IDClientChatSupport: id, IDChatSupportDetails: IdChatSupport }, apiheader);
                         if (clientChatSupport !== []) {
-                            setChat([...clientChatSupport, ...data.Response]);
+                            setClientChatSupport([...clientChatSupport, ...data.Response]);
                         }
                     }, (retryAfter || 60) * 1000);
                 }
@@ -102,10 +102,7 @@ function LiveChat() {
         }
         fetchClientDetail();
         chatReceive()
-        if (chatStatus === 'ONGOING') {
-        } else {
-            console.log('برررررررررررررررررررررررررررررررررررررررررررررررررررره 22222222');
-        }
+ 
         let interval = setInterval(() => {
             chatReceive()
         }, 5000);

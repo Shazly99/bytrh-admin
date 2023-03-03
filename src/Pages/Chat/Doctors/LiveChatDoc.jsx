@@ -55,7 +55,7 @@ const LiveChatDoc = () => {
 
         const { data } = await PostData(`https://bytrh.com/api/admin/chat/doctor/receive`, { IDDoctorChatSupport: id, IDChatSupportDetails: IdChatSupport }, apiheader);
         if (clientChatSupport !== []) {
-          setChat([...clientChatSupport, ...data.Response]);
+          setClientChatSupport([...clientChatSupport, ...data.Response]);
         }
       } catch (error) {
         if (error.response && error.response.status === 429) {
@@ -63,7 +63,7 @@ const LiveChatDoc = () => {
           setTimeout(async () => {
             const { data } = await PostData(`https://bytrh.com/api/admin/chat/client/receive`, { IDDoctorChatSupport: id, IDChatSupportDetails: IdChatSupport }, apiheader);
             if (clientChatSupport !== []) {
-              setChat([...clientChatSupport, ...data.Response]);
+              setClientChatSupport([...clientChatSupport, ...data.Response]);
             }
           }, (retryAfter || 60) * 1000);
         }
