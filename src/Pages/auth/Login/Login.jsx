@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
 import Img from '../../../assets/Img';
 import Component from '../../../constants/Component';
@@ -136,7 +136,7 @@ const Login = () => {
                             </div>
                         </Col> 
                         <Col xl={6} lg={6} xd={6} sm={12} className='avatar'>
-                            <img src={Img.avatar} />
+                            <img src={Img.avatar} alt='avatar' />
                         </Col>
                     </Row>
                 </Container>

@@ -9,7 +9,7 @@ import Form from 'react-bootstrap/Form';
 import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { Toaster, toast } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import Icons from '../../../../constants/Icons';
 
 const Edit = () => {

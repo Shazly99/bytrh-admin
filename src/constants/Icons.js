@@ -34,6 +34,8 @@ import { RxUpdate as uploadItem } from "react-icons/rx";
 import { MdBookmarkAdded as Added } from "react-icons/md";
 import { FaPowerOff as poweroff } from "react-icons/fa";
 
+import { MdPets as pets } from 'react-icons/md'
+
 export default{
     poweroff,
     uploadItem,
@@ -65,5 +67,6 @@ export default{
     Clients,
     chat,
     doctor,
-    imageUpload
+    imageUpload,
+    pets
 }

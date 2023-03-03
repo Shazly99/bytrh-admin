@@ -21,6 +21,11 @@ const routes = [
       name: "Admin",
       icon: <Icons.user size={20}/>,
     },
+    {
+      path: "/adoption",
+      name: "Adoption",
+      icon: <Icons.pets size={20}/>,
+    },
  
   ];
 

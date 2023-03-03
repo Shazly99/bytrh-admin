@@ -3,11 +3,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import './Sidebar.scss'
 import img from '../../assets/Img'
 import routes from './route.js';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { Tooltip as ReactTooltip } from 'react-tooltip'
-import { icons } from 'react-icons';
-import Icons from "../../constants/Icons";
+// import { icons } from 'react-icons';
+// import Icons from "../../constants/Icons";
 import { VendersContext } from "../../context/Store";
 
 const Sidebar = ({ children }) => {

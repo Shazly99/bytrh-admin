@@ -216,5 +216,64 @@ td {
       padding-left: 20px !important;
       padding-right: 10px !important;
     }
+
+    .input-group input#DoctorPhone{
+      padding-left: 45px !important;
+    }
   }
   
+
+  
+@media screen and (max-width: 570px) {
+
+  .personal-info h6,
+  .personal-info .fs-6,
+  .personal-info .h6,
+  .doc-info h6,
+  .doc-info .fs-6,
+  .doc-info .h6,
+  .license .d-flex h6 {
+      font-size: 16px !important;
+  }
+
+  .personal-info p , .personal-info small,
+  .doc-info p , .doc-info small,
+  .license .d-flex small{
+      font-size: 14px !important;
+  } 
+
+}
+
+@media screen and (max-width: 400px) {
+
+  .personal-info h6,
+  .personal-info .fs-6,
+  .personal-info .h6,
+  .doc-info h6,
+  .doc-info .fs-6,
+  .doc-info .h6,
+  .license .d-flex h6 {
+      font-size: 14px !important;
+  }
+
+  .personal-info p , .personal-info small,
+  .doc-info p , .doc-info small,
+  .license .d-flex small{
+      font-size: 12px !important;
+  } 
+
+}
+
+
+.img-doc img ,
+.license img {
+  height: 180px;
+}
+
+@media screen and (max-width: 500px) {
+  .img-doc img ,
+  .license img {
+    height: 150px;
+    min-height: 150px;
+  }
+}

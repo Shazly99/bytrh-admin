@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import $ from 'jquery';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
@@ -9,7 +9,7 @@ import Component from '../../../constants/Component';
 // import { apiheader } from './../../../utils/fetchData';
 
 
-function AddDoctor({ getTokenDoctors, fetchCountriesBytra }) {
+function AddDoctor({ fetchCountriesBytra }) {
   // get cities Bytra
   const [fetchCitiesBytra, setFetchCitiesBytra] = useState([]);
   async function getCitiesBytra(idcountry) {
@@ -103,7 +103,7 @@ function AddDoctor({ getTokenDoctors, fetchCountriesBytra }) {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': 'Bearer ' + localStorage.getItem('token'),
-      },
+        },
       });
 
       setMessage(data.ApiMsg);
@@ -113,7 +113,7 @@ function AddDoctor({ getTokenDoctors, fetchCountriesBytra }) {
 
         setApiCode(data.Success);
         setTimeout(() => {
-          getTokenDoctors();
+          // getTokenDoctors();
           navigate('/doctors');
         }, 2000);
       }

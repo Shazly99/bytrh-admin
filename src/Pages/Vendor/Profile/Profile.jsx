@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import Component from '../../../constants/Component';
-import { Col, FloatingLabel, Modal, Row } from 'react-bootstrap';
+import { Col, Modal, Row } from 'react-bootstrap';
 import './Profile.scss'
-import { Button } from 'react-bootstrap/';
-import axios from 'axios';
+// import { Button } from 'react-bootstrap/';
+// import axios from 'axios';
 import { apiheader, GetData } from '../../../utils/fetchData';
 import { VendersContext } from '../../../context/Store';
 

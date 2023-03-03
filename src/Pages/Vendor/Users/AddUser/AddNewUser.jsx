@@ -9,7 +9,7 @@ import 'react-phone-input-2/lib/style.css'
 import Form from 'react-bootstrap/Form';
 import { apiheader, PostData } from '../../../../utils/fetchData';
 import { useNavigate } from 'react-router-dom';
-import { Toaster, toast } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 const AddNewUser = () => {
     let navigate = useNavigate();

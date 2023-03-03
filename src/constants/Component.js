@@ -24,10 +24,13 @@ import Doctors from './../Pages/Vendor/Doctor/Doctors';
 import AddDoctor from './../Pages/Vendor/Doctor/AddDoctor';
 import EditDoctor from './../Pages/Vendor/Doctor/EditDoctor';
 import DoctorFields from './../Pages/Vendor/Doctor/DoctorFields';
+import DoctorCategory from './../Pages/Vendor/Doctor/DoctorCategory';
+import DoctorProfile from '../Pages/Vendor/Doctor/DoctorProfile';
 import ClientList from './../Pages/Chat/Client/ClientList';
 import LiveChat from './../Pages/Chat/Client/LiveChat';
 import DoctorList from './../Pages/Chat/Doctors/DoctorList';
 import LiveChatDoc from './../Pages/Chat/Doctors/LiveChatDoc';
+import Adoption from '../Pages/Vendor/Adoption/Adoption';
 
 export default {
     // Layout 
@@ -64,6 +67,12 @@ export default {
     AddDoctor,
     EditDoctor,
     DoctorFields,
+    DoctorCategory,
+    DoctorProfile,
+
+
+    // Adoption
+    Adoption,
 
     // Components
     Navber,

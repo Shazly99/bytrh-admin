@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 // import data from './data.js';
 import Icons from "../../../constants/Icons.js";
-import { useEffect } from 'react';
-import { Table, DropdownButton, Dropdown, NavDropdown } from "react-bootstrap";
+// import { useState , useEffect } from 'react';
+import { Table, DropdownButton, Dropdown } from "react-bootstrap";
 import { apiheader, PostData } from '../../../utils/fetchData.js';
 import { Link } from 'react-router-dom';
-import { Toaster, toast } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
 function UsersTable({ usersList, userList }) {
     // const [data, setData] = useState({});

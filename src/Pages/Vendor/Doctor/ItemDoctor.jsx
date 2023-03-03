@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { FiEdit3 } from 'react-icons/fi';
-import { AiOutlineDelete } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+// import { FiEdit3 } from 'react-icons/fi';
+// import { AiOutlineDelete } from 'react-icons/ai';
+import { Link, useNavigate } from 'react-router-dom';
 import { DropdownButton, Dropdown, Modal, Form, Button } from 'react-bootstrap';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { apiheader, PostData } from '../../../utils/fetchData';
 
 
@@ -54,13 +54,20 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
     }
 
 
+    let navigate = useNavigate();
+
+    const goToDoctorProfile = (id) => {
+        navigate(`./doctorProfile/${id}`);
+    }
+
+
 
     return (
         <>
             <tr>
                 <td>
-                    <div className='d-flex flex-column justify-content-center align-content-center' style={{gap:'0'}}>
-                        <span className='ClientName'>  {nameDoc}    </span>
+                    <div className='d-flex flex-column justify-content-center align-content-center' onClick={() => goToDoctorProfile(id)} style={{gap:'0' , cursor: 'pointer'}}>
+                        <span className='ClientName'> {nameDoc} </span>
                         <span className='ClientPhone'> {phone} </span>
                     </div>
                 </td>
@@ -102,6 +109,9 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                 </Dropdown.Item>
                                 <Dropdown.Item as={Link} to={`/doctors/doctorFields/${id}`}>
                                     Doctor Fields
+                                </Dropdown.Item>
+                                <Dropdown.Item as={Link} to={`/doctors/doctorCategory/${id}`}>
+                                    Doctor Animals Categories
                                 </Dropdown.Item>
                                 <Dropdown.Item eventKey="balance" onClick={handleShowModal}>Balance check</Dropdown.Item>
                                 <Modal show={showModal} onHide={handleCloseModal} centered >

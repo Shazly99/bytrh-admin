@@ -4,7 +4,7 @@ import './Users.scss'
 import Icons from "../../../constants/Icons.js";
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import { GetData, PostData } from '../../../utils/fetchData';
+import { PostData } from '../../../utils/fetchData';
 import { apiheader } from './../../../utils/fetchData';
 
 function Users() {
