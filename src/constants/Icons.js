@@ -42,6 +42,7 @@ import { CiMedicalCross as medical } from "react-icons/ci";
 import { RiAdvertisementLine as ads } from "react-icons/ri";
 import { FaBloggerB as blog } from "react-icons/fa"; 
 import { TfiCommentAlt as comments } from "react-icons/tfi"; 
+import { MdPets as pets } from 'react-icons/md'
 
 
 export default{
@@ -83,5 +84,6 @@ export default{
     Clients,
     chat,
     doctor,
-    imageUpload
+    imageUpload,
+    pets
 }

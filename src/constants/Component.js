@@ -53,6 +53,7 @@ import BlogClient from './../Pages/Blogs/Client/BlogClient';
 import { BlogDoctor } from './../Pages/Blogs/Doc/BlogDoctor';
 import BlogClientDetails from './../Pages/Blogs/Client/BlogClientDetails';
 import BlogDoctorDetails from './../Pages/Blogs/Doc/BlogDoctorDetails';
+import Adoption from '../Pages/Vendor/Adoption/Adoption';
 
 export default {
     // Layout 
@@ -125,6 +126,9 @@ export default {
     SubNav,
     Sildebar, 
     ButtonBase,
-    BaseHeader
+    BaseHeader,
+
+    // Adoption
+    Adoption,
 }
 

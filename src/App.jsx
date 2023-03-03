@@ -93,6 +93,15 @@ function App() {
             { path: 'doctorfields/:id', element: <ProtectedRoutes> <Component.DoctorFields /></ProtectedRoutes> },
           ]
         },
+
+        //  ! Rashed Adoption component
+        {
+          path: '/adoption', children: [
+            { index: true, element: <ProtectedRoutes><Component.Adoption /> </ProtectedRoutes> },
+          ]
+
+        },
+        
         // ToDo user profile
         { path: '/venderProfile', element: <ProtectedRoutes>  <Component.Profile /></ProtectedRoutes> },
         // ToDo Animal Categoryclient
