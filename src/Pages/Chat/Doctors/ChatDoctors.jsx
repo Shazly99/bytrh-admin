@@ -11,24 +11,28 @@ import _ from 'lodash';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 const ChatDoctors = () => {
-  const { id } = useParams(); 
-  let { chatEnd, userReplied ,docChatSupport, setDocChatSupport} = useContext(ChatContext);
- 
-  const clientlist =_.debounce( async () => {
+  const { id } = useParams();
+  let { setmassSend, chatEnd, userReplied, docChatSupport, setDocChatSupport } = useContext(ChatContext);
+
+  const clientlist = _.debounce(async () => {
     let { data } = await PostData(`https://bytrh.com/api/admin/chat/doctor/list`, {}, apiheader)
     console.log(data.Response);
     setDocChatSupport(data.Response.DoctorChatSupport)
-  },1000)
+  }, 1000)
 
   const adminSendMess = async (value) => {
-    let data = await PostData(`https://bytrh.com/api/admin/chat/doctor/reply`,
+    await PostData(`https://bytrh.com/api/admin/chat/doctor/reply`,
       {
         IDDoctorChatSupport: id,
         ChatSupportMessage: value,
         ChatSupportType: 'TEXT'
       }
-      , apiheader);
-    // console.log(data);
+      , apiheader).then((res) => {
+        if (res.data.Success === true) {
+          console.log('setmassSend true');
+          setmassSend(true) 
+        } 
+      });
   }
   useEffect(() => {
     clientlist()
@@ -52,14 +56,19 @@ const ChatDoctors = () => {
   async function handleFileSelect(event) {
     console.log(event.target.files);
     setSelectedFile();
-    if (selectedFile !== null) {  
+    if (selectedFile !== null) {
       let data = await PostData(`https://bytrh.com/api/admin/chat/doctor/reply`,
-      {
-        IDDoctorChatSupport: id,
-        ChatSupportMessage:event.target.files[0]  ,
-        ChatSupportType: 'IMAGE'
-      }
-      , apiheader);
+        {
+          IDDoctorChatSupport: id,
+          ChatSupportMessage: event.target.files[0],
+          ChatSupportType: 'IMAGE'
+        }
+        , apiheader).then((res) => {
+          if (res.data.Success === true) {
+            console.log('setmassSend true');
+            setmassSend(true) 
+          } 
+        });
       console.log(data);
     }
   }
@@ -90,30 +99,30 @@ const ChatDoctors = () => {
             {
               userReplied === 0 ?
                 <>
-                  { 
-                      chatEnd === 'ENDED' ?
-                        <Stack sx={{ width: '100%' }} spacing={2}>
-                          <Alert severity="error">Chat has been closed!</Alert>
-                        </Stack> :
-                        <>
-                          {
-                            id ?
-                              <div className="app__send">
-                                <input type="text" className="form-control" ref={inputRef} />
-                                <button className='btn shadow-lg bgChatBtn' onClick={handeAdminMess} >
-                                  <Icons.send color='#fff' size={20} />
-                                </button>
+                  {
+                    chatEnd === 'ENDED' ?
+                      <Stack sx={{ width: '100%' }} spacing={2}>
+                        <Alert severity="error">Chat has been closed!</Alert>
+                      </Stack> :
+                      <>
+                        {
+                          id ?
+                            <div className="app__send">
+                              <input type="text" className="form-control" ref={inputRef} />
+                              <button className='btn shadow-lg bgChatBtn' onClick={handeAdminMess} >
+                                <Icons.send color='#fff' size={20} />
+                              </button>
 
-                                <input type="file" id="file-input" accept="image/*" onChange={handleFileSelect} style={{ display: 'none' }} />
-                                <label htmlFor="file-input" className="btn btn-info bgChatBtn shadow" style={{ pointerEvents: 'all' }}>
-                                  <Icons.imageUpload color='#fff' size={20} />
-                                </label>
+                              <input type="file" id="file-input" accept="image/*" onChange={handleFileSelect} style={{ display: 'none' }} />
+                              <label htmlFor="file-input" className="btn btn-info bgChatBtn shadow" style={{ pointerEvents: 'all' }}>
+                                <Icons.imageUpload color='#fff' size={20} />
+                              </label>
 
-                              </div>
-                              :
-                              ''
-                          }
-                        </>
+                            </div>
+                            :
+                            ''
+                        }
+                      </>
                   }
                 </> :
                 <>

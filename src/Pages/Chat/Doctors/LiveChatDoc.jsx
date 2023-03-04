@@ -11,7 +11,7 @@ import _ from 'lodash';
 
 const LiveChatDoc = () => {
   const { id } = useParams();
-  let { setUserReplied, userReplied, setchatEnd } = useContext(ChatContext);
+  let { setmassSend, setUserReplied, massSend, setchatEnd } = useContext(ChatContext);
   const [isOn, setIsOn] = useLocalStorage('power', true);
 
   const [clientChatSupport, setClientChatSupport] = useState([]);
@@ -49,8 +49,7 @@ const LiveChatDoc = () => {
   };
   const chatReceive = _.debounce(async () => {
     if (chatStatus === 'ONGOING') {
-      console.log('اطلع بسرعه');
-
+      console.log('اطلع بسرعه'); 
       try {
 
         const { data } = await PostData(`https://bytrh.com/api/admin/chat/doctor/receive`, { IDDoctorChatSupport: id, IDChatSupportDetails: IdChatSupport }, apiheader);
@@ -103,6 +102,7 @@ const LiveChatDoc = () => {
     let interval = setInterval(() => {
       chatReceive()
     }, 5000);
+
     return () => {
       clearInterval(interval);
       chatReceive()
@@ -110,6 +110,16 @@ const LiveChatDoc = () => {
 
 
   }, [id, IdChatSupport, chatStatus]);
+
+  useEffect(() => {
+    if (massSend === true) {
+      console.log('sucess');
+      chatReceive()
+      setmassSend(false)
+    } else {
+      console.log('error');
+    }
+  }, [massSend]);
 
   useEffect(() => {
     setChat(null)
@@ -126,46 +136,46 @@ const LiveChatDoc = () => {
         </div>
       </div>
       {
-                isLoading ?
-      <ScrollToBottom className="message-container">
-        {clientChatSupport?.map((messageContent, index) => {
-          return (
-            <div
-              key={index}
-              className="message"
-              id={messageContent.ChatSupportSender === "USER" ? "other" : "you"}
-            >
-              <div>
-                <div className="message-content">
-                  {
-                    messageContent.ChatSupportType === "TEXT" &&
-                    <p>{messageContent.ChatSupportMessage}</p>
-                  }
-                  {
-                    messageContent.ChatSupportType === "IMAGE" &&
-                    <img src={messageContent.ChatSupportMessage} width="100%" className='rounded-3 w-50' />
-                  }
-                  {
-                    messageContent.ChatSupportType === "AUDIO" &&
-                    <audio ref={audioRef} controls>
-                      <source src={messageContent.ChatSupportMessage} type="audio/ogg" />
-                      <source src={messageContent.ChatSupportMessage} type="audio/mpeg" />
-                      Your browser does not support the audio element.
-                    </audio>
+        isLoading ?
+          <ScrollToBottom className="message-container">
+            {clientChatSupport?.map((messageContent, index) => {
+              return (
+                <div
+                  key={index}
+                  className="message"
+                  id={messageContent.ChatSupportSender === "USER" ? "other" : "you"}
+                >
+                  <div>
+                    <div className="message-content">
+                      {
+                        messageContent.ChatSupportType === "TEXT" &&
+                        <p>{messageContent.ChatSupportMessage}</p>
+                      }
+                      {
+                        messageContent.ChatSupportType === "IMAGE" &&
+                        <img src={messageContent.ChatSupportMessage} width="100%" className='rounded-3 w-50' />
+                      }
+                      {
+                        messageContent.ChatSupportType === "AUDIO" &&
+                        <audio ref={audioRef} controls>
+                          <source src={messageContent.ChatSupportMessage} type="audio/ogg" />
+                          <source src={messageContent.ChatSupportMessage} type="audio/mpeg" />
+                          Your browser does not support the audio element.
+                        </audio>
 
 
-                  }
+                      }
+                    </div>
+                    <div className="message-meta">
+                      <p id="time">{messageContent.CreateDate}</p>
+                      {/* <p id="author">{messageContent.ChatSupportSender}</p> */}
+                    </div>
+                  </div>
                 </div>
-                <div className="message-meta">
-                  <p id="time">{messageContent.CreateDate}</p>
-                  {/* <p id="author">{messageContent.ChatSupportSender}</p> */}
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </ScrollToBottom>:'loading...'
-}
+              );
+            })}
+          </ScrollToBottom> : 'loading...'
+      }
     </>
   )
 }

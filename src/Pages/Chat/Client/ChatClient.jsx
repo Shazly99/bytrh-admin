@@ -14,7 +14,7 @@ import { apiheader, PostData } from './../../../utils/fetchData';
 const ChatClient = () => {
   const { id } = useParams();
   const inputRef = useRef(null);
-  let { userReplied, chatEnd,setCChatSupport,cChatSupport } = useContext(ChatContext);
+  let { setmassSend ,userReplied, chatEnd,setCChatSupport,cChatSupport } = useContext(ChatContext);
   const [inputValue, setInputValue] = useState('');
 
   const [clientChatSupport, setClientChatSupport] = useState([])
@@ -33,7 +33,12 @@ const ChatClient = () => {
         ChatSupportMessage: value,
         ChatSupportType: 'TEXT'
       }
-      , apiheader);
+      , apiheader).then((res) => {
+        if (res.data.Success === true) {
+          console.log('setmassSend true');
+          setmassSend(true) 
+        } 
+      });;
 
     // console.log(data);
   }
@@ -59,7 +64,12 @@ const ChatClient = () => {
           ChatSupportMessage: event.target.files[0],
           ChatSupportType: 'IMAGE'
         }
-        , apiheader);
+        , apiheader).then((res) => {
+          if (res.data.Success === true) {
+            console.log('setmassSend true');
+            setmassSend(true) 
+          } 
+        });;
       // console.log(data);
     }
   }

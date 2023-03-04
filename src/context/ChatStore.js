@@ -9,6 +9,7 @@ function ChatStore({ children }) {
   const [chatEnd, setchatEnd] = useState(null); 
   const [cChatSupport, setCChatSupport] = useState(null); 
   const [docChatSupport, setDocChatSupport] = useState(null); 
+  const [massSend, setmassSend] = useState(false); 
   
   useEffect(() => {
     
@@ -17,7 +18,7 @@ function ChatStore({ children }) {
 
   return (
     <>
-      <ChatContext.Provider value={{docChatSupport,setDocChatSupport,setCChatSupport, cChatSupport,chatEnd,setchatEnd,setUserReplied ,userReplied}}>
+      <ChatContext.Provider value={{setmassSend,massSend,docChatSupport,setDocChatSupport,setCChatSupport, cChatSupport,chatEnd,setchatEnd,setUserReplied ,userReplied}}>
         {children}
       </ChatContext.Provider>
     </>
