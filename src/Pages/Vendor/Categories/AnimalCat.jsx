@@ -22,7 +22,7 @@ const AnimalCat = () => {
 
       setAnimal(data.Response.AnimalCategories)
       setPagesNumber(data.Response.Pages);
-    }).then((error) => {
+    }).catch((error) => {
       if (error.response && error.response.status === 429) {
         const retryAfter = error.response.headers['retry-after'];
         setTimeout(() => {

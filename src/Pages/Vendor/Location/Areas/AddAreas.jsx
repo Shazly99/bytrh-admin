@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { apiheader, PostData } from '../../../../utils/fetchData';
 import { Col, Container, Row, Form, Button } from 'react-bootstrap';
@@ -13,8 +13,8 @@ import useFetch from './../../../../utils/useFetch';
 const AddAreas = () => {
   let navigate = useNavigate();
   // let { countries, cities, getCities } = useContext(VendersContext);
-  let {countries, cities ,getCities} = useFetch()
-  
+  let { countries, cities, getCities } = useFetch()
+
   const [selectedCountry, setSelectedCountry] = useState("");
 
   const AreasNameEn = useRef();
@@ -25,7 +25,7 @@ const AddAreas = () => {
 
   const handelSelectCountry = (event) => {
     const selectedCountryId = event.target.value;
-    console.log(selectedCountryId); 
+    console.log(selectedCountryId);
     getCities(selectedCountryId)
   }
   const submit = e => {
@@ -84,7 +84,7 @@ const AddAreas = () => {
 
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
                       <Form.Label>Country</Form.Label>
-                      <Form.Select aria-label="Default select example"  onClick={handelSelectCountry}>
+                      <Form.Select aria-label="Default select example" onClick={handelSelectCountry}>
                         {/* <option>{countries[1].CountryName}</option> */}
                         {
                           countries?.map((item, index) => (
@@ -93,7 +93,7 @@ const AddAreas = () => {
                         }
                       </Form.Select>
                     </Form.Group>
-                        
+
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
                       <Form.Label>Areas Active</Form.Label>
                       <Form.Select aria-label="Default select example" ref={selectRef}>
@@ -118,10 +118,10 @@ const AddAreas = () => {
                       <Form.Label>City</Form.Label>
 
                       <Form.Select aria-label="Default select example" ref={countriesRef}>
-                        
+
                         {
                           cities?.map((item, index) => (
-                            <option key={index} value={item?.IDCity}>{item?.CityName }</option>
+                            <option key={index} value={item?.IDCity}>{item?.CityName}</option>
                           ))
                         }
                         {/* <option value="0">InActive</option> */}
@@ -130,10 +130,19 @@ const AddAreas = () => {
                     </Form.Group>
                   </Col>
                   <div className='d-flex justify-content-center align-content-center my-5'>
-                    <div className='baseBtn'>
+
+                    <div className='baseBtn1'>
                       <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Add New Areas
+                        Save
                       </Button>
+                    </div>
+
+                    <div className='baseBtn'>
+                      <Link to={'/location/areas'}>
+                        <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                          Cansel
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </Row>
@@ -142,7 +151,7 @@ const AddAreas = () => {
             </div>
           </div>
         </div>
-        
+
       </div>
     </Container >
   )

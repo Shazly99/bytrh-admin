@@ -7,12 +7,13 @@ import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
 import { VendersContext } from '../../../../context/Store';
 import useFetch from './../../../../utils/useFetch';
+import { Link } from 'react-router-dom';
 
 
 const EditArea = () => {
   let { id } = useParams()
   // let { countries, cities,getCities } = useContext(VendersContext);
-  let {countries, cities ,getCities} = useFetch()
+  let { countries, cities, getCities } = useFetch()
 
   let navigate = useNavigate();
   const AreaNameEn = useRef();
@@ -20,10 +21,10 @@ const EditArea = () => {
   const selectCity = useRef();
 
   const [editPage, setAreaDetail] = useState(null)
-  
+
   const handelSelectCountry = (event) => {
     const selectedCountryId = event.target.value;
-    console.log(selectedCountryId); 
+    console.log(selectedCountryId);
     getCities(selectedCountryId)
   }
 
@@ -90,10 +91,10 @@ const EditArea = () => {
 
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
                       <Form.Label>Country</Form.Label>
-                      <Form.Select aria-label="Default select example"   onClick={handelSelectCountry}> 
+                      <Form.Select aria-label="Default select example" onClick={handelSelectCountry}>
                         {
                           countries?.map((item, index) => (
-                            <option key={index} value={item?.IDCountry}  selected={editPage?.IDCountry === item?.IDCountry  && item?.CountryName }  >{item?.CountryName}  </option>
+                            <option key={index} value={item?.IDCountry} selected={editPage?.IDCountry === item?.IDCountry && item?.CountryName}  >{item?.CountryName}  </option>
                           ))
                         }
                       </Form.Select>
@@ -111,22 +112,31 @@ const EditArea = () => {
                     <Form.Group controlId="formBasicEmail" className='mt-3' >
                       <Form.Label>City</Form.Label>
 
-                      <Form.Select aria-label="Default select example"  ref={selectCity}>  
+                      <Form.Select aria-label="Default select example" ref={selectCity}>
                         {
                           cities?.map((item, index) => (
-                            <option key={index} value={item?.IDCity}  selected={editPage?.IDCity === item?.IDCity && item?.CityName} > {item?.CityName }</option>
+                            <option key={index} value={item?.IDCity} selected={editPage?.IDCity === item?.IDCity && item?.CityName} > {item?.CityName}</option>
                           ))
-                        }  
+                        }
                       </Form.Select>
 
                     </Form.Group>
 
                   </Col>
                   <div className='d-flex justify-content-center align-content-center my-5'>
-                    <div className='baseBtn'>
+
+                    <div className='baseBtn1'>
                       <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Update Area
+                        Save
                       </Button>
+                    </div>
+
+                    <div className='baseBtn'>
+                      <Link to={'/location/areas'}>
+                        <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                          Cansel
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </Row>

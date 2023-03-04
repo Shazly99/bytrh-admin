@@ -8,6 +8,7 @@ import Icons from '../../../../constants/Icons';
 import { VendersContext } from '../../../../context/Store';
 import { useEffect } from 'react';
 import useFetch from './../../../../utils/useFetch';
+import { Link } from 'react-router-dom';
 const AddCities = () => {
   // let { countries ,cities} = useContext(VendersContext);
   let {countries, cities ,getCities} = useFetch()
@@ -114,10 +115,19 @@ const AddCities = () => {
                     </Form.Group>
                   </Col>
                   <div className='d-flex justify-content-center align-content-center my-5'>
-                    <div className='baseBtn'>
+
+                    <div className='baseBtn1'>
                       <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Add New City
+                        Save
                       </Button>
+                    </div>
+
+                    <div className='baseBtn'>
+                      <Link to={'/location/cities'}>
+                        <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                          Cansel
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </Row>

@@ -160,11 +160,11 @@ function UsersTable({ usersList, userList }) {
                                                         Are you sure you want to delete this user?
                                                     </Modal.Body>
                                                     <Modal.Footer className='  d-flex justify-content-center'>
-                                                        <Button variant="outline-primary" onClick={() => setShowDeleteModal(false)}>
-                                                            Cancel
-                                                        </Button>
                                                         <Button variant="danger" onClick={() => handleDeleteUser(item.IDUser)}>
                                                             Delete
+                                                        </Button>
+                                                        <Button variant="outline-primary" onClick={() => setShowDeleteModal(false)}>
+                                                            Cancel
                                                         </Button>
                                                     </Modal.Footer>
                                                 </Modal>

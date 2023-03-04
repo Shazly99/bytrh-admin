@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
 import { Col, Container, Row, Form, Button } from 'react-bootstrap';
@@ -101,10 +101,19 @@ const EditCities = () => {
 
                   </Col>
                   <div className='d-flex justify-content-center align-content-center my-5'>
-                    <div className='baseBtn'>
+
+                    <div className='baseBtn1'>
                       <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Add New Country
+                        Save
                       </Button>
+                    </div>
+
+                    <div className='baseBtn'>
+                      <Link to={'/location/cities'}>
+                        <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                          Cansel
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </Row>

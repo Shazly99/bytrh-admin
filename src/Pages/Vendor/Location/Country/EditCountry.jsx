@@ -5,6 +5,7 @@ import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
 import { Col, Container, Row, Form, Button } from 'react-bootstrap';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
+import { Link } from 'react-router-dom';
 
 const EditCountry = () => {
   let { id } = useParams()
@@ -97,10 +98,19 @@ const EditCountry = () => {
 
                   </Col>
                   <div className='d-flex justify-content-center align-content-center my-5'>
-                    <div className='baseBtn'>
+
+                    <div className='baseBtn1'>
                       <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Add New Country
+                        Save
                       </Button>
+                    </div>
+
+                    <div className='baseBtn'>
+                      <Link to={'/location/cities'}>
+                        <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                          Cansel
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </Row>

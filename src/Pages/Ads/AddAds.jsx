@@ -8,6 +8,7 @@ import { toast } from 'react-hot-toast';
 import Icons from '../../constants/Icons';
 import { useNavigate } from 'react-router-dom';
 import useFetch from './../../utils/useFetch';
+import { Link } from 'react-router-dom';
 
 const AddAds = () => {
   let navigate = useNavigate();
@@ -235,10 +236,10 @@ const AddAds = () => {
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
                       <Form.Label>ID Link  </Form.Label>
                       <Form.Select aria-label="Default select example" ref={doctorRef} >
-                        {data.doctor?.map((item, index) => (<option key={index} value={item.IDDoctor}>{ '  '}{item.DoctorName}</option>))}
-                        {data.blog?.map((item, index) => (<option key={index} value={item.IDClientBlog}> {item.BlogTitle}{ ' (  '}{item.ClientName}{' )  '}</option>))}
-                        {data.blogDoc?.map((item, index) => (<option key={index} value={item.IDDoctorBlog}>{item.BlogTitle}{ ' (   '} {item.DoctorName}{' ) '} </option>))}
-                        {data.adoption?.map((item, index) => (<option key={index} value={item.IDAdoption}> {item.PetStrain}{ '/   '} {item.PetName}{ ' (  '} {item.ClientName}{ ' )  '}</option>))}
+                        {data.doctor?.map((item, index) => (<option key={index} value={item.IDDoctor}>{'  '}{item.DoctorName}</option>))}
+                        {data.blog?.map((item, index) => (<option key={index} value={item.IDClientBlog}> {item.BlogTitle}{' (  '}{item.ClientName}{' )  '}</option>))}
+                        {data.blogDoc?.map((item, index) => (<option key={index} value={item.IDDoctorBlog}>{item.BlogTitle}{' (   '} {item.DoctorName}{' ) '} </option>))}
+                        {data.adoption?.map((item, index) => (<option key={index} value={item.IDAdoption}> {item.PetStrain}{'/   '} {item.PetName}{' (  '} {item.ClientName}{' )  '}</option>))}
                       </Form.Select>
                     </Form.Group>
                   </Col>
@@ -246,10 +247,19 @@ const AddAds = () => {
                   const [blogDoc, setBlogDoc] = useState(null)
   const [adoption, setAdoption] = useState(null) */}
                   <div className='d-flex justify-content-center align-content-center my-5'>
-                    <div className='baseBtn'>
+
+                    <div className='baseBtn1'>
                       <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Add New Ads
+                        Save
                       </Button>
+                    </div>
+
+                    <div className='baseBtn'>
+                      <Link to={'/ads'}>
+                        <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                          Cansel
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </Row>

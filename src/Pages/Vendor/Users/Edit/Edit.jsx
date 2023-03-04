@@ -7,7 +7,7 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import Form from 'react-bootstrap/Form';
 import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Toaster, toast } from 'react-hot-toast';
 import Icons from '../../../../constants/Icons';
@@ -165,11 +165,22 @@ const Edit = () => {
 
                                             </Form.Group>
                                         </Col>
+                 
+
                                         <div className='d-flex justify-content-center align-content-center my-5'>
-                                            <div className='baseBtn'>
+
+                                            <div className='baseBtn1'>
                                                 <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                                    Update User
+                                                    Save
                                                 </Button>
+                                            </div>
+
+                                            <div className='baseBtn'>
+                                                <Link to={'/user'}>
+                                                    <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                                                        Cansel
+                                                    </Button>
+                                                </Link>
                                             </div>
                                         </div>
                                     </Row>

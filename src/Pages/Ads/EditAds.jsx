@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useContext } from 'react'
 import { Container, Row, Col, Button, InputGroup, Form, FormControl } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import Component from '../../constants/Component';
 import Icons from '../../constants/Icons';
 import { VendersContext } from '../../context/Store';
@@ -257,10 +257,19 @@ const EditAds = () => {
                       </Form.Group>
                     </Col>
                     <div className='d-flex justify-content-center align-content-center my-5'>
-                      <div className='baseBtn'>
+
+                      <div className='baseBtn1'>
                         <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                          Update Ads
+                          Save
                         </Button>
+                      </div>
+
+                      <div className='baseBtn'>
+                        <Link to={'/ads'}>
+                          <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                            Cansel
+                          </Button>
+                        </Link>
                       </div>
                     </div>
                   </Row>

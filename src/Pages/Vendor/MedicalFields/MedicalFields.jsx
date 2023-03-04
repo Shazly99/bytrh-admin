@@ -121,7 +121,7 @@ const MedicalFields = () => {
         medicalFields ?
           <>
             <div className="app__Users ">
-              <Component.ButtonBase title={"Add New Medical Field "} bg={"primary"} icon={<Icons.add />} path="/medicalfields/add" />
+              <Component.ButtonBase title={"Add "} bg={"primary"} icon={<Icons.add />} path="/medicalfields/add" />
               <div className="app__Users-table">
                 <div className="search-container">
                   <div className='search__group'>

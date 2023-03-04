@@ -1,24 +1,24 @@
 import React, { useContext, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { apiheader, PostData } from '../../../utils/fetchData';
 import { Col, Container, Row, Form, Button } from 'react-bootstrap';
 import Component from '../../../constants/Component';
-import Icons from '../../../constants/Icons'; 
+import Icons from '../../../constants/Icons';
 import { useEffect } from 'react';
 
 const AddMedicalFields = () => {
-  
-  let navigate = useNavigate();  
-  const MedicalFieldNameAr = useRef(); 
-  const MedicalFieldNameEn = useRef();  
- 
+
+  let navigate = useNavigate();
+  const MedicalFieldNameAr = useRef();
+  const MedicalFieldNameEn = useRef();
+
   const submit = e => {
-    e.preventDefault()  
-    
+    e.preventDefault()
+
     addNewMedicalFields({
-      MedicalFieldNameEn: MedicalFieldNameEn.current.value,  
-      MedicalFieldNameAr: MedicalFieldNameAr.current.value,   
+      MedicalFieldNameEn: MedicalFieldNameEn.current.value,
+      MedicalFieldNameAr: MedicalFieldNameAr.current.value,
     })
   }
 
@@ -42,59 +42,68 @@ const AddMedicalFields = () => {
       } else {
         toast.error(res.data.ApiMsg)
       }
-    }).catch((err)=>{
+    }).catch((err) => {
       console.log(err);
     });
   }
-  useEffect(() => { 
+  useEffect(() => {
   }, [])
 
   return (
     <>
-    
-    <Container fluid>
-      <div className="app__addprodects">
-        <Component.SubNav sub__nav={[{ name: " Medical Fields", path: '/medicalfields' }, { name: "Add Medical Field ", path: '/medicalfields/add' }]} />
 
-        <div className="app__addprodects__header ">
-          <Component.BaseHeader h1={'Add New Areas'} />
-          <div className="app__addOrder-form">
-            <div className="app__addprodects-form">
-              <form onSubmit={submit}>
-                <Row>
-                  <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
+      <Container fluid>
+        <div className="app__addprodects">
+          <Component.SubNav sub__nav={[{ name: " Medical Fields", path: '/medicalfields' }, { name: "Add Medical Field ", path: '/medicalfields/add' }]} />
 
-                    <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Medical Field Name (En)</Form.Label>
-                      <Form.Control type="text" name='firstname' ref={MedicalFieldNameEn} />
-                    </Form.Group> 
+          <div className="app__addprodects__header ">
+            <Component.BaseHeader h1={'Add Medical Fields '} />
+            <div className="app__addOrder-form">
+              <div className="app__addprodects-form">
+                <form onSubmit={submit}>
+                  <Row>
+                    <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
+
+                      <Form.Group controlId="formBasicEmail">
+                        <Form.Label>  Name (En)</Form.Label>
+                        <Form.Control type="text" name='firstname' ref={MedicalFieldNameEn} />
+                      </Form.Group>
 
 
-                  </Col>
-                  <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
+                    </Col>
+                    <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
-                    <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Medical Field Name (Ar)</Form.Label>
-                      <Form.Control type="text" name='firstname' ref={MedicalFieldNameAr} style={{ direction: 'rtl' }} />
-                    </Form.Group>
- 
-                  </Col>
-                  <div className='d-flex justify-content-center align-content-center my-5'>
-                    <div className='baseBtn'>
-                      <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Add New Areas
-                      </Button>
+                      <Form.Group controlId="formBasicEmail">
+                        <Form.Label>  Name (Ar)</Form.Label>
+                        <Form.Control type="text" name='firstname' ref={MedicalFieldNameAr} style={{ direction: 'rtl' }} />
+                      </Form.Group>
+
+                    </Col>
+                    <div className='d-flex justify-content-center align-content-center my-5'>
+
+                      <div className='baseBtn1'>
+                        <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                          Save
+                        </Button>
+                      </div>
+
+                      <div className='baseBtn'>
+                        <Link to={'/medicalfields'}>
+                          <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                            Cansel
+                          </Button>
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                </Row>
+                  </Row>
 
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </Container >
-    
+      </Container >
+
     </>
   )
 }

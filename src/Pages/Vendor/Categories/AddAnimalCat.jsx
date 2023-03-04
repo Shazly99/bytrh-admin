@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';  
+import React, { useRef } from 'react';
 import Component from '../../../constants/Component'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { apiheader, PostData } from '../../../utils/fetchData';
 import Icons from '../../../constants/Icons';
@@ -9,15 +9,15 @@ import { Col, Container, Row, Form, Button } from 'react-bootstrap';
 
 const AddAnimalCat = () => {
     let navigate = useNavigate();
-    const CategoryNameEn  = useRef();
-    const CategoryNameAr  = useRef();
+    const CategoryNameEn = useRef();
+    const CategoryNameAr = useRef();
 
     const submit = e => {
-        e.preventDefault() 
+        e.preventDefault()
         addNewCategory({
             AnimalCategoryNameEn: CategoryNameEn.current.value,
-            AnimalCategoryNameAr: CategoryNameAr.current.value, 
-        }) 
+            AnimalCategoryNameAr: CategoryNameAr.current.value,
+        })
     }
 
     async function addNewCategory(category) {
@@ -47,7 +47,7 @@ const AddAnimalCat = () => {
             <div className="app__addprodects">
                 <Component.SubNav sub__nav={[{ name: "Animal Categories", path: '/categ/animals' }, { name: "Add Category ", path: '/categ/animals/addAnimal' }]} />
                 <div className="app__addprodects__header ">
-                    <Component.BaseHeader h1={'Add New Category'} />
+                    <Component.BaseHeader h1={'Add  '} />
                     <div className="app__addOrder-form">
                         <div className="app__addprodects-form">
                             <form onSubmit={submit}>
@@ -56,7 +56,7 @@ const AddAnimalCat = () => {
 
                                         <Form.Group controlId="formBasicEmail">
                                             <Form.Label>Animal Category Name (En)</Form.Label>
-                                            <Form.Control type="text" name='firstname'  ref={CategoryNameEn}  />
+                                            <Form.Control type="text" name='firstname' ref={CategoryNameEn} />
                                         </Form.Group>
 
                                     </Col>
@@ -64,15 +64,24 @@ const AddAnimalCat = () => {
 
                                         <Form.Group controlId="formBasicEmail" >
                                             <Form.Label>Animal Category Name (Ar)</Form.Label>
-                                            <Form.Control type="text" name='email' ref={CategoryNameAr} style={{direction:'rtl'}} />
+                                            <Form.Control type="text" name='email' ref={CategoryNameAr} style={{ direction: 'rtl' }} />
                                         </Form.Group>
 
                                     </Col>
                                     <div className='d-flex justify-content-center align-content-center my-5'>
-                                        <div className='baseBtn'>
+
+                                        <div className='baseBtn1'>
                                             <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                                Add New Animal Category
+                                                Save
                                             </Button>
+                                        </div>
+
+                                        <div className='baseBtn'>
+                                            <Link to={'/categ/animals'}>
+                                                <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                                                    Cansel
+                                                </Button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </Row>

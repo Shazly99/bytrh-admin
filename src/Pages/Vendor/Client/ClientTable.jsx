@@ -50,7 +50,7 @@ const ClientTable = ({ usersList, userList }) => {
     } else if (action === "DELETED") {
       setSelectedUserId({ IDClient: id, ClientStatus: action });
       setShowDeleteModal(true);
- 
+
     }
     else if (action === "INACTIVE") {
       await userstatus({ IDClient: id, ClientStatus: action }).then((res) => {
@@ -112,20 +112,20 @@ const ClientTable = ({ usersList, userList }) => {
   const handleDeleteUser = async () => {
     // Logic for deleting user with ID `selectedUserId`
     setShowDeleteModal(false);
-    
+
     await userstatus(selectedUserId).then((res) => {
-        toast.success('user has been deleted', {
-            duration: 4000,
-            position: 'top-center',
-            icon: <Icons.bin color='#E20000' size={17} />,
-            iconTheme: {
-                primary: '#0a0',
-                secondary: '#fff',
-            },
-        });
+      toast.success('user has been deleted', {
+        duration: 4000,
+        position: 'top-center',
+        icon: <Icons.bin color='#E20000' size={17} />,
+        iconTheme: {
+          primary: '#0a0',
+          secondary: '#fff',
+        },
+      });
     })
     await userList()
-}
+  }
   useEffect(() => {
   }, [usersList])
 
@@ -204,11 +204,11 @@ const ClientTable = ({ usersList, userList }) => {
                       >
                         <Dropdown.Item eventKey="reset">Reset password</Dropdown.Item>
 
-                        <Dropdown.Item eventKey="balance" onClick={handleShowModal}>Balance check</Dropdown.Item>
+                        <Dropdown.Item eventKey="balance" onClick={handleShowModal}>Set Balance</Dropdown.Item>
 
                         <Modal show={showModal} onHide={handleCloseModal} centered >
                           <Modal.Header closeButton>
-                            <Modal.Title>Add in wallet {item?.ClientName} </Modal.Title>
+                            <Modal.Title>Set {item?.ClientName} Balance</Modal.Title>
                           </Modal.Header>
                           <Modal.Body>
                             <Form.Control type="number" defaultValue={item.ClientBalance} ref={changeBalance} />
@@ -217,11 +217,12 @@ const ClientTable = ({ usersList, userList }) => {
                             <Button variant="outline-primary" onClick={handleCloseModal}>
                               Cancel
                             </Button>
-                            <Button variant="primary" onClick={changeWallet}>
-                              set wallet
+                            <Button variant="primary" style={{border:'#FAAA40'}} onClick={changeWallet}>
+                              Set Balance
                             </Button>
                           </Modal.Footer>
                         </Modal>
+
                         <Dropdown.Item eventKey="DELETED">Deleted</Dropdown.Item>
                         <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
                           <Modal.Header closeButton>
