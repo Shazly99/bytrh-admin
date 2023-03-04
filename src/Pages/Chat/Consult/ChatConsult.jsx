@@ -85,7 +85,7 @@ const ChatConsult = () => {
     setConsultList(data.Response.Consults)
   }
   // Filter
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState('All');
 
   const handleOptionChange = async (event) => {
     const selectedValue = event.target.value;
@@ -130,15 +130,27 @@ const ChatConsult = () => {
                 <div className="app__addOrder-form ">
                   <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }}>Filter by consult status :	</h5>
                   <div className='filter__group__stats row ' style={{ display: 'flex', gap: '20px', marginBottom: '25px' }}>
-                    <label className='col active'>
-                      <input
-                        type="radio"
-                        name="filter"
-                        value="All"
-                        checked={selectedOption === "All"}
-                        onChange={handleOptionChange}
-                        className="inactive-radio form-check-input"
-                      />
+                  <label className='col active'>
+                      {
+                        selectedOption === "All" ?
+                          <input
+                            type="radio"
+                            name="filter"
+                            value="All"
+                            checked 
+                            onChange={handleOptionChange}
+                            className={`inactive-radio form-check-input `}
+                          /> :
+                          <input
+                            type="radio"
+                            name="filter"
+                            value="All"
+                            checked ={selectedOption === "All"}
+                            onChange={handleOptionChange}
+                            className={`inactive-radio form-check-input `} 
+                          />
+                      }
+
                       All
                     </label>
                     <label className='col active'>

@@ -55,7 +55,7 @@ const Clients = () => {
     setSearchValue(event.target.value);
   };
   // filter
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState('All');
 
   const handleOptionChange = async (event) => {
     const selectedValue = event.target.value;
@@ -91,7 +91,32 @@ const Clients = () => {
                   </div>
 
                   <div className='filter__group'>
+   
+                    <label>
+                      {
+                        selectedOption === "All" ?
+                          <input
+                            type="radio"
+                            name="filter"
+                            value="All"
+                            checked 
+                            onChange={handleOptionChange}
+                            className={`inactive-radio form-check-input `}
+                          /> :
+                          <input
+                            type="radio"
+                            name="filter"
+                            value="All"
+                            checked ={selectedOption === "All"}
+                            onChange={handleOptionChange}
+                            className={`inactive-radio form-check-input `} 
+                          />
+                      }
+
+                      All
+                    </label>
                     <label className='active'>
+
                       <input
                         type="radio"
                         name="filter"
@@ -99,7 +124,6 @@ const Clients = () => {
                         checked={selectedOption === "ACTIVE"}
                         onChange={handleOptionChange}
                         className="active-radio form-check-input"
-
                       />
                       Active
                     </label>
@@ -128,17 +152,7 @@ const Clients = () => {
                       />
                       Blocked
                     </label>
-                    <label>
-                      <input
-                        type="radio"
-                        name="filter"
-                        value="All"
-                        checked={selectedOption === "All"}
-                        onChange={handleOptionChange}
-                        className="inactive-radio form-check-input"
-                      />
-                      All
-                    </label>
+
                   </div>
                 </div>
                 <Component.ClientTable usersList={usersList} userList={userList} />
@@ -150,7 +164,7 @@ const Clients = () => {
               </Box>
             </div>
 
-          </> :<Loader/>
+          </> : <Loader />
       }
     </>
   )
