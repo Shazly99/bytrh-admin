@@ -249,7 +249,7 @@ const ChatConsult = () => {
             </div>
             {/* <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }}>Filter by  Complain :	</h5> */}
           </div>
-          <Table responsive={true} className='rounded-3  bg-info shadow-lg '>
+          <Table responsive={true} className='rounded-3    shadow-lg '>
             <thead>
               <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
                 <th>Client Info</th>

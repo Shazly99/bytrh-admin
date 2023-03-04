@@ -10,12 +10,13 @@ import useLocalStorage from './../../../context/useLocalStorage';
 import _ from 'lodash';
 
 function LiveChat() {
-    const { id } = useParams(); 
-  let { setmassSend, setUserReplied, massSend, setchatEnd } = useContext(ChatContext);
+    const { id } = useParams();
+    let { setmassSend, setUserReplied, massSend, setchatEnd } = useContext(ChatContext);
 
     const [isOn, setIsOn] = useLocalStorage('power', true);
 
     const [clientChatSupport, setClientChatSupport] = useState([]);
+    const [clientChatSupportDetail, setClientChatSupportDetail] = useState([]);
     const [IdChatSupport, setIdChatSupportDetails] = useState([]);
     const [chatStatus, setChatStatus] = useState('');
     const [chatName, setChatName] = useState('');
@@ -30,6 +31,7 @@ function LiveChat() {
         try {
             const { data } = await axios(`https://bytrh.com/api/admin/chat/client/details/${id}`, apiheader);
             setClientChatSupport(data.Response.ChatDetails);
+            setClientChatSupportDetail(data.Response.ChatDetails)
             setUserReplied(data.Response.UserReplied)
             setChatStatus(data.Response.ChatSupportStatus);
             setchatEnd(data.Response.ChatSupportStatus)
@@ -51,11 +53,10 @@ function LiveChat() {
     const chatReceive = _.debounce(async () => {
         if (chatStatus === 'ONGOING') {
             console.log('اطلع بسرعه');
-
             try {
-
                 const { data } = await PostData(`https://bytrh.com/api/admin/chat/client/receive`, { IDClientChatSupport: id, IDChatSupportDetails: IdChatSupport }, apiheader);
                 if (clientChatSupport !== []) {
+                    setClientChatSupport([])
                     setClientChatSupport([...clientChatSupport, ...data.Response]);
                 }
             } catch (error) {
@@ -73,7 +74,7 @@ function LiveChat() {
             console.log('برررررررررررررررررره');
             return
         }
-    },1000);
+    }, 1000);
 
 
 
@@ -103,7 +104,7 @@ function LiveChat() {
         }
         fetchClientDetail();
         chatReceive()
- 
+
         let interval = setInterval(() => {
             chatReceive()
         }, 5000);
@@ -111,23 +112,18 @@ function LiveChat() {
             clearInterval(interval);
             chatReceive()
         };
-
-        return () => {
-            // clearInterval(interval);
-            chatReceive()
-        };
     }, [id, IdChatSupport, chatStatus]);
 
     useEffect(() => {
         if (massSend === true) {
-          console.log('sucess');
-          chatReceive()
-          setmassSend(false)
+            console.log('sucess');
+            chatReceive()
+            setmassSend(false)
         } else {
-          console.log('error');
+            console.log('error');
         }
-      }, [massSend]);
-    
+    }, [massSend]);
+
     useEffect(() => {
         setChat(null)
         setIsLoading(false)
@@ -143,7 +139,7 @@ function LiveChat() {
                 </div>
             </div>
             {
-                isLoading ?
+                chatStatus === 'ONGOING' ?
                     <ScrollToBottom className="message-container">
                         {clientChatSupport?.map((messageContent, index) => {
                             return (
@@ -179,7 +175,44 @@ function LiveChat() {
                                 </div>
                             );
                         })}
-                    </ScrollToBottom> : 'loading.....'
+                    </ScrollToBottom>
+                    :
+                    <ScrollToBottom className="message-container">
+                        {clientChatSupportDetail?.map((messageContent, index) => {
+                            return (
+                                <div
+                                    key={index}
+                                    className="message"
+                                    id={messageContent.ChatSupportSender === "USER" ? "other" : "you"}
+                                >
+                                    <div>
+                                        <div className="message-content"  >
+                                            {
+                                                messageContent.ChatSupportType === "TEXT" &&
+                                                <p>{messageContent.ChatSupportMessage}</p>
+                                            }
+                                            {
+                                                messageContent.ChatSupportType === "IMAGE" &&
+                                                <img src={messageContent.ChatSupportMessage} width="100%" className='rounded-3 w-50' />
+                                            }
+                                            {
+                                                messageContent.ChatSupportType === "AUDIO" &&
+                                                <audio ref={audioRef} controls>
+                                                    <source src={messageContent.ChatSupportMessage} type="audio/ogg" />
+                                                    <source src={messageContent.ChatSupportMessage} type="audio/mpeg" />
+                                                    Your browser does not support the audio element.
+                                                </audio>
+                                            }
+                                        </div>
+                                        <div className="message-meta">
+                                            <p id="time">{messageContent.CreateDate}</p>
+                                            {/* <p id="author">{messageContent.ChatSupportSender}</p> */}
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </ScrollToBottom>
             }
 
 

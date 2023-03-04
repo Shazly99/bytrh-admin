@@ -21,7 +21,7 @@ const ChatClient = () => {
 
   const clientlist = _.debounce(async () => {
     let { data } = await PostData(`https://bytrh.com/api/admin/chat/client/list`, {}, apiheader)
-    console.log(data.Response.ClientChatSupport);
+    // console.log(data.Response.ClientChatSupport);
     // setClientChatSupport(data.Response.ClientChatSupport)
     setCChatSupport(data.Response.ClientChatSupport)
   }, 1000)
