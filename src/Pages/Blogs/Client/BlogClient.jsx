@@ -60,7 +60,7 @@ const BlogClient = () => {
     }
 
     // **filter and search
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [selectedOption, setSelectedOption] = useState('All');
     const [searchBlog, setSearchBlog] = useState('');
 
 
@@ -130,15 +130,27 @@ const BlogClient = () => {
                                         <Col xl={6} lg={6} md={6} sm={12} xs={12} >
                                             <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }}>Filter by Blogs status :	</h5>
                                             <div className='filter__group__stats row ' style={{ display: 'flex', gap: '0px', marginBottom: '25px' }}>
-                                                <label className='col    active' >
-                                                    <input
-                                                        className="  form-check-input"
-                                                        type="radio"
-                                                        name="filter"
-                                                        value="All"
-                                                        checked={selectedOption === "All"}
-                                                        onChange={handleOptionChange}
-                                                    />
+                                                <label className='col active'>
+                                                    {
+                                                        selectedOption === "All" ?
+                                                            <input
+                                                                type="radio"
+                                                                name="filter"
+                                                                value="All"
+                                                                checked
+                                                                onChange={handleOptionChange}
+                                                                className={`inactive-radio form-check-input `}
+                                                            /> :
+                                                            <input
+                                                                type="radio"
+                                                                name="filter"
+                                                                value="All"
+                                                                checked={selectedOption === "All"}
+                                                                onChange={handleOptionChange}
+                                                                className={`inactive-radio form-check-input `}
+                                                            />
+                                                    }
+
                                                     All
                                                 </label>
                                                 <label className='col active'>

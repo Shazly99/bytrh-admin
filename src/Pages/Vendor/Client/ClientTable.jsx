@@ -138,11 +138,11 @@ const ClientTable = ({ usersList, userList }) => {
         <thead>
           <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
             <th>User Name</th>
-            <th>Register Date</th>
             <th>Country</th>
             <th>Login by</th>
             <th>Balance</th>
             <th>Status</th>
+            <th>Register Date</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -156,11 +156,7 @@ const ClientTable = ({ usersList, userList }) => {
                     <span className='ClientPhone'>{item?.ClientPhone}</span>
                   </div>
                 </td>
-                <td >
-                  <div>
-                    {item?.CreateDate.split(" ")[0]}
-                  </div>
-                </td>
+
                 <td className='text-center'>
                   <div>
                     {item?.CountryName}
@@ -187,8 +183,13 @@ const ClientTable = ({ usersList, userList }) => {
                                         ${item.ClientStatus == 'INACTIVE' && 'txt_rejected'}
                                         ${item.ClientStatus == 'BLOCKED' && 'txt_blocked'}
                                         `}  >
-                      {item?.ClientStatus.toLowerCase()}
+                      {item?.ClientStatus.toLowerCase().charAt(0).toUpperCase() + item?.ClientStatus.slice(1).toLowerCase()}
                     </span>
+                  </div>
+                </td>
+                <td >
+                  <div>
+                    {item?.CreateDate.split(" ")[0]}
                   </div>
                 </td>
                 <td>

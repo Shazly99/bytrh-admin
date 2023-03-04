@@ -71,7 +71,7 @@ const MedicalFields = () => {
     searchGetData(searchValue)
   };
 
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState('All');
 
   const handleOptionChange = async (event) => {
     const selectedValue = event.target.value;
@@ -132,6 +132,29 @@ const MedicalFields = () => {
                   </div>
 
                   <div className='filter__group'>
+                  <label>
+                      {
+                        selectedOption === "All" ?
+                          <input
+                            type="radio"
+                            name="filter"
+                            value="All"
+                            checked 
+                            onChange={handleOptionChange}
+                            className={`inactive-radio form-check-input `}
+                          /> :
+                          <input
+                            type="radio"
+                            name="filter"
+                            value="All"
+                            checked ={selectedOption === "All"}
+                            onChange={handleOptionChange}
+                            className={`inactive-radio form-check-input `} 
+                          />
+                      }
+
+                      All
+                    </label>
                     <label className='active'>
                       <input
                         type="radio"
@@ -157,19 +180,7 @@ const MedicalFields = () => {
                       />
                       InActive
                     </label>
-
-                    <label>
-                      <input
-                        type="radio"
-                        name="filter"
-                        value="All"
-                        checked={selectedOption === "All"}
-                        onChange={handleOptionChange}
-                        className="inactive-radio form-check-input"
-
-                      />
-                      All
-                    </label>
+ 
 
                   </div>
                 </div>

@@ -40,7 +40,7 @@ function Users() {
   const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
 
 
-  const [searchValue, setSearchValue] = React.useState('');
+  const [searchValue, setSearchValue] = React.useState('All');
   const handleSearchClick = () => {
     console.log(searchValue);
     searchGetData(searchValue)
@@ -59,7 +59,7 @@ function Users() {
   };
 
   // filter
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState('All');
 
   const handleOptionChange = async (event) => {
     const selectedValue = event.target.value;
@@ -82,81 +82,95 @@ function Users() {
     <>
       {
         usersList ?
-      <>
-        <div className="app__Users ">
-          <Component.ButtonBase onclick={test} title={"Add new user"} bg={"primary"} icon={<Icons.add />} path="/user/addUser" />
-          <div className="app__Users-table">
-            <div className="search-container">
+          <>
+            <div className="app__Users ">
+              <Component.ButtonBase onclick={test} title={"Add new user"} bg={"primary"} icon={<Icons.add />} path="/user/addUser" />
+              <div className="app__Users-table">
+                <div className="search-container">
 
-              <div className='search__group'>
-                <input type="text" placeholder="Search by name or email or phone....." name="search" value={searchValue} onChange={handleInputChange} />
-                <button type="submit" onClick={handleSearchClick}>
-                  <Icons.Search color='#fff' size={25} />
-                </button>
-              </div>
+                  <div className='search__group'>
+                    <input type="text" placeholder="Search by name or email or phone....." name="search" value={searchValue} onChange={handleInputChange} />
+                    <button type="submit" onClick={handleSearchClick}>
+                      <Icons.Search color='#fff' size={25} />
+                    </button>
+                  </div>
 
-              <div className='filter__group'>
-                <label className='active'>
-                  <input
-                    type="radio"
-                    name="filter"
-                    value="ACTIVE"
-                    checked={selectedOption === "ACTIVE"}
-                    onChange={handleOptionChange}
-                    className="active-radio form-check-input"
+                  <div className='filter__group'>
+                    <label>
+                      {
+                        selectedOption === "All" ?
+                          <input
+                            type="radio"
+                            name="filter"
+                            value="All"
+                            checked 
+                            onChange={handleOptionChange}
+                            className={`inactive-radio form-check-input `}
+                          /> :
+                          <input
+                            type="radio"
+                            name="filter"
+                            value="All"
+                            checked ={selectedOption === "All"}
+                            onChange={handleOptionChange}
+                            className={`inactive-radio form-check-input `} 
+                          />
+                      }
 
-                  />
-                  Active
-                </label>
+                      All
+                    </label>
 
-                <label>
-                  <input
-                    type="radio"
-                    name="filter"
-                    value="INACTIVE"
-                    checked={selectedOption === "INACTIVE"}
-                    onChange={handleOptionChange}
-                    className="inactive-radio form-check-input"
+                    <label className='active'>
+                      <input
+                        type="radio"
+                        name="filter"
+                        value="ACTIVE"
+                        checked={selectedOption === "ACTIVE"}
+                        onChange={handleOptionChange}
+                        className="active-radio form-check-input"
 
-                  />
-                  InActive
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="filter"
-                    value="PENDING"
-                    checked={selectedOption === "PENDING"}
-                    onChange={handleOptionChange}
-                    className="inactive-radio form-check-input"
+                      />
+                      Active
+                    </label>
 
-                  />
-                  PENDING
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="filter"
-                    value="All"
-                    checked={selectedOption === "All"}
-                    onChange={handleOptionChange}
-                    className="inactive-radio form-check-input"
-                  />
-                  All
-                </label>
+                    <label>
+                      <input
+                        type="radio"
+                        name="filter"
+                        value="INACTIVE"
+                        checked={selectedOption === "INACTIVE"}
+                        onChange={handleOptionChange}
+                        className="inactive-radio form-check-input"
+
+                      />
+                      InActive
+                    </label>
+                    <label>
+                      <input
+                        type="radio"
+                        name="filter"
+                        value="PENDING"
+                        checked={selectedOption === "PENDING"}
+                        onChange={handleOptionChange}
+                        className="inactive-radio form-check-input"
+
+                      />
+                      PENDING
+                    </label>
+
+                  </div>
+
+                </div>
+                <Component.UsersTable usersList={usersList} userList={userList} />
               </div>
 
             </div>
-            <Component.UsersTable usersList={usersList} userList={userList} />
-          </div>
-
-        </div>
-        <div className="pagination ">
-          <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-            <Pagination count={pageCount} page={page} onChange={handleChange} />
-          </Box>
-        </div>
-      </>:<Component.Loader/>
+            <div className="pagination ">
+              <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
+                <Pagination count={pageCount} page={page} onChange={handleChange} />
+              </Box>
+            </div>
+          </> : <Component.Loader />
       }
     </>
   )

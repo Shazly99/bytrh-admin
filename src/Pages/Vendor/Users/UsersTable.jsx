@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 // import data from './data.js';
 import Icons from "../../../constants/Icons.js";
 import { useEffect } from 'react';
-import { Table, DropdownButton, Dropdown, NavDropdown, Modal ,Button} from "react-bootstrap";
+import { Table, DropdownButton, Dropdown, NavDropdown, Modal, Button } from "react-bootstrap";
 import { apiheader, PostData } from '../../../utils/fetchData.js';
 import { Link } from 'react-router-dom';
 import { Toaster, toast } from 'react-hot-toast';
@@ -40,7 +40,7 @@ function UsersTable({ usersList, userList }) {
             })
             await userList()
         } else if (action === "INACTIVE") {
-            
+
             await userstatus({ IDUser: id, UserStatus: action }).then((res) => {
                 toast.success('Status up to date', {
                     duration: 4000,
@@ -82,7 +82,7 @@ function UsersTable({ usersList, userList }) {
         await userList()
     }
     useEffect(() => {
-    }, [usersList,selectedUserId])
+    }, [usersList, selectedUserId])
 
     return (
         <>
@@ -125,7 +125,7 @@ function UsersTable({ usersList, userList }) {
                                           ${item.UserStatus == 'Out For Delivery' && 'txt_delivery'}
                                           ${item.UserStatus == 'ACTIVE' && 'txt_delivered'}
                                           ${item.UserStatus == 'INACTIVE' && 'txt_rejected'}`} >
-                                            {item?.UserStatus.toLowerCase()}
+                                            {item?.UserStatus.toLowerCase().charAt(0).toUpperCase() + item?.UserStatus.slice(1).toLowerCase()} 
                                         </span>
                                     </div>
                                 </td>
@@ -163,7 +163,7 @@ function UsersTable({ usersList, userList }) {
                                                         <Button variant="outline-primary" onClick={() => setShowDeleteModal(false)}>
                                                             Cancel
                                                         </Button>
-                                                        <Button variant="danger" onClick={()=>handleDeleteUser(item.IDUser)}>
+                                                        <Button variant="danger" onClick={() => handleDeleteUser(item.IDUser)}>
                                                             Delete
                                                         </Button>
                                                     </Modal.Footer>
