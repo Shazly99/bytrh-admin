@@ -154,8 +154,8 @@ function Users() {
                         onChange={handleOptionChange}
                         className="inactive-radio form-check-input"
 
-                      />
-                      PENDING
+                      /> 
+                      Pending
                     </label>
 
                   </div>

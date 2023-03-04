@@ -84,26 +84,23 @@ option {
 
 thead {
     overflow: hidden;
-    // white-space: nowrap !important;
-    .img{
-        background-color: red !important;
-    }
+ 
     >tr {
         border-radius: 15px !important;
         white-space: nowrap !important;
-
         >th {
             font-family: $fontBase;
             font-style: normal;
             font-weight: 500;
-            font-size: 18px !important;
+            font-size: 16px !important;
             line-height: 27px !important;
-
+ 
             text-align: center;
             color: #4A4A4A;
             padding: 15px 0 !important;
         }
     }
+    
 }
 tbody{
     white-space: nowrap !important;
@@ -112,8 +109,7 @@ tbody{
     }
 }
 td {
-    white-space: nowrap !important;
-
+    white-space: nowrap !important; 
     >div {
         display: flex;
         justify-content: center;
@@ -125,7 +121,7 @@ td {
         font-family: $fontBase;
         font-style: normal;
         font-weight: 400 !important;
-        font-size: 18px !important;
+        font-size: 15px !important;
         line-height: 32px !important;
         /* identical to box height */
         text-align: center;
