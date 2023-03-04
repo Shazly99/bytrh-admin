@@ -47,10 +47,10 @@ export default function ItemAdoption({ id , clientName , petName , petStrain , p
         <>
             <tr>
                 <td>
-                    <img src={petPicture} className='mx-auto' style={{width: '250px' , height: '150px' , cursor: 'pointer'}} alt="pet-image"  />
+                    <img src={petPicture} className='mx-auto' style={{width: '250px' , height: '150px' , cursor: 'pointer'}} alt="pet-image" onClick={() => {goToAdoptionDetails(id)}} />
                 </td>
                 <td>
-                    <div style={{cursor: petName ? 'pointer' : 'default'}} >{petName ? petName : '_'}</div>
+                    <div onClick={() => {goToAdoptionDetails(id)}} style={{cursor: petName ? 'pointer' : 'default'}} >{petName ? petName : '_'}</div>
                 </td>
                 <td>
                     <div>{petStrain ? petStrain : '_'}</div>
@@ -66,11 +66,11 @@ export default function ItemAdoption({ id , clientName , petName , petStrain , p
                 </td>
                 <td className='text-center '>
                     <span style={{ height: 'fit-content !important' }} className={`
-                            ${status == 'PENDING' && 'txt_pending py-2'} 
-                            ${status == 'CANCELLED' && 'txt_cancel py-2'}
-                            ${status == 'ADOPTED' && 'txt_blocked py-2'}
-                            ${status == 'ACTIVE' && 'txt_delivered py-2'}`} >
-                        {status.toLowerCase()}
+                            ${status == 'PENDING' && 'txt_pending'} 
+                            ${status == 'CANCELLED' && 'txt_cancel'}
+                            ${status == 'ADOPTED' && 'txt_blocked'}
+                            ${status == 'ACTIVE' && 'txt_delivered'} py-2`} >
+                            {status && status[0].toUpperCase()}{status.slice(1).toLowerCase()}
                     </span>
                 </td>
 
@@ -87,14 +87,14 @@ export default function ItemAdoption({ id , clientName , petName , petStrain , p
                                 status === "PENDING" ? 
                                 <>
                                     <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
-                                    <Dropdown.Item eventKey="ADOPTED">ADOPTED</Dropdown.Item>
-                                    <Dropdown.Item eventKey="CANCELLED">CANCELLED</Dropdown.Item>
+                                    <Dropdown.Item eventKey="ADOPTED">Adopted</Dropdown.Item>
+                                    <Dropdown.Item eventKey="CANCELLED">Cancelled</Dropdown.Item>
                                 </> :
 
                                 status === "ACTIVE" ? 
                                 <>
-                                    <Dropdown.Item eventKey="ADOPTED">ADOPTED</Dropdown.Item>
-                                    <Dropdown.Item eventKey="CANCELLED">CANCELLED</Dropdown.Item>
+                                    <Dropdown.Item eventKey="ADOPTED">Adopted</Dropdown.Item>
+                                    <Dropdown.Item eventKey="CANCELLED">Cancelled</Dropdown.Item>
                                 </> :
 
                                 status === "CANCELLED" ?
@@ -105,21 +105,9 @@ export default function ItemAdoption({ id , clientName , petName , petStrain , p
                                 status === "ADOPTED" ?
                                 <>
                                     <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
-                                    <Dropdown.Item eventKey="CANCELLED">CANCELLED</Dropdown.Item>
+                                    <Dropdown.Item eventKey="CANCELLED">Cancelled</Dropdown.Item>
                                 </> : ''
                             }
-                            {/* {
-                                status === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
-                            }
-                            {
-                                status === "CANCELLED" ? '' : <Dropdown.Item eventKey="CANCELLED">CANCELLED</Dropdown.Item>
-                            }
-                            {
-                                status === "ADOPTED" ? '' : <Dropdown.Item eventKey="ADOPTED">ADOPTED</Dropdown.Item>
-                            }
-                            {
-                                status === "PENDING" ? '' : <Dropdown.Item eventKey="PENDING">PENDING</Dropdown.Item>
-                            } */}
                         </DropdownButton>
                     </span>
                 </td>

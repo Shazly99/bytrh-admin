@@ -31,7 +31,6 @@ export default function DoctorProfile() {
     await axios.get(apiDoctoProfile,  apiheader )
       .then(res => {
         if (res.status === 200 && res.request.readyState === 4) {
-          // console.log(res.data.Response);
           setFetchDoctor(res.data.Response);
           setFetchDoctorLicense(res.data.Response.DoctorLicense);
           setFetchDoctorPricing(res.data.Response.DoctorPricing);

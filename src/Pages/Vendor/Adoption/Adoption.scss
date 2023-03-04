@@ -1,0 +1,154 @@
+
+
+@media screen and (max-width: 570px) {
+
+    .personal-info h6,
+    .personal-info .fs-6,
+    .personal-info .h6,
+    .doc-info h6,
+    .doc-info .fs-6,
+    .doc-info .h6,
+    .license .d-flex h6 {
+        font-size: 16px !important;
+    }
+  
+    .personal-info p , .personal-info small,
+    .doc-info p , .doc-info small,
+    .license .d-flex small{
+        font-size: 14px !important;
+    } 
+  
+  }
+  
+  @media screen and (max-width: 400px) {
+  
+    .personal-info h6,
+    .personal-info .fs-6,
+    .personal-info .h6,
+    .doc-info h6,
+    .doc-info .fs-6,
+    .doc-info .h6,
+    .license .d-flex h6 {
+        font-size: 14px !important;
+    }
+  
+    .personal-info p , .personal-info small,
+    .doc-info p , .doc-info small,
+    .license .d-flex small{
+        font-size: 12px !important;
+    } 
+  
+  }
+  
+  
+  .img-doc img ,
+  .license img {
+    height: 180px;
+  }
+  
+  @media screen and (max-width: 500px) {
+    .img-doc img ,
+    .license img {
+      height: 150px;
+      min-height: 150px;
+    }
+  }
+
+
+  .adoption-details h5.info {
+    font-weight: 600;
+  }
+
+
+  @media screen and (max-width: 570px) {
+
+    .adoption-details h5 {
+        font-size: 19px !important;
+    }
+
+  }
+  
+  @media screen and (max-width: 400px) {
+  
+    .adoption-details h5 {
+        font-size: 17px !important;
+    }
+
+  }
+
+
+  .adoption-details .single-details {
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1.5rem;
+    border-right: 1px solid rgba(140, 140, 140, 0.3);
+  }
+
+
+  .adoption-details .single-details:first-child {
+    border-radius: 10px 0px 0px 10px;
+  }
+
+  .adoption-details .single-details:last-child {
+    border-right: none;
+    border-radius: 0px 10px 10px 0px;
+  }
+
+  @media screen and (max-width: 572px) {
+    .adoption-details .single-details:nth-child(2) {
+      border-right: none;
+      border-radius: 0px 10px 10px 0px;
+    }
+  }
+
+  .adoption-details .single-details h5.title {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    color: #171717;
+  }
+
+  .adoption-details .single-details h6.body {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 27px;
+    text-align: center;
+    color: #464646;
+  }
+
+
+  @media screen and (max-width: 400px) {
+    .adoption-details .single-details h5.title {
+      font-size: 17px;
+    }
+
+    .adoption-details .single-details h6.body {
+      font-size: 14px;
+    }
+  }
+
+
+  @media screen and (max-width: 570px) {
+  
+    .adoption-details p {
+        font-size: 14px !important;
+    } 
+  
+  }
+  
+  @media screen and (max-width: 400px) {
+  
+    .adoption-details p {
+        font-size: 12px !important;
+    } 
+  
+  }
+

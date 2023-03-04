@@ -130,6 +130,7 @@ export default function Doctors() {
                           <th scope="col">Type</th>
                           <th scope="col">Balance</th>
                           <th scope="col">Status</th>
+                          <th scope="col">Register Date</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
@@ -145,6 +146,7 @@ export default function Doctors() {
                             type={item.DoctorType}
                             balance={item.DoctorBalance}
                             status={item.DoctorStatus}
+                            create={item.CreateDate}
                             item={item}
                             getTokenDoctors={getTokenDoctors}
                           />
