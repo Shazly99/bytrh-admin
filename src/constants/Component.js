@@ -57,13 +57,14 @@ import BlogClientDetails from './../Pages/Blogs/Client/BlogClientDetails';
 import BlogDoctorDetails from './../Pages/Blogs/Doc/BlogDoctorDetails';
 import Adoption from '../Pages/Vendor/Adoption/Adoption';
 import AdoptionDetails from '../Pages/Vendor/Adoption/AdoptionDetails';
+import Loader from './../Components/Shared/Loader/Loader';
 
 export default {
     // Layout 
     Vendor,
     Auth,
     Chat,
-
+Loader,
     // Vendor Components User 1
     Dashboard,
     Summary,
