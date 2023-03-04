@@ -75,11 +75,14 @@ const AdsList = () => {
 
   return (
     <>
+      {
+        ads ?
+          <>
 
-      <div className="app__Users ">
-        <Component.ButtonBase title={"Add New Ads"} bg={"primary"} icon={<Icons.add />} path="/ads/add" />
-        <div className="app__Users-table">
-          {/* <div className="search-container">
+            <div className="app__Users ">
+              <Component.ButtonBase title={"Add New Ads"} bg={"primary"} icon={<Icons.add />} path="/ads/add" />
+              <div className="app__Users-table">
+                {/* <div className="search-container">
             <div className='search__group'>
               <input type="text" placeholder="Search by area....." name="search" value={searchValue} onChange={handleInputChange} />
               <button type="submit" onClick={handleSearchClick}>
@@ -127,102 +130,105 @@ const AdsList = () => {
               </label>
             </div>
           </div> */}
-          <Table responsive={true} className='rounded-3 '>
-            <thead>
-              <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                <th> Image</th>
-                <th> Service</th>
-                <th>Start-Date</th>
-                <th> End-Date  </th>
-                <th> Location</th>
-                <th>Action</th>
-              </tr>
-            </thead>
+                <Table responsive={true} className='rounded-3 '>
+                  <thead>
+                    <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
+                      <th> Image</th>
+                      <th> Service</th>
+                      <th>Start-Date</th>
+                      <th> End-Date  </th>
+                      <th> Location</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
 
-            <tbody className='text-center'>
-              {
-                ads?.map((item, index) => (
-                  <tr key={index}>
-                    <td className='img'>
-                      {
-                        item?.AdvertisementImage ?
-                          <LazyLoadImage
-                            src={item.AdvertisementImage} // use normal <img> attributes as props
-                            className="w-100 rounded-2"
-                            effect="blur"
-                          /> :
+                  <tbody className='text-center'>
+                    {
+                      ads?.map((item, index) => (
+                        <tr key={index}>
+                          <td className='img'>
+                            {
+                              item?.AdvertisementImage ?
+                                <LazyLoadImage
+                                  src={item.AdvertisementImage} // use normal <img> attributes as props
+                                  className="w-100 rounded-2"
+                                  effect="blur"
+                                /> :
 
-                          <LazyLoadImage
-                            src={Img.ads} // use normal <img> attributes as props
-                            className="w-100 rounded-2"
-                            effect="blur"
-                          />
+                                <LazyLoadImage
+                                  src={Img.ads} // use normal <img> attributes as props
+                                  className="w-100 rounded-2"
+                                  effect="blur"
+                                />
 
-                      }
-                      {/* <img src={item.AdvertisementImage} alt='example' className='w-100 rounded-2' /> */}
-                    </td>
-                    <td >
-                      <div>
-                        {item?.AdvertisementService.charAt(0).toUpperCase() + item?.AdvertisementService.slice(1).toLowerCase()}
-                      </div>
-                    </td>
-                    <td >
-                      <div>
-                        {item?.AdvertisementStartDate?.split(" ")[0]}
-                      </div>
-                    </td>
-                    <td >
-                      <div>
-                        {item?.AdvertisementEndDate?.split(" ")[0]}
-                      </div>
-                    </td>
-                    <td >
-                      <div>
-                        {item?.AdvertisementLocation.charAt(0).toUpperCase() + item?.AdvertisementLocation.slice(1).toLowerCase()}
-                      </div>
-                    </td>
+                            }
+                            {/* <img src={item.AdvertisementImage} alt='example' className='w-100 rounded-2' /> */}
+                          </td>
+                          <td >
+                            <div>
+                              {item?.AdvertisementService.charAt(0).toUpperCase() + item?.AdvertisementService.slice(1).toLowerCase()}
+                            </div>
+                          </td>
+                          <td >
+                            <div>
+                              {item?.AdvertisementStartDate?.split(" ")[0]}
+                            </div>
+                          </td>
+                          <td >
+                            <div>
+                              {item?.AdvertisementEndDate?.split(" ")[0]}
+                            </div>
+                          </td>
+                          <td >
+                            <div>
+                              {item?.AdvertisementLocation.charAt(0).toUpperCase() + item?.AdvertisementLocation.slice(1).toLowerCase()}
+                            </div>
+                          </td>
 
 
 
-                    <td>
-                      <div>
-                        <span>
-                          <DropdownButton
-                            id={`dropdown-${item.IDAdvertisement}`}
-                            title="Actions"
-                            variant="outline-success"
-                            onSelect={(eventKey) => handleActionSelect(item.IDAdvertisement, eventKey)}
-                            className="DropdownButton "
-                            drop={'down-centered'}
-                          >
-                            <Dropdown.Item eventKey="Edite" as={Link} to={`/ads/edit/${item.IDAdvertisement}`}>
-                              Edit
-                            </Dropdown.Item>
+                          <td>
+                            <div>
+                              <span>
+                                <DropdownButton
+                                  id={`dropdown-${item.IDAdvertisement}`}
+                                  title="Actions"
+                                  variant="outline-success"
+                                  onSelect={(eventKey) => handleActionSelect(item.IDAdvertisement, eventKey)}
+                                  className="DropdownButton "
+                                  drop={'down-centered'}
+                                >
+                                  <Dropdown.Item eventKey="Edite" as={Link} to={`/ads/edit/${item.IDAdvertisement}`}>
+                                    Edit
+                                  </Dropdown.Item>
 
-                            <Dropdown.Item eventKey="DELETE"   >
-                              Delete
-                            </Dropdown.Item>
+                                  <Dropdown.Item eventKey="DELETE"   >
+                                    Delete
+                                  </Dropdown.Item>
 
-                          </DropdownButton>
-                        </span>
-                      </div>
-                    </td>
-                  </tr>
-                ))
-              }
+                                </DropdownButton>
+                              </span>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    }
 
-            </tbody>
+                  </tbody>
 
-          </Table>
-        </div>
+                </Table>
+              </div>
 
-      </div>
-      <div className="pagination ">
-        <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-          <Pagination count={pageCount} page={page} onChange={handleChange} />
-        </Box>
-      </div>
+            </div>
+            <div className="pagination ">
+              <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
+                <Pagination count={pageCount} page={page} onChange={handleChange} />
+              </Box>
+            </div>
+          </> : <Component.Loader />
+      }
     </>
+
   )
 }
 

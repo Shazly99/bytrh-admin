@@ -1,5 +1,21 @@
 @import '../../../style/varibale';
 
+.welcome__page {
+    max-height: calc( 100vh - 90px);
+    height: 100vh;
+    .title_bytrh {
+        padding: 40px 60px;
+
+
+        @media screen and (max-width:767px) {
+            padding: 20px 40px;
+
+            h3 {
+                font-size: 16px !important;
+            }
+        }
+    }
+}
 
 .app__dashboard {
     .app__dashboard_summary {
@@ -54,12 +70,12 @@
         }
 
         h2 {
-            font-family: $fontBase !important;  
+            font-family: $fontBase !important;
             font-style: normal;
             font-weight: 400;
             font-size: 20.52px;
-            line-height: 31px;  
-            color: #313bac; 
+            line-height: 31px;
+            color: #313bac;
         }
     }
 

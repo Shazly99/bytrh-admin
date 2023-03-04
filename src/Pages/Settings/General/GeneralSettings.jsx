@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Button, Modal, Table } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
+import Component from '../../../constants/Component';
 import Icons from '../../../constants/Icons';
 import { GetData, PostData } from '../../../utils/fetchData'
 import { apiheader } from './../../../utils/fetchData';
@@ -53,78 +54,85 @@ function GeneralSettings() {
 
   return (
     <>
-      <div className="app__Users ">
+      {
+        generalSettingData ?
+          <>
+            <div className="app__Users ">
 
-        <div className="app__Users-table">
+              <div className="app__Users-table">
 
-          <Table responsive={true} className='rounded-3 '>
-            <thead>
-              <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                <th>Setting Name</th>
-                <th>Setting Value</th>
-                <th>Setting Description</th>
-              </tr>
-            </thead>
-            <tbody className='text-center'>
-              {
-                generalSettingData?.map((item, index) => (
-                  <tr key={index}>
-                    <td >
-                      <div>
-                        {item?.GeneralSettingName}
-                      </div>
-                    </td>
-                    <td className='w-50'>
-                      <p style={{ whiteSpace: "pre-wrap", fontSize: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', flexDirection: 'column' }}>
-                        {item?.GeneralSettingValue}</p>
-                      <Button variant="outline-primary" onClick={() => handleModalOpen(index)}>
-                        View & Edit
-                      </Button>
-                      <Modal
-                        show={modalShow && modalIndex === index}
-                        onHide={handleModalClose}
-                        centered
-                      >
-                        <Modal.Header closeButton>
-                          <Modal.Title>Setting Value</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                          <textarea className="form-control" rows="10" defaultValue={item?.GeneralSettingValue} ref={edit} />
-                        </Modal.Body>
-                        <Modal.Footer>
-                          <Button variant="primary" onClick={handleModalClose}>
-                            Close
-                          </Button>
-                          <Button  variant="outline-primary"onClick={() => editValueSitting(item.IDGeneralSetting)}>
-                            Save changes
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
-                    </td>
-                    <td >
-                      <p style={{ whiteSpace: "pre-wrap" }}>
-                        {item?.GeneralSettingDescription}
-                      </p>
-                    </td>
+                <Table responsive={true} className='rounded-3 '>
+                  <thead>
+                    <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
+                      <th>Setting Name</th>
+                      <th>Setting Value</th>
+                      <th>Setting Description</th>
+                    </tr>
+                  </thead>
+                  <tbody className='text-center'>
+                    {
+                      generalSettingData?.map((item, index) => (
+                        <tr key={index}>
+                          <td >
+                            <div>
+                              {item?.GeneralSettingName}
+                            </div>
+                          </td>
+                          <td className='w-50'>
+                            <p style={{ whiteSpace: "pre-wrap", fontSize: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', flexDirection: 'column' }}>
+                              {item?.GeneralSettingValue}</p>
+                            <Button variant="outline-primary" onClick={() => handleModalOpen(index)}>
+                              View & Edit
+                            </Button>
+                            <Modal
+                              show={modalShow && modalIndex === index}
+                              onHide={handleModalClose}
+                              centered
+                            >
+                              <Modal.Header closeButton>
+                                <Modal.Title>Setting Value</Modal.Title>
+                              </Modal.Header>
+                              <Modal.Body>
+                                <textarea className="form-control" rows="10" defaultValue={item?.GeneralSettingValue} ref={edit} />
+                              </Modal.Body>
+                              <Modal.Footer>
+                                <Button variant="primary" onClick={handleModalClose}>
+                                  Close
+                                </Button>
+                                <Button variant="outline-primary" onClick={() => editValueSitting(item.IDGeneralSetting)}>
+                                  Save changes
+                                </Button>
+                              </Modal.Footer>
+                            </Modal>
+                          </td>
+                          <td >
+                            <p style={{ whiteSpace: "pre-wrap" }}>
+                              {item?.GeneralSettingDescription}
+                            </p>
+                          </td>
 
 
-                  </tr>
-                ))
-              }
+                        </tr>
+                      ))
+                    }
 
-            </tbody>
+                  </tbody>
 
-          </Table>
+                </Table>
 
-        </div>
+              </div>
 
-      </div>
-      {/* <div className="pagination ">
+            </div>
+            {/* <div className="pagination ">
         <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
           <Pagination count={pageCount} page={page} onChange={handleChange} />
         </Box>
       </div> */}
+          </>
+          : <Component.Loader />
+      }
     </>
+
   )
 }
 
