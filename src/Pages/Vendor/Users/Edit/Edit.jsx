@@ -11,49 +11,40 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Toaster, toast } from 'react-hot-toast';
 import Icons from '../../../../constants/Icons';
+import useFetch from '../../../../utils/useFetch';
 
 const Edit = () => {
     let navigate = useNavigate();
 
+    let { countries, cities, getCities } = useFetch()
     let { id } = useParams()
     const [userData, setUserData] = useState({});
+    const selectCity = useRef();
 
     const [phoneNumber, setPhoneNumber] = useState('');
     const [Country, setCountry] = useState({});
     const username = useRef();
     const email = useRef();
     const password = useRef();
-    const onChangeHandler = (phone, country, e) => { 
+
+    const onChangeHandler = (phone, country, e) => {
         setPhoneNumber(phone)
         setCountry(country.dialCode)
     }
-
+    const handelSelectCountry = (event) => {
+        const selectedCountryId = event.target.value;
+        console.log(selectedCountryId);
+        getCities(selectedCountryId)
+    }
     const submit = e => {
         e.preventDefault()
-        /*        setData({
-                   UserEmail: email.current.value,
-                   UserPassword: password.current.value,
-                   UserPhone: '+' + phoneNumber,
-                   UserPhoneFlag: '+' + Country,
-                   UserName: username.current.value,
-                   IDCity: 1,
-                   IDUser: id
-               }) */
-        // console.log({
-        //     UserEmail: email.current.value,
-        //     UserPassword: password.current.value,
-        //     UserPhone: '+' + phoneNumber,
-        //     UserPhoneFlag: '+' + Country,
-        //     UserName: username.current.value,
-        //     IDCity: 1
-        // });
         addNewUser({
             UserEmail: email.current.value,
             UserPassword: password.current.value,
             UserPhone: '+' + phoneNumber,
             UserPhoneFlag: '+' + Country,
             UserName: username.current.value,
-            IDCity: 1,
+            IDCity: selectCity.current.value,
             IDUser: id
         }).then(res => {
 
@@ -63,9 +54,9 @@ const Edit = () => {
     }
 
     async function addNewUser(editUserData) {
-        let {data} = await PostData(`https://bytrh.com/api/admin/users/edit`, editUserData, apiheader);
-    
-        if ( data.Success === true) {
+        let { data } = await PostData(`https://bytrh.com/api/admin/users/edit`, editUserData, apiheader);
+
+        if (data.Success === true) {
             toast.success('User data has been updated!', {
                 duration: 4000,
                 position: 'top-center',
@@ -79,13 +70,15 @@ const Edit = () => {
                 navigate('/user');
             }, 2000);
         } else {
-            toast.error( data.ApiMsg)
+            toast.error(data.ApiMsg)
         }
     }
 
     const diplayUserData = async () => {
         let data = await GetData(`https://bytrh.com/api/admin/users/profile/${id}`, apiheader)
-        setUserData(data.Response); 
+        setUserData(data.Response);
+        console.log(data.Response.IDCountry);
+        getCities(data.Response.IDCountry)
     }
     useEffect(() => {
         diplayUserData()
@@ -123,7 +116,16 @@ const Edit = () => {
                                                     <option value="3">Three</option>
                                                 </Form.Select>
                                             </div> */}
-
+                                            <Form.Group controlId="formBasicEmail" className='mt-3'>
+                                                <Form.Label>Country</Form.Label>
+                                                <Form.Select aria-label="Default select example" onClick={handelSelectCountry}>
+                                                    {
+                                                        countries?.map((item, index) => (
+                                                            <option key={index} value={item?.IDCountry} selected={userData?.IDCountry === item?.IDCountry && item?.CountryName}  >{item?.CountryName}  </option>
+                                                        ))
+                                                    }
+                                                </Form.Select>
+                                            </Form.Group>
 
                                         </Col>
                                         <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
@@ -150,7 +152,18 @@ const Edit = () => {
                                                 <Form.Label>Password</Form.Label>
                                                 <Form.Control type="password" ref={password} defaultValue={userData?.UserPassword} />
                                             </Form.Group>
+                                            <Form.Group controlId="formBasicEmail" className='mt-3' >
+                                                <Form.Label>City</Form.Label>
 
+                                                <Form.Select aria-label="Default select example" ref={selectCity}>
+                                                    {
+                                                        cities?.map((item, index) => (
+                                                            <option key={index} value={item?.IDCity} selected={userData?.IDCity === item?.IDCity && item?.CityName} > {item?.CityName}</option>
+                                                        ))
+                                                    }
+                                                </Form.Select>
+
+                                            </Form.Group>
                                         </Col>
                                         <div className='d-flex justify-content-center align-content-center my-5'>
                                             <div className='baseBtn'>

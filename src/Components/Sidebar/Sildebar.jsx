@@ -96,9 +96,9 @@ const Sidebar = ({ children }) => {
                         <div className="icon" id={root.name} data-tooltip-content={root.name}>
                           {root.icon}
                         </div>
-                        {
+                        {/* {
                           !isOpen && <ReactTooltip anchorId={root.name} data-tip={root.name} place="right" style={{ zIndex: 88888888, background: '#313bac' }} />
-                        }
+                        } */}
 
                         <AnimatePresence>
                           {

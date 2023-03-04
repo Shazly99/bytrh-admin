@@ -40,7 +40,7 @@ function Users() {
   const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
 
 
-  const [searchValue, setSearchValue] = React.useState('All');
+  const [searchValue, setSearchValue] = React.useState('');
   const handleSearchClick = () => {
     console.log(searchValue);
     searchGetData(searchValue)
