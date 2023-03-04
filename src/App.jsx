@@ -9,38 +9,7 @@ import { apiheader } from './utils/fetchData';
 import ChatStore from './context/ChatStore';
 
 function App() {
-  const URL_Doctors = `https://bytrh.com/api/admin/doctors`;
-  let token = localStorage.getItem('token')
-  const [pagesCountDoctors, setPagesCountDoctors] = useState(0);
-  const [countDoctors, setCountDoctors] = useState(1);
-  const [searchKeyDoctors, setSearchKeyDoctors] = useState(null);
-  const [loadingDoctors, setLoadingDoctors] = useState(false)
-  const [fetchDoctors, setFetchDoctors] = useState([])
-
- 
-
-  async function getTokenDoctors() {
-
-    setLoadingDoctors(true);
-    await axios.post(URL_Doctors, {
-      IDPage: countDoctors,
-      SearchKey: searchKeyDoctors
-    }, apiheader)
-      .then(res => {
-        setFetchDoctors(res.data.Response.Doctors);
-        setPagesCountDoctors(res.data.Response.Pages);
-        setLoadingDoctors(false); 
-      })
-      .catch((error) => {
-        console.log(error)
-      });
-  }
-  useEffect(() => {
-    if (token) {
-      getTokenDoctors();
-    }
-  }, [token, countDoctors, pagesCountDoctors, searchKeyDoctors]);
-
+  
   // get countries Bytra
   const [fetchCountriesBytra, setFetchCountriesBytra] = useState([]);
   async function getCountriesBytra() {
@@ -87,10 +56,12 @@ function App() {
         // ! Rashed Doctor component
         {
           path: '/doctors', children: [
-            { index: true, element: <ProtectedRoutes><Component.Doctors getTokenDoctors={getTokenDoctors} fetchDoctors={fetchDoctors} pagesCountDoctors={pagesCountDoctors} countDoctors={countDoctors} setCountDoctors={setCountDoctors} setSearchKeyDoctors={setSearchKeyDoctors} loadingDoctors={loadingDoctors} /> </ProtectedRoutes> },
-            { path: 'addDoctor', element: <ProtectedRoutes> <Component.AddDoctor getTokenDoctors={getTokenDoctors} fetchCountriesBytra={fetchCountriesBytra} /></ProtectedRoutes> },
-            { path: 'editDoctor/:id', element: <ProtectedRoutes> <Component.EditDoctor getTokenDoctors={getTokenDoctors} fetchCountriesBytra={fetchCountriesBytra} /></ProtectedRoutes> },
+            { index: true, element: <ProtectedRoutes><Component.Doctors /> </ProtectedRoutes> },
+            { path: 'addDoctor', element: <ProtectedRoutes> <Component.AddDoctor fetchCountriesBytra={fetchCountriesBytra} /></ProtectedRoutes> },
+            { path: 'editDoctor/:id', element: <ProtectedRoutes> <Component.EditDoctor fetchCountriesBytra={fetchCountriesBytra} /></ProtectedRoutes> },
             { path: 'doctorfields/:id', element: <ProtectedRoutes> <Component.DoctorFields /></ProtectedRoutes> },
+            { path: 'doctorCategory/:id', element: <ProtectedRoutes> <Component.DoctorCategory /></ProtectedRoutes> },
+            { path: 'doctorProfile/:id', element: <ProtectedRoutes> <Component.DoctorProfile /></ProtectedRoutes> },
           ]
         },
 
@@ -98,6 +69,7 @@ function App() {
         {
           path: '/adoption', children: [
             { index: true, element: <ProtectedRoutes><Component.Adoption /> </ProtectedRoutes> },
+            { path: 'details/:id', element: <ProtectedRoutes> <Component.AdoptionDetails /></ProtectedRoutes> },
           ]
 
         },

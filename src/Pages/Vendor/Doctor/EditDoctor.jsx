@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
 
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { FaBars } from 'react-icons/fa';
+// import { FaBars } from 'react-icons/fa';
 // import { BsSearch } from 'react-icons/bs'; 
-import { useContext } from 'react';
+// import { useContext } from 'react';
 // import { langContext } from '../context/store';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { Container } from 'react-bootstrap';
 import Component from '../../../constants/Component';
 import { apiheader } from './../../../utils/fetchData';
-import { Callbacks } from 'jquery';
 import { Button } from 'react-bootstrap/';
 
-const EditDoctor = ({ getTokenDoctors, fetchCountriesBytra }) => {
+
+
+const EditDoctor = ({ fetchCountriesBytra }) => {
   const { id } = useParams();
   const apiInfos = `https://bytrh.com/api/admin/doctors/edit/${id}`;
 
@@ -63,9 +64,6 @@ const EditDoctor = ({ getTokenDoctors, fetchCountriesBytra }) => {
         console.log(err);
       })
   }
-  // useEffect(() => {
-  //   // getCitiesBytra(country);
-  // }, [country])
 
 
 
@@ -98,7 +96,7 @@ const EditDoctor = ({ getTokenDoctors, fetchCountriesBytra }) => {
       },
       headers: {
         'Content-Type': 'multipart/form-data',
-        'Authorization': 'Bearer ' + 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvYnl0cmguY29tXC9hcGlcL2FkbWluXC9sb2dpbiIsImlhdCI6MTY3NjI3MzI4NSwiZXhwIjozNTQyNTEzMjg1LCJuYmYiOjE2NzYyNzMyODUsImp0aSI6InV6QURwTVV5b1BhWndFTlQiLCJzdWIiOjEsInBydiI6ImZkOWU0ZjkyODg3OWNjMWEwZWM5MGFjMzA5ZjdhZWY2MDJkYTY0NzkifQ.-ebAjkSFDE2naB5X-yxF5YDGmz15dey8QtSf3APbWaU',
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
       },
     });
 
@@ -108,7 +106,7 @@ const EditDoctor = ({ getTokenDoctors, fetchCountriesBytra }) => {
     if (data.Success === true) {
       setApiCode(data.Success);
       setTimeout(() => {
-        getTokenDoctors();
+        // getTokenDoctors();
         navigate('/doctors');
       }, 2000);
     }
@@ -150,7 +148,7 @@ const EditDoctor = ({ getTokenDoctors, fetchCountriesBytra }) => {
                     </div>
                     <div className="col-md-6">
                       <div className="group-add">
-                        <label className="fs-5  " htmlFor="DoctorPhone">phone</label>
+                        <label className="fs-5  " htmlFor="DoctorPhone">Phone</label>
                         <div className="input-group">
                           <PhoneInput
                             country={countryCode}
@@ -158,6 +156,7 @@ const EditDoctor = ({ getTokenDoctors, fetchCountriesBytra }) => {
                             enableSearch={true}
                             searchPlaceholder='Country number...'
                             inputClass={'form-control mx-auto w-100 py-3'}
+                            inputStyle={{width:'100%'}}
                             inputProps={{
                               name: 'DoctorPhone',
                               required: true,

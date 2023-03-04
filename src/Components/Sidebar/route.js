@@ -98,7 +98,7 @@ const routes = [
   {
     path: "/adoption",
     name: "Adoption",
-    icon: <Icons.pets size={20}/>,
+    icon: <Icons.pets size={19}/>,
   },
  
 ];

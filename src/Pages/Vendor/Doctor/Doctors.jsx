@@ -7,20 +7,65 @@ import Icons from '../../../constants/Icons';
 import './Doctor.scss'
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-
 import $ from 'jquery'
 import { Container, Table } from 'react-bootstrap';
+import Loader from '../../../Components/Shared/Loader/Loader';
+import axios from 'axios';
+import { apiheader } from '../../../utils/fetchData';
 
-export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDoctors, countDoctors, setCountDoctors, setSearchKeyDoctors, loadingDoctors }) {
 
 
-  const token = localStorage.getItem('userToken');
-  const [page, setPage] = useState(1); 
+// export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDoctors, countDoctors, setCountDoctors, setSearchKeyDoctors, loadingDoctors }) {
+export default function Doctors() {
+
+
+  // const token = localStorage.getItem('userToken');
+  const URL_Doctors = `https://bytrh.com/api/admin/doctors`;
+
+  const [pagesCountDoctors, setPagesCountDoctors] = useState(0);
+  const [countDoctors, setCountDoctors] = useState(1);
+  const [searchKeyDoctors, setSearchKeyDoctors] = useState(null);
+  const [loadingDoctors, setLoadingDoctors] = useState(false)
+  const [fetchDoctors, setFetchDoctors] = useState([])
+  async function getTokenDoctors() {
+
+    setLoadingDoctors(true);
+    await axios.post(URL_Doctors, {
+      IDPage: countDoctors,
+      SearchKey: searchKeyDoctors
+    }, apiheader)
+      .then(res => {
+        setFetchDoctors(res.data.Response.Doctors);
+        setPagesCountDoctors(res.data.Response.Pages);
+        setLoadingDoctors(false);
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+  }
+  useEffect(() => {
+      getTokenDoctors();
+  }, [countDoctors, pagesCountDoctors, searchKeyDoctors]);
+
+
+  useEffect(() => {
+    $('html , body').animate({ scrollTop: 0 }, 200);
+  }, [countDoctors]);
+
+  useEffect(() => {
+    if(loadingDoctors) {
+      $('body').addClass('d-none');
+      $('body').removeClass('d-block')
+    }
+    $('body').addClass('d-block');
+    $('body').removeClass('d-none')
+  }, [loadingDoctors]);
+
+
   const handleChange = (event, value) => {
-    console.log(value);
-    setPage(value);
     setCountDoctors(value); 
   };
+
   const [valueSearch, setValueSearch] = useState('')
 
   const handelSearch = () => {
@@ -28,53 +73,21 @@ export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDocto
     setCountDoctors(1);
   }
 
-
   const handelClickSearch = (e) => {
     if (e.keyCode === 13) {
-      // console.log('enter key pressed');
       handelSearch();
     }
   }
-  useEffect(() => {
-    $('html , body').animate({ scrollTop: 0 }, 200);
-  }, [page]);
+
+
 
   return (
     <>
 
-      {/* <div className="topbar">
-        <div className="toggle-topbar" onClick={() => {
-          toggleOpen();
-          widthBody();
-        }}>
-          <FaBars />
-        </div>
-        <div className="search-topbar sales-page">
-          <div className="group">
-            <input type="search"
-              value={localStorage.getItem('searchDoctors') ? localStorage.getItem('searchDoctors') : ''}
-              onChange={(e) => {
-                localStorage.setItem('searchDoctors', e.target.value);
-                setValueSearch(e.target.value);
-              }}
-              placeholder='Search by Name / Email / Mobile..' style={{ fontSize: '14px' }}
-              onKeyDown={handelClickSearch}
-            />
-            <BiX className='bxx' style={{ cursor: 'pointer', right: '50px' }} onClick={() => {
-              localStorage.removeItem('searchDoctors');
-              $('.sales-page .group input').val('');
-            }} />
-            <BsSearch className='bSearch' style={{ cursor: 'pointer', backgroundColor: 'var(--mainColor' }} onClick={handelSearch} />
-          </div>
-        </div>
-        <div className="user-img">
-          <img src={userImg2} alt="user" />
-        </div>
-      </div>   */}
       <Container fluid>
         <section className='   app__doctor  position-relative'>
           <div className="app__Users ">
-            <Component.ButtonBase title={"Add new user"} bg={"primary"} icon={<Icons.add />} path="/doctors/addDoctor" />
+            <Component.ButtonBase title={"Add New Doctor"} bg={"primary"} icon={<Icons.add />} path="/doctors/addDoctor" />
           </div>
           <div className="search-container">
             <div className='search__group'>
@@ -86,7 +99,7 @@ export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDocto
                 }}
                 onKeyDown={handelClickSearch}
 
-                type="text" placeholder="Search by name or email or phone....." name="search" />
+                type="text" placeholder="Search by name or email or phone.." name="search" />
               <button type="submit" onClick={() => {
                 localStorage.removeItem('searchDoctors');
 
@@ -98,21 +111,14 @@ export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDocto
           </div>
 
           {loadingDoctors ?
-            <div className="sk-chase">
-              <div className="sk-chase-dot"></div>
-              <div className="sk-chase-dot"></div>
-              <div className="sk-chase-dot"></div>
-              <div className="sk-chase-dot"></div>
-              <div className="sk-chase-dot"></div>
-              <div className="sk-chase-dot"></div>
-            </div>
+            <Loader /> 
+
             :
+
             <div className="total-table">
 
               {Object.keys(fetchDoctors).length > 0 ?
                 <> 
-     
-
                   <div className="app__Users-table  ">
                     <Table responsive={true} className='rounded-3 '>
                       <thead className="table-light bg-input">
@@ -147,9 +153,10 @@ export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDocto
                       </tbody>
                     </Table>
                   </div>
-                  <div className="pagination ">
+
+                  <div className="pagination mt-2">
                     <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-                      <Pagination count={pagesCountDoctors} page={page} onChange={handleChange} />
+                      <Pagination count={pagesCountDoctors} page={countDoctors} onChange={handleChange}  />
                     </Box>
                   </div>
                 </>

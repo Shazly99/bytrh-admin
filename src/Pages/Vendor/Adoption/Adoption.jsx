@@ -18,7 +18,6 @@ import { apiheader } from '../../../utils/fetchData';
 export default function Adoption() {
 
 
-  // const token = localStorage.getItem('userToken');
   const URL_Adoption = `https://bytrh.com/api/admin/adoptions`;
 
   const [pagesCountAdoption, setPagesCountAdoption] = useState(0);
@@ -85,9 +84,6 @@ export default function Adoption() {
 
       <Container fluid>
         <section className='   app__doctor  position-relative'>
-          {/* <div className="app__Users ">
-            <Component.ButtonBase title={"Add New Doctor"} bg={"primary"} icon={<Icons.add />} path="/doctors/addDoctor" />
-          </div> */}
           <div className="search-container my-4">
             <div className='search__group'>
               <input
@@ -102,7 +98,6 @@ export default function Adoption() {
               <button type="submit" onClick={() => {
                 localStorage.removeItem('searchAdoption');
 
-                //  $('.sales-page .group input').val('');
               }}>
                 <Icons.Search onClick={handelSearch} color='#fff' size={25} />
               </button>

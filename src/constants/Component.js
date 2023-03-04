@@ -24,6 +24,8 @@ import Doctors from './../Pages/Vendor/Doctor/Doctors';
 import AddDoctor from './../Pages/Vendor/Doctor/AddDoctor';
 import EditDoctor from './../Pages/Vendor/Doctor/EditDoctor';
 import DoctorFields from './../Pages/Vendor/Doctor/DoctorFields';
+import DoctorCategory from './../Pages/Vendor/Doctor/DoctorCategory';
+import DoctorProfile from '../Pages/Vendor/Doctor/DoctorProfile';
 import ClientList from './../Pages/Chat/Client/ClientList';
 import LiveChat from './../Pages/Chat/Client/LiveChat';
 import DoctorList from './../Pages/Chat/Doctors/DoctorList';
@@ -54,6 +56,7 @@ import { BlogDoctor } from './../Pages/Blogs/Doc/BlogDoctor';
 import BlogClientDetails from './../Pages/Blogs/Client/BlogClientDetails';
 import BlogDoctorDetails from './../Pages/Blogs/Doc/BlogDoctorDetails';
 import Adoption from '../Pages/Vendor/Adoption/Adoption';
+import AdoptionDetails from '../Pages/Vendor/Adoption/AdoptionDetails';
 
 export default {
     // Layout 
@@ -91,11 +94,15 @@ export default {
  
     ChatConsult,
     LiveConsult,
+
     // Doc
     Doctors,
     AddDoctor,
     EditDoctor,
     DoctorFields,
+    DoctorCategory,
+    DoctorProfile,
+
     //AnimalCat
     AnimalCat, 
     AddAnimalCat,
@@ -130,5 +137,6 @@ export default {
 
     // Adoption
     Adoption,
+    AdoptionDetails,
 }
 
