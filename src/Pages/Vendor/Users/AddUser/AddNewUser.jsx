@@ -10,20 +10,27 @@ import Form from 'react-bootstrap/Form';
 import { apiheader, PostData } from '../../../../utils/fetchData';
 import { useNavigate } from 'react-router-dom';
 import { Toaster, toast } from 'react-hot-toast';
+import useFetch from '../../../../utils/useFetch';
 
 const AddNewUser = () => {
     let navigate = useNavigate();
+    const countriesRef = useRef(null);
 
     const [data, setData] = useState({});
+    let { countries, cities, getCities } = useFetch()
 
     const [phoneNumber, setPhoneNumber] = useState('');
     const [Country, setCountry] = useState({});
     const username = useRef();
     const email = useRef();
     const password = useRef();
+    const handelSelectCountry = (event) => {
+        const selectedCountryId = event.target.value;
+        console.log(selectedCountryId);
+        getCities(selectedCountryId)
+    }
 
-
-    const onChangeHandler = (phone, country, e) => { 
+    const onChangeHandler = (phone, country, e) => {
         setPhoneNumber(phone)
         setCountry(country.dialCode)
     }
@@ -52,27 +59,27 @@ const AddNewUser = () => {
             UserPhone: '+' + phoneNumber,
             UserPhoneFlag: '+' + Country,
             UserName: username.current.value,
-            IDCity: 1
+            IDCity: countriesRef.current.value
         })
     }
 
     async function addNewUser(newUser) {
         await PostData(`https://bytrh.com/api/admin/users/add`, newUser, apiheader).then((res) => {
-       
+
             if (res.data.Success === true) {
                 toast.success('New user added successfully!', {
                     duration: 4000,
-                    position: 'top-center',  
-                    icon: <Icons.Added color='#40AB45' size={25}/>, 
+                    position: 'top-center',
+                    icon: <Icons.Added color='#40AB45' size={25} />,
                     iconTheme: {
-                      primary: '#0a0',
-                      secondary: '#fff',
-                    }, 
-                  });
+                        primary: '#0a0',
+                        secondary: '#fff',
+                    },
+                });
                 setTimeout(() => {
                     navigate('/user');
                 }, 2000);
-            }else{
+            } else {
                 toast.error(res.data.ApiMsg)
             }
         });
@@ -116,6 +123,17 @@ const AddNewUser = () => {
                                             </div> */}
 
 
+                                            <Form.Group controlId="formBasicEmail" className='mt-3'>
+                                                <Form.Label>Country</Form.Label>
+                                                <Form.Select aria-label="Default select example" onClick={handelSelectCountry}>
+                                                    {/* <option>{countries[1].CountryName}</option> */}
+                                                    {
+                                                        countries?.map((item, index) => (
+                                                            <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
+                                                        ))
+                                                    }
+                                                </Form.Select>
+                                            </Form.Group>
                                         </Col>
                                         <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
                                             <Form.Group controlId="formBasicEmail"  >
@@ -140,6 +158,21 @@ const AddNewUser = () => {
                                                 <Form.Control type="password" ref={password} />
                                             </Form.Group>
 
+
+                                            <Form.Group controlId="formBasicEmail" className='mt-3'>
+                                                <Form.Label>City</Form.Label>
+
+                                                <Form.Select aria-label="Default select example" ref={countriesRef}>
+
+                                                    {
+                                                        cities?.map((item, index) => (
+                                                            <option key={index} value={item?.IDCity}>{item?.CityName}</option>
+                                                        ))
+                                                    }
+                                                    {/* <option value="0">InActive</option> */}
+                                                </Form.Select>
+
+                                            </Form.Group>
                                         </Col>
                                         <div className='d-flex justify-content-center align-content-center my-5'>
                                             <div className='baseBtn'>
