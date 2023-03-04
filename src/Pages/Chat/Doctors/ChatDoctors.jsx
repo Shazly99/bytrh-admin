@@ -90,7 +90,7 @@ const ChatDoctors = () => {
                   <div className="empty_chat   w-100 h-100 d-flex justify-content-center align-items-center flex-column">
                     <img src={Img.empty_chat} className='w-50' />
                     <h2 className={` ${id ? '' : 'text-light'}`}>
-                      Welcome, <span style={{ color: '#313bac' }}>admin!</span>
+                      Welcome, <span style={{ color: '#FAAA40' }}>admin!</span>
                     </h2>
                     <h4 className={` ${id ? 'text-light' : 'text-light text-light'}`}>Please select a chat to Start messaging.</h4>
                   </div>
