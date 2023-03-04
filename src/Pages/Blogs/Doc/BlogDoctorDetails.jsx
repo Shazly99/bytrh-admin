@@ -73,7 +73,7 @@ const BlogDoctorDetails = () => {
             <>
               <div className="app__addprodects__header ">
                 <Component.BaseHeader h2={'BLog Gallery'} />
-                <a onClick={() => setLgShow(true)} className='blog__popup'>Read more</a>
+                <a onClick={() => setLgShow(true)} className='blog__popup'>show more</a>
                 <Modal
                   size="xl"
                   show={lgShow}

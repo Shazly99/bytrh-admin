@@ -39,7 +39,7 @@ const LiveConsult = () => {
           <div className="app__chat__Consult  ">
             <div className='app__chat'>
               <div >
-                <Component.SubNav sub__nav={[{ name: "Consults List", path: '/chat/consult' }, { name: "Consult ", path: `/chat/consult/details/${id}` }]} />
+                <Component.SubNav sub__nav={[{ name: "Consults List", path: '/chat/consult' }, { name: "Consult ", path: `/consult/chat/${id}` }]} />
               </div>
               <div className='app__chat__Consult_details'>
                 <Row>
@@ -74,7 +74,7 @@ const LiveConsult = () => {
 
                     <div className="client_details">
                       <label htmlFor="">Create Date :</label>
-                      <span>{consultDetails?.CreateDate}</span>
+                      <span>{consultDetails?.ConsultDate}</span>
                     </div>
                   </Col>
                 </Row>

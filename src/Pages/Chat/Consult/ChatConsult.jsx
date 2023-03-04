@@ -264,7 +264,7 @@ const ChatConsult = () => {
                   </div>
                   {/* <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }}>Filter by  Complain :	</h5> */}
                 </div>
-                <Table responsive={true} className='rounded-3    shadow-lg '>
+                <Table responsive={true}  >
                   <thead>
                     <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
                       <th>Client Info</th>
@@ -326,8 +326,8 @@ const ChatConsult = () => {
                                             ${item.ConsultType == 'Out For Delivery' && 'txt_delivery'}
                                             ${item.ConsultType == 'ACTIVE' && 'txt_delivered'}
                                             ${item.ConsultType == 'INACTIVE' && 'txt_rejected'}`} >
-                               
-                                {item?.ConsultType.toLowerCase().charAt(0).toUpperCase() + item?.ConsultType.slice(1).toLowerCase()} 
+
+                                {item?.ConsultType.toLowerCase().charAt(0).toUpperCase() + item?.ConsultType.slice(1).toLowerCase()}
 
                               </span>
                             </div>
@@ -350,15 +350,18 @@ const ChatConsult = () => {
                                             ${item.ConsultStatus == 'SKIPPED' && 'txt__status'} 
                                             ${item.ConsultStatus == 'REJECTED' && 'txt_rejected'}
                                             ${item.ConsultStatus == 'ACCEPTED' && 'txt_delivery'}`} >
-                                 {item?.ConsultStatus.toLowerCase().charAt(0).toUpperCase() + item?.ConsultStatus.slice(1).toLowerCase()} 
-                                
+                                {item?.ConsultStatus.toLowerCase().charAt(0).toUpperCase() + item?.ConsultStatus.slice(1).toLowerCase()}
+
                               </span>
                             </div>
                           </td>
+                          <td>
 
-                          {item.ConsultStatus == 'ONGOING'
+
+                          {
+                            item.ConsultStatus == 'ONGOING'
                             &&
-                            <td>
+                            
                               <div>
                                 <span>
                                   <DropdownButton
@@ -369,25 +372,27 @@ const ChatConsult = () => {
                                     className="DropdownButton "
                                     drop={'down-centered'}
                                   >
-                                    <Dropdown.Item eventKey="Edite" as={Link} to={`/chat/consult/details/${item.IDConsult}`}>  Chat </Dropdown.Item>
+                                    <Dropdown.Item eventKey="Edite" as={Link} to={`/chat/consult/details/${item.IDConsult}`}target="_blank">  Chat </Dropdown.Item>
                                     {item.ConsultStatus !== 'ENDED' &&
                                       <Dropdown.Item eventKey="End" as={Link}> End Chat  </Dropdown.Item>
                                     }
                                   </DropdownButton>
                                 </span>
                               </div>
-                            </td>
+                         
                           }
-                          {item.ConsultStatus == 'ENDED'
+                          {
+                            item.ConsultStatus == 'ENDED'
                             &&
-                            <td>
+                           
                               <div>
                                 <span>
-                                  <DropdownButton title="Chat" eventKey="Edite" as={Link} to={`/consult/chat/${item.IDConsult}`}>  Chat </DropdownButton>
+                                  <Button    variant="outline-primary"  className="DropdownButton "title="Chat" eventKey="Edite" as={Link} to={`/consult/chat/${item.IDConsult}`}target="_blank">  Chat </Button>
                                 </span>
                               </div>
-                            </td>
+                             
                           }
+                          </td>
                         </tr>
                       ))
                     }
