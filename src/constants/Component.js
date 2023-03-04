@@ -1,14 +1,14 @@
 import Vendor from '../Layout/Vendor';
-import Dashboard from './../Pages/Vendor/Dashboard/Dashboard.jsx'; 
+import Dashboard from './../Pages/Vendor/Dashboard/Dashboard.jsx';
 import Users from './../Pages/Vendor/Users/Users';
-import Profile from './../Pages/Vendor/Profile/Profile'; 
+import Profile from './../Pages/Vendor/Profile/Profile';
 import Navber from './../Components/Navber/Navber';
 import Sildebar from './../Components/Sidebar/Sildebar';
 import ButtonBase from './../Components/Button/ButtonBase';
-import UsersTable from './../Pages/Vendor/Users/UsersTable';  
+import UsersTable from './../Pages/Vendor/Users/UsersTable';
 import SubNav from './../Components/Navber/SubNav';
-import BaseHeader from './../Components/Header/BaseHeader'; 
-import Summary from './../Pages/Vendor/Dashboard/Summary'; 
+import BaseHeader from './../Components/Header/BaseHeader';
+import Summary from './../Pages/Vendor/Dashboard/Summary';
 import ChartColumn from '../Pages/Vendor/Dashboard/ChartColumn';
 import ChartLine from './../Pages/Vendor/Dashboard/ChartLine';//
 import Auth from './../Layout/Auth';
@@ -32,7 +32,7 @@ import DoctorList from './../Pages/Chat/Doctors/DoctorList';
 import LiveChatDoc from './../Pages/Chat/Doctors/LiveChatDoc';
 import AnimalCat from './../Pages/Vendor/Categories/AnimalCat';
 import AddAnimalCat from './../Pages/Vendor/Categories/AddAnimalCat';
-import EditAnimalCat from './../Pages/Vendor/Categories/EditAnimalCat'; 
+import EditAnimalCat from './../Pages/Vendor/Categories/EditAnimalCat';
 import Cities from './../Pages/Vendor/Location/Cities/Cities';
 import AddCities from './../Pages/Vendor/Location/Cities/AddCities';
 import EditCities from './../Pages/Vendor/Location/Cities/EditCities';
@@ -41,7 +41,7 @@ import AddAreas from './../Pages/Vendor/Location/Areas/AddAreas';
 import Country from './../Pages/Vendor/Location/Country/Country';
 import AddCountry from './../Pages/Vendor/Location/Country/AddCountry';
 import EditCountry from './../Pages/Vendor/Location/Country/EditCountry';
-import EditArea from './../Pages/Vendor/Location/Areas/EditArea'; 
+import EditArea from './../Pages/Vendor/Location/Areas/EditArea';
 import ChatConsult from './../Pages/Chat/Consult/ChatConsult';
 import LiveConsult from './../Pages/Chat/Consult/LiveConsult';
 import GeneralSettings from './../Pages/Settings/General/GeneralSettings';
@@ -64,7 +64,7 @@ export default {
     Vendor,
     Auth,
     Chat,
-Loader,
+    Loader,
     // Vendor Components User 1
     Dashboard,
     Summary,
@@ -76,7 +76,7 @@ Loader,
     Profile,
     Edit,
     Clients,
-    ClientTable, 
+    ClientTable,
 
     // Auth
     Login,
@@ -91,8 +91,8 @@ Loader,
     EditMedicalFields,
     ChatDoctors,
     DoctorList,
-    LiveChatDoc, 
- 
+    LiveChatDoc,
+
     ChatConsult,
     LiveConsult,
 
@@ -105,7 +105,7 @@ Loader,
     DoctorProfile,
 
     //AnimalCat
-    AnimalCat, 
+    AnimalCat,
     AddAnimalCat,
     EditAnimalCat,
     // location
@@ -128,11 +128,11 @@ Loader,
     // Advertisements
     AdsList,
     AddAds,
-    EditAds, 
+    EditAds,
     // Components
     Navber,
     SubNav,
-    Sildebar, 
+    Sildebar,
     ButtonBase,
     BaseHeader,
 

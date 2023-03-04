@@ -110,135 +110,143 @@ const Country = () => {
     }, [])
     return (
         <>
-            <div className="app__Users ">
-                <Component.ButtonBase title={"Add New Country"} bg={"primary"} icon={<Icons.add />} path="/location/country/addcountry" />
-                <div className="app__Users-table">
-                    <div className="search-container">
-                        <div className='search__group'>
-                            <input type="text" placeholder="Search by country....." name="search" value={searchValue} onChange={handleInputChange} />
-                            <button type="submit" onClick={handleSearchClick}>
-                                <Icons.Search color='#fff' size={25} />
-                            </button>
-                        </div>
+            {
+                country ?
+                    <>
+                        <>
+                            <div className="app__Users ">
+                                <Component.ButtonBase title={"Add New Country"} bg={"primary"} icon={<Icons.add />} path="/location/country/addcountry" />
+                                <div className="app__Users-table">
+                                    <div className="search-container">
+                                        <div className='search__group'>
+                                            <input type="text" placeholder="Search by country....." name="search" value={searchValue} onChange={handleInputChange} />
+                                            <button type="submit" onClick={handleSearchClick}>
+                                                <Icons.Search color='#fff' size={25} />
+                                            </button>
+                                        </div>
 
-                        <div className='filter__group'>
-                            <label className='active'>
-                                <input
-                                    type="radio"
-                                    name="filter"
-                                    value="ACTIVE"
-                                    checked={selectedOption === "ACTIVE"}
-                                    onChange={handleOptionChange}
-                                    className="active-radio form-check-input"
+                                        <div className='filter__group'>
+                                            <label className='active'>
+                                                <input
+                                                    type="radio"
+                                                    name="filter"
+                                                    value="ACTIVE"
+                                                    checked={selectedOption === "ACTIVE"}
+                                                    onChange={handleOptionChange}
+                                                    className="active-radio form-check-input"
 
-                                />
-                                Active
-                            </label>
+                                                />
+                                                Active
+                                            </label>
 
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="filter"
-                                    value="INACTIVE"
-                                    checked={selectedOption === "INACTIVE"}
-                                    onChange={handleOptionChange}
-                                    className="inactive-radio form-check-input"
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    name="filter"
+                                                    value="INACTIVE"
+                                                    checked={selectedOption === "INACTIVE"}
+                                                    onChange={handleOptionChange}
+                                                    className="inactive-radio form-check-input"
 
-                                />
-                                InActive
-                            </label>
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="filter"
-                                    value="All"
-                                    checked={selectedOption === "All"}
-                                    onChange={handleOptionChange}
-                                    className="inactive-radio form-check-input"
-                                />
-                                All
-                            </label>
-                        </div>
-                    </div>
-                    <Table responsive={true} className='rounded-3 '>
-                        <thead>
-                            <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                                <th>Country Name</th>
-                                <th>Country Time Zone</th>
-                                <th>Country Code</th>
-                                <th>Country Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody className='text-center'>
-                            {
-                                country?.map((item, index) => (
-                                    <tr key={index}>
-                                        <td >
-                                            <div>
-                                                {item?.CountryName}
-                                            </div>
-                                        </td>
+                                                />
+                                                InActive
+                                            </label>
+                                            <label>
+                                                <input
+                                                    type="radio"
+                                                    name="filter"
+                                                    value="All"
+                                                    checked={selectedOption === "All"}
+                                                    onChange={handleOptionChange}
+                                                    className="inactive-radio form-check-input"
+                                                />
+                                                All
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <Table responsive={true} className='rounded-3 '>
+                                        <thead>
+                                            <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
+                                                <th>Country Name</th>
+                                                <th>Country Time Zone</th>
+                                                <th>Country Code</th>
+                                                <th>Country Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className='text-center'>
+                                            {
+                                                country?.map((item, index) => (
+                                                    <tr key={index}>
+                                                        <td >
+                                                            <div>
+                                                                {item?.CountryName}
+                                                            </div>
+                                                        </td>
 
-                                        <td >
-                                            <div>
-                                                {item?.CountryCode}
-                                            </div>
-                                        </td>
-                                        <td >
-                                            <div>
-                                                {item?.CountryTimeZone}
-                                            </div>
-                                        </td>
+                                                        <td >
+                                                            <div>
+                                                                {item?.CountryCode}
+                                                            </div>
+                                                        </td>
+                                                        <td >
+                                                            <div>
+                                                                {item?.CountryTimeZone}
+                                                            </div>
+                                                        </td>
 
-                                        <td >
-                                            <div>
-                                                <span style={{ height: 'fit-content !important' }} className={`  ${item?.CountryActive === 1 && 'txt_delivered'}  ${item?.CountryActive === 0 && 'txt_rejected'} `} >
-                                                    {item?.CountryActive === 1 ? 'Active' : "InActive"}
-                                                </span>
-                                            </div>
-                                        </td>
+                                                        <td >
+                                                            <div>
+                                                                <span style={{ height: 'fit-content !important' }} className={`  ${item?.CountryActive === 1 && 'txt_delivered'}  ${item?.CountryActive === 0 && 'txt_rejected'} `} >
+                                                                    {item?.CountryActive === 1 ? 'Active' : "InActive"}
+                                                                </span>
+                                                            </div>
+                                                        </td>
 
-                                        <td>
-                                            <div>
-                                                <span>
-                                                    <DropdownButton
-                                                        id={`dropdown-${item.IDCountry}`}
-                                                        title="Actions"
-                                                        variant="outline-success"
-                                                        onSelect={(eventKey) => handleActionSelect(item.IDCountry, eventKey)}
-                                                        className="DropdownButton "
-                                                        drop={'down-centered'}
-                                                    >
-                                                        <Dropdown.Item eventKey="Edite" as={Link} to={`/location/country/editcountry/${item.IDCountry}`}>
-                                                            Edit
-                                                        </Dropdown.Item>
-                                                        {
-                                                            item?.CountryActive === 1 ? '' : item?.UserStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
-                                                        }
-                                                        {
-                                                            item?.CountryActive === 0 ? '' : item?.UserStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
-                                                        }
-                                                    </DropdownButton>
-                                                </span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))
-                            }
+                                                        <td>
+                                                            <div>
+                                                                <span>
+                                                                    <DropdownButton
+                                                                        id={`dropdown-${item.IDCountry}`}
+                                                                        title="Actions"
+                                                                        variant="outline-success"
+                                                                        onSelect={(eventKey) => handleActionSelect(item.IDCountry, eventKey)}
+                                                                        className="DropdownButton "
+                                                                        drop={'down-centered'}
+                                                                    >
+                                                                        <Dropdown.Item eventKey="Edite" as={Link} to={`/location/country/editcountry/${item.IDCountry}`}>
+                                                                            Edit
+                                                                        </Dropdown.Item>
+                                                                        {
+                                                                            item?.CountryActive === 1 ? '' : item?.UserStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
+                                                                        }
+                                                                        {
+                                                                            item?.CountryActive === 0 ? '' : item?.UserStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
+                                                                        }
+                                                                    </DropdownButton>
+                                                                </span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                ))
+                                            }
 
-                        </tbody>
+                                        </tbody>
 
-                    </Table>
-                </div>
+                                    </Table>
+                                </div>
 
-            </div>
-            <div className="pagination ">
-                <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-                    <Pagination count={pageCount} page={page} onChange={handleChange} />
-                </Box>
-            </div>
+                            </div>
+                            <div className="pagination ">
+                                <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
+                                    <Pagination count={pageCount} page={page} onChange={handleChange} />
+                                </Box>
+                            </div>
+                        </>
+                    </> : <Component.Loader />
+            }
         </>
+
     )
 }
 
