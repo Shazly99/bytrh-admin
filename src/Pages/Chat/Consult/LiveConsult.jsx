@@ -85,8 +85,7 @@ const LiveConsult = () => {
               <div className={`app__Live_chat chat-body   ${chat.length === 0 ? 'bg-dark' : ''} `} style={{ background: 'rgb(217 217 217 / 28%)' }}>
                 <ScrollToBottom className="message-container">
                   {
-                    chat.length === 0 ?
-
+                    chat.length === 0 ?  
                       <div className="empty_chat   w-100 h-100 d-flex justify-content-center align-items-center flex-column">
                         <img src={Img.empty_chat} className='w-25' />
                         <h2 className={` ${chat.length === 0 ? 'text-light' : ''}`}>
@@ -123,7 +122,8 @@ const LiveConsult = () => {
                                   }
                                 </div>
                                 <div className="message-meta">
-                                  <p id="time">{messageContent.CreateDate}</p>
+                                  <p id="time">{messageContent.CreateDate.split(" ")[0]} { ' , '} {messageContent.ConsultChatSender.charAt(0).toUpperCase() + messageContent?.ConsultChatSender?.slice(1).toLowerCase()}</p>
+                                  {/* ConsultChatSender */}
                                 </div>
                               </div>
                             </div>
