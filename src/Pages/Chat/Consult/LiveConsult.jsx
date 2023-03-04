@@ -91,7 +91,7 @@ const LiveConsult = () => {
                             <div className="empty_chat   w-100 h-100 d-flex justify-content-center align-items-center flex-column">
                               <img src={Img.empty_chat} className='w-25' />
                               <h2 className={` ${chat.length === 0 ? 'text-light' : ''}`}>
-                                Welcome, <span style={{ color: '#313bac' }}>admin!</span>
+                                Welcome, <span style={{ color: '#FAAA40' }}>admin!</span>
                               </h2>
                               <h4 className={` ${chat.length === 0 ? 'text-light text-center' : ' text-center'}`}>This Consults Is Empty.</h4>
                             </div>
