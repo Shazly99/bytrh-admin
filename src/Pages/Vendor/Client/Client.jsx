@@ -6,6 +6,7 @@ import { PostData } from '../../../utils/fetchData';
 import { apiheader } from './../../../utils/fetchData';
 import Icons from "../../../constants/Icons.js";
 import _ from 'lodash';
+import Loader from '../../../Components/Shared/Loader/Loader';
 
 const Clients = () => {
   const [page, setPage] = React.useState(1);
@@ -149,7 +150,7 @@ const Clients = () => {
               </Box>
             </div>
 
-          </> : 'loader..................'
+          </> :<Loader/>
       }
     </>
   )
