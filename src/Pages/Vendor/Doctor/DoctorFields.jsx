@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Component from '../../../constants/Component';
 import { Container } from 'react-bootstrap';
 import { apiheader } from './../../../utils/fetchData';
-
+import Loader from '../../../Components/Shared/Loader/Loader';
 
 
 export default function DoctorFields() { 
@@ -17,7 +17,7 @@ export default function DoctorFields() {
 
   async function getDoctorData() {
     setLoadind(true);
-    await axios.get(apiInfos,   apiheader  )
+    await axios.get(apiInfos, apiheader )
       .then(res => {
         if (res.status === 200 && res.request.readyState === 4) {
           setFields(res.data.Response);
@@ -52,7 +52,11 @@ export default function DoctorFields() {
       data: {
         IDDoctor: id,
         IDMedicalField: el
-      },apiheader,
+      },
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization': 'Bearer ' + localStorage.getItem('token'),
+      },
     });
 
     setMessage(data.ApiMsg);
@@ -81,9 +85,7 @@ export default function DoctorFields() {
         </div>
 
         {loadind ?
-          <div id="ready">
-            <i className="fa fa-spinner fa-5x fa-spin"></i>
-          </div>
+            <Loader />
           :
           <>
             <div className="row d-flex justify-content-center justify-content-md-start align-items-center g-4">
