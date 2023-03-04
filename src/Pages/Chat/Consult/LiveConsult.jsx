@@ -100,7 +100,7 @@ const LiveConsult = () => {
                             <div
                               key={index}
                               className="message"
-                              id={messageContent.ChatSupportSender === "CLIENT" ? "other" : "you"}
+                              id={messageContent.ConsultChatSender === "CLIENT" ? "other" : "you"}
                             >
                               <div>
                                 <div className="message-content"  >
