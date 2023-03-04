@@ -130,14 +130,14 @@ const ChatConsult = () => {
                 <div className="app__addOrder-form ">
                   <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }}>Filter by consult status :	</h5>
                   <div className='filter__group__stats row ' style={{ display: 'flex', gap: '20px', marginBottom: '25px' }}>
-                  <label className='col active'>
+                    <label className='col active'>
                       {
                         selectedOption === "All" ?
                           <input
                             type="radio"
                             name="filter"
                             value="All"
-                            checked 
+                            checked
                             onChange={handleOptionChange}
                             className={`inactive-radio form-check-input `}
                           /> :
@@ -145,9 +145,9 @@ const ChatConsult = () => {
                             type="radio"
                             name="filter"
                             value="All"
-                            checked ={selectedOption === "All"}
+                            checked={selectedOption === "All"}
                             onChange={handleOptionChange}
-                            className={`inactive-radio form-check-input `} 
+                            className={`inactive-radio form-check-input `}
                           />
                       }
 
@@ -326,7 +326,9 @@ const ChatConsult = () => {
                                             ${item.ConsultType == 'Out For Delivery' && 'txt_delivery'}
                                             ${item.ConsultType == 'ACTIVE' && 'txt_delivered'}
                                             ${item.ConsultType == 'INACTIVE' && 'txt_rejected'}`} >
-                                {item?.ConsultType.toLowerCase()}
+                               
+                                {item?.ConsultType.toLowerCase().charAt(0).toUpperCase() + item?.ConsultType.slice(1).toLowerCase()} 
+
                               </span>
                             </div>
                           </td>
@@ -348,7 +350,8 @@ const ChatConsult = () => {
                                             ${item.ConsultStatus == 'SKIPPED' && 'txt__status'} 
                                             ${item.ConsultStatus == 'REJECTED' && 'txt_rejected'}
                                             ${item.ConsultStatus == 'ACCEPTED' && 'txt_delivery'}`} >
-                                {item?.ConsultStatus.toLowerCase()}
+                                 {item?.ConsultStatus.toLowerCase().charAt(0).toUpperCase() + item?.ConsultStatus.slice(1).toLowerCase()} 
+                                
                               </span>
                             </div>
                           </td>

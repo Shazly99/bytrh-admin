@@ -119,7 +119,7 @@ const BlogClient = () => {
                             <div className="app__Users-table ">
                                 <div className="search-container">
                                     <div className='search__group'>
-                                        <input type="text" placeholder="Search by country....." name="search" value={searchBlog} onChange={handleInputChange} />
+                                        <input type="text" placeholder="Search by Doctor Name,Email,Phone......" name="search" value={searchBlog} onChange={handleInputChange} />
                                         <button type="submit" onClick={handleSearchClick}>
                                             <Icons.Search color='#fff' size={25} />
                                         </button>
