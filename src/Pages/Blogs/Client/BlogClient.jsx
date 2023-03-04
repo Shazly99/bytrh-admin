@@ -97,10 +97,16 @@ const BlogClient = () => {
     }
 
     const handelSelectAnimalCategory = async (event) => {
+        console.log(event.target.value);
         const selectedCountryId = event.target.value;
-        await animalcategories()
-        let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs`, { IDAnimalCategory: selectedCountryId }, apiheader)
-        setBlogs(data.Response.ClientBlogs)
+        if (selectedCountryId === "Animal Category") {
+            BlogsList()
+        } else {
+
+            await animalcategories()
+            let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs`, { IDAnimalCategory: selectedCountryId }, apiheader)
+            setBlogs(data.Response.ClientBlogs)
+        }
     }
 
     useEffect(() => {
@@ -260,7 +266,7 @@ const BlogClient = () => {
                                                             </span>
                                                             <div className="delete">
                                                                 <DropdownButton
-                                                                    title={<img src={Img.dropdown} />}
+                                                                    title={<Icons.dotes size={20}/>}
                                                                     id="dropdown-menu"
                                                                     variant="outline-success"
                                                                     onClick={() => setShowDropdown(!showDropdown)}

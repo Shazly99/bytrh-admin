@@ -118,7 +118,7 @@ const Areas = () => {
       areas?
       <>
         <div className="app__Users ">
-          <Component.ButtonBase title={"Add New Area"} bg={"primary"} icon={<Icons.add />} path="/location/areas/addareas" />
+          <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.add />} path="/location/areas/addareas" />
           <div className="app__Users-table">
             <div className="search-container">
               <div className='search__group'>

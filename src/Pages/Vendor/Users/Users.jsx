@@ -84,7 +84,7 @@ function Users() {
         usersList ?
           <>
             <div className="app__Users ">
-              <Component.ButtonBase onclick={test} title={"Add new user"} bg={"primary"} icon={<Icons.add />} path="/user/addUser" />
+              <Component.ButtonBase onclick={test} title={"Add  "} bg={"primary"} icon={<Icons.add />} path="/user/addUser" />
               <div className="app__Users-table">
                 <div className="search-container">
 

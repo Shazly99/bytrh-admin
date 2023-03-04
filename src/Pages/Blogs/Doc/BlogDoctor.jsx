@@ -257,7 +257,7 @@ export const BlogDoctor = () => {
                                                             </span>
                                                             <div className='delete'>
                                                                 <DropdownButton
-                                                                    title={<img src={Img.dropdown} />}
+                                                                    title={<Icons.dotes size={20}/>}
                                                                     id="dropdown-menu"
                                                                     // id={`dropdown-${item.IDDoctorBlog}`}
                                                                     onClick={() => setShowDropdown(!showDropdown)}
