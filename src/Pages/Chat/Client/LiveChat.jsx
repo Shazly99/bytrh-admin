@@ -10,8 +10,9 @@ import useLocalStorage from './../../../context/useLocalStorage';
 import _ from 'lodash';
 
 function LiveChat() {
-    const { id } = useParams();
-    let { setUserReplied, userReplied, setchatEnd } = useContext(ChatContext);
+    const { id } = useParams(); 
+  let { setmassSend, setUserReplied, massSend, setchatEnd } = useContext(ChatContext);
+
     const [isOn, setIsOn] = useLocalStorage('power', true);
 
     const [clientChatSupport, setClientChatSupport] = useState([]);
@@ -117,6 +118,16 @@ function LiveChat() {
         };
     }, [id, IdChatSupport, chatStatus]);
 
+    useEffect(() => {
+        if (massSend === true) {
+          console.log('sucess');
+          chatReceive()
+          setmassSend(false)
+        } else {
+          console.log('error');
+        }
+      }, [massSend]);
+    
     useEffect(() => {
         setChat(null)
         setIsLoading(false)
