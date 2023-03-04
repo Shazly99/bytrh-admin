@@ -7,7 +7,7 @@ import { DropdownButton, Dropdown, Modal, Form, Button } from 'react-bootstrap';
 import { apiheader, PostData } from '../../../utils/fetchData';
 
 
-export default function ItemDoctor({ nameDoc, email, phone, country, type, balance, status, item, id, getTokenDoctors }) {
+export default function ItemDoctor({ nameDoc, email, phone, country, type, balance, create, status, item, id, getTokenDoctors }) {
     // const [data, setData] = useState({});
     const [showModal, setShowModal] = useState(false);
     const [changeBalance, setChangeBalance] = useState(null);
@@ -77,7 +77,9 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                     <div> {country}   </div>
                 </td>
                 <td>
-                    <div>{type}</div>
+                    <div>
+                        {type && type[0].toUpperCase()}{type.slice(1).toLowerCase()}
+                    </div>
                 </td>
                 <td>
                     <div>{balance}</div>
@@ -90,9 +92,12 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                           ${status == 'BLOCKED' && 'txt_blocked'}
                                           ${status == 'ACTIVE' && 'txt_delivered'}
                                           ${status == 'OFFLINE' && 'txt_rejected'}`} >
-                            {status.toLowerCase()}
+                            {status && status[0].toUpperCase()}{status.slice(1).toLowerCase()}
                         </span>
                     </div>
+                </td>
+                <td>
+                    <div>{create}</div>
                 </td>
                 <td>
                     <div>
