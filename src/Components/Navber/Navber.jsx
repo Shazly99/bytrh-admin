@@ -109,12 +109,12 @@ function Navber() {
                   </LinkContainer>
 
 
-                  <NavDropdown.Item>
+                  {/* <NavDropdown.Item>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                       <Icons.settings size={18} style={{ marginRight: 10 }} />
                       <span>Settings & Privacy</span>
                     </div>
-                  </NavDropdown.Item>
+                  </NavDropdown.Item> */}
 
                   <NavDropdown.Divider />
 

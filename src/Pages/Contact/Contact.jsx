@@ -96,7 +96,7 @@ const Contact = () => {
                                   <textarea className="form-control" rows="10" defaultValue={item?.GeneralSettingValue} ref={edit} />
                                 </Modal.Body>
                                 <Modal.Footer>
-                                  <Button variant="primary" onClick={handleModalClose}>
+                                  <Button variant="primary" style={{border:'#FAAA40 '}}  onClick={handleModalClose}>
                                     Close
                                   </Button>
                                   <Button variant="outline-primary" onClick={() => editValueSitting(item.IDGeneralSetting)}>
