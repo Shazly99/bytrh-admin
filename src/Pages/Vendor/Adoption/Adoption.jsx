@@ -134,7 +134,7 @@ export default function Adoption() {
                             id={item.IDAdoption}
                             clientName={item.ClientName}
                             petName={item.PetName}
-                            petStrain={item.DoctorPetStrain}
+                            petStrain={item.PetStrain}
                             petPicture={item.PetPicture}
                             cityName={item.CityName}
                             cate={item.AnimalSubCategoryName}

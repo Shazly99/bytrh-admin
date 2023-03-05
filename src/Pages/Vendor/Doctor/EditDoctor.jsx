@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 // import { FaBars } from 'react-icons/fa';
 // import { BsSearch } from 'react-icons/bs'; 
@@ -223,12 +223,28 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
 
                   {message.length > 0 ? <p id="alertSave" className={`alert ${apiCode === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 mb-0 mt-3 w-50 text-center mx-auto`}>{message}</p> : ''}
 
-                  <div className="submitAdd-buttons mt-4 d-flex justify-content-center align-items-center">
+                  {/* <div className="submitAdd-buttons mt-4 d-flex justify-content-center align-items-center">
                     <Button type='submit' className="btn black-btn p-2 me-4">{loadind ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}</Button>
                     
                     <Component.ButtonBase title={"Cancel"} bg={"primary"} path="/doctors " />
-                    
+                  </div> */}
+
+                  <div className='d-flex justify-content-center align-content-center mt-4'>
+                      <div className='baseBtn'>
+                          <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                              {loadind ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}
+                          </Button>
+                      </div>
+
+                      <div className='baseBtn'>
+                          <Link to={'/doctors'}>
+                              <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                                  Cancel
+                              </Button>
+                          </Link>
+                      </div>
                   </div>
+
                 </form>
               </div>
             </div>
