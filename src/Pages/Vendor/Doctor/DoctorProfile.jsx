@@ -173,7 +173,6 @@ export default function DoctorProfile() {
 
   async function removeConfirm(e) {
 
-    // e.preventDefault();
     setLoadingRemove(true);
       let { data } = await axios({
         method: 'get',
@@ -235,7 +234,7 @@ export default function DoctorProfile() {
                     <small className='my-0 text-black-50' style={{fontWeight: '500'}}>Email:</small>
                     <h6 className='mb-2 mb-lg-3 text-black' style={{fontWeight: '700' , wordWrap: 'break-word'}}>{fetchDoctor.DoctorEmail}</h6>
 
-                    <small className='my-0 text-decoration-underline color-red' style={{fontWeight: '500' , cursor: 'pointer'}}>Change Password</small>
+                    {/* <small className='my-0 text-decoration-underline color-red' style={{fontWeight: '500' , cursor: 'pointer'}}>Change Password</small> */}
                         
                     <Link to={`../editDoctor/${id}`} className="personal-info-edit position-absolute top-0 end-0 color-red" style={{cursor: 'pointer' , whiteSpace: 'nowrap'}}>
                         <FiEdit3 className='me-1' />
@@ -273,9 +272,9 @@ export default function DoctorProfile() {
 
                     {price.IDDoctorPricing ?
                         <>
-                          <Modal style={{zIndex: '9999999999'}} show={showEdit} onHide={handleCloseEdit}>
+                          <Modal style={{zIndex: '9999999999'}} show={showEdit} onHide={handleCloseEdit} centered>
                               <Modal.Header closeButton>
-                                  <Modal.Title className='text-center w-100 text-primary'>
+                                  <Modal.Title className='text-center w-100'>
                                       <h5 className='mb-0'>Edit Price</h5>
                                   </Modal.Title>
                               </Modal.Header>
@@ -298,17 +297,30 @@ export default function DoctorProfile() {
 
                                       {messageEdit.length > 0 ? <p id="alertEdit" className={`alert ${apiCodeEdit === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 mb-0 mt-3 w-50 text-center mx-auto`}>{messageEdit}</p> : ''}
 
-                                      <div className="submitAdd-buttons mt-4 d-flex justify-content-center align-items-center">
+                                      {/* <div className="submitAdd-buttons mt-4 d-flex justify-content-center align-items-center">
                                           <Button type='submit' className="btn btn-primary py-2 px-3 me-3">{loadingEdit ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}</Button>
-                                          {/* <Component.ButtonBase title={"Save"} bg={"primary"}    /> */}
                                           <Button className="btn btn-primary p-2 me-4" onClick={handleCloseEdit}>Cancel</Button>
+                                      </div> */}
+
+                                      <div className='d-flex justify-content-center align-content-center mt-4'>
+                                          <div className='baseBtn pe-0 me-2'>
+                                              <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                                                  {loadingEdit ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}
+                                              </Button>
+                                          </div>
+
+                                          <div className='baseBtn ps-0'>
+                                              <Button onClick={handleCloseEdit} variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                                                  Cancel
+                                              </Button>
+                                          </div>
                                       </div>
 
                                   </form>
                               </Modal.Body>
                           </Modal>
 
-                          <Modal style={{zIndex: '9999999999'}} show={showRemove} onHide={handleCloseRemove}>
+                          <Modal style={{zIndex: '9999999999'}} show={showRemove} onHide={handleCloseRemove} centered>
                               <Modal.Header closeButton>
                                   <Modal.Title className='text-center w-100 text-warning'>
                                       <h5 className='mb-0'>Warning Remove..</h5>
@@ -319,7 +331,7 @@ export default function DoctorProfile() {
                               </Modal.Body>
                               {messageRemove.length > 0 ? <p id="alertRemove" className={`alert ${apiCodeRemove === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 my-2 w-50 text-center mx-auto`}>{messageRemove}</p> : ''}
                               <Modal.Footer className='d-flex justify-content-center align-items-center'>
-                                  <Button className='btn btn-primary py-2 text-capitalize me-2' onClick={() => {
+                                  {/* <Button className='btn btn-primary py-2 text-capitalize me-2' onClick={() => {
                                         removeConfirm()
                                   }}>
                                       {loadingRemove ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Confirm'}
@@ -328,14 +340,29 @@ export default function DoctorProfile() {
                                         handleCloseRemove();
                                     }}>
                                       Cancel
-                                  </Button>
+                                  </Button> */}
+
+                                  <div className='d-flex justify-content-center align-content-center'>
+                                      <div className='baseBtn pe-0 me-2'>
+                                          <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                                              {loadingRemove ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Confirm'}
+                                          </Button>
+                                      </div>
+
+                                      <div className='baseBtn ps-0'>
+                                          <Button onClick={handleCloseRemove} variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                                              Cancel
+                                          </Button>
+                                      </div>
+                                  </div>
+
                               </Modal.Footer>
                           </Modal>
                         </>
                         :
-                        <Modal style={{zIndex: '9999999999'}} show={showAdd} onHide={handleCloseAdd}>
+                        <Modal style={{zIndex: '9999999999'}} show={showAdd} onHide={handleCloseAdd} centered>
                             <Modal.Header closeButton>
-                                <Modal.Title className='text-center w-100 text-primary'>
+                                <Modal.Title className='text-center w-100'>
                                     <h5 className='mb-0'>Add Price</h5>
                                 </Modal.Title>
                             </Modal.Header>
@@ -369,10 +396,23 @@ export default function DoctorProfile() {
                                       
                                   {messageAdd.length > 0 ? <p id="alertAdd" className={`alert ${apiCodeAdd === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 mb-0 mt-3 w-50 text-center mx-auto`}>{messageAdd}</p> : ''}
 
-                                  <div className="submitAdd-buttons mt-4 d-flex justify-content-center align-items-center">
+                                  {/* <div className="submitAdd-buttons mt-4 d-flex justify-content-center align-items-center">
                                     <Button type='submit' className="btn btn-primary py-2 px-3 me-3">{loadingAdd ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}</Button>
-                                    {/* <Component.ButtonBase title={"Save"} bg={"primary"}    /> */}
                                     <Button className="btn btn-primary p-2 me-4" onClick={handleCloseAdd}>Cancel</Button>
+                                  </div> */}
+
+                                  <div className='d-flex justify-content-center align-content-center mt-4'>
+                                      <div className='baseBtn pe-0 me-2'>
+                                          <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                                              {loadingAdd ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}
+                                          </Button>
+                                      </div>
+
+                                      <div className='baseBtn ps-0'>
+                                          <Button onClick={handleCloseAdd} variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                                              Cancel
+                                          </Button>
+                                      </div>
                                   </div>
 
                                 </form>

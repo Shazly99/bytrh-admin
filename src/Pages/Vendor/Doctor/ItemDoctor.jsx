@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { DropdownButton, Dropdown, Modal, Form, Button } from 'react-bootstrap';
 // import { useEffect } from 'react';
 import { apiheader, PostData } from '../../../utils/fetchData';
+import oops from '../../../assets/Images/doctor/Z.jfif';
 
 
 export default function ItemDoctor({ nameDoc, email, phone, country, type, balance, create, status, item, id, getTokenDoctors }) {
@@ -32,8 +33,10 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
             await userstatus({ IDDoctor: id, DoctorStatus: action })
             await getTokenDoctors()
         } else if (action === "DELETED") {
-            await userstatus({ IDDoctor: id, DoctorStatus: action })
-            await getTokenDoctors()
+            // await userstatus({ IDDoctor: id, DoctorStatus: action })
+            // await getTokenDoctors()
+            handleShowRemove();
+
         } else if (action === "balance") {
             setId(id)
             setChangeBalance(null)
@@ -42,6 +45,16 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
     async function name() {
         await changeWallet({ IDDoctor: idDoc, Amount: changeBalance })
         await getTokenDoctors()
+    }
+
+
+    const [showRemove, setShowRemove] = useState(false);
+    const handleCloseRemove = () => setShowRemove(false);
+    const handleShowRemove = () => setShowRemove(true);
+
+    async function removeConfirm() {
+        await userstatus({ IDDoctor: id, DoctorStatus: "DELETED" });
+        await getTokenDoctors();
     }
 
 
@@ -59,6 +72,46 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
     const goToDoctorProfile = (id) => {
         navigate(`./doctorProfile/${id}`);
     }
+
+
+
+
+
+    // const [messageRemove, setMessageRemove] = useState('');
+    // const [apiCodeRemove, setApiCodeRemove] = useState('');
+    // const [loadingRemove, setLoadingRemove] = useState(false);
+  
+    // async function removeConfirm(e) {
+  
+    //   setLoadingRemove(true);
+    //     let { data } = await axios({
+    //       method: 'get',
+    //       url: `https://bytrh.com/api/admin/doctors/pricing/remove/${IDDoctorPricing}`,
+    //       headers: {
+    //         'Content-Type': 'multipart/form-data',
+    //         'Authorization': 'Bearer ' + localStorage.getItem('token'),
+    //       },
+    //     });
+  
+    //     setMessageRemove(data.ApiMsg);
+    //     setLoadingRemove(false);
+  
+    //     if (data.Success === true) {
+    //       setApiCodeRemove(data.Success);
+    //       setTimeout(() => {
+    //         setMessageRemove('');
+    //         getDoctorData();
+    //         handleCloseRemove();
+    //       }, 2000);
+    //     }
+  
+    //     else {
+    //       setTimeout(() => {
+    //         setMessageRemove('');
+    //       }, 2000);
+    //     }
+  
+    // }
 
 
 
@@ -118,10 +171,10 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                 <Dropdown.Item as={Link} to={`/doctors/doctorCategory/${id}`}>
                                     Doctor Animals Categories
                                 </Dropdown.Item>
-                                <Dropdown.Item eventKey="balance" onClick={handleShowModal}>Balance check</Dropdown.Item>
+                                <Dropdown.Item eventKey="balance" onClick={handleShowModal}>Set Balance</Dropdown.Item>
                                 <Modal show={showModal} onHide={handleCloseModal} centered >
                                     <Modal.Header closeButton>
-                                        <Modal.Title>Add in wallet {name} </Modal.Title>
+                                        <Modal.Title>Set {nameDoc} Balance</Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
                                         <Form.Control type="number" value={changeBalance} onChange={handleChangeBalance} />
@@ -152,6 +205,46 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                     status === "BLOCKED" ? '' : <Dropdown.Item eventKey="BLOCKED">Blocked</Dropdown.Item>
                                 }
                                 <Dropdown.Item eventKey="DELETED">Deleted</Dropdown.Item>
+
+                                <Modal style={{zIndex: '9999999999'}} show={showRemove} onHide={handleCloseRemove} centered>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title className='text-center w-100 text-warning'>
+                                            <h5 className='mb-0'>Warning Remove..</h5>
+                                        </Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <img src={oops} className='w-50 d-block mx-auto' alt="oops" />
+                                    </Modal.Body>
+                                    {/* {messageRemove.length > 0 ? <p id="alertRemove" className={`alert ${apiCodeRemove === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 my-2 w-50 text-center mx-auto`}>{messageRemove}</p> : ''} */}
+                                    <Modal.Footer className='d-flex justify-content-center align-items-center'>
+                                        {/* <Button className='btn btn-primary py-2 text-capitalize me-2' onClick={() => {
+                                                removeConfirm()
+                                        }}>
+                                            Confirm
+                                        </Button>
+                                        <Button className='btn btn-primary py-2 px-3 text-capitalize' onClick={() => {
+                                                handleCloseRemove();
+                                            }}>
+                                            Cancel
+                                        </Button> */}
+
+                                        <div className='d-flex justify-content-center align-content-center'>
+                                            <div className='baseBtn pe-0 me-2'>
+                                                <Button onClick={removeConfirm} variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                                                    {/* {loadingRemove ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'} */}
+                                                    Confirm
+                                                </Button>
+                                            </div>
+
+                                            <div className='baseBtn ps-0'>
+                                                <Button onClick={handleCloseRemove} variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                                                    Cancel
+                                                </Button>
+                                            </div>
+                                        </div>
+
+                                    </Modal.Footer>
+                                </Modal>
 
                             </DropdownButton>
                         </span>

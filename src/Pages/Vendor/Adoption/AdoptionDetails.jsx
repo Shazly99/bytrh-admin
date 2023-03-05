@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import Component from '../../../constants/Component';
-import doctor from '../../../assets/Images/doctor/doctor.png';
+// import doctor from '../../../assets/Images/doctor/doctor.png';
 import './Adoption.scss';
 import $ from 'jquery';
 import axios from 'axios';

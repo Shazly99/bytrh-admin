@@ -87,7 +87,7 @@ export default function Doctors() {
       <Container fluid>
         <section className='   app__doctor  position-relative'>
           <div className="app__Users ">
-            <Component.ButtonBase title={"Add New Doctor"} bg={"primary"} icon={<Icons.add />} path="/doctors/addDoctor" />
+            <Component.ButtonBase title={"Add"} bg={"primary"} icon={<Icons.add />} path="/doctors/addDoctor" />
           </div>
           <div className="search-container">
             <div className='search__group'>
