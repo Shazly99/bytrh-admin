@@ -9,7 +9,7 @@ function Dashboard() {
 
       <div className="welcome__page   bg-body  " style={{ display: 'flex ', justifyContent: 'center', alignItems: 'center' }}>
         <div className="title_bytrh shadow-lg rounded-3">
-          <h3>Welcome to Dashboard Admin Bytrh</h3>
+          <h3>Welcome to Dashboard Bytrh</h3>
         </div>
       </div>
       {/* <Container fluid>

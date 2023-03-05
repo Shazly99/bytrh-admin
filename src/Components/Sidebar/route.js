@@ -68,11 +68,7 @@ const routes = [
     name: "Consults",
     icon: <Icons.consult size={19} />,
   },
-  {
-    path: "/settings/general",
-    name: "Settings",
-    icon: <Icons.settings size={19} />
-  },
+
   {
     path: "/ads",
     name: "Ads",
@@ -100,7 +96,16 @@ const routes = [
     name: "Adoption",
     icon: <Icons.pets size={19}/>,
   },
- 
+  {
+    path: "/settings/general",
+    name: "Settings",
+    icon: <Icons.settings size={19} />
+  },
+  {
+    path: "/contact",
+    name: "Contact",
+    icon: <Icons.contact size={19} />
+  },
 ];
 
 export default routes
