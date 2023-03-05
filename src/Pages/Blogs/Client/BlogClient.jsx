@@ -41,7 +41,7 @@ const BlogClient = () => {
     const handleActionSelect = async (id, action) => {
         if (action === "PENDING" || action === "REJECTED" || action === "POSTED" || action === "REMOVED") {
             await ChangeBlogsStatus({ IDClientBlog: id, BlogStatus: action }).then((res) => {
-                toast.success('Status up to date', {
+                toast.success('Updated Successfully', {
                     duration: 4000,
                     position: 'top-center',
                     icon: <Icons.uploadItem color='#3182CE' size={20} />,

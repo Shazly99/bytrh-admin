@@ -15,7 +15,7 @@ function UsersTable({ usersList, userList }) {
     const handleActionSelect = async (id, action) => {
         if (action === "PENDING") {
             await userstatus({ IDUser: id, UserStatus: action }).then((res) => {
-                toast.success('Status up to date', {
+                toast.success('Updated Successfully', {
                     duration: 4000,
                     position: 'top-center',
                     icon: <Icons.uploadItem color='#3182CE' size={16} />,
@@ -28,7 +28,7 @@ function UsersTable({ usersList, userList }) {
             await userList()
         } else if (action === "ACTIVE") {
             await userstatus({ IDUser: id, UserStatus: action }).then((res) => {
-                toast.success('Status up to date', {
+                toast.success('Updated Successfully', {
                     duration: 4000,
                     position: 'top-center',
                     icon: <Icons.uploadItem color='#3182CE' size={25} />,
@@ -42,7 +42,7 @@ function UsersTable({ usersList, userList }) {
         } else if (action === "INACTIVE") {
 
             await userstatus({ IDUser: id, UserStatus: action }).then((res) => {
-                toast.success('Status up to date', {
+                toast.success('Updated Successfully', {
                     duration: 4000,
                     position: 'top-center',
                     icon: <Icons.uploadItem color='#3182CE' size={25} />,

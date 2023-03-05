@@ -41,7 +41,7 @@ export const BlogDoctor = () => {
     const handleActionSelect = async (id, action) => {
         if (action === "PENDING" || action === "REJECTED" || action === "POSTED" || action === "REMOVED") {
             await ChangeBlogsStatus({ IDDoctorBlog: id, BlogStatus: action }).then((res) => {
-                toast.success('Status up to date', {
+                toast.success('Updated Successfully', {
                     duration: 4000,
                     position: 'top-center',
                     icon: <Icons.uploadItem color='#3182CE' size={20} />,
@@ -97,10 +97,17 @@ export const BlogDoctor = () => {
     }
 
     const handelSelectAnimalCategory = async (event) => {
+
+
+        console.log(event.target.value);
         const selectedCountryId = event.target.value;
-        await animalcategories()
-        let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs`, { IDAnimalCategory: selectedCountryId }, apiheader)
-        setBlogs(data.Response.DoctorBlogs)
+        if (selectedCountryId === "Animal Category") {
+            BlogsList()
+        } else {
+            await animalcategories()
+            let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs`, { IDAnimalCategory: selectedCountryId }, apiheader)
+            setBlogs(data.Response.DoctorBlogs)
+        }
     }
 
     useEffect(() => {
@@ -257,7 +264,7 @@ export const BlogDoctor = () => {
                                                             </span>
                                                             <div className='delete'>
                                                                 <DropdownButton
-                                                                    title={<Icons.dotes size={20}/>}
+                                                                    title={<Icons.dotes size={20} />}
                                                                     id="dropdown-menu"
                                                                     // id={`dropdown-${item.IDDoctorBlog}`}
                                                                     onClick={() => setShowDropdown(!showDropdown)}

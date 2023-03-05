@@ -74,7 +74,7 @@ const LiveConsult = () => {
 
                     <div className="client_details">
                       <label htmlFor="">Create Date :</label>
-                      <span>{consultDetails?.ConsultDate}</span>
+                      <span>{consultDetails?.ConsultDate.replace(' '," , ")}</span>
                     </div>
                   </Col>
                 </Row>

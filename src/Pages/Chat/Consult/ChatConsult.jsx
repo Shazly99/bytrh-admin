@@ -259,7 +259,7 @@ const ChatConsult = () => {
                         className="active-radio form-check-input"
 
                       />
-                      No_Response
+                      No Response
                     </label>
                   </div>
                   {/* <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }}>Filter by  Complain :	</h5> */}
@@ -322,7 +322,7 @@ const ChatConsult = () => {
                             <div>
                               <span style={{ height: 'fit-content !important' }} className={`
                                             ${item.ConsultType == 'NORMAL' && 'txt_delivered'} 
-                                            ${item.ConsultType == 'URGENT' && 'txt_shipped'}
+                                            ${item.ConsultType == 'URGENT' && 'txt_rejected'}
                                             ${item.ConsultType == 'Out For Delivery' && 'txt_delivery'}
                                             ${item.ConsultType == 'ACTIVE' && 'txt_delivered'}
                                             ${item.ConsultType == 'INACTIVE' && 'txt_rejected'}`} >
@@ -346,11 +346,17 @@ const ChatConsult = () => {
                                             ${item.ConsultStatus == 'ENDED' && 'txt_rejected'}
                                             ${item.ConsultStatus == 'EXPIRED' && 'txt_delivery'}
                                             ${item.ConsultStatus == 'CANCELLED' && 'txt_cancel'}
-                                            ${item.ConsultStatus == 'NO_RESPONSE' && 'txt_pending'} 
+                                            ${item.ConsultStatus == 'NO_RESPONSE' && 'txt_shipped'} 
                                             ${item.ConsultStatus == 'SKIPPED' && 'txt__status'} 
                                             ${item.ConsultStatus == 'REJECTED' && 'txt_rejected'}
                                             ${item.ConsultStatus == 'ACCEPTED' && 'txt_delivery'}`} >
-                                {item?.ConsultStatus.toLowerCase().charAt(0).toUpperCase() + item?.ConsultStatus.slice(1).toLowerCase()}
+
+
+                                {
+
+                                  item?.ConsultStatus.toLowerCase().charAt(0).toUpperCase() + item?.ConsultStatus.slice(1).toLowerCase() === 'No_response' ?'No Response':
+                                  item?.ConsultStatus.toLowerCase().charAt(0).toUpperCase() + item?.ConsultStatus.slice(1).toLowerCase()
+                                }
 
                               </span>
                             </div>
@@ -358,10 +364,10 @@ const ChatConsult = () => {
                           <td>
 
 
-                          {
-                            item.ConsultStatus == 'ONGOING'
-                            &&
-                            
+                            {
+                              item.ConsultStatus == 'ONGOING'
+                              &&
+
                               <div>
                                 <span>
                                   <DropdownButton
@@ -372,26 +378,26 @@ const ChatConsult = () => {
                                     className="DropdownButton "
                                     drop={'down-centered'}
                                   >
-                                    <Dropdown.Item eventKey="Edite" as={Link} to={`/chat/consult/details/${item.IDConsult}`}target="_blank">  Chat </Dropdown.Item>
+                                    <Dropdown.Item eventKey="Edite" as={Link} to={`/chat/consult/details/${item.IDConsult}`} target="_blank">  Chat </Dropdown.Item>
                                     {item.ConsultStatus !== 'ENDED' &&
                                       <Dropdown.Item eventKey="End" as={Link}> End Chat  </Dropdown.Item>
                                     }
                                   </DropdownButton>
                                 </span>
                               </div>
-                         
-                          }
-                          {
-                            item.ConsultStatus == 'ENDED'
-                            &&
-                           
+
+                            }
+                            {
+                              item.ConsultStatus == 'ENDED'
+                              &&
+
                               <div>
                                 <span>
-                                  <Button    variant="outline-primary"  className="DropdownButton "title="Chat" eventKey="Edite" as={Link} to={`/consult/chat/${item.IDConsult}`}target="_blank">  Chat </Button>
+                                  <Button variant="outline-primary" className="DropdownButton " title="Chat" eventKey="Edite" as={Link} to={`/consult/chat/${item.IDConsult}`} target="_blank">  Chat </Button>
                                 </span>
                               </div>
-                             
-                          }
+
+                            }
                           </td>
                         </tr>
                       ))

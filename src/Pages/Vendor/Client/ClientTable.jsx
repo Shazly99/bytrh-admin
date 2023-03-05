@@ -23,7 +23,7 @@ const ClientTable = ({ usersList, userList }) => {
   const handleActionSelect = async (id, action) => {
     if (action === "BLOCKED") {
       await userstatus({ IDClient: id, ClientStatus: action }).then((res) => {
-        toast.success('Status up to date', {
+        toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
           icon: <Icons.uploadItem color='#3182CE' size={20} />,
@@ -36,7 +36,7 @@ const ClientTable = ({ usersList, userList }) => {
       await userList()
     } else if (action === "ACTIVE") {
       await userstatus({ IDClient: id, ClientStatus: action }).then((res) => {
-        toast.success('Status up to date', {
+        toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
           icon: <Icons.uploadItem color='#3182CE' size={20} />,
@@ -54,7 +54,7 @@ const ClientTable = ({ usersList, userList }) => {
     }
     else if (action === "INACTIVE") {
       await userstatus({ IDClient: id, ClientStatus: action }).then((res) => {
-        toast.success('Status up to date', {
+        toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
           icon: <Icons.uploadItem color='#3182CE' size={20} />,

@@ -40,7 +40,7 @@ const AnimalCat = () => {
     if (action === "ACTIVE") {
       await animalcategoriesStatus(id).then((res) => {
         console.log(res);
-        toast.success('Status up to date', {
+        toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
           icon: <Icons.uploadItem color='#3182CE' size={20} />,
@@ -53,7 +53,7 @@ const AnimalCat = () => {
       await animalcategories()
     } else if (action === "INACTIVE") {
       await animalcategoriesStatus(id).then((res) => {
-        toast.success('Status up to date', {
+        toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
           icon: <Icons.uploadItem color='#3182CE' size={20} />,

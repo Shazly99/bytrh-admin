@@ -40,7 +40,7 @@ const Cities = () => {
   const handleActionSelect = async (id, action) => {
     if (action === "ACTIVE") {
       await CitiescategoriesStatus(id).then((res) => {
-        toast.success('Status up to date', {
+        toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
           icon: <Icons.uploadItem color='#3182CE' size={20} />,
@@ -53,7 +53,7 @@ const Cities = () => {
       await CitiescList()
     } else if (action === "INACTIVE") {
       await CitiescategoriesStatus(id).then((res) => {
-        toast.success('Status up to date', {
+        toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
           icon: <Icons.uploadItem color='#3182CE' size={20} />,

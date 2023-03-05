@@ -118,7 +118,7 @@ const BlogClientDetails = () => {
                               <img
                                 className='rounded-2  image'
                                 src={item.ClientBlogGalleryPath} // use normal <img> attributes as props
-                                width={"100%"}
+                                width={clientBlogGallery?.length < 2 ? "20%" : '100%'}
                               />
                             </Col>
                           )) :

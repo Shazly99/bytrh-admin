@@ -41,7 +41,7 @@ const Areas = () => {
     if (action === "ACTIVE") {
       console.log(id);
       await AreascategoriesStatus(id).then((res) => {
-        toast.success('Status up to date', {
+        toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
           icon: <Icons.uploadItem color='#3182CE' size={20} />,
@@ -54,7 +54,7 @@ const Areas = () => {
       await AreascList()
     } else if (action === "INACTIVE") {
       await AreascategoriesStatus(id).then((res) => {
-        toast.success('Status up to date', {
+        toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
           icon: <Icons.uploadItem color='#3182CE' size={20} />,

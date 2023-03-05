@@ -125,11 +125,12 @@ const BlogDoctorDetails = () => {
                           lg={DoctorBlogGallery?.length === 4 ? 6 : 12 / Math.min(DoctorBlogGallery?.length, 4)}
 
                           md={12 / Math.min(DoctorBlogGallery?.length, 2)}
-                          sm={12} className='mt-3  '  >
+                          sm={12} className='mt-3  d-flex align-items-center justify-content-center'  >
                           <img
                             className='rounded-2  image'
                             src={item.DoctorBlogGalleryPath} // use normal <img> attributes as props
-                            width={"100%"}
+                            width={DoctorBlogGallery?.length  < 2 ? "20%" : '100%'}
+
                           />
                         </Col>
                       ))

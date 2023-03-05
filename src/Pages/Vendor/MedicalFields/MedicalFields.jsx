@@ -35,7 +35,7 @@ const MedicalFields = () => {
     if (action === "ACTIVE") {
       console.log(id);
       await MedicalFieldscategoriesStatus(id).then((res) => {
-        toast.success('Status up to date', {
+        toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
           icon: <Icons.uploadItem color='#3182CE' size={20} />,
@@ -48,7 +48,7 @@ const MedicalFields = () => {
       await MedicalFieldscList()
     } else if (action === "INACTIVE") {
       await MedicalFieldscategoriesStatus(id).then((res) => {
-        toast.success('Status up to date', {
+        toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
           icon: <Icons.uploadItem color='#3182CE' size={20} />,
