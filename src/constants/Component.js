@@ -59,6 +59,7 @@ import Adoption from '../Pages/Vendor/Adoption/Adoption';
 import AdoptionDetails from '../Pages/Vendor/Adoption/AdoptionDetails';
 import Loader from './../Components/Shared/Loader/Loader';
 import AdoptionChat from '../Pages/Vendor/Adoption/AdoptionChat';
+import Contact from './../Pages/Contact/Contact';
 
 export default {
     // Layout 
@@ -66,6 +67,7 @@ export default {
     Auth,
     Chat,
     Loader,
+    Contact,
     // Vendor Components User 1
     Dashboard,
     Summary,

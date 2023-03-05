@@ -77,6 +77,7 @@ function App() {
         
         // ToDo user profile
         { path: '/venderProfile', element: <ProtectedRoutes>  <Component.Profile /></ProtectedRoutes> },
+        { path: '/contact', element: <ProtectedRoutes>  <Component.Contact /></ProtectedRoutes> },
         // ToDo Animal Categoryclient
         {
           path: '/categ/animals', children: [

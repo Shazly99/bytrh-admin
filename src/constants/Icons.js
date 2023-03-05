@@ -44,9 +44,11 @@ import { FaBloggerB as blog } from "react-icons/fa";
 import { TfiCommentAlt as comments } from "react-icons/tfi"; 
 import { MdPets as pets } from 'react-icons/md'
 import { BsThreeDotsVertical as dotes } from 'react-icons/bs'
+import { MdOutlineContactless as contact } from 'react-icons/md'
 
 
 export default{
+    contact,
     dotes,
     comments,
     like,
