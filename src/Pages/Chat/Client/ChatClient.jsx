@@ -10,6 +10,7 @@ import Icons from '../../../constants/Icons';
 import { ChatContext } from '../../../context/ChatStore';
 import '../chat.scss';
 import { apiheader, PostData } from './../../../utils/fetchData';
+import { toast } from 'react-hot-toast';
 
 const ChatClient = () => {
   const { id } = useParams();
