@@ -6,6 +6,7 @@ import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import { GetData, PostData } from '../../../utils/fetchData';
 import { apiheader } from './../../../utils/fetchData';
+import Img from '../../../assets/Img';
 
 function Users() {
   const [page, setPage] = useState(1);
@@ -84,10 +85,10 @@ function Users() {
         usersList ?
           <>
             <div className="app__Users ">
-              <Component.ButtonBase onclick={test} title={"Add  "} bg={"primary"} icon={<Icons.add />} path="/user/addUser" />
+              <Component.ButtonBase onclick={test} title={"Add  "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/user/addUser" />
+
               <div className="app__Users-table">
                 <div className="search-container">
-
                   <div className='search__group'>
                     <input type="text" placeholder="Search by name or email or phone....." name="search" value={searchValue} onChange={handleInputChange} />
                     <button type="submit" onClick={handleSearchClick}>

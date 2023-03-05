@@ -10,7 +10,7 @@ import { TbBorderAll as order } from "react-icons/tb";
 // import { HiOutlineUserCircle as profile } from "react-icons/hi";
 import { AiOutlineMenuUnfold as menu } from "react-icons/ai";
 import { AiOutlineMenuFold as menuL } from "react-icons/ai";
-import { IoIosAddCircleOutline as add } from "react-icons/io";
+import { IoIosAddCircle as add } from "react-icons/io";
 import { IoTrashBin as bin } from "react-icons/io5";
 import { FiEdit as edit } from "react-icons/fi";
 import { IoIosArrowForward as arrow } from "react-icons/io";

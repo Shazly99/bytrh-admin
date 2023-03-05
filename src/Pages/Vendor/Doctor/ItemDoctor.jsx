@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 // import { FiEdit3 } from 'react-icons/fi';
 // import { AiOutlineDelete } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
@@ -11,11 +11,7 @@ import oops from '../../../assets/Images/doctor/Z.jfif';
 export default function ItemDoctor({ nameDoc, email, phone, country, type, balance, create, status, item, id, getTokenDoctors }) {
     // const [data, setData] = useState({});
     const [showModal, setShowModal] = useState(false);
-    const [changeBalance, setChangeBalance] = useState(null);
-
-    function handleChangeBalance(event) {
-        setChangeBalance(parseInt(event.target.value) || null);
-    }
+ 
     const [idDoc, setId] = useState(null);
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
@@ -38,8 +34,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
             handleShowRemove();
 
         } else if (action === "balance") {
-            setId(id)
-            setChangeBalance(null)
+            setId(id) 
         }
     };
     async function name() {
@@ -57,10 +52,12 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
         await getTokenDoctors();
     }
 
+    let changeBalance = useRef()
 
     const changeWallet = async (wallet) => {
-        let data = await PostData(`https://bytrh.com/api/admin/doctors/wallet/add`, wallet, apiheader)
+        let data = await PostData(`https://bytrh.com/api/admin/doctors/wallet/add`, {IDDoctor:id,Amount:changeBalance.current.value }, apiheader)
         await getTokenDoctors()
+        console.log(data);
     }
     const userstatus = async (status) => {
         let { data } = await PostData(`https://bytrh.com/api/admin/doctors/status`, status, apiheader)
@@ -80,9 +77,9 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
     // const [messageRemove, setMessageRemove] = useState('');
     // const [apiCodeRemove, setApiCodeRemove] = useState('');
     // const [loadingRemove, setLoadingRemove] = useState(false);
-  
+
     // async function removeConfirm(e) {
-  
+
     //   setLoadingRemove(true);
     //     let { data } = await axios({
     //       method: 'get',
@@ -92,10 +89,10 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
     //         'Authorization': 'Bearer ' + localStorage.getItem('token'),
     //       },
     //     });
-  
+
     //     setMessageRemove(data.ApiMsg);
     //     setLoadingRemove(false);
-  
+
     //     if (data.Success === true) {
     //       setApiCodeRemove(data.Success);
     //       setTimeout(() => {
@@ -104,13 +101,13 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
     //         handleCloseRemove();
     //       }, 2000);
     //     }
-  
+
     //     else {
     //       setTimeout(() => {
     //         setMessageRemove('');
     //       }, 2000);
     //     }
-  
+
     // }
 
 
@@ -119,7 +116,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
         <>
             <tr>
                 <td>
-                    <div className='d-flex flex-column justify-content-center align-content-center' onClick={() => goToDoctorProfile(id)} style={{gap:'0' , cursor: 'pointer'}}>
+                    <div className='d-flex flex-column justify-content-center align-content-center' onClick={() => goToDoctorProfile(id)} style={{ gap: '0', cursor: 'pointer' }}>
                         <span className='ClientName'> {nameDoc} </span>
                         <span className='ClientPhone'> {phone} </span>
                     </div>
@@ -177,24 +174,17 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                         <Modal.Title>Set {nameDoc} Balance</Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
-                                        <Form.Control type="number" value={changeBalance} onChange={handleChangeBalance} />
-                                        <div className='d-flex justify-content-center align-items-center mt-3' style={{ gap: '15px' }}>
-                                            <Button variant="outline-primary" onClick={() => setChangeBalance(changeBalance + 1)}>Balance add </Button>
-                                            <Button variant="outline-primary" onClick={() => setChangeBalance(changeBalance - 1)}>Balance deduction</Button>
-                                        </div>
+                                        <Form.Control type="number" defaultValue={balance} ref={changeBalance} />
                                     </Modal.Body>
                                     <Modal.Footer className="d-flex justify-content-center align-items-center">
                                         <Button variant="outline-primary" onClick={handleCloseModal}>
                                             Cancel
                                         </Button>
-                                        <Button eventKey="balance" variant="primary" onClick={name}>
-                                            Save Changes
+                                        <Button variant="primary" style={{ border: '#FAAA40' }} onClick={changeWallet}>
+                                            Set Balance
                                         </Button>
                                     </Modal.Footer>
                                 </Modal>
-                                {/* <Dropdown.Item eventKey="PENDING" >Pending</Dropdown.Item> */}
-                                {/* <Dropdown.Item eventKey="ACTIVE">Action</Dropdown.Item> */}
-                                {/* <Dropdown.Item eventKey="INACTIVE">InAction</Dropdown.Item> */}
                                 {
                                     status === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
                                 }
@@ -206,7 +196,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                 }
                                 <Dropdown.Item eventKey="DELETED">Deleted</Dropdown.Item>
 
-                                <Modal style={{zIndex: '9999999999'}} show={showRemove} onHide={handleCloseRemove} centered>
+                                <Modal style={{ zIndex: '9999999999' }} show={showRemove} onHide={handleCloseRemove} centered>
                                     <Modal.Header closeButton>
                                         <Modal.Title className='text-center w-100 text-warning'>
                                             <h5 className='mb-0'>Warning Remove..</h5>

@@ -80,7 +80,7 @@ const AdsList = () => {
           <>
 
             <div className="app__Users ">
-              <Component.ButtonBase title={"Add "} bg={"primary"} icon={<Icons.add />} path="/ads/add" />
+              <Component.ButtonBase title={"Add "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'}  />} path="/ads/add" />
               <div className="app__Users-table">
                 {/* <div className="search-container">
             <div className='search__group'>

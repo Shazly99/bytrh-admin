@@ -117,7 +117,7 @@ const AnimalCat = () => {
         animal ?
           <>
             <div className="app__Users ">
-              <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.add />} path="/categ/animals/addAnimal" />
+              <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/categ/animals/addAnimal" />
               <div className="app__Users-table">
                 <div className="search-container">
                   <div className='search__group'>
