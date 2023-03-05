@@ -8,9 +8,12 @@ import { ChatContext } from '../../../context/ChatStore';
 import Icons from '../../../constants/Icons';
 import useLocalStorage from './../../../context/useLocalStorage';
 import _ from 'lodash';
+import Component from '../../../constants/Component';
 
 function LiveChat() {
     const { id } = useParams();
+    const [loading, setLoading] = useState(false);
+
     let { setmassSend, setUserReplied, massSend, setchatEnd } = useContext(ChatContext);
 
     const [isOn, setIsOn] = useLocalStorage('power', true);
@@ -28,6 +31,8 @@ function LiveChat() {
         audioRef.current.play();
     }
     const fetchClientDetail = async () => {
+        setIsLoading(false)
+
         try {
             const { data } = await axios(`https://bytrh.com/api/admin/chat/client/details/${id}`, apiheader);
             setClientChatSupport(data.Response.ChatDetails);
@@ -38,7 +43,9 @@ function LiveChat() {
             setChatName(data.Response.ClientName)
             const IdLastMessage = data.Response.ChatDetails[data.Response.ChatDetails.length - 1].IDChatSupportDetails;
             setIdChatSupportDetails(IdLastMessage);
-            setIsLoading(true)
+            setTimeout(() => {
+                setIsLoading(true)
+            }, 5000);
         } catch (error) {
             setIsLoading(false)
             if (error.response && error.response.status === 429) {
@@ -52,7 +59,7 @@ function LiveChat() {
     };
     const chatReceive = _.debounce(async () => {
         if (chatStatus === 'ONGOING') {
-             try {
+            try {
                 const { data } = await PostData(`https://bytrh.com/api/admin/chat/client/receive`, { IDClientChatSupport: id, IDChatSupportDetails: IdChatSupport }, apiheader);
                 if (clientChatSupport !== []) {
                     setClientChatSupport([])
@@ -70,7 +77,7 @@ function LiveChat() {
                 }
             }
         } else {
-             return
+            return
         }
     }, 1000);
 
@@ -105,7 +112,7 @@ function LiveChat() {
 
         let interval = setInterval(() => {
             chatReceive()
-        }, 5000);
+        }, 4000);
         return () => {
             clearInterval(interval);
             chatReceive()
@@ -124,96 +131,102 @@ function LiveChat() {
 
     useEffect(() => {
         setChat(null)
-        setIsLoading(false)
+        setLoading(false);  
+  
     }, [id]);
     return (
         <>
-            <div className='chat__header'>
-                <h6>{chatName}</h6>
-                <div className="turn__off">
-                    <button className={`power-button ${isOn ? "on " : "off scaled"} `} onClick={handlePowerClick} >
-                        <Icons.poweroff className="icon" />{isOn ? 'End chat' : 'Chat Ended'}
-                    </button>
-                </div>
-            </div>
             {
-                chatStatus === 'ONGOING' ?
-                    <ScrollToBottom className="message-container">
-                        {clientChatSupport?.map((messageContent, index) => {
-                            return (
-                                <div
-                                    key={index}
-                                    className="message"
-                                    id={messageContent.ChatSupportSender === "USER" ? "other" : "you"}
-                                >
-                                    <div>
-                                        <div className="message-content"  >
-                                            {
-                                                messageContent.ChatSupportType === "TEXT" &&
-                                                <p>{messageContent.ChatSupportMessage}</p>
-                                            }
-                                            {
-                                                messageContent.ChatSupportType === "IMAGE" &&
-                                                <img src={messageContent.ChatSupportMessage} width="100%" className='rounded-3 w-50' />
-                                            }
-                                            {
-                                                messageContent.ChatSupportType === "AUDIO" &&
-                                                <audio ref={audioRef} controls>
-                                                    <source src={messageContent.ChatSupportMessage} type="audio/ogg" />
-                                                    <source src={messageContent.ChatSupportMessage} type="audio/mpeg" />
-                                                    Your browser does not support the audio element.
-                                                </audio>
-                                            }
-                                        </div>
-                                        <div className="message-meta">
-                                            <p id="time">{messageContent.CreateDate}</p>
-                                            {/* <p id="author">{messageContent.ChatSupportSender}</p> */}
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </ScrollToBottom>
-                    :
-                    <ScrollToBottom className="message-container">
-                        {clientChatSupportDetail?.map((messageContent, index) => {
-                            return (
-                                <div
-                                    key={index}
-                                    className="message"
-                                    id={messageContent.ChatSupportSender === "USER" ? "other" : "you"}
-                                >
-                                    <div>
-                                        <div className="message-content"  >
-                                            {
-                                                messageContent.ChatSupportType === "TEXT" &&
-                                                <p>{messageContent.ChatSupportMessage}</p>
-                                            }
-                                            {
-                                                messageContent.ChatSupportType === "IMAGE" &&
-                                                <img src={messageContent.ChatSupportMessage} width="100%" className='rounded-3 w-50' />
-                                            }
-                                            {
-                                                messageContent.ChatSupportType === "AUDIO" &&
-                                                <audio ref={audioRef} controls>
-                                                    <source src={messageContent.ChatSupportMessage} type="audio/ogg" />
-                                                    <source src={messageContent.ChatSupportMessage} type="audio/mpeg" />
-                                                    Your browser does not support the audio element.
-                                                </audio>
-                                            }
-                                        </div>
-                                        <div className="message-meta">
-                                            <p id="time">{messageContent.CreateDate}</p>
-                                            {/* <p id="author">{messageContent.ChatSupportSender}</p> */}
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </ScrollToBottom>
+                isLoading ?
+                    <>
+                        <div className='chat__header'>
+                            <h6>{chatName}</h6>
+                            <div className="turn__off">
+                                <button className={`power-button ${isOn ? "on " : "off scaled"} `} onClick={handlePowerClick} >
+                                    <Icons.poweroff className="icon" />{isOn ? 'End chat' : 'Chat Ended'}
+                                </button>
+                            </div>
+                        </div>
+                        {
+                            chatStatus === 'ONGOING' ?
+                                <ScrollToBottom className="message-container">
+                                    {clientChatSupport?.map((messageContent, index) => {
+                                        return (
+                                            <div
+                                                key={index}
+                                                className="message"
+                                                id={messageContent.ChatSupportSender === "USER" ? "other" : "you"}
+                                            >
+                                                <div>
+                                                    <div className="message-content"  >
+                                                        {
+                                                            messageContent.ChatSupportType === "TEXT" &&
+                                                            <p>{messageContent.ChatSupportMessage}</p>
+                                                        }
+                                                        {
+                                                            messageContent.ChatSupportType === "IMAGE" &&
+                                                            <img src={messageContent.ChatSupportMessage} width="100%" className='rounded-3 w-50' />
+                                                        }
+                                                        {
+                                                            messageContent.ChatSupportType === "AUDIO" &&
+                                                            <audio ref={audioRef} controls>
+                                                                <source src={messageContent.ChatSupportMessage} type="audio/ogg" />
+                                                                <source src={messageContent.ChatSupportMessage} type="audio/mpeg" />
+                                                                Your browser does not support the audio element.
+                                                            </audio>
+                                                        }
+                                                    </div>
+                                                    <div className="message-meta">
+                                                        <p id="time">{messageContent.CreateDate}</p>
+                                                        {/* <p id="author">{messageContent.ChatSupportSender}</p> */}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </ScrollToBottom>
+                                :
+                                <ScrollToBottom className="message-container">
+                                    {clientChatSupportDetail?.map((messageContent, index) => {
+                                        return (
+                                            <div
+                                                key={index}
+                                                className="message"
+                                                id={messageContent.ChatSupportSender === "USER" ? "other" : "you"}
+                                            >
+                                                <div>
+                                                    <div className="message-content"  >
+                                                        {
+                                                            messageContent.ChatSupportType === "TEXT" &&
+                                                            <p>{messageContent.ChatSupportMessage}</p>
+                                                        }
+                                                        {
+                                                            messageContent.ChatSupportType === "IMAGE" &&
+                                                            <img src={messageContent.ChatSupportMessage} width="100%" className='rounded-3 w-50' />
+                                                        }
+                                                        {
+                                                            messageContent.ChatSupportType === "AUDIO" &&
+                                                            <audio ref={audioRef} controls>
+                                                                <source src={messageContent.ChatSupportMessage} type="audio/ogg" />
+                                                                <source src={messageContent.ChatSupportMessage} type="audio/mpeg" />
+                                                                Your browser does not support the audio element.
+                                                            </audio>
+                                                        }
+                                                    </div>
+                                                    <div className="message-meta">
+                                                        <p id="time">{messageContent.CreateDate}</p>
+                                                        {/* <p id="author">{messageContent.ChatSupportSender}</p> */}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </ScrollToBottom>
+                        }
+
+
+                    </> : <Component.Loader />
             }
-
-
         </>
     )
 }
