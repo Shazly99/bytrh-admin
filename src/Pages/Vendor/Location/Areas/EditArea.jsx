@@ -134,8 +134,7 @@ const EditArea = () => {
                     <div className='baseBtn'>
                       <Link to={'/location/areas'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                          Cansel
-                        </Button>
+                        Cancel                        </Button>
                       </Link>
                     </div>
                   </div>

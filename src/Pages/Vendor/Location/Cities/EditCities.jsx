@@ -111,7 +111,7 @@ const EditCities = () => {
                     <div className='baseBtn'>
                       <Link to={'/location/cities'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                          Cansel
+                        Cancel
                         </Button>
                       </Link>
                     </div>

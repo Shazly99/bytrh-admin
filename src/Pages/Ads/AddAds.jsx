@@ -257,7 +257,7 @@ const AddAds = () => {
                     <div className='baseBtn'>
                       <Link to={'/ads'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                          Cansel
+                        Cancel
                         </Button>
                       </Link>
                     </div>
