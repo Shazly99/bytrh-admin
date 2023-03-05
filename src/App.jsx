@@ -70,6 +70,7 @@ function App() {
           path: '/adoption', children: [
             { index: true, element: <ProtectedRoutes><Component.Adoption /> </ProtectedRoutes> },
             { path: 'details/:id', element: <ProtectedRoutes> <Component.AdoptionDetails /></ProtectedRoutes> },
+            { path: 'chat/:id', element: <ProtectedRoutes> <Component.AdoptionChat /></ProtectedRoutes> },
           ]
 
         },

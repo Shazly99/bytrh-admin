@@ -58,6 +58,7 @@ import BlogDoctorDetails from './../Pages/Blogs/Doc/BlogDoctorDetails';
 import Adoption from '../Pages/Vendor/Adoption/Adoption';
 import AdoptionDetails from '../Pages/Vendor/Adoption/AdoptionDetails';
 import Loader from './../Components/Shared/Loader/Loader';
+import AdoptionChat from '../Pages/Vendor/Adoption/AdoptionChat';
 
 export default {
     // Layout 
@@ -139,5 +140,6 @@ export default {
     // Adoption
     Adoption,
     AdoptionDetails,
+    AdoptionChat,
 }
 
