@@ -206,8 +206,8 @@ function App() {
           style: {
             fontFamily: ' Arial, Helvetica, sans-serif',
             textTransform: 'capitalize',
-      /*       zIndex: '9999',
-            background: '#fff',
+        zIndex: '9999',
+           /* background: '#fff',
             color: '#000', */
             borderRadius: '10px',
             background: '#333',

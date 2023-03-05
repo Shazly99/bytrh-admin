@@ -52,8 +52,7 @@ function LiveChat() {
     };
     const chatReceive = _.debounce(async () => {
         if (chatStatus === 'ONGOING') {
-            console.log('اطلع بسرعه');
-            try {
+             try {
                 const { data } = await PostData(`https://bytrh.com/api/admin/chat/client/receive`, { IDClientChatSupport: id, IDChatSupportDetails: IdChatSupport }, apiheader);
                 if (clientChatSupport !== []) {
                     setClientChatSupport([])
@@ -71,8 +70,7 @@ function LiveChat() {
                 }
             }
         } else {
-            console.log('برررررررررررررررررره');
-            return
+             return
         }
     }, 1000);
 
@@ -103,7 +101,7 @@ function LiveChat() {
             localStorage.setItem('chatStatus', 'PENDING')
         }
         fetchClientDetail();
-        chatReceive()
+        // chatReceive()
 
         let interval = setInterval(() => {
             chatReceive()

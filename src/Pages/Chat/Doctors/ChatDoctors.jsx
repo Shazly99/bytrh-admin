@@ -10,13 +10,13 @@ import { apiheader, PostData } from './../../../utils/fetchData';
 import _ from 'lodash';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
+import { toast } from 'react-hot-toast';
 const ChatDoctors = () => {
   const { id } = useParams();
   let { setmassSend, chatEnd, userReplied, docChatSupport, setDocChatSupport } = useContext(ChatContext);
 
   const clientlist = _.debounce(async () => {
     let { data } = await PostData(`https://bytrh.com/api/admin/chat/doctor/list`, {}, apiheader)
-    console.log(data.Response);
     setDocChatSupport(data.Response.DoctorChatSupport)
   }, 1000)
 
@@ -30,8 +30,8 @@ const ChatDoctors = () => {
       , apiheader).then((res) => {
         if (res.data.Success === true) {
           console.log('setmassSend true');
-          setmassSend(true) 
-        } 
+          setmassSend(true)
+        }
       });
   }
   useEffect(() => {
@@ -52,25 +52,24 @@ const ChatDoctors = () => {
   };
 
   // send image
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState('');
   async function handleFileSelect(event) {
     console.log(event.target.files);
     setSelectedFile();
-    if (selectedFile !== null) {
-      let data = await PostData(`https://bytrh.com/api/admin/chat/doctor/reply`,
-        {
-          IDDoctorChatSupport: id,
-          ChatSupportMessage: event.target.files[0],
-          ChatSupportType: 'IMAGE'
-        }
-        , apiheader).then((res) => {
-          if (res.data.Success === true) {
-            console.log('setmassSend true');
-            setmassSend(true) 
-          } 
-        });
-      console.log(data);
-    }
+    console.log('ahahaa');
+    let {data} = await PostData(`https://bytrh.com/api/admin/chat/doctor/reply`,
+      {
+        IDDoctorChatSupport: id,
+        ChatSupportMessage: event.target.files[0],
+        ChatSupportType: 'IMAGE'
+      }
+      , apiheader) 
+
+      if (data.Success === false) {
+        toast.error(data.ApiMsg)
+      }
+    console.log(data);
+
   }
 
   useEffect(() => {

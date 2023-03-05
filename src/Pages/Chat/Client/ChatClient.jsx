@@ -55,23 +55,21 @@ const ChatClient = () => {
 
   const [selectedFile, setSelectedFile] = useState(null);
   async function handleFileSelect(event) {
-    // console.log(event.target.files);
+    console.log(event.target.files);
     setSelectedFile();
-    if (selectedFile !== null) {
-      let data = await PostData(`https://bytrh.com/api/admin/chat/client/reply`,
+   /*  if (selectedFile !== null) { */
+      let {data} = await PostData(`https://bytrh.com/api/admin/chat/client/reply`,
         {
           IDClientChatSupport: id,
           ChatSupportMessage: event.target.files[0],
           ChatSupportType: 'IMAGE'
         }
-        , apiheader).then((res) => {
-          if (res.data.Success === true) {
-            console.log('setmassSend true');
-            setmassSend(true) 
-          } 
-        });;
+        , apiheader) 
+        if (data.Success === false) {
+          toast.error(data.ApiMsg)
+        }
       // console.log(data);
-    }
+    // }
   }
 
   useEffect(() => {
