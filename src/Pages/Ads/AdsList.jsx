@@ -12,6 +12,7 @@ import Img from '../../assets/Img';
 import axios from 'axios';
 import _ from 'lodash';
 
+ 
 const AdsList = () => {
 
   const [ads, setAds] = useState(null)
@@ -130,6 +131,7 @@ const AdsList = () => {
               </label>
             </div>
           </div> */}
+  
                 <Table responsive={true} className='rounded-3 '>
                   <thead>
                     <tr className='text-center  ' style={{ background: '#F9F9F9' }}>

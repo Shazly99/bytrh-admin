@@ -67,10 +67,10 @@ const AddAreas = () => {
   return (
     <Container fluid>
       <div className="app__addprodects">
-        <Component.SubNav sub__nav={[{ name: " Areas", path: '/location/areas' }, { name: "Add Area ", path: '/location/areas/addareas' }]} />
+        <Component.SubNav sub__nav={[{ name: " Cities", path: '/location/areas' }, { name: "Add City ", path: '/location/areas/addareas' }]} />
 
         <div className="app__addprodects__header ">
-          <Component.BaseHeader h1={'Add New Areas'} />
+          <Component.BaseHeader h1={'Add New City'} />
           <div className="app__addOrder-form">
             <div className="app__addprodects-form">
               <form onSubmit={submit}>
@@ -78,7 +78,7 @@ const AddAreas = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Areas Name (En)</Form.Label>
+                      <Form.Label>  Name (En)</Form.Label>
                       <Form.Control type="text" name='firstname' ref={AreasNameEn} />
                     </Form.Group>
 
@@ -95,9 +95,9 @@ const AddAreas = () => {
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
-                      <Form.Label>Areas Active</Form.Label>
+                      <Form.Label>  Status</Form.Label>
                       <Form.Select aria-label="Default select example" ref={selectRef}>
-                        <option>Country Status</option>
+                        <option>Status</option>
                         <option value="1">Active</option>
                         <option value="0">InActive</option>
                       </Form.Select>
@@ -110,7 +110,7 @@ const AddAreas = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Areas Name (Ar)</Form.Label>
+                      <Form.Label>  Name (Ar)</Form.Label>
                       <Form.Control type="text" name='firstname' ref={AreasNameAr} style={{ direction: 'rtl' }} />
                     </Form.Group>
 

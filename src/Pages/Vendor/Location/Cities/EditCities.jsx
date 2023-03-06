@@ -63,9 +63,9 @@ const EditCities = () => {
   return (
     <Container fluid>
       <div className="app__addprodects">
-        <Component.SubNav sub__nav={[{ name: "City", path: '/location/cities' }, { name: "Edit City ", path: `/location/cities/editcity/${id}` }]} />
+        <Component.SubNav sub__nav={[{ name: "Areas", path: '/location/cities' }, { name: "Edit Area ", path: `/location/cities/editcity/${id}` }]} />
         <div className="app__addprodects__header ">
-          <Component.BaseHeader h1={'Edit City'} />
+          <Component.BaseHeader h1={'Edit Area'} />
           <div className="app__addOrder-form">
             <div className="app__addprodects-form">
               <form onSubmit={submit}>
@@ -73,7 +73,7 @@ const EditCities = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Country Name (En)</Form.Label>
+                      <Form.Label>  Name (En)</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CityNameEn} defaultValue={editPage?.CityNameEn} />
                     </Form.Group>
 
@@ -94,7 +94,7 @@ const EditCities = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Country Name (Ar)</Form.Label>
+                      <Form.Label>  Name (Ar)</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CityNameAr} defaultValue={editPage?.CityNameAr} style={{ direction: 'rtl' }} />
                     </Form.Group>
 

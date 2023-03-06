@@ -85,7 +85,7 @@ const EditArea = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Area Name (En)</Form.Label>
+                      <Form.Label>  Name (En)</Form.Label>
                       <Form.Control type="text" name='firstname' ref={AreaNameEn} defaultValue={editPage?.AreaNameEn} />
                     </Form.Group>
 
@@ -105,7 +105,7 @@ const EditArea = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Area Name (Ar)</Form.Label>
+                      <Form.Label>  Name (Ar)</Form.Label>
                       <Form.Control type="text" name='firstname' ref={AreaNameAr} defaultValue={editPage?.AreaNameAr} style={{ direction: 'rtl' }} />
                     </Form.Group>
 
@@ -134,7 +134,8 @@ const EditArea = () => {
                     <div className='baseBtn'>
                       <Link to={'/location/areas'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Cancel                        </Button>
+                        Cancel                       
+                         </Button>
                       </Link>
                     </div>
                   </div>

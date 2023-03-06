@@ -60,10 +60,10 @@ const AddCities = () => {
   return (
     <Container fluid>
       <div className="app__addprodects">
-      <Component.SubNav sub__nav={[{ name: "Cities", path: '/location/cities' }, { name: "Add City ", path: '/location/cities/addcity' }]} />
+      <Component.SubNav sub__nav={[{ name: "Areas", path: '/location/cities' }, { name: "Add Area ", path: '/location/cities/addcity' }]} />
         
         <div className="app__addprodects__header ">
-          <Component.BaseHeader h1={'Add New City'} />
+          <Component.BaseHeader h1={'Add New Area'} />
           <div className="app__addOrder-form">
             <div className="app__addprodects-form">
               <form onSubmit={submit}>
@@ -71,13 +71,13 @@ const AddCities = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>City Name (En)</Form.Label>
+                      <Form.Label>  Name (En)</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CityNameEn} />
                     </Form.Group>
 
 
                     <Form.Group controlId="formBasicEmail"className='mt-3'>
-                      <Form.Label>City Active</Form.Label> 
+                      <Form.Label>  Status</Form.Label> 
                       <Form.Select aria-label="Default select example" ref={selectRef}>
                         <option>Country Status</option>
                         <option value="1">Active</option>
@@ -86,7 +86,7 @@ const AddCities = () => {
 
                     </Form.Group>
                     <Form.Group controlId="formBasicEmail"className='mt-3'>
-                      <Form.Label>City Code</Form.Label>
+                      <Form.Label>  Code</Form.Label>
                       <Form.Control type="number" name='firstname' ref={CityCode} />
                     </Form.Group>
 
@@ -95,7 +95,7 @@ const AddCities = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>City Name (Ar)</Form.Label>
+                      <Form.Label>  Name (Ar)</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CityNameAr} style={{ direction: 'rtl' }} />
                     </Form.Group>
  

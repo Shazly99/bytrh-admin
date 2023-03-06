@@ -72,7 +72,7 @@ const AddCountry = () => {
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail" className='mt-2'>
-                      <Form.Label>  Active </Form.Label>
+                      <Form.Label>  Status </Form.Label>
 
                       <Form.Select aria-label="Default select example" ref={selectRef}>
                         <option>  Status</option>
