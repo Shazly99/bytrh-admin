@@ -193,10 +193,11 @@
     left: -135px;
     // top: 55px;
     background-color: rgba((248, 249, 250), var(--bs-bg-opacity)) !important;
-    /* right: -10px; */; 
+    /* right: -10px; */
+    ;
     z-index: 999999999999999999;
 }
- 
+
 .dropdown-toggle::after {
     display: none !important;
 }
@@ -208,8 +209,9 @@
         border-radius: 5px;
         background-color: transparent !important;
         position: relative;
+
         svg {
-            color: #B5B5C3  ;
+            color: #B5B5C3;
         }
 
         transition: all 0.5s;
@@ -229,34 +231,42 @@
         color: rgb(80, 205, 137);
         background-color: #50cd89 !important;
     }
+
     .bullet-dot {
         width: 4px;
         height: 4px;
         border-radius: 100% !important;
     }
+
     .bullet {
-        display: inline-block; 
+        display: inline-block;
         border-radius: 6px;
         width: 8px;
         height: 4px;
         flex-shrink: 0;
         z-index: 999999;
-    }   
+    }
+
     .h-6px {
         height: 6px !important;
     }
+
     .w-6px {
         width: 6px !important;
     }
+
     .translate-middle {
         transform: translate(-50%, -50%) !important;
     }
+
     .start-50 {
         left: 50% !important;
     }
+
     .top-0 {
         top: 0px !important;
-    } 
+    }
+
     // Blink
     .animation-blink {
         animation: animationBlink 1s steps(5, start) infinite;
@@ -265,6 +275,40 @@
     @keyframes animationBlink {
         to {
             visibility: hidden;
+        }
+    }
+}
+
+
+.chang__lang {
+    .dropdown-toggle {
+        background-color: transparent !important;
+        color: rgba($color: $colorGrey-1, $alpha: 0.1) !important;
+        padding: calc(0.7rem + 1px) calc(1.25rem + 1px) !important;
+        // padding: 1.2rem 0.7rem !important;
+        border-radius: 0.425rem !important;
+        font-size: 0.8rem !important;
+        border-radius: 0.4rem;
+        outline: none !important;
+        border: none !important;
+        color: #7E8299 !important;
+        background-color: #eff2f5 !important;
+        font-weight: 600 !important;
+        transition: all 0.5s;
+        box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+
+        &:hover {
+
+            box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+            color: #FAAA40 !important;
+            border-color: var(--kt-primary-light);
+            background-color: #f1faff !important;
+            transition: color 0.2s ease;
+
+        }
+
+        .my-svg {
+            // stroke: #FAAA40  !important;
         }
     }
 }

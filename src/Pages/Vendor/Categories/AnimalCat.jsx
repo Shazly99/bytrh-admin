@@ -17,7 +17,7 @@ const AnimalCat = () => {
   const [PagesNumber, setPagesNumber] = useState('')
   const [searchValue, setSearchValue] = useState('');
 
-  const animalcategories = async () => {
+  const animalcategories = async (page) => {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/animalcategories`, { IDPage: page }, apiheader).then(({ data }) => {
 
       setAnimal(data.Response.AnimalCategories)
@@ -85,10 +85,13 @@ const AnimalCat = () => {
   };
 
   const searchGetData = async (searchValue) => {
-    let { data } = await PostData(`https://bytrh.com/api/admin/animalcategories`, { SearchKey: searchValue }, apiheader)
+    let { data } = await PostData(`https://bytrh.com/api/admin/animalcategories`, {IDPage: page, SearchKey: searchValue }, apiheader)
     console.log(data);
     setAnimal(data.Response.AnimalCategories)
+    setPagesNumber(data.Response.Pages); 
+
   }
+
   // filter
   const [selectedOption, setSelectedOption] = useState('All');
 
@@ -96,19 +99,18 @@ const AnimalCat = () => {
     const selectedValue = event.target.value;
     setSelectedOption(selectedValue);
     // filter your content based on the selected option 
-    if (selectedValue === "ACTIVE") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/animalcategories`, { AnimalCategoryStatus: selectedValue }, apiheader)
+    if (selectedValue === "ACTIVE"||selectedValue === "INACTIVE") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/animalcategories`, { IDPage: page,AnimalCategoryStatus: selectedValue }, apiheader)
       setAnimal(data.Response.AnimalCategories)
-    } else if (selectedValue === "INACTIVE") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/animalcategories`, { AnimalCategoryStatus: selectedValue }, apiheader)
-      setAnimal(data.Response.AnimalCategories)
-    } else if (selectedValue === "All") {
+      setPagesNumber(data.Response.Pages); 
+
+    }  else if (selectedValue === "All") {
       animalcategories()
     }
   };
   useEffect(() => {
-    animalcategories()
-  }, [])
+    animalcategories(page)
+  }, [page])
 
   return (
 

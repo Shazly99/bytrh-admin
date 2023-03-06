@@ -61,21 +61,21 @@ const AddCountry = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Country Name (En)</Form.Label>
+                      <Form.Label>  Name (En)</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CountryNameEn} />
                     </Form.Group>
 
 
-                    <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Country Time Zone  </Form.Label>
+                    <Form.Group controlId="formBasicEmail" className='mt-2'>
+                      <Form.Label>  Time Zone  </Form.Label>
                       <Form.Control type="number" name='firstname' ref={CountryTimeZone} />
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Country Active </Form.Label>
+                    <Form.Group controlId="formBasicEmail" className='mt-2'>
+                      <Form.Label>  Active </Form.Label>
 
                       <Form.Select aria-label="Default select example" ref={selectRef}>
-                        <option>Country Status</option>
+                        <option>  Status</option>
                         <option value="1">Active</option>
                         <option value="0">InActive</option>
                       </Form.Select> 
@@ -86,12 +86,12 @@ const AddCountry = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Country Name (Ar)</Form.Label>
+                      <Form.Label>  Name (Ar)</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CountryNameAr} style={{ direction: 'rtl' }}  />
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Country Code</Form.Label>
+                    <Form.Group controlId="formBasicEmail" className='mt-2'>
+                      <Form.Label>  Code</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CountryCode} />
                     </Form.Group>
 

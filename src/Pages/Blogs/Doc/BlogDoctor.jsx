@@ -19,7 +19,7 @@ export const BlogDoctor = () => {
 
 
     const BlogsList = async () => {
-        await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs`, { IDPage: 1 }, apiheader).then(({ data }) => {
+        await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs`, { IDPage: page }, apiheader).then(({ data }) => {
             setBlogs(data.Response.DoctorBlogs)
             // console.log(data);
             setPagesNumber(data.Response.Pages);
@@ -74,16 +74,20 @@ export const BlogDoctor = () => {
     const handleSearchClick = () => searchGetBlog(searchBlog)
 
     const searchGetBlog = async (searchValue) => {
-        let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs`, { SearchKey: searchValue }, apiheader)
+        let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs`, { IDPage: page, SearchKey: searchValue }, apiheader)
         setBlogs(data.Response.DoctorBlogs)
+        setPagesNumber(data.Response.Pages);
+
     }
     // ToDo::Filter radio btn Blogs status
     const handleOptionChange = async (event) => {
         const selectedValue = event.target.value;
         setSelectedOption(selectedValue);
         if (selectedValue === "PENDING" || selectedValue === "REJECTED" || selectedValue === "POSTED" || selectedValue === "REMOVED") {
-            let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs`, { BlogStatus: selectedValue }, apiheader)
+            let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs`, {IDPage: page, BlogStatus: selectedValue }, apiheader)
             setBlogs(data.Response.DoctorBlogs)
+            setPagesNumber(data.Response.Pages);
+
         } else if (selectedValue === "All") {
             BlogsList()
         }
@@ -92,8 +96,10 @@ export const BlogDoctor = () => {
     const [animal, setAnimal] = useState(null)
 
     const animalcategories = async () => {
-        let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/animalcategories`, { IDPage: 1 }, apiheader)
+        let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/animalcategories`, { IDPage: page }, apiheader)
         setAnimal(data.Response.AnimalCategories)
+        setPagesNumber(data.Response.Pages);
+
     }
 
     const handelSelectAnimalCategory = async (event) => {
@@ -105,15 +111,20 @@ export const BlogDoctor = () => {
             BlogsList()
         } else {
             await animalcategories()
-            let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs`, { IDAnimalCategory: selectedCountryId }, apiheader)
+            let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs`, { IDPage: page, IDAnimalCategory: selectedCountryId }, apiheader)
             setBlogs(data.Response.DoctorBlogs)
+            setPagesNumber(data.Response.Pages);
+
         }
     }
 
     useEffect(() => {
         BlogsList()
+        animalcategories()
         return () => {
             BlogsList()
+            animalcategories()
+
         }
     }, [])
     return (

@@ -36,26 +36,25 @@ function Users() {
   }
   useEffect(() => {
     userList(page)
-  }, [page, PagesNumber])
+  }, [page])
   // to fixed problem because Pagination count need a number 
   const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
 
 
   const [searchValue, setSearchValue] = React.useState('');
   const handleSearchClick = () => {
-    console.log(searchValue);
     searchGetData(searchValue)
   };
   const searchGetData = async (searchValue) => {
-    let { data } = await PostData(`https://bytrh.com/api/admin/users`, { SearchKey: searchValue }, apiheader)
-    console.log(data);
+    let { data } = await PostData(`https://bytrh.com/api/admin/users`, {IDPage: page , SearchKey: searchValue }, apiheader)
     setuserList(data.Response.Users)
+    setPagesNumber(data.Response.Pages);
+    
   }
   const handleInputChange = (event) => {
     if (event.target.value === '') {
       userList(page)
     }
-    console.log(event.target.value);
     setSearchValue(event.target.value);
   };
 
@@ -66,16 +65,11 @@ function Users() {
     const selectedValue = event.target.value;
     setSelectedOption(selectedValue);
     // filter your content based on the selected option 
-    if (selectedValue === "ACTIVE") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/users`, { UserStatus: selectedValue }, apiheader)
+    if (selectedValue === "ACTIVE" || selectedValue === "INACTIVE" || selectedValue === "PENDING") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/users`, {IDPage: page , UserStatus: selectedValue }, apiheader)
       setuserList(data.Response.Users)
-    } else if (selectedValue === "INACTIVE") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/users`, { UserStatus: selectedValue }, apiheader)
-      setuserList(data.Response.Users)
-    } else if (selectedValue === "PENDING") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/users`, { UserStatus: selectedValue }, apiheader)
-      setuserList(data.Response.Users)
-    } else if (selectedValue === "All") {
+      setPagesNumber(data.Response.Pages);
+    }  else if (selectedValue === "All") {
       userList()
     }
   };

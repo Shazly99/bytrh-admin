@@ -19,7 +19,7 @@ const BlogClient = () => {
 
 
     const BlogsList = async () => {
-        await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs`, { IDPage: 1 }, apiheader).then(({ data }) => {
+        await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs`, { IDPage: page }, apiheader).then(({ data }) => {
             setBlogs(data.Response.ClientBlogs)
             // console.log(data);
             setPagesNumber(data.Response.Pages);
@@ -74,16 +74,20 @@ const BlogClient = () => {
     const handleSearchClick = () => searchGetBlog(searchBlog)
 
     const searchGetBlog = async (searchValue) => {
-        let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs`, { SearchKey: searchValue }, apiheader)
+        let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs`, { IDPage: page, SearchKey: searchValue }, apiheader)
         setBlogs(data.Response.ClientBlogs)
+        setPagesNumber(data.Response.Pages);
+
     }
     // ToDo::Filter radio btn Blogs status
     const handleOptionChange = async (event) => {
         const selectedValue = event.target.value;
         setSelectedOption(selectedValue);
         if (selectedValue === "PENDING" || selectedValue === "REJECTED" || selectedValue === "POSTED" || selectedValue === "REMOVED") {
-            let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs`, { BlogStatus: selectedValue }, apiheader)
+            let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs`, { IDPage: page, BlogStatus: selectedValue }, apiheader)
             setBlogs(data.Response.ClientBlogs)
+            setPagesNumber(data.Response.Pages);
+
         } else if (selectedValue === "All") {
             BlogsList()
         }
@@ -92,7 +96,7 @@ const BlogClient = () => {
     const [animal, setAnimal] = useState(null)
 
     const animalcategories = async () => {
-        let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/animalcategories`, { IDPage: 1 }, apiheader)
+        let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/animalcategories`, { IDPage: page }, apiheader)
         setAnimal(data.Response.AnimalCategories)
     }
 
@@ -102,19 +106,23 @@ const BlogClient = () => {
         if (selectedCountryId === "Animal Category") {
             BlogsList()
         } else {
-
             await animalcategories()
-            let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs`, { IDAnimalCategory: selectedCountryId }, apiheader)
+            let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs`, { IDPage: page, IDAnimalCategory: selectedCountryId }, apiheader)
             setBlogs(data.Response.ClientBlogs)
+            setPagesNumber(data.Response.Pages);
+
         }
     }
 
     useEffect(() => {
-        BlogsList()
+        BlogsList(page)
+        animalcategories()
         return () => {
             BlogsList()
+            animalcategories()
+
         }
-    }, [])
+    }, [page])
 
     return (
         <>
@@ -266,7 +274,7 @@ const BlogClient = () => {
                                                             </span>
                                                             <div className="delete">
                                                                 <DropdownButton
-                                                                    title={<Icons.dotes size={20}/>}
+                                                                    title={<Icons.dotes size={20} />}
                                                                     id="dropdown-menu"
                                                                     variant="outline-success"
                                                                     onClick={() => setShowDropdown(!showDropdown)}

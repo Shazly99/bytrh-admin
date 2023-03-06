@@ -15,10 +15,9 @@ const Country = () => {
     const [PagesNumber, setPagesNumber] = useState('')
     const [searchValue, setSearchValue] = useState('');
 
-    const CountrycList = async () => {
+    const CountrycList = async (page) => {
         await PostData(`${process.env.REACT_APP_API_URL}/admin/location/countries`, { IDPage: page }, apiheader).then(({ data }) => {
             setCountry(data.Response.Countries)
-            console.log(data);
             setPagesNumber(data.Response.Pages);
         }).catch((error) => {
             if (error.response && error.response.status === 429) {
@@ -60,8 +59,7 @@ const Country = () => {
                     },
                 });
             })
-            await CountrycList()
-
+            await CountrycList() 
         }
     };
     const CountrycategoriesStatus = async (id) => {
@@ -83,7 +81,7 @@ const Country = () => {
     };
 
     const searchGetData = async (searchValue) => {
-        let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, { SearchKey: searchValue }, apiheader)
+        let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, { IDPage: page ,SearchKey: searchValue }, apiheader)
         console.log(data);
         setCountry(data.Response.Countries)
     }
@@ -94,20 +92,18 @@ const Country = () => {
         const selectedValue = event.target.value;
         setSelectedOption(selectedValue);
         // filter your content based on the selected option 
-        if (selectedValue === "ACTIVE") {
-            let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, { CountryStatus: selectedValue }, apiheader)
+        if (selectedValue === "ACTIVE"||selectedValue === "INACTIVE") {
+            let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, {IDPage: page, CountryStatus: selectedValue }, apiheader)
             setCountry(data.Response.Countries)
-        } else if (selectedValue === "INACTIVE") {
-            let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, { CountryStatus: selectedValue }, apiheader)
-            setCountry(data.Response.Countries)
+            setPagesNumber(data.Response.Pages);
         } else if (selectedValue === "All") {
             CountrycList()
         }
     };
 
     useEffect(() => {
-        CountrycList()
-    }, [])
+        CountrycList(page)
+    }, [page])
     return (
         <>
             {
@@ -181,8 +177,8 @@ const Country = () => {
                                         <thead>
                                             <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
                                                 <th>Country Name</th>
-                                                <th>Country Time Zone</th>
                                                 <th>Country Code</th>
+                                                <th>Country Time Zone</th>
                                                 <th>Country Status</th>
                                                 <th>Action</th>
                                             </tr>

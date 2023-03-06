@@ -58,7 +58,7 @@ function LiveChat() {
         }
     };
     const chatReceive = _.debounce(async () => {
-        if (chatStatus === 'ONGOING') {
+        if (chatStatus === 'ONGOING' || chatStatus === 'PENDING') {
             try {
                 const { data } = await PostData(`https://bytrh.com/api/admin/chat/client/receive`, { IDClientChatSupport: id, IDChatSupportDetails: IdChatSupport }, apiheader);
                 if (clientChatSupport !== []) {
@@ -95,20 +95,16 @@ function LiveChat() {
     useEffect(() => {
         if (chatStatus === 'ONGOING') {
             setIsOn(true)
-            localStorage.setItem('chatStatus', 'ONGOING')
-
-
-        } else if (chatStatus === 'ENDED') {
-
+            localStorage.setItem('chatStatus', 'ONGOING') 
+        } else if (chatStatus === 'ENDED') { 
             setIsOn(false)
-            localStorage.setItem('chatStatus', 'ENDED')
-
+            localStorage.setItem('chatStatus', 'ENDED') 
         } else if (chatStatus === 'PENDING') {
             setIsOn(true)
             localStorage.setItem('chatStatus', 'PENDING')
         }
         fetchClientDetail();
-        // chatReceive()
+        chatReceive()
 
         let interval = setInterval(() => {
             chatReceive()
@@ -136,9 +132,7 @@ function LiveChat() {
     }, [id]);
     return (
         <>
-            {
-                isLoading ?
-                    <>
+     
                         <div className='chat__header'>
                             <h6>{chatName}</h6>
                             <div className="turn__off">
@@ -225,8 +219,7 @@ function LiveChat() {
                         }
 
 
-                    </> : <Component.Loader />
-            }
+                  
         </>
     )
 }

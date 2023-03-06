@@ -1,25 +1,28 @@
-import React, { useContext, useState } from 'react'
+import { motion } from 'framer-motion';
+import React, { useContext, useState } from 'react';
+import { Dropdown, DropdownButton, Nav, NavDropdown } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import './Navber.scss'
-import { Link } from 'react-router-dom';
-import { VendersContext } from './../../context/Store';
 import { HiMenuAlt4, HiX } from 'react-icons/hi';
-import { motion } from 'framer-motion';
-import routes from './../Sidebar/route';
-import { Form, Nav, NavDropdown } from 'react-bootstrap';
-import { FaUserCircle, FaCog, FaPowerOff } from 'react-icons/fa';
-import { IoMdNotificationsOutline } from 'react-icons/io';
-import Img from '../../assets/Img';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Link } from 'react-router-dom';
+import Img from '../../assets/Img';
 import Icons from '../../constants/Icons';
-import { InputGroup } from 'react-bootstrap';
+import { apiheader, PostData } from '../../utils/fetchData';
+import { VendersContext } from './../../context/Store';
+import routes from './../Sidebar/route';
+import './Navber.scss';
 
 function Navber() {
   let { LogOut } = useContext(VendersContext);
 
   const [Toggle, setToggle] = useState(false);
 
+  const handleActionSelect = async (action) => {
+    console.log(action);
+    let {data}= await PostData(`https://bytrh.com/api/admin/users/language/change`, {UserLanguage:action}, apiheader)
+    console.log(data);
+  }
   return (
     <>
       <Navbar className='bg-light navSubMain'>
@@ -49,17 +52,22 @@ function Navber() {
               }
             </div>
 
-            {/*<InputGroup>
-              <button id="basic-addon1" className='btn__search'>
-                <Icons.Search />
-              </button>
-              <Form.Control
-                placeholder="Search about Products"
-                aria-label="Username"
-                aria-describedby="basic-addon1"
-                className='input__search'
-              />
-            </InputGroup> */}
+            <span className='chang__lang '>
+              <DropdownButton
+                id={`dropdown-1`}
+                title={
+                  <>
+                   <Icons.Language size={17}/> Change Lang
+                  </>
+                }
+                variant="outline-"
+                onSelect={(eventKey) => handleActionSelect( eventKey)}
+                className="DropdownButton "
+              >
+                <Dropdown.Item eventKey="ar">عربي</Dropdown.Item>
+                <Dropdown.Item eventKey="en"  >English</Dropdown.Item>
+              </DropdownButton>
+            </span>
           </Navbar.Collapse>
 
           <Navbar.Toggle />
@@ -131,8 +139,8 @@ function Navber() {
                 </div>
               </NavDropdown>
 
-            </Nav> 
-            
+            </Nav>
+
           </Navbar.Collapse>
 
 

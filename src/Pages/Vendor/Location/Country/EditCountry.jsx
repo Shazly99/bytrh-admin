@@ -71,14 +71,14 @@ const EditCountry = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Country Name (En)</Form.Label>
+                      <Form.Label>  Name (En)</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CountryNameEn} defaultValue={editPage?.CountryNameEn} />
                     </Form.Group>
 
 
-                    <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Country Time Zone  </Form.Label>
-                      <Form.Control type="number" name='firstname' ref={CountryTimeZone} defaultValue={editPage?.CountryTimeZone} />
+                    <Form.Group controlId="formBasicEmail" className='mt-2' >
+                      <Form.Label>  Time Zone  </Form.Label>
+                      <Form.Control type="text" name='firstname' ref={CountryTimeZone} defaultValue={editPage?.CountryTimeZone} />
                     </Form.Group>
 
 
@@ -87,12 +87,12 @@ const EditCountry = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Country Name (Ar)</Form.Label>
+                      <Form.Label>  Name (Ar)</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CountryNameAr} defaultValue={editPage?.CountryNameAr} style={{ direction: 'rtl' }} />
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail">
-                      <Form.Label>Country Code</Form.Label>
+                    <Form.Group controlId="formBasicEmail" className='mt-2'>
+                      <Form.Label>  Code</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CountryCode} defaultValue={editPage?.CountryCode} />
                     </Form.Group>
 
@@ -108,7 +108,7 @@ const EditCountry = () => {
                     <div className='baseBtn'>
                       <Link to={'/location/cities'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Cancel
+                          Cancel
                         </Button>
                       </Link>
                     </div>
