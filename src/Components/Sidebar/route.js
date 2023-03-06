@@ -25,9 +25,7 @@ const routes = [
     path: "/medicalfields",
     name: "Medical Fields",
     icon: <Icons.medical size={19} />
-  },
-
-
+  }, 
   {
     name: "Categories ",
     icon: <Icons.category size={19} />,
@@ -52,12 +50,12 @@ const routes = [
       },
       {
         path: "/location/cities",
-        name: "Cities ",
+        name: "Areas ",
         icon: <Icons.dote size={19} />,
       },
       {
         path: "/location/areas",
-        name: "Areas ",
+        name: "Cities ",
         icon: <Icons.dote size={19} />,
       },
 
@@ -67,8 +65,7 @@ const routes = [
     path: "/consult",
     name: "Consults",
     icon: <Icons.consult size={19} />,
-  },
-
+  }, 
   {
     path: "/ads",
     name: "Ads",
@@ -80,12 +77,12 @@ const routes = [
     subRoutes: [
       {
         path: "/blogs/client",
-        name: "Blog Client ",
+        name: " Client ",
         icon: <Icons.dote size={19} />,
       },
       {
         path: "/blogs/doctor",
-        name: "Blog Doctor ",
+        name: " Doctor ",
         icon: <Icons.dote size={19} />,
       }, 
 

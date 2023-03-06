@@ -16,19 +16,18 @@ const Cities = () => {
   const [PagesNumber, setPagesNumber] = useState('')
   const [searchValue, setSearchValue] = useState('');
 
-  const CitiescList = async () => {
+  const CitiescList = async (page) => {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/location/cities`, { IDPage: page }, apiheader).then(({ data }) => {
       setCities(data.Response.Cities)
       console.log(data);
       setPagesNumber(data.Response.Pages);
-    }).then((error) => {
-
-      /*         if (error.response && error.response.status === 429) {
-                  const retryAfter = error.response.headers['retry-after'];
-                  setTimeout(() => {
-                      CitiescList();
-                  }, (retryAfter || 60) * 1000);
-              } */
+    }).catch((error) => {
+      if (error.response && error.response.status === 429) {
+        const retryAfter = error.response.headers['retry-after'];
+        setTimeout(() => {
+          CitiescList();
+        }, (retryAfter || 60) * 1000);
+      }
     })
   }
 
@@ -87,9 +86,10 @@ const Cities = () => {
   };
 
   const searchGetData = async (searchValue) => {
-    let { data } = await PostData(`https://bytrh.com/api/admin/location/cities`, { SearchKey: searchValue }, apiheader)
+    let { data } = await PostData(`https://bytrh.com/api/admin/location/cities`, { IDPage: page, SearchKey: searchValue }, apiheader)
     console.log(data);
     setCities(data.Response.Cities)
+    setPagesNumber(data.Response.Pages);
   }
   // filter
   const [selectedOption, setSelectedOption] = useState('All');
@@ -98,19 +98,17 @@ const Cities = () => {
     const selectedValue = event.target.value;
     setSelectedOption(selectedValue);
     // filter your content based on the selected option 
-    if (selectedValue === "ACTIVE") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/location/cities`, { CityStatus: selectedValue }, apiheader)
+    if (selectedValue === "ACTIVE" || selectedValue === "INACTIVE") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/location/cities`, { IDPage: page, CityStatus: selectedValue }, apiheader)
       setCities(data.Response.Cities)
-    } else if (selectedValue === "INACTIVE") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/location/cities`, { CityStatus: selectedValue }, apiheader)
-      setCities(data.Response.Cities)
+      setPagesNumber(data.Response.Pages);
     } else if (selectedValue === "All") {
       CitiescList()
     }
   };
   useEffect(() => {
-    CitiescList()
-  }, [])
+    CitiescList(page)
+  }, [page])
   return (
     <>
       {
@@ -128,14 +126,14 @@ const Cities = () => {
                   </div>
 
                   <div className='filter__group'>
-                  <label>
+                    <label>
                       {
                         selectedOption === "All" ?
                           <input
                             type="radio"
                             name="filter"
                             value="All"
-                            checked 
+                            checked
                             onChange={handleOptionChange}
                             className={`inactive-radio form-check-input `}
                           /> :
@@ -143,9 +141,9 @@ const Cities = () => {
                             type="radio"
                             name="filter"
                             value="All"
-                            checked ={selectedOption === "All"}
+                            checked={selectedOption === "All"}
                             onChange={handleOptionChange}
-                            className={`inactive-radio form-check-input `} 
+                            className={`inactive-radio form-check-input `}
                           />
                       }
 
@@ -176,7 +174,7 @@ const Cities = () => {
                       />
                       InActive
                     </label>
- 
+
                   </div>
                 </div>
                 <Table responsive={true} className='rounded-3 '>

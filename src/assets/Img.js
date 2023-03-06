@@ -9,6 +9,7 @@ import ads from "./Images/ads.png";
 import view from "./Images/svg/view.svg";
 import added from "./Images/svg/Property 1=outline.svg";
 import added2 from "./Images/svg/Property 1=bulk.svg";
+import translate from "./Images/svg/translate.svg";
 import dropdown from "./Images/svg/more-square.svg";
 import icon from "./Images/Ellipse 38.png";
 import search from "./Images/kisspng-mt-gox-chief-executive-management-system-business-searching-5b3ba1034696c2.1059044815306344992891.png";
@@ -16,6 +17,7 @@ import searchNotFound from "./Images/50b508673f1bd07bc3022c3b62c3a3a7.webp";
 
 export default{ 
     // logo, 
+    translate,
     added,
     added2,
     loginBg,

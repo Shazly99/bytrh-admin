@@ -16,7 +16,7 @@ const MedicalFields = () => {
   const [PagesNumber, setPagesNumber] = useState('')
   const [searchValue, setSearchValue] = useState('');
 
-  const MedicalFieldscList = async () => {
+  const MedicalFieldscList = async (page) => {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/medicalfields`, { IDPage: page }, apiheader).then(({ data }) => {
       setMedicalFields(data.Response.MedicalFields)
       console.log(data.Response.MedicalFields);
@@ -77,23 +77,22 @@ const MedicalFields = () => {
     const selectedValue = event.target.value;
     setSelectedOption(selectedValue);
     // filter your content based on the selected option 
-    if (selectedValue === "ACTIVE") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/medicalfields`, { MedicalFieldStatus: selectedValue }, apiheader)
+    if (selectedValue === "ACTIVE" || selectedValue === "INACTIVE" ) {
+      let { data } = await PostData(`https://bytrh.com/api/admin/medicalfields`, {IDPage: page , MedicalFieldStatus: selectedValue }, apiheader)
       setMedicalFields(data.Response.MedicalFields)
-      console.log(selectedValue);
-    } else if (selectedValue === "INACTIVE") {
-      console.log(selectedValue);
-      let { data } = await PostData(`https://bytrh.com/api/admin/medicalfields`, { MedicalFieldStatus: selectedValue }, apiheader)
-      setMedicalFields(data.Response.MedicalFields)
+      setPagesNumber(data.Response.Pages);
+
     } else if (selectedValue === "All") {
       MedicalFieldscList()
     }
   };
 
   const searchGetData = async (searchValue) => {
-    let { data } = await PostData(`https://bytrh.com/api/admin/medicalfields`, { SearchKey: searchValue }, apiheader)
+    let { data } = await PostData(`https://bytrh.com/api/admin/medicalfields`, { IDPage: page ,SearchKey: searchValue }, apiheader)
     console.log(data);
     setMedicalFields(data.Response.MedicalFields)
+    setPagesNumber(data.Response.Pages);
+
   }
 
   const handleInputChange = (event) => {
@@ -105,8 +104,8 @@ const MedicalFields = () => {
   };
 
   useEffect(() => {
-    MedicalFieldscList()
-  }, [])
+    MedicalFieldscList(page)
+  }, [page])
 
   useEffect(() => {
   }, [selectedOption, medicalFields])

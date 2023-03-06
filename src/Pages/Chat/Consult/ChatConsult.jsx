@@ -77,13 +77,18 @@ const ChatConsult = () => {
   };
 
   const searchGetClient = async (searchValue) => {
-    let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ClientSearchKey: searchValue }, apiheader)
+    let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { IDPage: page,ClientSearchKey: searchValue }, apiheader)
     setConsultList(data.Response.Consults)
+    setPagesNumber(data.Response.Pages); 
+
   }
   const searchByDoctor = async (searchValue1) => {
-    let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { DoctorSearchKey: searchValue1 }, apiheader)
+    let { data } = await PostData(`https://bytrh.com/api/admin/consult`, {IDPage: page, DoctorSearchKey: searchValue1 }, apiheader)
     setConsultList(data.Response.Consults)
+    setPagesNumber(data.Response.Pages); 
+
   }
+
   // Filter
   const [selectedOption, setSelectedOption] = useState('All');
 
@@ -92,15 +97,17 @@ const ChatConsult = () => {
     setSelectedOption(selectedValue);
     // filter your content based on the selected option 
     if (selectedValue === "ONGOING" || selectedValue === "ACCEPTED" || selectedValue === "REJECTED" || selectedValue === "SKIPPED" || selectedValue === "NO_RESPONSE" || selectedValue === "EXPIRED" || selectedValue === "ENDED" || selectedValue === "PENDING" || selectedValue === "CANCELLED") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, { ConsultStatus: selectedValue }, apiheader)
+      let { data } = await PostData(`https://bytrh.com/api/admin/consult`, {IDPage: page, ConsultStatus: selectedValue }, apiheader)
       setConsultList(data.Response.Consults)
+      setPagesNumber(data.Response.Pages); 
     } else if (selectedValue === "All") {
       consultList()
     }
   };
+  
   useEffect(() => {
     consultList(page)
-  }, [page, PagesNumber])
+  }, [page])
 
   return (
     <>

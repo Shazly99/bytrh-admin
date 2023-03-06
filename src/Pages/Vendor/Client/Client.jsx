@@ -30,7 +30,7 @@ const Clients = () => {
     userList(page)
     // if (isLoading === true) {
     // }
-  }, [page, PagesNumber])
+  }, [page])
 
   // to fixed problem because Pagination count need a number 
   const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
@@ -43,15 +43,15 @@ const Clients = () => {
     searchGetData(searchValue)
   };
   const searchGetData = async (searchValue) => {
-    let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { SearchKey: searchValue }, apiheader)
+    let { data } = await PostData(`https://bytrh.com/api/admin/clients`, {IDPage: page, SearchKey: searchValue }, apiheader)
     /*    console.log(data); */
     setuserList(data.Response.Clients)
+    setPagesNumber(data.Response.Pages); 
   }
   const handleInputChange = (event) => {
     if (event.target.value === '') {
       userList(page)
-    }
-    console.log(event.target.value);
+    } 
     setSearchValue(event.target.value);
   };
   // filter
@@ -61,16 +61,12 @@ const Clients = () => {
     const selectedValue = event.target.value;
     setSelectedOption(selectedValue);
     // filter your content based on the selected option 
-    if (selectedValue === "ACTIVE") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { ClientStatus: selectedValue }, apiheader)
+    if (selectedValue === "ACTIVE"||selectedValue === "INACTIVE"||selectedValue === "BLOCKED") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { IDPage: page,ClientStatus: selectedValue }, apiheader)
       setuserList(data.Response.Clients)
-    } else if (selectedValue === "INACTIVE") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { ClientStatus: selectedValue }, apiheader)
-      setuserList(data.Response.Clients)
-    } else if (selectedValue === "BLOCKED") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { ClientStatus: selectedValue }, apiheader)
-      setuserList(data.Response.Clients)
-    } else if (selectedValue === "All") {
+      setPagesNumber(data.Response.Pages);
+
+    }  else if (selectedValue === "All") {
       userList()
     }
   };

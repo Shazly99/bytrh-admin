@@ -175,7 +175,7 @@ function UsersTable({ usersList, userList }) {
                                                     item?.UserStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
                                                 }
                                                 {
-                                                    item?.UserStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">Active</Dropdown.Item>
+                                                    item?.UserStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
                                                 }
                                                 {/* {
                                                     item?.UserStatus === "BLOCKED" ? '' : <Dropdown.Item eventKey="BLOCKED">Blocked</Dropdown.Item>
