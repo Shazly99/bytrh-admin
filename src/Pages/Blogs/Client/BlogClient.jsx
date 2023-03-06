@@ -123,7 +123,8 @@ const BlogClient = () => {
 
         }
     }, [page])
-
+    useEffect(() => { 
+    }, [page,PagesNumber])
     return (
         <>
             {

@@ -73,6 +73,8 @@ function Users() {
       userList()
     }
   };
+  useEffect(() => { 
+  }, [page,PagesNumber])
   return (
     <>
       {

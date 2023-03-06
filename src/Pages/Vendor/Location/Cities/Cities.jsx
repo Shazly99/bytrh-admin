@@ -109,6 +109,8 @@ const Cities = () => {
   useEffect(() => {
     CitiescList(page)
   }, [page])
+  useEffect(() => { 
+  }, [page,PagesNumber])
   return (
     <>
       {

@@ -111,7 +111,8 @@ const AnimalCat = () => {
   useEffect(() => {
     animalcategories(page)
   }, [page])
-
+  useEffect(() => { 
+  }, [page,PagesNumber])
   return (
 
     <>

@@ -127,6 +127,8 @@ export const BlogDoctor = () => {
 
         }
     }, [])
+    useEffect(() => { 
+    }, [page,PagesNumber])
     return (
         <>
             {

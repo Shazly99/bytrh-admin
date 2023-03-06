@@ -70,6 +70,8 @@ const Clients = () => {
       userList()
     }
   };
+  useEffect(() => { 
+  }, [page,PagesNumber])
   return (
     <>
       {

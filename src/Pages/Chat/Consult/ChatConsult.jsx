@@ -107,7 +107,10 @@ const ChatConsult = () => {
   
   useEffect(() => {
     consultList(page)
-  }, [page])
+  }, [page]) 
+  
+  useEffect(() => { 
+  }, [page,PagesNumber])
 
   return (
     <>

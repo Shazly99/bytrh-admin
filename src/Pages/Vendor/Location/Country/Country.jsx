@@ -104,6 +104,8 @@ const Country = () => {
     useEffect(() => {
         CountrycList(page)
     }, [page])
+    useEffect(() => { 
+    }, [page,PagesNumber])
     return (
         <>
             {

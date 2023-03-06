@@ -110,7 +110,8 @@ const MedicalFields = () => {
   useEffect(() => {
   }, [selectedOption, medicalFields])
 
-
+  useEffect(() => { 
+  }, [page,PagesNumber])
 
 
 

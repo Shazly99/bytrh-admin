@@ -110,6 +110,8 @@ const Areas = () => {
   useEffect(() => {
     AreascList(page)
   }, [page])
+  useEffect(() => { 
+  }, [page,PagesNumber])
   return (
     <>
       {
