@@ -2,45 +2,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&family=Roboto+Mono:wght@200;300;400;500;600;700&family=Roboto:wght@700;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap');
 
 .color-red {
-    color: $colorRed-0 !important;
+  color: $colorRed-0 !important;
 }
 
 a {
-    text-decoration: none !important;
+  text-decoration: none !important;
 }
 
 .btn-primary {
-    background-color: $colorRed-0 !important;
+  background-color: $colorRed-0 !important;
 }
 
 .btn-outline-primary {
-    color: $colorRed-0 !important;
-    border-color: $colorRed-0 !important;
+  color: $colorRed-0 !important;
+  border-color: $colorRed-0 !important;
 
-    &:hover {
-        background-color: transparent !important;
+  &:hover {
+    background-color: transparent !important;
 
-    }
+  }
 }
 
 // button in folder (component / button ) shared in all project 
 .baseBtn {
-    padding: 15px;
+  padding: 15px;
 
-    button {
-        font-family: $fontBase !important;
-        font-style: normal;
-        font-weight: 400 !important;
-        font-size: 18px !important;
-        line-height: 27px;
-        color: #FFFFFF;
-        gap: 12px;
-        padding: 12px 45px !important;
-        border: none;
-    }
+  button {
+    font-family: $fontBase !important;
+    font-style: normal;
+    font-weight: 400 !important;
+    font-size: 18px !important;
+    line-height: 27px;
+    color: #FFFFFF;
+    gap: 12px;
+    padding: 12px 45px !important;
+    border: none;
+  }
 }
 
-.baseBtn1{
+.baseBtn1 {
   padding: 15px;
 
   button {
@@ -53,36 +53,36 @@ a {
     gap: 12px;
     padding: 12px 35px !important;
     border: none;
-}
+  }
 }
 
 // h1 h2 base style ( component / header ) shared in all project when wonted
 .app__baseHeader {
 
-    h2,
-    h1 {
-        font-family: $fontBase;
-        font-style: normal;
-        color: $colorDark;
-    }
+  h2,
+  h1 {
+    font-family: $fontBase;
+    font-style: normal;
+    color: $colorDark;
+  }
 
-    h1 {
-        font-weight: 500;
-        font-size: 31px;
-        line-height: 46px;
-        margin-top: 40px !important;
+  h1 {
+    font-weight: 500;
+    font-size: 31px;
+    line-height: 46px;
+    margin-top: 40px !important;
 
-    }
+  }
 
-    h2 {
-/* En (25 M) */
+  h2 {
+    /* En (25 M) */
 
-font-family: 'Poppins';
-font-style: normal;
-font-weight: 500;
-font-size: 25px;
-line-height: 38px;
-    }
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 38px;
+  }
 }
 
 // input textarea select option 
@@ -90,9 +90,9 @@ input,
 textarea,
 select,
 option {
-    background: rgba($color: $colorGrey-1, $alpha: 0.1) !important;
-    border: none !important;
-    border-radius: $radius-sm !important;
+  background: rgba($color: $colorGrey-1, $alpha: 0.1) !important;
+  border: none !important;
+  border-radius: $radius-sm !important;
 
 }
 
@@ -100,192 +100,198 @@ option {
 // table style
 
 thead {
-    overflow: hidden;
- 
-    >tr {
-        border-radius: 15px !important;
-        white-space: nowrap !important;
-        >th {
-            font-family: $fontBase;
-            font-style: normal;
-            font-weight: 500;
-            font-size: 16px !important;
-            line-height: 27px !important;
- 
-            text-align: center;
-            color: #4A4A4A;
-            padding: 15px 0 !important;
-        }
-    }
-    
-}
-tbody{
+  overflow: hidden;
+
+  >tr {
+    border-radius: 15px !important;
     white-space: nowrap !important;
-    .img{ 
-        width: 30%;
+
+    >th {
+      font-family: $fontBase;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px !important;
+      line-height: 27px !important;
+
+      text-align: center;
+      color: #4A4A4A;
+      padding: 15px 0 !important;
     }
+  }
+
 }
+
+tbody {
+  white-space: nowrap !important;
+
+  .img {
+    width: 30%;
+  }
+}
+
 td {
-    white-space: nowrap !important; 
-    >div {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 10px;
-        margin: auto;
-        // height: 100px !important;
-        gap: 30px;
-        font-family: $fontBase;
-        font-style: normal;
-        font-weight: 400 !important;
-        font-size: 15px !important;
-        line-height: 32px !important;
-        /* identical to box height */
-        text-align: center;
-        /* Black */
-        color: #000000;
+  white-space: nowrap !important;
 
-        >svg {
-            font-size: 20px;
-            cursor: pointer;
-        }
+  >div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: auto;
+    // height: 100px !important;
+    gap: 30px;
+    font-family: $fontBase;
+    font-style: normal;
+    font-weight: 400 !important;
+    font-size: 15px !important;
+    line-height: 32px !important;
+    /* identical to box height */
+    text-align: center;
+    /* Black */
+    color: #000000;
 
-        svg:first-child {
-            color: $colorGreen;
-        }
-
-        svg:last-child {
-            color: $colorRed-0;
-        }
+    >svg {
+      font-size: 20px;
+      cursor: pointer;
     }
+
+    svg:first-child {
+      color: $colorGreen;
+    }
+
+    svg:last-child {
+      color: $colorRed-0;
+    }
+  }
 }
 
 // pagination style
 .pagination {
-    margin-top: 35px !important;
+  margin-top: 35px !important;
 
-    .css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
-        background-color: $colorRed-0 !important;
-        color: #FFFFFF !important;
-    }
+  .css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+    background-color: $colorRed-0 !important;
+    color: #FFFFFF !important;
+  }
 }
 
 .app__addOrder-form {
-    background-color: #f9f9f9 !important;
-    border-radius: 5px;
-    margin-top: 16px !important;
-    padding: 32px 16px 10px;
-    margin-bottom: 20px !important;
+  background-color: #f9f9f9 !important;
+  border-radius: 5px;
+  margin-top: 16px !important;
+  padding: 32px 16px 10px;
+  margin-bottom: 20px !important;
 }
 
-  
-.active__hover{
-    cursor: pointer;
-    transition: all 0.4s !important;
-    &:hover{
-        background-color: #f9f9f9b3 !important;
-    }
+
+.active__hover {
+  cursor: pointer;
+  transition: all 0.4s !important;
+
+  &:hover {
+    background-color: #f9f9f9b3 !important;
+  }
 }
 
-.Filter_by_Animal{
-    @media screen and (max-width:767px) {
-     margin-top: 25px !important;   
-    }
+.Filter_by_Animal {
+  @media screen and (max-width:767px) {
+    margin-top: 25px !important;
+  }
 
 }
 
 
 td {
-    white-space: nowrap !important;
+  white-space: nowrap !important;
 }
 
 
 #ready {
-    text-align: center;
-    z-index: 999999;
-    position: fixed;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* color: var(--mainColor); */
-    // background-color: var(--mainColor);
-    color: $colorRed-0;
-    background-color: #000000;
-  }
+  text-align: center;
+  z-index: 999999;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* color: var(--mainColor); */
+  // background-color: var(--mainColor);
+  color: $colorRed-0;
+  background-color: #000000;
+}
 
 
-  .input-group{
-    position: relative;
-    border-radius: 0.75rem;
-    background-color: #eee;
-    display: flex;
-    align-items: center;
-  }
+.input-group {
+  position: relative;
+  border-radius: 0.75rem;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+}
 
 
-  .input-group input{
-    width: 100%;
-    height: 100%;
-    display: block;
-    border-radius: 0.75rem;
-    border: none;
-    padding: 15px 30px 15px 20px; 
-  }
+.input-group input {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 0.75rem;
+  border: none;
+  padding: 15px 30px 15px 20px;
+}
 
 
-  .input-group input:focus{
-    outline: none;
-  }
-  
-  .left-auto {
-    right: 10px !important;  
-    left: auto !important;   
-  }
-  
-  .right-auto {
-    right: auto !important;  
-    left: 10px !important; 
-  }
-  
-  .input-group i{
-    position: absolute;
-    top: 50%;
-    right: 15px;  
-    left: auto; 
-    transform: translateY(-50%);
-    font-size: 18px;
-    padding: 5px;
-    /* background-color: var(); */
-    /* background-color: var(--secondColor); */
-    background-color: transparent !important;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .left-i-auto {
-    right: 15px !important;  
-    left: auto !important;   
-  }
-  
-  .right-i-auto {
-    right: auto !important;  
-    left: 15px !important;   
-  }
-  
-  @media screen and (max-width: 768px) {
-    .input-group input{
-      padding-left: 20px !important;
-      padding-right: 10px !important;
-    }
+.input-group input:focus {
+  outline: none;
+}
 
-    .input-group input#DoctorPhone{
-      padding-left: 45px !important;
-    }
-  }
-  
+.left-auto {
+  right: 10px !important;
+  left: auto !important;
+}
 
-  
+.right-auto {
+  right: auto !important;
+  left: 10px !important;
+}
+
+.input-group i {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  left: auto;
+  transform: translateY(-50%);
+  font-size: 18px;
+  padding: 5px;
+  /* background-color: var(); */
+  /* background-color: var(--secondColor); */
+  background-color: transparent !important;
+  border: none;
+  cursor: pointer;
+}
+
+.left-i-auto {
+  right: 15px !important;
+  left: auto !important;
+}
+
+.right-i-auto {
+  right: auto !important;
+  left: 15px !important;
+}
+
+@media screen and (max-width: 768px) {
+  .input-group input {
+    padding-left: 20px !important;
+    padding-right: 10px !important;
+  }
+
+  .input-group input#DoctorPhone {
+    padding-left: 45px !important;
+  }
+}
+
+
+
 @media screen and (max-width: 570px) {
 
   .personal-info h6,
@@ -295,14 +301,16 @@ td {
   .doc-info .fs-6,
   .doc-info .h6,
   .license .d-flex h6 {
-      font-size: 16px !important;
+    font-size: 16px !important;
   }
 
-  .personal-info p , .personal-info small,
-  .doc-info p , .doc-info small,
-  .license .d-flex small{
-      font-size: 14px !important;
-  } 
+  .personal-info p,
+  .personal-info small,
+  .doc-info p,
+  .doc-info small,
+  .license .d-flex small {
+    font-size: 14px !important;
+  }
 
 }
 
@@ -315,27 +323,38 @@ td {
   .doc-info .fs-6,
   .doc-info .h6,
   .license .d-flex h6 {
-      font-size: 14px !important;
+    font-size: 14px !important;
   }
 
-  .personal-info p , .personal-info small,
-  .doc-info p , .doc-info small,
-  .license .d-flex small{
-      font-size: 12px !important;
-  } 
+  .personal-info p,
+  .personal-info small,
+  .doc-info p,
+  .doc-info small,
+  .license .d-flex small {
+    font-size: 12px !important;
+  }
 
 }
 
 
-.img-doc img ,
+.img-doc img,
 .license img {
   height: 180px;
 }
 
 @media screen and (max-width: 500px) {
-  .img-doc img ,
+
+  .img-doc img,
   .license img {
     height: 150px;
     min-height: 150px;
   }
+}
+
+.applyBtn {
+  border: none !important;
+}
+
+.daterangepicker .drp-buttons .btn {
+  border: $colorRed-0 !important;
 }

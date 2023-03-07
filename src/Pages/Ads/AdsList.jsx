@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Table, DropdownButton, Dropdown, NavDropdown } from "react-bootstrap";
+import React, { useEffect, useRef, useState } from 'react'
+import { Table, DropdownButton, Button, Dropdown, NavDropdown } from "react-bootstrap";
 import { GetData, PostData, apiheader } from '../../utils/fetchData';
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -11,9 +11,49 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Img from '../../assets/Img';
 import axios from 'axios';
 import _ from 'lodash';
+import DateRangePicker from 'react-bootstrap-daterangepicker';
+import moment from 'moment/moment';
 
- 
+
 const AdsList = () => {
+  // !Filter By Start Date And End Date
+  const [dateRange, setDateRange] = useState({ startDate: new Date(), endDate: new Date() });
+  const [startDate, setStartDate] = useState(null)
+  const [endDate, setEndDate] = useState(null)
+
+  function handleSelect(range) {
+    setDateRange({ startDate: range.startDate, endDate: range.endDate });
+  }
+
+  async function handleApply(event, picker) { 
+    const start = picker.startDate.toDate().toLocaleDateString('en-US');
+    const end = picker.endDate.toDate().toLocaleDateString('en-US');
+    setStartDate(moment(start, 'M/D/YYYY').format('YYYY-MM-DD'))
+    setEndDate(moment(end, 'M/D/YYYY').format('YYYY-MM-DD'))
+    let date = {
+      IDPage: page,
+      StartDate: moment(start, 'M/D/YYYY').format('YYYY-MM-DD'),
+      EndDate: moment(end, 'M/D/YYYY').format('YYYY-MM-DD')
+    };
+    console.log(date);
+    try {
+      await axios.post(`${process.env.REACT_APP_API_URL}/admin/advertisements`, date, apiheader).then((res) => {
+        if (res.status === 200 && res.request.readyState === 4) {
+          setAds(res.data.Response.Advertisements);
+          setPagesNumber(res.data.Response.Pages);
+          setIsLoading(false);
+          console.log(res);
+        }
+      })
+    } catch (error) {
+      if (error.response && error.response.status === 429) {
+        const retryAfter = error.response.headers['retry-after'];
+        setTimeout(() => {
+          advertisements();
+        }, (retryAfter || 30) * 1000);
+      }
+    }
+  }
 
   const [ads, setAds] = useState(null)
   const [page, setPage] = useState(1);
@@ -27,7 +67,6 @@ const AdsList = () => {
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/admin/advertisements`, { IDPage: page }, apiheader).then((res) => {
         if (res.status === 200 && res.request.readyState === 4) {
-          console.log(res);
           setAds(res.data.Response.Advertisements);
           setPagesNumber(res.data.Response.Pages);
           setIsLoading(false);
@@ -81,57 +120,26 @@ const AdsList = () => {
           <>
 
             <div className="app__Users ">
-              <Component.ButtonBase title={"Add "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'}  />} path="/ads/add" />
+              <Component.ButtonBase title={"Add "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/ads/add" />
               <div className="app__Users-table">
-                {/* <div className="search-container">
-            <div className='search__group'>
-              <input type="text" placeholder="Search by area....." name="search" value={searchValue} onChange={handleInputChange} />
-              <button type="submit" onClick={handleSearchClick}>
-                <Icons.Search color='#fff' size={25} />
-              </button>
-            </div>
+                <div className="search-container">
+                  <div className='search__group'>
+                    <div className='d-flex justify-content-between'>
+                      <DateRangePicker
+                        ranges={[dateRange]}
+                        onChange={handleSelect}
+                        onApply={handleApply}
+                      >
+                        <Button variant="outline-primary">Select Start Date & End Date</Button>
+                      </DateRangePicker>
 
-            <div className='filter__group'>
-              <label className='active'>
-                <input
-                  type="radio"
-                  name="filter"
-                  value="ACTIVE"
-                  checked={selectedOption === "ACTIVE"}
-                  onChange={handleOptionChange}
-                  className="active-radio form-check-input"
+                      {startDate&& <p> <strong>Start Date : </strong>{startDate} </p>} 
+                      {endDate&& <p> <strong>End Date : </strong>{endDate} </p>} 
 
-                />
-                Active
-              </label>
+                    </div>
+                  </div>
+                </div>
 
-              <label>
-                <input
-                  type="radio"
-                  name="filter"
-                  value="INACTIVE"
-                  checked={selectedOption === "INACTIVE"}
-                  onChange={handleOptionChange}
-                  className="inactive-radio form-check-input"
-
-                />
-                InActive
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="filter"
-                  value="All"
-                  checked={selectedOption === "All"}
-                  onChange={handleOptionChange}
-                  className="inactive-radio form-check-input"
-
-                />
-                All
-              </label>
-            </div>
-          </div> */}
-  
                 <Table responsive={true} className='rounded-3 '>
                   <thead>
                     <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
