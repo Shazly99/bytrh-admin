@@ -140,7 +140,7 @@ const AddAreas = () => {
                     <div className='baseBtn'>
                       <Link to={'/location/areas'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Cancel
+                          Cancel
                         </Button>
                       </Link>
                     </div>
