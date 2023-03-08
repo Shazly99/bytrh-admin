@@ -79,7 +79,7 @@ const Login = () => {
                     <Row>
                         <Col xl={6} lg={6} xd={6} sm={12} className='vh-100'>
                             <div className='app__login-left  vh-100   '>
-                                <img src={Img.loginBg} />
+                                <img loading="lazy"src={Img.loginBg} />
                                 <Component.BaseHeader h1={'Bytrh'} colorW="logoBaytrh" />
                                 <div className="w-75" >
                                     {
@@ -143,7 +143,7 @@ const Login = () => {
                             </div>
                         </Col> 
                         <Col xl={6} lg={6} xd={6} sm={12} className='avatar'>
-                            <img src={Img.avatar} />
+                            <img loading="lazy"src={Img.avatar} />
                         </Col>
                     </Row>
                 </Container>

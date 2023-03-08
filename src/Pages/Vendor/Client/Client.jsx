@@ -7,10 +7,11 @@ import { apiheader } from './../../../utils/fetchData';
 import Icons from "../../../constants/Icons.js";
 import _ from 'lodash';
 import Loader from '../../../Components/Shared/Loader/Loader';
+import Img from '../../../assets/Img';
 
 const Clients = () => {
   const [page, setPage] = React.useState(1);
-  const [usersList, setuserList] = React.useState(null);
+  const [usersList, setuserList] = React.useState([]);
   const [PagesNumber, setPagesNumber] = React.useState('')
   const [isLoading, setIsLoading] = useState(false);
 
@@ -34,44 +35,44 @@ const Clients = () => {
 
   // to fixed problem because Pagination count need a number 
   const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
+  const [loadSearch, setloadSearch] = useState(true);
 
 
   const [searchValue, setSearchValue] = useState('');
+  // search by click
+  // const handleSearchClick = () => {
+  //   // console.log(searchValue);
+  // };
+  const handleInputChange = (event) => {
+    setloadSearch(false)
 
-  const handleSearchClick = () => {
-    // console.log(searchValue);
+    setSearchValue(event.target.value);
     searchGetData(searchValue)
   };
-  const searchGetData = async (searchValue) => {
-    let { data } = await PostData(`https://bytrh.com/api/admin/clients`, {IDPage: page, SearchKey: searchValue }, apiheader)
-    /*    console.log(data); */
+  const searchGetData = _.debounce(async (searchValue) => {
+    let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { IDPage: page, SearchKey: searchValue }, apiheader)
     setuserList(data.Response.Clients)
-    setPagesNumber(data.Response.Pages); 
-  }
-  const handleInputChange = (event) => {
-    if (event.target.value === '') {
-      userList(page)
-    } 
-    setSearchValue(event.target.value);
-  };
+    setPagesNumber(data.Response.Pages);
+    setloadSearch(true)
+
+  }, 3000)
   // filter
   const [selectedOption, setSelectedOption] = useState('All');
-
   const handleOptionChange = async (event) => {
     const selectedValue = event.target.value;
     setSelectedOption(selectedValue);
     // filter your content based on the selected option 
-    if (selectedValue === "ACTIVE"||selectedValue === "INACTIVE"||selectedValue === "BLOCKED") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { IDPage: page,ClientStatus: selectedValue }, apiheader)
+    if (selectedValue === "ACTIVE" || selectedValue === "INACTIVE" || selectedValue === "BLOCKED") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { IDPage: page, ClientStatus: selectedValue }, apiheader)
       setuserList(data.Response.Clients)
       setPagesNumber(data.Response.Pages);
 
-    }  else if (selectedValue === "All") {
+    } else if (selectedValue === "All") {
       userList()
     }
   };
-  useEffect(() => { 
-  }, [page,PagesNumber])
+  useEffect(() => {
+  }, [page, PagesNumber])
   return (
     <>
       {
@@ -83,13 +84,13 @@ const Clients = () => {
                 <div className="search-container">
                   <div className='search__group'>
                     <input type="text" placeholder="Search by name or email or phone....." name="search" value={searchValue} onChange={handleInputChange} />
-                    <button type="submit" onClick={handleSearchClick}>
+                    {/*            <button type="submit" onClick={handleSearchClick}>
                       <Icons.Search color='#fff' size={25} />
-                    </button>
+                    </button> */}
                   </div>
 
                   <div className='filter__group'>
-   
+
                     <label>
                       {
                         selectedOption === "All" ?
@@ -97,7 +98,7 @@ const Clients = () => {
                             type="radio"
                             name="filter"
                             value="All"
-                            checked 
+                            checked
                             onChange={handleOptionChange}
                             className={`inactive-radio form-check-input `}
                           /> :
@@ -105,9 +106,9 @@ const Clients = () => {
                             type="radio"
                             name="filter"
                             value="All"
-                            checked ={selectedOption === "All"}
+                            checked={selectedOption === "All"}
                             onChange={handleOptionChange}
-                            className={`inactive-radio form-check-input `} 
+                            className={`inactive-radio form-check-input `}
                           />
                       }
 
@@ -153,7 +154,24 @@ const Clients = () => {
 
                   </div>
                 </div>
-                <Component.ClientTable usersList={usersList} userList={userList} />
+                {
+                  loadSearch ?
+
+                    <>
+                      {
+                        usersList.length <= 0 ?
+                          <div className="d-flex justify-content-center">
+                            <img loading="lazy" src={Img.searchNotFound} className="w-75" alt="" />
+                          </div>:
+                          <Component.ClientTable usersList={usersList} userList={userList} /> 
+                      }
+
+                    </>
+                    :
+                    <div className="d-flex justify-content-center">
+                      <img loading="lazy" src={Img.search} className="w-75" alt="" />
+                    </div>
+                }
               </div>
             </div>
             <div className="pagination ">

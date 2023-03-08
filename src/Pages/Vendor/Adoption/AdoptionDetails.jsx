@@ -154,7 +154,7 @@ export default function AdoptionDetails() {
                 {fetchGallery.map((el , i) => (
                     <div key={i} className={`${Object.keys(fetchGallery).length == 1 ? 'col' : Object.keys(fetchGallery).length == 2 ? 'col-sm-6' : Object.keys(fetchGallery).length == 3 ? 'col-md-4 col-sm-6' : Object.keys(fetchGallery).length > 3 ? 'col-lg-3 col-md-4 col-sm-6' : ''}`}>
                       <div className="rounded-3 shadow">
-                        <img src={el.AdoptionGalleryPath} className='w-100 rounded-3' style={{height: Object.keys(fetchGallery).length == 1 ? '350px' : Object.keys(fetchGallery).length == 2 ? '300px' : Object.keys(fetchGallery).length == 3 ? '250px' : Object.keys(fetchGallery).length > 3 ? '250px' : ''}} alt="item-gallery" />
+                        <img loading="lazy"src={el.AdoptionGalleryPath} className='w-100 rounded-3' style={{height: Object.keys(fetchGallery).length == 1 ? '350px' : Object.keys(fetchGallery).length == 2 ? '300px' : Object.keys(fetchGallery).length == 3 ? '250px' : Object.keys(fetchGallery).length > 3 ? '250px' : ''}} alt="item-gallery" />
                       </div>
                     </div>
                 ))}
@@ -172,7 +172,7 @@ export default function AdoptionDetails() {
                 {fetchChats.map((el , i) => (
                     <Link to={`../chat/${el.IDAdoptionChat}`} className="col-lg-3 col-md-4 col-sm-6 text-black">
                         <div className="rounded-3 shadow mb-2">
-                          <img src={el.ClientPicture} className='w-100 rounded-3' style={{height: '200px'}} alt="item-chat" />
+                          <img loading="lazy" src={el.ClientPicture} className='w-100 rounded-3' style={{height: '200px'}} alt="item-chat" />
                         </div>
                         <h5 className='mb-0 text-center'>{el.ClientName}</h5>
                     </Link>

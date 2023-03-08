@@ -96,7 +96,7 @@ const AdoptionChat = () => {
                         {
                           chat.length === 0 ?
                             <div className="empty_chat   w-100 h-100 d-flex justify-content-center align-items-center flex-column">
-                              <img src={Img.empty_chat} className='w-25' />
+                              <img loading="lazy"src={Img.empty_chat} className='w-25' />
                               <h2 className={` ${chat.length === 0 ? 'text-light' : ''}`}>
                                 Welcome, <span style={{ color: '#FAAA40' }}>admin!</span>
                               </h2>
@@ -119,7 +119,7 @@ const AdoptionChat = () => {
                                         }
                                         {
                                           messageContent.AdoptionChatType === "IMAGE" &&
-                                          <img src={messageContent.AdoptionChatMessage} width="100%" className='rounded-3 w-50' />
+                                          <img loading="lazy"src={messageContent.AdoptionChatMessage} width="100%" className='rounded-3 w-50' />
                                         }
                                         {
                                           messageContent.AdoptionChatType === "AUDIO" &&

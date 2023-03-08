@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Dropdown, DropdownButton, Row } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
-import { toast } from 'react-hot-toast';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { toast } from 'react-hot-toast'; 
 import { useParams } from 'react-router-dom';
 import Img from '../../../assets/Img';
 import Component from '../../../constants/Component';
@@ -94,9 +93,9 @@ const BlogClientDetails = () => {
                             {clientBlogGallery?.map((item, i) => (
                               <Col xl={4} lg={4} md={6} sm={12} className='mt-3'>
                                 <div key={i} className='mt-3'  >
-                                  <LazyLoadImage
+                                  <img
                                     className='rounded-2 image'
-                                    effect="blur"
+                                    loading="lazy"
                                     src={item.ClientBlogGalleryPath} // use normal <img> attributes as props
                                     width={"100%"} />
                                 </div>
@@ -116,6 +115,7 @@ const BlogClientDetails = () => {
                               md={12 / Math.min(clientBlogGallery?.length, 2)}
                               sm={12} className='mt-3  '  >
                               <img
+                              loading="lazy"
                                 className='rounded-2  image'
                                 src={item.ClientBlogGalleryPath} // use normal <img> attributes as props
                                 width={clientBlogGallery?.length < 2 ? "20%" : '100%'}
@@ -130,6 +130,7 @@ const BlogClientDetails = () => {
                                 md={12 / Math.min(clientBlogGallery?.length, 2)}
                                 sm={12} className='mt-3  '  >
                                 <img
+                                loading="lazy"
                                   className='rounded-2  image'
                                   src={item.ClientBlogGalleryPath} // use normal <img> attributes as props
                                   width={"100%"}
@@ -152,7 +153,7 @@ const BlogClientDetails = () => {
                     </div>
                   </div>
                   <div className="content">
-                    <img src={Img?.icon} width={50} height={50} />
+                    <img loading="lazy"src={Img?.icon} width={50} height={50} />
                     <h3>{blogsDetails?.ClientName}</h3>
                   </div>
                   <div className="blog_body">
@@ -195,7 +196,7 @@ const BlogClientDetails = () => {
                           clientBlogComments?.map((item, index) => (
 
                             <div className="body" key={index}>
-                              <img src={Img.icon} alt="" width={50} height={50} />
+                              <img src={Img.icon} loading="lazy" width={50} height={50} />
                               <div className="header">
 
                                 <div className="header__comment">
@@ -209,7 +210,7 @@ const BlogClientDetails = () => {
                                     </div>
                                     <div className="delete">
                                       <DropdownButton
-                                        title={<img src={Img.dropdown} />}
+                                        title={<img src={Img.dropdown} loading="lazy"/>}
                                         id="dropdown-menu"
                                         onClick={() => setShowDropdown(!showDropdown)}
                                       >

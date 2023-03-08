@@ -336,7 +336,7 @@ const BlogClient = () => {
                                                     <td >
                                                         <div>
                                                             <Link to={`/blogs/client/details/${item?.IDClientBlog}`}>
-                                                                <img src={Img.view} />
+                                                                <img src={Img.view}loading="lazy" />
                                                             </Link>
                                                         </div>
                                                     </td>

@@ -155,6 +155,7 @@ const AddAds = () => {
                       <div className="mt-3  " style={{ width: "200px " }}>
                         {selectedImage && (
                           <img
+                          loading="lazy"
                             src={URL.createObjectURL(selectedImage)}
                             alt={selectedImage.name}
                             className='rounded-3 w-100'

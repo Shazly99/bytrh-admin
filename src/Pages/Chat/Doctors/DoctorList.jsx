@@ -60,7 +60,7 @@ const DoctorList = () => {
                                         docChatSupport?.length <= 0 ?
                                             <>
                                                 <div className="d-flex justify-content-center">
-                                                    <img src={Img.searchNotFound} className="w-75" alt="" />
+                                                    <img loading="lazy"src={Img.searchNotFound} className="w-75" alt="" />
                                                 </div>
                                             </> :
                                             <>
@@ -109,7 +109,7 @@ const DoctorList = () => {
                                     }
                                 </> :
                                 <div className="d-flex justify-content-center">
-                                    <img src={Img.search} className="w-75" alt="" />
+                                    <img src={Img.search} loading="lazy"className="w-75" alt="" />
                                 </div>
                         }
                     </div>

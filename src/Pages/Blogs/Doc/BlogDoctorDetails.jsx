@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Col, Container, Dropdown, DropdownButton, Row } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-hot-toast';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useParams } from 'react-router-dom';
 import Img from '../../../assets/Img';
 import Component from '../../../constants/Component';
@@ -91,9 +90,9 @@ const BlogDoctorDetails = () => {
                       {DoctorBlogGallery?.map((item, i) => (
                         <Col xl={4} lg={4} md={6} sm={12} className='mt-3'>
                           <div key={i} className='mt-3'  >
-                            <LazyLoadImage
+                            <img
                               className='rounded-2 image'
-                              effect="blur"
+                              loading="lazy"
                               src={item.DoctorBlogGalleryPath} // use normal <img> attributes as props
                               width={"100%"} />
                           </div>
@@ -113,6 +112,7 @@ const BlogDoctorDetails = () => {
                         md={12 / Math.min(DoctorBlogGallery?.length, 2)}
                         sm={12} className='mt-3  '  >
                         <img
+                        loading="lazy"
                           className='rounded-2  image'
                           src={item.DoctorBlogGalleryPath} // use normal <img> attributes as props
                           width={"100%"}
@@ -130,7 +130,7 @@ const BlogDoctorDetails = () => {
                             className='rounded-2  image'
                             src={item.DoctorBlogGalleryPath} // use normal <img> attributes as props
                             width={DoctorBlogGallery?.length  < 2 ? "20%" : '100%'}
-
+                            loading="lazy"
                           />
                         </Col>
                       ))
@@ -150,7 +150,7 @@ const BlogDoctorDetails = () => {
               </div>
             </div>
             <div className="content">
-              <img src={Img?.icon} width={50} height={50} />
+              <img src={Img?.icon} width={50} height={50}loading="lazy" />
               <h3>{blogsDetails?.DoctorName}</h3>
             </div>
             <div className="blog_body">
@@ -193,7 +193,7 @@ const BlogDoctorDetails = () => {
                     DoctorBlogComments?.map((item, index) => (
 
                       <div className="body" key={index}>
-                        <img src={Img.icon} alt="" width={50} height={50} />
+                        <img loading="lazy"src={Img.icon} alt="" width={50} height={50} />
                         <div className="header">
 
                           <div className="header__comment">
@@ -207,7 +207,7 @@ const BlogDoctorDetails = () => {
                               </div>
                               <div className="delete">
                                 <DropdownButton
-                                  title={<img src={Img.dropdown} />}
+                                  title={<img src={Img.dropdown} loading="lazy"/>}
                                   id="dropdown-menu"
                                   onClick={() => setShowDropdown(!showDropdown)}
                                 >

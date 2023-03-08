@@ -160,12 +160,14 @@ const EditAds = () => {
 
                           {selectedImage ? (
                             <img
+                            loading="lazy"
                               src={URL.createObjectURL(selectedImage)}
                               alt={selectedImage.name}
                               className='rounded-3 w-100'
                             />
                           ) :
                             <img
+                            loading="lazy"
                               src={editPage?.AdvertisementImage}
                               className='rounded-3 w-100'
                             />

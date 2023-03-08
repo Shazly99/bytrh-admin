@@ -153,7 +153,7 @@ const LiveChatDoc = () => {
                       }
                       {
                         messageContent.ChatSupportType === "IMAGE" &&
-                        <img src={messageContent.ChatSupportMessage} width="100%" className='rounded-3 w-50' />
+                        <img loading="lazy"src={messageContent.ChatSupportMessage} width="100%" className='rounded-3 w-50' />
                       }
                       {
                         messageContent.ChatSupportType === "AUDIO" &&
@@ -191,7 +191,7 @@ const LiveChatDoc = () => {
                       }
                       {
                         messageContent.ChatSupportType === "IMAGE" &&
-                        <img src={messageContent.ChatSupportMessage} width="100%" className='rounded-3 w-50' />
+                        <img loading="lazy"src={messageContent.ChatSupportMessage} width="100%" className='rounded-3 w-50' />
                       }
                       {
                         messageContent.ChatSupportType === "AUDIO" &&

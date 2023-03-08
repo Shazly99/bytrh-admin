@@ -18,10 +18,8 @@ const ClientList = () => {
     }
 
     const handelSearchClientList = (event) => {
-        setloadSearch(false)
-        console.log(event.target.value);
+        setloadSearch(false) 
         clientlist(event.target.value)
-
     };
 
     const clientlist = _.debounce(async (clientNAme) => {
@@ -53,7 +51,7 @@ const ClientList = () => {
                                         cChatSupport?.length <= 0 ?
                                             <>
                                                 <div className="d-flex justify-content-center">
-                                                    <img src={Img.searchNotFound} className="w-75" alt="" />
+                                                    <img loading="lazy"src={Img.searchNotFound} className="w-75" alt="" />
                                                 </div>
                                             </> :
                                             <>
@@ -106,7 +104,7 @@ const ClientList = () => {
                                     }
                                 </> :
                                 <div className="d-flex justify-content-center">
-                                    <img src={Img.search} className="w-75" alt="" />
+                                    <img loading="lazy"src={Img.search} className="w-75" alt="" />
                                 </div>
                         }
                     </div>

@@ -21,18 +21,33 @@ const routes = [
     name: "Users",
     icon: <Icons.user size={19} />,
   },
+  // {
+  //   path: "/medicalfields",
+  //   name: "Medical Fields",
+  //   icon: <Icons.medical size={19} />
+  // }, 
   {
-    path: "/medicalfields",
-    name: "Medical Fields",
-    icon: <Icons.medical size={19} />
-  }, 
-  {
-    name: "Categories ",
+    name: "Animals ",
     icon: <Icons.category size={19} />,
     subRoutes: [
       {
         path: "/categ/animals",
-        name: "Animals ",
+        name: "Categories ",
+        icon: <Icons.dote size={19} />,
+      },
+      {
+        path: "/categ/animals",
+        name: "Sub Categories ",
+        icon: <Icons.dote size={19} />,
+      },
+      {
+        path: "/categ/animals",
+        name: "Cutting ",
+        icon: <Icons.dote size={19} />,
+      },
+      {
+        path: "/categ/animals",
+        name: "Baging ",
         icon: <Icons.dote size={19} />,
       },
 

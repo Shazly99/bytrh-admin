@@ -57,7 +57,7 @@ const Sidebar = ({ children }) => {
                     className="logo"
                     key={1}
                   >
-                    <img src={Img.logo} className="w-100"/>
+                    <img loading="lazy" src={Img.logo} className="w-100"/>
                     {/* <h3>Baytrh</h3> */}
                   </motion.div>
                 )}

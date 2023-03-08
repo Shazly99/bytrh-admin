@@ -103,13 +103,13 @@ function Navber() {
             </Nav>
 
             <Nav>
-              <NavDropdown title={<img src={Img.avatar1} width="40" height="40" style={{ borderRadius: '10px' }} />} id="basic-nav-dropdown"  >
+              <NavDropdown title={<img loading="lazy" src={Img.avatar1} width="40" height="40" style={{ borderRadius: '10px' }} />} id="basic-nav-dropdown"  >
                 <div style={{ maxHeight: '60vh', overflowY: 'auto' }}>
 
                   <LinkContainer to="/venderProfile">
                     <NavDropdown.Item  >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <img src={Icons.profile} alt="" srcset="" style={{ marginRight: 10 }} width={18} height={18} />
+                        <img loading="lazy" src={Icons.profile} alt="" srcset="" style={{ marginRight: 10 }} width={18} height={18} />
                         {/* <Icons.profile size={20} /> */}
                         <span>My Profile</span>
                       </div>
@@ -129,7 +129,7 @@ function Navber() {
                   <LinkContainer onClick={LogOut} to={'/auth/login'}>
                     <NavDropdown.Item  >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <img src={Icons.logout} alt="" srcset="" style={{ marginRight: 10 }} width={18} height={18} />
+                        <img loading="lazy"src={Icons.logout} alt="" srcset="" style={{ marginRight: 10 }} width={18} height={18} />
                         <span>  Logout  </span>
                       </div>
                     </NavDropdown.Item>

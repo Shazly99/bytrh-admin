@@ -327,7 +327,7 @@ export default function DoctorProfile() {
                                   </Modal.Title>
                               </Modal.Header>
                               <Modal.Body>
-                                  <img src={oops} className='w-50 d-block mx-auto' alt="oops" />
+                                  <img src={oops}loading="lazy" className='w-50 d-block mx-auto' alt="oops" />
                               </Modal.Body>
                               {messageRemove.length > 0 ? <p id="alertRemove" className={`alert ${apiCodeRemove === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 my-2 w-50 text-center mx-auto`}>{messageRemove}</p> : ''}
                               <Modal.Footer className='d-flex justify-content-center align-items-center'>
