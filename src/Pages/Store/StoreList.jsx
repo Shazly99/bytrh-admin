@@ -236,6 +236,8 @@ const StoreList = () => {
         ${item.AnimalProductStatus == 'REJECTED' && 'txt_rejected'} 
         ${item.AnimalProductStatus == 'SOLD' && 'txt__status'}
         ${item.AnimalProductStatus == 'ACTIVE' && 'txt_delivered'}`} >
+
+            
                                                                     {item?.AnimalProductStatus.charAt(0).toUpperCase() + item?.AnimalProductStatus.slice(1).toLowerCase()}
                                                                 </span>
                                                              </div>
