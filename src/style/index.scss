@@ -124,10 +124,10 @@ td {
 .daterangepicker td.active:hover {
   background-color: #FAAA40 !important;
   border-color: transparent;
-  color: #fff;
+  color: #fff; 
 }
 
-.outline-delete {
+.outline-sucess {
   background-color: transparent !important;
   color: rgba($color: $colorGrey-1, $alpha: 0.1) !important;
   padding: calc(0.7rem + 1px) calc(1.25rem + 1px) !important;

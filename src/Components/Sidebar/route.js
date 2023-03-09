@@ -45,21 +45,21 @@ const routes = [
         name: "Cutting ",
         icon: <Icons.dote size={19} />,
       },     
-      // {
-      //   path: "/animals/cuttingprice",
-      //   name: "Cutting Price",
-      //   icon: <Icons.dote size={19} />,
-      // },
+      {
+        path: "/animals/cuttingprice",
+        name: "Cutting Price",
+        icon: <Icons.dote size={19} />,
+      },
       {
         path: "/animals/bagging",
         name: "Bagging ",
         icon: <Icons.dote size={19} />,
       },
-      // {
-      //   path: "/animals/baggingprice",
-      //   name: "Bagging Price",
-      //   icon: <Icons.dote size={19} />,
-      // },
+      {
+        path: "/animals/baggingprice",
+        name: "Bagging Price",
+        icon: <Icons.dote size={19} />,
+      },
  
 
 
