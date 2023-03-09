@@ -71,11 +71,9 @@ import AddBagging from './../Pages/Animals/Bagging/AddBagging';
 import EditBagging from './../Pages/Animals/Bagging/EditBagging';
 import BaggingPricing from './../Pages/Animals/BaggingPricing/BaggingPricing';
 import AddBaggingPricing from './../Pages/Animals/BaggingPricing/AddBaggingPricing';
-import EditBaggingPricing from './../Pages/Animals/BaggingPricing/EditBaggingPricing';
-import CuttingPricing from './../Pages/Animals/CuttingPricing/CuttingPricing';
+ import CuttingPricing from './../Pages/Animals/CuttingPricing/CuttingPricing';
 import AddCuttingPricing from './../Pages/Animals/CuttingPricing/AddCuttingPricing';
-import EditCuttingPricing from './../Pages/Animals/CuttingPricing/EditCuttingPricing';
-
+ 
 export default {
     // Layout 
     Vendor,
@@ -137,11 +135,9 @@ export default {
     EditBagging,
     BaggingPricing,
     AddBaggingPricing,
-    EditBaggingPricing,
-    CuttingPricing,
+     CuttingPricing,
     AddCuttingPricing, 
-    EditCuttingPricing,
-    // location
+     // location
     Country,
     AddCountry,
     EditCountry,
@@ -174,4 +170,3 @@ export default {
     AdoptionDetails,
     AdoptionChat,
 }
-
