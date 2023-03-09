@@ -44,8 +44,7 @@ const Clients = () => {
   //   // console.log(searchValue);
   // };
   const handleInputChange = (event) => {
-    setloadSearch(false)
-
+    setloadSearch(false) 
     setSearchValue(event.target.value);
     searchGetData(searchValue)
   };
@@ -53,8 +52,7 @@ const Clients = () => {
     let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { IDPage: page, SearchKey: searchValue }, apiheader)
     setuserList(data.Response.Clients)
     setPagesNumber(data.Response.Pages);
-    setloadSearch(true)
-
+    setloadSearch(true) 
   }, 3000)
   // filter
   const [selectedOption, setSelectedOption] = useState('All');

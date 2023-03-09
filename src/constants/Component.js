@@ -29,10 +29,7 @@ import DoctorProfile from '../Pages/Vendor/Doctor/DoctorProfile';
 import ClientList from './../Pages/Chat/Client/ClientList';
 import LiveChat from './../Pages/Chat/Client/LiveChat';
 import DoctorList from './../Pages/Chat/Doctors/DoctorList';
-import LiveChatDoc from './../Pages/Chat/Doctors/LiveChatDoc';
-import AnimalCat from './../Pages/Vendor/Categories/AnimalCat';
-import AddAnimalCat from './../Pages/Vendor/Categories/AddAnimalCat';
-import EditAnimalCat from './../Pages/Vendor/Categories/EditAnimalCat';
+import LiveChatDoc from './../Pages/Chat/Doctors/LiveChatDoc'; 
 import Cities from './../Pages/Vendor/Location/Cities/Cities';
 import AddCities from './../Pages/Vendor/Location/Cities/AddCities';
 import EditCities from './../Pages/Vendor/Location/Cities/EditCities';
@@ -60,6 +57,24 @@ import AdoptionDetails from '../Pages/Vendor/Adoption/AdoptionDetails';
 import Loader from './../Components/Shared/Loader/Loader';
 import AdoptionChat from '../Pages/Vendor/Adoption/AdoptionChat';
 import Contact from './../Pages/Contact/Contact';
+import AnimalCat from './../Pages/Animals/Categories/AnimalCat';
+import AddAnimalCat from './../Pages/Animals/Categories/AddAnimalCat';
+import EditAnimalCat from './../Pages/Animals/Categories/EditAnimalCat';
+import AnimalsSubCategories from './../Pages/Animals/SubCategories/AnimalsSubCategories';
+import AddAnimalsSubCategories from './../Pages/Animals/SubCategories/AddAnimalsSubCategories';
+import EditAnimalsSubCategories from './../Pages/Animals/SubCategories/EditAnimalsSubCategories';
+import AnimalsCutting from './../Pages/Animals/Cutting/AnimalsCutting';
+import AddAnimalsCutting from './../Pages/Animals/Cutting/AddAnimalsCutting';
+import EditAnimalsCutting from './../Pages/Animals/Cutting/EditAnimalsCutting';
+import Bagging from './../Pages/Animals/Bagging/Bagging';
+import AddBagging from './../Pages/Animals/Bagging/AddBagging';
+import EditBagging from './../Pages/Animals/Bagging/EditBagging';
+import BaggingPricing from './../Pages/Animals/BaggingPricing/BaggingPricing';
+import AddBaggingPricing from './../Pages/Animals/BaggingPricing/AddBaggingPricing';
+import EditBaggingPricing from './../Pages/Animals/BaggingPricing/EditBaggingPricing';
+import CuttingPricing from './../Pages/Animals/CuttingPricing/CuttingPricing';
+import AddCuttingPricing from './../Pages/Animals/CuttingPricing/AddCuttingPricing';
+import EditCuttingPricing from './../Pages/Animals/CuttingPricing/EditCuttingPricing';
 
 export default {
     // Layout 
@@ -111,6 +126,21 @@ export default {
     AnimalCat,
     AddAnimalCat,
     EditAnimalCat,
+    AnimalsSubCategories,
+    AddAnimalsSubCategories,
+    EditAnimalsSubCategories,
+    AnimalsCutting,
+    AddAnimalsCutting,
+    EditAnimalsCutting,
+    Bagging,
+    AddBagging,
+    EditBagging,
+    BaggingPricing,
+    AddBaggingPricing,
+    EditBaggingPricing,
+    CuttingPricing,
+    AddCuttingPricing, 
+    EditCuttingPricing,
     // location
     Country,
     AddCountry,

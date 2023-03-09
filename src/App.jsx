@@ -9,7 +9,7 @@ import { apiheader } from './utils/fetchData';
 import ChatStore from './context/ChatStore';
 
 function App() {
-  
+
   // get countries Bytra
   const [fetchCountriesBytra, setFetchCountriesBytra] = useState([]);
   async function getCountriesBytra() {
@@ -74,38 +74,77 @@ function App() {
           ]
 
         },
-        
+
         // ToDo user profile
         { path: '/venderProfile', element: <ProtectedRoutes>  <Component.Profile /></ProtectedRoutes> },
         { path: '/contact', element: <ProtectedRoutes>  <Component.Contact /></ProtectedRoutes> },
-        // ToDo Animal Categoryclient
+        // ToDo Animals   
         {
-          path: '/categ/animals', children: [
-            { index: true, element: <ProtectedRoutes>  <Component.AnimalCat /> </ProtectedRoutes> },
-            { path: 'addAnimal', element: <ProtectedRoutes> <Component.AddAnimalCat /></ProtectedRoutes> },
-            { path: 'editAnimal/:id', element: <ProtectedRoutes>  <Component.EditAnimalCat /> </ProtectedRoutes> },
+          path: '/animals', children: [
+            {
+              path: 'categories', children: [
+                { index: true, element: <ProtectedRoutes> <Component.AnimalCat /></ProtectedRoutes> },
+                { path: 'addAnimal', element: <ProtectedRoutes> <Component.AddAnimalCat /></ProtectedRoutes> },
+                { path: 'editAnimal/:id', element: <ProtectedRoutes>  <Component.EditAnimalCat /> </ProtectedRoutes> },
+              ]
+            },
+            {
+              path: 'subcategories', children: [
+                { index: true, element: <ProtectedRoutes>  <Component.AnimalsSubCategories /> </ProtectedRoutes> },
+                { path: 'addsubcategories', element: <ProtectedRoutes>  <Component.AddAnimalsSubCategories /> </ProtectedRoutes> },
+                { path: 'editsubcategories/:id', element: <ProtectedRoutes>  <Component.EditAnimalsSubCategories /> </ProtectedRoutes> },
+              ]
+            },
+            {
+              path: 'cutting', children: [
+                { index: true, element: <ProtectedRoutes>  <Component.AnimalsCutting /> </ProtectedRoutes>, },
+                { path: 'addcutting', element: <ProtectedRoutes>  <Component.AddAnimalsCutting /> </ProtectedRoutes> },
+                { path: 'editcutting/:id', element: <ProtectedRoutes>  <Component.EditAnimalsCutting /> </ProtectedRoutes> },
+              ]
+            },
+            {
+              path: 'bagging', children: [
+                { index: true, element: <ProtectedRoutes>  <Component.Bagging /> </ProtectedRoutes>, },
+                { path: 'addbagging', element: <ProtectedRoutes>  <Component.AddBagging /> </ProtectedRoutes> },
+                { path: 'editbagging/:id', element: <ProtectedRoutes>  <Component.EditBagging /> </ProtectedRoutes> },
+              ]
+            },
+
+            {
+              path: 'baggingprice', children: [
+                { index: true, element: <ProtectedRoutes>  <Component.BaggingPricing /> </ProtectedRoutes>, },
+                { path: 'addbaggingprice', element: <ProtectedRoutes>  <Component.AddBaggingPricing /> </ProtectedRoutes> }, 
+              ]
+            },
+            {
+              path: 'cuttingprice', children: [
+                { index: true, element: <ProtectedRoutes>  <Component.CuttingPricing /> </ProtectedRoutes>, },
+                { path: 'addcuttingprice', element: <ProtectedRoutes>  <Component.AddCuttingPricing /> </ProtectedRoutes> }, 
+              ]
+            },
+    
           ]
         },
-        // ToDo :: Locations
+        // ** :: Locations
         {
           path: '/location', children: [
             {
-              path: 'country',children: [
-                {index:true, element: <ProtectedRoutes> <Component.Country /></ProtectedRoutes>},
+              path: 'country', children: [
+                { index: true, element: <ProtectedRoutes> <Component.Country /></ProtectedRoutes> },
                 { path: 'addcountry', element: <ProtectedRoutes> <Component.AddCountry /></ProtectedRoutes> },
                 { path: 'editcountry/:id', element: <ProtectedRoutes>  <Component.EditCountry /> </ProtectedRoutes> },
               ]
             },
             {
-              path: 'cities',  children: [
-                {index:true, element: <ProtectedRoutes>  <Component.Cities /> </ProtectedRoutes>},
+              path: 'cities', children: [
+                { index: true, element: <ProtectedRoutes>  <Component.Cities /> </ProtectedRoutes> },
                 { path: 'addcity', element: <ProtectedRoutes>  <Component.AddCities /> </ProtectedRoutes> },
                 { path: 'editcity/:id', element: <ProtectedRoutes>  <Component.EditCities /> </ProtectedRoutes> },
               ]
             },
             {
               path: 'areas', children: [
-                {index:true, element: <ProtectedRoutes>  <Component.Areas /> </ProtectedRoutes>, },
+                { index: true, element: <ProtectedRoutes>  <Component.Areas /> </ProtectedRoutes>, },
                 { path: 'addareas', element: <ProtectedRoutes>  <Component.AddAreas /> </ProtectedRoutes> },
                 { path: 'editareas/:id', element: <ProtectedRoutes>  <Component.EditArea /> </ProtectedRoutes> },
               ]
@@ -116,8 +155,8 @@ function App() {
         {
           path: '/settings', children: [
             {
-              path: 'general',children: [
-                {index:true, element: <ProtectedRoutes> <Component.GeneralSettings /></ProtectedRoutes>},
+              path: 'general', children: [
+                { index: true, element: <ProtectedRoutes> <Component.GeneralSettings /></ProtectedRoutes> },
               ]
             }
           ]
@@ -125,42 +164,42 @@ function App() {
         // ToDo :: Medical Fields
         {
           path: '/medicalfields', children: [
-            { index: true, element: <ProtectedRoutes><Component.MedicalFields    /> </ProtectedRoutes> },
-            { path: 'add', element: <ProtectedRoutes> <Component.AddMedicalFields   /></ProtectedRoutes> },
-            { path: 'edit/:id', element: <ProtectedRoutes> <Component.EditMedicalFields   /></ProtectedRoutes> },
- 
+            { index: true, element: <ProtectedRoutes><Component.MedicalFields /> </ProtectedRoutes> },
+            { path: 'add', element: <ProtectedRoutes> <Component.AddMedicalFields /></ProtectedRoutes> },
+            { path: 'edit/:id', element: <ProtectedRoutes> <Component.EditMedicalFields /></ProtectedRoutes> },
+
           ]
         },
         // ToDo :: Ads
         {
           path: '/ads', children: [
-            { index: true, element: <ProtectedRoutes><Component.AdsList    /> </ProtectedRoutes> },
-            { path: 'add', element: <ProtectedRoutes> <Component.AddAds   /></ProtectedRoutes> },
-            { path: 'edit/:id', element: <ProtectedRoutes> <Component.EditAds   /></ProtectedRoutes> },
- 
+            { index: true, element: <ProtectedRoutes><Component.AdsList /> </ProtectedRoutes> },
+            { path: 'add', element: <ProtectedRoutes> <Component.AddAds /></ProtectedRoutes> },
+            { path: 'edit/:id', element: <ProtectedRoutes> <Component.EditAds /></ProtectedRoutes> },
+
           ]
         },
         // ToDO :: Blogs
         {
           path: '/blogs', children: [
             {
-              path:'client',children:[
-                {index:true,element:<ProtectedRoutes> <Component.BlogClient/> </ProtectedRoutes>},
-                {path:'details/:id',element:<ProtectedRoutes><Component.BlogClientDetails/></ProtectedRoutes>}
+              path: 'client', children: [
+                { index: true, element: <ProtectedRoutes> <Component.BlogClient /> </ProtectedRoutes> },
+                { path: 'details/:id', element: <ProtectedRoutes><Component.BlogClientDetails /></ProtectedRoutes> }
               ]
-            }, 
+            },
             {
-              path:'doctor',children:[
-                {index:true,element:<ProtectedRoutes> <Component.BlogDoctor/> </ProtectedRoutes>},
-                {path:'details/:id',element:<ProtectedRoutes><Component.BlogDoctorDetails/></ProtectedRoutes>}
+              path: 'doctor', children: [
+                { index: true, element: <ProtectedRoutes> <Component.BlogDoctor /> </ProtectedRoutes> },
+                { path: 'details/:id', element: <ProtectedRoutes><Component.BlogDoctorDetails /></ProtectedRoutes> }
               ]
-            }, 
+            },
           ]
         },
         // ToDO :: consult
         {
           path: '/consult', children: [
-            { index:true, element: <ProtectedRoutes> <Component.ChatConsult /> </ProtectedRoutes> },
+            { index: true, element: <ProtectedRoutes> <Component.ChatConsult /> </ProtectedRoutes> },
             { path: 'chat/:id', element: <ProtectedRoutes> <Component.LiveConsult /> </ProtectedRoutes> }
           ]
         },
@@ -182,7 +221,7 @@ function App() {
         },
         {
           path: '/chat/consult', children: [
-            { index:true, element: <ProtectedRoutes> <Component.ChatConsult /> </ProtectedRoutes> },
+            { index: true, element: <ProtectedRoutes> <Component.ChatConsult /> </ProtectedRoutes> },
             { path: 'details/:id', element: <ProtectedRoutes> <Component.LiveConsult /> </ProtectedRoutes> }
           ]
         },
@@ -199,7 +238,7 @@ function App() {
   ])
   return (
     <div>
-      
+
       <Toaster
         position="top-center"
         reverseOrder={false}
@@ -208,9 +247,9 @@ function App() {
           style: {
             fontFamily: ' Arial, Helvetica, sans-serif',
             textTransform: 'capitalize',
-        zIndex: '9999',
-           /* background: '#fff',
-            color: '#000', */
+            zIndex: '9999',
+            /* background: '#fff',
+             color: '#000', */
             borderRadius: '10px',
             background: '#333',
             color: '#fff',

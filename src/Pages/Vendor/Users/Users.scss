@@ -92,7 +92,8 @@
 td {
     >div {
         color: #4e505d !important;
-        height: 100px !important;
+        min-height: 100px !important;
+        /* max-width: 160px  !important; */
         // font-size: 1.1rem !important;
         font-weight: 500 !important;
         gap: 1px;  
@@ -100,6 +101,7 @@ td {
             font-size: 15px !important;
             font-weight: normal;
             color: #025585;
+        
         }
     }
 }
