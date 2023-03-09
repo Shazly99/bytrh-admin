@@ -16,10 +16,12 @@ const AnimalCat = () => {
   const [page, setPage] = useState(1);
   const [PagesNumber, setPagesNumber] = useState('')
   const [searchValue, setSearchValue] = useState('');
+  // pagination
+  const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
 
+  // get animalcategories
   const animalcategories = async (page) => {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/animalcategories`, { IDPage: page }, apiheader).then(({ data }) => {
-
       setAnimal(data.Response.AnimalCategories)
       setPagesNumber(data.Response.Pages);
     }).catch((error) => {
@@ -32,14 +34,14 @@ const AnimalCat = () => {
     })
   }
 
-  const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
+  // pagination
   const handleChange = (event, value) => {
     setPage(value);
   };
+  // change status
   const handleActionSelect = async (id, action) => {
     if (action === "ACTIVE") {
       await animalcategoriesStatus(id).then((res) => {
-        console.log(res);
         toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
@@ -67,15 +69,13 @@ const AnimalCat = () => {
     }
   };
   const animalcategoriesStatus = async (id) => {
-    let { data } = await GetData(`${process.env.REACT_APP_API_URL}/admin/animalcategories/status/${id}`, apiheader)
+    return await GetData(`${process.env.REACT_APP_API_URL}/admin/animalcategories/status/${id}`, apiheader)
   }
 
   // search and filter 
-
   const handleSearchClick = () => {
     searchGetData(searchValue)
   };
-
   const handleInputChange = (event) => {
     if (event.target.value === '') {
       animalcategories(page)
@@ -83,12 +83,11 @@ const AnimalCat = () => {
     console.log(event.target.value);
     setSearchValue(event.target.value);
   };
-
   const searchGetData = async (searchValue) => {
-    let { data } = await PostData(`https://bytrh.com/api/admin/animalcategories`, {IDPage: page, SearchKey: searchValue }, apiheader)
+    let { data } = await PostData(`https://bytrh.com/api/admin/animalcategories`, { IDPage: page, SearchKey: searchValue }, apiheader)
     console.log(data);
     setAnimal(data.Response.AnimalCategories)
-    setPagesNumber(data.Response.Pages); 
+    setPagesNumber(data.Response.Pages);
 
   }
 
@@ -99,20 +98,21 @@ const AnimalCat = () => {
     const selectedValue = event.target.value;
     setSelectedOption(selectedValue);
     // filter your content based on the selected option 
-    if (selectedValue === "ACTIVE"||selectedValue === "INACTIVE") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/animalcategories`, { IDPage: page,AnimalCategoryStatus: selectedValue }, apiheader)
+    if (selectedValue === "ACTIVE" || selectedValue === "INACTIVE") {
+      let { data } = await PostData(`https://bytrh.com/api/admin/animalcategories`, { IDPage: page, AnimalCategoryStatus: selectedValue }, apiheader)
       setAnimal(data.Response.AnimalCategories)
-      setPagesNumber(data.Response.Pages); 
+      setPagesNumber(data.Response.Pages);
 
-    }  else if (selectedValue === "All") {
+    } else if (selectedValue === "All") {
       animalcategories()
     }
   };
+
   useEffect(() => {
     animalcategories(page)
   }, [page])
-  useEffect(() => { 
-  }, [page,PagesNumber])
+  useEffect(() => {
+  }, [page, PagesNumber])
   return (
 
     <>
@@ -120,25 +120,25 @@ const AnimalCat = () => {
         animal ?
           <>
             <div className="app__Users ">
-              <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/categ/animals/addAnimal" />
+              <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/animals/categories/addAnimal" />
               <div className="app__Users-table">
                 <div className="search-container">
                   <div className='search__group'>
-                    <input type="text" placeholder="Search by animal category....." name="search" value={searchValue} onChange={handleInputChange} />
+                    <input className='shadow' type="text" placeholder="Search by animal category....." name="search" value={searchValue} onChange={handleInputChange} />
                     <button type="submit" onClick={handleSearchClick}>
                       <Icons.Search color='#fff' size={25} />
                     </button>
                   </div>
 
                   <div className='filter__group'>
-                  <label>
+                    <label>
                       {
                         selectedOption === "All" ?
                           <input
                             type="radio"
                             name="filter"
                             value="All"
-                            checked 
+                            checked
                             onChange={handleOptionChange}
                             className={`inactive-radio form-check-input `}
                           /> :
@@ -146,9 +146,9 @@ const AnimalCat = () => {
                             type="radio"
                             name="filter"
                             value="All"
-                            checked ={selectedOption === "All"}
+                            checked={selectedOption === "All"}
                             onChange={handleOptionChange}
-                            className={`inactive-radio form-check-input `} 
+                            className={`inactive-radio form-check-input `}
                           />
                       }
 
@@ -179,12 +179,13 @@ const AnimalCat = () => {
                       />
                       InActive
                     </label>
- 
+
                   </div>
                 </div>
                 <Table responsive={true} className='rounded-3 '>
                   <thead>
                     <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
+                      <th>Iamges</th>
                       <th>Animal Category Name</th>
                       <th>Animal Category Status</th>
                       <th>Action</th>
@@ -194,6 +195,12 @@ const AnimalCat = () => {
                     {
                       animal?.map((item, index) => (
                         <tr key={index}>
+                          <td >
+                            <div style={{ maxWidth: '170px' }}>
+                              <img src={item?.AnimalCategoryImage} className='w-100 rounded-3' alt={item?.AnimalCategoryName} loading="lazy" />
+                            </div>
+                          </td>
+
                           <td >
                             <div>
                               {item?.AnimalCategoryName}
@@ -220,7 +227,7 @@ const AnimalCat = () => {
                                   className="DropdownButton "
                                   drop={'down-centered'}
                                 >
-                                  <Dropdown.Item eventKey="Edite" as={Link} to={`/categ/animals/editAnimal/${item.IDAnimalCategory}`}>
+                                  <Dropdown.Item eventKey="Edite" as={Link} to={`/animals/categories/editAnimal/${item.IDAnimalCategory}`}>
                                     Edit
                                   </Dropdown.Item>
 

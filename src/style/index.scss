@@ -31,8 +31,8 @@ body {
 .txt_pending,
 .txt_shipped,
 .txt_cancel,
-.txt_rejected ,
-.txt__status{
+.txt_rejected,
+.txt__status {
   /* Button */
   font-weight: 600 !important;
   display: inline-flex;
@@ -59,7 +59,7 @@ body {
 
 .txt_shipped {
   color: #9804F0;
-  background-color: rgba($color: #9804F0, $alpha: 0.1); 
+  background-color: rgba($color: #9804F0, $alpha: 0.1);
 }
 
 .txt_delivery {
@@ -70,24 +70,28 @@ body {
 .txt_delivered {
   color: #40AB45;
   background-color: rgba($color: #40AB45, $alpha: 0.1);
-}  
-
-.txt__status{
-  color: #009ef7;
-  background-color: rgba($color: #009ef7, $alpha: 0.1);  
 }
+
+.txt__status {
+  color: #009ef7;
+  background-color: rgba($color: #009ef7, $alpha: 0.1);
+}
+
 .txt_rejected {
   color: #E20000;
   background-color: rgba($color: #E20000, $alpha: 0.1) !important;
 }
+
 .txt_cancel {
-  color: #BF1E30  ;
-  background-color: rgba($color: #BF1E30  , $alpha: 0.1);
+  color: #BF1E30;
+  background-color: rgba($color: #BF1E30, $alpha: 0.1);
 }
-.bgComplain{
+
+.bgComplain {
   background-color: rgba($color: #E20000, $alpha: 0.1) !important;
 
 }
+
 // navbar fixed 
 .navMain {
   position: relative;
@@ -106,7 +110,7 @@ body {
   margin-top: 70px !important;
 }
 
-td{
+td {
   vertical-align: middle !important;
 }
 
@@ -116,8 +120,36 @@ td{
 }
 
 
-.daterangepicker td.active, .daterangepicker td.active:hover {
+.daterangepicker td.active,
+.daterangepicker td.active:hover {
   background-color: #FAAA40 !important;
   border-color: transparent;
   color: #fff;
+}
+
+.outline-delete {
+  background-color: transparent !important;
+  color: rgba($color: $colorGrey-1, $alpha: 0.1) !important;
+  padding: calc(0.7rem + 1px) calc(1.25rem + 1px) !important;
+  // padding: 1.2rem 0.7rem !important;
+  border-radius: 0.425rem !important;
+  font-size: 0.8rem !important;
+  border-radius: 0.4rem;
+  outline: none !important;
+  border: none !important;
+  color: #7E8299 !important;
+  background-color: #eff2f5 !important;
+  font-weight: 600 !important;
+  transition: all 0.5s;
+  box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+
+  &:hover {
+
+    box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
+    color: #E20000 !important;
+    border-color: var(--kt-primary-light);
+    background-color: #f1faff !important;
+    transition: color 0.2s ease;
+
+  }
 }

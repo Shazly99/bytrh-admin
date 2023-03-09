@@ -35,7 +35,7 @@ import { BsImage as imageUpload } from "react-icons/bs";
 import { RxUpdate as uploadItem } from "react-icons/rx";
 import { MdBookmarkAdded as Added } from "react-icons/md";
 import { FaPowerOff as poweroff } from "react-icons/fa";
-import { BiCategoryAlt as category } from "react-icons/bi";
+import { GiSniffingDog as category } from "react-icons/gi";
 import { MdOutlineLocationOn as location } from "react-icons/md";
 import { IoChatboxEllipsesOutline as consult } from "react-icons/io5";
 import { CiMedicalCross as medical } from "react-icons/ci";

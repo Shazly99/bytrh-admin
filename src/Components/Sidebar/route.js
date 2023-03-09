@@ -31,25 +31,37 @@ const routes = [
     icon: <Icons.category size={19} />,
     subRoutes: [
       {
-        path: "/categ/animals",
+        path: "/animals/categories",
         name: "Categories ",
         icon: <Icons.dote size={19} />,
       },
       {
-        path: "/categ/animals",
+        path: "/animals/subcategories",
         name: "Sub Categories ",
         icon: <Icons.dote size={19} />,
       },
       {
-        path: "/categ/animals",
+        path: "/animals/cutting",
         name: "Cutting ",
         icon: <Icons.dote size={19} />,
-      },
+      },     
+      // {
+      //   path: "/animals/cuttingprice",
+      //   name: "Cutting Price",
+      //   icon: <Icons.dote size={19} />,
+      // },
       {
-        path: "/categ/animals",
-        name: "Baging ",
+        path: "/animals/bagging",
+        name: "Bagging ",
         icon: <Icons.dote size={19} />,
       },
+      // {
+      //   path: "/animals/baggingprice",
+      //   name: "Bagging Price",
+      //   icon: <Icons.dote size={19} />,
+      // },
+ 
+
 
     ],
   },
