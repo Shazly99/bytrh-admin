@@ -116,6 +116,12 @@ const routes = [
     ],
   },
   {
+    path: "/store",
+    name: "Store",
+    icon: <Icons.shop size={19}/>,
+  },
+
+  {
     path: "/adoption",
     name: "Adoption",
     icon: <Icons.pets size={19}/>,
