@@ -113,18 +113,19 @@ function App() {
             {
               path: 'baggingprice', children: [
                 { index: true, element: <ProtectedRoutes>  <Component.BaggingPricing /> </ProtectedRoutes>, },
-                { path: 'addbaggingprice', element: <ProtectedRoutes>  <Component.AddBaggingPricing /> </ProtectedRoutes> }, 
+                { path: 'addbaggingprice', element: <ProtectedRoutes>  <Component.AddBaggingPricing /> </ProtectedRoutes> },
               ]
             },
             {
               path: 'cuttingprice', children: [
                 { index: true, element: <ProtectedRoutes>  <Component.CuttingPricing /> </ProtectedRoutes>, },
-                { path: 'addcuttingprice', element: <ProtectedRoutes>  <Component.AddCuttingPricing /> </ProtectedRoutes> }, 
+                { path: 'addcuttingprice', element: <ProtectedRoutes>  <Component.AddCuttingPricing /> </ProtectedRoutes> },
               ]
             },
-    
+
           ]
         },
+        { path: '/store', element: <ProtectedRoutes>  <Component.StoreList /></ProtectedRoutes> },
         // ** :: Locations
         {
           path: '/location', children: [
