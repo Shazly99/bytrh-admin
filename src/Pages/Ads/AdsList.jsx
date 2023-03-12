@@ -212,8 +212,7 @@ const AdsList = () => {
                         <Col className='w-100'>
                           <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry}>
                             <Form.Label>Country</Form.Label>
-                            <Form.Select aria-label="Default select example" >
-
+                            <Form.Select aria-label="Default select example" > 
                               {
                                 countries?.map((item, index) => (
                                   <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>

@@ -20,7 +20,7 @@ function App() {
         }
       })
       .catch(err => {
-       })
+      })
   }
   useEffect(() => {
     getCountriesBytra();
@@ -124,7 +124,12 @@ function App() {
 
           ]
         },
-        { path: '/store', element: <ProtectedRoutes>  <Component.StoreList /></ProtectedRoutes> },
+        {
+          path: '/store', children: [
+            {index:true , element: <ProtectedRoutes>  <Component.StoreList /></ProtectedRoutes> },
+            {path:'details/:id', element: <ProtectedRoutes>  <Component.StoreDetails /></ProtectedRoutes>}
+          ]
+        },
         // ** :: Locations
         {
           path: '/location', children: [
