@@ -283,7 +283,7 @@ export default function DoctorProfile() {
                                       <div className="group-add">
                                         <label className="fs-6 " htmlFor="AmountEdit">Amount</label>
                                         <div className="input-group">
-                                          <input value={amountEdit} onChange={(e) => setAmountEdit(e.target.value)} type="number" className='bg-transparent form-control  mx-auto py-2 w-100' required name="AmountEdit" id="AmountEdit" />
+                                          <input value={amountEdit} onChange={(e) => setAmountEdit(e.target.value)} type="number" className='bg-transparent form-control mx-auto py-2 w-100' required name="AmountEdit" id="AmountEdit" />
                                         </div>
                                       </div>
 
@@ -296,10 +296,6 @@ export default function DoctorProfile() {
 
                                       {messageEdit.length > 0 ? <p id="alertEdit" className={`alert ${apiCodeEdit === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 mb-0 mt-3 w-50 text-center mx-auto`}>{messageEdit}</p> : ''}
 
-                                      {/* <div className="submitAdd-buttons mt-4 d-flex justify-content-center align-items-center">
-                                          <Button type='submit' className="btn btn-primary py-2 px-3 me-3">{loadingEdit ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}</Button>
-                                          <Button className="btn btn-primary p-2 me-4" onClick={handleCloseEdit}>Cancel</Button>
-                                      </div> */}
 
                                       <div className='d-flex justify-content-center align-content-center mt-4'>
                                           <div className='baseBtn pe-0 me-2'>
@@ -330,16 +326,6 @@ export default function DoctorProfile() {
                               </Modal.Body>
                               {messageRemove.length > 0 ? <p id="alertRemove" className={`alert ${apiCodeRemove === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 my-2 w-50 text-center mx-auto`}>{messageRemove}</p> : ''}
                               <Modal.Footer className='d-flex justify-content-center align-items-center'>
-                                  {/* <Button className='btn btn-primary py-2 text-capitalize me-2' onClick={() => {
-                                        removeConfirm()
-                                  }}>
-                                      {loadingRemove ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Confirm'}
-                                  </Button>
-                                  <Button className='btn btn-primary py-2 px-3 text-capitalize' onClick={() => {
-                                        handleCloseRemove();
-                                    }}>
-                                      Cancel
-                                  </Button> */}
 
                                   <div className='d-flex justify-content-center align-content-center'>
                                       <div className='baseBtn pe-0 me-2'>
@@ -387,18 +373,13 @@ export default function DoctorProfile() {
                                         <div className="input-group">
                                           <select onChange={getDoctorAddData} className='w-100 bg-transparent mx-auto py-2 px-2' required name="DoctorPricingService" id="DoctorPricingService">
                                             <option>choose a service</option>
-                                            <option value='CONSULT' >CONSULT</option>
-                                            <option value='URGENT_CONSULT' >URGENT_CONSULT</option>
+                                            <option value='CONSULT' >Consult</option>
+                                            <option value='URGENT_CONSULT' >Urgent_consult</option>
                                           </select>
                                         </div>
                                       </div>
                                       
                                   {messageAdd.length > 0 ? <p id="alertAdd" className={`alert ${apiCodeAdd === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 mb-0 mt-3 w-50 text-center mx-auto`}>{messageAdd}</p> : ''}
-
-                                  {/* <div className="submitAdd-buttons mt-4 d-flex justify-content-center align-items-center">
-                                    <Button type='submit' className="btn btn-primary py-2 px-3 me-3">{loadingAdd ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}</Button>
-                                    <Button className="btn btn-primary p-2 me-4" onClick={handleCloseAdd}>Cancel</Button>
-                                  </div> */}
 
                                   <div className='d-flex justify-content-center align-content-center mt-4'>
                                       <div className='baseBtn pe-0 me-2'>
@@ -423,7 +404,7 @@ export default function DoctorProfile() {
                     
 
                     <div className="price position-relative">
-                      <h6 className='mb-3'>{price.DoctorPricingService}</h6>
+                      <h6 className='mb-3'>{price.DoctorPricingService[0].toUpperCase() + price.DoctorPricingService.slice(1).toLowerCase()}</h6>
                       <div className="service-level d-flex justify-content-between mb-2">
                         <h6 className='mb-1'>Service Level <span className='text-black-50' style={{fontSize: '12px'}}>(start from)</span> :</h6>
                         <h6 className='mb-0 fw-bold pe-2 color-red'>{price.DoctorServiceLevel} SAR</h6>
