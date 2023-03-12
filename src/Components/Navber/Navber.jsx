@@ -55,18 +55,18 @@ function Navber() {
                         routes.map((item, index) => {
 
 
-                          if (item.subRoutes) {
-                            return (
-                              <SidebarMenu
-                                key={index}
-                                setIsOpen={setIsOpen}
-                                route={item}
-                                // showAnimation={showAnimation}
-                                isOpen={isOpen}
-                                open={isOpen}
-                              />
-                            );
-                          }
+                          // if (item.subRoutes) {
+                          //   return (
+                          //     <SidebarMenu
+                          //       key={index}
+                          //       setIsOpen={setIsOpen}
+                          //       route={item}
+                          //       // showAnimation={showAnimation}
+                          //       isOpen={isOpen}
+                          //       open={isOpen}
+                          //     />
+                          //   );
+                          // }
                           return (
                             <li key={index}>
                               <Link to={item.path} onClick={() => setToggle(false)} className='d-flex' >

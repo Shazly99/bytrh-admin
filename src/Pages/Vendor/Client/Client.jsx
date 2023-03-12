@@ -29,8 +29,7 @@ const Clients = () => {
   }, 1000)
   useEffect(() => {
     userList(page)
-    // if (isLoading === true) {
-    // }
+ 
   }, [page])
 
   // to fixed problem because Pagination count need a number 
