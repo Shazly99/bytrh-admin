@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import ItemDoctor from './ItemDoctor';
 import { useEffect } from 'react';
-// import { Pagination } from 'antd';
 import Component from '../../../constants/Component';
 import Icons from '../../../constants/Icons';
 import './Doctor.scss'
@@ -14,8 +13,6 @@ import axios from 'axios';
 import { apiheader } from '../../../utils/fetchData';
 
 
-
-// export default function Doctors({ getTokenDoctors, fetchDoctors, pagesCountDoctors, countDoctors, setCountDoctors, setSearchKeyDoctors, loadingDoctors }) {
 export default function Doctors() {
 
 
@@ -32,19 +29,22 @@ export default function Doctors() {
     setLoadingDoctors(true);
     await axios.post(URL_Doctors, {
       IDPage: countDoctors,
-      SearchKey: searchKeyDoctors
+      // SearchKey: searchKeyDoctors
     }, apiheader)
-      .then(res => {
-        setFetchDoctors(res.data.Response.Doctors);
-        setPagesCountDoctors(res.data.Response.Pages);
-        setLoadingDoctors(false);
-      })
+    .then(res => {
+      setFetchDoctors(res.data.Response.Doctors);
+      setPagesCountDoctors(res.data.Response.Pages);
+      setLoadingDoctors(false);
+    })
       .catch((error) => {
-       });
+        console.log(error);
+    });
   }
   useEffect(() => {
       getTokenDoctors();
-  }, [countDoctors, pagesCountDoctors, searchKeyDoctors]);
+  }, [countDoctors]);
+
+
 
 
   useEffect(() => {
@@ -80,6 +80,60 @@ export default function Doctors() {
 
 
 
+    // filter
+    const [selectedOption, setSelectedOption] = useState('All');
+
+    const handleOptionChange = async (e) => {
+      const selectedValue = e.target.value;
+      setSelectedOption(selectedValue);
+
+      // filter your content based on the selected option 
+      if (selectedValue === "ACTIVE" || selectedValue === "INACTIVE" || selectedValue === "BLOCKED" || selectedValue === "OFFLINE") {
+          setLoadingDoctors(true);
+            await axios.post(URL_Doctors, {
+              // IDPage: countDoctors,
+              // SearchKey: searchKeyDoctors,
+              DoctorStatus: selectedValue,
+            }, apiheader)
+              .then(res => {
+                setFetchDoctors(res.data.Response.Doctors);
+                setPagesCountDoctors(res.data.Response.Pages);
+                setLoadingDoctors(false);
+            })
+              .catch((error) => {
+                console.log(error);
+            });
+      }  else if (selectedValue === "All") {
+            getTokenDoctors();
+      }
+    };
+
+
+
+
+    useEffect(() => {
+      setLoadingDoctors(true);
+      axios.post(URL_Doctors, {
+        IDPage: pagesCountDoctors > 1 ? countDoctors : '1',
+        SearchKey: searchKeyDoctors,
+        DoctorStatus: selectedOption !== "All" ? selectedOption : null,
+      }, apiheader)
+      .then(res => {
+        setFetchDoctors(res.data.Response.Doctors);
+        setPagesCountDoctors(res.data.Response.Pages);
+        setLoadingDoctors(false);
+      })
+        .catch((error) => {
+          console.log(error);
+      });
+    }, [searchKeyDoctors , selectedOption]);
+
+
+
+
+
+
+
   return (
     <>
 
@@ -88,6 +142,7 @@ export default function Doctors() {
           <div className="app__Users ">
             <Component.ButtonBase title={"Add"} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/doctors/addDoctor" />
           </div>
+
           <div className="search-container">
             <div className='search__group'>
               <input
@@ -98,16 +153,96 @@ export default function Doctors() {
                 }}
                 onKeyDown={handelClickSearch}
 
-                type="text" placeholder="Search by name or email or phone.." name="search" />
+                type="text" placeholder="Search by name or phone.." name="search" />
               <button type="submit" onClick={() => {
                 localStorage.removeItem('searchDoctors');
 
-                //  $('.sales-page .group input').val('');
               }}>
                 <Icons.Search onClick={handelSearch} color='#fff' size={25} />
               </button>
             </div>
+
+            <div className='filter__group'>
+              <label>
+                {
+                  selectedOption === "All" ?
+                    <input
+                      type="radio"
+                      name="filter"
+                      value="All"
+                      checked 
+                      onChange={handleOptionChange}
+                      className={`inactive-radio form-check-input `}
+                    /> :
+                    <input
+                      type="radio"
+                      name="filter"
+                      value="All"
+                      checked ={selectedOption === "All"}
+                      onChange={handleOptionChange}
+                      className={`inactive-radio form-check-input `} 
+                    />
+                }
+
+                All
+              </label>
+
+              <label className='active'>
+                <input
+                  type="radio"
+                  name="filter"
+                  value="ACTIVE"
+                  checked={selectedOption === "ACTIVE"}
+                  onChange={handleOptionChange}
+                  className="active-radio form-check-input"
+
+                />
+                Active
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="filter"
+                  value="INACTIVE"
+                  checked={selectedOption === "INACTIVE"}
+                  onChange={handleOptionChange}
+                  className="inactive-radio form-check-input"
+
+                />
+                InActive
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="filter"
+                  value="BLOCKED"
+                  checked={selectedOption === "BLOCKED"}
+                  onChange={handleOptionChange}
+                  className="inactive-radio form-check-input"
+
+                /> 
+                BLOCKED
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="filter"
+                  value="OFFLINE"
+                  checked={selectedOption === "OFFLINE"}
+                  onChange={handleOptionChange}
+                  className="inactive-radio form-check-input"
+
+                /> 
+                OFFLINE
+              </label>
+            </div>
           </div>
+
+          
+
 
           {loadingDoctors ?
             <Loader /> 

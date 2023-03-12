@@ -162,9 +162,9 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                 <Dropdown.Item as={Link} to={`/doctors/editDoctor/${id}`}>
                                     Edit
                                 </Dropdown.Item>
-                                <Dropdown.Item as={Link} to={`/doctors/doctorFields/${id}`}>
+                                {/* <Dropdown.Item as={Link} to={`/doctors/doctorFields/${id}`}>
                                     Doctor Fields
-                                </Dropdown.Item>
+                                </Dropdown.Item> */}
                                 <Dropdown.Item as={Link} to={`/doctors/doctorCategory/${id}`}>
                                     Doctor Animals Categories
                                 </Dropdown.Item>

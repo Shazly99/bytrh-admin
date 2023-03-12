@@ -47,9 +47,8 @@ export default function ItemAdoption({ id , clientName , petName , petStrain , p
         <>
             <tr>
                 <td>
-                    <div>
-
-                    <img loading="lazy" src={petPicture} className='mx-auto' style={{width: '250px' , height: '150px' , cursor: 'pointer'}} alt="pet-image" onClick={() => {goToAdoptionDetails(id)}} />
+                    <div style={{width: '250px', height: '150px'}}>
+                        <img loading="lazy" src={petPicture} className='ro rounded-3 w-100 h-100 mx-auto' style={{cursor: 'pointer'}} alt="pet-image" onClick={() => {goToAdoptionDetails(id)}} />
                     </div>
                 </td>
                 <td>
