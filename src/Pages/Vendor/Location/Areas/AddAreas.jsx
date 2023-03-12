@@ -25,13 +25,11 @@ const AddAreas = () => {
 
   const handelSelectCountry = (event) => {
     const selectedCountryId = event.target.value;
-    console.log(selectedCountryId);
-    getCities(selectedCountryId)
+     getCities(selectedCountryId)
   }
   const submit = e => {
     e.preventDefault()
-    console.log(selectRef.current.value);
-    addNewAreas({
+     addNewAreas({
       AreaNameEn: AreasNameEn.current.value,
       AreaNameAr: AreasNameAr.current.value,
       AreaActive: selectRef.current.value,

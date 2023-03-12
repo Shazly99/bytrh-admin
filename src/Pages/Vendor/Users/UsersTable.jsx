@@ -62,8 +62,7 @@ function UsersTable({ usersList, userList }) {
 
     const userstatus = async (status) => {
         let { data } = await PostData(`https://bytrh.com/api/admin/users/status`, status, apiheader)
-        console.log(data);
-    }
+     }
 
     const handleDeleteUser = async () => {
         // Logic for deleting user with ID `selectedUserId`

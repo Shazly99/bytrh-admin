@@ -22,8 +22,7 @@ const ChatClient = () => {
 
   const clientlist = _.debounce(async () => {
     let { data } = await PostData(`https://bytrh.com/api/admin/chat/client/list`, {}, apiheader)
-    // console.log(data.Response.ClientChatSupport);
-    // setClientChatSupport(data.Response.ClientChatSupport)
+     // setClientChatSupport(data.Response.ClientChatSupport)
     setCChatSupport(data.Response.ClientChatSupport)
   }, 1000)
 
@@ -36,19 +35,16 @@ const ChatClient = () => {
       }
       , apiheader).then((res) => {
         if (res.data.Success === true) {
-          console.log('setmassSend true');
-          setmassSend(true)
+           setmassSend(true)
         }
       });;
 
-    // console.log(data);
-  }
+   }
 
 
   const handeAdminMess = () => {
     const value = inputRef.current.value;
-    // console.log(value);
-    // TODO: Send the value to the server
+     // TODO: Send the value to the server
     adminSendMess(value)
     setInputValue('');
     inputRef.current.value = '';
@@ -56,8 +52,7 @@ const ChatClient = () => {
 
   const [selectedFile, setSelectedFile] = useState(null);
   async function handleFileSelect(event) {
-    console.log(event.target.files);
-    setSelectedFile();
+     setSelectedFile();
     /*  if (selectedFile !== null) { */
     let { data } = await PostData(`https://bytrh.com/api/admin/chat/client/reply`,
       {
@@ -69,8 +64,7 @@ const ChatClient = () => {
     if (data.Success === false) {
       toast.error(data.ApiMsg)
     }
-    // console.log(data);
-    // }
+     // }
   }
 
   useEffect(() => {

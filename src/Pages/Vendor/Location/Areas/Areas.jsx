@@ -19,8 +19,7 @@ const Areas = () => {
   const AreascList = async (page) => {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/location/areas`, { IDPage: page }, apiheader).then(({ data }) => {
       setAreas(data.Response.Areas)
-      console.log(data.Response.Areas);
-      setPagesNumber(data.Response.Pages);
+       setPagesNumber(data.Response.Pages);
     }).catch((error) => {
       if (error.response && error.response.status === 429) {
         const retryAfter = error.response.headers['retry-after'];
@@ -38,8 +37,7 @@ const Areas = () => {
 
   const handleActionSelect = async (id, action) => {
     if (action === "ACTIVE") {
-      console.log(id);
-      await AreascategoriesStatus(id).then((res) => {
+       await AreascategoriesStatus(id).then((res) => {
         toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
@@ -69,8 +67,7 @@ const Areas = () => {
   };
   const AreascategoriesStatus = async (id) => {
     let data = await GetData(`${process.env.REACT_APP_API_URL}/admin/location/areas/status/${id}`, apiheader)
-    console.log(data);
-  }
+   }
 
   // search and filter  
   const handleSearchClick = () => {
@@ -81,14 +78,12 @@ const Areas = () => {
     if (event.target.value === '') {
       AreascList(page)
     }
-    console.log(event.target.value);
-    setSearchValue(event.target.value);
+     setSearchValue(event.target.value);
   };
 
   const searchGetData = async (searchValue) => {
     let { data } = await PostData(`https://bytrh.com/api/admin/location/areas`, {IDPage: page, SearchKey: searchValue }, apiheader)
-    console.log(data);
-    setAreas(data.Response.Areas)
+     setAreas(data.Response.Areas)
     setPagesNumber(data.Response.Pages);
 
   }

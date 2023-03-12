@@ -33,8 +33,7 @@ const Edit = () => {
     }
     const handelSelectCountry = (event) => {
         const selectedCountryId = event.target.value;
-        console.log(selectedCountryId);
-        getCities(selectedCountryId)
+         getCities(selectedCountryId)
     }
     const submit = e => {
         e.preventDefault()
@@ -49,8 +48,7 @@ const Edit = () => {
         }).then(res => {
 
         }).catch(err => {
-            console.log(err);
-        })
+         })
     }
 
     async function addNewUser(editUserData) {
@@ -77,8 +75,7 @@ const Edit = () => {
     const diplayUserData = async () => {
         let data = await GetData(`https://bytrh.com/api/admin/users/profile/${id}`, apiheader)
         setUserData(data.Response);
-        console.log(data.Response.IDCountry);
-        getCities(data.Response.IDCountry)
+         getCities(data.Response.IDCountry)
     }
     useEffect(() => {
         diplayUserData()

@@ -23,10 +23,8 @@ const AddMedicalFields = () => {
   }
 
   async function addNewMedicalFields(MedicalFields) {
-    console.log(MedicalFields);
-    await PostData(`${process.env.REACT_APP_API_URL}/admin/medicalfields/add`, MedicalFields, apiheader).then((res) => {
-      console.log(res);
-      if (res.data.Success === true) {
+     await PostData(`${process.env.REACT_APP_API_URL}/admin/medicalfields/add`, MedicalFields, apiheader).then((res) => {
+       if (res.data.Success === true) {
         toast.success('New Areas added successfully!', {
           duration: 4000,
           position: 'top-center',
@@ -43,8 +41,7 @@ const AddMedicalFields = () => {
         toast.error(res.data.ApiMsg)
       }
     }).catch((err) => {
-      console.log(err);
-    });
+     });
   }
   useEffect(() => {
   }, [])

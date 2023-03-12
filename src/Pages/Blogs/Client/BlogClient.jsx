@@ -21,8 +21,7 @@ const BlogClient = () => {
     const BlogsList = async () => {
         await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs`, { IDPage: page }, apiheader).then(({ data }) => {
             setBlogs(data.Response.ClientBlogs)
-            // console.log(data);
-            setPagesNumber(data.Response.Pages);
+             setPagesNumber(data.Response.Pages);
         }).catch((error) => {
             if (error.response && error.response.status === 429) {
                 const retryAfter = error.response.headers['retry-after'];
@@ -65,8 +64,7 @@ const BlogClient = () => {
 
 
     const handleInputChange = (event) => {
-        console.log(event.target.value);
-        setSearchBlog(event.target.value);
+         setSearchBlog(event.target.value);
         if (event.target.value === '') {
             BlogsList(page)
         }
@@ -101,8 +99,7 @@ const BlogClient = () => {
     }
 
     const handelSelectAnimalCategory = async (event) => {
-        console.log(event.target.value);
-        const selectedCountryId = event.target.value;
+         const selectedCountryId = event.target.value;
         if (selectedCountryId === "Animal Category") {
             BlogsList()
         } else {

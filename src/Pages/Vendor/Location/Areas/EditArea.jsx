@@ -24,14 +24,12 @@ const EditArea = () => {
 
   const handelSelectCountry = (event) => {
     const selectedCountryId = event.target.value;
-    console.log(selectedCountryId);
-    getCities(selectedCountryId)
+     getCities(selectedCountryId)
   }
 
   const submit = e => {
     e.preventDefault()
-    console.log(selectCity.current.value);
-    editArea({
+     editArea({
       AreaNameEn: AreaNameEn.current.value,
       AreaNameAr: AreaNameAr.current.value,
       IDCity: selectCity.current.value,
@@ -64,8 +62,7 @@ const EditArea = () => {
   const AreaDetail = async () => {
     let data = await GetData(`${process.env.REACT_APP_API_URL}/admin/location/areas/edit/page/${id}`, apiheader)
     setAreaDetail(data.Response);
-    // console.log();
-    getCities(data.Response?.IDCountry)
+     getCities(data.Response?.IDCountry)
   }
 
   useEffect(() => {

@@ -19,14 +19,12 @@ const DoctorList = () => {
     let { setDocChatSupport, docChatSupport } = useContext(ChatContext);
 
     const handelActive = () => {
-        console.log('hmud');
-        setActive(!active)
+         setActive(!active)
     }
 
     const handelSearchClientList = (event) => {
         setloadSearch(false)
-        console.log(event.target.value);
-        clientlist(event.target.value)
+         clientlist(event.target.value)
 
     };
 

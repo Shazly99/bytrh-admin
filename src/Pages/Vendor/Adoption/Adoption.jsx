@@ -38,8 +38,7 @@ export default function Adoption() {
         setLoadingAdoption(false);
       })
       .catch((error) => {
-        console.log(error)
-      });
+       });
   }
   useEffect(() => {
       getTokenAdoption();

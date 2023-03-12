@@ -23,8 +23,7 @@ function Profile() {
   }
 
   useEffect(() => {
-    // console.log(localStorage.getItem("IDUser"));
-    userProfileGet()
+     userProfileGet()
   }, [userProfile])
   
   useEffect(() => { 

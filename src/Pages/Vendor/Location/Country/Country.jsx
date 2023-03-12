@@ -76,14 +76,12 @@ const Country = () => {
         if (event.target.value === '') {
             CountrycList(page)
         }
-        console.log(event.target.value);
-        setSearchValue(event.target.value);
+         setSearchValue(event.target.value);
     };
 
     const searchGetData = async (searchValue) => {
         let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, { IDPage: page ,SearchKey: searchValue }, apiheader)
-        console.log(data);
-        setCountry(data.Response.Countries)
+         setCountry(data.Response.Countries)
     }
     // filter
     const [selectedOption, setSelectedOption] = useState('All');

@@ -30,20 +30,17 @@ const AddAnimalsSubCategories = () => {
   //  !Get IDAnimalCategory 
   const IDAnimalCategory = async () => {
     const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/animalcategories/ajax`, {}, apiheader);
-    console.log(data);
-    setAnimalCategory(data.Response)
+     setAnimalCategory(data.Response)
   }
   //  !Get AnimalBagging 
   const AnimalBagging = async () => {
     const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/baggings`, {}, apiheader);
-    console.log(data);
-    setAnimalBagging(data.Response)
+     setAnimalBagging(data.Response)
   }
   //  !Get AnimalCut 
   const AnimalCut = async () => {
     const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/cuttings`, {}, apiheader);
-    console.log(data);
-    setAnimalCut(data.Response)
+     setAnimalCut(data.Response)
   }
 
   const submit = e => {

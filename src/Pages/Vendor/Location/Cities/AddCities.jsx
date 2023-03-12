@@ -22,8 +22,7 @@ const AddCities = () => {
 
   const submit = e => {
     e.preventDefault()
-    console.log(selectRef.current.value);
-    addNewCity({
+     addNewCity({
       CityNameEn: CityNameEn.current.value,
       CityNameAr: CityNameAr.current.value,
       CityCode: '+' + CityCode.current.value,
@@ -54,8 +53,7 @@ const AddCities = () => {
     });
   }
   useEffect(() => {
-    console.log(countries);
-  }, [])
+   }, [])
 
   return (
     <Container fluid>

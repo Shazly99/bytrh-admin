@@ -34,8 +34,7 @@ export default function AdoptionDetails() {
         }
       })
       .catch(err => {
-        console.log(err);
-      })
+       })
   }
   useEffect(() => {
     getAdoptionData();

@@ -20,8 +20,7 @@ function AddDoctor({ fetchCountriesBytra }) {
         }
       })
       .catch(err => {
-        console.log(err);
-      })
+       })
   }
 
   let navigate = useNavigate();

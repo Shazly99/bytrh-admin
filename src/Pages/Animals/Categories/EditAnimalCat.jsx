@@ -57,8 +57,7 @@ const EditAnimalCat = () => {
     const categoryDetail = async () => {
         let data = await GetData(`${process.env.REACT_APP_API_URL}/admin/animalcategories/edit/page/${id}`, apiheader)
         setCategoryDetail(data.Response);
-        console.log(data.Response);
-    }
+     }
     useEffect(() => {
         categoryDetail()
     }, [id])

@@ -24,8 +24,7 @@ const AnimalsSubCategories = () => {
         await PostData(`${process.env.REACT_APP_API_URL}/admin/animalsubcategories`, { IDPage: page }, apiheader).then(({ data }) => {
             setAnimal(data.Response.AnimalSubCategories)
             setPagesNumber(data.Response.Pages);
-            console.log(data.Response.AnimalSubCategories);
-        }).catch((error) => {
+         }).catch((error) => {
             if (error.response && error.response.status === 429) {
                 const retryAfter = error.response.headers['retry-after'];
                 setTimeout(() => {
@@ -81,13 +80,11 @@ const AnimalsSubCategories = () => {
         if (event.target.value === '') {
             AnimalSubCategories(page)
         }
-        console.log(event.target.value);
-        setSearchValue(event.target.value);
+         setSearchValue(event.target.value);
     };
     const searchGetData = async (searchValue) => {
         let { data } = await PostData(`https://bytrh.com/api/admin/animalsubcategories`, { IDPage: page, SearchKey: searchValue }, apiheader)
-        console.log(data);
-        setAnimal(data.Response.AnimalSubCategories)
+         setAnimal(data.Response.AnimalSubCategories)
         setPagesNumber(data.Response.Pages);
 
     }

@@ -22,8 +22,7 @@ const LiveConsult = () => {
     await GetData(`${process.env.REACT_APP_API_URL}/admin/consult/chat/details/${id}`, apiheader).then(({ Response }) => {
       setChat(Response.ChatDetails);
       setconsultDetails(Response);
-      console.log(Response.ChatDetails);
-    })
+     })
   }
   useEffect(() => {
     ConsultDetails()

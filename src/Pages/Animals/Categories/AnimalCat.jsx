@@ -80,13 +80,11 @@ const AnimalCat = () => {
     if (event.target.value === '') {
       animalcategories(page)
     }
-    console.log(event.target.value);
-    setSearchValue(event.target.value);
+     setSearchValue(event.target.value);
   };
   const searchGetData = async (searchValue) => {
     let { data } = await PostData(`https://bytrh.com/api/admin/animalcategories`, { IDPage: page, SearchKey: searchValue }, apiheader)
-    console.log(data);
-    setAnimal(data.Response.AnimalCategories)
+     setAnimal(data.Response.AnimalCategories)
     setPagesNumber(data.Response.Pages);
 
   }

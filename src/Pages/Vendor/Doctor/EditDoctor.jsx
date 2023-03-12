@@ -43,8 +43,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
         }
       })
       .catch(err => {
-        console.log(err);
-      })
+       })
   }
   useEffect(() => {
     getDoctorData();
@@ -61,8 +60,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
         }
       })
       .catch(err => {
-        console.log(err);
-      })
+       })
   }
 
 

@@ -22,8 +22,7 @@ const AdoptionChat = () => {
     await GetData(`${process.env.REACT_APP_API_URL}/admin/adoptions/chat/details/${id}`, apiheader).then(({ Response }) => {
       setAdoptionDetails(Response);
       setChat(Response.ChatDetails);
-      console.log(Response.ChatDetails);
-    })
+     })
   }
   useEffect(() => {
     getDetails()

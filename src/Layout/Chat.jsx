@@ -8,8 +8,7 @@ const Chat = () => {
     let { isOpen } = useContext(VendersContext);
 
     useEffect(() => {
-        // console.log(isOpen);
-    }, [isOpen])
+     }, [isOpen])
     return (
         <div style={{ backgroundColor: ' #F5F8FA' }}>
             <div className="vender overflow-hidden">

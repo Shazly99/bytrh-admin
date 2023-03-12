@@ -65,8 +65,7 @@ const CuttingPricing = () => {
 
   // change status Delete 
   const handleActionSelect = async (id) => {
-    console.log(id);
-    await baggingsStatus(id).then((res) => {
+     await baggingsStatus(id).then((res) => {
       toast.success("Deleted", {
         duration: 4000,
         position: "top-center",
@@ -89,8 +88,7 @@ const CuttingPricing = () => {
 
 
   const handleChangePrice = async (id,IDCutting) => {
-    console.log(
-       );
+ 
     await cuttingChangePrice( 
       {IDCutting:IDCutting,IDAnimalSubCategory:id,SubCategoryCuttingPrice:changePrice.current.value}
     ).then((res) => {

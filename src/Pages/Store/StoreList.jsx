@@ -1,17 +1,15 @@
-import React from 'react'
-import { Table, DropdownButton, Dropdown, NavDropdown } from "react-bootstrap";
-
-import Component from '../../constants/Component'
-import Icons from '../../constants/Icons'
-import { GetData, PostData, apiheader } from './../../utils/fetchData';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import React from 'react';
+import { Table } from "react-bootstrap";
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import { Link } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
+import { useEffect, useState } from 'react';
+import Component from '../../constants/Component';
+import { apiheader, PostData } from './../../utils/fetchData';
 
 const StoreList = () => {
+    /**
+     * 'PENDING','ACTIVE','CANCELLED','SOLD','REJECTED','RESERVED'
+     */
     const [animal, setAnimal] = useState(null)
     const [page, setPage] = useState(1);
     const [PagesNumber, setPagesNumber] = useState('')
@@ -80,13 +78,11 @@ const StoreList = () => {
     //   if (event.target.value === '') {
     //     animalcategories(page)
     //   }
-    //   console.log(event.target.value);
-    //   setSearchValue(event.target.value);
+     //   setSearchValue(event.target.value);
     // };
     // const searchGetData = async (searchValue) => {
     //   let { data } = await PostData(`https://bytrh.com/api/admin/animalcategories`, { IDPage: page, SearchKey: searchValue }, apiheader)
-    //   console.log(data);
-    //   setAnimal(data.Response.AnimalCategories)
+     //   setAnimal(data.Response.AnimalCategories)
     //   setPagesNumber(data.Response.Pages);
 
     // }
@@ -112,6 +108,7 @@ const StoreList = () => {
         animalcategories(page)
     }, [page])
     useEffect(() => {
+        
     }, [page, PagesNumber])
     return (
         <>
@@ -120,7 +117,7 @@ const StoreList = () => {
                     animal ?
                         <>
                             <div className="app__Users ">
-                                <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/animals/categories/addAnimal" />
+                                {/* <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/animals/categories/addAnimal" /> */}
                                 <div className="app__Users-table">
                                     {/*           <div className="search-container">
                                         <div className='search__group'>

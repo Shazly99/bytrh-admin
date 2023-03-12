@@ -41,8 +41,7 @@ const Clients = () => {
   const [searchValue, setSearchValue] = useState('');
   // search by click
   // const handleSearchClick = () => {
-  //   // console.log(searchValue);
-  // };
+   // };
   const handleInputChange = (event) => {
     setloadSearch(false) 
     setSearchValue(event.target.value);

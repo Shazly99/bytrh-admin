@@ -53,11 +53,8 @@ const AdsList = () => {
   };
 
   const handleActionSelect = async (id, action) => {
-    console.log(id);
-    console.log(action);
-    if (action === "DELETE") {
-      console.log(id);
-      await GetData(`${process.env.REACT_APP_API_URL}/admin/advertisements/status/${id}`, apiheader).then((res) => {
+     if (action === "DELETE") {
+       await GetData(`${process.env.REACT_APP_API_URL}/admin/advertisements/status/${id}`, apiheader).then((res) => {
         toast.success('The ads has been removed', {
           duration: 4000,
           position: 'top-center',
@@ -94,15 +91,13 @@ const AdsList = () => {
       StartDate: moment(start, 'M/D/YYYY').format('YYYY-MM-DD'),
       EndDate: moment(end, 'M/D/YYYY').format('YYYY-MM-DD')
     };
-    console.log(date);
-    try {
+     try {
       await axios.post(`${process.env.REACT_APP_API_URL}/admin/advertisements`, date, apiheader).then((res) => {
         if (res.status === 200 && res.request.readyState === 4) {
           setAds(res.data.Response.Advertisements);
           setPagesNumber(res.data.Response.Pages);
           setIsLoading(false);
-          console.log(res);
-        }
+         }
       })
     } catch (error) {
       if (error.response && error.response.status === 429) {
@@ -119,8 +114,7 @@ const AdsList = () => {
   const countriesRef = useRef(null);
   const handelSelectCountry = (event) => {
     const selectedCountryId = event.target.value;
-    console.log(selectedCountryId);
-    getCities(selectedCountryId)
+     getCities(selectedCountryId)
   }
   const handelSelectCity = async () => {
     let city = countriesRef.current.value
@@ -134,8 +128,7 @@ const AdsList = () => {
             setAds(res.data.Response.Advertisements);
             setPagesNumber(res.data.Response.Pages);
             setIsLoading(false);
-            console.log(res);
-          }
+           }
         })
       } catch (error) {
         if (error.response && error.response.status === 429) {

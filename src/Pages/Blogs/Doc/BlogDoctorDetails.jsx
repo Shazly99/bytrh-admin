@@ -36,10 +36,8 @@ const BlogDoctorDetails = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const handleDelete = async (idComment) => {
     // perform delete action using the id
-    console.log(id);
-    await GetData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs/comments/remove/${idComment}`).then((res) => {
-      console.log(res);
-      if (res.Success === true) {
+     await GetData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs/comments/remove/${idComment}`).then((res) => {
+       if (res.Success === true) {
         toast.success('The comment has been deleted ', {
           duration: 4000,
           position: 'top-center',

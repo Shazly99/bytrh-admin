@@ -13,8 +13,7 @@ const ClientList = () => {
     let { setCChatSupport, cChatSupport } = useContext(ChatContext);
 
     const handelActive = () => {
-        console.log('hmud');
-        setActive(!active)
+         setActive(!active)
     }
 
     const handelSearchClientList = (event) => {

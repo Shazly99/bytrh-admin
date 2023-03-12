@@ -53,8 +53,7 @@ const EditMedicalFields = () => {
   const MedicalFieldsDetail = async () => {
     let data = await GetData(`${process.env.REACT_APP_API_URL}/admin/medicalfields/edit/page/${id}`, apiheader)
     setMedicalFieldsDetail(data.Response);
-    console.log(data.Response);
-  }
+   }
 
   useEffect(() => {
     MedicalFieldsDetail()

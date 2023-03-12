@@ -47,8 +47,7 @@ const EditAnimalsCutting = () => {
   const categoryDetail = async () => {
     let data = await GetData(`${process.env.REACT_APP_API_URL}/admin/cuttings/edit/page/${id}`, apiheader)
     setCategoryDetail(data.Response);
-    console.log(data.Response);
-  }
+   }
   useEffect(() => {
     categoryDetail()
   }, [id])

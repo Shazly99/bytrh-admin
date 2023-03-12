@@ -23,8 +23,7 @@ const BlogClientDetails = () => {
       setBlogsDetails(Response)
       setClientBlogGallery(Response.ClientBlogGallery)
       setClientBlogComments(Response.ClientBlogComments)
-      console.log(Response.ClientBlogGallery);
-    }).catch((error) => {
+     }).catch((error) => {
       if (error.response && error.response.status === 429) {
         const retryAfter = error.response.headers['retry-after'];
         setTimeout(() => {
@@ -38,10 +37,8 @@ const BlogClientDetails = () => {
 
   const handleDelete = async (idComment) => {
     // perform delete action using the id
-    console.log(id);
-    await GetData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs/comments/remove/${idComment}`).then((res) => {
-      console.log(res);
-      if (res.Success === true) {
+     await GetData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs/comments/remove/${idComment}`).then((res) => {
+       if (res.Success === true) {
         toast.success('The comment has been deleted ', {
           duration: 4000,
           position: 'top-center',

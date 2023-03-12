@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useContext } from 'react';
+import { motion } from 'framer-motion';
+import React, { useContext, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Component from '../constants/Component';
-import { motion } from 'framer-motion';
 import { VendersContext } from '../context/Store';
 
 function Vendor() {
   let { isOpen } = useContext(VendersContext);
 
   useEffect(() => {
-    // console.log(isOpen);
-  }, [isOpen])
+   }, [isOpen])
   return (
     <>
       <div className="vender overflow-hidden">

@@ -26,8 +26,7 @@ const AddNewUser = () => {
     const password = useRef();
     const handelSelectCountry = (event) => {
         const selectedCountryId = event.target.value;
-        console.log(selectedCountryId);
-        getCities(selectedCountryId)
+         getCities(selectedCountryId)
     }
 
     const onChangeHandler = (phone, country, e) => {
@@ -45,8 +44,7 @@ const AddNewUser = () => {
         //     UserName: username.current.value,
         //     IDCity: 1
         // })
-        // console.log({
-        //     UserEmail: email.current.value,
+         //     UserEmail: email.current.value,
         //     UserPassword: password.current.value,
         //     UserPhone: '+' + phoneNumber,
         //     UserPhoneFlag: '+' + Country,

@@ -19,8 +19,7 @@ const MedicalFields = () => {
   const MedicalFieldscList = async (page) => {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/medicalfields`, { IDPage: page }, apiheader).then(({ data }) => {
       setMedicalFields(data.Response.MedicalFields)
-      console.log(data.Response.MedicalFields);
-      setPagesNumber(data.Response.Pages);
+       setPagesNumber(data.Response.Pages);
     }).then((error) => {
 
     })
@@ -33,8 +32,7 @@ const MedicalFields = () => {
 
   const handleActionSelect = async (id, action) => {
     if (action === "ACTIVE") {
-      console.log(id);
-      await MedicalFieldscategoriesStatus(id).then((res) => {
+       await MedicalFieldscategoriesStatus(id).then((res) => {
         toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
@@ -64,8 +62,7 @@ const MedicalFields = () => {
   };
   const MedicalFieldscategoriesStatus = async (id) => {
     let data = await GetData(`${process.env.REACT_APP_API_URL}/admin/medicalfields/status/${id}`, apiheader)
-    console.log(data);
-  }
+   }
 
   const handleSearchClick = () => {
     searchGetData(searchValue)
@@ -89,8 +86,7 @@ const MedicalFields = () => {
 
   const searchGetData = async (searchValue) => {
     let { data } = await PostData(`https://bytrh.com/api/admin/medicalfields`, { IDPage: page ,SearchKey: searchValue }, apiheader)
-    console.log(data);
-    setMedicalFields(data.Response.MedicalFields)
+     setMedicalFields(data.Response.MedicalFields)
     setPagesNumber(data.Response.Pages);
 
   }
@@ -99,8 +95,7 @@ const MedicalFields = () => {
     if (event.target.value === '') {
       MedicalFieldscList(page)
     }
-    console.log(event.target.value);
-    setSearchValue(event.target.value);
+     setSearchValue(event.target.value);
   };
 
   useEffect(() => {

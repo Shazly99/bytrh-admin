@@ -117,12 +117,10 @@ function LiveChat() {
 
     useEffect(() => {
         if (massSend === true) {
-            console.log('sucess');
-            chatReceive()
+             chatReceive()
             setmassSend(false)
         } else {
-            console.log('error');
-        }
+         }
     }, [massSend]);
 
     useEffect(() => {

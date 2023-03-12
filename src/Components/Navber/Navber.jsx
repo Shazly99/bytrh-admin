@@ -9,20 +9,34 @@ import { Link } from 'react-router-dom';
 import Img from '../../assets/Img';
 import Icons from '../../constants/Icons';
 import { apiheader, PostData } from '../../utils/fetchData';
+import SidebarMenu from '../Sidebar/SidebarMenu';
 import { VendersContext } from './../../context/Store';
 import routes from './../Sidebar/route';
 import './Navber.scss';
 
 function Navber() {
-  let { LogOut } = useContext(VendersContext);
+  let { isOpen, toggle, LogOut, setIsOpen } = useContext(VendersContext);
+
 
   const [Toggle, setToggle] = useState(false);
-
+  const showAnimation = {
+    hidden: {
+      width: 0,
+      opacity: 0,
+      transition: { duration: 0.4, when: "afterChildren" },
+    },
+    show: {
+      opacity: 1,
+      width: "auto",
+      transition: {
+        duration: 0.3,
+        when: "beforeChildren",
+      },
+    },
+  };
   const handleActionSelect = async (action) => {
-    console.log(action);
-    let {data}= await PostData(`https://bytrh.com/api/admin/users/language/change`, {UserLanguage:action}, apiheader)
-    console.log(data);
-  }
+     let { data } = await PostData(`https://bytrh.com/api/admin/users/language/change`, { UserLanguage: action }, apiheader)
+   }
   return (
     <>
       <Navbar className='bg-light navSubMain'>
@@ -34,17 +48,37 @@ function Navber() {
 
               {
                 Toggle && (
-                  <motion.div whileInView={{ x: [-300, 0] }} transition={{ duration: 1.5, ease: 'backOut' }} >
+                  <motion.div className='sidebarSm' whileInView={{ x: [-300, 0] }} transition={{ duration: 1.5, ease: 'backOut' }} >
                     <HiX onClick={() => setToggle(!Toggle)} />
                     <ul >
-                      {routes.map((item, index) =>
-                      (<li key={index}>
-                        <Link to={item.path} onClick={() => setToggle(false)} className='d-flex' >
-                          {item.icon}
-                          {item.name}
-                        </Link>
-                      </li>
-                      ))}
+                      {
+                        routes.map((item, index) => {
+
+
+                          if (item.subRoutes) {
+                            return (
+                              <SidebarMenu
+                                key={index}
+                                setIsOpen={setIsOpen}
+                                route={item}
+                                // showAnimation={showAnimation}
+                                isOpen={isOpen}
+                                open={isOpen}
+                              />
+                            );
+                          }
+                          return (
+                            <li key={index}>
+                              <Link to={item.path} onClick={() => setToggle(false)} className='d-flex' >
+                                {item.icon}
+                                {item.name}
+                              </Link>
+                            </li>
+                          )
+                        })
+                      }
+                        
+                      
                     </ul>
 
                   </motion.div>
@@ -57,11 +91,11 @@ function Navber() {
                 id={`dropdown-1`}
                 title={
                   <>
-                   <Icons.Language size={17}/> Change Lang
+                    <Icons.Language size={17} /> Change Lang
                   </>
                 }
                 variant="outline-"
-                onSelect={(eventKey) => handleActionSelect( eventKey)}
+                onSelect={(eventKey) => handleActionSelect(eventKey)}
                 className="DropdownButton "
               >
                 <Dropdown.Item eventKey="ar">عربي</Dropdown.Item>
@@ -129,7 +163,7 @@ function Navber() {
                   <LinkContainer onClick={LogOut} to={'/auth/login'}>
                     <NavDropdown.Item  >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <img loading="lazy"src={Icons.logout} alt="" srcset="" style={{ marginRight: 10 }} width={18} height={18} />
+                        <img loading="lazy" src={Icons.logout} alt="" srcset="" style={{ marginRight: 10 }} width={18} height={18} />
                         <span>  Logout  </span>
                       </div>
                     </NavDropdown.Item>

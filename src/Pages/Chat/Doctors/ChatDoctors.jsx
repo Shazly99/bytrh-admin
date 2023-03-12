@@ -29,8 +29,7 @@ const ChatDoctors = () => {
       }
       , apiheader).then((res) => {
         if (res.data.Success === true) {
-          console.log('setmassSend true');
-          setmassSend(true)
+           setmassSend(true)
         }
       });
   }
@@ -44,8 +43,7 @@ const ChatDoctors = () => {
 
   const handeAdminMess = () => {
     const value = inputRef.current.value;
-    // console.log(value);
-    // TODO: Send the value to the server
+     // TODO: Send the value to the server
     adminSendMess(value)
     setInputValue('');
     inputRef.current.value = '';
@@ -54,10 +52,8 @@ const ChatDoctors = () => {
   // send image
   const [selectedFile, setSelectedFile] = useState('');
   async function handleFileSelect(event) {
-    console.log(event.target.files);
-    setSelectedFile();
-    console.log('ahahaa');
-    let {data} = await PostData(`https://bytrh.com/api/admin/chat/doctor/reply`,
+     setSelectedFile();
+     let {data} = await PostData(`https://bytrh.com/api/admin/chat/doctor/reply`,
       {
         IDDoctorChatSupport: id,
         ChatSupportMessage: event.target.files[0],
@@ -68,8 +64,7 @@ const ChatDoctors = () => {
       if (data.Success === false) {
         toast.error(data.ApiMsg)
       }
-    console.log(data);
-
+ 
   }
 
   useEffect(() => {

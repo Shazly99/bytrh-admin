@@ -21,8 +21,7 @@ export const BlogDoctor = () => {
     const BlogsList = async () => {
         await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs`, { IDPage: page }, apiheader).then(({ data }) => {
             setBlogs(data.Response.DoctorBlogs)
-            // console.log(data);
-            setPagesNumber(data.Response.Pages);
+             setPagesNumber(data.Response.Pages);
         }).catch((error) => {
             if (error.response && error.response.status === 429) {
                 const retryAfter = error.response.headers['retry-after'];
@@ -65,8 +64,7 @@ export const BlogDoctor = () => {
 
 
     const handleInputChange = (event) => {
-        console.log(event.target.value);
-        setSearchBlog(event.target.value);
+         setSearchBlog(event.target.value);
         if (event.target.value === '') {
             BlogsList(page)
         }
@@ -105,8 +103,7 @@ export const BlogDoctor = () => {
     const handelSelectAnimalCategory = async (event) => {
 
 
-        console.log(event.target.value);
-        const selectedCountryId = event.target.value;
+         const selectedCountryId = event.target.value;
         if (selectedCountryId === "Animal Category") {
             BlogsList()
         } else {

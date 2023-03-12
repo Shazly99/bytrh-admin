@@ -40,8 +40,7 @@ export default function Doctors() {
         setLoadingDoctors(false);
       })
       .catch((error) => {
-        console.log(error)
-      });
+       });
   }
   useEffect(() => {
       getTokenDoctors();

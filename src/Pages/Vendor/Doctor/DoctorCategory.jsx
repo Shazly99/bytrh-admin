@@ -25,8 +25,7 @@ export default function DoctorCategory() {
         }
       })
       .catch(err => {
-        console.log(err);
-      })
+       })
   }
   useEffect(() => {
     getDoctorData();

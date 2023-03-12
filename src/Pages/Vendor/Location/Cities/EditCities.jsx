@@ -55,8 +55,7 @@ const EditCities = () => {
   const cityDetail = async () => {
     let data = await GetData(`${process.env.REACT_APP_API_URL}/admin/location/cities/edit/page/${id}`, apiheader)
     setcityDetail(data.Response);
-    console.log(data.Response);
-  }
+   }
   useEffect(() => {
     cityDetail()
   }, [id])

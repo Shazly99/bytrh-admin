@@ -19,8 +19,7 @@ const Cities = () => {
   const CitiescList = async (page) => {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/location/cities`, { IDPage: page }, apiheader).then(({ data }) => {
       setCities(data.Response.Cities)
-      console.log(data);
-      setPagesNumber(data.Response.Pages);
+       setPagesNumber(data.Response.Pages);
     }).catch((error) => {
       if (error.response && error.response.status === 429) {
         const retryAfter = error.response.headers['retry-after'];
@@ -81,14 +80,12 @@ const Cities = () => {
     if (event.target.value === '') {
       CitiescList(page)
     }
-    console.log(event.target.value);
-    setSearchValue(event.target.value);
+     setSearchValue(event.target.value);
   };
 
   const searchGetData = async (searchValue) => {
     let { data } = await PostData(`https://bytrh.com/api/admin/location/cities`, { IDPage: page, SearchKey: searchValue }, apiheader)
-    console.log(data);
-    setCities(data.Response.Cities)
+     setCities(data.Response.Cities)
     setPagesNumber(data.Response.Pages);
   }
   // filter

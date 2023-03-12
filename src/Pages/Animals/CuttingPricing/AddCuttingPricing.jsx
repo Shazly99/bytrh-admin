@@ -19,14 +19,12 @@ const AddCuttingPricing = () => {
   //  !Get IDAnimalCategory 
   const IDAnimalCategory = async () => {
     const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/animalsubcategories/ajax`, { AnimalSubCategoryType: "CUTTING" }, apiheader);
-    console.log(data);
-    setAnimalCategory(data.Response)
+     setAnimalCategory(data.Response)
   }
   //  !Get AnimalCut 
   const AnimalCut = async () => {
     const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/cuttings`, {}, apiheader);
-    console.log(data);
-    setAnimalCut(data.Response)
+     setAnimalCut(data.Response)
   }
 
   const submit = e => {

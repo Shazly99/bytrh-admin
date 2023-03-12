@@ -53,8 +53,7 @@ const EditCountry = () => {
   const countryDetail = async () => {
     let data = await GetData(`${process.env.REACT_APP_API_URL}/admin/location/countries/edit/page/${id}`, apiheader)
     setcountryDetail(data.Response);
-    console.log(data.Response);
-  }
+   }
   useEffect(() => {
     countryDetail()
   }, [id])
