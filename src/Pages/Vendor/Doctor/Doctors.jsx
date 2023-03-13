@@ -112,9 +112,10 @@ export default function Doctors() {
 
 
     useEffect(() => {
+      setCountDoctors(1);
       setLoadingDoctors(true);
       axios.post(URL_Doctors, {
-        IDPage: pagesCountDoctors > 1 ? countDoctors : '1',
+        IDPage: 1,
         SearchKey: searchKeyDoctors,
         DoctorStatus: selectedOption !== "All" ? selectedOption : null,
       }, apiheader)
@@ -223,7 +224,7 @@ export default function Doctors() {
                   className="inactive-radio form-check-input"
 
                 /> 
-                BLOCKED
+                Blocked
               </label>
 
               <label>
@@ -236,7 +237,7 @@ export default function Doctors() {
                   className="inactive-radio form-check-input"
 
                 /> 
-                OFFLINE
+                Offline
               </label>
             </div>
           </div>

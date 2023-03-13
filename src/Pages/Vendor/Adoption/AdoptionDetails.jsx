@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import Component from '../../../constants/Component';
-// import doctor from '../../../assets/Images/doctor/doctor.png';
 import './Adoption.scss';
 import $ from 'jquery';
 import axios from 'axios';
@@ -34,7 +33,8 @@ export default function AdoptionDetails() {
         }
       })
       .catch(err => {
-       })
+        console.log(err);
+      })
   }
   useEffect(() => {
     getAdoptionData();
@@ -167,13 +167,21 @@ export default function AdoptionDetails() {
         {Object.keys(fetchChats).length > 0 ? 
           <>
             <h5 className='mb-3'>Chats</h5>
-            <div className={`row ${Object.keys(fetchChats).length == 1 ? '' : Object.keys(fetchChats).length > 1 ? 'gx-sm-4' : ''} gx-0 gy-4 d-flex justify-content-sm-start justify-content-center align-items-center`}>
+            <div className={`mb-2 row ${Object.keys(fetchChats).length == 1 ? '' : Object.keys(fetchChats).length > 1 ? 'gx-sm-4' : ''} gx-0 gy-4 d-flex justify-content-sm-start justify-content-center align-items-center`}>
                 {fetchChats.map((el , i) => (
                     <Link to={`../chat/${el.IDAdoptionChat}`} className="col-lg-3 col-md-4 col-sm-6 text-black">
-                        <div className="rounded-3 shadow mb-2">
-                          <img loading="lazy" src={el.ClientPicture} className='w-100 rounded-3' style={{height: '200px'}} alt="item-chat" />
+                        <div className="rounded-3 shadow bg-black color-red position-relative adDetails">
+                          <div className="d-flex justify-content-center align-items-center flex-column py-5 px-3">
+                            <h5 className='mb-2'>{el.ClientName}</h5>
+                            <h6 className='mb-3'>{el.ClientPhone}</h6>
+                            <h6 className='mb-0'>{`" ${el.AdoptionChatStatus} "`}</h6>
+                          </div>
+                          <div className="layer-adDetails position-absolute rounded-3 top-0 bottom-0 d-flex justify-content-center align-items-center" style={{backgroundColor: '#aaa'}}>
+                            <i className="fa-regular fa-eye" style={{fontSize: '24px'}}></i>
+                          </div>
+                          {/* <img loading="lazy" src={el.ClientPicture} className='w-100 rounded-3' style={{height: '200px'}} alt="item-chat" /> */}
                         </div>
-                        <h5 className='mb-0 text-center'>{el.ClientName}</h5>
+                        {/* <h5 className='mb-0 text-center'>{el.ClientName}</h5> */}
                     </Link>
                 ))}
             </div>
