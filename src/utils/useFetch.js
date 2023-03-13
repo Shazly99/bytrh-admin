@@ -1,6 +1,5 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { GetData, apiheader, PostData } from './fetchData';
+import { apiheader, GetData } from './fetchData';
 
 
 const useFetch = () => {

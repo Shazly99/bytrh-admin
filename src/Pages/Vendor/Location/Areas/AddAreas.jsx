@@ -65,16 +65,14 @@ const AddAreas = () => {
   return (
     <Container fluid>
       <div className="app__addprodects">
-        <Component.SubNav sub__nav={[{ name: " Cities", path: '/location/areas' }, { name: "Add City ", path: '/location/areas/addareas' }]} />
-
+        <Component.SubNav sub__nav={[{ name: " Cities", path: '/location/areas' }, { name: "Add City ", path: '/location/areas/addareas' }]} /> 
         <div className="app__addprodects__header ">
           <Component.BaseHeader h1={'Add New City'} />
           <div className="app__addOrder-form">
             <div className="app__addprodects-form">
               <form onSubmit={submit}>
                 <Row>
-                  <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
-
+                  <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en"> 
                     <Form.Group controlId="formBasicEmail">
                       <Form.Label>  Name (En)</Form.Label>
                       <Form.Control type="text" name='firstname' ref={AreasNameEn} />
@@ -100,41 +98,31 @@ const AddAreas = () => {
                         <option value="0">InActive</option>
                       </Form.Select>
 
-                    </Form.Group>
-
-
-
+                    </Form.Group>  
                   </Col>
-                  <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
-
+                  <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en"> 
                     <Form.Group controlId="formBasicEmail">
                       <Form.Label>  Name (Ar)</Form.Label>
                       <Form.Control type="text" name='firstname' ref={AreasNameAr} style={{ direction: 'rtl' }} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
-                      <Form.Label>City</Form.Label>
-
-                      <Form.Select aria-label="Default select example" ref={countriesRef}>
-
+                      <Form.Label>City</Form.Label> 
+                      <Form.Select aria-label="Default select example" ref={countriesRef}> 
                         {
                           cities?.map((item, index) => (
                             <option key={index} value={item?.IDCity}>{item?.CityName}</option>
                           ))
-                        }
-                        {/* <option value="0">InActive</option> */}
-                      </Form.Select>
-
+                        } 
+                      </Form.Select> 
                     </Form.Group>
                   </Col>
-                  <div className='d-flex justify-content-center align-content-center my-5'>
-
+                  <div className='d-flex justify-content-center align-content-center my-5'> 
                     <div className='baseBtn1'>
                       <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
                         Save
                       </Button>
-                    </div>
-
+                    </div> 
                     <div className='baseBtn'>
                       <Link to={'/location/areas'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>

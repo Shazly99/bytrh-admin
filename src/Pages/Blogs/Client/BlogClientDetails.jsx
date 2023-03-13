@@ -219,9 +219,7 @@ const BlogClientDetails = () => {
 
                                 <div className='comments_content'>
                                   <p>{item?.ClientBlogComment}</p>
-                                  {/* <p>Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra,m mmper inceptos himenaeos. Curabitur tempus urna at turpis condimentum lobortis.</p> */}
-                                </div>
-
+                                 </div> 
                               </div>
                             </div>
                           ))
@@ -230,8 +228,7 @@ const BlogClientDetails = () => {
                     </div> : ''
                   }
                 </div>
-              </div>
-              {/* </div> */}
+              </div> 
             </Container >
 
           </div >
