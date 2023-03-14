@@ -35,8 +35,8 @@ const StoreDetails = () => {
 
   useEffect(() => {
     store();
-    
-    return()=>{
+
+    return () => {
       store();
     }
   }, [id]);
@@ -69,7 +69,8 @@ const StoreDetails = () => {
   }
   const SkeletonImage = () => {
     return (
-      <Skeleton variant="rounded" width={210} height={'100%'} />
+      <Skeleton variant="rounded" width={'100%'} height={170} />
+
     )
   }
   return (
@@ -88,8 +89,8 @@ const StoreDetails = () => {
                 <Row >
                   <Col xl={5} lg={5} md={5} sm={5}  >
                     {isLoader ? <> {animal.AnimalProductImage ?
-                      <img src={animal.AnimalProductImage} alt={animal.AnimalProductImage} width='100%' className='w-100 rounded' /> :
-                      <img src={Img.defaultImg}  alt={animal.defaultImg} width='100%'className='w-100 rounded' />}
+                      <img src={animal.AnimalProductImage} alt={animal.AnimalProductImage} loading='lazy'height={170}width='100%' className='w-100 rounded' /> :
+                      <img src={Img.defaultImg} alt={animal.defaultImg} width='100%'loading='lazy'height={170} className='w-100 rounded' />}
                     </> : SkeletonImage()}
                   </Col>
                   <Col xl={7} lg={7} md={7} sm={7} className="store_info_animal">
@@ -121,8 +122,8 @@ const StoreDetails = () => {
                     {
                       isLoader ? <>
                         {animal.ClientPicture ?
-                          <img src={animal.ClientPicture} alt={'Client Picture'} width='100%' className='w-100 rounded' /> :
-                          <img src={Img.defaultImg}  alt={'Client tPicture'} width='100%'className='w-100 rounded' />}
+                          <img src={animal.ClientPicture} alt={'Client Picture'}loading='lazy'height={170} width='100%' className='w-100 rounded' /> :
+                          <img src={Img.defaultImg} alt={'Client tPicture'} loading='lazy'height={170}width='100%' className='w-100 rounded' />}
                       </> : SkeletonImage()}
                   </Col>
                   <Col xl={7} lg={7} md={7} sm={7} className="store_info_animal">
@@ -176,34 +177,34 @@ const StoreDetails = () => {
                 </Col>
                 <Col className="summary_blog">
                   {isLoader ? <>
-                    <span className='title'>{animal?.HasBagging ===1?'Yes':'No'}</span>
+                    <span className='title'>{animal?.HasBagging === 1 ? 'Yes' : 'No'}</span>
                     <span className='body'>Bagging</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
 
                   {isLoader ? <>
-                    <span className='title'>{animal?.HasCutting  ===1?'Yes':'No'}</span>
+                    <span className='title'>{animal?.HasCutting === 1 ? 'Yes' : 'No'}</span>
                     <span className='body'> Cutting</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
                   {isLoader ? <>
-                    <span className='title'>{animal?.HasDelivery ===1?'Yes':'No'}</span>
+                    <span className='title'>{animal?.HasDelivery === 1 ? 'Yes' : 'No'}</span>
                     <span className='body'> Delivery</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
 
                   {isLoader ? <>
-                    <span className='title'>{animal?.AllowPhone  ===1?'Allow':'Not allow'}</span>
+                    <span className='title'>{animal?.AllowPhone === 1 ? 'Allow' : 'Not allow'}</span>
                     <span className='body'>  Phone</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
 
                   {isLoader ? <>
-                    <span className='title'>{animal?.AllowWhatsapp ===1?'Allow':'Not allow'}</span>
+                    <span className='title'>{animal?.AllowWhatsapp === 1 ? 'Allow' : 'Not allow'}</span>
                     <span className='body'>  Whatsapp</span>
                   </> : SkeletonSummary()}
                 </Col>
@@ -253,7 +254,7 @@ const StoreDetails = () => {
                             className='rounded-2  image'
                             src={item?.AnimalProductGalleryPath} // use normal <img> attributes as props
                             width={item?.AnimalProductGallery?.length < 2 ? "20%" : '100%'}
-                            alt={'Animal Product Gallery'} 
+                            alt={'Animal Product Gallery'}
                           />
                         </Col>
                       )) :
@@ -269,7 +270,7 @@ const StoreDetails = () => {
                               src={item?.AnimalProductGalleryPath} // use normal <img> attributes as props
                               width={'100%'}
                               height={'100%'}
-                            alt={'Animal Product Gallery'} 
+                              alt={'Animal Product Gallery'}
 
                             />
                           </Col>
@@ -296,11 +297,17 @@ const StoreDetails = () => {
           </div>
 
           <div className="app__store__chat">
-            <StoreChat chat={animal?.AnimalProductChats} isLoader={isLoader}/>
+            {
+              animal?.AnimalProductChats?.length > 0 &&
+              <StoreChat chat={animal?.AnimalProductChats} isLoader={isLoader} />
+            }
           </div>
 
           <div className="app__store__chat">
-            <ProductRequests Request={animal?.AnimalProductRequests} isLoader={isLoader}/>
+            {
+              animal?.AnimalProductRequests?.length > 0 &&
+              <ProductRequests Request={animal?.AnimalProductRequests} isLoader={isLoader} />
+            }
           </div>
         </Container>
       </div>

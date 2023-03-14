@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom';
 
 const ProductRequests = ({ Request, isLoader }) => {
 
-    useEffect(() => {
-        console.log(Request);
+    useEffect(() => { 
     }, [isLoader])
     const SkeletonHeader = () => {
         return (
@@ -16,22 +15,24 @@ const ProductRequests = ({ Request, isLoader }) => {
         )
     }
     const SkeletonTable = () => {
-        return (
-
-
+        return ( 
             <Table striped bordered hover size="sm" className='Skeleton_table'>
                 <thead>
                     <tr  >
                         <th style={{ padding: '15px !important', textAlign: 'center', margin: 'auto' }}>  <Skeleton variant='rounded' height={10} width="30%" /></th>
+                        <th style={{ padding: '15px', textAlign: 'center', margin: 'auto' }}>  <Skeleton variant='rounded' height={10} width="30%" /></th>
+                        <th style={{ padding: '15px', textAlign: 'center', margin: 'auto' }}>  <Skeleton variant='rounded' height={10} width="30%" /></th>
                         <th style={{ padding: '15px', textAlign: 'center', margin: 'auto' }}>  <Skeleton variant='rounded' height={10} width="30%" /></th>
                         <th style={{ padding: '15px', textAlign: 'center', margin: 'auto' }} >  <Skeleton variant='rounded' height={10} width="30%" /></th>
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        Request?.map((item, index) => (
+                        Array.from(Array(2).keys())?.map((  index) => (
                             <tr key={index}>
                                 <td style={{ padding: '15px', textAlign: 'center', margin: 'auto' }}>    <Skeleton variant='rounded' height={10} width="30%" /> </td>
+                                <td style={{ padding: '15px', textAlign: 'center', margin: 'auto' }}><Skeleton variant='rounded' height={10} width="30%" /></td>
+                                <td style={{ padding: '15px', textAlign: 'center', margin: 'auto' }}><Skeleton variant='rounded' height={10} width="30%" /></td>
                                 <td style={{ padding: '15px', textAlign: 'center', margin: 'auto' }}><Skeleton variant='rounded' height={10} width="30%" /></td>
                                 <td style={{ padding: '15px', textAlign: 'center', margin: 'auto' }}><Skeleton variant='rounded' height={10} width="30%" /></td>
                             </tr>
@@ -42,6 +43,7 @@ const ProductRequests = ({ Request, isLoader }) => {
         )
     }
     return (
+        
         <>
             {isLoader ? <>
                 {Request &&
@@ -49,7 +51,7 @@ const ProductRequests = ({ Request, isLoader }) => {
                         <h3 > Animal Product Requests  </h3>
                     </div>
                 }
-            </> : SkeletonHeader()}
+            </> : SkeletonHeader()} 
 
             {isLoader ? <>
                 {Request &&

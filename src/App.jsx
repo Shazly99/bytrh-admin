@@ -126,8 +126,13 @@ function App() {
         },
         {
           path: '/store', children: [
-            {index:true , element: <ProtectedRoutes>  <Component.StoreList /></ProtectedRoutes> },
-            {path:'details/:id', element: <ProtectedRoutes>  <Component.StoreDetails /></ProtectedRoutes>}
+            { index: true, element: <ProtectedRoutes>  <Component.StoreList /></ProtectedRoutes> },
+            {
+              path: 'details/:id', children: [
+                { index: true, element: <ProtectedRoutes>  <Component.StoreDetails /></ProtectedRoutes> },
+                { path: 'chat/:id', element: <ProtectedRoutes>  <Component.StoreChatDetails /></ProtectedRoutes> }
+              ]
+            }
           ]
         },
         // ** :: Locations

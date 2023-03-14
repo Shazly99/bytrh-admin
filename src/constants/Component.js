@@ -75,6 +75,7 @@ import AddBaggingPricing from './../Pages/Animals/BaggingPricing/AddBaggingPrici
 import AddCuttingPricing from './../Pages/Animals/CuttingPricing/AddCuttingPricing';
 import StoreList from './../Pages/Store/StoreList';
 import StoreDetails from './../Pages/Store/StoreDetails';
+import StoreChatDetails from './../Pages/Store/StoreChatDetails';
  
 export default {
     // Layout 
@@ -142,6 +143,7 @@ export default {
     // Store
     StoreList,
     StoreDetails,
+    StoreChatDetails,
      // location
     Country,
     AddCountry,
