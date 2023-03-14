@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import Component from '../../constants/Component'
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import './store.scss'
 import { GetData } from '../../utils/fetchData';
 import { apiheader } from './../../utils/fetchData';
 import Img from '../../assets/Img';
 import Skeleton from '@mui/material/Skeleton';
+import StoreChat from './StoreChat';
+import ProductRequests from './ProductRequests';
 
 const StoreDetails = () => {
   let { id } = useParams()
@@ -33,6 +35,10 @@ const StoreDetails = () => {
 
   useEffect(() => {
     store();
+    
+    return()=>{
+      store();
+    }
   }, [id]);
 
   const SkeletonCard = () => {
@@ -82,8 +88,8 @@ const StoreDetails = () => {
                 <Row >
                   <Col xl={5} lg={5} md={5} sm={5}  >
                     {isLoader ? <> {animal.AnimalProductImage ?
-                      <img src={animal.AnimalProductImage} className='w-100 rounded' /> :
-                      <img src={Img.defaultImg} className='w-100 rounded' />}
+                      <img src={animal.AnimalProductImage} alt={animal.AnimalProductImage} width='100%' className='w-100 rounded' /> :
+                      <img src={Img.defaultImg}  alt={animal.defaultImg} width='100%'className='w-100 rounded' />}
                     </> : SkeletonImage()}
                   </Col>
                   <Col xl={7} lg={7} md={7} sm={7} className="store_info_animal">
@@ -115,8 +121,8 @@ const StoreDetails = () => {
                     {
                       isLoader ? <>
                         {animal.ClientPicture ?
-                          <img src={animal.ClientPicture} className='w-100 rounded' /> :
-                          <img src={Img.defaultImg} className='w-100 rounded' />}
+                          <img src={animal.ClientPicture} alt={'Client Picture'} width='100%' className='w-100 rounded' /> :
+                          <img src={Img.defaultImg}  alt={'Client tPicture'} width='100%'className='w-100 rounded' />}
                       </> : SkeletonImage()}
                   </Col>
                   <Col xl={7} lg={7} md={7} sm={7} className="store_info_animal">
@@ -170,34 +176,34 @@ const StoreDetails = () => {
                 </Col>
                 <Col className="summary_blog">
                   {isLoader ? <>
-                    <span className='title'>{animal?.HasBagging}</span>
+                    <span className='title'>{animal?.HasBagging ===1?'Yes':'No'}</span>
                     <span className='body'>Bagging</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
 
                   {isLoader ? <>
-                    <span className='title'>{animal?.HasCutting}</span>
+                    <span className='title'>{animal?.HasCutting  ===1?'Yes':'No'}</span>
                     <span className='body'> Cutting</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
                   {isLoader ? <>
-                    <span className='title'>{animal?.HasDelivery}</span>
+                    <span className='title'>{animal?.HasDelivery ===1?'Yes':'No'}</span>
                     <span className='body'> Delivery</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
 
                   {isLoader ? <>
-                    <span className='title'>{animal?.AllowPhone}</span>
+                    <span className='title'>{animal?.AllowPhone  ===1?'Allow':'Not allow'}</span>
                     <span className='body'>  Phone</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
 
                   {isLoader ? <>
-                    <span className='title'>{animal?.AllowWhatsapp}</span>
+                    <span className='title'>{animal?.AllowWhatsapp ===1?'Allow':'Not allow'}</span>
                     <span className='body'>  Whatsapp</span>
                   </> : SkeletonSummary()}
                 </Col>
@@ -228,7 +234,7 @@ const StoreDetails = () => {
                     <h3 >Product Gallery</h3>
                   </div>
                 }
-              </> :         <Skeleton variant='rounded' height={30} width="40%" className='mt-3 mb-2' />
+              </> : <Skeleton variant='rounded' height={30} width="40%" className='mt-3 mb-2' />
 
               }
 
@@ -247,6 +253,7 @@ const StoreDetails = () => {
                             className='rounded-2  image'
                             src={item?.AnimalProductGalleryPath} // use normal <img> attributes as props
                             width={item?.AnimalProductGallery?.length < 2 ? "20%" : '100%'}
+                            alt={'Animal Product Gallery'} 
                           />
                         </Col>
                       )) :
@@ -262,6 +269,8 @@ const StoreDetails = () => {
                               src={item?.AnimalProductGalleryPath} // use normal <img> attributes as props
                               width={'100%'}
                               height={'100%'}
+                            alt={'Animal Product Gallery'} 
+
                             />
                           </Col>
                         ))
@@ -284,6 +293,14 @@ const StoreDetails = () => {
                 }
               </div>
             </div>
+          </div>
+
+          <div className="app__store__chat">
+            <StoreChat chat={animal?.AnimalProductChats} isLoader={isLoader}/>
+          </div>
+
+          <div className="app__store__chat">
+            <ProductRequests Request={animal?.AnimalProductRequests} isLoader={isLoader}/>
           </div>
         </Container>
       </div>
