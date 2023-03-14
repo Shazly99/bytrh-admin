@@ -14,13 +14,16 @@
     border-radius: 5px;
     padding: 14px 16px;
     min-height: 180px !important;
+
     .store_info_animal {
       display: flex;
       flex-direction: column;
       gap: 16px;
+
       .summary_blog {
         display: flex;
         flex-direction: column;
+
         .title {
           font-family: "Poppins";
           font-style: normal;
@@ -29,6 +32,7 @@
           line-height: 20px;
           color: #8c8c8c;
         }
+
         .body {
           font-family: "Poppins";
           font-style: normal;
@@ -41,8 +45,10 @@
     }
   }
 }
+
 .summary {
   margin-top: 30px !important;
+
   .summary_blog {
     background-color: #f5f5f5 !important;
     display: flex;
@@ -92,23 +98,67 @@
     }
   }
 }
+
 .product_description {
   margin-top: 30px !important;
-  h3{
+
+  h3 {
     font-family: "Poppins" !important;
     font-style: normal !important;
     font-weight: 500 !important;
     font-size: 20px !important;
     line-height: 38px !important;
-    color: #171717 !important; 
+    color: #171717 !important;
   }
+
   p {
     font-family: "Poppins";
     font-style: normal;
     font-weight: 500;
     font-size: 16px;
-    line-height: 24px; 
+    line-height: 24px;
     color: #464646;
   }
 }
+
 //   {/* <span className='title'>{blogsDetails?.BlogVisibiclity.charAt(0).toUpperCase() + blogsDetails?.BlogVisibility.slice(1).toLowerCase()}</span> */}
+
+
+.app__store__chat {
+
+  tbody,
+  thead {
+
+    th {
+      margin: 0 !important;
+      padding-top: 0 !important;
+      padding: 4px 2px !important;
+    }
+
+    .first_th {
+      text-align: left !important;
+      padding-left: 20px !important;
+    }
+
+    .last_th {
+      text-align: right !important;
+      padding-right: 20px !important;
+    }
+
+    a {
+      color: #171717 !important;
+    }
+  }
+
+ 
+} .Skeleton_table {
+  tbody,
+  thead {
+
+    th {
+ 
+      margin: 0 !important;
+      padding: 15px !important
+    }
+  }
+  }
