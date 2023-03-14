@@ -66,9 +66,9 @@ const StoreChat = ({ chat, isLoader }) => {
                             {
                                 chat?.map((item, index) => (
                                     <tr key={index}>
-                                        <td className='first_th'>   <Link className='d-block'> {item.BuyerName} </Link></td>
-                                        <td className='text-center'><Link className='d-block'>{item.BuyerPhone}</Link></td>
-                                        <td className='last_th'><Link className='d-block'> {item.ChatStatus.charAt(0).toUpperCase() + item.ChatStatus.slice(1).toLowerCase()}</Link></td>
+                                        <td className='first_th'>   <Link to={`/store/details/${item.IDAnimalProduct}/chat/${item.IDAnimalProductChat}`} className='d-block'> {item.BuyerName} </Link></td>
+                                        <td className='text-center'><Link to={`/store/details/${item.IDAnimalProduct}/chat/${item.IDAnimalProductChat}`} className='d-block'>{item.BuyerPhone}</Link></td>
+                                        <td className='last_th'><Link to={`/store/details/${item.IDAnimalProduct}/chat/${item.IDAnimalProductChat}`}k className='d-block'> {item.ChatStatus.charAt(0).toUpperCase() + item.ChatStatus.slice(1).toLowerCase()}</Link></td>
                                     </tr>
                                 ))
                             }
