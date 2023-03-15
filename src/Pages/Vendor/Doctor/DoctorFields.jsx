@@ -108,7 +108,7 @@ export default function DoctorFields() {
                 getDoctorData();
                 setTimeout(() => {
                   navigate('/doctors');
-                }, 1500);
+                }, 1000);
               }} />
               <Component.ButtonBase title={"Cancel"} bg={"primary"} path="/doctors " />
             </div>

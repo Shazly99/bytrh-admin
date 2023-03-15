@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 // import data from './data.js';
-import Icons from "../../../constants/Icons.js";
+import { Skeleton } from '@mui/material';
 import { useEffect } from 'react';
-import { Table, DropdownButton, Dropdown, NavDropdown, Modal, Button } from "react-bootstrap";
-import { apiheader, PostData } from '../../../utils/fetchData.js';
+import { Button, Dropdown, DropdownButton, Modal, Table } from "react-bootstrap";
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-import { Toaster, toast } from 'react-hot-toast';
+import Icons from "../../../constants/Icons.js";
+import { apiheader, PostData } from '../../../utils/fetchData.js';
+import useSkeletonTable from '../../../utils/useSkeletonTable.js';
 
-function UsersTable({ usersList, userList }) {
-    // const [data, setData] = useState({});
+function UsersTable({ usersList, userList, isLoader }) {
+    let {SkeletonTable} =useSkeletonTable();
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState({});
 
@@ -62,7 +64,7 @@ function UsersTable({ usersList, userList }) {
 
     const userstatus = async (status) => {
         let { data } = await PostData(`https://bytrh.com/api/admin/users/status`, status, apiheader)
-     }
+    }
 
     const handleDeleteUser = async () => {
         // Logic for deleting user with ID `selectedUserId`
@@ -83,114 +85,118 @@ function UsersTable({ usersList, userList }) {
     useEffect(() => {
     }, [usersList, selectedUserId])
 
+
+   
     return (
         <>
-            <Table responsive={true} className='rounded-3 '>
-                <thead>
-                    <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                        <th>User Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>User State</th>
-                        <th>Role</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody className='text-center'>
-                    {
-                        usersList?.map((item, index) => (
-                            <tr key={index}>
+            {isLoader ? <>
+                <Table responsive={true} className='rounded-3 '>
+                    <thead>
+                        <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>User State</th>
+                            <th>Role</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody className='text-center'>
+                        {
+                            usersList?.map((item, index) => (
+                                <tr key={index}>
 
-                                <td >
-                                    <div>
-                                        {item?.UserName}
-                                    </div>
-                                </td>
-                                <td >
-                                    <div>
-                                        {item?.UserEmail}
-                                    </div>
-                                </td>
-                                <td>
-                                    <div className='color-red'>
-                                        {item?.UserPhone}
-                                    </div>
-                                </td>
-                                <td className='text-center  d-flex '>
-                                    <div>
-                                        <span style={{ height: 'fit-content !important' }} className={`
+                                    <td >
+                                        <div>
+                                            {item?.UserName}
+                                        </div>
+                                    </td>
+                                    <td >
+                                        <div>
+                                            {item?.UserEmail}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className='color-red'>
+                                            {item?.UserPhone}
+                                        </div>
+                                    </td>
+                                    <td className='text-center  d-flex '>
+                                        <div>
+                                            <span style={{ height: 'fit-content !important' }} className={`
                                           ${item.UserStatus == 'PENDING' && 'txt_pending'} 
                                           ${item.UserStatus == 'Shipped' && 'txt_shipped'}
                                           ${item.UserStatus == 'Out For Delivery' && 'txt_delivery'}
                                           ${item.UserStatus == 'ACTIVE' && 'txt_delivered'}
                                           ${item.UserStatus == 'INACTIVE' && 'txt_rejected'}`} >
-                                            {item?.UserStatus.toLowerCase().charAt(0).toUpperCase() + item?.UserStatus.slice(1).toLowerCase()} 
-                                        </span>
-                                    </div>
-                                </td>
-                                <td className='text-center'>
-                                    <div>
-                                        {item?.RoleName}
-                                    </div>
-                                </td>
+                                                {item?.UserStatus.toLowerCase().charAt(0).toUpperCase() + item?.UserStatus.slice(1).toLowerCase()}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td className='text-center'>
+                                        <div>
+                                            {item?.RoleName}
+                                        </div>
+                                    </td>
 
-                                <td>
-                                    <div>
+                                    <td>
+                                        <div>
 
-                                        <span>
-                                            <DropdownButton
-                                                id={`dropdown-${item.IDUser}`}
-                                                title="Actions"
-                                                variant="outline-success"
-                                                onSelect={(eventKey) => handleActionSelect(item.IDUser, eventKey)}
-                                                className="DropdownButton "
-                                            >
-                                                <Dropdown.Item eventKey="Edite" as={Link} to={`/user/editUser/${item.IDUser}`}>
-                                                    Edit
-                                                </Dropdown.Item>
-                                                <Dropdown.Item eventKey="DELETED">Deleted</Dropdown.Item>
+                                            <span>
+                                                <DropdownButton
+                                                    id={`dropdown-${item.IDUser}`}
+                                                    title="Actions"
+                                                    variant="outline-success"
+                                                    onSelect={(eventKey) => handleActionSelect(item.IDUser, eventKey)}
+                                                    className="DropdownButton "
+                                                >
+                                                    <Dropdown.Item eventKey="Edite" as={Link} to={`/user/editUser/${item.IDUser}`}>
+                                                        Edit
+                                                    </Dropdown.Item>
+                                                    <Dropdown.Item eventKey="DELETED">Deleted</Dropdown.Item>
 
 
-                                                <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
-                                                    <Modal.Header closeButton>
-                                                        <Modal.Title>Delete User</Modal.Title>
-                                                    </Modal.Header>
-                                                    <Modal.Body>
-                                                        Are you sure you want to delete this user?
-                                                    </Modal.Body>
-                                                    <Modal.Footer className='  d-flex justify-content-center'>
-                                                        <Button variant="danger" onClick={() => handleDeleteUser(item.IDUser)}>
-                                                            Delete
-                                                        </Button>
-                                                        <Button variant="outline-primary" onClick={() => setShowDeleteModal(false)}>
-                                                            Cancel
-                                                        </Button>
-                                                    </Modal.Footer>
-                                                </Modal>
-                                                {
-                                                    item?.UserStatus === "PENDING" ? '' : <Dropdown.Item eventKey="PENDING">Pending</Dropdown.Item>
-                                                }
-                                                {
-                                                    item?.UserStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
-                                                }
-                                                {
-                                                    item?.UserStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
-                                                }
-                                                {/* {
+                                                    <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
+                                                        <Modal.Header closeButton>
+                                                            <Modal.Title>Delete User</Modal.Title>
+                                                        </Modal.Header>
+                                                        <Modal.Body>
+                                                            Are you sure you want to delete this user?
+                                                        </Modal.Body>
+                                                        <Modal.Footer className='  d-flex justify-content-center'>
+                                                            <Button variant="danger" onClick={() => handleDeleteUser(item.IDUser)}>
+                                                                Delete
+                                                            </Button>
+                                                            <Button variant="outline-primary" onClick={() => setShowDeleteModal(false)}>
+                                                                Cancel
+                                                            </Button>
+                                                        </Modal.Footer>
+                                                    </Modal>
+                                                    {
+                                                        item?.UserStatus === "PENDING" ? '' : <Dropdown.Item eventKey="PENDING">Pending</Dropdown.Item>
+                                                    }
+                                                    {
+                                                        item?.UserStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
+                                                    }
+                                                    {
+                                                        item?.UserStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
+                                                    }
+                                                    {/* {
                                                     item?.UserStatus === "BLOCKED" ? '' : <Dropdown.Item eventKey="BLOCKED">Blocked</Dropdown.Item>
                                                 } */}
-                                            </DropdownButton>
-                                        </span>
-                                    </div>
-                                </td>
+                                                </DropdownButton>
+                                            </span>
+                                        </div>
+                                    </td>
 
-                            </tr>
-                        ))
-                    }
+                                </tr>
+                            ))
+                        }
 
-                </tbody>
+                    </tbody>
 
-            </Table>
+                </Table>
+            </> : SkeletonTable()}
         </>
     )
 }
