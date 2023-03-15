@@ -71,14 +71,8 @@
         font-style: normal;
         font-weight: 400;
         font-size: 21px !important;
-        line-height: 32px !important;
-        /* identical to box height */
-
-
-        /* Black */
-
-        color: #000000;
-
+        line-height: 32px !important;  
+        color: #000000; 
     }
 }
 
@@ -133,9 +127,7 @@ td {
 
         }
     }
-}
-
-
+} 
 .search-container {
 
     margin-bottom: 20px !important;
@@ -166,41 +158,15 @@ td {
             .form-check-input:checked {
                 background-color: #0d6efd !important;
                 border-color: #0d6efd !important;
-            }
-            // &:nth-child(1) {
-            //     .form-check-input:checked {
-            //         background-color: $colorGreen !important;
-            //         border-color: $colorGreen !important;
-            //     }
-            // }
-
-            // &:nth-child(2) { 
-            //     .form-check-input:checked {
-            //         background-color: #E20000 !important;
-            //         border-color: #E20000 !important;
-            //     }
-            // }
-
-            // &:nth-child(3) { 
-            //     .form-check-input:checked {
-            //         background-color: #0d6efd !important;
-            //         border-color: #0d6efd !important;
-            //     }
-            // }
-
+            } 
             input {
                 cursor: pointer !important;
 
-            }
-
+            } 
             .form-check-input:checked[type=radio] {
                 background-image: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%272%27 fill=%27%23fff%27/%3e%3c/svg%3e') !important;
-            }
-
-
-        }
-
-        .active {}
+            } 
+        } 
     }
 }
  
@@ -220,46 +186,11 @@ td {
         .form-check-input:checked {
             background-color: #0d6efd !important;
             border-color: #0d6efd !important;
-        }
-        // &:nth-child(2),
-        // &:nth-child(10) {
-        //     .form-check-input:checked {
-        //         background-color: $colorGreen !important;
-        //         border-color: $colorGreen !important;
-        //     }
-        // }
-
-        // &:nth-child(5),
-        // &:nth-child(3),
-        // &:nth-child(6),
-        // &:nth-child(7),
-        // &:nth-child(9) {
-        //     .form-check-input:checked {
-        //         background-color: #E20000 !important;
-        //         border-color: #E20000 !important;
-        //     }
-        // }
-
-        // &:nth-child(7) {
-        //     .form-check-input:checked {
-        //         background-color: #9804F0 !important;
-        //         border-color: #9804F0 !important;
-        //     }
-        // }
-
-        // &:nth-child(4) {
-        //     .form-check-input:checked {
-        //         background-color: #FFC107 !important;
-        //         border-color: #FFC107 !important;
-        //     }
-        // }
-
+        } 
         .form-check-input:checked {
             background-color: #0d6efd !important;
             border-color: #0d6efd !important;
-        }
-
-
+        } 
         input {
             cursor: pointer !important;
         }
@@ -277,10 +208,10 @@ td {
 
 .search__group {
     width: 70% !important;
-    position: relative;
-
+    position: relative; 
     @media screen and (max-width:400px) {
         width: 90% !important;
+        margin-left: -44px;
     }
 }
 
@@ -305,7 +236,7 @@ td {
     border-bottom: 2px solid #aaa;
 }
 
-.search-container button[type="submit"] {
+.search__group button[type="submit"] {
     position: absolute;
     right: 0;
     top: 0;
@@ -320,10 +251,7 @@ td {
     @media screen and (max-width:650px) {
         right: -51px !important;
     }
-
-    // @media screen and (max-width:375px) {
-    //     right: -90px !important;
-    // }
+ 
 }
 
 .search-container button[type="submit"]:hover {
@@ -339,3 +267,14 @@ td {
 }.selected-background {
     background-color: #f0f0f0;
   }
+  .search_and__btn{
+    display: flex !important;
+    flex-direction: row  !important;
+    align-items: center;
+} 
+  @media screen and (max-width:650px) {
+    .search_and__btn{
+        display: flex !important;
+        flex-direction: column  !important;
+    } 
+}

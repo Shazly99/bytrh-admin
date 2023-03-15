@@ -1,25 +1,30 @@
-import React from 'react'
-import { Table, DropdownButton, Dropdown, NavDropdown } from "react-bootstrap";
-import { GetData, PostData, apiheader } from '../../../../utils/fetchData';
-import { useEffect } from 'react';
-import { useState } from 'react';
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Dropdown, DropdownButton, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
+import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
+import useSkeletonTable from '../../../../utils/useSkeletonTable';
 
 const Cities = () => {
   const [Cities, setCities] = useState(null)
   const [page, setPage] = useState(1);
   const [PagesNumber, setPagesNumber] = useState('')
   const [searchValue, setSearchValue] = useState('');
+  const [isLoader, setIsloader] = useState(false);
+  let { SkeletonTable, SkeletonSearch, SkeletonFilters } = useSkeletonTable();
 
   const CitiescList = async (page) => {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/location/cities`, { IDPage: page }, apiheader).then(({ data }) => {
       setCities(data.Response.Cities)
-       setPagesNumber(data.Response.Pages);
+      setPagesNumber(data.Response.Pages);
+      const timeoutId = setTimeout(() => {
+        setIsloader(true)
+      }, 1000);
+      return () => clearTimeout(timeoutId);
     }).catch((error) => {
       if (error.response && error.response.status === 429) {
         const retryAfter = error.response.headers['retry-after'];
@@ -36,7 +41,7 @@ const Cities = () => {
   };
 
   const handleActionSelect = async (id, action) => {
-    if (action === "ACTIVE") {
+    if (action === "ACTIVE" || action === "INACTIVE") {
       await CitiescategoriesStatus(id).then((res) => {
         toast.success('Updated Successfully', {
           duration: 4000,
@@ -49,20 +54,6 @@ const Cities = () => {
         });
       })
       await CitiescList()
-    } else if (action === "INACTIVE") {
-      await CitiescategoriesStatus(id).then((res) => {
-        toast.success('Updated Successfully', {
-          duration: 4000,
-          position: 'top-center',
-          icon: <Icons.uploadItem color='#3182CE' size={20} />,
-          iconTheme: {
-            primary: '#0a0',
-            secondary: '#fff',
-          },
-        });
-      })
-      await CitiescList()
-
     }
   };
   const CitiescategoriesStatus = async (id) => {
@@ -80,12 +71,12 @@ const Cities = () => {
     if (event.target.value === '') {
       CitiescList(page)
     }
-     setSearchValue(event.target.value);
+    setSearchValue(event.target.value);
   };
 
   const searchGetData = async (searchValue) => {
     let { data } = await PostData(`https://bytrh.com/api/admin/location/cities`, { IDPage: page, SearchKey: searchValue }, apiheader)
-     setCities(data.Response.Cities)
+    setCities(data.Response.Cities)
     setPagesNumber(data.Response.Pages);
   }
   // filter
@@ -106,150 +97,157 @@ const Cities = () => {
   useEffect(() => {
     CitiescList(page)
   }, [page])
-  useEffect(() => { 
-  }, [page,PagesNumber])
+  useEffect(() => {
+  }, [page, PagesNumber])
   return (
+
     <>
-      {
-        Cities ?
-          <>
-            <div className="app__Users ">
-              <Component.ButtonBase title={"Add "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/location/cities/addcity" />
-              <div className="app__Users-table">
-                <div className="search-container">
-                  <div className='search__group'>
-                    <input type="text" placeholder="Search by city....." name="search" value={searchValue} onChange={handleInputChange} />
-                    <button type="submit" onClick={handleSearchClick}>
-                      <Icons.Search color='#fff' size={25} />
-                    </button>
-                  </div>
-
-                  <div className='filter__group'>
-                    <label>
-                      {
-                        selectedOption === "All" ?
-                          <input
-                            type="radio"
-                            name="filter"
-                            value="All"
-                            checked
-                            onChange={handleOptionChange}
-                            className={`inactive-radio form-check-input `}
-                          /> :
-                          <input
-                            type="radio"
-                            name="filter"
-                            value="All"
-                            checked={selectedOption === "All"}
-                            onChange={handleOptionChange}
-                            className={`inactive-radio form-check-input `}
-                          />
-                      }
-
-                      All
-                    </label>
-                    <label className='active'>
-                      <input
-                        type="radio"
-                        name="filter"
-                        value="ACTIVE"
-                        checked={selectedOption === "ACTIVE"}
-                        onChange={handleOptionChange}
-                        className="active-radio form-check-input"
-
-                      />
-                      Active
-                    </label>
-
-                    <label>
-                      <input
-                        type="radio"
-                        name="filter"
-                        value="INACTIVE"
-                        checked={selectedOption === "INACTIVE"}
-                        onChange={handleOptionChange}
-                        className="inactive-radio form-check-input"
-
-                      />
-                      InActive
-                    </label>
-
-                  </div>
+      <div className="app__Users ">
+        <div className="app__Users-table">
+          <div className="search-container">
+            <div className="search_and__btn w-100">
+              {isLoader ? <>
+                <Component.ButtonBase title={"Add "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/location/cities/addcity" />
+                <div className='search__group'>
+                  <input type="text" placeholder="Search by city....." name="search" value={searchValue} onChange={handleInputChange} />
+                  <button type="submit" onClick={handleSearchClick}>
+                    <Icons.Search color='#fff' size={25} />
+                  </button>
                 </div>
-                <Table responsive={true} className='rounded-3 '>
-                  <thead>
-                    <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                      <th>Country Name</th>
-                      <th>City Name</th>
-                      <th>City status</th>
-                      <th>Action</th>
+              </> : SkeletonSearch(40, "100%")}
+            </div>
+
+            <div className='filter__group'>
+              {isLoader ? <>
+                <label>
+                  {
+                    selectedOption === "All" ?
+                      <input
+                        type="radio"
+                        name="filter"
+                        value="All"
+                        checked
+                        onChange={handleOptionChange}
+                        className={`inactive-radio form-check-input `}
+                      /> :
+                      <input
+                        type="radio"
+                        name="filter"
+                        value="All"
+                        checked={selectedOption === "All"}
+                        onChange={handleOptionChange}
+                        className={`inactive-radio form-check-input `}
+                      />
+                  }
+
+                  All
+                </label>
+              </> : SkeletonFilters(10, 90)}
+              {isLoader ? <>
+                <label className='active'>
+                  <input
+                    type="radio"
+                    name="filter"
+                    value="ACTIVE"
+                    checked={selectedOption === "ACTIVE"}
+                    onChange={handleOptionChange}
+                    className="active-radio form-check-input"
+
+                  />
+                  Active
+                </label>
+              </> : SkeletonFilters(10, 90)}
+              {isLoader ? <>
+                <label>
+                  <input
+                    type="radio"
+                    name="filter"
+                    value="INACTIVE"
+                    checked={selectedOption === "INACTIVE"}
+                    onChange={handleOptionChange}
+                    className="inactive-radio form-check-input"
+
+                  />
+                  InActive
+                </label>
+              </> : SkeletonFilters(10, 90)}
+
+            </div>
+          </div>
+          {isLoader ? <>
+            <Table responsive={true} className='rounded-3 '>
+              <thead>
+                <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
+                  <th>Country Name</th>
+                  <th>City Name</th>
+                  <th>City status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody className='text-center'>
+                {
+                  Cities?.map((item, index) => (
+                    <tr key={index}>
+                      <td >
+                        <div>
+                          {item?.CountryName}
+                        </div>
+                      </td>
+
+                      <td >
+                        <div>
+                          {item?.CityName}
+                        </div>
+                      </td>
+
+                      <td >
+                        <div>
+                          <span style={{ height: 'fit-content !important' }} className={`  ${item?.CityActive === 1 && 'txt_delivered'}  ${item?.CityActive === 0 && 'txt_rejected'} `} >
+                            {item?.CityActive === 1 ? 'Active' : "InActive"}
+                          </span>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div>
+                          <span>
+                            <DropdownButton
+                              id={`dropdown-${item.IDCity}`}
+                              title="Actions"
+                              variant="outline-success"
+                              onSelect={(eventKey) => handleActionSelect(item.IDCity, eventKey)}
+                              className="DropdownButton "
+                              drop={'down-centered'}
+                            >
+                              <Dropdown.Item eventKey="Edite" as={Link} to={`/location/cities/editcity/${item.IDCity}`}>
+                                Edit
+                              </Dropdown.Item>
+                              {
+                                item?.CityActive === 1 ? '' : item?.UserStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
+                              }
+                              {
+                                item?.CityActive === 0 ? '' : item?.UserStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
+                              }
+                            </DropdownButton>
+                          </span>
+                        </div>
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody className='text-center'>
-                    {
-                      Cities?.map((item, index) => (
-                        <tr key={index}>
-                          <td >
-                            <div>
-                              {item?.CountryName}
-                            </div>
-                          </td>
+                  ))
+                }
 
-                          <td >
-                            <div>
-                              {item?.CityName}
-                            </div>
-                          </td>
+              </tbody>
 
-                          <td >
-                            <div>
-                              <span style={{ height: 'fit-content !important' }} className={`  ${item?.CityActive === 1 && 'txt_delivered'}  ${item?.CityActive === 0 && 'txt_rejected'} `} >
-                                {item?.CityActive === 1 ? 'Active' : "InActive"}
-                              </span>
-                            </div>
-                          </td>
+            </Table>
+          </> : SkeletonTable()}
+        </div>
 
-                          <td>
-                            <div>
-                              <span>
-                                <DropdownButton
-                                  id={`dropdown-${item.IDCity}`}
-                                  title="Actions"
-                                  variant="outline-success"
-                                  onSelect={(eventKey) => handleActionSelect(item.IDCity, eventKey)}
-                                  className="DropdownButton "
-                                  drop={'down-centered'}
-                                >
-                                  <Dropdown.Item eventKey="Edite" as={Link} to={`/location/cities/editcity/${item.IDCity}`}>
-                                    Edit
-                                  </Dropdown.Item>
-                                  {
-                                    item?.CityActive === 1 ? '' : item?.UserStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
-                                  }
-                                  {
-                                    item?.CityActive === 0 ? '' : item?.UserStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
-                                  }
-                                </DropdownButton>
-                              </span>
-                            </div>
-                          </td>
-                        </tr>
-                      ))
-                    }
-
-                  </tbody>
-
-                </Table>
-              </div>
-
-            </div>
-            <div className="pagination ">
-              <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-                <Pagination count={pageCount} page={page} onChange={handleChange} />
-              </Box>
-            </div>
-          </> : <Component.Loader />
-      }
+      </div>
+      <div className="pagination ">
+        <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
+          <Pagination count={pageCount} page={page} onChange={handleChange} />
+        </Box>
+      </div>
     </>
   )
 }

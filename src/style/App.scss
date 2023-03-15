@@ -25,7 +25,7 @@ a {
 
 // button in folder (component / button ) shared in all project 
 .baseBtn {
-  padding: 15px;
+  padding: 15px 10px;
 
   button {
     font-family: $fontBase !important;
@@ -35,7 +35,7 @@ a {
     line-height: 27px;
     color: #FFFFFF;
     gap: 12px;
-    padding: 12px 45px !important;
+    padding: 10px 45px !important;
     border: none;
   }
 }

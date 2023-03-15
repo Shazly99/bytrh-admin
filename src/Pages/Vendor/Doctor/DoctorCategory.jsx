@@ -108,7 +108,7 @@ export default function DoctorCategory() {
                 getDoctorData();
                 setTimeout(() => {
                   navigate('/doctors');
-                }, 1500);
+                }, 1000);
               }} />
               <Component.ButtonBase title={"Cancel"} bg={"primary"} path="/doctors " />
             </div>

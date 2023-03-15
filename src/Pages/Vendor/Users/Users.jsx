@@ -7,12 +7,14 @@ import Box from "@mui/material/Box";
 import { GetData, PostData } from '../../../utils/fetchData';
 import { apiheader } from './../../../utils/fetchData';
 import Img from '../../../assets/Img';
+import useSkeletonTable from '../../../utils/useSkeletonTable';
 
 function Users() {
   const [page, setPage] = useState(1);
   const [usersList, setuserList] = useState(null);
   const [PagesNumber, setPagesNumber] = useState('')
-
+  const [isLoader, setIsloader] = useState(false);
+  let { SkeletonSearch,SkeletonFilters } = useSkeletonTable();
   const handleChange = (event, value) => {
     setPage(value);
   };
@@ -22,9 +24,15 @@ function Users() {
 
   const userList = async (page) => {
     try {
-      let { data } = await PostData(`https://bytrh.com/api/admin/users`, { IDPage: page }, apiheader);
-      setuserList(data.Response.Users);
-      setPagesNumber(data.Response.Pages);
+      await PostData(`https://bytrh.com/api/admin/users`, { IDPage: page }, apiheader).then(({ data }) => {
+
+        setuserList(data.Response.Users);
+        setPagesNumber(data.Response.Pages);
+        const timeoutId = setTimeout(() => {
+          setIsloader(true)
+        }, 1000);
+        return () => clearTimeout(timeoutId);
+      });
     } catch (error) {
       if (error.response && error.response.status === 429) {
         const retryAfter = error.response.headers['retry-after'];
@@ -46,10 +54,10 @@ function Users() {
     searchGetData(searchValue)
   };
   const searchGetData = async (searchValue) => {
-    let { data } = await PostData(`https://bytrh.com/api/admin/users`, {IDPage: page , SearchKey: searchValue }, apiheader)
+    let { data } = await PostData(`https://bytrh.com/api/admin/users`, { IDPage: page, SearchKey: searchValue }, apiheader)
     setuserList(data.Response.Users)
     setPagesNumber(data.Response.Pages);
-    
+
   }
   const handleInputChange = (event) => {
     if (event.target.value === '') {
@@ -66,109 +74,117 @@ function Users() {
     setSelectedOption(selectedValue);
     // filter your content based on the selected option 
     if (selectedValue === "ACTIVE" || selectedValue === "INACTIVE" || selectedValue === "PENDING") {
-      let { data } = await PostData(`https://bytrh.com/api/admin/users`, {IDPage: page , UserStatus: selectedValue }, apiheader)
+      let { data } = await PostData(`https://bytrh.com/api/admin/users`, { IDPage: page, UserStatus: selectedValue }, apiheader)
       setuserList(data.Response.Users)
       setPagesNumber(data.Response.Pages);
-    }  else if (selectedValue === "All") {
+    } else if (selectedValue === "All") {
       userList()
     }
   };
-  useEffect(() => { 
-  }, [page,PagesNumber])
+  useEffect(() => {
+  }, [page, PagesNumber])
   return (
     <>
-      {
-        usersList ?
-          <>
-            <div className="app__Users ">
-              <Component.ButtonBase onclick={test} title={"Add  "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/user/addUser" />
+      <div className="app__Users ">
+        <div className="app__Users-table">
+          <div className="search-container   ">
 
-              <div className="app__Users-table">
-                <div className="search-container">
-                  <div className='search__group'>
-                    <input type="text" placeholder="Search by name or email or phone....." name="search" value={searchValue} onChange={handleInputChange} />
-                    <button type="submit" onClick={handleSearchClick}>
-                      <Icons.Search color='#fff' size={25} />
-                    </button>
-                  </div>
-
-                  <div className='filter__group'>
-                    <label>
-                      {
-                        selectedOption === "All" ?
-                          <input
-                            type="radio"
-                            name="filter"
-                            value="All"
-                            checked 
-                            onChange={handleOptionChange}
-                            className={`inactive-radio form-check-input `}
-                          /> :
-                          <input
-                            type="radio"
-                            name="filter"
-                            value="All"
-                            checked ={selectedOption === "All"}
-                            onChange={handleOptionChange}
-                            className={`inactive-radio form-check-input `} 
-                          />
-                      }
-
-                      All
-                    </label>
-
-                    <label className='active'>
-                      <input
-                        type="radio"
-                        name="filter"
-                        value="ACTIVE"
-                        checked={selectedOption === "ACTIVE"}
-                        onChange={handleOptionChange}
-                        className="active-radio form-check-input"
-
-                      />
-                      Active
-                    </label>
-
-                    <label>
-                      <input
-                        type="radio"
-                        name="filter"
-                        value="INACTIVE"
-                        checked={selectedOption === "INACTIVE"}
-                        onChange={handleOptionChange}
-                        className="inactive-radio form-check-input"
-
-                      />
-                      InActive
-                    </label>
-                    <label>
-                      <input
-                        type="radio"
-                        name="filter"
-                        value="PENDING"
-                        checked={selectedOption === "PENDING"}
-                        onChange={handleOptionChange}
-                        className="inactive-radio form-check-input"
-
-                      /> 
-                      Pending
-                    </label>
-
-                  </div>
-
+            <div className="search_and__btn   w-100">
+              {isLoader ? <>
+                <Component.ButtonBase onclick={test} title={"Add  "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/user/addUser" />
+                <div className='search__group'>
+                  <input type="text" placeholder="Search by name or email or phone....." name="search" value={searchValue} onChange={handleInputChange} />
+                  <button type="submit" onClick={handleSearchClick}>
+                    <Icons.Search color='#fff' size={25} />
+                  </button >
                 </div>
-                <Component.UsersTable usersList={usersList} userList={userList} />
-              </div>
+              </> : SkeletonSearch(40, "100%")}
+            </div>
+            <div className='filter__group'>
+              {isLoader ? <>
+                <label>
+                  {
+                    selectedOption === "All" ?
+                      <input
+                        type="radio"
+                        name="filter"
+                        value="All"
+                        checked
+                        onChange={handleOptionChange}
+                        className={`inactive-radio form-check-input `}
+                      /> :
+                      <input
+                        type="radio"
+                        name="filter"
+                        value="All"
+                        checked={selectedOption === "All"}
+                        onChange={handleOptionChange}
+                        className={`inactive-radio form-check-input `}
+                      />
+                  }
+
+                  All
+                </label>
+              </> : SkeletonFilters(10, 90)}
+
+              {isLoader ? <>
+                <label className='active'>
+                  <input
+                    type="radio"
+                    name="filter"
+                    value="ACTIVE"
+                    checked={selectedOption === "ACTIVE"}
+                    onChange={handleOptionChange}
+                    className="active-radio form-check-input"
+
+                  />
+                  Active
+                </label>
+              </> : SkeletonFilters(10, 90)}
+
+              {isLoader ? <>
+                <label>
+                  <input
+                    type="radio"
+                    name="filter"
+                    value="INACTIVE"
+                    checked={selectedOption === "INACTIVE"}
+                    onChange={handleOptionChange}
+                    className="inactive-radio form-check-input"
+
+                  />
+                  InActive
+                </label>
+              </> : SkeletonFilters(10, 90)}
+
+              {isLoader ? <>
+                <label>
+                  <input
+                    type="radio"
+                    name="filter"
+                    value="PENDING"
+                    checked={selectedOption === "PENDING"}
+                    onChange={handleOptionChange}
+                    className="inactive-radio form-check-input"
+
+                  />
+                  Pending
+                </label>
+              </> : SkeletonFilters(10, 90)}
 
             </div>
-            <div className="pagination ">
-              <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-                <Pagination count={pageCount} page={page} onChange={handleChange} />
-              </Box>
-            </div>
-          </> : <Component.Loader />
-      }
+          </div>
+          <Component.UsersTable isLoader={isLoader} usersList={usersList} userList={userList} />
+        </div>
+
+      </div>
+      <div className="pagination ">
+        <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
+          <Pagination count={pageCount} page={page} onChange={handleChange} />
+        </Box>
+      </div>
+
+
     </>
   )
 }

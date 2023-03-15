@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
 import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
+import useSkeletonTable from "../../../../utils/useSkeletonTable";
 
 
 const Country = () => {
@@ -14,11 +15,17 @@ const Country = () => {
     const [page, setPage] = useState(1);
     const [PagesNumber, setPagesNumber] = useState('')
     const [searchValue, setSearchValue] = useState('');
+    const [isLoader, setIsloader] = useState(false);
+    let { SkeletonTable, SkeletonSearch, SkeletonFilters } = useSkeletonTable();
 
     const CountrycList = async (page) => {
         await PostData(`${process.env.REACT_APP_API_URL}/admin/location/countries`, { IDPage: page }, apiheader).then(({ data }) => {
             setCountry(data.Response.Countries)
             setPagesNumber(data.Response.Pages);
+            const timeoutId = setTimeout(() => {
+                setIsloader(true)
+            }, 1000);
+            return () => clearTimeout(timeoutId);
         }).catch((error) => {
             if (error.response && error.response.status === 429) {
                 const retryAfter = error.response.headers['retry-after'];
@@ -59,7 +66,7 @@ const Country = () => {
                     },
                 });
             })
-            await CountrycList() 
+            await CountrycList()
         }
     };
     const CountrycategoriesStatus = async (id) => {
@@ -76,12 +83,12 @@ const Country = () => {
         if (event.target.value === '') {
             CountrycList(page)
         }
-         setSearchValue(event.target.value);
+        setSearchValue(event.target.value);
     };
 
     const searchGetData = async (searchValue) => {
-        let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, { IDPage: page ,SearchKey: searchValue }, apiheader)
-         setCountry(data.Response.Countries)
+        let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, { IDPage: page, SearchKey: searchValue }, apiheader)
+        setCountry(data.Response.Countries)
     }
     // filter
     const [selectedOption, setSelectedOption] = useState('All');
@@ -90,8 +97,8 @@ const Country = () => {
         const selectedValue = event.target.value;
         setSelectedOption(selectedValue);
         // filter your content based on the selected option 
-        if (selectedValue === "ACTIVE"||selectedValue === "INACTIVE") {
-            let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, {IDPage: page, CountryStatus: selectedValue }, apiheader)
+        if (selectedValue === "ACTIVE" || selectedValue === "INACTIVE") {
+            let { data } = await PostData(`https://bytrh.com/api/admin/location/countries`, { IDPage: page, CountryStatus: selectedValue }, apiheader)
             setCountry(data.Response.Countries)
             setPagesNumber(data.Response.Pages);
         } else if (selectedValue === "All") {
@@ -102,159 +109,164 @@ const Country = () => {
     useEffect(() => {
         CountrycList(page)
     }, [page])
-    useEffect(() => { 
-    }, [page,PagesNumber])
+    useEffect(() => {
+    }, [page, PagesNumber])
     return (
+
         <>
-            {
-                country ?
-                    <>
-                        <>
-                            <div className="app__Users ">
-                                <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'}  />} path="/location/country/addcountry" />
-                                <div className="app__Users-table">
-                                    <div className="search-container">
-                                        <div className='search__group'>
-                                            <input type="text" placeholder="Search by country....." name="search" value={searchValue} onChange={handleInputChange} />
-                                            <button type="submit" onClick={handleSearchClick}>
-                                                <Icons.Search color='#fff' size={25} />
-                                            </button>
-                                        </div>
-
-                                        <div className='filter__group'>
-                                        <label>
-                      {
-                        selectedOption === "All" ?
-                          <input
-                            type="radio"
-                            name="filter"
-                            value="All"
-                            checked 
-                            onChange={handleOptionChange}
-                            className={`inactive-radio form-check-input `}
-                          /> :
-                          <input
-                            type="radio"
-                            name="filter"
-                            value="All"
-                            checked ={selectedOption === "All"}
-                            onChange={handleOptionChange}
-                            className={`inactive-radio form-check-input `} 
-                          />
-                      }
-
-                      All
-                    </label>
-                                            <label className='active'>
-                                                <input
-                                                    type="radio"
-                                                    name="filter"
-                                                    value="ACTIVE"
-                                                    checked={selectedOption === "ACTIVE"}
-                                                    onChange={handleOptionChange}
-                                                    className="active-radio form-check-input"
-
-                                                />
-                                                Active
-                                            </label>
-
-                                            <label>
-                                                <input
-                                                    type="radio"
-                                                    name="filter"
-                                                    value="INACTIVE"
-                                                    checked={selectedOption === "INACTIVE"}
-                                                    onChange={handleOptionChange}
-                                                    className="inactive-radio form-check-input"
-
-                                                />
-                                                InActive
-                                            </label>
-                            
-                                        </div>
-                                    </div>
-                                    <Table responsive={true} className='rounded-3 '>
-                                        <thead>
-                                            <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                                                <th>Country Name</th>
-                                                <th>Country Code</th>
-                                                <th>Country Time Zone</th>
-                                                <th>Country Status</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className='text-center'>
-                                            {
-                                                country?.map((item, index) => (
-                                                    <tr key={index}>
-                                                        <td >
-                                                            <div>
-                                                                {item?.CountryName}
-                                                            </div>
-                                                        </td>
-
-                                                        <td >
-                                                            <div>
-                                                                {item?.CountryCode}
-                                                            </div>
-                                                        </td>
-                                                        <td >
-                                                            <div>
-                                                                {item?.CountryTimeZone}
-                                                            </div>
-                                                        </td>
-
-                                                        <td >
-                                                            <div>
-                                                                <span style={{ height: 'fit-content !important' }} className={`  ${item?.CountryActive === 1 && 'txt_delivered'}  ${item?.CountryActive === 0 && 'txt_rejected'} `} >
-                                                                    {item?.CountryActive === 1 ? 'Active' : "InActive"}
-                                                                </span>
-                                                            </div>
-                                                        </td>
-
-                                                        <td>
-                                                            <div>
-                                                                <span>
-                                                                    <DropdownButton
-                                                                        id={`dropdown-${item.IDCountry}`}
-                                                                        title="Actions"
-                                                                        variant="outline-success"
-                                                                        onSelect={(eventKey) => handleActionSelect(item.IDCountry, eventKey)}
-                                                                        className="DropdownButton "
-                                                                        drop={'down-centered'}
-                                                                    >
-                                                                        <Dropdown.Item eventKey="Edite" as={Link} to={`/location/country/editcountry/${item.IDCountry}`}>
-                                                                            Edit
-                                                                        </Dropdown.Item>
-                                                                        {
-                                                                            item?.CountryActive === 1 ? '' : item?.UserStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
-                                                                        }
-                                                                        {
-                                                                            item?.CountryActive === 0 ? '' : item?.UserStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
-                                                                        }
-                                                                    </DropdownButton>
-                                                                </span>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                ))
-                                            }
-
-                                        </tbody>
-
-                                    </Table>
+            <div className="app__Users ">
+                <div className="app__Users-table">
+                    <div className="search-container">
+                        <div className="search_and__btn w-100">
+                            {isLoader ? <>
+                                <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/location/country/addcountry" />
+                                <div className='search__group'>
+                                    <input type="text" placeholder="Search by country....." name="search" value={searchValue} onChange={handleInputChange} />
+                                    <button type="submit" onClick={handleSearchClick}>
+                                        <Icons.Search color='#fff' size={25} />
+                                    </button>
                                 </div>
+                            </> : SkeletonSearch(40, "100%")}
+                        </div>
 
-                            </div>
-                            <div className="pagination ">
-                                <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-                                    <Pagination count={pageCount} page={page} onChange={handleChange} />
-                                </Box>
-                            </div>
-                        </>
-                    </> : <Component.Loader />
-            }
+                        <div className='filter__group'>
+                            {isLoader ? <>
+                                <label>
+                                    {
+                                        selectedOption === "All" ?
+                                            <input
+                                                type="radio"
+                                                name="filter"
+                                                value="All"
+                                                checked
+                                                onChange={handleOptionChange}
+                                                className={`inactive-radio form-check-input `}
+                                            /> :
+                                            <input
+                                                type="radio"
+                                                name="filter"
+                                                value="All"
+                                                checked={selectedOption === "All"}
+                                                onChange={handleOptionChange}
+                                                className={`inactive-radio form-check-input `}
+                                            />
+                                    }
+
+                                    All
+                                </label>
+                            </> : SkeletonFilters(10, 90)}
+                            {isLoader ? <>
+                            <label className='active'>
+                                <input
+                                    type="radio"
+                                    name="filter"
+                                    value="ACTIVE"
+                                    checked={selectedOption === "ACTIVE"}
+                                    onChange={handleOptionChange}
+                                    className="active-radio form-check-input"
+
+                                />
+                                Active
+                            </label>
+                            </> : SkeletonFilters(10, 90)}
+                            {isLoader ? <>
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="filter"
+                                        value="INACTIVE"
+                                        checked={selectedOption === "INACTIVE"}
+                                        onChange={handleOptionChange}
+                                        className="inactive-radio form-check-input"
+
+                                    />
+                                    InActive
+                                </label>
+                            </> : SkeletonFilters(10, 90)}
+                        </div>
+                    </div>
+                    {isLoader ? <>
+                        <Table responsive={true} className='rounded-3 '>
+                            <thead>
+                                <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
+                                    <th>Country Name</th>
+                                    <th>Country Code</th>
+                                    <th>Country Time Zone</th>
+                                    <th>Country Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody className='text-center'>
+                                {
+                                    country?.map((item, index) => (
+                                        <tr key={index}>
+                                            <td >
+                                                <div>
+                                                    {item?.CountryName}
+                                                </div>
+                                            </td>
+
+                                            <td >
+                                                <div>
+                                                    {item?.CountryCode}
+                                                </div>
+                                            </td>
+                                            <td >
+                                                <div>
+                                                    {item?.CountryTimeZone}
+                                                </div>
+                                            </td>
+
+                                            <td >
+                                                <div>
+                                                    <span style={{ height: 'fit-content !important' }} className={`  ${item?.CountryActive === 1 && 'txt_delivered'}  ${item?.CountryActive === 0 && 'txt_rejected'} `} >
+                                                        {item?.CountryActive === 1 ? 'Active' : "InActive"}
+                                                    </span>
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                <div>
+                                                    <span>
+                                                        <DropdownButton
+                                                            id={`dropdown-${item.IDCountry}`}
+                                                            title="Actions"
+                                                            variant="outline-success"
+                                                            onSelect={(eventKey) => handleActionSelect(item.IDCountry, eventKey)}
+                                                            className="DropdownButton "
+                                                            drop={'down-centered'}
+                                                        >
+                                                            <Dropdown.Item eventKey="Edite" as={Link} to={`/location/country/editcountry/${item.IDCountry}`}>
+                                                                Edit
+                                                            </Dropdown.Item>
+                                                            {
+                                                                item?.CountryActive === 1 ? '' : item?.UserStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
+                                                            }
+                                                            {
+                                                                item?.CountryActive === 0 ? '' : item?.UserStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
+                                                            }
+                                                        </DropdownButton>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    ))
+                                }
+
+                            </tbody>
+
+                        </Table>
+                    </> : SkeletonTable()}
+                </div>
+
+            </div>
+            <div className="pagination ">
+                <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
+                    <Pagination count={pageCount} page={page} onChange={handleChange} />
+                </Box>
+            </div>
         </>
+
 
     )
 }
