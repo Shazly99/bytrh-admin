@@ -37,10 +37,10 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
             setId(id) 
         }
     };
-    async function name() {
-        await changeWallet({ IDDoctor: idDoc, Amount: changeBalance })
-        await getTokenDoctors()
-    }
+    // async function name() {
+    //     await changeWallet({ IDDoctor: idDoc, Amount: changeBalance })
+    //     await getTokenDoctors()
+    // }
 
 
     const [showRemove, setShowRemove] = useState(false);
@@ -54,13 +54,13 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
 
     let changeBalance = useRef()
 
-    const changeWallet = async (wallet) => {
-        let data = await PostData(`https://bytrh.com/api/admin/doctors/wallet/add`, {IDDoctor:id,Amount:changeBalance.current.value }, apiheader)
+    const changeWallet = async () => {
+        await PostData(`https://bytrh.com/api/admin/doctors/wallet/add`, {IDDoctor:id,Amount:changeBalance.current.value }, apiheader)
         await getTokenDoctors()
  
     }
     const userstatus = async (status) => {
-        let { data } = await PostData(`https://bytrh.com/api/admin/doctors/status`, status, apiheader)
+        await PostData(`https://bytrh.com/api/admin/doctors/status`, status, apiheader)
     }
 
 
@@ -168,6 +168,9 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                 <Dropdown.Item as={Link} to={`/doctors/doctorCategory/${id}`}>
                                     Doctor Animals Categories
                                 </Dropdown.Item>
+                                <Dropdown.Item as={Link} to={`/doctors/doctorHours/${id}`}>
+                                    Doctor Hours
+                                </Dropdown.Item>
                                 <Dropdown.Item eventKey="balance" onClick={handleShowModal}>Set Balance</Dropdown.Item>
                                 <Modal show={showModal} onHide={handleCloseModal} centered >
                                     <Modal.Header closeButton>
@@ -203,7 +206,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                         </Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
-                                        <img src={oops} className='w-50 d-block mx-auto' alt="oops"loading="lazy" />
+                                        <img src={oops} className='w-50 d-block mx-auto' alt="oops" loading="lazy" />
                                     </Modal.Body>
                                     {/* {messageRemove.length > 0 ? <p id="alertRemove" className={`alert ${apiCodeRemove === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 my-2 w-50 text-center mx-auto`}>{messageRemove}</p> : ''} */}
                                     <Modal.Footer className='d-flex justify-content-center align-items-center'>

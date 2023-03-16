@@ -26,6 +26,9 @@ import EditDoctor from './../Pages/Vendor/Doctor/EditDoctor';
 import DoctorFields from './../Pages/Vendor/Doctor/DoctorFields';
 import DoctorCategory from './../Pages/Vendor/Doctor/DoctorCategory';
 import DoctorProfile from '../Pages/Vendor/Doctor/DoctorProfile';
+import DoctorHours from '../Pages/Vendor/Doctor/DoctorHours';
+import SingleHour from '../Pages/Vendor/Doctor/SingleHour';
+import AddDoctorHours from '../Pages/Vendor/Doctor/AddDoctorHours';
 import ClientList from './../Pages/Chat/Client/ClientList';
 import LiveChat from './../Pages/Chat/Client/LiveChat';
 import DoctorList from './../Pages/Chat/Doctors/DoctorList';
@@ -123,6 +126,9 @@ export default {
     DoctorFields,
     DoctorCategory,
     DoctorProfile,
+    DoctorHours,
+    SingleHour,
+    AddDoctorHours,
 
     //AnimalCat
     AnimalCat,

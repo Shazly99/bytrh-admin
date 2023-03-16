@@ -70,3 +70,16 @@
       transform: scale(1.0); 
     } 
   }
+
+  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #FAAA40 !important;
+  }
+
+  .inf-time svg {
+    transition: all 0.3s;
+    opacity: 0;
+  }
+
+  .inf-time:hover svg {
+    opacity: 1;
+  }

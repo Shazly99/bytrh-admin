@@ -61,6 +61,8 @@ function App() {
             { path: 'doctorfields/:id', element: <ProtectedRoutes> <Component.DoctorFields /></ProtectedRoutes> },
             { path: 'doctorCategory/:id', element: <ProtectedRoutes> <Component.DoctorCategory /></ProtectedRoutes> },
             { path: 'doctorProfile/:id', element: <ProtectedRoutes> <Component.DoctorProfile /></ProtectedRoutes> },
+            { path: 'doctorHours/:id', element: <ProtectedRoutes> <Component.DoctorHours /></ProtectedRoutes> },
+            { path: 'addDoctorHours', element: <ProtectedRoutes> <Component.AddDoctorHours /></ProtectedRoutes> },
           ]
         },
 
