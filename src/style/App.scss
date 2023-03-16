@@ -356,3 +356,9 @@ td {
 .daterangepicker .drp-buttons .btn {
   border: $colorRed-0 !important;
 }
+
+.app__error{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

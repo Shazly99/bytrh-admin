@@ -213,6 +213,9 @@ function App() {
             { path: 'chat/:id', element: <ProtectedRoutes> <Component.LiveConsult /> </ProtectedRoutes> }
           ]
         },
+        {
+          path: '*', element: <Component.Error />
+        }
       ],
     },
 
@@ -235,7 +238,9 @@ function App() {
             { path: 'details/:id', element: <ProtectedRoutes> <Component.LiveConsult /> </ProtectedRoutes> }
           ]
         },
-        { path: '*', element: <h1>test</h1> }
+        {
+          path: '*', element: <Component.Error />
+        }
       ],
     },
 
@@ -258,11 +263,11 @@ function App() {
             fontFamily: ' Arial, Helvetica, sans-serif',
             textTransform: 'capitalize',
             zIndex: '9999',
-          background: '#fff',
-             color: '#000',  
+            background: '#fff',
+            color: '#000',
             borderRadius: '10px',
-           /*  background: '#333',
-            color: '#fff', */
+            /*  background: '#333',
+             color: '#fff', */
           },
         }}
         containerStyle={{

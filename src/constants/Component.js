@@ -29,7 +29,7 @@ import DoctorProfile from '../Pages/Vendor/Doctor/DoctorProfile';
 import ClientList from './../Pages/Chat/Client/ClientList';
 import LiveChat from './../Pages/Chat/Client/LiveChat';
 import DoctorList from './../Pages/Chat/Doctors/DoctorList';
-import LiveChatDoc from './../Pages/Chat/Doctors/LiveChatDoc'; 
+import LiveChatDoc from './../Pages/Chat/Doctors/LiveChatDoc';
 import Cities from './../Pages/Vendor/Location/Cities/Cities';
 import AddCities from './../Pages/Vendor/Location/Cities/AddCities';
 import EditCities from './../Pages/Vendor/Location/Cities/EditCities';
@@ -71,12 +71,13 @@ import AddBagging from './../Pages/Animals/Bagging/AddBagging';
 import EditBagging from './../Pages/Animals/Bagging/EditBagging';
 import BaggingPricing from './../Pages/Animals/BaggingPricing/BaggingPricing';
 import AddBaggingPricing from './../Pages/Animals/BaggingPricing/AddBaggingPricing';
- import CuttingPricing from './../Pages/Animals/CuttingPricing/CuttingPricing';
+import CuttingPricing from './../Pages/Animals/CuttingPricing/CuttingPricing';
 import AddCuttingPricing from './../Pages/Animals/CuttingPricing/AddCuttingPricing';
 import StoreList from './../Pages/Store/StoreList';
 import StoreDetails from './../Pages/Store/StoreDetails';
 import StoreChatDetails from './../Pages/Store/StoreChatDetails';
- 
+import Error from './../Components/Shared/NotFound/Error';
+
 export default {
     // Layout 
     Vendor,
@@ -138,13 +139,13 @@ export default {
     EditBagging,
     BaggingPricing,
     AddBaggingPricing,
-     CuttingPricing,
-    AddCuttingPricing, 
+    CuttingPricing,
+    AddCuttingPricing,
     // Store
     StoreList,
     StoreDetails,
     StoreChatDetails,
-     // location
+    // location
     Country,
     AddCountry,
     EditCountry,
@@ -171,9 +172,10 @@ export default {
     Sildebar,
     ButtonBase,
     BaseHeader,
-
     // Adoption
     Adoption,
     AdoptionDetails,
     AdoptionChat,
+    
+    Error,
 }

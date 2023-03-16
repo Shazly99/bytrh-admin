@@ -15,6 +15,7 @@ import icon from "./Images/Ellipse 38.png";
 import defaultImg from "./Images/default.png";
 import search from "./Images/kisspng-mt-gox-chief-executive-management-system-business-searching-5b3ba1034696c2.1059044815306344992891.png";
 import searchNotFound from "./Images/50b508673f1bd07bc3022c3b62c3a3a7.webp";
+import ErrorGif1 from "./Images/GIF/GIF/404 Error with a cute animal(1).gif";
 
 export default{ 
     // logo, 
@@ -33,5 +34,6 @@ export default{
     view,
     icon,
     search,
-    searchNotFound
+    searchNotFound,
+    ErrorGif1
 }
