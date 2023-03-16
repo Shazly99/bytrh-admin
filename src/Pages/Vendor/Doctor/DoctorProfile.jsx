@@ -40,7 +40,8 @@ export default function DoctorProfile() {
         }
       })
       .catch(err => {
-       })
+        console.log(err);
+      })
   }
   useEffect(() => {
     getDoctorData();
