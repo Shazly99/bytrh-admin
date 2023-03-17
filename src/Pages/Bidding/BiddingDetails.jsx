@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import Component from '../../constants/Component'
-import { Container, Row, Col } from 'react-bootstrap';
+import Skeleton from '@mui/material/Skeleton';
+import React, { useEffect, useState } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
-import './store.scss'
+import Img from '../../assets/Img';
+import Component from '../../constants/Component';
+import Icons from '../../constants/Icons';
 import { GetData } from '../../utils/fetchData';
 import { apiheader } from './../../utils/fetchData';
-import Img from '../../assets/Img';
-import Skeleton from '@mui/material/Skeleton';
-import StoreChat from './StoreChat';
-import ProductRequests from './ProductRequests';
-import Icons from '../../constants/Icons';
 
-const StoreDetails = () => {
+const BiddingDetails = () => {
+
   let { id } = useParams()
   const [animal, setAnimal] = useState([]);
   const [isLoader, setIsloader] = useState(false);
@@ -79,7 +77,7 @@ const StoreDetails = () => {
       <div className='app__blog'>
         <Container fluid>
           <div className="app__addprodects">
-            <Component.SubNav sub__nav={[{ name: " Animal Products", path: '/store' }, { name: "Product Details ", path: `/store/details/${id}` }]} />
+            <Component.SubNav sub__nav={[{ name: " Animal bidding", path: '/bidding' }, { name: "Bidding details ", path: `/bidding/details/${id}` }]} />
           </div>
           <Row>
             <Col xl={6} lg={6} md={6} sm={12} className='store_info'>
@@ -218,7 +216,7 @@ const StoreDetails = () => {
               </Row>
             </div>
             {isLoader ? <>
-              {animal?.AnimalProductDescription &&
+              {animal?.AnimalProductDescription ===[]&&
                 <div className="product_description">
                   <h3 >Product Description</h3>
                   <p>{animal?.AnimalProductDescription}</p>
@@ -242,7 +240,7 @@ const StoreDetails = () => {
 
                 <div className='row'>
                   {isLoader ? <>
-                    {animal?.AnimalProductGallery ===[]&&
+                    {animal?.AnimalProductGallery &&
                       <>
                         {animal?.AnimalProductGallery?.length > 8 ? animal?.AnimalProductGallery?.slice(0, 8).map((item, i) => (
                           <Col key={i}
@@ -298,17 +296,18 @@ const StoreDetails = () => {
             </div>
           }
 
-          <div className="app__store__chat">
+
+          {/* <div className="app__store__chat">
             {
               animal?.AnimalProductChats?.length > 0 &&
               <StoreChat chat={animal?.AnimalProductChats} isLoader={isLoader} />
             }
-          </div>
+          </div> */}
 
           <div className="app__store__chat">
             {
               animal?.AnimalProductRequests?.length > 0 &&
-              <ProductRequests Request={animal?.AnimalProductRequests} isLoader={isLoader} />
+              <Component.BiddingRequests Request={animal?.AnimalProductRequests} isLoader={isLoader} />
             }
           </div>
         </Container>
@@ -318,4 +317,4 @@ const StoreDetails = () => {
   )
 }
 
-export default StoreDetails
+export default BiddingDetails

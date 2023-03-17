@@ -4,9 +4,8 @@ import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Icons from '../../constants/Icons';
 
-const ProductRequests = ({ Request, isLoader }) => {
-
-    useEffect(() => { 
+const BiddingRequests = ({ Request, isLoader }) => {
+    useEffect(() => {
     }, [isLoader])
     const SkeletonHeader = () => {
         return (
@@ -16,8 +15,8 @@ const ProductRequests = ({ Request, isLoader }) => {
         )
     }
     const SkeletonTable = () => {
-        return ( 
-            <Table responsive={true}striped bordered hover size="sm" className='Skeleton_table'>
+        return (
+            <Table striped bordered hover size="sm" className='Skeleton_table'>
                 <thead>
                     <tr  >
                         <th style={{ padding: '15px !important', textAlign: 'center', margin: 'auto' }}>  <Skeleton variant='rounded' height={10} width="30%" /></th>
@@ -29,7 +28,7 @@ const ProductRequests = ({ Request, isLoader }) => {
                 </thead>
                 <tbody>
                     {
-                        Array.from(Array(2).keys())?.map((  index) => (
+                        Array.from(Array(2).keys())?.map((index) => (
                             <tr key={index}>
                                 <td style={{ padding: '15px', textAlign: 'center', margin: 'auto' }}>    <Skeleton variant='rounded' height={10} width="30%" /> </td>
                                 <td style={{ padding: '15px', textAlign: 'center', margin: 'auto' }}><Skeleton variant='rounded' height={10} width="30%" /></td>
@@ -44,7 +43,7 @@ const ProductRequests = ({ Request, isLoader }) => {
         )
     }
     return (
-        
+
         <>
             {isLoader ? <>
                 {Request &&
@@ -52,14 +51,14 @@ const ProductRequests = ({ Request, isLoader }) => {
                         <h3 > Animal Product Requests  </h3>
                     </div>
                 }
-            </> : SkeletonHeader()} 
+            </> : SkeletonHeader()}
 
             {isLoader ? <>
                 {Request &&
-                    <Table striped bordered hover size="sm">
+                    <Table responsive={true} striped bordered hover size="sm">
                         <thead>
                             <tr>
-                            <th >  Buyer Info</th>
+                                <th >  Buyer Info</th>
                             {/*     <th>Phone</th> */}
                                 <th>Note</th>
                                 <th>CuttingName</th>
@@ -81,6 +80,7 @@ const ProductRequests = ({ Request, isLoader }) => {
                                             <span className='ClientPhone'>{item?.BuyerPhone}</span> 
                                         </td> 
                                         <td className='text-center'>{item?.AnimalProductRequestNote?.split(" ").slice(0, 2).join(' ')}</td>
+
                                         <td className='text-center'>{item?.CuttingName}</td>
                                         <td className='text-center'>{item?.AnimalProductCuttingFees  === 0? <Icons.check color='#40AB45'size={18}/> : <Icons.uncheck color='#E20000' size={18}/> }</td>
                                         <td className='text-center'>{item?.BaggingName}</td>
@@ -101,4 +101,4 @@ const ProductRequests = ({ Request, isLoader }) => {
     )
 }
 
-export default ProductRequests
+export default BiddingRequests

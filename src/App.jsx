@@ -137,6 +137,17 @@ function App() {
             }
           ]
         },
+        {
+          path: '/bidding', children: [
+            { index: true, element: <ProtectedRoutes>  <Component.Bidding /></ProtectedRoutes> },
+            {
+              path: 'details/:id', children: [
+                { index: true, element: <ProtectedRoutes>  <Component.BiddingDetails /></ProtectedRoutes> },
+                { path: 'chat/:id', element: <ProtectedRoutes>  <Component.StoreChatDetails /></ProtectedRoutes> }
+              ]
+            }
+          ]
+        },
         // ** :: Locations
         {
           path: '/location', children: [

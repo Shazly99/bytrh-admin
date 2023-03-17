@@ -44,7 +44,7 @@ const routes = [
         path: "/animals/cutting",
         name: "Cutting ",
         icon: <Icons.dote size={19} />,
-      },     
+      },
       {
         path: "/animals/cuttingprice",
         name: "Cutting Price",
@@ -60,7 +60,7 @@ const routes = [
         name: "Bagging Price",
         icon: <Icons.dote size={19} />,
       },
- 
+
 
 
     ],
@@ -92,7 +92,7 @@ const routes = [
     path: "/consult",
     name: "Consults",
     icon: <Icons.consult size={19} />,
-  }, 
+  },
   {
     path: "/ads",
     name: "Ads",
@@ -111,20 +111,24 @@ const routes = [
         path: "/blogs/doctor",
         name: " Doctor ",
         icon: <Icons.dote size={19} />,
-      }, 
+      },
 
     ],
   },
   {
     path: "/store",
     name: "Store",
-    icon: <Icons.shop size={19}/>,
+    icon: <Icons.shop size={19} />,
   },
-
+  {
+    path: "/bidding",
+    name: "Bidding",
+    icon: <Icons.bidding size={19} />,
+  },
   {
     path: "/adoption",
     name: "Adoption",
-    icon: <Icons.pets size={19}/>,
+    icon: <Icons.pets size={19} />,
   },
   {
     path: "/settings/general",

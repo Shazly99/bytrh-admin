@@ -1,5 +1,4 @@
  
-import { CiCircleCheck as check } from "react-icons/ci";
 import { MdSpaceDashboard as Dashboard } from "react-icons/md";
 import { IoIosNotificationsOutline as notification } from "react-icons/io";
 import { CiSearch as Search } from "react-icons/ci";
@@ -46,9 +45,14 @@ import { MdPets as pets } from 'react-icons/md'
 import { BsThreeDotsVertical as dotes } from 'react-icons/bs'
 import { MdOutlineContactless as contact } from 'react-icons/md'
 import { MdLanguage as Language } from 'react-icons/md'
+import { RiAuctionLine as bidding } from 'react-icons/ri'
+import { BsCheck2Circle as check } from 'react-icons/bs'
+import { CiCircleRemove as uncheck } from 'react-icons/ci'
 
 
 export default{
+    uncheck,
+    bidding,
     Language,
     contact,
     dotes,

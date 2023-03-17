@@ -125,6 +125,13 @@
 
 
 .app__store__chat {
+ 
+
+  .ClientPhone {
+    font-size: 15px !important;
+    font-weight: normal;
+    color: #025585; 
+  }
 
   tbody,
   thead {
@@ -150,15 +157,18 @@
     }
   }
 
- 
-} .Skeleton_table {
+
+}
+
+.Skeleton_table {
+
   tbody,
   thead {
 
     th {
- 
+
       margin: 0 !important;
       padding: 15px !important
     }
   }
-  }
+}

@@ -329,8 +329,8 @@ const StoreList = () => {
                     <Table responsive={true} className="rounded-3 ">
                         <thead>
                             <tr className="text-center  " style={{ background: "#F9F9F9" }} >
-                                <th >   {isLoader ? <>Client Info </> : SkeletonTable(70)} </th>
                                 <th >   {isLoader ? <>  Product Image   </> : SkeletonTable(70)} </th>
+                                <th >   {isLoader ? <>Client Info </> : SkeletonTable(70)} </th>
                                 <th >   {isLoader ? <> SubCategory   </> : SkeletonTable(70)} </th>
                                 <th >   {isLoader ? <> Price   </> : SkeletonTable(70)} </th>
                                 <th >   {isLoader ? <> Type </> : SkeletonTable(70)} </th>
@@ -346,11 +346,11 @@ const StoreList = () => {
                                     <>
                                         {Array.from(Array(5).keys())?.map((index) => (
                                             <tr key={index}>
-                                                <td>
-                                                    <Skeleton variant="rounded" width={'100%'} height={70} />
-                                                </td>
                                                 <td className="d-flex justify-content-center align-item-center">
                                                     <Skeleton variant="rounded" width={145} height={96} />
+                                                </td>
+                                                <td>
+                                                    <Skeleton variant="rounded" width={'100%'} height={20} />
                                                 </td>
                                                 <td>
                                                     <Skeleton variant="rounded" width={'100%'} height={20} />
@@ -376,6 +376,16 @@ const StoreList = () => {
                                     <>
                                         {animal?.map((item, index) => (
                                             <tr key={index}>
+                                                                                                <td>
+                                                    <div style={{ maxWidth: "170px" }}>
+                                                        <img
+                                                            src={item?.AnimalProductImage}
+                                                            className="w-100 rounded-3"
+                                                            alt={item?.AnimalProductTypeName}
+                                                            loading="lazy"
+                                                        />
+                                                    </div>
+                                                </td>
                                                 <td>
                                                     <div
                                                         className="d-flex flex-column justify-content-center align-content-center"
@@ -389,16 +399,7 @@ const StoreList = () => {
                                                         </span>
                                                     </div>
                                                 </td>
-                                                <td>
-                                                    <div style={{ maxWidth: "170px" }}>
-                                                        <img
-                                                            src={item?.AnimalProductImage}
-                                                            className="w-100 rounded-3"
-                                                            alt={item?.AnimalProductTypeName}
-                                                            loading="lazy"
-                                                        />
-                                                    </div>
-                                                </td>
+
                                                 <td>
                                                     <div>{item?.AnimalSubCategoryName}</div>
                                                 </td>

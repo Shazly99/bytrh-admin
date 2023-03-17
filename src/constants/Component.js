@@ -80,6 +80,9 @@ import StoreList from './../Pages/Store/StoreList';
 import StoreDetails from './../Pages/Store/StoreDetails';
 import StoreChatDetails from './../Pages/Store/StoreChatDetails';
 import Error from './../Components/Shared/NotFound/Error';
+import Bidding from './../Pages/Bidding/Bidding';
+import BiddingDetails from './../Pages/Bidding/BiddingDetails';
+import BiddingRequests from './../Pages/Bidding/BiddingRequests';
 
 export default {
     // Layout 
@@ -151,6 +154,11 @@ export default {
     StoreList,
     StoreDetails,
     StoreChatDetails,
+    // Bidding
+    Bidding,
+    BiddingDetails,
+    BiddingRequests,
+
     // location
     Country,
     AddCountry,

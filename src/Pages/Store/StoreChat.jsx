@@ -20,7 +20,7 @@ const StoreChat = ({ chat, isLoader }) => {
         return (
 
 
-            <Table striped bordered hover size="sm" className='Skeleton_table'>
+            <Table responsive={true}striped bordered hover size="sm" className='Skeleton_table'>
                 <thead>
                     <tr  >
                         <th style={{ padding: '15px !important', textAlign: 'center', margin: 'auto' }}>  <Skeleton variant='rounded' height={10} width="30%" /></th>
