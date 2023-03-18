@@ -59,6 +59,7 @@ const EditAnimalCat = () => {
         setCategoryDetail(data.Response);
      }
     useEffect(() => {
+        window.scrollTo(0, 0);
         categoryDetail()
     }, [id])
     useEffect(() => {

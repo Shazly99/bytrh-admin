@@ -55,6 +55,7 @@ const BlogDoctorDetails = () => {
   }
   useEffect(() => {
     BlogList()
+     window.scrollTo(0, 0);
   }, [id])
   return (
 

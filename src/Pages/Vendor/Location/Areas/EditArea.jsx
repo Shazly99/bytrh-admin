@@ -67,6 +67,7 @@ const EditArea = () => {
 
   useEffect(() => {
     AreaDetail()
+     window.scrollTo(0, 0);
   }, [id])
 
   return (

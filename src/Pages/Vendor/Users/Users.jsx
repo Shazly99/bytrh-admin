@@ -28,12 +28,14 @@ function Users() {
 
         setuserList(data.Response.Users);
         setPagesNumber(data.Response.Pages);
+        console.log(data.Response.Pages)
         const timeoutId = setTimeout(() => {
           setIsloader(true)
         }, 1000);
         return () => clearTimeout(timeoutId);
       });
     } catch (error) {
+      console.log(error);
       if (error.response && error.response.status === 429) {
         const retryAfter = error.response.headers['retry-after'];
         setTimeout(() => {
@@ -43,6 +45,7 @@ function Users() {
     }
   }
   useEffect(() => {
+    window.scrollTo(0, 0);
     userList(page)
   }, [page])
   // to fixed problem because Pagination count need a number 

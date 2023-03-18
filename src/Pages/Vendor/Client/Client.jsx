@@ -33,7 +33,7 @@ const Clients = () => {
   }, 1000)
   useEffect(() => {
     userList(page)
-
+    window.scrollTo(0, 0);
   }, [page])
 
   // to fixed problem because Pagination count need a number 

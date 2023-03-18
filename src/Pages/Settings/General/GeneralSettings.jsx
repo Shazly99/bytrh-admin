@@ -50,6 +50,7 @@ function GeneralSettings() {
 
   useEffect(() => {
     generalData();
+    window.scrollTo(0, 0);
   }, []);
 
   return (

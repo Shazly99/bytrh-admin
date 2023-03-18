@@ -95,6 +95,7 @@ const ClientTable = ({ usersList, userList, isLoading }) => {
     await userList()
   }
   useEffect(() => {
+   window.scrollTo(0, 0);
   }, [usersList]) 
   return (
     <>

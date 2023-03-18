@@ -108,6 +108,7 @@ const Country = () => {
 
     useEffect(() => {
         CountrycList(page)
+         window.scrollTo(0, 0);
     }, [page])
     useEffect(() => {
     }, [page, PagesNumber])

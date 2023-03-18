@@ -116,6 +116,7 @@ const AnimalsSubCategories = () => {
 
     useEffect(() => {
         AnimalSubCategories(page)
+        window.scrollTo(0, 0);
     }, [page])
     useEffect(() => {
     }, [page, PagesNumber])

@@ -88,6 +88,7 @@ const EditAnimalsSubCategories = () => {
     IDAnimalCategory()
     AnimalBagging()
     AnimalCut()
+     window.scrollTo(0, 0);
     return () => {
       categoryDetail()
       IDAnimalCategory()

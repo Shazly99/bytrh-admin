@@ -69,6 +69,7 @@ const ChatClient = () => {
 
   useEffect(() => {
     clientlist()
+    window.scrollTo(0, 0);
   }, [id, chatEnd])
   return (
     <>

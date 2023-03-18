@@ -1,6 +1,6 @@
 import React from 'react'
-import { Container } from 'react-bootstrap'
-import Component from '../../../constants/Component'
+// import { Container } from 'react-bootstrap'
+// import Component from '../../../constants/Component'
 import './Dashboard.scss'
 function Dashboard() {
 

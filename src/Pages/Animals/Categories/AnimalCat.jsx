@@ -113,6 +113,7 @@ const AnimalCat = () => {
 
   useEffect(() => {
     animalcategories(page)
+    window.scrollTo(0, 0);
   }, [page])
   useEffect(() => {
   }, [page, PagesNumber])

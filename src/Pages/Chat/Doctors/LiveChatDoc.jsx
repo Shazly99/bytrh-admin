@@ -84,6 +84,7 @@ const LiveChatDoc = () => {
 
   };
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (chatStatus === 'ONGOING') {
       setIsOn(true)
       localStorage.setItem('chatStatus', 'ONGOING')
