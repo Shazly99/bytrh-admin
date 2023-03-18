@@ -10,9 +10,9 @@ import oops from '../../../assets/Images/doctor/Z.jfif';
 
 export default function ItemDoctor({ nameDoc, email, phone, country, type, balance, create, status, item, id, getTokenDoctors }) {
     // const [data, setData] = useState({});
-    const [showModal, setShowModal] = useState(false);
  
     const [idDoc, setId] = useState(null);
+    const [showModal, setShowModal] = useState(false);
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
     const handleActionSelect = async (id, action) => {
@@ -137,11 +137,11 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                 <td className='text-center  d-flex '>
                     <div>
                         <span style={{ height: 'fit-content !important' }} className={`
-                                          ${status == 'PENDING' && 'txt_pending'} 
-                                          ${status == 'NOT_VERIFIED' && 'txt_shipped'}
-                                          ${status == 'BLOCKED' && 'txt_blocked'}
-                                          ${status == 'ACTIVE' && 'txt_delivered'}
-                                          ${status == 'OFFLINE' && 'txt_rejected'}`} >
+                                ${status == 'PENDING' && 'txt_pending'} 
+                                ${status == 'NOT_VERIFIED' && 'txt_shipped'}
+                                ${status == 'BLOCKED' && 'txt_blocked'}
+                                ${status == 'ACTIVE' && 'txt_delivered'}
+                                ${status == 'OFFLINE' && 'txt_rejected'}`} >
                             {status && status[0].toUpperCase()}{status.slice(1).toLowerCase()}
                         </span>
                     </div>
