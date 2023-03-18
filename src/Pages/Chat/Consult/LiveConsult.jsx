@@ -26,6 +26,7 @@ const LiveConsult = () => {
   }
   useEffect(() => {
     ConsultDetails()
+     window.scrollTo(0, 0);
     return () => {
       ConsultDetails()
     }

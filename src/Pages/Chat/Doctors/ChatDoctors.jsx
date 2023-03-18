@@ -34,6 +34,7 @@ const ChatDoctors = () => {
       });
   }
   useEffect(() => {
+    window.scrollTo(0, 0);
     clientlist()
   }, [id])
 

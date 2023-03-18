@@ -41,7 +41,7 @@ function App() {
         // ?User 
         {
           path: '/user', children: [
-            { index: true, element: <ProtectedRoutes>  <Component.Users /> </ProtectedRoutes> },
+            { index: true , element: <ProtectedRoutes>  <Component.Users /> </ProtectedRoutes> },
             { path: 'addUser', element: <ProtectedRoutes> <Component.AddNewUser /></ProtectedRoutes> },
             { path: 'editUser/:id', element: <ProtectedRoutes>  <Component.Edit /> </ProtectedRoutes> },
           ]

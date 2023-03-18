@@ -24,6 +24,7 @@ function Profile() {
 
   useEffect(() => {
      userProfileGet()
+     window.scrollTo(0, 0);
   }, [userProfile])
   
   useEffect(() => { 

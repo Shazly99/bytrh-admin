@@ -52,6 +52,7 @@ const Bagging = () => {
 
   useEffect(() => {
     baggings()
+    window.scrollTo(0, 0);
   }, [])
   // useEffect(() => {
   // }, [page, PagesNumber])

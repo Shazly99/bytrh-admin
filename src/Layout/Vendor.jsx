@@ -8,6 +8,8 @@ function Vendor() {
   let { isOpen } = useContext(VendersContext);
 
   useEffect(() => {
+   
+
    }, [isOpen])
   return (
     <>

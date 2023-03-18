@@ -36,7 +36,7 @@ const StoreDetails = () => {
 
   useEffect(() => {
     store();
-
+ window.scrollTo(0, 0);
     return () => {
       store();
     }

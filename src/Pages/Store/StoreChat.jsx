@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const StoreChat = ({ chat, isLoader }) => {
 
-    useEffect(() => {
+    useEffect(() => { window.scrollTo(0, 0);
         console.log(chat);
     }, [isLoader])
     const SkeletonHeader = () => {

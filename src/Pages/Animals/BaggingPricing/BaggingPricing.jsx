@@ -121,6 +121,7 @@ const BaggingPricing = () => {
 
   useEffect(() => {
     baggings(page);
+    window.scrollTo(0, 0);
   }, [page]);
   useEffect(() => { }, [page, PagesNumber]);
 

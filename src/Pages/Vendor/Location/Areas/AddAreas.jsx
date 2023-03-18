@@ -60,6 +60,7 @@ const AddAreas = () => {
   }
   useEffect(() => {
     getCities(countriesRef.current.value)
+    window.scrollTo(0, 0);
   }, [])
 
   return (

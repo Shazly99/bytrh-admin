@@ -58,6 +58,7 @@ const EditCities = () => {
    }
   useEffect(() => {
     cityDetail()
+    window.scrollTo(0, 0);
   }, [id])
   return (
     <Container fluid>

@@ -61,6 +61,7 @@ const AddBaggingPricing = () => {
   useEffect(() => {
     IDAnimalCategory()
     AnimalCut()
+    window.scrollTo(0, 0);
     return () => {
       IDAnimalCategory()
       AnimalCut()

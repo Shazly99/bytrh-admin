@@ -96,6 +96,7 @@ const Cities = () => {
   };
   useEffect(() => {
     CitiescList(page)
+     window.scrollTo(0, 0);
   }, [page])
   useEffect(() => {
   }, [page, PagesNumber])

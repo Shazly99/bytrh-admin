@@ -13,6 +13,7 @@ import Component from '../../constants/Component';
 import Icons from '../../constants/Icons';
 import { apiheader, GetData } from '../../utils/fetchData';
 import useFetch from '../../utils/useFetch';
+import useSkeletonTable from "../../utils/useSkeletonTable";
 
 
 const AdsList = () => {
@@ -22,6 +23,8 @@ const AdsList = () => {
   const [page, setPage] = useState(1);
   const [PagesNumber, setPagesNumber] = useState('')
   const [searchValue, setSearchValue] = useState('');
+  const [isLoader, setIsloader] = useState(false);
+  let { SkeletonTableImg, SkeletonFilters, SkeletonSearchsingel } = useSkeletonTable();
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -33,7 +36,10 @@ const AdsList = () => {
           setAds(res.data.Response.Advertisements);
           setPagesNumber(res.data.Response.Pages);
           setIsLoading(false);
-
+          const timeoutId = setTimeout(() => {
+            setIsloader(true)
+          }, 0);
+          return () => clearTimeout(timeoutId);
         }
       })
     } catch (error) {
@@ -53,8 +59,8 @@ const AdsList = () => {
   };
 
   const handleActionSelect = async (id, action) => {
-     if (action === "DELETE") {
-       await GetData(`${process.env.REACT_APP_API_URL}/admin/advertisements/status/${id}`, apiheader).then((res) => {
+    if (action === "DELETE") {
+      await GetData(`${process.env.REACT_APP_API_URL}/admin/advertisements/status/${id}`, apiheader).then((res) => {
         toast.success('The ads has been removed', {
           duration: 4000,
           position: 'top-center',
@@ -91,13 +97,13 @@ const AdsList = () => {
       StartDate: moment(start, 'M/D/YYYY').format('YYYY-MM-DD'),
       EndDate: moment(end, 'M/D/YYYY').format('YYYY-MM-DD')
     };
-     try {
+    try {
       await axios.post(`${process.env.REACT_APP_API_URL}/admin/advertisements`, date, apiheader).then((res) => {
         if (res.status === 200 && res.request.readyState === 4) {
           setAds(res.data.Response.Advertisements);
           setPagesNumber(res.data.Response.Pages);
           setIsLoading(false);
-         }
+        }
       })
     } catch (error) {
       if (error.response && error.response.status === 429) {
@@ -114,7 +120,7 @@ const AdsList = () => {
   const countriesRef = useRef(null);
   const handelSelectCountry = (event) => {
     const selectedCountryId = event.target.value;
-     getCities(selectedCountryId)
+    getCities(selectedCountryId)
   }
   const handelSelectCity = async () => {
     let city = countriesRef.current.value
@@ -128,7 +134,7 @@ const AdsList = () => {
             setAds(res.data.Response.Advertisements);
             setPagesNumber(res.data.Response.Pages);
             setIsLoading(false);
-           }
+          }
         })
       } catch (error) {
         if (error.response && error.response.status === 429) {
@@ -179,201 +185,201 @@ const AdsList = () => {
 
   useEffect(() => {
     advertisements();
+    window.scrollTo(0, 0);
   }, [page]);
 
   return (
+
     <>
-      {
-        ads ?
-          <>
-            <div className="app__Users ">
-              <Component.ButtonBase title={"Add "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/ads/add" />
-              <div className="app__Users-table">
-                <div className="search-container">
-                  <div className='search__group w-100'>
-                    <div className=' app__addOrder-form'>
-                      <div className="d-flex flex-column row justify-content-between">
-                        <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }} className='col'>Filter by Start Date and End Date :	</h5>
-                        <div className='d-flex flex-row justify-content-between'>
-                          <DateRangePicker
-                            ranges={[dateRange]}
-                            onChange={handleSelect}
-                            onApply={handleApply}
-                          >
-                            <Button variant="outline-primary">Select Start Date & End Date</Button>
-                          </DateRangePicker>
-                          {startDate && <p> <strong>Start Date : </strong>{startDate} </p>}
-                          {endDate && <p> <strong>End Date : </strong>{endDate} </p>}
-                        </div>
-
-                      </div>
-                      <h5 style={{ marginTop: '15px', color: '#4A4A4A' }} className='col'>Filter by City || Ads Location || Ads Service :	</h5>
-                      <Row className='d-flex flex-row justify-content-between'>
-                        <Col className='w-100'>
-                          <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry}>
-                            <Form.Label>Country</Form.Label>
-                            <Form.Select aria-label="Default select example" > 
-                              {
-                                countries?.map((item, index) => (
-                                  <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
-                                ))
-                              }
-                            </Form.Select>
-                          </Form.Group>
-                        </Col>
-
-                        <Col className='w-100'>
-                          <Form.Group controlId="formBasicEmail"   >
-                            <Form.Label>City</Form.Label>
-                            <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={countriesRef}>
-                              <option value={'cities'}>all city</option>
-                              {
-                                cities?.map((item, index) => (
-                                  <option key={index} value={item?.IDCity}>{item?.CityName}</option>
-                                ))
-                              }
-                            </Form.Select>
-
-                          </Form.Group>
-                        </Col>
-                        <Col className='w-100'>
-                          <Form.Group controlId="formBasicEmail"  >
-                            <Form.Label  >Advertisement Location</Form.Label>
-
-
-                            <Form.Select aria-label="Default select example" ref={adsLocation} onClick={handelAdvertisementLocation} >
-                              <option value={'ads'}  >All Ads</option>
-                              {
-                                ['HOME', 'PAGES', 'INNER_PAGES']?.map((item, index) => (
-                                  <option key={index} value={item}  >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase().replace('_', " ")}</option>
-                                ))
-                              }
-                            </Form.Select>
-                          </Form.Group>
-                        </Col>
-
-                        <Col className='w-100'>
-                          <Form.Group controlId="formBasicEmail"   >
-                            <Form.Label  >Advertisement Service</Form.Label>
-                            <Form.Select aria-label="Default select example" ref={adsService} onClick={handelAdvertisementService} >
-                              <option value={'ads'}  >All Ads</option>
-                              {
-                                ['NONE', 'URGENT_CONSULT', 'CONSULT', 'DOCTOR_BLOG', 'CLIENT_BLOG', 'ADOPTION']?.map((item, index) => (
-                                  <option key={index} value={item}>{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase().replace('_', " ")}</option>
-                                ))
-                              }
-                              {/* <option value="0">InActive</option> */}
-                            </Form.Select>
-
-                          </Form.Group>
-                        </Col>
-
-                      </Row>
-
-                    </div>
+      <div className="app__Users ">
+        <Component.ButtonBase title={"Add "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/ads/add" />
+        <div className="app__Users-table">
+          <div className="search-container">
+            <div className='search__group w-100'>
+              <div className=' app__addOrder-form'>
+                <div className="d-flex flex-column row justify-content-between">
+                  <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }} className='col'>Filter by Start Date and End Date :	</h5>
+                  <div className='d-flex flex-row justify-content-between'>
+                    <DateRangePicker
+                      ranges={[dateRange]}
+                      onChange={handleSelect}
+                      onApply={handleApply}
+                    >
+                      <Button variant="outline-primary">Select Start Date & End Date</Button>
+                    </DateRangePicker>
+                    {startDate && <p> <strong>Start Date : </strong>{startDate} </p>}
+                    {endDate && <p> <strong>End Date : </strong>{endDate} </p>}
                   </div>
+
                 </div>
+                <h5 style={{ marginTop: '15px', color: '#4A4A4A' }} className='col'>Filter by City || Ads Location || Ads Service :	</h5>
+                <Row className='d-flex flex-row justify-content-between'>
+                  <Col className='w-100'>
+                    <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry}>
+                      <Form.Label>Country</Form.Label>
+                      <Form.Select aria-label="Default select example" >
+                        {
+                          countries?.map((item, index) => (
+                            <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
+                          ))
+                        }
+                      </Form.Select>
+                    </Form.Group>
+                  </Col>
 
-                <Table responsive={true} className='rounded-3 '>
-                  <thead>
-                    <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                      <th> Image</th>
-                      <th> Service</th>
-                      <th>Start-Date</th>
-                      <th> End-Date  </th>
-                      <th> Location</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
+                  <Col className='w-100'>
+                    <Form.Group controlId="formBasicEmail"   >
+                      <Form.Label>City</Form.Label>
+                      <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={countriesRef}>
+                        <option value={'cities'}>all city</option>
+                        {
+                          cities?.map((item, index) => (
+                            <option key={index} value={item?.IDCity}>{item?.CityName}</option>
+                          ))
+                        }
+                      </Form.Select>
 
-                  <tbody className='text-center'>
-                    {
-                      ads?.map((item, index) => (
-                        <tr key={index}>
-                          <td className='img'>
-                            {
-                              item?.AdvertisementImage ?
-                                <img
-                                
-                                loading="lazy"
-                                  src={item.AdvertisementImage} // use normal <img> attributes as props
-                                  className="w-100 rounded-2"
-                                /> :
-
-                                <img
-                                
-                                loading="lazy"
-                                  src={Img.ads} // use normal <img> attributes as props
-                                  className="w-100 rounded-2"
-                                />
-
-                            }
-                            {/* <img src={item.AdvertisementImage} alt='example' className='w-100 rounded-2' /> */}
-                          </td>
-                          <td >
-                            <div>
-                              {item?.AdvertisementService.charAt(0).toUpperCase() + item?.AdvertisementService.slice(1).toLowerCase()}
-                            </div>
-                          </td>
-                          <td >
-                            <div>
-                              {item?.AdvertisementStartDate?.split(" ")[0]}
-                            </div>
-                          </td>
-                          <td >
-                            <div>
-                              {item?.AdvertisementEndDate?.split(" ")[0]}
-                            </div>
-                          </td>
-                          <td >
-                            <div>
-                              {item?.AdvertisementLocation.charAt(0).toUpperCase() + item?.AdvertisementLocation.slice(1).toLowerCase()}
-                            </div>
-                          </td>
+                    </Form.Group>
+                  </Col>
+                  <Col className='w-100'>
+                    <Form.Group controlId="formBasicEmail"  >
+                      <Form.Label  >Advertisement Location</Form.Label>
 
 
+                      <Form.Select aria-label="Default select example" ref={adsLocation} onClick={handelAdvertisementLocation} >
+                        <option value={'ads'}  >All Ads</option>
+                        {
+                          ['HOME', 'PAGES', 'INNER_PAGES']?.map((item, index) => (
+                            <option key={index} value={item}  >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase().replace('_', " ")}</option>
+                          ))
+                        }
+                      </Form.Select>
+                    </Form.Group>
+                  </Col>
 
-                          <td>
-                            <div>
-                              <span>
-                                <DropdownButton
-                                  id={`dropdown-${item.IDAdvertisement}`}
-                                  title="Actions"
-                                  variant="outline-success"
-                                  onSelect={(eventKey) => handleActionSelect(item.IDAdvertisement, eventKey)}
-                                  className="DropdownButton "
-                                  drop={'down-centered'}
-                                >
-                                  <Dropdown.Item eventKey="Edite" as={Link} to={`/ads/edit/${item.IDAdvertisement}`}>
-                                    Edit
-                                  </Dropdown.Item>
+                  <Col className='w-100'>
+                    <Form.Group controlId="formBasicEmail"   >
+                      <Form.Label  >Advertisement Service</Form.Label>
+                      <Form.Select aria-label="Default select example" ref={adsService} onClick={handelAdvertisementService} >
+                        <option value={'ads'}  >All Ads</option>
+                        {
+                          ['NONE', 'URGENT_CONSULT', 'CONSULT', 'DOCTOR_BLOG', 'CLIENT_BLOG', 'ADOPTION']?.map((item, index) => (
+                            <option key={index} value={item}>{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase().replace('_', " ")}</option>
+                          ))
+                        }
+                        {/* <option value="0">InActive</option> */}
+                      </Form.Select>
 
-                                  <Dropdown.Item eventKey="DELETE"   >
-                                    Delete
-                                  </Dropdown.Item>
+                    </Form.Group>
+                  </Col>
 
-                                </DropdownButton>
-                              </span>
-                            </div>
-                          </td>
-                        </tr>
-                      ))
-                    }
+                </Row>
 
-                  </tbody>
-
-                </Table>
               </div>
+            </div>
+          </div>
 
-            </div>
-            <div className="pagination ">
-              <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-                <Pagination count={pageCount} page={page} onChange={handleChange} />
-              </Box>
-            </div>
-          </> : <Component.Loader />
-      }
+          {isLoader ? <>
+            <Table responsive={true} className='rounded-3 '>
+              <thead>
+                <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
+                  <th> Image</th>
+                  <th> Service</th>
+                  <th>Start-Date</th>
+                  <th> End-Date  </th>
+                  <th> Location</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody className='text-center'>
+                {
+                  ads?.map((item, index) => (
+                    <tr key={index}>
+                      <td className='img'>
+                        {
+                          item?.AdvertisementImage ?
+                            <img 
+                              loading="lazy"
+                              src={item.AdvertisementImage} // use normal <img> attributes as props
+                              className="w-100 rounded-2"
+                            /> : 
+
+                            <img
+
+                              loading="lazy"
+                              src={Img.defaultImg} // use normal <img> attributes as props
+                              className="w-100 rounded-2"
+                            />
+
+                        }
+                        {/* <img src={item.AdvertisementImage} alt='example' className='w-100 rounded-2' /> */}
+                      </td>
+                      <td >
+                        <div>
+                          {item?.AdvertisementService.charAt(0).toUpperCase() + item?.AdvertisementService.slice(1).toLowerCase()}
+                        </div>
+                      </td>
+                      <td >
+                        <div>
+                          {item?.AdvertisementStartDate?.split(" ")[0]}
+                        </div>
+                      </td>
+                      <td >
+                        <div>
+                          {item?.AdvertisementEndDate?.split(" ")[0]}
+                        </div>
+                      </td>
+                      <td >
+                        <div>
+                          {item?.AdvertisementLocation.charAt(0).toUpperCase() + item?.AdvertisementLocation.slice(1).toLowerCase()}
+                        </div>
+                      </td>
+
+
+
+                      <td>
+                        <div>
+                          <span>
+                            <DropdownButton
+                              id={`dropdown-${item.IDAdvertisement}`}
+                              title="Actions"
+                              variant="outline-success"
+                              onSelect={(eventKey) => handleActionSelect(item.IDAdvertisement, eventKey)}
+                              className="DropdownButton "
+                              drop={'down-centered'}
+                            >
+                              <Dropdown.Item eventKey="Edite" as={Link} to={`/ads/edit/${item.IDAdvertisement}`}>
+                                Edit
+                              </Dropdown.Item>
+
+                              <Dropdown.Item eventKey="DELETE"   >
+                                Delete
+                              </Dropdown.Item>
+
+                            </DropdownButton>
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                }
+
+              </tbody>
+
+            </Table>
+          </> : SkeletonTableImg()}
+
+        </div>
+
+      </div>
+      <div className="pagination ">
+        <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
+          <Pagination count={pageCount} page={page} onChange={handleChange} />
+        </Box>
+      </div>
     </>
+
 
   )
 }

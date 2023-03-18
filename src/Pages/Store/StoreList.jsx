@@ -195,6 +195,7 @@ const StoreList = () => {
     useEffect(() => {
         store(page);
         animalSubCategoryGet()
+        window.scrollTo(0, 0);
     }, [page, isLoader]);
     useEffect(() => { }, [page, PagesNumber]);
     const SkeletonSearch = (w, h) => {

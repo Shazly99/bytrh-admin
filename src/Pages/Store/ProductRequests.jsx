@@ -6,7 +6,7 @@ import Icons from '../../constants/Icons';
 
 const ProductRequests = ({ Request, isLoader }) => {
 
-    useEffect(() => { 
+    useEffect(() => {  window.scrollTo(0, 0);
     }, [isLoader])
     const SkeletonHeader = () => {
         return (

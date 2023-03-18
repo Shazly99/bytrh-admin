@@ -128,6 +128,7 @@ const EditAds = () => {
 
   useEffect(() => {
     adsDetail()
+    window.scrollTo(0, 0);
   }, [id])
 
   return (

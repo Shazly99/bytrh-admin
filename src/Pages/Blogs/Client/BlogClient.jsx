@@ -114,6 +114,7 @@ const BlogClient = () => {
     useEffect(() => {
         BlogsList(page)
         animalcategories()
+         window.scrollTo(0, 0);
         return () => {
             BlogsList()
             animalcategories()

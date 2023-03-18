@@ -118,6 +118,7 @@ export const BlogDoctor = () => {
     useEffect(() => {
         BlogsList()
         animalcategories()
+        window.scrollTo(0, 0);
         return () => {
             BlogsList()
             animalcategories()
