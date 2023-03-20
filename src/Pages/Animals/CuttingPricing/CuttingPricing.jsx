@@ -1,3 +1,4 @@
+import { Player } from "@lottiefiles/react-lottie-player";
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState, useRef } from "react";
@@ -140,97 +141,104 @@ const CuttingPricing = () => {
         <div className="app__Users-table">
 
           {isLoader ? <>
-          <Table responsive={true} className="rounded-3 ">
-            <thead>
-              <tr
-                className="text-center  "
-                style={{ background: "#F9F9F9" }}
-              >
-                <th>Animal SubCategory  </th>
-                <th>Cutting Name</th>
-                <th>Cutting Price </th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody className="text-center">
-              {animal?.map((item, index) => (
-                <tr key={index}>
-                  <td>
-                    <div>{item?.AnimalSubCategoryName}</div>
-                  </td>
-                  <td>
-                    <div>{item?.CuttingName}</div>
-                  </td>
+            <Table responsive={true} className="rounded-3 ">
+              <thead>
+                <tr
+                  className="text-center  "
+                  style={{ background: "#F9F9F9" }}
+                >
+                  <th>Animal SubCategory  </th>
+                  <th>Cutting Name</th>
+                  <th>Cutting Price </th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody className="text-center">
+                {animal?.map((item, index) => (
+                  <tr key={index}>
+                    <td>
+                      <div>{item?.AnimalSubCategoryName}</div>
+                    </td>
+                    <td>
+                      <div>{item?.CuttingName}</div>
+                    </td>
 
-                  <td>
-                    <div className="d-flex gap-1">
-                      <h6 className="mb-0  pe-2 color-red">{item?.SubCategoryCuttingPrice}{' '}SAR</h6>
-                      <Icons.edit
-                        onClick={() => handleModalOpenEdit(index)}
-                      />
-                      <Modal
-                        show={modalShowEdit && modalIndexEdit === index}
-                        onHide={handleModalCloseEdit}
-                        centered
-                      >
-                        <Modal.Header closeButton>
-                          <Modal.Title className='  w-100 text-center'>  price Details</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
-                          <input className="form-control" defaultValue={item.SubCategoryCuttingPrice} ref={changePrice} />
-                        </Modal.Body>
-                        <Modal.Footer className="d-flex justify-content-center align-items-center">
-
-                          <Button variant="outline-primary" onClick={handleModalCloseEdit}>
-                            Cancel
-                          </Button>
-                          <Button style={{ border: '#FAAA40' }} onClick={() => handleChangePrice(item.IDAnimalSubCategory, item.IDCutting)}>
-                            Set Price
-                          </Button>
-                        </Modal.Footer>
-                      </Modal>
-
-
-                    </div>
-                  </td>
-
-                  <td>
-                    <div>
-                      <span>
-                        <Button
-                          variant=" outline-sucess"
-                          onClick={() => handleModalOpen(index)}
-                          className="DropdownButton outline-sucess"
-                        >Detete</Button>
+                    <td>
+                      <div className="d-flex gap-1">
+                        <h6 className="mb-0  pe-2 color-red">{item?.SubCategoryCuttingPrice}{' '}SAR</h6>
+                        <Icons.edit
+                          onClick={() => handleModalOpenEdit(index)}
+                        />
                         <Modal
-                          show={modalShow && modalIndex === index}
-                          onHide={handleModalClose}
+                          show={modalShowEdit && modalIndexEdit === index}
+                          onHide={handleModalCloseEdit}
                           centered
                         >
                           <Modal.Header closeButton>
                             <Modal.Title className='  w-100 text-center'>  price Details</Modal.Title>
                           </Modal.Header>
                           <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
-                            <p>   Are you sure you want to delete this client?</p>
-                            <input className="form-control" defaultValue={item.SubCategoryCuttingPrice} disabled />
+                            <input className="form-control" defaultValue={item.SubCategoryCuttingPrice} ref={changePrice} />
                           </Modal.Body>
                           <Modal.Footer className="d-flex justify-content-center align-items-center">
 
-                            <Button variant="outline-primary" onClick={handleModalClose}>
+                            <Button variant="outline-primary" onClick={handleModalCloseEdit}>
                               Cancel
                             </Button>
-                            <Button variant="danger" style={{ border: '#FAAA40' }} onClick={() => handleActionSelect(item.IDSubCategoryCutting)}>
-                              Delete
+                            <Button style={{ border: '#FAAA40' }} onClick={() => handleChangePrice(item.IDAnimalSubCategory, item.IDCutting)}>
+                              Set Price
                             </Button>
                           </Modal.Footer>
                         </Modal>
-                      </span>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+
+
+                      </div>
+                    </td>
+
+                    <td>
+                      <div>
+                        <span>
+                          <Button
+                            variant=" outline-sucess"
+                            onClick={() => handleModalOpen(index)}
+                            className="DropdownButton outline-sucess"
+                          >Detete</Button>
+                          <Modal
+                            show={modalShow && modalIndex === index}
+                            onHide={handleModalClose}
+                            centered
+                          >
+                            <Modal.Header closeButton>
+                              <Modal.Title className='  w-100 '> Delete Cutting Price </Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
+
+                              <div className="expired-container">
+                                <Player
+                                  className="expired-image"
+                                  src="https://assets6.lottiefiles.com/packages/lf20_dqnvaulk.json"
+                                  autoplay
+                                  loop
+                                />
+                              </div>                            <input className="form-control" defaultValue={item.SubCategoryCuttingPrice} disabled />
+                            </Modal.Body>
+                            <Modal.Footer className="d-flex justify-content-center align-items-center">
+
+                              <Button variant="outline-primary" onClick={handleModalClose}>
+                                Cancel
+                              </Button>
+                              <Button variant="danger" style={{ border: '#FAAA40' }} onClick={() => handleActionSelect(item.IDSubCategoryCutting)}>
+                                Delete
+                              </Button>
+                            </Modal.Footer>
+                          </Modal>
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
           </> :
             SkeletonTable()
           }

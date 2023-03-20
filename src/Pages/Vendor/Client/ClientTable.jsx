@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-// import data from './data.js';
+import { Player } from '@lottiefiles/react-lottie-player';
 import { Dropdown, DropdownButton, Form, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
 import Icons from "../../../constants/Icons.js";
@@ -9,7 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 import useSkeletonTable from '../../../utils/useSkeletonTable.js';
 
 const ClientTable = ({ usersList, userList, isLoading }) => {
-  let {SkeletonTable} =useSkeletonTable();
+  let { SkeletonTable } = useSkeletonTable();
   const [showModal, setShowModal] = useState(false);
   const [id, setId] = useState(null);
   const handleShowModal = () => setShowModal(true);
@@ -95,11 +95,11 @@ const ClientTable = ({ usersList, userList, isLoading }) => {
     await userList()
   }
   useEffect(() => {
-   window.scrollTo(0, 0);
-  }, [usersList]) 
+    window.scrollTo(0, 0);
+  }, [usersList])
   return (
     <>
-      { isLoading ? <> 
+      {isLoading ? <>
         <Table responsive={true} className='rounded-3 '>
           <thead>
             <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
@@ -194,8 +194,14 @@ const ClientTable = ({ usersList, userList, isLoading }) => {
                               <Modal.Title>Delete Client</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                              Are you sure you want to delete this client?
-                            </Modal.Body>
+                              <div className="expired-container">
+                                <Player
+                                  className="expired-image"
+                                  src="https://assets6.lottiefiles.com/packages/lf20_dqnvaulk.json"
+                                  autoplay
+                                  loop
+                                />
+                              </div>                            </Modal.Body>
                             <Modal.Footer className='  d-flex justify-content-center'>
                               <Button variant="outline-primary" onClick={() => setShowDeleteModal(false)}>
                                 Cancel

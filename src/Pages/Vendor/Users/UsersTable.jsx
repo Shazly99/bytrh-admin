@@ -164,7 +164,7 @@ function UsersTable({ usersList, userList, isLoader }) {
                                                                 <div className="expired-container">
                                                                     <Player
                                                                         className="expired-image"
-                                                                        src="https://assets3.lottiefiles.com/packages/lf20_N7k36k.json"
+                                                                        src="https://assets6.lottiefiles.com/packages/lf20_dqnvaulk.json"
                                                                         autoplay
                                                                         loop
                                                                     />

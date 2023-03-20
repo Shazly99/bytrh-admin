@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,8 +10,7 @@ import useFetch from './../../../../utils/useFetch';
 
 const AddAreas = () => {
   let navigate = useNavigate();
-  // let { countries, cities, getCities } = useContext(VendersContext);
-  let { countries, cities, getCities } = useFetch()
+   let { countries, cities, getCities } = useFetch()
 
  
   const AreasNameEn = useRef();
