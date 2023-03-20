@@ -483,7 +483,7 @@ const Bidding = () => {
                                   ""
                                 ) : (
                                   <Dropdown.Item eventKey="CANCELLED">
-                                    Canselled
+                                    Cancelled
                                   </Dropdown.Item>
                                 )}
                                 {item?.AnimalProductStatus === "SOLD" ? (
