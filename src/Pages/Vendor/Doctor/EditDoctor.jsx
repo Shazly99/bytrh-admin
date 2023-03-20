@@ -43,7 +43,8 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
         }
       })
       .catch(err => {
-       })
+        console.log(err);
+      })
   }
   useEffect(() => {
     getDoctorData();
@@ -60,13 +61,14 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
         }
       })
       .catch(err => {
-       })
+        console.log(err);
+      })
   }
 
 
 
 
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
   const [message, setMessage] = useState('');
 
@@ -104,9 +106,9 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
     if (data.Success === true) {
       setApiCode(data.Success);
       setTimeout(() => {
-        // getTokenDoctors();
-        navigate('/doctors');
-      }, 2000);
+        // navigate('/doctors');
+        window.history.go(-1);
+      }, 1500);
     }
 
   }

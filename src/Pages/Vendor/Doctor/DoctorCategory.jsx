@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Component from '../../../constants/Component';
@@ -25,7 +24,8 @@ export default function DoctorCategory() {
         }
       })
       .catch(err => {
-       })
+        console.log(err);
+      })
   }
   useEffect(() => {
     getDoctorData();
@@ -33,7 +33,7 @@ export default function DoctorCategory() {
 
 
 
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
   const [message, setMessage] = useState('');
 
@@ -66,9 +66,13 @@ export default function DoctorCategory() {
       setTimeout(() => {
         setApiCode(null);
         setMessage('');
-        // navigate('../doctors');
       }, 2000);
     }
+  }
+
+
+  const goToBack = () => {
+    window.history.go(-1);
   }
 
 
@@ -104,11 +108,11 @@ export default function DoctorCategory() {
 
             <div className="submitAdd-buttons mt-4 d-flex justify-content-center align-items-center">
  
-              <Component.ButtonBase title={"Save"} bg={"primary"}  path="/doctors "onclick={() => {
+              <Component.ButtonBase title={"Save"} bg={"primary"}  onclick={() => {
                 getDoctorData();
                 setTimeout(() => {
-                  navigate('/doctors');
-                }, 1000);
+                  goToBack();
+                }, 500);
               }} />
               <Component.ButtonBase title={"Cancel"} bg={"primary"} path="/doctors " />
             </div>
