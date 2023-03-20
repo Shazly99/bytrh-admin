@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { apiheader, GetData } from '../utils/fetchData';
-
+ 
 
 export const VendersContext = createContext([])
 

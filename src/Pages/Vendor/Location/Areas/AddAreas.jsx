@@ -1,26 +1,21 @@
-import React, { useContext, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
-import { apiheader, PostData } from '../../../../utils/fetchData';
-import { Col, Container, Row, Form, Button } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
-import { VendersContext } from '../../../../context/Store';
-import { useEffect } from 'react';
+import { apiheader, PostData } from '../../../../utils/fetchData';
 import useFetch from './../../../../utils/useFetch';
 
 
 const AddAreas = () => {
   let navigate = useNavigate();
-  // let { countries, cities, getCities } = useContext(VendersContext);
-  let { countries, cities, getCities } = useFetch()
+   let { countries, cities, getCities } = useFetch()
 
-  const [selectedCountry, setSelectedCountry] = useState("");
-
+ 
   const AreasNameEn = useRef();
   const AreasNameAr = useRef();
-  const AreasCode = useRef();
-  const selectRef = useRef();
+   const selectRef = useRef();
   const countriesRef = useRef(null);
 
   const handelSelectCountry = (event) => {

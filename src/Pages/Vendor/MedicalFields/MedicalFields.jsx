@@ -1,14 +1,12 @@
-import React from 'react'
-import { Table, DropdownButton, Dropdown, NavDropdown } from "react-bootstrap";
-import { GetData, PostData, apiheader } from '../../../utils/fetchData';
-import { useEffect } from 'react';
-import { useState } from 'react';
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Dropdown, DropdownButton, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import Component from '../../../constants/Component';
 import Icons from '../../../constants/Icons';
+import { apiheader, GetData, PostData } from '../../../utils/fetchData';
 
 const MedicalFields = () => {
   const [medicalFields, setMedicalFields] = useState(null)
@@ -36,7 +34,7 @@ const MedicalFields = () => {
         toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
-          icon: <Icons.uploadItem color='#3182CE' size={20} />,
+          icon: <Icons.UploadItem color='#3182CE' size={20} />,
           iconTheme: {
             primary: '#0a0',
             secondary: '#fff',
@@ -49,7 +47,7 @@ const MedicalFields = () => {
         toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
-          icon: <Icons.uploadItem color='#3182CE' size={20} />,
+          icon: <Icons.UploadItem color='#3182CE' size={20} />,
           iconTheme: {
             primary: '#0a0',
             secondary: '#fff',
@@ -61,7 +59,7 @@ const MedicalFields = () => {
     }
   };
   const MedicalFieldscategoriesStatus = async (id) => {
-    let data = await GetData(`${process.env.REACT_APP_API_URL}/admin/medicalfields/status/${id}`, apiheader)
+    return await GetData(`${process.env.REACT_APP_API_URL}/admin/medicalfields/status/${id}`, apiheader)
    }
 
   const handleSearchClick = () => {
@@ -117,7 +115,7 @@ const MedicalFields = () => {
         medicalFields ?
           <>
             <div className="app__Users ">
-              <Component.ButtonBase title={"Add "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'}  />} path="/medicalfields/add" />
+              <Component.ButtonBase title={"Add "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'}  />} path="/medicalfields/add" />
               <div className="app__Users-table">
                 <div className="search-container">
                   <div className='search__group'>

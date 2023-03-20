@@ -24,7 +24,7 @@ const Country = () => {
             setPagesNumber(data.Response.Pages);
             const timeoutId = setTimeout(() => {
                 setIsloader(true)
-            }, 1000);
+            }, 200);
             return () => clearTimeout(timeoutId);
         }).catch((error) => {
             if (error.response && error.response.status === 429) {
@@ -46,7 +46,7 @@ const Country = () => {
                 toast.success('Updated Successfully', {
                     duration: 4000,
                     position: 'top-center',
-                    icon: <Icons.uploadItem color='#3182CE' size={20} />,
+                    icon: <Icons.UploadItem color='#3182CE' size={20} />,
                     iconTheme: {
                         primary: '#0a0',
                         secondary: '#fff',
@@ -59,7 +59,7 @@ const Country = () => {
                 toast.success('Updated Successfully', {
                     duration: 4000,
                     position: 'top-center',
-                    icon: <Icons.uploadItem color='#3182CE' size={20} />,
+                    icon: <Icons.UploadItem color='#3182CE' size={20} />,
                     iconTheme: {
                         primary: '#0a0',
                         secondary: '#fff',
@@ -120,7 +120,7 @@ const Country = () => {
                     <div className="search-container">
                         <div className="search_and__btn w-100">
                             {isLoader ? <>
-                                <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/location/country/addcountry" />
+                                <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/location/country/addcountry" />
                                 <div className='search__group'>
                                     <input type="text" placeholder="Search by country....." name="search" value={searchValue} onChange={handleInputChange} />
                                     <button type="submit" onClick={handleSearchClick}>

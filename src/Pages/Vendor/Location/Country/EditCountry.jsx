@@ -14,8 +14,7 @@ const EditCountry = () => {
   const CountryNameAr = useRef();
   const CountryTimeZone = useRef();
   const CountryCode = useRef();
-  const selectRef = useRef();
-  const [editPage, setcountryDetail] = useState(null)
+   const [editPage, setcountryDetail] = useState(null)
 
   const submit = e => {
     e.preventDefault()

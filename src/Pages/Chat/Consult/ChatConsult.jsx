@@ -53,7 +53,7 @@ const ChatConsult = () => {
       setConsultList(data.Response.Consults);
       const timeoutId = setTimeout(() => {
         setIsloader(true)
-      }, 500);
+      }, 200);
       return () => clearTimeout(timeoutId);
 
     });

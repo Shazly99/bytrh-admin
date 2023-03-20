@@ -9,15 +9,14 @@ import 'react-phone-input-2/lib/style.css'
 import Form from 'react-bootstrap/Form';
 import { apiheader, PostData } from '../../../../utils/fetchData';
 import { Link, useNavigate } from 'react-router-dom';
-import { Toaster, toast } from 'react-hot-toast';
+import {   toast } from 'react-hot-toast';
 import useFetch from '../../../../utils/useFetch';
 
 const AddNewUser = () => {
     let navigate = useNavigate();
     const countriesRef = useRef(null);
 
-    const [data, setData] = useState({});
-    let { countries, cities, getCities } = useFetch()
+     let { countries, cities, getCities } = useFetch()
 
     const [phoneNumber, setPhoneNumber] = useState('');
     const [Country, setCountry] = useState({});
@@ -84,7 +83,7 @@ const AddNewUser = () => {
     }
 
     useEffect(() => {
-    }, [data, phoneNumber])
+    }, [ phoneNumber])
 
     return (
         <>

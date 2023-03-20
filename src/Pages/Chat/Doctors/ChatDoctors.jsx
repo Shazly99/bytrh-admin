@@ -11,6 +11,7 @@ import _ from 'lodash';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import { toast } from 'react-hot-toast';
+import { Player } from '@lottiefiles/react-lottie-player';
 const ChatDoctors = () => {
   const { id } = useParams();
   let { setmassSend, chatEnd, userReplied, docChatSupport, setDocChatSupport } = useContext(ChatContext);
@@ -83,8 +84,16 @@ const ChatDoctors = () => {
                 id ?
                   <Outlet></Outlet> :
                   <div className="empty_chat   w-100 h-100 d-flex justify-content-center align-items-center flex-column">
-                    <img loading="lazy"src={Img.empty_chat} className='w-50' />
-                    <h2 className={` ${id ? '' : 'text-light'}`}>
+ <div className="expired-container">
+                                <Player
+                                  className="expired-image w-75"
+                                  // src="https://assets4.lottiefiles.com/packages/lf20_3vbOcw.json"
+                                  src="https://assets7.lottiefiles.com/packages/lf20_qwl4gi2d.json"
+
+                                  autoplay
+                                  loop
+                                />
+                              </div>                    <h2 className={` ${id ? '' : 'text-light'}`}>
                       Welcome, <span style={{ color: '#FAAA40' }}>admin!</span>
                     </h2>
                     <h4 className={` ${id ? 'text-light' : 'text-light text-light'}`}>Please select a chat to Start messaging.</h4>

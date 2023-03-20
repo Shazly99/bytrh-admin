@@ -34,7 +34,7 @@ const Bidding = () => {
       setPagesNumber(data.Response.Pages);
       const timeoutId = setTimeout(() => {
         setIsloader(true)
-      }, 1000);
+      }, 200);
       return () => clearTimeout(timeoutId);
     })
       .catch((error) => {
@@ -64,12 +64,12 @@ const Bidding = () => {
       await ChangeStoreStatus({
         IDAnimalProduct: id,
         AnimalProductStatus: action
-        , AnimalProductService: 'BIDDING' 
+        , AnimalProductService: 'BIDDING'
       }).then((res) => {
         toast.success("Updated Successfully", {
           duration: 4000,
           position: "top-center",
-          icon: <Icons.uploadItem color="#3182CE" size={20} />,
+          icon: <Icons.UploadItem color="#3182CE" size={20} />,
           iconTheme: {
             primary: "#0a0",
             secondary: "#fff",
@@ -103,7 +103,7 @@ const Bidding = () => {
   };
   const searchGetData = async (searchValue) => {
 
-    let { data } = await PostData(`https://bytrh.com/api/admin/animalproducts`, { IDPage: page, SearchKey: searchValue, AnimalProductService: 'BIDDING'  }, apiheader)
+    let { data } = await PostData(`https://bytrh.com/api/admin/animalproducts`, { IDPage: page, SearchKey: searchValue, AnimalProductService: 'BIDDING' }, apiheader)
     setAnimal(data.Response.AnimalProducts);
     setPagesNumber(data.Response.Pages);
   }
@@ -120,7 +120,7 @@ const Bidding = () => {
       store()
     } else {
       try {
-        await axios.post(`${process.env.REACT_APP_API_URL}/admin/animalproducts`, { IDPage: page, IDCity: city , AnimalProductService: 'BIDDING' }, apiheader).then((res) => {
+        await axios.post(`${process.env.REACT_APP_API_URL}/admin/animalproducts`, { IDPage: page, IDCity: city, AnimalProductService: 'BIDDING' }, apiheader).then((res) => {
           if (res.status === 200 && res.request.readyState === 4) {
             setAnimal(res.data.Response.AnimalProducts);
             setPagesNumber(res.data.Response.Pages);
@@ -144,7 +144,7 @@ const Bidding = () => {
     if (AnimalProductType === 'All') {
       store()
     } else {
-      await axios.post(`${process.env.REACT_APP_API_URL}/admin/animalproducts`, { IDPage: page, AnimalProductType: AnimalProductType , AnimalProductService: 'BIDDING' }, apiheader).then((res) => {
+      await axios.post(`${process.env.REACT_APP_API_URL}/admin/animalproducts`, { IDPage: page, AnimalProductType: AnimalProductType, AnimalProductService: 'BIDDING' }, apiheader).then((res) => {
         if (res.status === 200 && res.request.readyState === 4) {
           setAnimal(res.data.Response.AnimalProducts);
           setPagesNumber(res.data.Response.Pages);
@@ -168,7 +168,7 @@ const Bidding = () => {
     if (AnimalProductType === 'All') {
       store()
     } else {
-      await axios.post(`${process.env.REACT_APP_API_URL}/admin/animalproducts`, { IDPage: page, IDAnimalSubCategory: AnimalProductType , AnimalProductService: 'BIDDING' }, apiheader).then((res) => {
+      await axios.post(`${process.env.REACT_APP_API_URL}/admin/animalproducts`, { IDPage: page, IDAnimalSubCategory: AnimalProductType, AnimalProductService: 'BIDDING' }, apiheader).then((res) => {
         if (res.status === 200 && res.request.readyState === 4) {
           setAnimal(res.data.Response.AnimalProducts);
           setPagesNumber(res.data.Response.Pages);
@@ -184,7 +184,7 @@ const Bidding = () => {
     if (animalProductStatus === 'All') {
       store()
     } else {
-      await axios.post(`${process.env.REACT_APP_API_URL}/admin/animalproducts`, { IDPage: page, AnimalProductStatus: animalProductStatus , AnimalProductService: 'BIDDING' }, apiheader).then((res) => {
+      await axios.post(`${process.env.REACT_APP_API_URL}/admin/animalproducts`, { IDPage: page, AnimalProductStatus: animalProductStatus, AnimalProductService: 'BIDDING' }, apiheader).then((res) => {
         if (res.status === 200 && res.request.readyState === 4) {
           setAnimal(res.data.Response.AnimalProducts);
           setPagesNumber(res.data.Response.Pages);
@@ -196,7 +196,7 @@ const Bidding = () => {
   useEffect(() => {
     store(page);
     animalSubCategoryGet()
-     window.scrollTo(0, 0);  
+    window.scrollTo(0, 0);
   }, [page, isLoader]);
   useEffect(() => { }, [page, PagesNumber]);
   const SkeletonSearch = (w, h) => {
@@ -244,8 +244,10 @@ const Bidding = () => {
                   <Col className='w-100'>
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry}>
-                        <Form.Label>Country</Form.Label>
+                        {/* <Form.Label>Country</Form.Label> */}
                         <Form.Select aria-label="Default select example" >
+                          <option >Select Country</option>
+
                           {
                             countries?.map((item, index) => (
                               <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
@@ -259,9 +261,12 @@ const Bidding = () => {
                   <Col className='w-100'>
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"   >
-                        <Form.Label>City</Form.Label>
+                        {/* <Form.Label>City</Form.Label> */}
                         <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={countriesRef}>
-                          <option value={'cities'}>all city</option>
+                        <option >Select city</option>
+                          
+                          <option value={'cities'}>All City</option>
+
                           {
                             cities?.map((item, index) => (
                               <option key={index} value={item?.IDCity}>{item?.CityName}</option>
@@ -277,8 +282,10 @@ const Bidding = () => {
 
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"  >
-                        <Form.Label  >Product Type </Form.Label>
+                        {/* <Form.Label  >Product Type </Form.Label> */}
                         <Form.Select aria-label="Default select example" ref={animalProductType} onClick={handelAdvertisement} >
+                        <option >Select Product Type</option>
+                          
                           <option value={'All'}  >Animals Product Type</option>
                           {
                             ['SINGLE', 'GROUP']?.map((item, index) => (
@@ -294,8 +301,10 @@ const Bidding = () => {
 
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"  >
-                        <Form.Label  >  Product Status </Form.Label>
+                        {/* <Form.Label  >  Product Status </Form.Label> */}
                         <Form.Select aria-label="Default select example" ref={statusRef} onClick={handelanimalProductStatus} >
+                        <option >Select Status</option>
+                          
                           <option value={'All'}  > All Status</option>
                           {
                             ['PENDING', 'ACTIVE', 'CANCELLED', 'SOLD', 'REJECTED', 'RESERVED']?.map((item, index) => (
@@ -310,8 +319,10 @@ const Bidding = () => {
                   <Col className='w-100'>
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"  >
-                        <Form.Label  >  SubCategory </Form.Label>
+                        {/* <Form.Label  >  SubCategory </Form.Label> */}
                         <Form.Select aria-label="Default select example" ref={animalSubCategoryRef} onClick={handelanimalSubCategory} >
+                        <option >Select SubCategory</option>
+                         
                           <option value={'All'}  >Animal SubCategory</option>
                           {
                             animalSubCategory?.map((item, index) => (

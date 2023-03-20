@@ -7,8 +7,7 @@ const useFetch = () => {
     const [countries, setCountries] = useState(null);
     const [cities, setCities] = useState(null);
     const [areas, setAreas] = useState(null);
-    const [animal, setAnimal] = useState(null)
-
+ 
 
     // countries
     const getCountries = async () => {

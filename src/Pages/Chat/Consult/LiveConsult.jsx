@@ -1,3 +1,4 @@
+import { Player } from '@lottiefiles/react-lottie-player';
 import React, { useEffect, useRef, useState } from 'react'
 import { Row, Col, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
@@ -89,8 +90,15 @@ const LiveConsult = () => {
                         {
                           chat.length === 0 ?
                             <div className="empty_chat   w-100 h-100 d-flex justify-content-center align-items-center flex-column">
-                              <img loading="lazy"src={Img.empty_chat} className='w-25' />
-                              <h2 className={` ${chat.length === 0 ? 'text-light' : ''}`}>
+<div className="expired-container">
+                                <Player
+                                  className="expired-image w-75"
+                                  // src="https://assets4.lottiefiles.com/packages/lf20_3vbOcw.json"
+                                  src="https://assets7.lottiefiles.com/packages/lf20_qwl4gi2d.json"
+                                  autoplay
+                                  loop
+                                />
+                              </div>                              <h2 className={` ${chat.length === 0 ? 'text-light' : ''}`}>
                                 Welcome, <span style={{ color: '#FAAA40' }}>admin!</span>
                               </h2>
                               <h4 className={` ${chat.length === 0 ? 'text-light text-center' : ' text-center'}`}>This Consults Is Empty.</h4>

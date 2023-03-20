@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-// import data from './data.js';
+import { Player } from '@lottiefiles/react-lottie-player';
 import { Dropdown, DropdownButton, Form, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
 import Icons from "../../../constants/Icons.js";
@@ -9,7 +9,7 @@ import Modal from 'react-bootstrap/Modal';
 import useSkeletonTable from '../../../utils/useSkeletonTable.js';
 
 const ClientTable = ({ usersList, userList, isLoading }) => {
-  let {SkeletonTable} =useSkeletonTable();
+  let { SkeletonTable } = useSkeletonTable();
   const [showModal, setShowModal] = useState(false);
   const [id, setId] = useState(null);
   const handleShowModal = () => setShowModal(true);
@@ -25,7 +25,7 @@ const ClientTable = ({ usersList, userList, isLoading }) => {
         toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
-          icon: <Icons.uploadItem color='#3182CE' size={20} />,
+          icon: <Icons.UploadItem color='#3182CE' size={20} />,
           iconTheme: {
             primary: '#0a0',
             secondary: '#fff',
@@ -52,7 +52,7 @@ const ClientTable = ({ usersList, userList, isLoading }) => {
         toast.success('wallet updated !', {
           duration: 4000,
           position: 'top-center',
-          icon: <Icons.uploadItem color='#3182CE' size={20} />,
+          icon: <Icons.UploadItem color='#3182CE' size={20} />,
           iconTheme: {
             primary: '#0a0',
             secondary: '#fff',
@@ -85,7 +85,7 @@ const ClientTable = ({ usersList, userList, isLoading }) => {
       toast.success('user has been deleted', {
         duration: 4000,
         position: 'top-center',
-        icon: <Icons.bin color='#E20000' size={17} />,
+        icon: <Icons.Bin color='#E20000' size={17} />,
         iconTheme: {
           primary: '#0a0',
           secondary: '#fff',
@@ -95,11 +95,11 @@ const ClientTable = ({ usersList, userList, isLoading }) => {
     await userList()
   }
   useEffect(() => {
-   window.scrollTo(0, 0);
-  }, [usersList]) 
+    window.scrollTo(0, 0);
+  }, [usersList])
   return (
     <>
-      { isLoading ? <> 
+      {isLoading ? <>
         <Table responsive={true} className='rounded-3 '>
           <thead>
             <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
@@ -144,9 +144,9 @@ const ClientTable = ({ usersList, userList, isLoading }) => {
                   <td className='text-center  d-flex '>
                     <div>
                       <span style={{ height: 'fit-content !important' }} className={` 
-                                        ${item.ClientStatus == 'ACTIVE' && 'txt_delivered'}
-                                        ${item.ClientStatus == 'INACTIVE' && 'txt_rejected'}
-                                        ${item.ClientStatus == 'BLOCKED' && 'txt_blocked'}
+                                        ${item.ClientStatus === 'ACTIVE' && 'txt_delivered'}
+                                        ${item.ClientStatus === 'INACTIVE' && 'txt_rejected'}
+                                        ${item.ClientStatus === 'BLOCKED' && 'txt_blocked'}
                                         `}  >
                         {item?.ClientStatus.toLowerCase().charAt(0).toUpperCase() + item?.ClientStatus.slice(1).toLowerCase()}
                       </span>
@@ -194,8 +194,14 @@ const ClientTable = ({ usersList, userList, isLoading }) => {
                               <Modal.Title>Delete Client</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                              Are you sure you want to delete this client?
-                            </Modal.Body>
+                              <div className="expired-container">
+                                <Player
+                                  className="expired-image"
+                                  src="https://assets6.lottiefiles.com/packages/lf20_dqnvaulk.json"
+                                  autoplay
+                                  loop
+                                />
+                              </div>                            </Modal.Body>
                             <Modal.Footer className='  d-flex justify-content-center'>
                               <Button variant="outline-primary" onClick={() => setShowDeleteModal(false)}>
                                 Cancel

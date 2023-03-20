@@ -84,7 +84,7 @@ import Bidding from './../Pages/Bidding/Bidding';
 import BiddingDetails from './../Pages/Bidding/BiddingDetails';
 import BiddingRequests from './../Pages/Bidding/BiddingRequests';
 
-export default {
+const Component= {
     // Layout 
     Vendor,
     Auth,
@@ -193,3 +193,7 @@ export default {
     
     Error,
 }
+
+export default Component
+
+

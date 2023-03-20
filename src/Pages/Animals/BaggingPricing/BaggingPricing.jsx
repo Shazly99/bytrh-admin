@@ -1,3 +1,4 @@
+import { Player } from "@lottiefiles/react-lottie-player";
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState, useRef } from "react";
@@ -53,7 +54,7 @@ const BaggingPricing = () => {
         setPagesNumber(data.Response.Pages);
         const timeoutId = setTimeout(() => {
           setIsloader(true)
-        }, 1000);
+        }, 200);
         return () => clearTimeout(timeoutId);
       })
       .catch((error) => {
@@ -77,7 +78,7 @@ const BaggingPricing = () => {
       toast.success("Deleted", {
         duration: 4000,
         position: "top-center",
-        icon: <Icons.uploadItem color="#3182CE" size={20} />,
+        icon: <Icons.UploadItem color="#3182CE" size={20} />,
         iconTheme: {
           primary: "#0a0",
           secondary: "#fff",
@@ -103,7 +104,7 @@ const BaggingPricing = () => {
       toast.success("update price ", {
         duration: 4000,
         position: "top-center",
-        icon: <Icons.uploadItem color="#3182CE" size={20} />,
+        icon: <Icons.UploadItem color="#3182CE" size={20} />,
         iconTheme: {
           primary: "#0a0",
           secondary: "#fff",
@@ -134,7 +135,7 @@ const BaggingPricing = () => {
           <Component.ButtonBase
             title={"Add  "}
             bg={"primary"}
-            icon={<Icons.add size={21} color={"#ffffffb4"} />}
+            icon={<Icons.Add size={21} color={"#ffffffb4"} />}
             path="/animals/baggingprice/addbaggingprice"
           />
         </> :
@@ -212,10 +213,17 @@ const BaggingPricing = () => {
                             centered
                           >
                             <Modal.Header closeButton>
-                              <Modal.Title className='  w-100 text-center'>  price Details</Modal.Title>
+                              <Modal.Title className='  w-100 '> Delete Bagging Price  </Modal.Title>
                             </Modal.Header>
                             <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
-                              <p>   Are you sure you want to delete this client?</p>
+                              <div className="expired-container">
+                                <Player
+                                  className="expired-image"
+                                  src="https://assets6.lottiefiles.com/packages/lf20_dqnvaulk.json"
+                                  autoplay
+                                  loop
+                                />
+                              </div>
                               <input className="form-control" defaultValue={item.SubCategoryBaggingPrice} disabled />
                             </Modal.Body>
                             <Modal.Footer className="d-flex justify-content-center align-items-center">
