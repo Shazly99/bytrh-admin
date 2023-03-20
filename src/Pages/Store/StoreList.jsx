@@ -481,7 +481,7 @@ const StoreList = () => {
                                                                     ""
                                                                 ) : (
                                                                     <Dropdown.Item eventKey="CANCELLED">
-                                                                        Canselled
+                                                                        Cancelled
                                                                     </Dropdown.Item>
                                                                 )}
                                                                 {item?.AnimalProductStatus === "SOLD" ? (
