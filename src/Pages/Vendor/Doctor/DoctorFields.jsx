@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Component from '../../../constants/Component';
@@ -33,7 +32,7 @@ export default function DoctorFields() {
 
 
 
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
   const [message, setMessage] = useState('');
 
@@ -66,9 +65,13 @@ export default function DoctorFields() {
       setTimeout(() => {
         setApiCode(null);
         setMessage('');
-        // navigate('../doctors');
       }, 2000);
     }
+  }
+
+
+  const goToBack = () => {
+    window.history.go(-1);
   }
 
 
@@ -107,8 +110,8 @@ export default function DoctorFields() {
               <Component.ButtonBase title={"Save"} bg={"primary"}  path="/doctors "onclick={() => {
                 getDoctorData();
                 setTimeout(() => {
-                  navigate('/doctors');
-                }, 1000);
+                  goToBack();
+                }, 500);
               }} />
               <Component.ButtonBase title={"Cancel"} bg={"primary"} path="/doctors " />
             </div>

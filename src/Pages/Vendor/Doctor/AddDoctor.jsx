@@ -20,7 +20,8 @@ function AddDoctor({ fetchCountriesBytra }) {
         }
       })
       .catch(err => {
-       })
+        console.log(err);
+      })
   }
 
   let navigate = useNavigate();
@@ -109,12 +110,10 @@ function AddDoctor({ fetchCountriesBytra }) {
       setLoadind(false);
 
       if (data.Success === true) {
-
         setApiCode(data.Success);
         setTimeout(() => {
-          // getTokenDoctors();
           navigate('/doctors');
-        }, 2000);
+        }, 1500);
       }
 
     }
@@ -137,7 +136,6 @@ function AddDoctor({ fetchCountriesBytra }) {
                 <div className="row d-flex justify-content-center justify-content-md-start align-items-center g-4">
 
                   <div className="col-md-6">
-
                     <div className="group-add">
                       <label className="fs-5 " htmlFor="DoctorName">Name</label>
                       <div className="input-group">
