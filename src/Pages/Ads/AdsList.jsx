@@ -64,7 +64,7 @@ const AdsList = () => {
         toast.success('The ads has been removed', {
           duration: 4000,
           position: 'top-center',
-          icon: <Icons.bin color='#E20000' size={20} />,
+          icon: <Icons.Bin color='#E20000' size={20} />,
           iconTheme: {
             primary: '#0a0',
             secondary: '#fff',
@@ -192,7 +192,7 @@ const AdsList = () => {
 
     <>
       <div className="app__Users ">
-        <Component.ButtonBase title={"Add "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/ads/add" />
+        <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.Add  size={21} color={'#ffffffb4'} />} path="/ads/add" />
         <div className="app__Users-table">
           <div className="search-container">
             <div className='search__group w-100'>

@@ -23,7 +23,7 @@ const Areas = () => {
       setPagesNumber(data.Response.Pages);
       const timeoutId = setTimeout(() => {
         setIsloader(true)
-      }, 1000);
+      }, 200);
       return () => clearTimeout(timeoutId);
     }).catch((error) => {
       if (error.response && error.response.status === 429) {
@@ -46,7 +46,7 @@ const Areas = () => {
         toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
-          icon: <Icons.uploadItem color='#3182CE' size={20} />,
+          icon: <Icons.UploadItem color='#3182CE' size={20} />,
           iconTheme: {
             primary: '#0a0',
             secondary: '#fff',
@@ -57,7 +57,7 @@ const Areas = () => {
     }
   };
   const AreascategoriesStatus = async (id) => {
-    let data = await GetData(`${process.env.REACT_APP_API_URL}/admin/location/areas/status/${id}`, apiheader)
+    return await GetData(`${process.env.REACT_APP_API_URL}/admin/location/areas/status/${id}`, apiheader)
   }
 
   // search and filter  
@@ -107,7 +107,7 @@ const Areas = () => {
           <div className="search-container">
             <div className="search_and__btn w-100">
               {isLoader ? <>
-                <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/location/areas/addareas" />
+                <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/location/areas/addareas" />
                 <div className='search__group'>
                   <input type="text" placeholder="Search by area....." name="search" value={searchValue} onChange={handleInputChange} />
                   <button type="submit" onClick={handleSearchClick}>

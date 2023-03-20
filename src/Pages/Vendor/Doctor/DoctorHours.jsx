@@ -52,7 +52,7 @@ const DoctorHours = () => {
             </div >
 
             <div className="app__Users mb-3">
-                <Component.ButtonBase title={"Add"} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/doctors/addDoctorHours" />
+                <Component.ButtonBase title={"Add"} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/doctors/addDoctorHours" />
             </div>
 
             {Object.keys(fetchDoctorHours).length > 0 ?

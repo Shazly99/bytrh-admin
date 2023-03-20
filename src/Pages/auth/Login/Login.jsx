@@ -1,13 +1,12 @@
-import React, { useRef, useState } from 'react'
-import { Container, Row, Col } from 'react-bootstrap';
-import Img from '../../../assets/Img';
-import Component from '../../../constants/Component';
-import "./login.scss";
 import axios from 'axios';
+import { useFormik } from 'formik';
+import React, { useState } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import Img from '../../../assets/Img';
+import "./login.scss";
 
 
 let validationSchemaPhone= Yup.object().shape({
@@ -32,7 +31,7 @@ const Login = () => {
         onSubmit: async (values) => {
              if (values) {
                 let { data } = await axios.post(`https://bytrh.com/api/admin/login`, values);
-                if (data.Success == true) { 
+                if (data.Success === true) { 
                      localStorage.setItem("token", data.Response.AccessToken);
                     localStorage.setItem("IDUser", data.Response.IDUser);
                     toast.success(data.ApiMsg);
@@ -53,7 +52,7 @@ const Login = () => {
         onSubmit: async (values) => {
              if (values) {
                 let { data } = await axios.post(`https://bytrh.com/api/admin/login`, values);
-                 if (data.Success == true) {
+                 if (data.Success === true) {
                      localStorage.setItem("token", data.Response.AccessToken);
                     localStorage.setItem("IDUser", data.Response.IDUser);
 
@@ -72,7 +71,7 @@ const Login = () => {
                     <Row>
                         <Col xl={6} lg={6} xd={6} sm={12} className='vh-100'>
                             <div className='app__login-left  vh-100   '>
-                                <img loading="lazy"src={Img.loginBg} />
+                                <img loading="lazy"src={Img.loginBg} alt="Login page background"  />
                                 {/* <Component.BaseHeader h1={'Bytrh'} colorW="logoBaytrh" /> */}
                                 <div className="w-75" >
                                     {
@@ -102,7 +101,7 @@ const Login = () => {
                                                     {formikPhoneNumber.errors.Password ? <span className='error__handel'>{formikPhoneNumber.errors.Password}</span> : null}
                                                 </div>
                                                 <button className='app__login-btn mt-3' type='submit'>Login</button>
-                                                <a className='anther_way_toLgoin ' onClick={() => setAnthorWay(!anthorWay)} >Do you want to log in with email?</a>
+                                                <button className='anther_way_toLgoin  ' onClick={() => setAnthorWay(!anthorWay)} >Do you want to log in with email?</button>
                                             </form>   :
                                             <form onSubmit={formik.handleSubmit}>
                                                 <div className="email ">
@@ -129,14 +128,14 @@ const Login = () => {
                                                     {formik.errors.Password ? <span className='error__handel'>{formik.errors.Password}</span> : null}
                                                 </div>
                                                 <button className='app__login-btn mt-3' type='submit'>Login</button>
-                                                <a className='anther_way_toLgoin ' onClick={() => setAnthorWay(!anthorWay)} >Do you want to log in with phone number?</a>
+                                                <button className='anther_way_toLgoin ' onClick={() => setAnthorWay(!anthorWay)} >Do you want to log in with phone number?</button>
                                             </form>
                                     }
                                 </div>
                             </div>
                         </Col> 
                         <Col xl={6} lg={6} xd={6} sm={12} className='avatar'>
-                            <img loading="lazy"src={Img.avatar} />
+                            <img loading="lazy"src={Img.avatar} alt='backgroung sign in bytrh' />
                         </Col>
                     </Row>
                 </Container>

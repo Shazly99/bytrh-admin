@@ -1,3 +1,4 @@
+import { Player } from '@lottiefiles/react-lottie-player';
 import { Skeleton } from '@mui/material';
 import React, { useState, useEffect, useRef } from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
@@ -22,7 +23,7 @@ const StoreChatDetails = () => {
             setAnimal(res.Response);
             const timeoutId = setTimeout(() => {
                 setIsloader(true)
-            }, 2000);
+            }, 200);
             return () => clearTimeout(timeoutId);
         }).catch((error) => {
             if (error.response && error.response.status === 429) {
@@ -133,8 +134,8 @@ const StoreChatDetails = () => {
                 </Row>
                 <div className="app__chat__Consult  mt-3  ">
                     <div className='app__chat'>
-                        <Component.BaseHeader h2={'Chat Details :'} /> 
-                        <Row className="app__chat__container " style={{marginTop:'0'}}>
+                        <Component.BaseHeader h2={'Chat Details :'} />
+                        <Row className="app__chat__container " style={{ marginTop: '0' }}>
                             <Col xl={12} lg={12} md={12} sm={12} className='app__chat_messages '>
                                 <div className='shadow app__chat_list-card'>
                                     <div className={`app__Live_chat chat-body   ${animal?.ChatDetails?.length === 0 ? 'bg-dark' : ''} `} style={{ background: 'rgb(217 217 217 / 28%)' }}>
@@ -142,8 +143,16 @@ const StoreChatDetails = () => {
                                             {
                                                 animal?.ChatDetails?.length === 0 ?
                                                     <div className="empty_chat   w-100 h-100 d-flex justify-content-center align-items-center flex-column">
-                                                        <img loading="lazy" src={Img.empty_chat} className='w-25' />
-                                                        <h2 className={` ${animal?.ChatDetails?.length === 0 ? 'text-light' : ''}`}>
+                                                        <div className="expired-container">
+                                                            <Player
+                                                                className="expired-image w-75"
+                                                                // src="https://assets4.lottiefiles.com/packages/lf20_3vbOcw.json"
+                                                                src="https://assets7.lottiefiles.com/packages/lf20_qwl4gi2d.json"
+
+                                                                autoplay
+                                                                loop
+                                                            />
+                                                        </div>                                                        <h2 className={` ${animal?.ChatDetails?.length === 0 ? 'text-light' : ''}`}>
                                                             Welcome, <span style={{ color: '#FAAA40' }}>admin!</span>
                                                         </h2>
                                                         <h4 className={` ${animal?.ChatDetails?.length === 0 ? 'text-light text-center' : ' text-center'}`}>This Chat Is Empty.</h4>

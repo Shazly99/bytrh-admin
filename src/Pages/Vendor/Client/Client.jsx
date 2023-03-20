@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import Component from '../../../constants/Component'
 import { Pagination, Skeleton } from "@mui/material";
 import Box from "@mui/material/Box";
+import _ from 'lodash';
+import React, { useEffect, useState } from 'react';
+import Component from '../../../constants/Component';
+import Icons from "../../../constants/Icons.js";
 import { PostData } from '../../../utils/fetchData';
 import { apiheader } from './../../../utils/fetchData';
-import Icons from "../../../constants/Icons.js";
-import _ from 'lodash';
-import Loader from '../../../Components/Shared/Loader/Loader';
-import Img from '../../../assets/Img';
 
 const Clients = () => {
   const [page, setPage] = React.useState(1);
@@ -27,7 +25,7 @@ const Clients = () => {
       setPagesNumber(data.Response.Pages);
       const timeoutId = setTimeout(() => {
         setIsloader(true)
-      }, 1000);
+      }, 0);
       return () => clearTimeout(timeoutId);
     })
   }, 1000)
@@ -38,8 +36,7 @@ const Clients = () => {
 
   // to fixed problem because Pagination count need a number 
   const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
-  const [loadSearch, setloadSearch] = useState(true);
-
+ 
 
   const [searchValue, setSearchValue] = useState('');
   // search by click
@@ -56,8 +53,7 @@ const Clients = () => {
     let { data } = await PostData(`https://bytrh.com/api/admin/clients`, { IDPage: page, SearchKey: searchValue }, apiheader)
     setuserList(data.Response.Clients)
     setPagesNumber(data.Response.Pages);
-    setloadSearch(true)
-  }, 3000)
+   }, 3000)
   // filter
   const [selectedOption, setSelectedOption] = useState('All');
   const handleOptionChange = async (event) => {

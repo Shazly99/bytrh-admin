@@ -150,12 +150,21 @@ const useSkeletonTable = () => {
             </div>
         )
     }
+    const SkeletonFilterBlogs  = () => {
+        return (
+            <div className="d-flex flex-column  gap-2 mt-2">
+                <Skeleton variant='rounded' animation='wave' height={15} width={'60%'} />
+                <Skeleton variant='rounded' animation='wave' height={35} width={'100%'} />
+            </div>
+        )
+    }
     return {
         SkeletonTable,
         SkeletonSearch,
         SkeletonFilters,
         SkeletonSearchsingel,
-        SkeletonTableImg
+        SkeletonTableImg,
+        SkeletonFilterBlogs
     }
 }
 

@@ -42,7 +42,7 @@ const BlogClientDetails = () => {
         toast.success('The comment has been deleted ', {
           duration: 4000,
           position: 'top-center',
-          icon: <Icons.bin color='#E20000' size={20} />,
+          icon: <Icons.Bin color='#E20000' size={20} />,
           iconTheme: {
             primary: '#0a0',
             secondary: '#fff',

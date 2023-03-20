@@ -11,6 +11,7 @@ import { ChatContext } from '../../../context/ChatStore';
 import '../chat.scss';
 import { apiheader, PostData } from './../../../utils/fetchData';
 import { toast } from 'react-hot-toast';
+import { Player } from '@lottiefiles/react-lottie-player';
 
 const ChatClient = () => {
   const { id } = useParams();
@@ -89,7 +90,16 @@ const ChatClient = () => {
                         </>
                         :
                         <div className="empty_chat   w-100 h-100 d-flex justify-content-center align-items-center flex-column">
-                          <img loading="lazy"src={Img.empty_chat} className='w-50' />
+                         <div className="expired-container">
+                                <Player
+                                  className="expired-image w-75"
+                                  // src="https://assets4.lottiefiles.com/packages/lf20_3vbOcw.json"
+                                  src="https://assets7.lottiefiles.com/packages/lf20_qwl4gi2d.json"
+
+                                  autoplay
+                                  loop
+                                />
+                              </div>
                           <h2 className={` ${id ? '' : 'text-light'}`}>
                             Welcome, <span style={{ color: '#FAAA40' }}>admin!</span>
                           </h2>

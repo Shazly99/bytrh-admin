@@ -1,17 +1,14 @@
-import React, { useContext, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useRef } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
-import { apiheader, PostData } from '../../../../utils/fetchData';
-import { Col, Container, Row, Form, Button } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
-import { VendersContext } from '../../../../context/Store';
-import { useEffect } from 'react';
+import { apiheader, PostData } from '../../../../utils/fetchData';
 import useFetch from './../../../../utils/useFetch';
-import { Link } from 'react-router-dom';
 const AddCities = () => {
   // let { countries ,cities} = useContext(VendersContext);
-  let {countries, cities ,getCities} = useFetch()
+  let {countries } = useFetch()
 
   let navigate = useNavigate();
   const CityNameEn = useRef();

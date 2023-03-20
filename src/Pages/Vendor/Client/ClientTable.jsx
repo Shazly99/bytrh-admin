@@ -25,7 +25,7 @@ const ClientTable = ({ usersList, userList, isLoading }) => {
         toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
-          icon: <Icons.uploadItem color='#3182CE' size={20} />,
+          icon: <Icons.UploadItem color='#3182CE' size={20} />,
           iconTheme: {
             primary: '#0a0',
             secondary: '#fff',
@@ -52,7 +52,7 @@ const ClientTable = ({ usersList, userList, isLoading }) => {
         toast.success('wallet updated !', {
           duration: 4000,
           position: 'top-center',
-          icon: <Icons.uploadItem color='#3182CE' size={20} />,
+          icon: <Icons.UploadItem color='#3182CE' size={20} />,
           iconTheme: {
             primary: '#0a0',
             secondary: '#fff',
@@ -85,7 +85,7 @@ const ClientTable = ({ usersList, userList, isLoading }) => {
       toast.success('user has been deleted', {
         duration: 4000,
         position: 'top-center',
-        icon: <Icons.bin color='#E20000' size={17} />,
+        icon: <Icons.Bin color='#E20000' size={17} />,
         iconTheme: {
           primary: '#0a0',
           secondary: '#fff',
@@ -144,9 +144,9 @@ const ClientTable = ({ usersList, userList, isLoading }) => {
                   <td className='text-center  d-flex '>
                     <div>
                       <span style={{ height: 'fit-content !important' }} className={` 
-                                        ${item.ClientStatus == 'ACTIVE' && 'txt_delivered'}
-                                        ${item.ClientStatus == 'INACTIVE' && 'txt_rejected'}
-                                        ${item.ClientStatus == 'BLOCKED' && 'txt_blocked'}
+                                        ${item.ClientStatus === 'ACTIVE' && 'txt_delivered'}
+                                        ${item.ClientStatus === 'INACTIVE' && 'txt_rejected'}
+                                        ${item.ClientStatus === 'BLOCKED' && 'txt_blocked'}
                                         `}  >
                         {item?.ClientStatus.toLowerCase().charAt(0).toUpperCase() + item?.ClientStatus.slice(1).toLowerCase()}
                       </span>
