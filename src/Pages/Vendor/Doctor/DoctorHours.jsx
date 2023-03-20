@@ -51,7 +51,7 @@ const DoctorHours = () => {
                 <Component.SubNav sub__nav={[{ name: "Doctors", path: '/doctors' }, { name: "Doctor Hours", path: `/doctors/doctorHours/${id}` }]} />
             </div > 
             <div className="app__Users mb-3">
-                <Component.ButtonBase title={"Add"} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path={`/doctors/addDoctorHours/${id}`} />
+                <Component.ButtonBase title={"Add"} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path={`/doctors/addDoctorHours/${id}`} />
             </div> 
             {Object.keys(fetchDoctorHours).length > 0 ?
                 <div className="bg-light py-5 px-3 rounded-4 shadow-sm">
