@@ -6,6 +6,7 @@ import Img from '../../../assets/Img';
 import Component from '../../../constants/Component';
 import { GetData } from '../../../utils/fetchData';
 import { apiheader } from './../../../utils/fetchData';
+import { Player } from '@lottiefiles/react-lottie-player';
 
 const AdoptionChat = () => {
 
@@ -22,7 +23,7 @@ const AdoptionChat = () => {
     await GetData(`${process.env.REACT_APP_API_URL}/admin/adoptions/chat/details/${id}`, apiheader).then(({ Response }) => {
       setAdoptionDetails(Response);
       setChat(Response.ChatDetails);
-     })
+    })
   }
   useEffect(() => {
     getDetails()
@@ -81,7 +82,7 @@ const AdoptionChat = () => {
                       :
                       ''
                     }
-                    
+
                   </Col>
                 </Row>
               </div>
@@ -90,12 +91,20 @@ const AdoptionChat = () => {
               <Row className="app__chat__container ">
                 <Col xl={12} lg={12} md={12} sm={12} className='app__chat_messages '>
                   <div className='shadow app__chat_list-card'>
-                    <div className={`app__Live_chat chat-body   ${chat.length === 0 ? 'bg-dark' : ''} `} style={{ background: 'rgb(217 217 217 / 28%)' }}>
+                    <div className={`app__Live_chat chat-body   ${chat.length === 0 ? ' bg-dark' : ''} `} style={{ background: 'rgb(217 217 217 / 28%)' }}>
                       <ScrollToBottom className="message-container">
                         {
                           chat.length === 0 ?
                             <div className="empty_chat   w-100 h-100 d-flex justify-content-center align-items-center flex-column">
-                              <img loading="lazy"src={Img.empty_chat} className='w-25' />
+                              <div className="expired-container">
+                                <Player
+                                  className="expired-image w-75"
+                                  // src="https://assets4.lottiefiles.com/packages/lf20_3vbOcw.json"
+                                  src="https://assets7.lottiefiles.com/packages/lf20_qwl4gi2d.json"
+                                  autoplay
+                                  loop
+                                />
+                              </div>
                               <h2 className={` ${chat.length === 0 ? 'text-light' : ''}`}>
                                 Welcome, <span style={{ color: '#FAAA40' }}>admin!</span>
                               </h2>
@@ -118,7 +127,7 @@ const AdoptionChat = () => {
                                         }
                                         {
                                           messageContent.AdoptionChatType === "IMAGE" &&
-                                          <img loading="lazy"src={messageContent.AdoptionChatMessage} width="100%" className='rounded-3 w-50' />
+                                          <img loading="lazy" src={messageContent.AdoptionChatMessage} width="100%" className='rounded-3 w-50' />
                                         }
                                         {
                                           messageContent.AdoptionChatType === "AUDIO" &&

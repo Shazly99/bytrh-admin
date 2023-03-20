@@ -14,7 +14,7 @@ const EditMedicalFields = () => {
   let navigate = useNavigate();
   const MedicalFieldsNameEn = useRef();
   const MedicalFieldsNameAr = useRef();
-  const selectCity = useRef();
+ 
 
   const [editPage, setMedicalFieldsDetail] = useState(null)
 

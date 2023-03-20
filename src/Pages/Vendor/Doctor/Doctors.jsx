@@ -141,7 +141,7 @@ export default function Doctors() {
       <Container fluid>
         <section className='   app__doctor  position-relative'>
           <div className="app__Users ">
-            <Component.ButtonBase title={"Add"} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/doctors/addDoctor" />
+            <Component.ButtonBase title={"Add"} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/doctors/addDoctor" />
           </div>
 
           <div className="search-container">

@@ -1,21 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import Component from '../../../constants/Component';
-import { Col, FloatingLabel, Modal, Row } from 'react-bootstrap';
-import './Profile.scss'
-import { Button } from 'react-bootstrap/';
-import axios from 'axios';
-import { apiheader, GetData } from '../../../utils/fetchData';
 import { VendersContext } from '../../../context/Store';
+import { apiheader, GetData } from '../../../utils/fetchData';
+import './Profile.scss';
 
 function Profile() {
   let { userId } = useContext(VendersContext);
 
-  const [show, setShow] = useState(false);
-  const [userProfile, setUserProfile] = useState(null);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+   const [userProfile, setUserProfile] = useState(null);
+ 
 
   const userProfileGet = async () => {
     let resp = await GetData(`https://bytrh.com/api/admin/users/profile/${userId}`, apiheader);

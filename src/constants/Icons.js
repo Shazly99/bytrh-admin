@@ -1,56 +1,39 @@
  
-import { MdSpaceDashboard as Dashboard } from "react-icons/md";
-import { IoIosNotificationsOutline as notification } from "react-icons/io";
-import { CiSearch as Search } from "react-icons/ci";
+import { CiSearch as Search, CiShoppingBasket as Products } from "react-icons/ci";
 import { FiUserPlus as user } from "react-icons/fi";
 import { HiOutlineUserGroup as Clients } from "react-icons/hi";
-import { CiShoppingBasket as Products } from "react-icons/ci";
+import { IoIosNotificationsOutline as notification } from "react-icons/io";
+import { MdSpaceDashboard as Dashboard } from "react-icons/md";
 import { TbBorderAll as order } from "react-icons/tb";
-// import { HiOutlineUserCircle as profile } from "react-icons/hi";
-import { AiOutlineMenuUnfold as menu } from "react-icons/ai";
-import { AiOutlineMenuFold as menuL } from "react-icons/ai";
-import { IoIosAddCircle as add } from "react-icons/io";
-import { IoTrashBin as bin } from "react-icons/io5";
+ import { AiOutlineCloudUpload as upload, AiOutlineMenuFold as menuL, AiOutlineMenuUnfold as menu } from "react-icons/ai";
 import { FiEdit as edit } from "react-icons/fi";
-import { IoIosArrowForward as arrow } from "react-icons/io";
-import { AiOutlineCloudUpload as upload } from "react-icons/ai";
+import { IoIosAddCircle as Add, IoIosArrowForward as arrow } from "react-icons/io";
+import { IoTrashBin as Bin } from "react-icons/io5";
 
 import { CiShop as shop } from "react-icons/ci";
-import {   SlLike, SlNotebook as list } from "react-icons/sl";
-import {   SlLike as like } from "react-icons/sl";
+import { SlLike as like, SlNotebook as list } from "react-icons/sl";
 
-import { TbReportAnalytics as report } from "react-icons/tb";
-import { RxDotFilled as dote } from "react-icons/rx";
-import { IoSettingsOutline as settings } from "react-icons/io5";
-import { RiUserVoiceFill as Chatuser } from "react-icons/ri";
 import { FaUserMd as ChatDoc } from "react-icons/fa";
-import { RiSendPlaneFill as send } from "react-icons/ri";
+import { IoSettingsOutline as settings } from "react-icons/io5";
+import { RiSendPlaneFill as send, RiUserVoiceFill as Chatuser } from "react-icons/ri";
+import { RxDotFilled as dote } from "react-icons/rx";
+import { TbReportAnalytics as report } from "react-icons/tb";
 
-import logout   from "../assets/Images/svg/logout.svg";
-import  profile  from "../assets/Images/Vector.svg";
-import { SiAsciidoctor as doctor } from 'react-icons/si';
-import { BsChatSquareTextFill as chat } from "react-icons/bs";
-import { BsImage as imageUpload } from "react-icons/bs";
-import { RxUpdate as uploadItem } from "react-icons/rx";
-import { MdBookmarkAdded as Added } from "react-icons/md";
-import { FaPowerOff as poweroff } from "react-icons/fa";
+import { BsChatSquareTextFill as chat, BsCheck2Circle as check, BsImage as imageUpload, BsThreeDotsVertical as dotes } from "react-icons/bs";
+import { CiCircleRemove as uncheck, CiMedicalCross as medical } from "react-icons/ci";
+import { FaBloggerB as blog, FaPowerOff as poweroff } from "react-icons/fa";
 import { GiSniffingDog as category } from "react-icons/gi";
-import { MdOutlineLocationOn as location } from "react-icons/md";
 import { IoChatboxEllipsesOutline as consult } from "react-icons/io5";
-import { CiMedicalCross as medical } from "react-icons/ci";
-import { RiAdvertisementLine as ads } from "react-icons/ri";
-import { FaBloggerB as blog } from "react-icons/fa"; 
-import { TfiCommentAlt as comments } from "react-icons/tfi"; 
-import { MdPets as pets } from 'react-icons/md'
-import { BsThreeDotsVertical as dotes } from 'react-icons/bs'
-import { MdOutlineContactless as contact } from 'react-icons/md'
-import { MdLanguage as Language } from 'react-icons/md'
-import { RiAuctionLine as bidding } from 'react-icons/ri'
-import { BsCheck2Circle as check } from 'react-icons/bs'
-import { CiCircleRemove as uncheck } from 'react-icons/ci'
+import { MdBookmarkAdded as Added, MdLanguage as Language, MdOutlineContactless as contact, MdOutlineLocationOn as location, MdPets as pets } from "react-icons/md";
+import { RiAdvertisementLine as ads, RiAuctionLine as bidding } from "react-icons/ri";
+import { RxUpdate as UploadItem } from "react-icons/rx";
+import { SiAsciidoctor as doctor } from 'react-icons/si';
+import { TfiCommentAlt as comments } from "react-icons/tfi";
+import logout from "../assets/Images/svg/logout.svg";
+import profile from "../assets/Images/Vector.svg";
 
 
-export default{
+const icons ={
     uncheck,
     bidding,
     Language,
@@ -65,7 +48,7 @@ export default{
     location,
     poweroff,
     category,
-    uploadItem,
+    UploadItem,
     Added,
     send,
     ChatDoc,
@@ -84,8 +67,8 @@ export default{
     profile,
     menu,
     menuL,
-    add,
-    bin,
+    Add,
+    Bin,
     edit,
     arrow,
     upload,
@@ -97,3 +80,4 @@ export default{
     imageUpload,
     pets
 }
+export default icons;

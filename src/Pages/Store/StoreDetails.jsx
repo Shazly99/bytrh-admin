@@ -22,7 +22,7 @@ const StoreDetails = () => {
       setAnimal(res.Response);
       const timeoutId = setTimeout(() => {
         setIsloader(true)
-      }, 2000);
+      }, 200);
       return () => clearTimeout(timeoutId);
     }).catch((error) => {
       if (error.response && error.response.status === 429) {

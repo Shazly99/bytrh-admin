@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-// import data from './data.js';
-import { Skeleton } from '@mui/material';
+ import { Player } from '@lottiefiles/react-lottie-player';
 import { useEffect } from 'react';
 import { Button, Dropdown, DropdownButton, Modal, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
@@ -10,7 +9,7 @@ import { apiheader, PostData } from '../../../utils/fetchData.js';
 import useSkeletonTable from '../../../utils/useSkeletonTable.js';
 
 function UsersTable({ usersList, userList, isLoader }) {
-    let {SkeletonTable} =useSkeletonTable();
+    let { SkeletonTable } = useSkeletonTable();
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState({});
 
@@ -20,7 +19,7 @@ function UsersTable({ usersList, userList, isLoader }) {
                 toast.success('Updated Successfully', {
                     duration: 4000,
                     position: 'top-center',
-                    icon: <Icons.uploadItem color='#3182CE' size={16} />,
+                    icon: <Icons.UploadItem color='#3182CE' size={16} />,
                     iconTheme: {
                         primary: '#0a0',
                         secondary: '#fff',
@@ -33,7 +32,7 @@ function UsersTable({ usersList, userList, isLoader }) {
                 toast.success('Updated Successfully', {
                     duration: 4000,
                     position: 'top-center',
-                    icon: <Icons.uploadItem color='#3182CE' size={25} />,
+                    icon: <Icons.UploadItem color='#3182CE' size={25} />,
                     iconTheme: {
                         primary: '#0a0',
                         secondary: '#fff',
@@ -47,7 +46,7 @@ function UsersTable({ usersList, userList, isLoader }) {
                 toast.success('Updated Successfully', {
                     duration: 4000,
                     position: 'top-center',
-                    icon: <Icons.uploadItem color='#3182CE' size={25} />,
+                    icon: <Icons.UploadItem color='#3182CE' size={25} />,
                     iconTheme: {
                         primary: '#0a0',
                         secondary: '#fff',
@@ -63,7 +62,7 @@ function UsersTable({ usersList, userList, isLoader }) {
     };
 
     const userstatus = async (status) => {
-        let { data } = await PostData(`https://bytrh.com/api/admin/users/status`, status, apiheader)
+        return await PostData(`https://bytrh.com/api/admin/users/status`, status, apiheader)
     }
 
     const handleDeleteUser = async () => {
@@ -73,7 +72,7 @@ function UsersTable({ usersList, userList, isLoader }) {
             toast.success('user has been deleted', {
                 duration: 4000,
                 position: 'top-center',
-                icon: <Icons.bin color='#E20000' size={17} />,
+                icon: <Icons.Bin color='#E20000' size={17} />,
                 iconTheme: {
                     primary: '#0a0',
                     secondary: '#fff',
@@ -86,7 +85,7 @@ function UsersTable({ usersList, userList, isLoader }) {
     }, [usersList, selectedUserId])
 
 
-   
+
     return (
         <>
             {isLoader ? <>
@@ -124,11 +123,11 @@ function UsersTable({ usersList, userList, isLoader }) {
                                     <td className='text-center  d-flex '>
                                         <div>
                                             <span style={{ height: 'fit-content !important' }} className={`
-                                          ${item.UserStatus == 'PENDING' && 'txt_pending'} 
-                                          ${item.UserStatus == 'Shipped' && 'txt_shipped'}
-                                          ${item.UserStatus == 'Out For Delivery' && 'txt_delivery'}
-                                          ${item.UserStatus == 'ACTIVE' && 'txt_delivered'}
-                                          ${item.UserStatus == 'INACTIVE' && 'txt_rejected'}`} >
+                                          ${item.UserStatus === 'PENDING' && 'txt_pending'} 
+                                          ${item.UserStatus === 'Shipped' && 'txt_shipped'}
+                                          ${item.UserStatus === 'Out For Delivery' && 'txt_delivery'}
+                                          ${item.UserStatus === 'ACTIVE' && 'txt_delivered'}
+                                          ${item.UserStatus === 'INACTIVE' && 'txt_rejected'}`} >
                                                 {item?.UserStatus.toLowerCase().charAt(0).toUpperCase() + item?.UserStatus.slice(1).toLowerCase()}
                                             </span>
                                         </div>
@@ -161,7 +160,16 @@ function UsersTable({ usersList, userList, isLoader }) {
                                                             <Modal.Title>Delete User</Modal.Title>
                                                         </Modal.Header>
                                                         <Modal.Body>
-                                                            Are you sure you want to delete this user?
+                                                            <div>
+                                                                <div className="expired-container">
+                                                                    <Player
+                                                                        className="expired-image"
+                                                                        src="https://assets3.lottiefiles.com/packages/lf20_N7k36k.json"
+                                                                        autoplay
+                                                                        loop
+                                                                    />
+                                                                 </div>
+                                                            </div>
                                                         </Modal.Body>
                                                         <Modal.Footer className='  d-flex justify-content-center'>
                                                             <Button variant="danger" onClick={() => handleDeleteUser(item.IDUser)}>

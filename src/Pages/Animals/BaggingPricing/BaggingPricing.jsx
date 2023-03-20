@@ -53,7 +53,7 @@ const BaggingPricing = () => {
         setPagesNumber(data.Response.Pages);
         const timeoutId = setTimeout(() => {
           setIsloader(true)
-        }, 1000);
+        }, 200);
         return () => clearTimeout(timeoutId);
       })
       .catch((error) => {
@@ -77,7 +77,7 @@ const BaggingPricing = () => {
       toast.success("Deleted", {
         duration: 4000,
         position: "top-center",
-        icon: <Icons.uploadItem color="#3182CE" size={20} />,
+        icon: <Icons.UploadItem color="#3182CE" size={20} />,
         iconTheme: {
           primary: "#0a0",
           secondary: "#fff",
@@ -103,7 +103,7 @@ const BaggingPricing = () => {
       toast.success("update price ", {
         duration: 4000,
         position: "top-center",
-        icon: <Icons.uploadItem color="#3182CE" size={20} />,
+        icon: <Icons.UploadItem color="#3182CE" size={20} />,
         iconTheme: {
           primary: "#0a0",
           secondary: "#fff",
@@ -134,7 +134,7 @@ const BaggingPricing = () => {
           <Component.ButtonBase
             title={"Add  "}
             bg={"primary"}
-            icon={<Icons.add size={21} color={"#ffffffb4"} />}
+            icon={<Icons.Add size={21} color={"#ffffffb4"} />}
             path="/animals/baggingprice/addbaggingprice"
           />
         </> :

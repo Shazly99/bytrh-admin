@@ -7,9 +7,8 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import Form from 'react-bootstrap/Form';
 import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
-import { useParams, Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { Toaster, toast } from 'react-hot-toast';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import {   toast } from 'react-hot-toast';
 import Icons from '../../../../constants/Icons';
 import useFetch from '../../../../utils/useFetch';
 
@@ -78,8 +77,8 @@ const Edit = () => {
          getCities(data.Response.IDCountry)
     }
     useEffect(() => {
-        diplayUserData()
-    }, [phoneNumber])
+        diplayUserData() 
+    }, [])
     return (
         <>
             <Container fluid>

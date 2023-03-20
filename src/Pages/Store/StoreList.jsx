@@ -34,7 +34,7 @@ const StoreList = () => {
             setPagesNumber(data.Response.Pages);
             const timeoutId = setTimeout(() => {
                 setIsloader(true)
-            }, 1000);
+            }, 200);
             return () => clearTimeout(timeoutId);
         })
             .catch((error) => {
@@ -68,7 +68,7 @@ const StoreList = () => {
                 toast.success("Updated Successfully", {
                     duration: 4000,
                     position: "top-center",
-                    icon: <Icons.uploadItem color="#3182CE" size={20} />,
+                    icon: <Icons.UploadItem color="#3182CE" size={20} />,
                     iconTheme: {
                         primary: "#0a0",
                         secondary: "#fff",
@@ -214,18 +214,18 @@ const StoreList = () => {
         )
     }
     const SkeletonTable = (w) => {
-        return ( 
-            <div className="d-flex justify-content-center"> 
-                <Skeleton variant='rounded' animation='wave' height={15} width={w} /> 
+        return (
+            <div className="d-flex justify-content-center">
+                <Skeleton variant='rounded' animation='wave' height={15} width={w} />
             </div>
-            
+
         )
     }
     return (
 
         <>
             <div className="app__Users ">
-                 <div className="app__Users-table">
+                <div className="app__Users-table">
                     <div className="search-container">
                         <div className='search__group w-100'>
 
@@ -243,8 +243,10 @@ const StoreList = () => {
                                     <Col className='w-100'>
                                         {isLoader ? <>
                                             <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry}>
-                                                <Form.Label>Country</Form.Label>
+                                                {/* <Form.Label>Country</Form.Label> */}
                                                 <Form.Select aria-label="Default select example" >
+                                                    <option >Select Country</option>
+
                                                     {
                                                         countries?.map((item, index) => (
                                                             <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
@@ -255,70 +257,78 @@ const StoreList = () => {
                                         </> : SkeletonFilter()}
                                     </Col>
 
-                                    <Col className='w-100'> 
-                                        {isLoader ? <>                                        
-                                        <Form.Group controlId="formBasicEmail"   >
-                                            <Form.Label>City</Form.Label>
-                                            <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={countriesRef}>
-                                                <option value={'cities'}>all city</option>
-                                                {
-                                                    cities?.map((item, index) => (
-                                                        <option key={index} value={item?.IDCity}>{item?.CityName}</option>
-                                                    ))
-                                                }
-                                            </Form.Select>
+                                    <Col className='w-100'>
+                                        {isLoader ? <>
+                                            <Form.Group controlId="formBasicEmail"   >
+                                                {/* <Form.Label>City</Form.Label> */}
+                                                <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={countriesRef}>
+                                                    <option >Select city</option>
 
-                                        </Form.Group>
+                                                    <option value={'cities'}>All City</option>
+                                                    {
+                                                        cities?.map((item, index) => (
+                                                            <option key={index} value={item?.IDCity}>{item?.CityName}</option>
+                                                        ))
+                                                    }
+                                                </Form.Select>
+
+                                            </Form.Group>
                                         </> : SkeletonFilter()}
                                     </Col>
 
                                     <Col className='w-100'>
 
-                                        {isLoader ? <>                    
-                                         <Form.Group controlId="formBasicEmail"  >
-                                            <Form.Label  >Product Type </Form.Label>
-                                            <Form.Select aria-label="Default select example" ref={animalProductType} onClick={handelAdvertisement} >
-                                                <option value={'All'}  >Animals Product Type</option>
-                                                {
-                                                    ['SINGLE', 'GROUP']?.map((item, index) => (
-                                                        <option key={index} value={item}  >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase()}</option>
-                                                    ))
-                                                }
-                                            </Form.Select>
-                                        </Form.Group>
+                                        {isLoader ? <>
+                                            <Form.Group controlId="formBasicEmail"  >
+                                                {/* <Form.Label  >Product Type </Form.Label> */}
+                                                <Form.Select aria-label="Default select example" ref={animalProductType} onClick={handelAdvertisement} >
+                                                    <option >Select Product Type</option>
+
+                                                    <option value={'All'}  >Animals Product Type</option>
+                                                    {
+                                                        ['SINGLE', 'GROUP']?.map((item, index) => (
+                                                            <option key={index} value={item}  >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase()}</option>
+                                                        ))
+                                                    }
+                                                </Form.Select>
+                                            </Form.Group>
                                         </> : SkeletonFilter()}
                                     </Col>
 
                                     <Col className='w-100'>
 
-                                        {isLoader ? <>                                        
-                                        <Form.Group controlId="formBasicEmail"  >
-                                            <Form.Label  >  Product Status </Form.Label>
-                                            <Form.Select aria-label="Default select example" ref={statusRef} onClick={handelanimalProductStatus} >
-                                                <option value={'All'}  > All Status</option>
-                                                {
-                                                    ['PENDING', 'ACTIVE', 'CANCELLED', 'SOLD', 'REJECTED', 'RESERVED']?.map((item, index) => (
-                                                        <option key={index} value={item}  >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase()}</option>
-                                                    ))
-                                                }
-                                            </Form.Select>
-                                        </Form.Group>
+                                        {isLoader ? <>
+                                            <Form.Group controlId="formBasicEmail"  >
+                                                {/* <Form.Label  >  Product Status </Form.Label> */}
+                                                <Form.Select aria-label="Default select example" ref={statusRef} onClick={handelanimalProductStatus} >
+                                                    <option >Select Status</option>
+
+                                                    <option value={'All'}  > All Status</option>
+                                                    {
+                                                        ['PENDING', 'ACTIVE', 'CANCELLED', 'SOLD', 'REJECTED', 'RESERVED']?.map((item, index) => (
+                                                            <option key={index} value={item}  >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase()}</option>
+                                                        ))
+                                                    }
+                                                </Form.Select>
+                                            </Form.Group>
                                         </> : SkeletonFilter()}
                                     </Col>
 
-                                    <Col className='w-100'> 
-                                        {isLoader ? <>                                        
-                                        <Form.Group controlId="formBasicEmail"  >
-                                            <Form.Label  >  SubCategory </Form.Label>
-                                            <Form.Select aria-label="Default select example" ref={animalSubCategoryRef} onClick={handelanimalSubCategory} >
-                                                <option value={'All'}  >Animal SubCategory</option>
-                                                {
-                                                    animalSubCategory?.map((item, index) => (
-                                                        <option key={index} value={item.IDAnimalSubCategory}  >{item?.AnimalSubCategoryName}</option>
-                                                    ))
-                                                }
-                                            </Form.Select>
-                                        </Form.Group>
+                                    <Col className='w-100'>
+                                        {isLoader ? <>
+                                            <Form.Group controlId="formBasicEmail"  >
+
+                                                {/* <Form.Label  >  SubCategory </Form.Label> */}
+                                                <Form.Select aria-label="Default select example" ref={animalSubCategoryRef} onClick={handelanimalSubCategory} >
+                                                    <option >Select SubCategory</option>
+                                                    <option value={'All'}  >Animal SubCategory</option>
+                                                    {
+                                                        animalSubCategory?.map((item, index) => (
+                                                            <option key={index} value={item.IDAnimalSubCategory}  >{item?.AnimalSubCategoryName}</option>
+                                                        ))
+                                                    }
+                                                </Form.Select>
+                                            </Form.Group>
                                         </> : SkeletonFilter()}
                                     </Col>
 
@@ -338,7 +348,7 @@ const StoreList = () => {
                                 <th >   {isLoader ? <> Status </> : SkeletonTable(70)} </th>
                                 <th >   {isLoader ? <>Create Date </> : SkeletonTable(70)} </th>
                                 <th >   {isLoader ? <>View </> : SkeletonTable(70)} </th>
-                                
+
                             </tr>
                         </thead>
                         <tbody className="text-center">
@@ -377,7 +387,7 @@ const StoreList = () => {
                                     <>
                                         {animal?.map((item, index) => (
                                             <tr key={index}>
-                                                                                                <td>
+                                                <td>
                                                     <div style={{ maxWidth: "170px" }}>
                                                         <img
                                                             src={item?.AnimalProductImage}

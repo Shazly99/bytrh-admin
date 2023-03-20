@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import Component from '../../../constants/Component'
-import './Users.scss'
-import Icons from "../../../constants/Icons.js";
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import { GetData, PostData } from '../../../utils/fetchData';
-import { apiheader } from './../../../utils/fetchData';
-import Img from '../../../assets/Img';
+import React, { useEffect, useState } from 'react';
+import Component from '../../../constants/Component';
+import Icons from "../../../constants/Icons.js";
+import { PostData } from '../../../utils/fetchData';
 import useSkeletonTable from '../../../utils/useSkeletonTable';
+import { apiheader } from './../../../utils/fetchData';
+import './Users.scss';
 
 function Users() {
   const [page, setPage] = useState(1);
@@ -31,7 +30,7 @@ function Users() {
         console.log(data.Response.Pages)
         const timeoutId = setTimeout(() => {
           setIsloader(true)
-        }, 1000);
+        }, 200);
         return () => clearTimeout(timeoutId);
       });
     } catch (error) {
@@ -94,7 +93,7 @@ function Users() {
 
             <div className="search_and__btn   w-100">
               {isLoader ? <>
-                <Component.ButtonBase onclick={test} title={"Add  "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/user/addUser" />
+                <Component.ButtonBase onclick={test} title={"Add "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/user/addUser" />
                 <div className='search__group'>
                   <input type="text" placeholder="Search by name or email or phone....." name="search" value={searchValue} onChange={handleInputChange} />
                   <button type="submit" onClick={handleSearchClick}>

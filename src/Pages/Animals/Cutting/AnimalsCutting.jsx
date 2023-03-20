@@ -25,7 +25,7 @@ const AnimalsCutting = () => {
       // setPagesNumber(data.Response.Pages);
       const timeoutId = setTimeout(() => {
         setIsloader(true)
-      }, 1000);
+      }, 200);
       return () => clearTimeout(timeoutId);
     }).catch((error) => {
       if (error.response && error.response.status === 429) {
@@ -44,7 +44,7 @@ const AnimalsCutting = () => {
         toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
-          icon: <Icons.uploadItem color='#3182CE' size={20} />,
+          icon: <Icons.UploadItem color='#3182CE' size={20} />,
           iconTheme: {
             primary: '#0a0',
             secondary: '#fff',
@@ -57,7 +57,7 @@ const AnimalsCutting = () => {
         toast.success('Updated Successfully', {
           duration: 4000,
           position: 'top-center',
-          icon: <Icons.uploadItem color='#3182CE' size={20} />,
+          icon: <Icons.UploadItem color='#3182CE' size={20} />,
           iconTheme: {
             primary: '#0a0',
             secondary: '#fff',
@@ -83,7 +83,7 @@ const AnimalsCutting = () => {
    
             <div className="app__Users ">
               {isLoader ? <>
-                <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.add size={21} color={'#ffffffb4'} />} path="/animals/cutting/addcutting" />
+                <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/cutting/addcutting" />
               </> :
                 <div className="mt-3 p-2">
                   {SkeletonFilters(40, 150)}
