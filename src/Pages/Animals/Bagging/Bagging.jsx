@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown, DropdownButton, Table } from "react-bootstrap";
+import { Dropdown, DropdownButton, NavDropdown, Table } from "react-bootstrap";
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
@@ -113,6 +113,7 @@ const Bagging = () => {
                               <Dropdown.Item eventKey="Edite" as={Link} to={`/animals/bagging/editbagging/${item.IDBagging}`}>
                                 Edit
                               </Dropdown.Item>
+                              <NavDropdown.Divider />
 
                               {
                                 item?.BaggingActive === 1 ? '' : item?.BaggingActive === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>

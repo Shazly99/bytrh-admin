@@ -23,8 +23,8 @@ const useFetch = () => {
 
     // areas
     const getAreas = async (id) => {
-        let { Response } = await GetData(`${process.env.REACT_APP_API_URL}/admin/areas/1`, apiheader)
-        setAreas(Response.Countries)
+        let { Response } = await GetData(`${process.env.REACT_APP_API_URL}/admin/areas/${id}`, apiheader)
+        setAreas(Response)
     }
 
 
@@ -42,6 +42,7 @@ const useFetch = () => {
         areas,
         getCities,
         getCountries, 
+        getAreas
     }
 }
 

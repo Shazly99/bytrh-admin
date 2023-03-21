@@ -19,8 +19,8 @@ import { RiSendPlaneFill as send, RiUserVoiceFill as Chatuser } from "react-icon
 import { RxDotFilled as dote } from "react-icons/rx";
 import { TbReportAnalytics as report } from "react-icons/tb";
 
-import { BsChatSquareTextFill as chat, BsCheck2Circle as check, BsImage as imageUpload, BsThreeDotsVertical as dotes } from "react-icons/bs";
-import { CiCircleRemove as uncheck, CiMedicalCross as medical } from "react-icons/ci";
+import { BsChatSquareTextFill as Chat, BsCheck2Circle as Check, BsImage as imageUpload, BsThreeDotsVertical as dotes } from "react-icons/bs";
+import { CiCircleRemove as Uncheck, CiMedicalCross as medical } from "react-icons/ci";
 import { FaBloggerB as blog, FaPowerOff as poweroff } from "react-icons/fa";
 import { GiSniffingDog as category } from "react-icons/gi";
 import { IoChatboxEllipsesOutline as consult } from "react-icons/io5";
@@ -34,7 +34,7 @@ import profile from "../assets/Images/Vector.svg";
 
 
 const icons ={
-    uncheck,
+    Uncheck,
     bidding,
     Language,
     contact,
@@ -53,7 +53,7 @@ const icons ={
     send,
     ChatDoc,
     Chatuser,
-    check,
+    Check,
     logout,
     Dashboard,
     notification,
@@ -75,7 +75,7 @@ const icons ={
     shop,
     settings,
     Clients,
-    chat,
+    Chat,
     doctor,
     imageUpload,
     pets

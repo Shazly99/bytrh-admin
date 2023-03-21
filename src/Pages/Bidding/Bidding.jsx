@@ -1,20 +1,21 @@
-import React, { useRef } from "react";
-import { Button, Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
-import { Pagination } from "@mui/material";
+import { Player } from "@lottiefiles/react-lottie-player";
+import { Pagination, Skeleton } from "@mui/material";
 import Box from "@mui/material/Box";
-import { useEffect, useState } from "react";
-import Component from "../../constants/Component";
-import { apiheader, PostData } from "./../../utils/fetchData";
-import Img from "../../assets/Img";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
+import { Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
 import { toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
+import Img from "../../assets/Img";
+import Component from "../../constants/Component";
 import Icons from "../../constants/Icons";
 import useFetch from "../../utils/useFetch";
-import axios from "axios";
-import { Skeleton } from '@mui/material';
-import _ from 'lodash';
+import useSkeletonTable from "../../utils/useSkeletonTable";
+import { apiheader, PostData } from "./../../utils/fetchData";
 
 const Bidding = () => {
+  let { SkeletonTable  } = useSkeletonTable();
+
   const [animal, setAnimal] = useState([]);
   const [page, setPage] = useState(1);
   const [PagesNumber, setPagesNumber] = useState("");
@@ -94,7 +95,6 @@ const Bidding = () => {
   // const handleSearchClick = () => {
   // };
   const handleInputChange = (event) => {
-
     if (event.target.value === '') {
       store(page)
     }
@@ -107,18 +107,44 @@ const Bidding = () => {
     setAnimal(data.Response.AnimalProducts);
     setPagesNumber(data.Response.Pages);
   }
-  // !Filter by city name 
-  let { countries, cities, getCities } = useFetch()
-  const countriesRef = useRef(null);
-  const handelSelectCountry = (event) => {
+  // !Filter by city and country and area  
+  let { countries, areas, cities, getCities, getAreas } = useFetch()
+  const cityRef = useRef(null);
+  const countryRef = useRef(null);
+  const areaRef = useRef(null);
+  const handelSelectCountry = async (event) => {
     const selectedCountryId = event.target.value;
-    getCities(selectedCountryId)
+    if (selectedCountryId === 'country') {
+      store()
+    } else if (selectedCountryId === 'Select Country') {
+      return false
+    } else {
+      getCities(selectedCountryId)
+      try {
+        await axios.post(`${process.env.REACT_APP_API_URL}/admin/animalproducts`, { IDPage: page, IDCountry: selectedCountryId, AnimalProductService: 'BIDDING' }, apiheader).then((res) => {
+          if (res.status === 200 && res.request.readyState === 4) {
+            setAnimal(res.data.Response.AnimalProducts);
+            setPagesNumber(res.data.Response.Pages);
+          }
+        })
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = error.response.headers['retry-after'];
+          setTimeout(() => {
+            store();
+          }, (retryAfter || 30) * 1000);
+        }
+      }
+    }
   }
   const handelSelectCity = async () => {
-    let city = countriesRef.current.value
+    let city = cityRef.current.value
     if (city === 'cities') {
       store()
+    } else if (city === 'Select city') {
+      return false
     } else {
+      getAreas(city)
       try {
         await axios.post(`${process.env.REACT_APP_API_URL}/admin/animalproducts`, { IDPage: page, IDCity: city, AnimalProductService: 'BIDDING' }, apiheader).then((res) => {
           if (res.status === 200 && res.request.readyState === 4) {
@@ -136,13 +162,39 @@ const Bidding = () => {
       }
     }
   }
+  const handelSelectArea = async () => {
+    let city = areaRef.current.value
+    if (city === 'Areas') {
+      store()
+    } else if (city === 'Select Area') {
+      return false
+    } else {
+      try {
+        await axios.post(`${process.env.REACT_APP_API_URL}/admin/animalproducts`, { IDPage: page, IDArea: city, AnimalProductService: 'BIDDING' }, apiheader).then((res) => {
+          if (res.status === 200 && res.request.readyState === 4) {
+            setAnimal(res.data.Response.AnimalProducts);
+            setPagesNumber(res.data.Response.Pages);
+          }
+        })
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = error.response.headers['retry-after'];
+          setTimeout(() => {
+            store();
+          }, (retryAfter || 30) * 1000);
+        }
+      }
+    }
+  }
 
-  // !Filter by  IDAnimalProductType
+  // !Filter by  AnimalProductType
   const animalProductType = useRef(null);
   const handelAdvertisement = async () => {
     let AnimalProductType = animalProductType.current.value
     if (AnimalProductType === 'All') {
       store()
+    } else if (AnimalProductType === 'Select Product Type') {
+      return false
     } else {
       await axios.post(`${process.env.REACT_APP_API_URL}/admin/animalproducts`, { IDPage: page, AnimalProductType: AnimalProductType, AnimalProductService: 'BIDDING' }, apiheader).then((res) => {
         if (res.status === 200 && res.request.readyState === 4) {
@@ -153,7 +205,7 @@ const Bidding = () => {
     }
   }
 
-  // !Filter by  IDAnimalSubCategory 
+  // !Filter by  animal SubCategory 
   const animalSubCategoryRef = useRef();
   const [animalSubCategory, setAnimalSubCategory] = useState(null)
   const animalSubCategoryGet = async () => {
@@ -167,6 +219,8 @@ const Bidding = () => {
     let AnimalProductType = animalSubCategoryRef.current.value
     if (AnimalProductType === 'All') {
       store()
+    } else if (AnimalProductType === 'Select SubCategory') {
+      return false
     } else {
       await axios.post(`${process.env.REACT_APP_API_URL}/admin/animalproducts`, { IDPage: page, IDAnimalSubCategory: AnimalProductType, AnimalProductService: 'BIDDING' }, apiheader).then((res) => {
         if (res.status === 200 && res.request.readyState === 4) {
@@ -177,12 +231,14 @@ const Bidding = () => {
     }
   }
 
-  // !Filter by  IDAnimalProductType
+  // !Filter by   Animal Product Status
   const statusRef = useRef(null);
   const handelanimalProductStatus = async () => {
     let animalProductStatus = statusRef.current.value
     if (animalProductStatus === 'All') {
       store()
+    } else if (animalProductStatus === 'Select Status') {
+      return false
     } else {
       await axios.post(`${process.env.REACT_APP_API_URL}/admin/animalproducts`, { IDPage: page, AnimalProductStatus: animalProductStatus, AnimalProductService: 'BIDDING' }, apiheader).then((res) => {
         if (res.status === 200 && res.request.readyState === 4) {
@@ -214,7 +270,7 @@ const Bidding = () => {
       </div>
     )
   }
-  const SkeletonTable = (w) => {
+  const SkeletonTables = (w) => {
     return (
       <div className="d-flex justify-content-center">
         <Skeleton variant='rounded' animation='wave' height={15} width={w} />
@@ -229,7 +285,6 @@ const Bidding = () => {
         <div className="app__Users-table">
           <div className="search-container">
             <div className='search__group w-100'>
-
               {isLoader ? <>
                 <div className='search__group'>
                   <input type="text" placeholder="Search by client name or email....." name="search" value={searchValue} onChange={handleInputChange} />
@@ -240,14 +295,13 @@ const Bidding = () => {
 
               </> : SkeletonSearch(40, "60%")}
               <div className=' app__addOrder-form '>
-                <Row className='d-flex flex-row justify-content-between'>
-                  <Col className='w-100'>
+                <Row className='d-flex  flex-row justify-content-between'>
+                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2' >
                     {isLoader ? <>
-                      <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry}>
-                        {/* <Form.Label>Country</Form.Label> */}
+                      <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry} ref={countryRef}>
                         <Form.Select aria-label="Default select example" >
                           <option >Select Country</option>
-
+                          <option value={'country'} >Countries</option>
                           {
                             countries?.map((item, index) => (
                               <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
@@ -258,14 +312,13 @@ const Bidding = () => {
                     </> : SkeletonFilter()}
                   </Col>
 
-                  <Col className='w-100'>
+                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"   >
-                        {/* <Form.Label>City</Form.Label> */}
-                        <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={countriesRef}>
-                        <option >Select city</option>
-                          
-                          <option value={'cities'}>All City</option>
+                        <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={cityRef}>
+                          <option >Select city</option>
+
+                          <option value={'cities'} > Cities</option>
 
                           {
                             cities?.map((item, index) => (
@@ -278,14 +331,33 @@ const Bidding = () => {
                     </> : SkeletonFilter()}
                   </Col>
 
-                  <Col className='w-100'>
+                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
+                    {isLoader ? <>
+                      <Form.Group controlId="formBasicEmail"   >
+                        <Form.Select aria-label="Default select example" onClick={handelSelectArea} ref={areaRef}>
+                          <option >Select Area</option>
+
+                          <option value={'Areas'} >Areas</option>
+
+                          {
+                            areas?.map((item, index) => (
+                              <option key={index} value={item?.IDArea}>{item?.AreaName}</option>
+                            ))
+                          }
+                        </Form.Select>
+
+                      </Form.Group>
+                    </> : SkeletonFilter()}
+                  </Col>
+
+                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
 
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"  >
                         {/* <Form.Label  >Product Type </Form.Label> */}
                         <Form.Select aria-label="Default select example" ref={animalProductType} onClick={handelAdvertisement} >
-                        <option >Select Product Type</option>
-                          
+                          <option >Select Product Type</option>
+
                           <option value={'All'}  >Animals Product Type</option>
                           {
                             ['SINGLE', 'GROUP']?.map((item, index) => (
@@ -297,14 +369,14 @@ const Bidding = () => {
                     </> : SkeletonFilter()}
                   </Col>
 
-                  <Col className='w-100'>
+                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
 
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"  >
                         {/* <Form.Label  >  Product Status </Form.Label> */}
                         <Form.Select aria-label="Default select example" ref={statusRef} onClick={handelanimalProductStatus} >
-                        <option >Select Status</option>
-                          
+                          <option >Select Status</option>
+
                           <option value={'All'}  > All Status</option>
                           {
                             ['PENDING', 'ACTIVE', 'CANCELLED', 'SOLD', 'REJECTED', 'RESERVED']?.map((item, index) => (
@@ -316,13 +388,13 @@ const Bidding = () => {
                     </> : SkeletonFilter()}
                   </Col>
 
-                  <Col className='w-100'>
+                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"  >
                         {/* <Form.Label  >  SubCategory </Form.Label> */}
                         <Form.Select aria-label="Default select example" ref={animalSubCategoryRef} onClick={handelanimalSubCategory} >
-                        <option >Select SubCategory</option>
-                         
+                          <option >Select SubCategory</option>
+
                           <option value={'All'}  >Animal SubCategory</option>
                           {
                             animalSubCategory?.map((item, index) => (
@@ -339,208 +411,181 @@ const Bidding = () => {
             </div>
           </div>
 
-          <Table responsive={true} className="rounded-3 ">
-            <thead>
-              <tr className="text-center  " style={{ background: "#F9F9F9" }} >
-                <th >   {isLoader ? <>  Product Image   </> : SkeletonTable(70)} </th>
-                <th >   {isLoader ? <>Client Info </> : SkeletonTable(70)} </th>
-                <th >   {isLoader ? <> SubCategory   </> : SkeletonTable(70)} </th>
-                <th >   {isLoader ? <> Price   </> : SkeletonTable(70)} </th>
-                <th >   {isLoader ? <> Type </> : SkeletonTable(70)} </th>
-                <th >   {isLoader ? <> Status </> : SkeletonTable(70)} </th>
-                <th >   {isLoader ? <>Create Date </> : SkeletonTable(70)} </th>
-                <th >   {isLoader ? <>View </> : SkeletonTable(70)} </th>
-
-              </tr>
-            </thead>
-            <tbody className="text-center">
+          {isLoader ? <>
+            <>
               {
-                isLoader === false ?
-                  <>
-                    {Array.from(Array(5).keys())?.map((index) => (
-                      <tr key={index}>
-                        <td className="d-flex justify-content-center align-item-center">
-                          <Skeleton variant="rounded" width={145} height={96} />
-                        </td>
-                        <td>
-                          <Skeleton variant="rounded" width={'100%'} height={20} />
-                        </td>
-                        <td>
-                          <Skeleton variant="rounded" width={'100%'} height={20} />
-                        </td>
-                        <td>
-                          <Skeleton variant="rounded" width={'100%'} height={20} />
-                        </td>
-                        <td>
-                          <Skeleton variant="rounded" width={'100%'} height={20} />
-                        </td>
-                        <td>
-                          <Skeleton variant="rounded" width={'100%'} height={20} />
-                        </td>
-                        <td>
-                          <Skeleton variant="rounded" width={'100%'} height={20} />
-                        </td>
-                        <td>
-                          <Skeleton variant="rounded" width={'100%'} height={20} />
-                        </td>
-                      </tr>
-                    ))}
-                  </> :
-                  <>
-                    {animal?.map((item, index) => (
-                      <tr key={index}>
-                        <td>
-                          <div style={{ maxWidth: "170px" }}>
-                            <img
-                              src={item?.AnimalProductImage}
-                              className="w-100 rounded-3"
-                              alt={item?.AnimalProductTypeName}
-                              loading="lazy"
-                            />
-                          </div>
-                        </td>
-                        <td>
-                          <div
-                            className="d-flex flex-column justify-content-center align-content-center"
-                            style={{ gap: "0" }}
-                          >
-                            <span className="ClientName">
-                              {item?.ClientName}
-                            </span>
-                            <span className="ClientPhone">
-                              {item?.ClientPhone}
-                            </span>
-                          </div>
-                        </td>
+                animal.length > 0 ?
+                  <Table responsive={true} className="rounded-3 ">
+                    <thead>
+                      <tr className="text-center  " style={{ background: "#F9F9F9" }} >
+                        <th > Product Image</th>
+                        <th >Client Info  </th>
+                        <th >SubCategory    </th>
+                        <th >     Price    </th>
+                        <th >     Type  </th>
+                        <th >     Status  </th>
+                        <th >    Create Date  </th>
+                        <th >    View  </th>
 
-                        <td>
-                          <div>{item?.AnimalSubCategoryName}</div>
-                        </td>
-                        <td>
-                          <div className="d-flex gap-1">
-                            <h6 className="mb-0  pe-2 color-red">
-                              {item?.AnimalProductPrice} SAR
-                            </h6>
-                          </div>
-                        </td>
-                        <td>
-                          <div>
-                            {item?.AnimalProductType.charAt(0).toUpperCase() +
-                              item?.AnimalProductType.slice(1).toLowerCase()}
-                          </div>
-                        </td>
-                        <td>
-                          <div className="blog__status">
-                            <span
-                              style={{ height: "fit-content  important" }}
-                              className={`  ${item.AnimalProductStatus == "PENDING" &&
-                                "txt_pending"
-                                } ${item.AnimalProductStatus == "CANCELLED" &&
-                                "txt_rejected"
-                                }   ${item.AnimalProductStatus == "RESERVED" &&
-                                "txt_delivery"
-                                } ${item.AnimalProductStatus == "REJECTED" &&
-                                "txt_rejected"
-                                }   ${item.AnimalProductStatus == "SOLD" &&
-                                "txt__status"
-                                } ${item.AnimalProductStatus == "ACTIVE" &&
-                                "txt_delivered"
-                                }`}
-                            > {item?.AnimalProductStatus.charAt(0).toUpperCase() + item?.AnimalProductStatus.slice(1).toLowerCase()}
-                            </span>
-                            <div className="delete">
-                              <DropdownButton
-                                title={
-                                  <img src={Img.dropdown} loading="lazy" />
-                                }
-                                id="dropdown-menu"
-                                variant="outline-success"
-                                onClick={() => setShowDropdown(!showDropdown)}
-                                onSelect={(eventKey) =>
-                                  handleActionSelect(
-                                    item.IDAnimalProduct,
-                                    eventKey
-                                  )
-                                }
-                                className="DropdownButton "
-                                drop={"down-centered"}
-                              >
-                                {item?.AnimalProductStatus === "PENDING" ? (
-                                  ""
-                                ) : (
-                                  <Dropdown.Item eventKey="PENDING">
-                                    Pending
-                                  </Dropdown.Item>
-                                )}
-                                {item?.AnimalProductStatus === "ACTIVE" ? (
-                                  ""
-                                ) : (
-                                  <Dropdown.Item eventKey="ACTIVE">
-                                    Active
-                                  </Dropdown.Item>
-                                )}
-                                {item?.AnimalProductStatus === "CANCELLED" ? (
-                                  ""
-                                ) : (
-                                  <Dropdown.Item eventKey="CANCELLED">
-                                    Cancelled
-                                  </Dropdown.Item>
-                                )}
-                                {item?.AnimalProductStatus === "SOLD" ? (
-                                  ""
-                                ) : (
-                                  <Dropdown.Item eventKey="SOLD">
-                                    Sold
-                                  </Dropdown.Item>
-                                )}
-                                {item?.AnimalProductStatus === "REJECTED" ? (
-                                  ""
-                                ) : (
-                                  <Dropdown.Item eventKey="REJECTED">
-                                    Rejected
-                                  </Dropdown.Item>
-                                )}
-                                {item?.AnimalProductStatus === "RESERVED" ? (
-                                  ""
-                                ) : (
-                                  <Dropdown.Item eventKey="RESERVED">
-                                    Reserved
-                                  </Dropdown.Item>
-                                )}
-                              </DropdownButton>
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div
-                            className="d-flex flex-column justify-content-center align-content-center"
-                            style={{ gap: "0" }}
-                          >
-                            <span className="ClientName">
-                              {" "}
-                              {item?.CreateDate.split(" ")[0]}{" "}
-                            </span>
-                            <span className="ClientPhone">
-                              {" "}
-                              {item?.CreateDate.split(" ")[1]}
-                            </span>
-                          </div>
-                        </td>
-                        <td>
-                          <div>
-                            <Link
-                              to={`/bidding/details/${item?.IDAnimalProduct}`}
-                            >
-                              <img src={Img.view} loading="lazy" />
-                            </Link>
-                          </div>
-                        </td>
                       </tr>
-                    ))}
-                  </>
+                    </thead>
+                    <tbody className="text-center">
+                      {animal?.map((item, index) => (
+                        <tr key={index}>
+                          <td>
+                            <div style={{ maxWidth: "170px" }}>
+                              <img
+                                src={item?.AnimalProductImage}
+                                className="w-100 rounded-3"
+                                alt={item?.AnimalProductTypeName}
+                                loading="lazy"
+                              />
+                            </div>
+                          </td>
+                          <td>
+                            <div
+                              className="d-flex flex-column justify-content-center align-content-center"
+                              style={{ gap: "0" }}
+                            >
+                              <span className="ClientName">
+                                {item?.ClientName}
+                              </span>
+                              <span className="ClientPhone">
+                                {item?.ClientPhone}
+                              </span>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div>{item?.AnimalSubCategoryName}</div>
+                          </td>
+                          <td>
+                            <div className="d-flex gap-1">
+                              <h6 className="mb-0  pe-2 color-red">
+                                {item?.AnimalProductPrice} SAR
+                              </h6>
+                            </div>
+                          </td>
+                          <td>
+                            <div>
+                              {item?.AnimalProductType.charAt(0).toUpperCase() +
+                                item?.AnimalProductType.slice(1).toLowerCase()}
+                            </div>
+                          </td>
+                          <td>
+                            <div className="blog__status">
+                              <span
+                                style={{ height: "fit-content  important" }}
+                                className={`  ${item.AnimalProductStatus === "PENDING" &&
+                                  "txt_pending"
+                                  } ${item.AnimalProductStatus === "CANCELLED" &&
+                                  "txt_rejected"
+                                  }   ${item.AnimalProductStatus === "RESERVED" &&
+                                  "txt_delivery"
+                                  } ${item.AnimalProductStatus === "REJECTED" &&
+                                  "txt_rejected"
+                                  }   ${item.AnimalProductStatus === "SOLD" &&
+                                  "txt__status"
+                                  } ${item.AnimalProductStatus === "ACTIVE" &&
+                                  "txt_delivered"
+                                  }`}
+                              > {item?.AnimalProductStatus.charAt(0).toUpperCase() + item?.AnimalProductStatus.slice(1).toLowerCase()}
+                              </span>
+                              <div className="delete">
+                                <DropdownButton
+                                  title={
+                                    <img src={Img.dropdown} loading="lazy" alt="Img.dropdown" />
+                                  }
+                                  id="dropdown-menu"
+                                  variant="outline-success"
+                                  onClick={() => setShowDropdown(!showDropdown)}
+                                  onSelect={(eventKey) =>
+                                    handleActionSelect(
+                                      item.IDAnimalProduct,
+                                      eventKey
+                                    )
+                                  }
+                                  className="DropdownButton "
+                                  drop={"down-centered"}
+                                >
+                                  {item?.AnimalProductStatus === "PENDING" ? (
+                                    ""
+                                  ) : (
+                                    <Dropdown.Item eventKey="PENDING">
+                                      Pending
+                                    </Dropdown.Item>
+                                  )}
+                                  {item?.AnimalProductStatus === "ACTIVE" ? (
+                                    ""
+                                  ) : (
+                                    <Dropdown.Item eventKey="ACTIVE">
+                                      Active
+                                    </Dropdown.Item>
+                                  )}
+                                  {item?.AnimalProductStatus === "CANCELLED" ? (
+                                    ""
+                                  ) : (
+                                    <Dropdown.Item eventKey="CANCELLED">
+                                      Cancelled
+                                    </Dropdown.Item>
+                                  )}
+                                  {item?.AnimalProductStatus === "SOLD" ? (
+                                    ""
+                                  ) : (
+                                    <Dropdown.Item eventKey="SOLD">
+                                      Sold
+                                    </Dropdown.Item>
+                                  )}
+                                  {item?.AnimalProductStatus === "REJECTED" ? (
+                                    ""
+                                  ) : (
+                                    <Dropdown.Item eventKey="REJECTED">
+                                      Rejected
+                                    </Dropdown.Item>
+                                  )}
+                                  {item?.AnimalProductStatus === "RESERVED" ? (
+                                    ""
+                                  ) : (
+                                    <Dropdown.Item eventKey="RESERVED">
+                                      Reserved
+                                    </Dropdown.Item>
+                                  )}
+                                </DropdownButton>
+                              </div>
+                            </div>
+                          </td>
+                          <td>
+                            <div
+                              className="d-flex flex-column justify-content-center align-content-center"
+                              style={{ gap: "0" }}
+                            >
+                              <span className="ClientName">
+                                {" "}
+                                {item?.CreateDate.split(" ")[0]}{" "}
+                              </span>
+                              <span className="ClientPhone">
+                                {" "}
+                                {item?.CreateDate.split(" ")[1]}
+                              </span>
+                            </div>
+                          </td>
+                          <td>
+                            <div>
+                              <Link
+                                to={`/bidding/details/${item?.IDAnimalProduct}`}
+                              >
+                                <img src={Img.view} loading="lazy" alt='img view' />
+                              </Link>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table> :
+                  <Component.DataNotFound />
               }
-            </tbody>
-          </Table>
+            </>
+          </> : SkeletonTable()}
         </div>
       </div>
       <div className="pagination ">

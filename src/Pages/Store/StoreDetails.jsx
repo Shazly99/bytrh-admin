@@ -36,7 +36,7 @@ const StoreDetails = () => {
 
   useEffect(() => {
     store();
- window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
     return () => {
       store();
     }
@@ -178,41 +178,53 @@ const StoreDetails = () => {
                 </Col>
                 <Col className="summary_blog">
                   {isLoader ? <>
-                    <span className='title'>{animal?.HasBagging === 1 ?  <Icons.check color='#40AB45'size={18}/> : <Icons.uncheck color='#E20000' size={18}/>}</span>
+                    <span className='title'>{animal?.HasBagging === 1 ? <Icons.Check color='#40AB45' size={18} /> : <Icons.Uncheck color='#E20000' size={18} />}</span>
                     <span className='body'>Bagging</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
 
                   {isLoader ? <>
-                    <span className='title'>{animal?.HasCutting === 1 ?  <Icons.check color='#40AB45'size={18}/> : <Icons.uncheck color='#E20000' size={18}/>}</span>
+                    <span className='title'>{animal?.HasCutting === 1 ? <Icons.Check color='#40AB45' size={18} /> : <Icons.Uncheck color='#E20000' size={18} />}</span>
                     <span className='body'> Cutting</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
                   {isLoader ? <>
-                    <span className='title'>{animal?.HasDelivery === 1 ?  <Icons.check color='#40AB45'size={18}/> : <Icons.uncheck color='#E20000' size={18}/>}</span>
+                    <span className='title'>{animal?.HasDelivery === 1 ? <Icons.Check color='#40AB45' size={18} /> : <Icons.Uncheck color='#E20000' size={18} />}</span>
                     <span className='body'> Delivery</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
 
                   {isLoader ? <>
-                    <span className='title'>{animal?.AllowPhone === 1 ?  <Icons.check color='#40AB45'size={18}/> : <Icons.uncheck color='#E20000' size={18}/>}</span>
+                    <span className='title'>{animal?.AllowPhone === 1 ? <Icons.Check color='#40AB45' size={18} /> : <Icons.Uncheck color='#E20000' size={18} />}</span>
                     <span className='body'>  Phone</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
 
                   {isLoader ? <>
-                    <span className='title'>{animal?.AllowWhatsapp === 1 ?  <Icons.check color='#40AB45'size={18}/> : <Icons.uncheck color='#E20000' size={18}/>}</span>
+                    <span className='title'>{animal?.AllowWhatsapp === 1 ? <Icons.Check color='#40AB45' size={18} /> : <Icons.Uncheck color='#E20000' size={18} />}</span>
                     <span className='body'>  Whatsapp</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
                   {isLoader ? <>
-                    <span className='title'>{animal?.AnimalProductStatus?.charAt(0)?.toUpperCase() + animal?.AnimalProductStatus?.slice(1).toLowerCase()}</span>
-                    <span className='body'>Status</span>
+                    <span className={`  ${animal.AnimalProductStatus === "PENDING" &&
+                      "txt_pending"
+                      } ${animal.AnimalProductStatus === "CANCELLED" &&
+                      "txt_rejected"
+                      }   ${animal.AnimalProductStatus === "RESERVED" &&
+                      "txt_delivery"
+                      } ${animal.AnimalProductStatus === "REJECTED" &&
+                      "txt_rejected"
+                      }   ${animal.AnimalProductStatus === "SOLD" &&
+                      "txt__status"
+                      } ${animal.AnimalProductStatus === "ACTIVE" &&
+                      "txt_delivered"
+                      }`}>{animal?.AnimalProductStatus?.charAt(0)?.toUpperCase() + animal?.AnimalProductStatus?.slice(1).toLowerCase()}</span>
+                    <span className='body'  >Status</span>
                   </> : SkeletonSummary()}
                 </Col>
               </Row>
@@ -227,23 +239,18 @@ const StoreDetails = () => {
             </> : SkeletonDesc()
             }
           </Row>
-          {animal?.AnimalProductGallery ===[]&&
+          {animal?.AnimalProductGallery?.length > 0 &&
             <div className="app__blog_gallary">
               <div className=' '  >
-                {isLoader ? <>
-                  {animal?.AnimalProductGallery &&
-                    <div className="product_description">
-                      <h3 >Product Gallery</h3>
-                    </div>
-                  }
+                {isLoader ? <> 
+                  <div className="product_description">
+                    <h3 >Product Gallery</h3>
+                  </div>
                 </> : <Skeleton variant='rounded' height={30} width="40%" className='mt-3 mb-2' />
-
                 }
 
                 <div className='row'>
-                  {isLoader ? <>
-                    {animal?.AnimalProductGallery ===[]&&
-                      <>
+                  {isLoader ? <> 
                         {animal?.AnimalProductGallery?.length > 8 ? animal?.AnimalProductGallery?.slice(0, 8).map((item, i) => (
                           <Col key={i}
                             xl={animal?.AnimalProductGallery?.length === 4 ? 6 : 12 / Math.min(animal?.AnimalProductGallery?.length, 4)}
@@ -277,8 +284,7 @@ const StoreDetails = () => {
                             </Col>
                           ))
                         }
-                      </>
-                    }
+                     
                   </> :
 
                     <>
