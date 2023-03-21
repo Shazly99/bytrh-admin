@@ -1,4 +1,3 @@
-import { Player } from "@lottiefiles/react-lottie-player";
 import { Pagination, Skeleton } from "@mui/material";
 import Box from "@mui/material/Box";
 import axios from "axios";
