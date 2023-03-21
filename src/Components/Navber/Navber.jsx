@@ -9,34 +9,33 @@ import { Link } from 'react-router-dom';
 import Img from '../../assets/Img';
 import Icons from '../../constants/Icons';
 import { apiheader, PostData } from '../../utils/fetchData';
-import SidebarMenu from '../Sidebar/SidebarMenu';
 import { VendersContext } from './../../context/Store';
 import routes from './../Sidebar/route';
 import './Navber.scss';
 
 function Navber() {
-  let { isOpen, toggle, LogOut, setIsOpen } = useContext(VendersContext);
-
-
+  let { LogOut } = useContext(VendersContext); 
   const [Toggle, setToggle] = useState(false);
-  const showAnimation = {
-    hidden: {
-      width: 0,
-      opacity: 0,
-      transition: { duration: 0.4, when: "afterChildren" },
-    },
-    show: {
-      opacity: 1,
-      width: "auto",
-      transition: {
-        duration: 0.3,
-        when: "beforeChildren",
-      },
-    },
-  };
+  // const showAnimation = {
+  //   hidden: {
+  //     width: 0,
+  //     opacity: 0,
+  //     transition: { duration: 0.4, when: "afterChildren" },
+  //   },
+  //   show: {
+  //     opacity: 1,
+  //     width: "auto",
+  //     transition: {
+  //       duration: 0.3,
+  //       when: "beforeChildren",
+  //     },
+  //   },
+  // };
   const handleActionSelect = async (action) => {
-     let { data } = await PostData(`https://bytrh.com/api/admin/users/language/change`, { UserLanguage: action }, apiheader)
-   }
+    return await PostData(`https://bytrh.com/api/admin/users/language/change`, { UserLanguage: action }, apiheader)
+  }
+
+
   return (
     <>
       <Navbar className='bg-light navSubMain'>
@@ -77,8 +76,8 @@ function Navber() {
                           )
                         })
                       }
-                        
-                      
+
+
                     </ul>
 
                   </motion.div>
@@ -98,8 +97,8 @@ function Navber() {
                 onSelect={(eventKey) => handleActionSelect(eventKey)}
                 className="DropdownButton "
               >
-                <Dropdown.Item eventKey="ar">عربي</Dropdown.Item>
-                <Dropdown.Item eventKey="en"  >English</Dropdown.Item>
+                <Dropdown.Item eventKey="ar"onClick={()=>window.location.reload()} >عربي</Dropdown.Item>
+                <Dropdown.Item eventKey="en"  onClick={()=>window.location.reload()}>English</Dropdown.Item>
               </DropdownButton>
             </span>
           </Navbar.Collapse>
@@ -109,7 +108,7 @@ function Navber() {
           <Navbar.Collapse className="navEnd justify-content-end">
 
             <Nav className="chat__icon">
-              <NavDropdown title={<Icons.chat size={21} />} id="basic-nav-dropdown"  >
+              <NavDropdown title={<Icons.Chat size={21} />} id="basic-nav-dropdown"  >
                 <div style={{ maxHeight: '60vh', overflowY: 'auto' }}>
                   <LinkContainer to="/chat/clients">
                     <NavDropdown.Item  >
@@ -137,7 +136,7 @@ function Navber() {
             </Nav>
 
             <Nav>
-              <NavDropdown title={<img loading="lazy" src={Img.avatar1} width="40" height="40" style={{ borderRadius: '10px' }} />} id="basic-nav-dropdown"  >
+              <NavDropdown title={<img loading="lazy" src={Img.avatar1} alt='Img avatar1' width="40" height="40" style={{ borderRadius: '10px' }} />} id="basic-nav-dropdown"  >
                 <div style={{ maxHeight: '60vh', overflowY: 'auto' }}>
 
                   <LinkContainer to="/venderProfile">
@@ -149,14 +148,6 @@ function Navber() {
                       </div>
                     </NavDropdown.Item>
                   </LinkContainer>
-
-
-                  {/* <NavDropdown.Item>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                      <Icons.settings size={18} style={{ marginRight: 10 }} />
-                      <span>Settings & Privacy</span>
-                    </div>
-                  </NavDropdown.Item> */}
 
                   <NavDropdown.Divider />
 

@@ -1,7 +1,6 @@
 import { Skeleton } from '@mui/material';
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { Table } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import Icons from '../../constants/Icons';
 
 const ProductRequests = ({ Request, isLoader }) => {
@@ -82,11 +81,11 @@ const ProductRequests = ({ Request, isLoader }) => {
                                         </td> 
                                         <td className='text-center'>{item?.AnimalProductRequestNote?.split(" ").slice(0, 2).join(' ')}</td>
                                         <td className='text-center'>{item?.CuttingName}</td>
-                                        <td className='text-center'>{item?.AnimalProductCuttingFees  === 0? <Icons.check color='#40AB45'size={18}/> : <Icons.uncheck color='#E20000' size={18}/> }</td>
+                                        <td className='text-center'>{item?.AnimalProductCuttingFees  === 0? <Icons.Check color='#40AB45'size={18}/> : <Icons.Uncheck color='#E20000' size={18}/> }</td>
                                         <td className='text-center'>{item?.BaggingName}</td>
-                                        <td className='text-center'>{item?.AnimalProductBaggingFees === 1 ? <Icons.check color='#40AB45'size={18}/> : <Icons.uncheck color='#E20000' size={18}/> }</td>
-                                        <td className='text-center'>{item?.DeliveryRequest === 1 ? <Icons.check color='#40AB45'size={18}/> : <Icons.uncheck color='#E20000' size={18}/> }</td>
-                                        <td className='text-center'>{item?.AnimalProductDeliveryFees === 1 ? <Icons.check color='#40AB45'size={18}/> : <Icons.uncheck color='#E20000' size={18}/> }</td>
+                                        <td className='text-center'>{item?.AnimalProductBaggingFees === 1 ? <Icons.Check color='#40AB45'size={18}/> : <Icons.Uncheck color='#E20000' size={18}/> }</td>
+                                        <td className='text-center'>{item?.DeliveryRequest === 1 ? <Icons.Check color='#40AB45'size={18}/> : <Icons.Uncheck color='#E20000' size={18}/> }</td>
+                                        <td className='text-center'>{item?.AnimalProductDeliveryFees === 1 ? <Icons.Check color='#40AB45'size={18}/> : <Icons.Uncheck color='#E20000' size={18}/> }</td>
                                         <td className='text-center'>{item?.AnimalProductPrice}</td>
                                         <td className='last_th'> {item?.AnimalProductRequestStatus?.charAt(0)?.toUpperCase() + item.AnimalProductRequestStatus?.slice(1)?.toLowerCase()}</td>
                                     </tr>

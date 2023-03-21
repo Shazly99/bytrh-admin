@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
- import { Player } from '@lottiefiles/react-lottie-player';
+import { Player } from '@lottiefiles/react-lottie-player';
 import { useEffect } from 'react';
-import { Button, Dropdown, DropdownButton, Modal, Table } from "react-bootstrap";
+import { Button, Dropdown, DropdownButton, Modal, NavDropdown, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import Icons from "../../../constants/Icons.js";
@@ -168,7 +168,7 @@ function UsersTable({ usersList, userList, isLoader }) {
                                                                         autoplay
                                                                         loop
                                                                     />
-                                                                 </div>
+                                                                </div>
                                                             </div>
                                                         </Modal.Body>
                                                         <Modal.Footer className='  d-flex justify-content-center'>
@@ -180,6 +180,8 @@ function UsersTable({ usersList, userList, isLoader }) {
                                                             </Button>
                                                         </Modal.Footer>
                                                     </Modal>
+                                                    <NavDropdown.Divider />
+
                                                     {
                                                         item?.UserStatus === "PENDING" ? '' : <Dropdown.Item eventKey="PENDING">Pending</Dropdown.Item>
                                                     }

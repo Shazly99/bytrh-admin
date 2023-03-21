@@ -78,7 +78,7 @@ a {
     font-family: "Poppins" !important;
     font-style: normal !important;
     font-weight: 500 !important;
-    font-size: 20px !important; 
+    font-size: 20px !important;
     color: #171717 !important;
   }
 }
@@ -357,9 +357,28 @@ td {
   border: $colorRed-0 !important;
 }
 
-.app__error{
+.app__error {
   height: calc(100vh - 70px);
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.notfound-image {
+  width: 410px;
+}
+
+.no-result-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .no-result-image {
+    width: 410px;
+  }
+
+  h3 {}
+
+  p {}
 }
