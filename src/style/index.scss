@@ -13,18 +13,20 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: $colorRed-0;
+  background-color: $mainColor;
   border-radius: 50px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba($color: $colorRed-0, $alpha: 0.8);
+  background-color: rgba($color: $mainColor, $alpha: 0.8);
 }
 
 ::-webkit-scrollbar-corner {
   background-color: transparent;
 }
-
+button{
+  border-color: $mainColor !important;
+}
 .txt_blocked,
 .txt_delivery,
 .txt_delivered,
@@ -122,7 +124,7 @@ td {
 
 .daterangepicker td.active,
 .daterangepicker td.active:hover {
-  background-color: #FAAA40 !important;
+  background-color: $mainColor!important;
   border-color: transparent;
   color: #fff; 
 }
@@ -152,4 +154,9 @@ td {
     transition: color 0.2s ease;
 
   }
+}
+.dropdown-item.active, .dropdown-item:active {
+  color:  $secondColor;
+  text-decoration: none;
+  background-color: #f1f1f1b2 !important;
 }

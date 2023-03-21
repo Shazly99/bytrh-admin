@@ -4,13 +4,13 @@ import React, { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { DropdownButton, Dropdown, Modal, Form, Button } from 'react-bootstrap';
 // import { useEffect } from 'react';
-import { apiheader, PostData } from '../../../utils/fetchData';
-import oops from '../../../assets/Images/doctor/Z.jfif';
+import { apiheader, PostData } from '../../../utils/fetchData'; 
+import Component from '../../../constants/Component';
 
 
 export default function ItemDoctor({ nameDoc, email, phone, country, type, balance, create, status, item, id, getTokenDoctors }) {
     // const [data, setData] = useState({});
- 
+
     const [idDoc, setId] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const handleShowModal = () => setShowModal(true);
@@ -34,7 +34,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
             handleShowRemove();
 
         } else if (action === "balance") {
-            setId(id) 
+            setId(id)
         }
     };
     // async function name() {
@@ -55,9 +55,9 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
     let changeBalance = useRef()
 
     const changeWallet = async () => {
-        await PostData(`https://bytrh.com/api/admin/doctors/wallet/add`, {IDDoctor:id,Amount:changeBalance.current.value }, apiheader)
+        await PostData(`https://bytrh.com/api/admin/doctors/wallet/add`, { IDDoctor: id, Amount: changeBalance.current.value }, apiheader)
         await getTokenDoctors()
- 
+
     }
     const userstatus = async (status) => {
         await PostData(`https://bytrh.com/api/admin/doctors/status`, status, apiheader)
@@ -183,7 +183,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                         <Button variant="outline-primary" onClick={handleCloseModal}>
                                             Cancel
                                         </Button>
-                                        <Button variant="primary" style={{ border: '#FAAA40' }} onClick={changeWallet}>
+                                        <Button variant="primary" onClick={changeWallet}>
                                             Set Balance
                                         </Button>
                                     </Modal.Footer>
@@ -201,12 +201,13 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
 
                                 <Modal style={{ zIndex: '9999999999' }} show={showRemove} onHide={handleCloseRemove} centered>
                                     <Modal.Header closeButton>
-                                        <Modal.Title className='text-center w-100 text-warning'>
+                                        <Modal.Title className='text-center w-100  '>
                                             <h5 className='mb-0'>Warning Remove..</h5>
                                         </Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
-                                        <img src={oops} className='w-50 d-block mx-auto' alt="oops" loading="lazy" />
+                                        <Component.HandelDelete />
+
                                     </Modal.Body>
                                     {/* {messageRemove.length > 0 ? <p id="alertRemove" className={`alert ${apiCodeRemove === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 my-2 w-50 text-center mx-auto`}>{messageRemove}</p> : ''} */}
                                     <Modal.Footer className='d-flex justify-content-center align-items-center'>

@@ -39,7 +39,7 @@ main {
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            color: $colorRed-0;
+            color: $mainColor;
             -webkit-user-select: none;
             user-select: none;
             margin: auto;
@@ -68,9 +68,9 @@ main {
         transition: all 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
         cursor: pointer;
         &:hover {
-            // border-left: 4px solid $colorRed-0;
+            // border-left: 4px solid $mainColor;
             transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
-            color: $colorRed-0;
+            color: $mainColor;
             position: relative;
 
             &::after {
@@ -82,7 +82,7 @@ main {
                 top: 0%;
                 border-top-right-radius: 5px;
                 border-bottom-right-radius: 5px;
-                background-color: $colorRed-0;
+                background-color: $mainColor;
             }
         }
 
@@ -107,7 +107,7 @@ main {
 
         // background-color: #faa9402f;
         width: 100% !important;
-        color: $colorRed-0 !important;
+        color: $mainColor !important;
         width: 20px;
         position: relative;
         &::after {
@@ -119,7 +119,7 @@ main {
             top: 0%;
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
-            background-color: $colorRed-0;
+            background-color: $mainColor;
         }
     }
 
@@ -141,7 +141,7 @@ main {
         flex-direction: column;
 
         .active {
-            color: $colorRed-0 !important;
+            color: $mainColor !important;
             width: 20px;
             position: relative;
 
@@ -166,7 +166,7 @@ main {
 
             &:hover {
                 transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
-                color: $colorRed-0;
+                color: $mainColor;
                 position: relative;
 
                 &::after {

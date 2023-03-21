@@ -113,7 +113,7 @@ function Navber() {
                   <LinkContainer to="/chat/clients">
                     <NavDropdown.Item  >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <Icons.Chatuser color='#FAAA40' style={{ marginRight: 10 }} />
+                        <Icons.Chatuser   style={{ marginRight: 10 }} />
                         <span>Chat clients </span>
                       </div>
                     </NavDropdown.Item>
@@ -122,7 +122,7 @@ function Navber() {
                   <LinkContainer to="/chat/doctors">
                     <NavDropdown.Item  >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <Icons.ChatDoc color='#FAAA40' style={{ marginRight: 10 }} />
+                        <Icons.ChatDoc   style={{ marginRight: 10 }} />
 
                         <span>Chat doctors</span>
                       </div>

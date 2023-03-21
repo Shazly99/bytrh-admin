@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&family=Roboto+Mono:wght@200;300;400;500;600;700&family=Roboto:wght@700;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap');
 
 .color-red {
-  color: $colorRed-0 !important;
+  color: $mainColor !important;
 }
 
 a {
@@ -10,12 +10,12 @@ a {
 }
 
 .btn-primary {
-  background-color: $colorRed-0 !important;
+  background-color: $mainColor !important;
 }
 
 .btn-outline-primary {
-  color: $colorRed-0 !important;
-  border-color: $colorRed-0 !important;
+  color: $mainColor !important;
+  border-color: $mainColor !important;
 
   &:hover {
     background-color: transparent !important;
@@ -158,7 +158,7 @@ td {
     }
 
     svg:last-child {
-      color: $colorRed-0;
+      color: $mainColor;
     }
   }
 }
@@ -168,7 +168,7 @@ td {
   margin-top: 35px !important;
 
   .css-yuzg60-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
-    background-color: $colorRed-0 !important;
+    background-color: $mainColor !important;
     color: #FFFFFF !important;
   }
 }
@@ -214,7 +214,7 @@ td {
   align-items: center;
   /* color: var(--mainColor); */
   // background-color: var(--mainColor);
-  color: $colorRed-0;
+  color: $mainColor;
   background-color:#000000;
 
   .loader {}
@@ -360,7 +360,7 @@ td {
 }
 
 .daterangepicker .drp-buttons .btn {
-  border: $colorRed-0 !important;
+  border: $mainColor !important;
 }
 
 .app__error {

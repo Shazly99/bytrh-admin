@@ -14,7 +14,7 @@
     margin-bottom: 50px !important;
 
     .Mui-selected {
-        color: $colorRed-0 !important;
+        color: $mainColor !important;
     }
 }
 
@@ -30,7 +30,7 @@
             margin-top: 15px;
 
             svg {
-                color: $colorRed-0;
+                color: $mainColor;
             }
 
             a {
@@ -39,7 +39,7 @@
                 font-weight: 400;
                 font-size: 18px;
                 line-height: 27px;
-                color: $colorRed-0;
+                color: $mainColor;
                 text-decoration: none;
             }
         }
@@ -122,7 +122,7 @@ td {
         &:hover {
 
             box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
-            color: #FAAA40 !important;
+            color: $mainColor !important;
             border-color: var(--kt-primary-light);
             background-color: #f1faff !important;
             transition: color 0.2s ease;
@@ -245,7 +245,7 @@ td {
     border-radius: 0 5px 5px 0;
     height: 100%;
     min-width: 90px;
-    background: $colorRed-0;
+    background: $mainColor;
     font-size: 17px;
     border: none;
     cursor: pointer;
@@ -257,7 +257,7 @@ td {
 }
 
 .search-container button[type="submit"]:hover {
-    background: rgba($color: $colorRed-0, $alpha: 0.8);
+    background: rgba($color: $mainColor, $alpha: 0.8);
 }
 
 .app__addprodects {

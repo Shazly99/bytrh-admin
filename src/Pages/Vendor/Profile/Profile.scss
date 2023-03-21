@@ -9,11 +9,11 @@
     line-height: 27px !important;
     /* identical to box height */
     text-decoration-line: underline;
-    color: $colorRed-0;
+    color: $mainColor;
     cursor: pointer;
     text-decoration: underline !important;
     &:hover{
-        color: $colorRed-0;
+        color: $mainColor;
     }
 }
 .modal-content{

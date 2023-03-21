@@ -17,7 +17,7 @@
     }
 
     .nav__notification {
-        background-color: $colorRed-0 ;
+        background-color: $mainColor ;
         color: $colorLight;
         border-radius: 5px;
         padding: 8px 10px;
@@ -31,7 +31,7 @@
 
 .btn__search {
     border: none;
-    background-color: $colorRed-0;
+    background-color: $mainColor;
     border-radius: 5px !important;
     position: relative;
     left: 10px;
@@ -57,7 +57,7 @@
 .form-control:focus {
     outline: 0;
     box-shadow: none !important;
-    border-color: $colorRed-0
+    border-color: $mainColor
 }
 
 .subNav {
@@ -71,7 +71,7 @@
     }
 
     .active {
-        color: $colorRed-0 !important;
+        color: $mainColor !important;
     }
 }
 
@@ -82,7 +82,7 @@
 
 
     --primary-color: #edf2f8;
-    --secondary-color: #FAAA40;
+    --secondary-color: $mainColor;
     --black-color: #030303;
     --lightGray-color: #e4e4e4;
     --gray-color: #6b7688;
@@ -100,7 +100,7 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    background-color: $colorRed-0;
+    background-color: $mainColor;
 
     svg {
         width: 70%;
@@ -145,7 +145,7 @@
         svg {
             width: 20px;
             height: 20px;
-            color: $colorRed-0;
+            color: $mainColor;
             margin: 0.5rem 1rem;
         }
 
@@ -179,7 +179,7 @@
                     font-size: larger;
 
                     &:hover {
-                        color: $colorRed-0;
+                        color: $mainColor;
                     }
                 }
             }
@@ -308,7 +308,7 @@
         &:hover {
 
             box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important;
-            color: #FAAA40 !important;
+            color: $mainColor!important;
             border-color: var(--kt-primary-light);
             background-color: #f1faff !important;
             transition: color 0.2s ease;
@@ -316,7 +316,7 @@
         }
 
         .my-svg {
-            // stroke: #FAAA40  !important;
+            // stroke: $mainColor  !important;
         }
     }
 }

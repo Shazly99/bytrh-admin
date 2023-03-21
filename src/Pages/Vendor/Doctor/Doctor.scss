@@ -12,7 +12,7 @@
     color: var(--white);
     background-color:black  ;
     i{
-      color: $colorRed-0      !important;
+      color: $mainColor      !important;
     }
   }
 
@@ -72,7 +72,7 @@
   }
 
   .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-    background-color: $colorRed-0 !important;
+    background-color: $mainColor !important;
   }
 
   .inf-time svg {
