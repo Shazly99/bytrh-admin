@@ -9,9 +9,12 @@ import Img from "../../assets/Img";
 import Component from "../../constants/Component";
 import Icons from "../../constants/Icons";
 import useFetch from "../../utils/useFetch";
+import useSkeletonTable from "../../utils/useSkeletonTable";
 import { apiheader, PostData } from "./../../utils/fetchData";
 
 const StoreList = () => {
+    let { SkeletonTable } = useSkeletonTable();
+
     const [animal, setAnimal] = useState([]);
     const [page, setPage] = useState(1);
     const [PagesNumber, setPagesNumber] = useState("");
@@ -266,7 +269,7 @@ const StoreList = () => {
             </div>
         )
     }
-    const SkeletonTable = (w) => {
+    const SkeletonTables = (w) => {
         return (
             <div className="d-flex justify-content-center">
                 <Skeleton variant='rounded' animation='wave' height={15} width={w} />
@@ -408,56 +411,26 @@ const StoreList = () => {
                             </div>
                         </div>
                     </div>
-                    {
-                        animal.length > 0 ?
-                            <Table responsive={true} className="rounded-3 ">
+                    {isLoader ? <>
+                        <>
+                            {
+                                animal.length > 0 ?
+                                <Table responsive={true} className="rounded-3 ">
                                 <thead>
                                     <tr className="text-center  " style={{ background: "#F9F9F9" }} >
-                                        <th >   {isLoader ? <>  Product Image   </> : SkeletonTable(70)} </th>
-                                        <th >   {isLoader ? <>Client Info </> : SkeletonTable(70)} </th>
-                                        <th >   {isLoader ? <> SubCategory   </> : SkeletonTable(70)} </th>
-                                        <th >   {isLoader ? <> Price   </> : SkeletonTable(70)} </th>
-                                        <th >   {isLoader ? <> Type </> : SkeletonTable(70)} </th>
-                                        <th >   {isLoader ? <> Status </> : SkeletonTable(70)} </th>
-                                        <th >   {isLoader ? <>Create Date </> : SkeletonTable(70)} </th>
-                                        <th >   {isLoader ? <>View </> : SkeletonTable(70)} </th>
+                                        <th >  Product Image    </th>
+                                        <th >Client Info  </th>
+                                        <th > SubCategory    </th>
+                                        <th > Price    </th>
+                                        <th > Type  </th>
+                                        <th > Status  </th>
+                                        <th >Create Date  </th>
+                                        <th >View  </th>
 
                                     </tr>
                                 </thead>
                                 <tbody className="text-center">
-                                    {
-                                        isLoader === false ?
-                                            <>
-                                                {Array.from(Array(5).keys())?.map((index) => (
-                                                    <tr key={index}>
-                                                        <td className="d-flex justify-content-center align-item-center">
-                                                            <Skeleton variant="rounded" width={145} height={96} />
-                                                        </td>
-                                                        <td>
-                                                            <Skeleton variant="rounded" width={'100%'} height={20} />
-                                                        </td>
-                                                        <td>
-                                                            <Skeleton variant="rounded" width={'100%'} height={20} />
-                                                        </td>
-                                                        <td>
-                                                            <Skeleton variant="rounded" width={'100%'} height={20} />
-                                                        </td>
-                                                        <td>
-                                                            <Skeleton variant="rounded" width={'100%'} height={20} />
-                                                        </td>
-                                                        <td>
-                                                            <Skeleton variant="rounded" width={'100%'} height={20} />
-                                                        </td>
-                                                        <td>
-                                                            <Skeleton variant="rounded" width={'100%'} height={20} />
-                                                        </td>
-                                                        <td>
-                                                            <Skeleton variant="rounded" width={'100%'} height={20} />
-                                                        </td>
-                                                    </tr>
-                                                ))}
-                                            </> :
-                                            <>
+                         
                                                 {animal?.map((item, index) => (
                                                     <tr key={index}>
                                                         <td>
@@ -608,14 +581,16 @@ const StoreList = () => {
                                                         </td>
                                                     </tr>
                                                 ))}
-                                            </>
-                                    }
+                                 
                                 </tbody>
                             </Table>
-                            :
-                            <Component.DataNotFound/>
+                                :
+                                    <Component.DataNotFound />
+                            }
+                        </>
+                    </> : SkeletonTable()}
 
-                    }
+
                 </div>
             </div>
             <div className="pagination ">

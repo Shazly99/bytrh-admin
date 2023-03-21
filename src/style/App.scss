@@ -215,7 +215,13 @@ td {
   /* color: var(--mainColor); */
   // background-color: var(--mainColor);
   color: $colorRed-0;
-  background-color: #000000;
+  background-color:#000000;
+
+  .loader {}
+
+  .loader-image {
+    width: 400px !important;
+  }
 }
 
 
