@@ -1,4 +1,4 @@
-import { Player } from "@lottiefiles/react-lottie-player";
+ 
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState, useRef } from "react";
@@ -189,7 +189,7 @@ const BaggingPricing = () => {
                             <Button variant="outline-primary" onClick={handleModalCloseEdit}>
                               Cancel
                             </Button>
-                            <Button style={{ border: '#FAAA40' }} onClick={() => handleChangePrice(item.IDAnimalSubCategory, item.IDBagging)}>
+                            <Button   onClick={() => handleChangePrice(item.IDAnimalSubCategory, item.IDBagging)}>
                               Set Price
                             </Button>
                           </Modal.Footer>
@@ -216,23 +216,17 @@ const BaggingPricing = () => {
                               <Modal.Title className='  w-100 '> Delete Bagging Price  </Modal.Title>
                             </Modal.Header>
                             <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
-                              <div className="expired-container">
-                                <Player
-                                  className="expired-image"
-                                  src="https://assets6.lottiefiles.com/packages/lf20_dqnvaulk.json"
-                                  autoplay
-                                  loop
-                                />
-                              </div>
+                            <Component.HandelDelete/>
+
                               <input className="form-control" defaultValue={item.SubCategoryBaggingPrice} disabled />
                             </Modal.Body>
                             <Modal.Footer className="d-flex justify-content-center align-items-center">
 
+                              <Button variant="danger" style={{border:'#dc3545'}} onClick={() => handleActionSelect(item.IDSubCategoryCutting)}>
+                                Delete now
+                              </Button>
                               <Button variant="outline-primary" onClick={handleModalClose}>
                                 Cancel
-                              </Button>
-                              <Button variant="danger" style={{ border: '#FAAA40' }} onClick={() => handleActionSelect(item.IDSubCategoryCutting)}>
-                                Delete
                               </Button>
                             </Modal.Footer>
                           </Modal>

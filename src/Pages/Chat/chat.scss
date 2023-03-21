@@ -343,12 +343,12 @@
 }
 
 .bgChatBtn {
-    background-color: $colorRed-0 !important;
+    background-color: $mainColor !important;
     border: none !important;
     transition: all 0.8s;
 
     &:hover {
-        background-color: rgba($color: $colorRed-0 , $alpha: 0.8) !important;
+        background-color: rgba($color: $mainColor , $alpha: 0.8) !important;
         box-shadow: none !important;
     }
 }
@@ -492,4 +492,8 @@
             }
         }
     }
+}
+
+.admin__color{
+    color: $secondColor;
 }

@@ -153,7 +153,7 @@ const StoreChatDetails = () => {
                                                                 loop
                                                             />
                                                         </div>                                                        <h2 className={` ${animal?.ChatDetails?.length === 0 ? 'text-light' : ''}`}>
-                                                            Welcome, <span style={{ color: '#FAAA40' }}>admin!</span>
+                                                            Welcome, <span className='admin__color'>admin!</span>
                                                         </h2>
                                                         <h4 className={` ${animal?.ChatDetails?.length === 0 ? 'text-light text-center' : ' text-center'}`}>This Chat Is Empty.</h4>
                                                     </div>

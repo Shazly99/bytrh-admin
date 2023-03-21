@@ -1,3 +1,4 @@
+import { Player } from "@lottiefiles/react-lottie-player";
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import axios from 'axios';
@@ -15,6 +16,7 @@ import { apiheader, GetData } from '../../utils/fetchData';
 import useFetch from '../../utils/useFetch';
 import useSkeletonTable from "../../utils/useSkeletonTable";
 
+import Modal from 'react-bootstrap/Modal';
 
 const AdsList = () => {
 
@@ -22,12 +24,17 @@ const AdsList = () => {
   const [ads, setAds] = useState(null)
   const [page, setPage] = useState(1);
   const [PagesNumber, setPagesNumber] = useState('')
-  const [searchValue, setSearchValue] = useState('');
   const [isLoader, setIsloader] = useState(false);
-  let { SkeletonTableImg, SkeletonFilters, SkeletonSearchsingel } = useSkeletonTable();
+  let { SkeletonTableImg } = useSkeletonTable();
+  const [modalIndexEdit, setModalIndexEdit] = React.useState(0);
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [showModal, setShowModal] = useState(false);
+  const handleShowModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState({});
   const advertisements = _.debounce(async () => {
     setIsLoading(true);
     try {
@@ -58,24 +65,28 @@ const AdsList = () => {
     setPage(value);
   };
 
-  const handleActionSelect = async (id, action) => {
-    if (action === "DELETE") {
-      await GetData(`${process.env.REACT_APP_API_URL}/admin/advertisements/status/${id}`, apiheader).then((res) => {
-        toast.success('The ads has been removed', {
-          duration: 4000,
-          position: 'top-center',
-          icon: <Icons.Bin color='#E20000' size={20} />,
-          iconTheme: {
-            primary: '#0a0',
-            secondary: '#fff',
-          },
-        });
-      })
-      await advertisements()
-    }
+  const handleActionSelect = async (id, index) => {
+    setShowDeleteModal(true);
+    setSelectedUserId(id);
+    setModalIndexEdit(index);
   };
-
-
+ 
+  const handleDeleteUser = async (id) => {
+    // Logic for deleting user with ID `selectedUserId`
+    setShowDeleteModal(false);
+    await GetData(`${process.env.REACT_APP_API_URL}/admin/advertisements/status/${selectedUserId}`, apiheader).then((res) => {
+      toast.success('The ads has been removed', {
+        duration: 4000,
+        position: 'top-center',
+        icon: <Icons.Bin color='#E20000' size={20} />,
+        iconTheme: {
+          primary: '#0a0',
+          secondary: '#fff',
+        },
+      });
+    })
+    await advertisements()
+  }
 
 
   // !Filter By Start Date And End Date
@@ -192,7 +203,7 @@ const AdsList = () => {
 
     <>
       <div className="app__Users ">
-        <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.Add  size={21} color={'#ffffffb4'} />} path="/ads/add" />
+        <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/ads/add" />
         <div className="app__Users-table">
           <div className="search-container">
             <div className='search__group w-100'>
@@ -299,11 +310,11 @@ const AdsList = () => {
                       <td className='img'>
                         {
                           item?.AdvertisementImage ?
-                            <img 
+                            <img
                               loading="lazy"
                               src={item.AdvertisementImage} // use normal <img> attributes as props
                               className="w-100 rounded-2"
-                            /> : 
+                            /> :
 
                             <img
 
@@ -345,7 +356,7 @@ const AdsList = () => {
                               id={`dropdown-${item.IDAdvertisement}`}
                               title="Actions"
                               variant="outline-success"
-                              onSelect={(eventKey) => handleActionSelect(item.IDAdvertisement, eventKey)}
+                              onSelect={(eventKey) => handleActionSelect(item.IDAdvertisement, index)}
                               className="DropdownButton "
                               drop={'down-centered'}
                             >
@@ -357,6 +368,23 @@ const AdsList = () => {
                                 Delete
                               </Dropdown.Item>
 
+
+                              <Modal show={showDeleteModal && modalIndexEdit === index} onHide={() => setShowDeleteModal(false)} centered>
+                                <Modal.Header closeButton>
+                                  <Modal.Title>Delete Advertisement</Modal.Title>
+                                </Modal.Header>
+                                <Modal.Body> 
+                                  <Component.HandelDelete/>
+                                </Modal.Body>
+                                <Modal.Footer className='  d-flex justify-content-center'>
+                                  <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => handleDeleteUser(item.IDUser)}>
+                                    Delete Now
+                                  </Button>
+                                  <Button variant="outline-primary" onClick={() => setShowDeleteModal(false)}>
+                                    Cancel
+                                  </Button>
+                                </Modal.Footer>
+                              </Modal>
                             </DropdownButton>
                           </span>
                         </div>

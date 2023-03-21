@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Player } from '@lottiefiles/react-lottie-player';
-import { Dropdown, DropdownButton, Form, Table } from "react-bootstrap";
+ import { Dropdown, DropdownButton, Form, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
 import Icons from "../../../constants/Icons.js";
 import { apiheader, GetData, PostData } from '../../../utils/fetchData.js';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import useSkeletonTable from '../../../utils/useSkeletonTable.js';
+import Component from '../../../constants/Component.js';
 
 const ClientTable = ({ usersList, userList, isLoading }) => {
   let { SkeletonTable } = useSkeletonTable();
@@ -182,7 +182,7 @@ const ClientTable = ({ usersList, userList, isLoading }) => {
                               <Button variant="outline-primary" onClick={handleCloseModal}>
                                 Cancel
                               </Button>
-                              <Button variant="primary" style={{ border: '#FAAA40' }} onClick={changeWallet}>
+                              <Button variant="primary"   onClick={changeWallet}>
                                 Set Balance
                               </Button>
                             </Modal.Footer>
@@ -194,20 +194,15 @@ const ClientTable = ({ usersList, userList, isLoading }) => {
                               <Modal.Title>Delete Client</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                              <div className="expired-container">
-                                <Player
-                                  className="expired-image"
-                                  src="https://assets6.lottiefiles.com/packages/lf20_dqnvaulk.json"
-                                  autoplay
-                                  loop
-                                />
-                              </div>                            </Modal.Body>
+                            <Component.HandelDelete/>
+                         
+                              </Modal.Body>
                             <Modal.Footer className='  d-flex justify-content-center'>
+                              <Button variant="danger" style={{border:'#dc3545'}} onClick={() => handleDeleteUser(item.IDUser)}>
+                                Delete Now
+                              </Button>
                               <Button variant="outline-primary" onClick={() => setShowDeleteModal(false)}>
                                 Cancel
-                              </Button>
-                              <Button variant="danger" onClick={() => handleDeleteUser(item.IDUser)}>
-                                Delete Now
                               </Button>
                             </Modal.Footer>
                           </Modal>

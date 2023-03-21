@@ -94,7 +94,7 @@ const ChatDoctors = () => {
                                   loop
                                 />
                               </div>                    <h2 className={` ${id ? '' : 'text-light'}`}>
-                      Welcome, <span style={{ color: '#FAAA40' }}>admin!</span>
+                      Welcome, <span className='admin__color'>admin!</span>
                     </h2>
                     <h4 className={` ${id ? 'text-light' : 'text-light text-light'}`}>Please select a chat to Start messaging.</h4>
                   </div>

@@ -74,7 +74,7 @@
             }
 
             .app__login-btn {
-                background: $colorRed-0;
+                background: $mainColor;
                 border-radius: 25px;
                 font-family: 'Poppins';
                 font-style: normal;
@@ -91,7 +91,7 @@
                 padding: 13px;
                 margin-top: 56px;
                 color: #FFFFFF; 
-                border: $colorRed-0;
+                border: $mainColor;
                 transition: all 0.4s;
 
                 &:hover {
@@ -116,7 +116,7 @@
 }
 
 .anther_way_toLgoin{
-    color: $colorRed-0;
+    color: $mainColor;
     text-align: center;
     cursor: pointer;
     display: block;
@@ -125,7 +125,7 @@
 }
 
 .logoBaytrh{
-    color: $colorRed-0 !important;
+    color: $mainColor !important;
     font-weight: 700 !important;
     font-size: larger;
     user-select: none;

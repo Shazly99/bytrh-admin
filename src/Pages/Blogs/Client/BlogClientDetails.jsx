@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Dropdown, DropdownButton, Row } from 'react-bootstrap';
+import { Button, Col, Container, Dropdown, DropdownButton, Row } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
-import { toast } from 'react-hot-toast'; 
+import { toast } from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 import Img from '../../../assets/Img';
 import Component from '../../../constants/Component';
 import Icons from '../../../constants/Icons';
 import { apiheader, GetData } from '../../../utils/fetchData';
 import '../blog.scss';
-
 
 const BlogClientDetails = () => {
   let { id } = useParams()
@@ -23,7 +22,7 @@ const BlogClientDetails = () => {
       setBlogsDetails(Response)
       setClientBlogGallery(Response.ClientBlogGallery)
       setClientBlogComments(Response.ClientBlogComments)
-     }).catch((error) => {
+    }).catch((error) => {
       if (error.response && error.response.status === 429) {
         const retryAfter = error.response.headers['retry-after'];
         setTimeout(() => {
@@ -34,11 +33,20 @@ const BlogClientDetails = () => {
 
   }
   const [showDropdown, setShowDropdown] = useState(false);
-
+  // Modal Table Edit
+  const [modalShowEdit, setModalShowEdit] = React.useState(false);
+  const [modalIndexEdit, setModalIndexEdit] = React.useState(0);
+  function handleModalCloseEdit() {
+    setModalShowEdit(false);
+  }
+  function handleModalOpenEdit(index) {
+    setModalIndexEdit(index);
+    setModalShowEdit(true);
+  }
   const handleDelete = async (idComment) => {
     // perform delete action using the id
-     await GetData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs/comments/remove/${idComment}`).then((res) => {
-       if (res.Success === true) {
+    await GetData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs/comments/remove/${idComment}`).then((res) => {
+      if (res.Success === true) {
         toast.success('The comment has been deleted ', {
           duration: 4000,
           position: 'top-center',
@@ -113,7 +121,7 @@ const BlogClientDetails = () => {
                               md={12 / Math.min(clientBlogGallery?.length, 2)}
                               sm={12} className='mt-3  '  >
                               <img
-                              loading="lazy"
+                                loading="lazy"
                                 className='rounded-2  image'
                                 src={item.ClientBlogGalleryPath} // use normal <img> attributes as props
                                 width={clientBlogGallery?.length < 2 ? "20%" : '100%'}
@@ -128,7 +136,7 @@ const BlogClientDetails = () => {
                                 md={12 / Math.min(clientBlogGallery?.length, 2)}
                                 sm={12} className='mt-3  '  >
                                 <img
-                                loading="lazy"
+                                  loading="lazy"
                                   className='rounded-2  image'
                                   src={item.ClientBlogGalleryPath} // use normal <img> attributes as props
                                   width={"100%"}
@@ -151,7 +159,7 @@ const BlogClientDetails = () => {
                     </div>
                   </div>
                   <div className="content">
-                    <img loading="lazy"src={Img?.icon} width={50} height={50} />
+                    <img loading="lazy" src={Img?.icon} width={50} height={50} />
                     <h3>{blogsDetails?.ClientName}</h3>
                   </div>
                   <div className="blog_body">
@@ -208,11 +216,32 @@ const BlogClientDetails = () => {
                                     </div>
                                     <div className="delete">
                                       <DropdownButton
-                                        title={<img src={Img.dropdown} loading="lazy"/>}
+                                        title={<img src={Img.dropdown} loading="lazy" />}
                                         id="dropdown-menu"
                                         onClick={() => setShowDropdown(!showDropdown)}
                                       >
-                                        <Dropdown.Item onClick={() => handleDelete(item.IDClientBlogComment)}>Delete</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => handleModalOpenEdit(index)}>Delete</Dropdown.Item>
+                                        <Modal
+                                          show={modalShowEdit && modalIndexEdit === index}
+                                          onHide={handleModalCloseEdit}
+                                          centered
+                                        >
+                                          <Modal.Header closeButton>
+                                            <Modal.Title className='  w-100 text-center'>  price Details</Modal.Title>
+                                          </Modal.Header>
+                                          <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
+                                            <Component.HandelDelete />
+                                          </Modal.Body>
+                                          <Modal.Footer className="d-flex justify-content-center align-items-center">
+
+                                            <Button variant="outline-primary" onClick={handleModalCloseEdit}>
+                                              Cancel
+                                            </Button>
+                                            <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => handleDelete(item.IDClientBlogComment)}>
+                                              Delete now
+                                            </Button>
+                                          </Modal.Footer>
+                                        </Modal>
                                       </DropdownButton>
                                     </div>
                                   </div>
@@ -220,7 +249,7 @@ const BlogClientDetails = () => {
 
                                 <div className='comments_content'>
                                   <p>{item?.ClientBlogComment}</p>
-                                 </div> 
+                                </div>
                               </div>
                             </div>
                           ))
@@ -229,7 +258,7 @@ const BlogClientDetails = () => {
                     </div> : ''
                   }
                 </div>
-              </div> 
+              </div>
             </Container >
 
           </div >

@@ -84,6 +84,7 @@ import Bidding from './../Pages/Bidding/Bidding';
 import BiddingDetails from './../Pages/Bidding/BiddingDetails';
 import BiddingRequests from './../Pages/Bidding/BiddingRequests';
 import DataNotFound from './../Components/Shared/DataNotFound/DataNotFound';
+import HandelDelete from './../Components/Shared/HandelDelete/HandelDelete';
 
 const Component= {
     // Layout 
@@ -192,7 +193,7 @@ const Component= {
     Adoption,
     AdoptionDetails,
     AdoptionChat,
-    
+    HandelDelete,
     Error,
 }
 
