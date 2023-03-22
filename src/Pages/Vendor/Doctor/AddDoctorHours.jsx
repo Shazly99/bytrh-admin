@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import React, { useRef, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import Select from "react-select";
 import { Button, Container } from 'react-bootstrap';
 import Component from '../../../constants/Component';
 import $ from 'jquery';
 // import { apiheader } from './../../../utils/fetchData';
-
 
 function AddDoctorHours() {
 
@@ -16,9 +16,34 @@ function AddDoctorHours() {
   const doctorEndHour = useRef();
   const doctorHourDay = useRef();  
 
-
   const doctorServiceLevel = useRef();
-  const doctorHourDays = useRef([]);
+  const doctorStartBulkHour = useRef();
+  const doctorEndBulkHour = useRef();
+
+
+  const daysOptions = [
+    { value: "SATURDAY", label: "Saturday" },
+    { value: "SUNDAY", label: "Sunday" },
+    { value: "MONDAY", label: "Monday" },
+    { value: "TUESDAY", label: "Tuesday" },
+    { value: "WEDNESDAY", label: "Wednesday" },
+    { value: "THURSDAY", label: "Thursday" },
+    { value: "FRIDAY", label: "Friday" }
+  ];
+
+  const [selectedValues, setSelectedValues] = useState([]);
+  const [groupDays, setGroupDays] = useState([]);
+  let daysList = [];
+
+  function handleChange (selectedOptions) {
+    setSelectedValues(selectedOptions);
+    for (let i of selectedOptions) {
+      daysList.push(i.value)
+    }
+    setGroupDays(...daysList);
+  };
+  
+
 
 
   const changeStatus = () => {
@@ -38,16 +63,22 @@ function AddDoctorHours() {
 
   // let navigate = useNavigate();
 
-  const [message, setMessage] = useState('');
+  const [messageSingle, setMessageSingle] = useState('');
 
-  const [loadind, setLoadind] = useState(false);
+  const [loadindSingle, setLoadindSingle] = useState(false);
 
-  const [apiCode, setApiCode] = useState(null);
+  const [apiCodeSingle, setApiCodeSingle] = useState(null);
+
+  const [messageBulk, setMessageBulk] = useState('');
+
+  const [loadindBulk, setLoadindBulk] = useState(false);
+
+  const [apiCodeBulk, setApiCodeBulk] = useState(null);
 
 
   async function registerAddSingleForm(e) {
     e.preventDefault();
-    setLoadind(true);
+    setLoadindSingle(true);
     let { data } = await axios({
         method: 'post',
         url: `https://bytrh.com/api/admin/doctors/hours/add`,
@@ -75,11 +106,44 @@ function AddDoctorHours() {
         },
     });
 
-    setMessage(data.ApiMsg);
-    setLoadind(false);
+    setMessageSingle(data.ApiMsg);
+    setLoadindSingle(false);
 
     if (data.Success === true) {
-        setApiCode(data.Success);
+        setApiCodeSingle(data.Success);
+        setTimeout(() => {
+          window.history.go(-1);
+        }, 1500);
+    }
+  }
+
+
+  async function registerAddBulkForm(e) {
+    e.preventDefault();
+    setLoadindBulk(true);
+    let { data } = await axios({
+        method: 'post',
+        url: `https://bytrh.com/api/admin/doctors/hours/add`,
+        data: {
+          IDDoctor: id,
+          AddType: 'BULK',
+          DoctorHourService: 'CONSULT',
+          'DoctorHourDay[0]': groupDays,
+          DoctorServiceLevel: doctorServiceLevel.current.value,
+          DoctorStartHour: doctorStartBulkHour.current.value,
+          DoctorEndHour: doctorEndBulkHour.current.value,
+        },
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        },
+    });
+
+    setMessageBulk(data.ApiMsg);
+    setLoadindBulk(false);
+
+    if (data.Success === true) {
+        setApiCodeBulk(data.Success);
         setTimeout(() => {
           window.history.go(-1);
         }, 1500);
@@ -92,90 +156,182 @@ function AddDoctorHours() {
         <Component.SubNav sub__nav={[{ name: "Doctor Hours", path: `/doctors/doctorHours/${id}` }, { name: "Add Time", path: `/doctors/addDoctorHours/${id}` }]} />
         <div className="app__addprodects__header ">
           <Component.BaseHeader h1={'Add Time'} />
-          <div className="app__addOrder-form">
-            <div className="app__addprodects-form">
-              <form onSubmit={registerAddSingleForm}>
-                <div className="row d-flex justify-content-center justify-content-md-start align-items-center g-4">
 
-                  <div className="col-md-6">
-                    <div className="group-add">
-                      <label className="fs-5 " htmlFor="day">Day</label>
-                      <div className="input-group">
-                        <select className='w-100 bg-transparent mx-auto py-2 px-2' name="day" id="day" ref={doctorHourDay} required>
-                          <option>choose a day</option>
-                          <option value='SATURDAY' >Saturday</option>
-                          <option value='SUNDAY' >Sunday</option>
-                          <option value='MONDAY' >Monday</option>
-                          <option value='TUESDAY' >Tuesday</option>
-                          <option value='WEDNESDAY' >Wednesday</option>
-                          <option value='THURSDAY' >Thursday</option>
-                          <option value='FRIDAY' >Friday</option>
-                        </select>
-                      </div>
+          <div className="mt-4">
+              <ul className="nav nav-pills mb-4" id="pills-tab" role="tablist">
+                <li className="nav-item my-0 me-2" role="presentation">
+                  <button className="nav-link text-black mx-0 active" style={{fontWeight: '600' , fontSize: '18px'}} id="pills-single-tab" data-bs-toggle="pill" data-bs-target="#pills-single" type="button" role="tab" aria-controls="pills-single" aria-selected="true">Single</button>
+                </li>
+                <li className="nav-item my-0 ms-2" role="presentation">
+                  <button className="nav-link text-black mx-0" style={{fontWeight: '600' , fontSize: '18px'}} id="pills-bulk-tab" data-bs-toggle="pill" data-bs-target="#pills-bulk" type="button" role="tab" aria-controls="pills-bulk" aria-selected="false">Bulk</button>
+                </li>
+              </ul>
+              <div className="tab-content" id="pills-tabContent">
+
+                <div className="tab-pane fade show active" id="pills-single" role="tabpanel" aria-labelledby="pills-single-tab" tabIndex="0">
+                  <div className="app__addOrder-form">
+                    <div className="app__addprodects-form">
+                      <form onSubmit={registerAddSingleForm}>
+                        <div className="row d-flex justify-content-center justify-content-md-start align-items-center g-4">
+
+                          <div className="col-md-6">
+                            <div className="group-add">
+                              <label className="fs-5 " htmlFor="day">Day</label>
+                              <div className="input-group">
+                                <select className='w-100 bg-transparent mx-auto py-2 px-2' name="day" id="day" ref={doctorHourDay} required>
+                                  <option>choose a day</option>
+                                  <option value='SATURDAY' >Saturday</option>
+                                  <option value='SUNDAY' >Sunday</option>
+                                  <option value='MONDAY' >Monday</option>
+                                  <option value='TUESDAY' >Tuesday</option>
+                                  <option value='WEDNESDAY' >Wednesday</option>
+                                  <option value='THURSDAY' >Thursday</option>
+                                  <option value='FRIDAY' >Friday</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="col-md-6">
+                            <div className="group-add">
+                              <label className="fs-5 " htmlFor="day">Status</label>
+                              <div className="input-group">
+                                <select className='w-100 bg-transparent mx-auto py-2 px-2' name="status" id="status" onChange={changeStatus} ref={doctorHourStatus} required>
+                                  <option>choose the status</option>
+                                  <option value='OPEN' >Open</option>
+                                  <option value='CLOSE' >Close</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="col-md-6">
+                            <div className="group-add">
+                              <label className="fs-5 " htmlFor="StartHour">Start</label>
+                              <div className="input-group">
+                                <input type="time" className='bg-transparent form-control mx-auto py-2 w-100 startHour' name="StartHour" id="StartHour" ref={doctorStartHour} required />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="col-md-6">
+                            <div className="group-add">
+                              <label className="fs-5 " htmlFor="EndHour">End</label>
+                              <div className="input-group">
+                                <input type="time" className='bg-transparent form-control mx-auto py-2 w-100 endHour' name="EndHour" id="EndHour" ref={doctorEndHour} required />
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        {messageSingle.length > 0 ? <p id="alertSave" className={`alert ${apiCodeSingle === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 mb-0 mt-3 w-50 text-center mx-auto`}>{messageSingle}</p> : ''}
+
+                          <div className='d-flex justify-content-center align-content-center mt-4'>
+                              <div className='baseBtn'>
+                                  <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                                      {loadindSingle ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}
+                                  </Button>
+                              </div>
+
+                              <div className='baseBtn'>
+                                  <Link to={`/doctors/doctorHours/${id}`}>
+                                      <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                                          Cancel
+                                      </Button>
+                                  </Link>
+                              </div>
+                          </div>
+
+                      </form>
                     </div>
                   </div>
-
-                  <div className="col-md-6">
-                    <div className="group-add">
-                      <label className="fs-5 " htmlFor="day">Status</label>
-                      <div className="input-group">
-                        <select className='w-100 bg-transparent mx-auto py-2 px-2' name="status" id="status" onChange={changeStatus} ref={doctorHourStatus} required>
-                          <option>choose the status</option>
-                          <option value='OPEN' >Open</option>
-                          <option value='CLOSE' >Close</option>
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col-md-6">
-                    <div className="group-add">
-                      <label className="fs-5 " htmlFor="StartHour">Start</label>
-                      <div className="input-group">
-                        <input type="time" className='bg-transparent form-control mx-auto py-2 w-100 startHour' name="StartHour" id="StartHour" ref={doctorStartHour} required />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col-md-6">
-                    <div className="group-add">
-                      <label className="fs-5 " htmlFor="EndHour">End</label>
-                      <div className="input-group">
-                        <input type="time" className='bg-transparent form-control mx-auto py-2 w-100 endHour' name="EndHour" id="EndHour" ref={doctorEndHour} required />
-                      </div>
-                    </div>
-                  </div>
-
                 </div>
 
-                {message.length > 0 ? <p id="alertSave" className={`alert ${apiCode === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 mb-0 mt-3 w-50 text-center mx-auto`}>{message}</p> : ''}
+                <div className="tab-pane fade" id="pills-bulk" role="tabpanel" aria-labelledby="pills-bulk-tab" tabIndex="0">
+                  <div className="app__addOrder-form">
+                    <div className="app__addprodects-form">
+                      <form onSubmit={registerAddBulkForm}>
+                        <div className="row d-flex justify-content-center justify-content-md-start align-items-center g-4">
 
-                {/* <div className="submitAdd-buttons mt-4 d-flex justify-content-center align-items-center">
-                  <Button type='submit' className="btn black-btn p-2 me-4">{loadind ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}</Button>
+                          <div className="col-md-6">
+                            <div className="group-add">
+                              <label className="fs-5 " htmlFor="days">Days</label>
+                              <div className="input-group">
+                                <Select
+                                  defaultValue={[daysOptions[1], daysOptions[2]]}
+                                  isMulti
+                                  name="days"
+                                  id="days"
+                                  options={daysOptions}
+                                  className="basic-multi-select w-100 py-0"
+                                  classNamePrefix="select"
+                                  placeholder='choose list of days..'
+                                  onChange={handleChange}
+                                  value={selectedValues}
+                                  required
+                                />
+                              </div>
+                            </div>
+                          </div>
 
-                  <Component.ButtonBase title={"Cancel"} bg={"primary"} path="/doctors " />
-                  </div> */}
+                          <div className="col-md-6">
+                            <div className="group-add">
+                              <label className="fs-5 " htmlFor="serviceLevel">Service Level In Minutes (Between Slots)</label>
+                              <div className="input-group">
+                                <input type="number" className='bg-transparent form-control mx-auto py-2 w-100' name="serviceLevel" id="serviceLevel" ref={doctorServiceLevel} required />
+                              </div>
+                            </div>
+                          </div>
 
-                  <div className='d-flex justify-content-center align-content-center mt-4'>
-                      <div className='baseBtn'>
-                          <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                              {loadind ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}
-                          </Button>
-                      </div>
+                          <div className="col-md-6">
+                            <div className="group-add">
+                              <label className="fs-5 " htmlFor="StartBulkHour">Start</label>
+                              <div className="input-group">
+                                <input type="time" className='bg-transparent form-control mx-auto py-2 w-100 startBulkHour' name="StartBulkHour" id="StartBulkHour" ref={doctorStartBulkHour} required />
+                              </div>
+                            </div>
+                          </div>
 
-                      <div className='baseBtn'>
-                          <Link to={`/doctors/doctorHours/${id}`}>
-                              <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                  Cancel
-                              </Button>
-                          </Link>
-                      </div>
+                          <div className="col-md-6">
+                            <div className="group-add">
+                              <label className="fs-5 " htmlFor="EndBulkHour">End</label>
+                              <div className="input-group">
+                                <input type="time" className='bg-transparent form-control mx-auto py-2 w-100 endBulkHour' name="EndBulkHour" id="EndBulkHour" ref={doctorEndBulkHour} required />
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+                        {messageBulk.length > 0 ? <p id="alertSave" className={`alert ${apiCodeBulk === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 mb-0 mt-3 w-50 text-center mx-auto`}>{messageBulk}</p> : ''}
+
+                          <div className='d-flex justify-content-center align-content-center mt-4'>
+                              <div className='baseBtn'>
+                                  <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                                      {loadindBulk ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}
+                                  </Button>
+                              </div>
+
+                              <div className='baseBtn'>
+                                  <Link to={`/doctors/doctorHours/${id}`}>
+                                      <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                                          Cancel
+                                      </Button>
+                                  </Link>
+                              </div>
+                          </div>
+
+                      </form>
+                    </div>
                   </div>
-
-
-              </form>
-            </div>
+                </div>
+              </div>
           </div>
+
+
+
+
         </div>
       </div >
     </Container >
