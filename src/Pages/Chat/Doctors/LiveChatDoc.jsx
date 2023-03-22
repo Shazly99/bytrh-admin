@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import { Outlet, useParams } from 'react-router-dom';
-import ScrollToBottom from 'react-scroll-to-bottom';
-import { apiheader, GetData } from '../../../utils/fetchData';
 import axios from 'axios';
-import { PostData } from './../../../utils/fetchData';
-import { ChatContext } from '../../../context/ChatStore';
-import useLocalStorage from './../../../context/useLocalStorage';
-import Icons from '../../../constants/Icons';
 import _ from 'lodash';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import ScrollToBottom from 'react-scroll-to-bottom';
+import Icons from '../../../constants/Icons';
+import { ChatContext } from '../../../context/ChatStore';
+import { apiheader, GetData } from '../../../utils/fetchData';
+import useLocalStorage from './../../../context/useLocalStorage';
+import { PostData } from './../../../utils/fetchData';
 
 const LiveChatDoc = () => {
   const { id } = useParams();
@@ -19,13 +19,13 @@ const LiveChatDoc = () => {
   const [IdChatSupport, setIdChatSupportDetails] = useState([]);
   const [chatStatus, setChatStatus] = useState('');
   const [chatName, setChatName] = useState('');
-  const [chat, setChat] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [chat, setChat] = useState([]);
+  // const [isLoading, setIsLoading] = useState(false);
   const audioRef = useRef(null);
 
-  function handlePlay() {
-    audioRef.current.play();
-  }
+  // function handlePlay() {
+  //   audioRef.current.play();
+  // }
   const fetchClientDetail = async () => {
     try {
       const { data } = await axios(`https://bytrh.com/api/admin/chat/doctor/details/${id}`, apiheader);
@@ -37,14 +37,14 @@ const LiveChatDoc = () => {
       setChatName(data.Response.DoctorName)
       const IdLastMessage = data.Response.ChatDetails[data.Response.ChatDetails.length - 1].IDChatSupportDetails;
       setIdChatSupportDetails(IdLastMessage);
-      setIsLoading(true)
+      // setIsLoading(true)
     } catch (error) {
-      setIsLoading(false)
+      // setIsLoading(false)
       if (error.response && error.response.status === 429) {
         const retryAfter = error.response.headers['retry-after'];
         setTimeout(() => {
           fetchClientDetail();
-          setIsLoading(true)
+          // setIsLoading(true)
         }, (retryAfter || 60) * 1000);
       }
     }
@@ -77,9 +77,9 @@ const LiveChatDoc = () => {
 
   const handlePowerClick = async () => {
     setIsOn(false);
-    let fil = clientChatSupport
+    // let fil = clientChatSupport
     if (isOn === true) {
-      let data = await GetData(`https://bytrh.com/api/admin/chat/doctor/end/${id}`, apiheader)
+      return await GetData(`https://bytrh.com/api/admin/chat/doctor/end/${id}`, apiheader)
     }
 
   };
@@ -121,8 +121,8 @@ const LiveChatDoc = () => {
   }, [massSend]);
 
   useEffect(() => {
-    setChat(null)
-    setIsLoading(false)
+    // setChat(null)
+    // setIsLoading(false)
   }, [id]);
   return (
     <>
@@ -130,7 +130,7 @@ const LiveChatDoc = () => {
         <h6>{chatName}</h6>
         <div className="turn__off">
           <button className={`power-button ${isOn ? "on " : "off scaled"} `} onClick={handlePowerClick} >
-            <Icons.poweroff className="icon" />{isOn ? 'End chat' : 'Chat Ended'}
+            <Icons.Poweroff className="icon" />{isOn ? 'End chat' : 'Chat Ended'}
           </button>
         </div>
       </div>
@@ -152,7 +152,7 @@ const LiveChatDoc = () => {
                       }
                       {
                         messageContent.ChatSupportType === "IMAGE" &&
-                        <img loading="lazy"src={messageContent.ChatSupportMessage} width="100%" className='rounded-3 w-50' />
+                        <img loading="lazy"src={messageContent.ChatSupportMessage} alt='ChatSupportMessage' width="100%" className='rounded-3 w-50' />
                       }
                       {
                         messageContent.ChatSupportType === "AUDIO" &&
@@ -190,7 +190,7 @@ const LiveChatDoc = () => {
                       }
                       {
                         messageContent.ChatSupportType === "IMAGE" &&
-                        <img loading="lazy"src={messageContent.ChatSupportMessage} width="100%" className='rounded-3 w-50' />
+                        <img loading="lazy"src={messageContent.ChatSupportMessage} alt='ChatSupportMessage' width="100%" className='rounded-3 w-50' />
                       }
                       {
                         messageContent.ChatSupportType === "AUDIO" &&

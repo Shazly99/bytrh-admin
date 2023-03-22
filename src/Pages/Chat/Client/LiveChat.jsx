@@ -1,18 +1,17 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import axios from 'axios';
+import _ from 'lodash';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ScrollToBottom from 'react-scroll-to-bottom';
-import { apiheader, GetData } from '../../../utils/fetchData';
-import axios from 'axios';
-import { PostData } from './../../../utils/fetchData';
-import { ChatContext } from '../../../context/ChatStore';
 import Icons from '../../../constants/Icons';
+import { ChatContext } from '../../../context/ChatStore';
+import { apiheader, GetData } from '../../../utils/fetchData';
 import useLocalStorage from './../../../context/useLocalStorage';
-import _ from 'lodash';
-import Component from '../../../constants/Component';
+import { PostData } from './../../../utils/fetchData';
 
 function LiveChat() {
     const { id } = useParams();
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
 
     let { setmassSend, setUserReplied, massSend, setchatEnd } = useContext(ChatContext);
 
@@ -23,15 +22,15 @@ function LiveChat() {
     const [IdChatSupport, setIdChatSupportDetails] = useState([]);
     const [chatStatus, setChatStatus] = useState('');
     const [chatName, setChatName] = useState('');
-    const [chat, setChat] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    // const [chat, setChat] = useState([]);
+    // const [isLoading, setIsLoading] = useState(false);
     const audioRef = useRef(null);
 
-    function handlePlay() {
-        audioRef.current.play();
-    }
+    // function handlePlay() {
+    //     audioRef.current.play();
+    // }
     const fetchClientDetail = async () => {
-        setIsLoading(false)
+        // setIsLoading(false)
 
         try {
             const { data } = await axios(`https://bytrh.com/api/admin/chat/client/details/${id}`, apiheader);
@@ -44,15 +43,15 @@ function LiveChat() {
             const IdLastMessage = data.Response.ChatDetails[data.Response.ChatDetails.length - 1].IDChatSupportDetails;
             setIdChatSupportDetails(IdLastMessage);
             setTimeout(() => {
-                setIsLoading(true)
+                // setIsLoading(true)
             }, 5000);
         } catch (error) {
-            setIsLoading(false)
+            // setIsLoading(false)
             if (error.response && error.response.status === 429) {
                 const retryAfter = error.response.headers['retry-after'];
                 setTimeout(() => {
                     fetchClientDetail();
-                    setIsLoading(true)
+                    // setIsLoading(true)
                 }, (retryAfter || 60) * 1000);
             }
         }
@@ -85,9 +84,9 @@ function LiveChat() {
 
     const handlePowerClick = async () => {
         setIsOn(false);
-        let fil = clientChatSupport
+        // let fil = clientChatSupport
         if (isOn === true) {
-            let data = await GetData(`https://bytrh.com/api/admin/chat/client/end/${id}`, apiheader)
+            return await GetData(`https://bytrh.com/api/admin/chat/client/end/${id}`, apiheader)
         }
 
     };
@@ -125,8 +124,8 @@ function LiveChat() {
     }, [massSend]);
 
     useEffect(() => {
-        setChat(null)
-        setLoading(false);  
+        // setChat(null)
+        // setLoading(false);  
   
     }, [id]);
     return (
@@ -136,7 +135,7 @@ function LiveChat() {
                             <h6>{chatName}</h6>
                             <div className="turn__off">
                                 <button className={`power-button ${isOn ? "on " : "off scaled"} `} onClick={handlePowerClick} >
-                                    <Icons.poweroff className="icon" />{isOn ? 'End chat' : 'Chat Ended'}
+                                    <Icons.Poweroff className="icon" />{isOn ? 'End chat' : 'Chat Ended'}
                                 </button>
                             </div>
                         </div>
@@ -158,7 +157,7 @@ function LiveChat() {
                                                         }
                                                         {
                                                             messageContent.ChatSupportType === "IMAGE" &&
-                                                            <img loading="lazy"src={messageContent.ChatSupportMessage} width="100%" className='rounded-3 w-50' />
+                                                            <img loading="lazy"src={messageContent.ChatSupportMessage}alt='ChatSupportMessage' width="100%" className='rounded-3 w-50' />
                                                         }
                                                         {
                                                             messageContent.ChatSupportType === "AUDIO" &&
@@ -195,7 +194,7 @@ function LiveChat() {
                                                         }
                                                         {
                                                             messageContent.ChatSupportType === "IMAGE" &&
-                                                            <img loading="lazy"src={messageContent.ChatSupportMessage} width="100%" className='rounded-3 w-50' />
+                                                            <img loading="lazy"src={messageContent.ChatSupportMessage}alt='ChatSupportMessage' width="100%" className='rounded-3 w-50' />
                                                         }
                                                         {
                                                             messageContent.ChatSupportType === "AUDIO" &&
