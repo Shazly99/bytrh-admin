@@ -12,7 +12,7 @@ import defaultImg from "./Images/default.png";
 import search from "./Images/kisspng-mt-gox-chief-executive-management-system-business-searching-5b3ba1034696c2.1059044815306344992891.png";
 
 const img = {
-     defaultImg,
+    defaultImg,
     translate,
     added,
     added2,

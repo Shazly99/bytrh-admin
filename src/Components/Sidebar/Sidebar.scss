@@ -82,7 +82,7 @@ main {
                 top: 0%;
                 border-top-right-radius: 5px;
                 border-bottom-right-radius: 5px;
-                background-color: $mainColor;
+                background-color: $secondColor;
             }
         }
 
@@ -126,7 +126,7 @@ main {
     .menu {
         display: flex;
         color: white;
-        padding-right: 20px;
+        // padding-right: 20px;
         transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
         justify-content: space-between;
     }
@@ -183,6 +183,82 @@ main {
 }
 
 
+.routesAr { 
+
+    .link { 
+        &:hover {
+            // border-left: 4px solid $mainColor;
+            transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+            color: $mainColor;
+            position: relative;
+
+            &::after {
+                content: '';
+                height: 100%;
+                width: 4px;
+                position: absolute;
+                right: -4px !important;
+                top: 0%;
+                border-top-left-radius: 5px !important;
+                border-bottom-left-radius: 5px !important;
+                border-top-right-radius: 0px !important;
+                border-bottom-right-radius: 0px !important;
+                background-color: $secondColor;
+            }
+        }
+        // transition: all 1s !important;
+        width: 0% !important;
+    } 
+
+    .active {
+        // transition: all 1s !important;
+
+        // background-color: #faa9402f;
+        width: 100% !important;
+        color: $mainColor !important; 
+        &::after { 
+            right: -4px !important;
+            top: 0%;
+            border-top-left-radius: 5px !important;
+            border-bottom-left-radius: 5px !important;
+            border-top-right-radius: 0px !important;
+            border-bottom-right-radius: 0px !important;
+            background-color: $mainColor;
+        }
+    }  
+    .menu_container {
+        .active { 
+            &::after {
+                content: '';
+                border-top-left-radius: 0px;
+                border-bottom-left-radius: 0px; 
+            }
+        } 
+        .link {
+            display: flex;
+            color: $colorLight;
+            gap: 10px;
+            text-decoration: none;
+            transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+
+            &:hover {
+                transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+                color: $mainColor;
+                position: relative;
+
+                &::after {
+                    content: '';
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+ 
+}
+
+
+
+
 
 
 
@@ -191,7 +267,7 @@ main {
     width: inherit;
     position: fixed;
     top: 0;
-    left: 0;
+    // left: 0;
     background-color: #000;
     z-index: 99;
     overflow: scroll;

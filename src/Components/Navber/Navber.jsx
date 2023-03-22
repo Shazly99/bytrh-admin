@@ -14,7 +14,7 @@ import routes from './../Sidebar/route';
 import './Navber.scss';
 
 function Navber() {
-  let { LogOut } = useContext(VendersContext); 
+  let { LogOut, isLang, setIsLang } = useContext(VendersContext);
   const [Toggle, setToggle] = useState(false);
   // const showAnimation = {
   //   hidden: {
@@ -32,7 +32,13 @@ function Navber() {
   //   },
   // };
   const handleActionSelect = async (action) => {
-    return await PostData(`https://bytrh.com/api/admin/users/language/change`, { UserLanguage: action }, apiheader)
+    if (action === 'en') {
+      setIsLang('en')
+      return await PostData(`https://bytrh.com/api/admin/users/language/change`, { UserLanguage: action }, apiheader)
+    } else if (action === 'ar') {
+      setIsLang('ar')
+      return await PostData(`https://bytrh.com/api/admin/users/language/change`, { UserLanguage: action }, apiheader)
+    }
   }
 
 
@@ -97,8 +103,10 @@ function Navber() {
                 onSelect={(eventKey) => handleActionSelect(eventKey)}
                 className="DropdownButton "
               >
-                <Dropdown.Item eventKey="ar"onClick={()=>window.location.reload()} >عربي</Dropdown.Item>
-                <Dropdown.Item eventKey="en"  onClick={()=>window.location.reload()}>English</Dropdown.Item>
+                <Dropdown.Item eventKey="ar"  >عربي</Dropdown.Item>
+                <Dropdown.Item eventKey="en" >English</Dropdown.Item>
+               {/*  onClick={() => window.location.reload()}
+onClick={() => window.location.reload()} */}
               </DropdownButton>
             </span>
           </Navbar.Collapse>
@@ -113,7 +121,7 @@ function Navber() {
                   <LinkContainer to="/chat/clients">
                     <NavDropdown.Item  >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <Icons.Chatuser   style={{ marginRight: 10 }} />
+                        <Icons.Chatuser style={{ marginRight: 10 }} />
                         <span>Chat clients </span>
                       </div>
                     </NavDropdown.Item>
@@ -122,7 +130,7 @@ function Navber() {
                   <LinkContainer to="/chat/doctors">
                     <NavDropdown.Item  >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <Icons.ChatDoc   style={{ marginRight: 10 }} />
+                        <Icons.ChatDoc style={{ marginRight: 10 }} />
 
                         <span>Chat doctors</span>
                       </div>

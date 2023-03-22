@@ -5,7 +5,7 @@ import Component from '../constants/Component';
 import { VendersContext } from '../context/Store';
 
 function Vendor() {
-  let { isOpen } = useContext(VendersContext);
+  let { isOpen ,isLang} = useContext(VendersContext);
 
   useEffect(() => {
    
@@ -13,7 +13,7 @@ function Vendor() {
    }, [isOpen])
   return (
     <>
-      <div className="vender overflow-hidden">
+      <div className="vender overflow-hidden" dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
         <div className='d-flex'>
           <Component.Sildebar />
           <motion.div

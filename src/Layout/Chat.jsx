@@ -5,12 +5,12 @@ import Component from '../constants/Component';
 import { motion } from 'framer-motion';
 import { VendersContext } from '../context/Store';
 const Chat = () => {
-    let { isOpen } = useContext(VendersContext);
+    let { isOpen,isLang } = useContext(VendersContext);
 
     useEffect(() => {
      }, [isOpen])
     return (
-        <div style={{ backgroundColor: ' #F5F8FA' }}>
+        <div style={{ backgroundColor: ' #F5F8FA' }} dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
             <div className="vender overflow-hidden">
                 <div className='d-flex'>
                     <Component.Sildebar />

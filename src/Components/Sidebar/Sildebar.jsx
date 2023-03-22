@@ -1,16 +1,15 @@
-import { NavLink } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import './Sidebar.scss'
-import routes from './route.js';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { FaBars } from 'react-icons/fa';
-import { Tooltip as ReactTooltip } from 'react-tooltip'
-import { VendersContext } from "../../context/Store";
-import SidebarMenu from './SidebarMenu';
+import { NavLink } from "react-router-dom";
 import Img from "../../assets/Img";
+import { VendersContext } from "../../context/Store";
+import routes from './route.js';
+import './Sidebar.scss';
+import SidebarMenu from './SidebarMenu';
 
 const Sidebar = ({ children }) => {
-  let { isOpen, toggle, LogOut, setIsOpen } = useContext(VendersContext);
+  let { isLang,isOpen, toggle, LogOut, setIsOpen } = useContext(VendersContext);
 
 
   const showAnimation = {
@@ -28,23 +27,24 @@ const Sidebar = ({ children }) => {
       },
     },
   };
-
+ 
   return (
     <>
-      <div className="main-container ">
+      <div className="main-container " dir={isLang === 'ar'?'rtl':'ltr'}>
         <motion.div
+        dir={isLang === 'ar'?'rtl':'ltr'}
           animate={{
             width: isOpen ? "270px" : "50px",
             background: '#000',
             transition: {
-              duration: 0.5,
+              duration: 0.7,
               type: "spring",
               damping: 10,
             },
           }}
           className={`sidebar  `}
         >
-          <div className="side   ">
+          <div className="side   " style={{[isLang === 'ar' ? 'right' : 'left']: 0 }}>
 
             <div className="top_section  ">
               <AnimatePresence>
@@ -57,8 +57,7 @@ const Sidebar = ({ children }) => {
                     className="logo"
                     key={1}
                   >
-                    <img loading="lazy" src={Img.logo} className="w-100"/>
-                    {/* <h3>Baytrh</h3> */}
+                    <img loading="lazy" src={Img.logo} alt='logo' className="w-100" />
                   </motion.div>
                 )}
                 <div className="bars">
@@ -66,7 +65,7 @@ const Sidebar = ({ children }) => {
                 </div>
               </AnimatePresence>
             </div>
-            <section className='routes '  >
+            <section className={isLang === 'ar' ? 'routes routesAr' : 'routes'}   >
               {
                 routes.map((root, i) => {
                   if (root.subRoutes) {
@@ -78,6 +77,7 @@ const Sidebar = ({ children }) => {
                         showAnimation={showAnimation}
                         isOpen={isOpen}
                         open={isOpen}
+                        isLang={isLang}
                       />
                     );
                   }

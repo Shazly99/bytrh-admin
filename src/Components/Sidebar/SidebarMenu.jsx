@@ -35,7 +35,7 @@ const menuItemAnimation = {
   }),
 };
 
-const SidebarMenu = ({ route,open, showAnimation, isOpen, setIsOpen }) => {
+const SidebarMenu = ({isLang, route,open, showAnimation, isOpen, setIsOpen }) => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
@@ -51,7 +51,7 @@ const SidebarMenu = ({ route,open, showAnimation, isOpen, setIsOpen }) => {
   }, [isOpen]);
   return (
     <>
-      <div className="menu" onClick={toggleMenu}>
+      <div className="menu" onClick={toggleMenu} style={{[isLang === 'en' ? 'paddingRight' : 'paddingLeft']: '20px' }} >
         <div className="menu_item">
           <span className={`link ${isMenuOpen?'link_text':''}`}>
             <div className="icon">{route.icon}</div>

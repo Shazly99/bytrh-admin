@@ -24,6 +24,9 @@ body {
 ::-webkit-scrollbar-corner {
   background-color: transparent;
 }
+::-webkit-scrollbar {
+  left: 0 !important;
+}
 button{
   border-color: $mainColor !important;
 }

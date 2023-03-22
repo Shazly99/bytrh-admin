@@ -9,7 +9,8 @@ function VenderContext({ children }) {
   const [userId, setUser] = useState('');
 
  
-  
+  const [isLang, setIsLang] = useState('en');
+ 
 
   
   const toggle = () => setIsOpen(!isOpen);
@@ -26,7 +27,7 @@ function VenderContext({ children }) {
 
   return (
     <>
-      <VendersContext.Provider value={{ isOpen,  setIsOpen, toggle, LogOut, userId }}>
+      <VendersContext.Provider value={{isLang,setIsLang, isOpen,  setIsOpen, toggle, LogOut, userId }}>
         {children}
       </VendersContext.Provider>
     </>

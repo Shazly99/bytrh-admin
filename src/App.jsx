@@ -1,14 +1,14 @@
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import Component from './constants/Component';
 import './style/App.scss';
-import VenderContext from './context/Store';
+import VenderContext, { VendersContext } from './context/Store';
 import { Toaster } from 'react-hot-toast';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { apiheader } from './utils/fetchData';
+import { useContext, useEffect, useState } from 'react'; 
 import ChatStore from './context/ChatStore';
 
 function App() {
+  let { LogOut, isLang, setIsLang } = useContext(VendersContext);
 
   // get countries Bytra
   const [fetchCountriesBytra, setFetchCountriesBytra] = useState([]);
