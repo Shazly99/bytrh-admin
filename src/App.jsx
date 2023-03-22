@@ -268,23 +268,26 @@ function App() {
     <div>
 
       <Toaster
-        position="top-center"
+        position="bottom-center"
         reverseOrder={false}
         toastOptions={{
-          duration: 3000,
+          duration: 3500,
           style: {
             fontFamily: ' Arial, Helvetica, sans-serif',
             textTransform: 'capitalize',
             zIndex: '9999',
-            background: '#fff',
-            color: '#000',
+            background: '#000',
+            color: '#fff',
             borderRadius: '10px',
+            boxShadow:'10px 10px 10px rgba(188, 188, 188, 0.16)',
+             
+            
             /*  background: '#333',
              color: '#fff', */
           },
         }}
         containerStyle={{
-          top: 60
+          bottom: 50
         }}
       />
       <ChatStore>

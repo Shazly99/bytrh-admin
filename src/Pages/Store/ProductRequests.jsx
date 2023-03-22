@@ -55,7 +55,7 @@ const ProductRequests = ({ Request, isLoader }) => {
 
             {isLoader ? <>
                 {Request &&
-                    <Table striped bordered hover size="sm">
+                    <Table responsive={true}striped bordered hover size="sm">
                         <thead>
                             <tr>
                             <th >  Buyer Info</th>

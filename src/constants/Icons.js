@@ -21,7 +21,7 @@ import { TbReportAnalytics as report } from "react-icons/tb";
 
 import { BsChatSquareTextFill as Chat, BsCheck2Circle as Check, BsImage as imageUpload, BsThreeDotsVertical as dotes } from "react-icons/bs";
 import { CiCircleRemove as Uncheck, CiMedicalCross as medical } from "react-icons/ci";
-import { FaBloggerB as blog, FaPowerOff as poweroff } from "react-icons/fa";
+import { FaBloggerB as blog, FaPowerOff as Poweroff } from "react-icons/fa";
 import { GiSniffingDog as category } from "react-icons/gi";
 import { IoChatboxEllipsesOutline as consult } from "react-icons/io5";
 import { MdBookmarkAdded as Added, MdLanguage as Language, MdOutlineContactless as contact, MdOutlineLocationOn as location, MdPets as pets } from "react-icons/md";
@@ -46,7 +46,7 @@ const icons ={
     medical,
     consult,
     location,
-    poweroff,
+    Poweroff,
     category,
     UploadItem,
     Added,
