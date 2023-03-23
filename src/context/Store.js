@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
- 
+
 
 export const VendersContext = createContext([])
 
@@ -8,11 +8,11 @@ function VenderContext({ children }) {
   const [isOpen, setIsOpen] = useState(true);
   const [userId, setUser] = useState('');
 
- 
-  const [isLang, setIsLang] = useState('en');
- 
 
-  
+  const [isLang, setIsLang] = useState(localStorage.getItem('langChange'));
+
+
+
   const toggle = () => setIsOpen(!isOpen);
   function LogOut() {
     localStorage.removeItem('token')
@@ -22,12 +22,13 @@ function VenderContext({ children }) {
 
   useEffect(() => {
     setUser(localStorage.getItem("IDUser"))
-  }, [userId])
- 
+    localStorage.setItem('langChange', isLang)
+  }, [userId, isLang])
+
 
   return (
     <>
-      <VendersContext.Provider value={{isLang,setIsLang, isOpen,  setIsOpen, toggle, LogOut, userId }}>
+      <VendersContext.Provider value={{ isLang, setIsLang, isOpen, setIsOpen, toggle, LogOut, userId }}>
         {children}
       </VendersContext.Provider>
     </>

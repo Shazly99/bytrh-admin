@@ -1,15 +1,16 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useContext } from 'react';
 import { FaBars } from 'react-icons/fa';
-import { NavLink } from "react-router-dom";
+import { NavLink, Route } from "react-router-dom";
 import Img from "../../assets/Img";
 import { VendersContext } from "../../context/Store";
 import routes from './route.js';
+import routeAr from "./routeAr";
 import './Sidebar.scss';
 import SidebarMenu from './SidebarMenu';
 
 const Sidebar = ({ children }) => {
-  let { isLang,isOpen, toggle, LogOut, setIsOpen } = useContext(VendersContext);
+  let { isLang, isOpen, toggle, LogOut, setIsOpen } = useContext(VendersContext);
 
 
   const showAnimation = {
@@ -27,12 +28,13 @@ const Sidebar = ({ children }) => {
       },
     },
   };
- 
+  let currentRoutes = isLang === 'ar' ? routeAr : routes;
+
   return (
     <>
-      <div className="main-container " dir={isLang === 'ar'?'rtl':'ltr'}>
+      <div className="main-container " dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
         <motion.div
-        dir={isLang === 'ar'?'rtl':'ltr'}
+          dir={isLang === 'ar' ? 'rtl' : 'ltr'}
           animate={{
             width: isOpen ? "270px" : "50px",
             background: '#000',
@@ -44,7 +46,7 @@ const Sidebar = ({ children }) => {
           }}
           className={`sidebar  `}
         >
-          <div className="side   " style={{[isLang === 'ar' ? 'right' : 'left']: 0 }}>
+          <div className="side   " style={{ [isLang === 'ar' ? 'right' : 'left']: 0 }}>
 
             <div className="top_section  ">
               <AnimatePresence>
@@ -67,7 +69,8 @@ const Sidebar = ({ children }) => {
             </div>
             <section className={isLang === 'ar' ? 'routes routesAr' : 'routes'}   >
               {
-                routes.map((root, i) => {
+
+currentRoutes?.map((root, i) => {
                   if (root.subRoutes) {
                     return (
                       <SidebarMenu

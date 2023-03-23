@@ -68,9 +68,9 @@ main {
         transition: all 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045);
         cursor: pointer;
         &:hover {
-            // border-left: 4px solid $mainColor;
+            // border-left: 4px solid $secondColor;
             transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
-            color: $mainColor;
+            color: $secondColor;
             position: relative;
 
             &::after {
@@ -189,7 +189,7 @@ main {
         &:hover {
             // border-left: 4px solid $mainColor;
             transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
-            color: $mainColor;
+            color: $secondColor;
             position: relative;
 
             &::after {
@@ -243,7 +243,7 @@ main {
 
             &:hover {
                 transition: 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
-                color: $mainColor;
+                color: $secondColor;
                 position: relative;
 
                 &::after {

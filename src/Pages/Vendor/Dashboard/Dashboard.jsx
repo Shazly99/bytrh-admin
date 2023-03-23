@@ -1,15 +1,29 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+import { VendersContext } from '../../../context/Store';
 // import { Container } from 'react-bootstrap'
 // import Component from '../../../constants/Component'
 import './Dashboard.scss'
 function Dashboard() {
+  let { isLang } = useContext(VendersContext);
 
+  const translate = {
+    "ar": {
+        hello: 'مرحبًا بك في لوحة تحكم بيطرة '
+     },
+     "en": {
+        hello: 'Welcome to Dashboard Bytrh'
+     }
+  }
+  useEffect(() => {
+     
+  }, [isLang])
+  
   return (
     <>
 
       <div className="welcome__page   bg-body  " style={{ display: 'flex ', justifyContent: 'center', alignItems: 'center' }}>
         <div className="title_bytrh shadow-lg rounded-3">
-          <h3>Welcome to Dashboard Bytrh</h3>
+          <h3>{translate[isLang].hello} </h3>
         </div>
       </div>
       {/* <Container fluid>
