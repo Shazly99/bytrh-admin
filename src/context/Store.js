@@ -9,7 +9,7 @@ function VenderContext({ children }) {
   const [userId, setUser] = useState('');
 
 
-  const [isLang, setIsLang] = useState(localStorage.getItem('langChange'));
+  const [isLang, setIsLang] = useState('en');
 
 
 
