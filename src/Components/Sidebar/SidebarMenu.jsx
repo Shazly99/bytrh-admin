@@ -48,7 +48,7 @@ const SidebarMenu = ({isLang, route,open, showAnimation, isOpen, setIsOpen }) =>
     if (!isOpen) {
       setIsMenuOpen(false);
     }
-  }, [isOpen]);
+  }, [isOpen,isLang]);
   return (
     <>
       <div className="menu" onClick={toggleMenu} style={{[isLang === 'en' ? 'paddingRight' : 'paddingLeft']: '20px' }} >

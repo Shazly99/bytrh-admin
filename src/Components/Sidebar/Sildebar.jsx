@@ -70,7 +70,8 @@ const Sidebar = ({ children }) => {
             <section className={isLang === 'ar' ? 'routes routesAr' : 'routes'}   >
               {
 
-currentRoutes?.map((root, i) => {
+                currentRoutes?.map((root, i) => {
+                  
                   if (root.subRoutes) {
                     return (
                       <SidebarMenu
