@@ -9,7 +9,7 @@ function VenderContext({ children }) {
   const [userId, setUser] = useState('');
 
 
-  const [isLang, setIsLang] = useState('en');
+  const [isLang, setIsLang] = useState(localStorage.getItem('langChange'));
 
 
 
@@ -20,9 +20,17 @@ function VenderContext({ children }) {
     return <Navigate to="/auth/login" replace={true} />
   }
 
+  const chnageLang = () => {
+    if (!localStorage.getItem('langChange')) {
+      setIsLang('en')
+      return localStorage.setItem('langChange', 'en')
+    } else {
+      return localStorage.setItem('langChange', isLang)
+    }
+  }
   useEffect(() => {
     setUser(localStorage.getItem("IDUser"))
-    localStorage.setItem('langChange', isLang)
+    chnageLang()
   }, [userId, isLang])
 
 
