@@ -5,19 +5,24 @@ import { VendersContext } from '../../../context/Store';
 import './Dashboard.scss'
 function Dashboard() {
   let { isLang } = useContext(VendersContext);
-  const [translate, setTranslate] = useState({})
+  const [translate, setTranslate] = useState({
+    "ar": {
+      hello: 'مرحبًا بك في لوحة تحكم بيطرة '
+    },
+    "en": {
+      hello: 'Welcome to Dashboard Bytrh'
+    }
+  })
 
   const handelTranslate = () => {
-    setTranslate(
-      {
-        "ar": {
-          hello: 'مرحبًا بك في لوحة تحكم بيطرة '
-        },
-        "en": {
-          hello: 'Welcome to Dashboard Bytrh'
-        }
+    setTranslate({
+      "ar": {
+        hello: 'مرحبًا بك في لوحة تحكم بيطرة '
+      },
+      "en": {
+        hello: 'Welcome to Dashboard Bytrh'
       }
-    )
+    })
   }
   useEffect(() => {
     handelTranslate()
@@ -25,7 +30,6 @@ function Dashboard() {
 
   return (
     <>
-
       <div className="welcome__page   bg-body  " style={{ display: 'flex ', justifyContent: 'center', alignItems: 'center' }}>
         <div className="title_bytrh shadow-lg rounded-3">
           <h3>{translate[isLang]?.hello} </h3>
