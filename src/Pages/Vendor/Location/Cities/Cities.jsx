@@ -1,11 +1,12 @@
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Dropdown, DropdownButton, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
+import { VendersContext } from "../../../../context/Store";
 import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
 import useSkeletonTable from '../../../../utils/useSkeletonTable';
 
@@ -16,7 +17,7 @@ const Cities = () => {
   const [searchValue, setSearchValue] = useState('');
   const [isLoader, setIsloader] = useState(false);
   let { SkeletonTable, SkeletonSearch, SkeletonFilters } = useSkeletonTable();
-
+  let { isLang } = useContext(VendersContext);
   const CitiescList = async (page) => {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/location/cities`, { IDPage: page }, apiheader).then(({ data }) => {
       setCities(data.Response.Cities)
@@ -109,7 +110,8 @@ const Cities = () => {
             <div className="search_and__btn w-100">
               {isLoader ? <>
                 <Component.ButtonBase title={"Add "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/location/cities/addcity" />
-                <div className='search__group'>
+                <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
+
                   <input type="text" placeholder="Search by city....." name="search" value={searchValue} onChange={handleInputChange} />
                   <button type="submit" onClick={handleSearchClick}>
                     <Icons.Search color='#fff' size={25} />

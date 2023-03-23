@@ -25,23 +25,23 @@ const AddAnimalsSubCategories = () => {
   };
   // Gets
   const [animalCategory, setAnimalCategory] = useState(null)
-  const [animalBagging, setAnimalBagging] = useState(null)
-  const [animalCut, setAnimalCut] = useState(null)
+  // const [animalBagging, setAnimalBagging] = useState(null)
+  // const [animalCut, setAnimalCut] = useState(null)
   //  !Get IDAnimalCategory 
   const IDAnimalCategory = async () => {
     const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/animalcategories/ajax`, {}, apiheader);
      setAnimalCategory(data.Response)
   }
   //  !Get AnimalBagging 
-  const AnimalBagging = async () => {
-    const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/baggings`, {}, apiheader);
-     setAnimalBagging(data.Response)
-  }
+  // const AnimalBagging = async () => {
+  //   const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/baggings`, {}, apiheader);
+  //    setAnimalBagging(data.Response)
+  // }
   //  !Get AnimalCut 
-  const AnimalCut = async () => {
-    const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/cuttings`, {}, apiheader);
-     setAnimalCut(data.Response)
-  }
+  // const AnimalCut = async () => {
+  //   const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/cuttings`, {}, apiheader);
+  //    setAnimalCut(data.Response)
+  // }
 
   const submit = e => {
     e.preventDefault()
@@ -49,9 +49,9 @@ const AddAnimalsSubCategories = () => {
       AnimalSubCategoryNameEn: CategoryNameEn.current.value,
       AnimalSubCategoryNameAr: CategoryNameAr.current.value,
       AnimalSubCategoryImage: selectedImage,
-      AnimalCut: animalCategoryRef.current.value,
+      AnimalCut: animalCutRef.current.value,
       AnimalBagging: animalBaggingRef.current.value,
-      IDAnimalCategory: animalCutRef.current.value
+      IDAnimalCategory: animalCategoryRef.current.value
     })
   }
 
@@ -78,13 +78,13 @@ const AddAnimalsSubCategories = () => {
   }
   useEffect(() => {
     IDAnimalCategory()
-    AnimalBagging()
-    AnimalCut()
+    // AnimalBagging()
+    // AnimalCut()
     window.scrollTo(0, 0);
     return () => {
       IDAnimalCategory()
-      AnimalBagging()
-      AnimalCut()
+      // AnimalBagging()
+      // AnimalCut()
     };
   }, [])
   return (
@@ -150,7 +150,7 @@ const AddAnimalsSubCategories = () => {
 
                       <Form.Select aria-label="Default select example" ref={animalCutRef}>
                         {
-                          animalCut?.map((item, index) => (
+                          [{IDCutting:1,CuttingName:'Yes'},{IDCutting:0,CuttingName:'No'}]?.map((item, index) => (
                             <option key={index} value={item?.IDCutting}>{item?.CuttingName}</option>
                           ))
                         }
@@ -171,7 +171,7 @@ const AddAnimalsSubCategories = () => {
 
                       <Form.Select aria-label="Default select example" ref={animalBaggingRef}>
                         {
-                          animalBagging?.map((item, index) => (
+                          [{IDBagging:1,BaggingName:'Yes'},{IDBagging:0,BaggingName:'No'}]?.map((item, index) => (
                             <option key={index} value={item?.IDBagging}>{item?.BaggingName}</option>
                           ))
                         }
@@ -189,7 +189,7 @@ const AddAnimalsSubCategories = () => {
                     </div>
 
                     <div className='baseBtn'>
-                      <Link to={'/animals/categories'}>
+                      <Link to={'/animals/subcategories'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                           Cancel
                         </Button>

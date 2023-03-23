@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ItemDoctor from './ItemDoctor';
 import { useEffect } from 'react';
 import Component from '../../../constants/Component';
@@ -11,6 +11,7 @@ import { Container, Table } from 'react-bootstrap';
 import Loader from '../../../Components/Shared/Loader/Loader';
 import axios from 'axios';
 import { apiheader } from '../../../utils/fetchData';
+import { VendersContext } from '../../../context/Store';
 
 
 export default function Doctors() {
@@ -24,6 +25,7 @@ export default function Doctors() {
   const [searchKeyDoctors, setSearchKeyDoctors] = useState(null);
   const [loadingDoctors, setLoadingDoctors] = useState(false)
   const [fetchDoctors, setFetchDoctors] = useState([])
+  let { isLang } = useContext(VendersContext);
   async function getTokenDoctors() {
 
     setLoadingDoctors(true);
@@ -145,7 +147,8 @@ export default function Doctors() {
           </div>
 
           <div className="search-container">
-            <div className='search__group'>
+          <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
+
               <input
                 value={localStorage.getItem('searchDoctors') ? localStorage.getItem('searchDoctors') : ''}
                 onChange={(e) => {

@@ -27,7 +27,7 @@ const AddAreas = () => {
      addNewAreas({
       AreaNameEn: AreasNameEn.current.value,
       AreaNameAr: AreasNameAr.current.value,
-      AreaActive: selectRef.current.value,
+      AreaActive: 1,
       IDCity: countriesRef.current.value
     })
   }
@@ -86,7 +86,7 @@ const AddAreas = () => {
                       </Form.Select>
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail" className='mt-3'>
+                    {/* <Form.Group controlId="formBasicEmail" className='mt-3'>
                       <Form.Label>  Status</Form.Label>
                       <Form.Select aria-label="Default select example" ref={selectRef}>
                         <option>Status</option>
@@ -94,7 +94,7 @@ const AddAreas = () => {
                         <option value="0">InActive</option>
                       </Form.Select>
 
-                    </Form.Group>  
+                    </Form.Group>   */}
                   </Col>
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en"> 
                     <Form.Group controlId="formBasicEmail">

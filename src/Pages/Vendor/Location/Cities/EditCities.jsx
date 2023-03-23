@@ -79,7 +79,7 @@ const EditCities = () => {
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
                       <Form.Label>Countries </Form.Label>
                       <Form.Select aria-label="Default select example" ref={selectCountry} defaultValue="US">
-                        <option>Country id</option>
+                        {/* <option>Country id</option> */}
                         {
                           countries?.map((item, index) => (
                             <option key={index} value={item?.IDCountry}  selected={editPage?.IDCountry === item?.IDCountry}>{item?.CountryName}</option>

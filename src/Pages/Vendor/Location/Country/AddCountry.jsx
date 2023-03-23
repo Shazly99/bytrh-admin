@@ -23,7 +23,7 @@ const AddCountry = () => {
       CountryNameAr: CountryNameAr.current.value,
       CountryTimeZone: '+' + CountryTimeZone.current.value,
       CountryCode: CountryCode.current.value,
-      CountryActive: selectRef.current.value,
+      CountryActive: 1,
     })
   }
 
@@ -71,7 +71,7 @@ const AddCountry = () => {
                       <Form.Control type="number" name='firstname' ref={CountryTimeZone} />
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail" className='mt-2'>
+                    {/* <Form.Group controlId="formBasicEmail" className='mt-2'>
                       <Form.Label>  Status </Form.Label>
 
                       <Form.Select aria-label="Default select example" ref={selectRef}>
@@ -80,7 +80,7 @@ const AddCountry = () => {
                         <option value="0">InActive</option>
                       </Form.Select> 
 
-                    </Form.Group>
+                    </Form.Group> */}
 
                   </Col>
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">

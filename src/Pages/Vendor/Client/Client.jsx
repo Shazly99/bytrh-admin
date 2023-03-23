@@ -1,9 +1,10 @@
 import { Pagination, Skeleton } from "@mui/material";
 import Box from "@mui/material/Box";
 import _ from 'lodash';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Component from '../../../constants/Component';
 import Icons from "../../../constants/Icons.js";
+import { VendersContext } from "../../../context/Store";
 import { PostData } from '../../../utils/fetchData';
 import { apiheader } from './../../../utils/fetchData';
 
@@ -12,7 +13,7 @@ const Clients = () => {
   const [usersList, setuserList] = React.useState([]);
   const [PagesNumber, setPagesNumber] = React.useState('')
   const [isLoader, setIsloader] = useState(false);
-
+  let { isLang } = useContext(VendersContext);
 
   const handleChange = (event, value) => {
     setPage(value);
@@ -84,7 +85,8 @@ const Clients = () => {
         <div className="app__Users-table">
           <div className="search-container"> 
             { isLoader ? <>
-              <div className='search__group'>
+              <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
+
                 <input type="text" placeholder="Search by name or email or phone....." name="search" value={searchValue} onChange={handleInputChange} />
                 <button type="submit" onClick={handleSearchClick}>
                   <Icons.Search color='#fff' size={25} />

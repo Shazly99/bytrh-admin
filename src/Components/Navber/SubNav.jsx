@@ -10,7 +10,7 @@ const SubNav = ({ sub__nav }) => {
     return (
         <>
             <Navbar className='shadow-none subNav'>
-                <Nav className="me-auto">
+                <Nav className="me-auto w-100">
                     {
                         sub__nav.map((nav, index) => (
                             <React.Fragment key={index} >

@@ -1,13 +1,14 @@
 import { Pagination, Skeleton } from "@mui/material";
 import Box from "@mui/material/Box";
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import Img from "../../assets/Img";
 import Component from "../../constants/Component";
 import Icons from "../../constants/Icons";
+import { VendersContext } from "../../context/Store";
 import useFetch from "../../utils/useFetch";
 import useSkeletonTable from "../../utils/useSkeletonTable";
 import { apiheader, PostData } from "./../../utils/fetchData";
@@ -22,6 +23,7 @@ const Bidding = () => {
   const [isLoader, setIsloader] = useState(false);
   // **pagination
   const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
+  let { isLang } = useContext(VendersContext);
 
   // **get store
   const store = async (page) => {
@@ -283,9 +285,9 @@ const Bidding = () => {
       <div className="app__Users ">
         <div className="app__Users-table">
           <div className="search-container">
-            <div className='search__group w-100'>
+            <div className='  w-100'>
               {isLoader ? <>
-                <div className='search__group'>
+                <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
                   <input type="text" placeholder="Search by client name or email....." name="search" value={searchValue} onChange={handleInputChange} />
                   <button type="submit" >
                     <Icons.Search color='#fff' size={25} />

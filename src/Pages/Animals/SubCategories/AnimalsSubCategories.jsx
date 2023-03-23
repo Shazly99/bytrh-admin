@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Table, DropdownButton, Dropdown, NavDropdown } from "react-bootstrap";
 import Component from '../../../constants/Component'
 import Icons from '../../../constants/Icons'
@@ -10,6 +10,7 @@ import Box from "@mui/material/Box";
 import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import useSkeletonTable from '../../../utils/useSkeletonTable';
+import { VendersContext } from '../../../context/Store';
 
 
 const AnimalsSubCategories = () => {
@@ -19,6 +20,7 @@ const AnimalsSubCategories = () => {
     const [searchValue, setSearchValue] = useState('');
     const [isLoader, setIsloader] = useState(false);
     let { SkeletonTableImg, SkeletonSearch, SkeletonFilters } = useSkeletonTable();
+    let { isLang } = useContext(VendersContext);
 
     // pagination
     const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
@@ -128,7 +130,7 @@ const AnimalsSubCategories = () => {
                         <div className="search_and__btn w-100">
                             {isLoader ? <>
                                 <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/subcategories/addsubcategories" />
-                                <div className='search__group'>
+                                <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
                                     <input className='shadow' type="text" placeholder="Search by animal category....." name="search" value={searchValue} onChange={handleInputChange} />
                                     <button type="submit" onClick={handleSearchClick}>
                                         <Icons.Search color='#fff' size={25} />

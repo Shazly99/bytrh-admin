@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import axios from 'axios';
 import _ from 'lodash';
 import moment from 'moment/moment';
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useContext, useEffect, useRef, useState } from 'react';
 import { Button, Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
 import DateRangePicker from 'react-bootstrap-daterangepicker';
 import { toast } from 'react-hot-toast';
@@ -17,8 +17,10 @@ import useFetch from '../../utils/useFetch';
 import useSkeletonTable from "../../utils/useSkeletonTable";
 
 import Modal from 'react-bootstrap/Modal';
+import { VendersContext } from "../../context/Store";
 
 const AdsList = () => {
+  let { isLang } = useContext(VendersContext);
 
 
   const [ads, setAds] = useState(null)
@@ -206,7 +208,7 @@ const AdsList = () => {
         <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/ads/add" />
         <div className="app__Users-table">
           <div className="search-container">
-            <div className='search__group w-100'>
+          <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
               <div className=' app__addOrder-form'>
                 <div className="d-flex flex-column row justify-content-between">
                   <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }} className='col'>Filter by Start Date and End Date :	</h5>

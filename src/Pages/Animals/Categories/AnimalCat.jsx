@@ -1,11 +1,12 @@
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Dropdown, DropdownButton, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import Component from '../../../constants/Component';
 import Icons from '../../../constants/Icons';
+import { VendersContext } from "../../../context/Store";
 import useSkeletonTable from '../../../utils/useSkeletonTable';
 import { apiheader, GetData, PostData } from './../../../utils/fetchData';
 
@@ -16,6 +17,7 @@ const AnimalCat = () => {
   const [searchValue, setSearchValue] = useState('');
   const [isLoader, setIsloader] = useState(false);
   let { SkeletonTableImg, SkeletonSearch, SkeletonFilters } = useSkeletonTable();
+  let { isLang } = useContext(VendersContext);
 
   // pagination
   const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
@@ -125,7 +127,7 @@ const AnimalCat = () => {
             <div className="search_and__btn w-100" >
               {isLoader ? <>
                 <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/categories/addAnimal" />
-                <div className='search__group'>
+                <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
                   <input   type="text" placeholder="Search by animal category....." name="search" value={searchValue} onChange={handleInputChange} />
                   <button type="submit" onClick={handleSearchClick}>
                     <Icons.Search color='#fff' size={25} />
@@ -193,7 +195,7 @@ const AnimalCat = () => {
             <Table responsive={true} className='rounded-3 '>
               <thead>
                 <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                  <th>Iamges</th>
+                  <th>Image</th>
                   <th>Animal Category Name</th>
                   <th>Animal Category Status</th>
                   <th>Action</th>

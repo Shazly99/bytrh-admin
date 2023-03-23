@@ -8,22 +8,22 @@ import { apiheader, PostData } from '../../../../utils/fetchData';
 import useFetch from './../../../../utils/useFetch';
 const AddCities = () => {
   // let { countries ,cities} = useContext(VendersContext);
-  let {countries } = useFetch()
+  let { countries } = useFetch()
 
   let navigate = useNavigate();
   const CityNameEn = useRef();
-  const CityNameAr = useRef(); 
+  const CityNameAr = useRef();
   const CityCode = useRef();
   const selectRef = useRef();
   const countriesRef = useRef();
 
   const submit = e => {
     e.preventDefault()
-     addNewCity({
+    addNewCity({
       CityNameEn: CityNameEn.current.value,
       CityNameAr: CityNameAr.current.value,
       CityCode: '+' + CityCode.current.value,
-      CityActive: selectRef.current.value,
+      CityActive: 1,
       IDCountry: countriesRef.current.value
     })
   }
@@ -51,13 +51,13 @@ const AddCities = () => {
   }
   useEffect(() => {
     window.scrollTo(0, 0);
-   }, [])
+  }, [])
 
   return (
     <Container fluid>
       <div className="app__addprodects">
-      <Component.SubNav sub__nav={[{ name: "Areas", path: '/location/cities' }, { name: "Add Area ", path: '/location/cities/addcity' }]} />
-        
+        <Component.SubNav sub__nav={[{ name: "Areas", path: '/location/cities' }, { name: "Add Area ", path: '/location/cities/addcity' }]} />
+
         <div className="app__addprodects__header ">
           <Component.BaseHeader h1={'Add New Area'} />
           <div className="app__addOrder-form">
@@ -72,7 +72,7 @@ const AddCities = () => {
                     </Form.Group>
 
 
-                    <Form.Group controlId="formBasicEmail"className='mt-3'>
+                    {/* <Form.Group controlId="formBasicEmail"className='mt-3'>
                       <Form.Label>  Status</Form.Label> 
                       <Form.Select aria-label="Default select example" ref={selectRef}>
                         <option>Country Status</option>
@@ -80,8 +80,8 @@ const AddCities = () => {
                         <option value="0">InActive</option>
                       </Form.Select>
 
-                    </Form.Group>
-                    <Form.Group controlId="formBasicEmail"className='mt-3'>
+                    </Form.Group> */}
+                    <Form.Group controlId="formBasicEmail" className='mt-3'>
                       <Form.Label>  Code</Form.Label>
                       <Form.Control type="number" name='firstname' ref={CityCode} />
                     </Form.Group>
@@ -94,12 +94,13 @@ const AddCities = () => {
                       <Form.Label>  Name (Ar)</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CityNameAr} style={{ direction: 'rtl' }} />
                     </Form.Group>
- 
-                    <Form.Group controlId="formBasicEmail"className='mt-3'>
+
+                    <Form.Group controlId="formBasicEmail" className='mt-3'>
                       <Form.Label>Country</Form.Label>
 
                       <Form.Select aria-label="Default select example" ref={countriesRef}>
-                        <option>Country id</option>
+                        {/* <option>Country id</option> */}
+                        <option value="" selected disabled hidden> Select Country</option>
                         {
                           countries?.map((item, index) => (
                             <option key={index} value={item?.IDCountry}>{item?.CountryName}</option>
@@ -121,7 +122,7 @@ const AddCities = () => {
                     <div className='baseBtn'>
                       <Link to={'/location/cities'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Cancel
+                          Cancel
                         </Button>
                       </Link>
                     </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import { Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
@@ -9,6 +9,7 @@ import Icons from '../../../constants/Icons';
 import { apiheader, PostData } from '../../../utils/fetchData';
 import Component from '../../../constants/Component';
 import useSkeletonTable from '../../../utils/useSkeletonTable';
+import { VendersContext } from '../../../context/Store';
 
 export const BlogDoctor = () => {
     const animalRef = useRef();
@@ -19,7 +20,7 @@ export const BlogDoctor = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const [isLoader, setIsloader] = useState(false);
     let { SkeletonTable, SkeletonSearchsingel, SkeletonFilterBlogs } = useSkeletonTable();
-
+    let { isLang } = useContext(VendersContext);
 
     const BlogsList = async () => {
         await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs`, { IDPage: page }, apiheader).then(({ data }) => {
@@ -142,7 +143,7 @@ export const BlogDoctor = () => {
                 <div className="app__Users-table ">
                     <div className="search-container">
                         {isLoader ? <>
-                            <div className='search__group'>
+                            <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
                                 <input type="text" placeholder="Search by  Client Name,Email,Phone....." name="search" value={searchBlog} onChange={handleInputChange} />
                                 <button type="submit" onClick={handleSearchClick}>
                                     <Icons.Search color='#fff' size={25} />

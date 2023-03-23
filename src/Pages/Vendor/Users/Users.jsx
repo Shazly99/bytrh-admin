@@ -1,19 +1,22 @@
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Component from '../../../constants/Component';
 import Icons from "../../../constants/Icons.js";
+import { VendersContext } from "../../../context/Store";
 import { PostData } from '../../../utils/fetchData';
 import useSkeletonTable from '../../../utils/useSkeletonTable';
 import { apiheader } from './../../../utils/fetchData';
 import './Users.scss';
 
 function Users() {
+  let { isLang } = useContext(VendersContext);
+
   const [page, setPage] = useState(1);
   const [usersList, setuserList] = useState(null);
   const [PagesNumber, setPagesNumber] = useState('')
   const [isLoader, setIsloader] = useState(false);
-  let { SkeletonSearch,SkeletonFilters } = useSkeletonTable();
+  let { SkeletonSearch, SkeletonFilters } = useSkeletonTable();
   const handleChange = (event, value) => {
     setPage(value);
   };
@@ -94,9 +97,9 @@ function Users() {
             <div className="search_and__btn   w-100">
               {isLoader ? <>
                 <Component.ButtonBase onclick={test} title={"Add "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/user/addUser" />
-                <div className='search__group'>
+                <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
                   <input type="text" placeholder="Search by name or email or phone....." name="search" value={searchValue} onChange={handleInputChange} />
-                  <button type="submit" onClick={handleSearchClick}>
+                  <button  type="submit" onClick={handleSearchClick}>
                     <Icons.Search color='#fff' size={25} />
                   </button >
                 </div>

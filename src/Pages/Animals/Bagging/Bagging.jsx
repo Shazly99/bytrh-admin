@@ -62,7 +62,7 @@ const Bagging = () => {
 
       <div className="app__Users ">
         {isLoader ? <>
-          <Component.ButtonBase title={"Add    "} bg={"primary"} icon={<Icons.Add   size={21} color={'#ffffffb4'} />} path="/animals/bagging/Add  bagging" />
+          <Component.ButtonBase title={"Add    "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/bagging/addbagging" />
         </> :
           <div className="mt-3 p-2">
             {SkeletonFilters(40, 150)}

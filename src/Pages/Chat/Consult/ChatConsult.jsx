@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Table, DropdownButton, Dropdown, NavDropdown, Modal, Form, Button } from "react-bootstrap";
 import Component from '../../../constants/Component'
 import Icons from '../../../constants/Icons'
@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import Complain from './Complain';
 import useSkeletonTable from '../../../utils/useSkeletonTable';
+import { VendersContext } from '../../../context/Store';
 
 const ChatConsult = () => {
   const [consult, setConsultList] = useState(null)
@@ -20,7 +21,7 @@ const ChatConsult = () => {
   const [searchDoctor, setSearchDoctot] = useState('');
   const [isLoader, setIsloader] = useState(false);
   let { SkeletonTable, SkeletonFilters, SkeletonSearchsingel } = useSkeletonTable();
-
+  let { isLang } = useContext(VendersContext);
   //**Modal Complain */
   const [modalShow, setModalShow] = React.useState(false);
   const [modalIndex, setModalIndex] = React.useState(0);
@@ -129,7 +130,8 @@ const ChatConsult = () => {
         <div className="app__Users-table">
           <div className="search-container  " style={{ display: 'flex', gap: '15px' }}>
             {isLoader ? <>
-              <div className='search__group'>
+              <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
+
                 <input type="text" placeholder="Search by client....." name="search" value={searchClient} onChange={handleInputChange} />
                 <button type="submit" onClick={handleSearchClick} >
                   <Icons.Search color='#fff' size={25} />
@@ -137,7 +139,8 @@ const ChatConsult = () => {
               </div>
             </> : SkeletonSearchsingel(40, "100%")}
             {isLoader ? <>
-              <div className='search__group'>
+              <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
+
                 <input type="text" placeholder="Search by doctor....." name="search" value={searchDoctor} onChange={handleInputChange1} />
                 <button type="submit"  >
                   <Icons.Search color='#fff' size={25} onClick={handleSearchClick1} />

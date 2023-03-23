@@ -1,11 +1,12 @@
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Dropdown, DropdownButton, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import Component from '../../../constants/Component';
 import Icons from '../../../constants/Icons';
+import { VendersContext } from "../../../context/Store";
 import { apiheader, GetData, PostData } from '../../../utils/fetchData';
 
 const MedicalFields = () => {
@@ -13,7 +14,7 @@ const MedicalFields = () => {
   const [page, setPage] = useState(1);
   const [PagesNumber, setPagesNumber] = useState('')
   const [searchValue, setSearchValue] = useState('');
-
+  let { isLang } = useContext(VendersContext);
   const MedicalFieldscList = async (page) => {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/medicalfields`, { IDPage: page }, apiheader).then(({ data }) => {
       setMedicalFields(data.Response.MedicalFields)
@@ -118,7 +119,8 @@ const MedicalFields = () => {
               <Component.ButtonBase title={"Add "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'}  />} path="/medicalfields/add" />
               <div className="app__Users-table">
                 <div className="search-container">
-                  <div className='search__group'>
+                <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
+
                     <input type="text" placeholder="Search by medical field....." name="search" value={searchValue} onChange={handleInputChange} />
                     <button type="submit" onClick={handleSearchClick}>
                       <Icons.Search color='#fff' size={25} />

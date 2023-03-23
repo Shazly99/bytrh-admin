@@ -1,20 +1,21 @@
 import { Pagination, Skeleton } from "@mui/material";
 import Box from "@mui/material/Box";
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import Img from "../../assets/Img";
 import Component from "../../constants/Component";
 import Icons from "../../constants/Icons";
+import { VendersContext } from "../../context/Store";
 import useFetch from "../../utils/useFetch";
 import useSkeletonTable from "../../utils/useSkeletonTable";
 import { apiheader, PostData } from "./../../utils/fetchData";
 
 const StoreList = () => {
     let { SkeletonTable } = useSkeletonTable();
-
+    let { isLang } = useContext(VendersContext);
     const [animal, setAnimal] = useState([]);
     const [page, setPage] = useState(1);
     const [PagesNumber, setPagesNumber] = useState("");
@@ -283,10 +284,10 @@ const StoreList = () => {
             <div className="app__Users ">
                 <div className="app__Users-table">
                     <div className="search-container">
-                        <div className='search__group w-100'>
+                        <div className='  w-100'>
 
                             {isLoader ? <>
-                                <div className='search__group'>
+                                <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}> 
                                     <input type="text" placeholder="Search by client name or email....." name="search" value={searchValue} onChange={handleInputChange} />
                                     <button type="submit" >
                                         <Icons.Search color='#fff' size={25} />
@@ -300,7 +301,7 @@ const StoreList = () => {
                                         {isLoader ? <>
                                             <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry} ref={countryRef}>
                                                 <Form.Select aria-label="Default select example" >
-                                                    <option >Select Country</option>
+                                                    <option selected disabled hidden>Select Country</option>
                                                     <option value={'country'} >Countries</option>
 
                                                     {
@@ -317,7 +318,7 @@ const StoreList = () => {
                                         {isLoader ? <>
                                             <Form.Group controlId="formBasicEmail"   >
                                                 <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={cityRef}>
-                                                    <option >Select city</option>
+                                                    <option selected disabled hidden>Select city</option>
 
                                                     <option value={'cities'} >Cities</option>
 
@@ -336,7 +337,7 @@ const StoreList = () => {
                                         {isLoader ? <>
                                             <Form.Group controlId="formBasicEmail"   >
                                                 <Form.Select aria-label="Default select example" onClick={handelSelectArea} ref={areaRef}>
-                                                    <option >Select Area</option>
+                                                    <option selected disabled hidden>Select Area</option>
 
                                                     <option value={'Areas'} >Areas</option>
 
@@ -357,7 +358,7 @@ const StoreList = () => {
                                             <Form.Group controlId="formBasicEmail"  >
                                                 {/* <Form.Label  >Product Type </Form.Label> */}
                                                 <Form.Select aria-label="Default select example" ref={animalProductType} onClick={handelAdvertisement} >
-                                                    <option >Select Product Type</option>
+                                                    <option selected disabled hidden>Select Product Type</option>
 
                                                     <option value={'All'}  >Animals Product Type</option>
                                                     {
@@ -376,7 +377,7 @@ const StoreList = () => {
                                             <Form.Group controlId="formBasicEmail"  >
                                                 {/* <Form.Label  >  Product Status </Form.Label> */}
                                                 <Form.Select aria-label="Default select example" ref={statusRef} onClick={handelanimalProductStatus} >
-                                                    <option >Select Status</option>
+                                                    <option selected disabled hidden>Select Status</option>
 
                                                     <option value={'All'}  > All Status</option>
                                                     {
@@ -395,7 +396,7 @@ const StoreList = () => {
 
                                                 {/* <Form.Label  >  SubCategory </Form.Label> */}
                                                 <Form.Select aria-label="Default select example" ref={animalSubCategoryRef} onClick={handelanimalSubCategory} >
-                                                    <option >Select SubCategory</option>
+                                                    <option selected disabled hidden>Select SubCategory</option>
                                                     <option value={'All'}  >Animal SubCategory</option>
                                                     {
                                                         animalSubCategory?.map((item, index) => (
