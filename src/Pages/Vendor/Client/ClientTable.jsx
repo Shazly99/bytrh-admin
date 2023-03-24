@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
- import { Dropdown, DropdownButton, Form, Table } from "react-bootstrap";
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Dropdown, DropdownButton, Form, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
 import Icons from "../../../constants/Icons.js";
 import { apiheader, GetData, PostData } from '../../../utils/fetchData.js';
@@ -7,9 +7,12 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import useSkeletonTable from '../../../utils/useSkeletonTable.js';
 import Component from '../../../constants/Component.js';
+import { VendersContext } from '../../../context/Store.js';
 
-const ClientTable = ({ usersList, userList, isLoading }) => {
+const ClientTable = ({ usersList, userList, isLoading,actionsTranslate, statusTranslate, tabelTranslate }) => {
   let { SkeletonTable } = useSkeletonTable();
+  let { isLang } = useContext(VendersContext);
+
   const [showModal, setShowModal] = useState(false);
   const [id, setId] = useState(null);
   const handleShowModal = () => setShowModal(true);
@@ -103,13 +106,11 @@ const ClientTable = ({ usersList, userList, isLoading }) => {
         <Table responsive={true} className='rounded-3 '>
           <thead>
             <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-              <th>User Name</th>
-              <th>Country</th>
-              <th>Login by</th>
-              <th>Balance</th>
-              <th>Status</th>
-              <th>Register Date</th>
-              <th>Action</th>
+              {
+                tabelTranslate?.map((item, index) => (
+                  <th key={index}>{item}</th>
+                ))
+              }
             </tr>
           </thead>
           <tbody className='text-center'>
@@ -160,61 +161,62 @@ const ClientTable = ({ usersList, userList, isLoading }) => {
                   <td>
                     <div>
                       <span>
-                        <DropdownButton
+                        <DropdownButton 
                           id={`dropdown-${item.IDClient}`}
-                          title="Actions"
+                          title={actionsTranslate[0].name}
                           variant="outline-success"
                           onSelect={(eventKey) => handleActionSelect(item.IDClient, eventKey)}
                           className="DropdownButton "
-                        >
-                          <Dropdown.Item eventKey="reset">Reset password</Dropdown.Item>
-
-                          <Dropdown.Item eventKey="balance" onClick={handleShowModal}>Set Balance</Dropdown.Item>
-
-                          <Modal show={showModal} onHide={handleCloseModal} centered >
+                         >
+                          <Dropdown.Item className={isLang ==="ar"?"dropdown-itemAr":"dropdown-itemEn" } eventKey="reset">{actionsTranslate[1].name}</Dropdown.Item>
+                          <Dropdown.Item className={isLang ==="ar"?"dropdown-itemAr":"dropdown-itemEn" } eventKey="balance" onClick={handleShowModal}>{actionsTranslate[2].name}</Dropdown.Item>
+                          <Modal dir={isLang === "ar"?"rtl":"ltr"} show={showModal} onHide={handleCloseModal} centered >
                             <Modal.Header closeButton>
-                              <Modal.Title>Set {item?.ClientName} Balance</Modal.Title>
+                              <Modal.Title>{actionsTranslate[2].titleModel} {' '} {item?.ClientName} </Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
                               <Form.Control type="number" defaultValue={item.ClientBalance} ref={changeBalance} />
                             </Modal.Body>
                             <Modal.Footer className="d-flex justify-content-center align-items-center">
                               <Button variant="outline-primary" onClick={handleCloseModal}>
-                                Cancel
+                              {actionsTranslate[2].btn2}
                               </Button>
-                              <Button variant="primary"   onClick={changeWallet}>
-                                Set Balance
-                              </Button>
+                              <Button variant="primary" onClick={changeWallet}>
+                              {actionsTranslate[2].btn1}                              </Button>
                             </Modal.Footer>
                           </Modal>
-
-                          <Dropdown.Item eventKey="DELETED">Deleted</Dropdown.Item>
-                          <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
+                          <Dropdown.Item className={isLang ==="ar"?"dropdown-itemAr":"dropdown-itemEn" } eventKey="DELETED">{actionsTranslate[3].name}</Dropdown.Item>
+                          <Modal dir={isLang === "ar"?"rtl":"ltr"} show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
                             <Modal.Header closeButton>
-                              <Modal.Title>Delete Client</Modal.Title>
+                              <Modal.Title>{actionsTranslate[3].titleModel} {' '} {item?.ClientName} </Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                            <Component.HandelDelete/>
-                         
-                              </Modal.Body>
+                              <Component.HandelDelete /> 
+                            </Modal.Body>
                             <Modal.Footer className='  d-flex justify-content-center'>
-                              <Button variant="danger" style={{border:'#dc3545'}} onClick={() => handleDeleteUser(item.IDUser)}>
-                                Delete Now
+                              <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => handleDeleteUser(item.IDUser)}>
+                              {actionsTranslate[3].btn1}
                               </Button>
                               <Button variant="outline-primary" onClick={() => setShowDeleteModal(false)}>
-                                Cancel
+                              {actionsTranslate[3].btn2}
                               </Button>
                             </Modal.Footer>
                           </Modal>
                           {
-                            item?.ClientStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
+                            statusTranslate?.filter?.((item)=>item.value !== "All").map((status, index) => (
+                              <React.Fragment key={index}>
+                                {
+                                  item?.ClientStatus === status.value ? '' : <Dropdown.Item eventKey={status.value}>{ status.text }</Dropdown.Item>
+                                }
+                              </React.Fragment>
+                            ))
                           }
-                          {
+                          {/* {
                             item?.ClientStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
                           }
                           {
                             item?.ClientStatus === "BLOCKED" ? '' : <Dropdown.Item eventKey="BLOCKED">Blocked</Dropdown.Item>
-                          }
+                          } */}
                         </DropdownButton>
                       </span>
                     </div>
