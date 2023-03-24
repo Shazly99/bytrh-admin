@@ -331,14 +331,19 @@ const ChatConsult = () => {
                   consult?.map((item, index) => (
                     <tr key={index}>
                       <td className={`${item.ClientComplainBody === "" ? '' : 'bgComplain'}`}>
-                        <div className='d-flex flex-column justify-content-center align-content-center' style={{ gap: '0' }}>
+                        
                           {
                             item.ClientComplainBody === "" ?
-                              <span className='ClientName'>{item?.ClientName}</span> :
-                              <span className='ClientName ' style={{ cursor: 'pointer' }} onClick={() => handleModalOpen(index)}>{item?.ClientName}</span>
+                            <div className='d-flex flex-column justify-content-center align-content-center' style={{ gap: '0' }}>
+                              <span className='ClientName'>{item?.ClientName}</span> 
+                              <span className='ClientPhone'>{item?.ClientPhone}</span>
+                            </div>:
+                              <div className='d-flex flex-column justify-content-center align-content-center'  style={{ gap: '0' , cursor: 'pointer' }} onClick={() => handleModalOpen(index)}>
+                                <span className='ClientName ' >{item?.ClientName}</span>
+                                <span className='ClientPhone'>{item?.ClientPhone}</span>
+                              </div>
                           }
-                          <span className='ClientPhone'>{item?.ClientPhone}</span>
-                        </div>
+                    
                       </td>
                       <Complain
                         Complain={item?.ClientComplainBody}

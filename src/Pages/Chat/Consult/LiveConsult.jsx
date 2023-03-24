@@ -23,11 +23,11 @@ const LiveConsult = () => {
     await GetData(`${process.env.REACT_APP_API_URL}/admin/consult/chat/details/${id}`, apiheader).then(({ Response }) => {
       setChat(Response.ChatDetails);
       setconsultDetails(Response);
-     })
+    })
   }
   useEffect(() => {
     ConsultDetails()
-     window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
     return () => {
       ConsultDetails()
     }
@@ -45,38 +45,52 @@ const LiveConsult = () => {
               <div className='app__chat__Consult_details'>
                 <Row>
                   <Col xl={4} lg={4} md={4} sm={6} className='client'>
+                  {consultDetails?.ClientName &&                  
                     <div className="client_details">
                       <label htmlFor="">Client Name:</label>
                       <span>{consultDetails?.ClientName}</span>
                     </div>
-
+                  }
+                    {consultDetails?.ClientPhone&&
+                    
                     <div className="client_details">
                       <label htmlFor="">Client Phone :</label>
                       <span>{consultDetails?.ClientPhone}</span>
                     </div>
+                    }
                   </Col>
                   <Col xl={4} lg={4} md={4} sm={6} className='doctor'>
+                  {consultDetails?.DoctorName&&
+                  
                     <div className="client_details">
                       <label htmlFor="">Doctor Name :</label>
                       <span>{consultDetails?.DoctorName}</span>
                     </div>
-
-                    <div className="client_details">
-                      <label htmlFor="">Doctor Phone :</label>
-                      <span>{consultDetails?.DoctorPhone}</span>
-                    </div>
+                  }
+                    {
+                      consultDetails?.DoctorPhone &&
+                      <div className="client_details">
+                        <label htmlFor="">Doctor Phone :</label>
+                        <span>{consultDetails?.DoctorPhone}</span>
+                      </div>
+                    }
                   </Col>
 
                   <Col xl={4} lg={4} md={4} sm={6} className='doctor'>
-                    <div className="client_details">
-                      <label htmlFor="">Consult Status:</label>
-                      <span>{consultDetails?.ConsultStatus.charAt(0).toUpperCase() + consultDetails?.ConsultStatus.slice(1).toLowerCase()}</span>
-                    </div>
-
-                    <div className="client_details">
-                      <label htmlFor="">Create Date :</label>
-                      <span>{consultDetails?.ConsultDate.replace(' '," , ")}</span>
-                    </div>
+                    {
+                      consultDetails?.ConsultStatus &&
+                      <div className="client_details">
+                        <label htmlFor="">Consult Status:</label>
+                        <span>{consultDetails?.ConsultStatus.charAt(0).toUpperCase() + consultDetails?.ConsultStatus.slice(1).toLowerCase()}</span>
+                      </div>
+                    }
+                    {
+                      consultDetails?.ConsultDate &&
+                      <div className="client_details">
+                        <label htmlFor="">Create Date :</label>
+                        <span>{consultDetails?.ConsultDate}</span>
+                      </div>
+                    }
                   </Col>
                 </Row>
               </div>
@@ -90,7 +104,7 @@ const LiveConsult = () => {
                         {
                           chat.length === 0 ?
                             <div className="empty_chat   w-100 h-100 d-flex justify-content-center align-items-center flex-column">
-<div className="expired-container">
+                              <div className="expired-container">
                                 <Player
                                   className="expired-image w-75"
                                   // src="https://assets4.lottiefiles.com/packages/lf20_3vbOcw.json"
@@ -120,7 +134,7 @@ const LiveConsult = () => {
                                         }
                                         {
                                           messageContent.ConsultChatType === "IMAGE" &&
-                                          <img loading="lazy"src={messageContent.ConsultChatMessage} width="100%" className='rounded-3 w-50' />
+                                          <img loading="lazy" src={messageContent.ConsultChatMessage} width="100%" className='rounded-3 w-50' />
                                         }
                                         {
                                           messageContent.ConsultChatType === "AUDIO" &&

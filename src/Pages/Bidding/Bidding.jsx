@@ -301,7 +301,7 @@ const Bidding = () => {
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry} ref={countryRef}>
                         <Form.Select aria-label="Default select example" >
-                          <option >Select Country</option>
+                          <option  selected disabled hidden>Select Country</option>
                           <option value={'country'} >Countries</option>
                           {
                             countries?.map((item, index) => (
@@ -317,7 +317,7 @@ const Bidding = () => {
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"   >
                         <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={cityRef}>
-                          <option >Select city</option>
+                          <option  selected disabled hidden>Select city</option>
 
                           <option value={'cities'} > Cities</option>
 
@@ -336,7 +336,7 @@ const Bidding = () => {
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"   >
                         <Form.Select aria-label="Default select example" onClick={handelSelectArea} ref={areaRef}>
-                          <option >Select Area</option>
+                          <option  selected disabled hidden>Select Area</option>
 
                           <option value={'Areas'} >Areas</option>
 
@@ -357,7 +357,7 @@ const Bidding = () => {
                       <Form.Group controlId="formBasicEmail"  >
                         {/* <Form.Label  >Product Type </Form.Label> */}
                         <Form.Select aria-label="Default select example" ref={animalProductType} onClick={handelAdvertisement} >
-                          <option >Select Product Type</option>
+                          <option  selected disabled hidden > Select Product Type</option>
 
                           <option value={'All'}  >Animals Product Type</option>
                           {
@@ -376,7 +376,7 @@ const Bidding = () => {
                       <Form.Group controlId="formBasicEmail"  >
                         {/* <Form.Label  >  Product Status </Form.Label> */}
                         <Form.Select aria-label="Default select example" ref={statusRef} onClick={handelanimalProductStatus} >
-                          <option >Select Status</option>
+                          <option selected disabled hidden >Select Status</option>
 
                           <option value={'All'}  > All Status</option>
                           {
@@ -394,7 +394,7 @@ const Bidding = () => {
                       <Form.Group controlId="formBasicEmail"  >
                         {/* <Form.Label  >  SubCategory </Form.Label> */}
                         <Form.Select aria-label="Default select example" ref={animalSubCategoryRef} onClick={handelanimalSubCategory} >
-                          <option >Select SubCategory</option>
+                          <option selected disabled hidden >Select SubCategory</option>
 
                           <option value={'All'}  >Animal SubCategory</option>
                           {
@@ -420,13 +420,15 @@ const Bidding = () => {
                     <thead>
                       <tr className="text-center  " style={{ background: "#F9F9F9" }} >
                         <th > Product Image</th>
-                        <th >Client Info  </th>
-                        <th >SubCategory    </th>
-                        <th >     Price    </th>
-                        <th >     Type  </th>
-                        <th >     Status  </th>
-                        <th >    Create Date  </th>
-                        <th >    View  </th>
+                        <th >Client Info</th>
+                        <th >SubCategory</th>
+                        <th >Price</th>
+                        <th >Type</th>
+                        <th >Status</th>
+                        <th >Start Date</th>
+                        <th >End Date</th>
+                        <th >Create Date</th>
+                        <th >View</th>
 
                       </tr>
                     </thead>
@@ -553,6 +555,36 @@ const Bidding = () => {
                                   )}
                                 </DropdownButton>
                               </div>
+                            </div>
+                          </td>
+                          <td>
+                            <div
+                              className="d-flex flex-column justify-content-center align-content-center"
+                              style={{ gap: "0" }}
+                            >
+                              <span className="ClientName">
+                                {" "}
+                                {item?.BiddingStartDate.split(" ")[0]}{" "}
+                              </span>
+                              <span className="ClientPhone">
+                                {" "}
+                                {item?.BiddingStartDate.split(" ")[1]}
+                              </span>
+                            </div>
+                          </td>
+                          <td>
+                            <div
+                              className="d-flex flex-column justify-content-center align-content-center"
+                              style={{ gap: "0" }}
+                            >
+                              <span className="ClientName">
+                                {" "}
+                                {item?.BiddingEndDate.split(" ")[0]}{" "}
+                              </span>
+                              <span className="ClientPhone">
+                                {" "}
+                                {item?.BiddingEndDate.split(" ")[1]}
+                              </span>
                             </div>
                           </td>
                           <td>

@@ -182,8 +182,8 @@ const Cities = () => {
               <thead>
                 <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
                   <th>Country Name</th>
-                  <th>City Name</th>
-                  <th>City status</th>
+                  <th>Area Name</th>
+                  <th>Area status</th>
                   <th>Action</th>
                 </tr>
               </thead>

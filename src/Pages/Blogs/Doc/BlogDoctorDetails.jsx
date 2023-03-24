@@ -209,6 +209,8 @@ const BlogDoctorDetails = () => {
                                 <div className="header__comment">
                                   <div className='info'>
                                     <span>{item?.Name}</span>
+                                    <span className='Comment__User'>({item?.CommentUser.charAt(0).toUpperCase() + item?.CommentUser.slice(1).toLowerCase() })</span>
+
                                   </div>
 
                                   <div className="action">
