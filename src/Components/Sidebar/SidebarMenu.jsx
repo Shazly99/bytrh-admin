@@ -63,8 +63,9 @@ const SidebarMenu = ({isLang, route,open, showAnimation, isOpen, setIsOpen }) =>
                   animate="show"
                   exit="hidden"
                   className="link_text"
-                >
-                  {route.name}
+                > 
+                  {isLang === 'ar' ? route.nameAr : route.nameEn}
+
                 </motion.div>
               )}
             </AnimatePresence>
@@ -99,7 +100,10 @@ const SidebarMenu = ({isLang, route,open, showAnimation, isOpen, setIsOpen }) =>
                 <NavLink to={subRoute.path} className="link">
                   
                   <div className="icon">{subRoute.icon}</div>
-                  <motion.div className="link_text">{subRoute.name}</motion.div>
+                  <motion.div className="link_text">{subRoute.name}
+                  {isLang === 'ar' ? subRoute.nameAr : subRoute.nameEn}
+                  
+                  </motion.div>
                 </NavLink>
               </motion.div>
             ))}

@@ -5,7 +5,6 @@ import { NavLink, Route } from "react-router-dom";
 import Img from "../../assets/Img";
 import { VendersContext } from "../../context/Store";
 import routes from './route.js';
-import routeAr from "./routeAr";
 import './Sidebar.scss';
 import SidebarMenu from './SidebarMenu';
 
@@ -28,7 +27,6 @@ const Sidebar = ({ children }) => {
       },
     },
   };
-  let currentRoutes = isLang === 'ar' ? routeAr : routes;
 
   return (
     <>
@@ -47,7 +45,6 @@ const Sidebar = ({ children }) => {
           className={`sidebar  `}
         >
           <div className="side   " style={{ [isLang === 'ar' ? 'right' : 'left']: 0 }}>
-
             <div className="top_section  ">
               <AnimatePresence>
                 {isOpen && (
@@ -69,9 +66,7 @@ const Sidebar = ({ children }) => {
             </div>
             <section className={isLang === 'ar' ? 'routes routesAr' : 'routes'}   >
               {
-
-                currentRoutes?.map((root, i) => {
-                  
+                routes?.filter((role) => role.Roles.includes("Admin")).map((root, i) => {
                   if (root.subRoutes) {
                     return (
                       <SidebarMenu
@@ -97,7 +92,7 @@ const Sidebar = ({ children }) => {
                       }}
                     >
                       <NavLink to={root.path} key={i} className="link " >
-                        <div className="icon" id={root.name} data-tooltip-content={root.name}>
+                        <div className="icon" id={root.name} data-tooltip-content={isLang === 'ar' ? root.nameAr : root.nameEn}>
                           {root.icon}
                         </div>
                         {/* {
@@ -116,22 +111,19 @@ const Sidebar = ({ children }) => {
                                 exit={"hidden"}
                                 className="link_text"
                               >
-                                {root.name}
+                                {isLang === 'ar' ? root.nameAr : root.nameEn}
                               </motion.div>
                             </>
                           }
                         </AnimatePresence>
                       </NavLink>
-
                     </motion.div>
                   )
                 })
               }
             </section>
           </div>
-
         </motion.div>
-
       </div>
     </>
   );

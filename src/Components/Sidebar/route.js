@@ -3,61 +3,82 @@ import Icons from "../../constants/Icons";
 const routes = [
   {
     path: "/",
-    name: "Dashboard",
+    nameEn: "Dashboard",
+    nameAr: "لوحة القيادة",
     icon: <Icons.Dashboard size={19} />,
+    Roles: ["Admin"]
   },
   {
     path: "/client",
-    name: "Clients",
+    nameEn: "Clients",
+    nameAr: "عملاء ",
+
     icon: <Icons.Clients size={19} />,
+    Roles: ["Admin"]
+
   },
   {
     path: "/doctors",
-    name: "Doctors",
+    nameAr: "الأطباء",
+    nameEn: "Doctors",
     icon: <Icons.doctor size={19} />,
+    Roles: ["Admin"]
+
   },
   {
     path: "/user",
-    name: "Users",
+    nameAr: "المستخدمين",
+    nameEn: "Users",
     icon: <Icons.user size={19} />,
+    Roles: ["Admin"]
+
   },
   // {
   //   path: "/medicalfields",
-  //   name: "Medical Fields",
+  //   nameAr: "المجالات الطبية",
+  //   nameEn: "Medical Fields",
   //   icon: <Icons.medical size={19} />
   // }, 
   {
-    name: "Animals ",
+    nameAr: "الحيوانات ",
+    nameEn: "Animals ",
     icon: <Icons.category size={19} />,
+    Roles: ["Admin"],
     subRoutes: [
       {
         path: "/animals/categories",
-        name: "Categories ",
+        nameAr: "فئات ",
+        nameEn: "Categories ",
         icon: <Icons.dote size={19} />,
       },
       {
         path: "/animals/subcategories",
-        name: "Sub Categories ",
+        nameAr: "الفئات الفرعية ",
+        nameEn: "Sub Categories ",
         icon: <Icons.dote size={19} />,
       },
       {
         path: "/animals/cutting",
-        name: "Cutting ",
+        nameAr: "قطع   ",
+        nameEn: "Cutting ",
         icon: <Icons.dote size={19} />,
       },
       {
         path: "/animals/cuttingprice",
-        name: "Cutting Price",
+        nameAr: "سعر القطع",
+        nameEn: "Cutting Price",
         icon: <Icons.dote size={19} />,
       },
       {
         path: "/animals/bagging",
-        name: "Bagging ",
+        nameAr: "تكييس ",
+        nameEn: "Bagging ",
         icon: <Icons.dote size={19} />,
       },
       {
         path: "/animals/baggingprice",
-        name: "Bagging Price",
+        nameAr: "سعر التكييس",
+        nameEn: "Bagging Price",
         icon: <Icons.dote size={19} />,
       },
 
@@ -67,22 +88,27 @@ const routes = [
   },
 
   {
-    name: "Locations ",
+    nameAr: "المواقع ",
+    nameEn: "Locations ",
     icon: <Icons.location size={19} />,
+    Roles: ["Admin"],
     subRoutes: [
       {
         path: "/location/country",
-        name: "Country ",
+        nameAr: "بلدان ",
+        nameEn: "Country ",
         icon: <Icons.dote size={19} />,
       },
       {
         path: "/location/cities",
-        name: "Areas ",
+        nameAr: "المناطق ",
+        nameEn: "Areas ",
         icon: <Icons.dote size={19} />,
       },
       {
         path: "/location/areas",
-        name: "Cities ",
+        nameAr: "مدن ",
+        nameEn: "Cities ",
         icon: <Icons.dote size={19} />,
       },
 
@@ -90,26 +116,37 @@ const routes = [
   },
   {
     path: "/consult",
-    name: "Consults",
+    nameAr: "استشارة",
+    nameEn: "Consults",
     icon: <Icons.consult size={19} />,
+    Roles: ["Admin"],
+
   },
   {
     path: "/ads",
-    name: "Ads",
-    icon: <Icons.ads size={19} />
+    nameAr: "إعلانات",
+    nameEn: "Ads",
+    icon: <Icons.ads size={19} />,
+    Roles: ["Admin"],
+
   },
   {
-    name: "Blogs ",
+    nameAr: "المدونات ",
+    nameEn: "Blogs ",
     icon: <Icons.blog size={19} />,
+    Roles: ["Admin"],
+
     subRoutes: [
       {
         path: "/blogs/client",
-        name: " Client ",
+        nameAr: " عميل ",
+        nameEn: " Client ",
         icon: <Icons.dote size={19} />,
       },
       {
         path: "/blogs/doctor",
-        name: " Doctor ",
+        nameAr: " طبيب ",
+        nameEn: " Doctor ",
         icon: <Icons.dote size={19} />,
       },
 
@@ -117,28 +154,41 @@ const routes = [
   },
   {
     path: "/store",
-    name: "Store",
+    nameAr: "محل",
+    nameEn: "Store",
     icon: <Icons.shop size={19} />,
+    Roles: ["Admin"],
+
   },
   {
     path: "/bidding",
-    name: "Bidding",
+    nameAr: "مزايدة",
+    nameEn: "Bidding",
     icon: <Icons.bidding size={19} />,
+    Roles: ["Admin"],
+
   },
   {
     path: "/adoption",
-    name: "Adoption",
+    nameAr: "تبني",
+    nameEn: "Adoption",
     icon: <Icons.pets size={19} />,
+    Roles: ["Admin"],
+
   },
   {
     path: "/settings/general",
-    name: "Settings",
-    icon: <Icons.settings size={19} />
+    nameAr: "إعدادات",
+    nameEn: "Settings",
+    icon: <Icons.settings size={19} />,
+    Roles: ["Admin","doctor"],
   },
   {
     path: "/contact",
-    name: "Contact",
-    icon: <Icons.contact size={19} />
+    nameAr: "اتصال",
+    nameEn: "Contact",
+    icon: <Icons.contact size={19} />,
+    Roles: ["Admin","doctor"],
   },
 ];
 

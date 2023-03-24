@@ -31,8 +31,9 @@ const Login = () => {
         onSubmit: async (values) => {
              if (values) {
                 let { data } = await axios.post(`https://bytrh.com/api/admin/login`, values);
+                console.log(data);
                 if (data.Success === true) { 
-                     localStorage.setItem("token", data.Response.AccessToken);
+                    localStorage.setItem("token", data.Response.AccessToken);
                     localStorage.setItem("IDUser", data.Response.IDUser);
                     toast.success(data.ApiMsg);
                     navigate('/');
