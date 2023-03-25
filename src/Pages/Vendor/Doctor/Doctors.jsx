@@ -25,9 +25,8 @@ export default function Doctors() {
   const [searchKeyDoctors, setSearchKeyDoctors] = useState(null);
   const [loadingDoctors, setLoadingDoctors] = useState(false)
   const [fetchDoctors, setFetchDoctors] = useState([])
-  let { isLang } = useContext(VendersContext);
-  async function getTokenDoctors() {
 
+  async function getTokenDoctors() {
     setLoadingDoctors(true);
     await axios.post(URL_Doctors, {
       IDPage: countDoctors,
@@ -45,8 +44,6 @@ export default function Doctors() {
   useEffect(() => {
       getTokenDoctors();
   }, [countDoctors]);
-
-
 
 
   useEffect(() => {
@@ -81,7 +78,6 @@ export default function Doctors() {
   }
 
 
-
     // filter
     const [selectedOption, setSelectedOption] = useState('All');
 
@@ -111,8 +107,6 @@ export default function Doctors() {
     };
 
 
-
-
     useEffect(() => {
       setCountDoctors(1);
       setLoadingDoctors(true);
@@ -133,6 +127,31 @@ export default function Doctors() {
 
 
 
+    let { isLang } = useContext(VendersContext);
+    // let initialTranslate = {
+    //   "ar": {
+    //     hello: 'مرحبًا بك في لوحة تحكم بيطرة '
+    //   },
+    //   "en": {
+    //     hello: 'Welcome to Dashboard Bytrh'
+    //   }
+    // }
+    // const [translate, setTranslate] = useState(initialTranslate)
+  
+    // const handelTranslate = () => {
+    //   setTranslate({
+    //     "ar": {
+    //       hello: 'مرحبًا بك في لوحة تحكم بيطرة '
+    //     },
+    //     "en": {
+    //       hello: 'Welcome to Dashboard Bytrh'
+    //     }
+    //   })
+    // }
+    // useEffect(() => {
+    //   handelTranslate()
+    // }, [isLang])
+
 
 
 
@@ -141,14 +160,14 @@ export default function Doctors() {
     <>
 
       <Container fluid>
-        <section className='   app__doctor  position-relative'>
+        <section className='app__doctor  position-relative'>
           <div className="app__Users ">
-            <Component.ButtonBase title={"Add"} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/doctors/addDoctor" />
+            <Component.ButtonBase title={isLang === 'ar' ? 'إضـافة' : 'Add'} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/doctors/addDoctor" />
           </div>
 
           <div className="search-container">
-          <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
-
+            <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}`}>
+            {/* <div className='search__group'> */}
               <input
                 value={localStorage.getItem('searchDoctors') ? localStorage.getItem('searchDoctors') : ''}
                 onChange={(e) => {
@@ -156,11 +175,9 @@ export default function Doctors() {
                   setValueSearch(e.target.value);
                 }}
                 onKeyDown={handelClickSearch}
-
-                type="text" placeholder="Search by name or phone.." name="search" />
+                type="text" placeholder={isLang === 'ar' ? 'البحث بالإسم أو رقم التليفون..' : 'Search by name or phone..'} name="search" />
               <button type="submit" onClick={() => {
                 localStorage.removeItem('searchDoctors');
-
               }}>
                 <Icons.Search onClick={handelSearch} color='#fff' size={25} />
               </button>
@@ -187,8 +204,7 @@ export default function Doctors() {
                       className={`inactive-radio form-check-input `} 
                     />
                 }
-
-                All
+                {isLang === 'ar' ? 'الكـل' : 'All'}
               </label>
 
               <label className='active'>
@@ -199,12 +215,11 @@ export default function Doctors() {
                   checked={selectedOption === "ACTIVE"}
                   onChange={handleOptionChange}
                   className="active-radio form-check-input"
-
                 />
-                Active
+                {isLang === 'ar' ? 'نشط' : 'Active'}
               </label>
 
-              <label>
+              <label style={{whiteSpace: 'nowrap'}}>
                 <input
                   type="radio"
                   name="filter"
@@ -212,9 +227,8 @@ export default function Doctors() {
                   checked={selectedOption === "INACTIVE"}
                   onChange={handleOptionChange}
                   className="inactive-radio form-check-input"
-
                 />
-                InActive
+                {isLang === 'ar' ? 'غير نشط' : 'InActive'}
               </label>
 
               <label>
@@ -225,9 +239,8 @@ export default function Doctors() {
                   checked={selectedOption === "BLOCKED"}
                   onChange={handleOptionChange}
                   className="inactive-radio form-check-input"
-
                 /> 
-                Blocked
+                {isLang === 'ar' ? 'محظور' : 'Blocked'}
               </label>
 
               <label>
@@ -238,14 +251,11 @@ export default function Doctors() {
                   checked={selectedOption === "OFFLINE"}
                   onChange={handleOptionChange}
                   className="inactive-radio form-check-input"
-
                 /> 
-                Offline
+                {isLang === 'ar' ? 'مغلق' : 'Offline'}
               </label>
             </div>
           </div>
-
-          
 
 
           {loadingDoctors ?
@@ -261,15 +271,15 @@ export default function Doctors() {
                     <Table responsive={true} className='rounded-3 '>
                       <thead className="table-light bg-input">
                         <tr>
-                          <th scope="col">Name</th>
+                          <th scope="col">{isLang === 'ar' ? 'الإسـم' : 'Name'}</th>
                           {/* <th scope="col">Email</th> */}
                           {/* <th scope="col">Mobile</th> */}
-                          <th scope="col">Country</th>
-                          <th scope="col">Type</th>
-                          <th scope="col">Balance</th>
-                          <th scope="col">Status</th>
-                          <th scope="col">Register Date</th>
-                          <th scope="col">Action</th>
+                          <th scope="col">{isLang === 'ar' ? 'الدولـة' : 'Country'}</th>
+                          <th scope="col">{isLang === 'ar' ? 'النـوع' : 'Type'}</th>
+                          <th scope="col">{isLang === 'ar' ? 'الرصيــد' : 'Balance'}</th>
+                          <th scope="col">{isLang === 'ar' ? 'الحالـة' : 'Status'}</th>
+                          <th scope="col">{isLang === 'ar' ? 'تاريخ التسجيـل' : 'Register Date'}</th>
+                          <th scope="col">{isLang === 'ar' ? 'الإجراء' : 'Action'}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -301,7 +311,9 @@ export default function Doctors() {
                   </div>
                 </>
                 :
-                <h2 className='text-center mt-fixed py-4'>Your Table is Empty..</h2>
+                <h2 className='text-center mt-fixed py-4'>
+                    {isLang === 'ar' ? 'القائمـة فارغـة..' : 'The list is Empty..'}
+                </h2>
               }
             </div>
           }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useContext } from 'react';
 import ItemAdoption from '../Adoption/ItemAdoption';
 import { useEffect } from 'react';
 // import { Pagination } from 'antd';
@@ -12,6 +12,7 @@ import { Container, Table } from 'react-bootstrap';
 import Loader from '../../../Components/Shared/Loader/Loader';
 import axios from 'axios';
 import { apiheader } from '../../../utils/fetchData';
+import { VendersContext } from '../../../context/Store';
 
 
 
@@ -26,7 +27,6 @@ export default function Adoption() {
   const [loadingAdoption, setLoadingAdoption] = useState(false)
   const [fetchAdoption, setFetchAdoption] = useState([])
   async function getTokenAdoption() {
-
     setLoadingAdoption(true);
     await axios.post(URL_Adoption, {
       IDPage: countAdoption,
@@ -38,7 +38,8 @@ export default function Adoption() {
         setLoadingAdoption(false);
       })
       .catch((error) => {
-       });
+        console.log(error);
+      });
   }
   useEffect(() => {
       getTokenAdoption();
@@ -78,13 +79,17 @@ export default function Adoption() {
 
 
 
+  let { isLang } = useContext(VendersContext);
+
+
+
   return (
     <>
 
       <Container fluid>
         <section className='   app__doctor  position-relative'>
           <div className="search-container my-4">
-            <div className='search__group'>
+            <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}`}>
               <input
                 value={localStorage.getItem('searchAdoption') ? localStorage.getItem('searchAdoption') : ''}
                 onChange={(e) => {
@@ -93,7 +98,7 @@ export default function Adoption() {
                 }}
                 onKeyDown={handelClickSearch}
 
-                type="text" placeholder="Search by client name.." name="search" />
+                type="text" placeholder={isLang === 'ar' ? 'البحث بالإسم..' : 'Search by name'} name="search" />
               <button type="submit" onClick={() => {
                 localStorage.removeItem('searchAdoption');
 
@@ -116,14 +121,14 @@ export default function Adoption() {
                     <Table responsive={true} className='rounded-3 '>
                       <thead className="table-light bg-input">
                         <tr>
-                          <th scope="col">Pet Image</th>
-                          <th scope="col">Pet Name</th>
-                          <th scope="col">Pet Strain</th>
-                          <th scope="col">Category</th>
-                          <th scope="col">City</th>
-                          <th scope="col">Client Name</th>
-                          <th scope="col">Status</th>
-                          <th scope="col">Action</th>
+                          <th scope="col">{isLang === 'ar' ? 'صـورة الحيـوان' : 'Pet Image'}</th>
+                          <th scope="col">{isLang === 'ar' ? 'اسـم الحيـوان' : 'Pet Name'}</th>
+                          <th scope="col">{isLang === 'ar' ? 'السلالـة' : 'Pet Strain'}</th>
+                          <th scope="col">{isLang === 'ar' ? 'الفئــة' : 'Category'}</th>
+                          <th scope="col">{isLang === 'ar' ? 'المدينــة' : 'City'}</th>
+                          <th scope="col">{isLang === 'ar' ? 'اســم العميــل' : 'Client Name'}</th>
+                          <th scope="col">{isLang === 'ar' ? 'الحالــة' : 'Status'}</th>
+                          <th scope="col">{isLang === 'ar' ? 'الإجـراء' : 'Action'}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -153,7 +158,9 @@ export default function Adoption() {
                   </div>
                 </>
                 :
-                <h2 className='text-center mt-fixed py-4'>Your Table is Empty..</h2>
+                <h2 className='text-center mt-fixed py-4'>
+                    {isLang === 'ar' ? 'القائمـة فارغـة..' : 'The list is Empty..'}
+                </h2>
               }
             </div>
           }

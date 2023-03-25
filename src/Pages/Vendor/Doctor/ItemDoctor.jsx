@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState , useContext } from 'react';
 // import { FiEdit3 } from 'react-icons/fi';
 // import { AiOutlineDelete } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,10 +6,14 @@ import { DropdownButton, Dropdown, Modal, Form, Button } from 'react-bootstrap';
 // import { useEffect } from 'react';
 import { apiheader, PostData } from '../../../utils/fetchData'; 
 import Component from '../../../constants/Component';
+import { VendersContext } from '../../../context/Store';
 
 
 export default function ItemDoctor({ nameDoc, email, phone, country, type, balance, create, status, item, id, getTokenDoctors }) {
-    // const [data, setData] = useState({});
+
+
+    let { isLang } = useContext(VendersContext);
+
 
     const [idDoc, setId] = useState(null);
     const [showModal, setShowModal] = useState(false);
@@ -134,7 +138,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                 <td>
                     <div>{balance}</div>
                 </td>
-                <td className='text-center  d-flex '>
+                <td className='text-center d-flex '>
                     <div>
                         <span style={{ height: 'fit-content !important' }} className={`
                                 ${status == 'PENDING' && 'txt_pending'} 
@@ -154,55 +158,72 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                         <span>
                             <DropdownButton
                                 id={`dropdown-${id}`}
-                                title="Actions"
+                                title={isLang === 'ar' ? 'الإجراءات' : 'Actions'}
                                 variant="outline-success"
                                 onSelect={(eventKey) => handleActionSelect(id, eventKey)}
                                 className="DropdownButton "
                             >
                                 <Dropdown.Item as={Link} to={`/doctors/editDoctor/${id}`}>
-                                    Edit
+                                    {isLang === 'ar' ? 'تعديـل' : 'Edit'}
                                 </Dropdown.Item>
                                 {/* <Dropdown.Item as={Link} to={`/doctors/doctorFields/${id}`}>
-                                    Doctor Fields
+                                    {isLang === 'ar' ? 'المجالات الطبيـة' : 'Medical Fields'}
                                 </Dropdown.Item> */}
                                 <Dropdown.Item as={Link} to={`/doctors/doctorCategory/${id}`}>
-                                    Doctor Animals Categories
+                                    {isLang === 'ar' ? 'التخصـص' : 'Specialization'}
                                 </Dropdown.Item>
                                 <Dropdown.Item as={Link} to={`/doctors/doctorHours/${id}`}>
-                                    Doctor Hours
+                                    {isLang === 'ar' ? 'أوقـات العمـل' : 'Doctor Hours'}
                                 </Dropdown.Item>
-                                <Dropdown.Item eventKey="balance" onClick={handleShowModal}>Set Balance</Dropdown.Item>
-                                <Modal show={showModal} onHide={handleCloseModal} centered >
+                                <Dropdown.Item eventKey="balance" onClick={handleShowModal}>
+                                    {isLang === 'ar' ? 'ضبـط التوازن' : 'Set Balance'}
+                                </Dropdown.Item>
+                                <Modal show={showModal} onHide={handleCloseModal} centered dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
                                     <Modal.Header closeButton>
-                                        <Modal.Title>Set {nameDoc} Balance</Modal.Title>
+                                        <Modal.Title>
+                                            {`${isLang === 'ar' ? `ضبـط التوازن ل ${nameDoc}` : `Set ${nameDoc} Balance`}`}
+                                        </Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
                                         <Form.Control type="number" defaultValue={balance} ref={changeBalance} />
                                     </Modal.Body>
                                     <Modal.Footer className="d-flex justify-content-center align-items-center">
                                         <Button variant="outline-primary" onClick={handleCloseModal}>
-                                            Cancel
+                                            {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                                         </Button>
                                         <Button variant="primary" onClick={changeWallet}>
-                                            Set Balance
+                                            {isLang === 'ar' ? 'ضبـط التوازن' : 'Set Balance'}
                                         </Button>
                                     </Modal.Footer>
                                 </Modal>
                                 {
-                                    status === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
+                                    status === "ACTIVE" ? '' : 
+                                    <Dropdown.Item eventKey="ACTIVE">
+                                        {isLang === 'ar' ? 'نشـط' : 'Active'}
+                                    </Dropdown.Item>
                                 }
                                 {
-                                    status === "OFFLINE" ? '' : <Dropdown.Item eventKey="OFFLINE">Offline</Dropdown.Item>
+                                    status === "OFFLINE" ? '' : 
+                                    <Dropdown.Item eventKey="OFFLINE">
+                                        {isLang === 'ar' ? 'مغلـق' : 'Offline'}
+                                    </Dropdown.Item>
                                 }
                                 {
-                                    status === "BLOCKED" ? '' : <Dropdown.Item eventKey="BLOCKED">Blocked</Dropdown.Item>
+                                    status === "BLOCKED" ? '' : 
+                                    <Dropdown.Item eventKey="BLOCKED">
+                                        {isLang === 'ar' ? 'محظـور' : 'Blocked'}
+                                    </Dropdown.Item>
                                 }
-                                <Dropdown.Item eventKey="DELETED">Deleted</Dropdown.Item>
+                                <Dropdown.Item eventKey="DELETED">
+                                    {isLang === 'ar' ? 'حـذف' : 'Deleted'}
+                                </Dropdown.Item>
 
-                                <Modal style={{ zIndex: '9999999999' }} show={showRemove} onHide={handleCloseRemove} centered>
+                                <Modal style={{ zIndex: '9999999999' }} show={showRemove} onHide={handleCloseRemove} centered dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
                                     <Modal.Header closeButton>
                                         <Modal.Title className='text-center w-100  '>
-                                            <h5 className='mb-0'>Warning Remove..</h5>
+                                            <h5 className='mb-0 text-warning'>
+                                                {isLang === 'ar' ? 'تحذيـر..' : 'Warning Remove..'}
+                                            </h5>
                                         </Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
@@ -211,28 +232,18 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                     </Modal.Body>
                                     {/* {messageRemove.length > 0 ? <p id="alertRemove" className={`alert ${apiCodeRemove === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 my-2 w-50 text-center mx-auto`}>{messageRemove}</p> : ''} */}
                                     <Modal.Footer className='d-flex justify-content-center align-items-center'>
-                                        {/* <Button className='btn btn-primary py-2 text-capitalize me-2' onClick={() => {
-                                                removeConfirm()
-                                        }}>
-                                            Confirm
-                                        </Button>
-                                        <Button className='btn btn-primary py-2 px-3 text-capitalize' onClick={() => {
-                                                handleCloseRemove();
-                                            }}>
-                                            Cancel
-                                        </Button> */}
 
                                         <div className='d-flex justify-content-center align-content-center'>
                                             <div className='baseBtn pe-0 me-2'>
                                                 <Button onClick={removeConfirm} variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                                     {/* {loadingRemove ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'} */}
-                                                    Confirm
+                                                    {isLang === 'ar' ? 'تأكيـد' : 'Confirm'}
                                                 </Button>
                                             </div>
 
                                             <div className='baseBtn ps-0'>
                                                 <Button onClick={handleCloseRemove} variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                                    Cancel
+                                                    {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                                                 </Button>
                                             </div>
                                         </div>
@@ -244,14 +255,6 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                         </span>
                     </div>
                 </td>
-                {/* <td>
-                    <Link to={} className='me-3 '>
-                        <AiOutlineDelete className='text-danger'/>
-                    </Link>
-                    <Link to={`/doctors/editDoctor/${id}`}>
-                        <FiEdit3 className='main-color'/>
-                    </Link>
-                </td> */}
             </tr>
         </>
     )

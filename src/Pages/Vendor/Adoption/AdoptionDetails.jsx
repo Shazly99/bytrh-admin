@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Container } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 import Component from '../../../constants/Component';
@@ -7,6 +7,8 @@ import $ from 'jquery';
 import axios from 'axios';
 import { apiheader } from '../../../utils/fetchData';
 import Loader from '../../../Components/Shared/Loader/Loader';
+import { BsEyeFill } from 'react-icons/bs';
+import { VendersContext } from '../../../context/Store';
 
 
 export default function AdoptionDetails() {
@@ -51,33 +53,41 @@ export default function AdoptionDetails() {
   }, [loading]);
 
 
+  let { isLang } = useContext(VendersContext);
+
+
 
   return (
-    loading ? <Loader /> :
+    loading ? 
+    <Loader /> :
     <Container fluid className='py-3'>
       <div className="adoption-details">
-        <Component.SubNav sub__nav={[{ name: "Adoption", path: '/adoption' }, { name: "Animal Details", path: `/adoption/details/${id}` }]} />
-        
+
+        {isLang === 'ar' ?
+            <Component.SubNav sub__nav={[{ name: 'تفاصيـل الحيـوان', path: `/adoption/details/${id}` } , { name: 'قائمـة التبنـي', path: '/adoption' }]} />
+            :
+            <Component.SubNav sub__nav={[{ name: "Adoption", path: '/adoption' }, { name: "Animal Details", path: `/adoption/details/${id}` }]} />
+        }
         <div className="row gx-lg-4 gx-0 gy-lg-0 gy-4 d-flex justify-content-lg-start justify-content-center">
             <div className="col-lg-6">
-              <h5 className='my-2 info'>Animal Info</h5>
+              <h5 className='my-2 info'>{isLang === 'ar' ? 'معلومـات الحيـوان' : 'Animal Info'}</h5>
               <div className="doc-info bg-light shadow-sm rounded-3 p-2">
                 <div className="row gx-md-3 gx-2 gy-0 d-flex align-items-center">
                   <div className="col-4">
                     <div className="img-doc">
-                      <img src={fetchAdoptionDts.PetPicture} className='img-fluid d-block' loading='lazy' alt="pet" />
+                      <img src={fetchAdoptionDts.PetPicture} className='img-fluid d-block rounded-3' loading='lazy' alt="pet" />
                     </div>
                   </div>
                   <div className="col-8">
                     <div className="personal-info">
 
-                      <small className='my-0 text-black-50' style={{fontWeight: '500'}}>Name:</small>
+                      <small className='my-0 text-black-50' style={{fontWeight: '500'}}>{isLang === 'ar' ? 'الإســم' : 'Name'}:</small>
                       <h6 className='mb-2 text-black' style={{fontWeight: '700' , wordWrap:  'break-word'}}>{fetchAdoptionDts.PetName}</h6>
 
-                      <small className='my-0 text-black-50' style={{fontWeight: '500'}}>Animal Type:</small>
+                      <small className='my-0 text-black-50' style={{fontWeight: '500'}}>{isLang === 'ar' ? 'نـوع الحيـوان' : 'Animal Type'}:</small>
                       <h6 className='mb-2 text-black' style={{fontWeight: '700' , wordWrap: 'break-word'}}>{fetchAdoptionDts.PetStrain}</h6>
 
-                      <small className='my-0 text-black-50' style={{fontWeight: '500'}}>Location:</small>
+                      <small className='my-0 text-black-50' style={{fontWeight: '500'}}>{isLang === 'ar' ? 'الموقـع' : 'Location'}:</small>
                       <h6 className='mb-2 mb-lg-3 text-black' style={{fontWeight: '700' , wordWrap: 'break-word'}}>{fetchAdoptionDts.CityName}</h6>
 
                     </div>
@@ -87,24 +97,24 @@ export default function AdoptionDetails() {
             </div>
 
             <div className="col-lg-6">
-              <h5 className='my-2 info'>Client Details</h5>
+              <h5 className='my-2 info'>{isLang === 'ar' ? 'تفاصيـل العميـل' : 'Client Details'}</h5>
               <div className="doc-info bg-light shadow-sm rounded-3 p-2">
                 <div className="row gx-md-3 gx-2 gy-0 d-flex align-items-center">
                   <div className="col-4">
                     <div className="img-doc">
-                      <img src={fetchAdoptionDts.ClientPicture} className='img-fluid d-block' loading='lazy' alt="client" />
+                      <img src={fetchAdoptionDts.ClientPicture} className='img-fluid d-block rounded-3' loading='lazy' alt="client" />
                     </div>
                   </div>
                   <div className="col-8">
                     <div className="personal-info position-relative">
 
-                      <small className='my-0 text-black-50' style={{fontWeight: '500'}}>Name:</small>
+                      <small className='my-0 text-black-50' style={{fontWeight: '500'}}>{isLang === 'ar' ? 'الإســم' : 'Name'}:</small>
                       <h6 className='mb-2 text-black' style={{fontWeight: '700' , wordWrap:  'break-word'}}>{fetchAdoptionDts.ClientName}</h6>
 
-                      <small className='my-0 text-black-50' style={{fontWeight: '500'}}>Mobile Number:</small>
+                      <small className='my-0 text-black-50' style={{fontWeight: '500'}}>{isLang === 'ar' ? 'رقـم التليفـون' : 'Mobile Number'}:</small>
                       <h6 className='mb-2 text-black' style={{fontWeight: '700' , wordWrap: 'break-word'}}>{fetchAdoptionDts.ClientPhone}</h6>
 
-                      <small className='my-0 text-black-50' style={{fontWeight: '500'}}>Email:</small>
+                      <small className='my-0 text-black-50' style={{fontWeight: '500'}}>{isLang === 'ar' ? 'البريـد الإلكترونـي' : 'Email'}:</small>
                       <h6 className='mb-2 mb-lg-3 text-black' style={{fontWeight: '700' , wordWrap: 'break-word'}}>{fetchAdoptionDts.ClientEmail}</h6>
 
                     </div>
@@ -117,29 +127,29 @@ export default function AdoptionDetails() {
         <div className="row gx-0 gy-sm-0 gy-3 my-5">
           <div className=" col-sm col-6 single-details">
               <h5 className="title">{fetchAdoptionDts.PetAgeYear}</h5>
-              <h6 className="body">Age</h6>
+              <h6 className="body">{isLang === 'ar' ? 'العمـر' : 'Age'}</h6>
           </div>
           <div className=" col-sm col-6 single-details">
               <h5 className="title">{fetchAdoptionDts.PetColor}</h5>
-              <h6 className="body">Color</h6>
+              <h6 className="body">{isLang === 'ar' ? 'اللـون' : 'Color'}</h6>
           </div>
           <div className=" col-sm col-4 single-details">
               <h5 className="title">{fetchAdoptionDts.PetGender && fetchAdoptionDts.PetGender[0].toUpperCase() + fetchAdoptionDts.PetGender.slice(1).toLowerCase()}</h5>
-              <h6 className="body">Gender</h6>
+              <h6 className="body">{isLang === 'ar' ? 'النـوع' : 'Gender'}</h6>
           </div>
           <div className=" col-sm col-4 single-details">
               <h5 className="title">{fetchAdoptionDts.PetSize}</h5>
-              <h6 className="body">Size</h6>
+              <h6 className="body">{isLang === 'ar' ? 'الحجـم' : 'Size'}</h6>
           </div>
           <div className=" col-sm col-4 single-details">
               <h5 className="title">{fetchAdoptionDts.AdoptionStatus && fetchAdoptionDts.AdoptionStatus[0].toUpperCase() + fetchAdoptionDts.AdoptionStatus.slice(1).toLowerCase()}</h5>
-              <h6 className="body">Activity</h6>
+              <h6 className="body">{isLang === 'ar' ? 'حالة النشـاط' : 'Activity'}</h6>
           </div>
         </div>
 
         {fetchAdoptionDts.PetDescription !== undefined && fetchAdoptionDts.PetDescription !== null  ? 
           <>
-            <h5 className='mb-3'>Animal Description</h5>
+            <h5 className='mb-3'>{isLang === 'ar' ? 'وصـف الحيـوان' : 'Animal Description'}</h5>
             <p className='text-black mb-5'>{fetchAdoptionDts.PetDescription}</p>
           </>
           :
@@ -148,7 +158,7 @@ export default function AdoptionDetails() {
 
         {Object.keys(fetchGallery).length > 0 ? 
           <>
-            <h5 className='mb-3'>Gallery</h5>
+            <h5 className='mb-3'>{isLang === 'ar' ? 'معـرض الصـور' : 'Gallery'}</h5>
             <div className={`row ${Object.keys(fetchGallery).length == 1 ? '' : Object.keys(fetchGallery).length > 1 ? 'gx-sm-4' : ''} gx-0 gy-4 d-flex justify-content-sm-start justify-content-center align-items-center mb-5`}>
                 {fetchGallery.map((el , i) => (
                     <div key={i} className={`${Object.keys(fetchGallery).length == 1 ? 'col' : Object.keys(fetchGallery).length == 2 ? 'col-sm-6' : Object.keys(fetchGallery).length == 3 ? 'col-md-4 col-sm-6' : Object.keys(fetchGallery).length > 3 ? 'col-lg-3 col-md-4 col-sm-6' : ''}`}>
@@ -166,10 +176,10 @@ export default function AdoptionDetails() {
 
         {Object.keys(fetchChats).length > 0 ? 
           <>
-            <h5 className='mb-3'>Chats</h5>
+            <h5 className='mb-3'>{isLang === 'ar' ? 'المحادثــات' : 'Chats'}</h5>
             <div className={`mb-2 row ${Object.keys(fetchChats).length == 1 ? '' : Object.keys(fetchChats).length > 1 ? 'gx-sm-4' : ''} gx-0 gy-4 d-flex justify-content-sm-start justify-content-center align-items-center`}>
                 {fetchChats.map((el , i) => (
-                    <Link to={`../chat/${el.IDAdoptionChat}`} className="col-lg-3 col-md-4 col-sm-6 text-black">
+                    <Link key={i} to={`../chat/${el.IDAdoptionChat}`} className="col-lg-3 col-md-4 col-sm-6 text-black">
                         <div className="rounded-3 shadow bg-black color-red position-relative adDetails">
                           <div className="d-flex justify-content-center align-items-center flex-column py-5 px-3">
                             <h5 className='mb-2'>{el.ClientName}</h5>
@@ -177,7 +187,7 @@ export default function AdoptionDetails() {
                             <h6 className='mb-0'>{`" ${el.AdoptionChatStatus} "`}</h6>
                           </div>
                           <div className="layer-adDetails position-absolute rounded-3 top-0 bottom-0 d-flex justify-content-center align-items-center" style={{backgroundColor: '#aaa'}}>
-                            <i className="fa-regular fa-eye" style={{fontSize: '24px'}}></i>
+                            <BsEyeFill style={{fontSize: '30px'}} />
                           </div>
                           {/* <img loading="lazy" src={el.ClientPicture} className='w-100 rounded-3' style={{height: '200px'}} alt="item-chat" /> */}
                         </div>
