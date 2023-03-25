@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 // import { FaBars } from 'react-icons/fa';
 // import { BsSearch } from 'react-icons/bs'; 
@@ -12,6 +11,8 @@ import { Container } from 'react-bootstrap';
 import Component from '../../../constants/Component';
 import { apiheader } from './../../../utils/fetchData';
 import { Button } from 'react-bootstrap/';
+import { VendersContext } from '../../../context/Store';
+
 
 
 
@@ -114,6 +115,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
   }
 
 
+  let { isLang } = useContext(VendersContext);
 
 
 
@@ -121,10 +123,13 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
     <>
       <Container fluid>
         <div className="app__addprodects">
-          <Component.SubNav sub__nav={[{ name: "Doctors", path: '/doctors' }, { name: "Edit  doctor", path: `/doctors/editDoctor/${id}` }]} />
-
+          {isLang === 'ar' ?
+            <Component.SubNav sub__nav={[{ name: "تعديـل", path: `/doctors/editDoctor/${id}` } , { name: "قائمـة الأطبـاء", path: '/doctors' }]} />
+            :
+            <Component.SubNav sub__nav={[{ name: "Doctors", path: '/doctors' }, { name: "Edit Doctor", path: `/doctors/editDoctor/${id}` }]} />
+          }
           <div className="app__addprodects__header ">
-            <Component.BaseHeader h1={'Edit Doctor information'} />
+            <Component.BaseHeader h1={isLang === 'ar' ? 'تعديـل بيانـات الطبيـب' : 'Edit Doctor information'} />
             <div className="app__addOrder-form">
               <div className="app__addprodects-form">
                 <form onSubmit={updateForm}>
@@ -132,7 +137,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
 
                     <div className="col-md-6">
                       <div className="group-add">
-                        <label className="fs-5  " htmlFor="DoctorName">Name</label>
+                        <label className="fs-5  " htmlFor="DoctorName">{isLang === 'ar' ? 'الأســم' : 'Name'}</label>
                         <div className="input-group">
                           <input type="text" value={name} onChange={(e) => setName(e.target.value)} className='form-control mx-auto py-2' required name="DoctorName" id="DoctorName" />
                         </div>
@@ -140,7 +145,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
                     </div>
                     <div className="col-md-6">
                       <div className="group-add">
-                        <label className="fs-5  " htmlFor="DoctorEmail">Email</label>
+                        <label className="fs-5  " htmlFor="DoctorEmail">{isLang === 'ar' ? 'البريـد الإلكترونـي' : 'Email'}</label>
                         <div className="input-group">
                           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className='form-control mx-auto py-2' required name="DoctorEmail" id="DoctorEmail" />
                         </div>
@@ -148,19 +153,19 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
                     </div>
                     <div className="col-md-6">
                       <div className="group-add">
-                        <label className="fs-5  " htmlFor="DoctorPhone">Phone</label>
+                        <label className="fs-5  " htmlFor="DoctorPhone">{isLang === 'ar' ? 'رقـم التليفـون' : 'Phone'}</label>
                         <div className="input-group">
                           <PhoneInput
                             country={countryCode}
                             preferredCountries={['eg', 'sa', 'ae']}
                             enableSearch={true}
-                            searchPlaceholder='Country number...'
+                            searchPlaceholder={isLang === 'ar' ? 'الرقم الكودي الدولـة..' : 'Country number...'}
                             inputClass={'form-control mx-auto w-100 py-3'}
                             inputStyle={{width:'100%'}}
                             inputProps={{
                               name: 'DoctorPhone',
                               required: true,
-                              id: 'DoctorPhone',
+                              id: isLang === 'ar' ? 'DoctorPhone2' : 'DoctorPhone',
                               value: phone
                               // autoFocus: true
                             }}
@@ -174,13 +179,13 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
                     </div>
                     <div className="col-md-6">
                       <div className="group-add">
-                        <label className="fs-5  " htmlFor="IDCountry">Country</label>
+                        <label className="fs-5  " htmlFor="IDCountry">{isLang === 'ar' ? 'البلـد' : 'Country'}</label>
                         <div className="input-group">
                           <select value={country} onChange={(e) => {
                             setCountry(e.target.value);
                             getCitiesBytra(e.target.value);
                           }} className='w-100 form-control mx-auto py-2 px-2' required name="IDCountry" id="IDCountry">
-                            <option>choose your country</option>
+                            {/* <option>choose your country</option> */}
                             {fetchCountriesBytra.map((item, i) => (
                               <option key={i} value={item.IDCountry} >{item.CountryName}</option>
                             ))}
@@ -190,12 +195,12 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
                     </div>
                     <div className="col-md-6">
                       <div className="group-add">
-                        <label className="fs-5  " htmlFor="IDCity">City</label>
+                        <label className="fs-5  " htmlFor="IDCity">{isLang === 'ar' ? 'المدينـة' : 'City'}</label>
                         <div className="input-group">
                           <select value={city} onChange={(e) => {
                             setCity(e.target.value);
                           }} className='w-100 form-control mx-auto py-2 px-2' required name="IDCity" id="IDCity">
-                            <option>choose your city</option>
+                            {/* <option>choose your city</option> */}
                             {fetchCitiesBytra && fetchCitiesBytra.map((item, i) => (
                               <option key={i} value={item.IDCity} >{item.CityName}</option>
                             ))}
@@ -232,14 +237,16 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
                   <div className='d-flex justify-content-center align-content-center mt-4'>
                       <div className='baseBtn'>
                           <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                              {loadind ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}
+                              {loadind ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 
+                                isLang === 'ar' ? 'حفـظ' : 'Save'
+                              }
                           </Button>
                       </div>
 
                       <div className='baseBtn'>
                           <Link to={'/doctors'}>
                               <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                  Cancel
+                                {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                               </Button>
                           </Link>
                       </div>

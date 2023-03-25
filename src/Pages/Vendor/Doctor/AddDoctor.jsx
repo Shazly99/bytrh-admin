@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useContext } from 'react';
 import $ from 'jquery';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -6,6 +6,8 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { Button, Container } from 'react-bootstrap';
 import Component from '../../../constants/Component';
+import { VendersContext } from '../../../context/Store';
+
 // import { apiheader } from './../../../utils/fetchData';
 
 
@@ -124,12 +126,21 @@ function AddDoctor({ fetchCountriesBytra }) {
 
   }
 
+
+  let { isLang } = useContext(VendersContext);
+
+
+
   return (
     <Container fluid>
       <div className="app__addprodects">
-        <Component.SubNav sub__nav={[{ name: "Doctors", path: '/doctors' }, { name: "Add  doctor", path: '/doctors/addDoctor' }]} />
+          {isLang === 'ar' ?
+            <Component.SubNav sub__nav={[{ name: isLang === 'ar' ? 'إضـافة طبيـب' : 'Add Doctor', path: '/doctors/addDoctor' } , { name: isLang === 'ar' ? 'قائمـة الأطبـاء' : 'Doctors', path: '/doctors' }]} />
+            :
+            <Component.SubNav sub__nav={[{ name: "Doctors", path: '/doctors' }, { name: "Add Doctor", path: '/doctors/addDoctor' }]} />
+          }
         <div className="app__addprodects__header ">
-          <Component.BaseHeader h1={'Add new doctor'} />
+          <Component.BaseHeader h1={isLang === 'ar' ? 'إضافـة طبيـب جديد' : 'Add new doctor'} />
           <div className="app__addOrder-form">
             <div className="app__addprodects-form">
               <form onSubmit={registerAddForm}>
@@ -137,7 +148,7 @@ function AddDoctor({ fetchCountriesBytra }) {
 
                   <div className="col-md-6">
                     <div className="group-add">
-                      <label className="fs-5 " htmlFor="DoctorName">Name</label>
+                      <label className="fs-5 " htmlFor="DoctorName">{isLang === 'ar' ? 'الإسـم' : 'Name'}</label>
                       <div className="input-group">
                         <input onChange={getUserData} type="text" className='bg-transparent form-control  mx-auto py-2 w-100' required name="DoctorName" id="DoctorName" />
                       </div>
@@ -145,7 +156,7 @@ function AddDoctor({ fetchCountriesBytra }) {
                   </div>
                   <div className="col-md-6">
                     <div className="group-add">
-                      <label className="fs-5 " htmlFor="DoctorEmail">Email</label>
+                      <label className="fs-5 " htmlFor="DoctorEmail">{isLang === 'ar' ? 'البريد الإلكتروني' : 'Email'}</label>
                       <div className="input-group">
                         <input onChange={getUserData} type="email" className='bg-transparent form-control mx-auto py-2 w-100' required name="DoctorEmail" id="DoctorEmail" />
                       </div>
@@ -153,19 +164,19 @@ function AddDoctor({ fetchCountriesBytra }) {
                   </div>
                   <div className="col-md-6">
                     <div className="group-add">
-                      <label className="fs-5 " htmlFor="DoctorPhone">Mobile</label>
+                      <label className="fs-5 " htmlFor="DoctorPhone">{isLang === 'ar' ? 'رقم التليفـون' : 'Mobile'}</label>
                       <div className="input-group">
                         {/* <input onChange={getUserData} type="tel" className='bg-transparent mx-auto' required name="DoctorPhone" id="DoctorPhone" /> */}
                         <PhoneInput
                           country={'sa'}
                           preferredCountries={['eg', 'sa', 'ae']}
                           enableSearch={true}
-                          searchPlaceholder='Country number...'
+                          searchPlaceholder={isLang === 'ar' ? 'الرقم الكودي الدولـة..' : 'Country number...'}
                           inputClass={'bg-transparent mx-auto w-100 py-3'}
                           inputProps={{
                             name: 'DoctorPhone',
                             required: true,
-                            id: 'DoctorPhone',
+                            id: isLang === 'ar' ? 'DoctorPhone2' : 'DoctorPhone',
                             // autoFocus: true
                           }}
 
@@ -180,7 +191,7 @@ function AddDoctor({ fetchCountriesBytra }) {
 
                   <div className="col-md-6">
                     <div className="group-add">
-                      <label className="fs-5 " htmlFor="DoctorPicture">Picture (optional)</label>
+                      <label className="fs-5 " htmlFor="DoctorPicture">{isLang === 'ar' ? 'الصورة (اختيـاري)' : 'Picture (optional)'}</label>
                       <div className="input-group">
                         <input onChange={getUserData} type="file" accept='png , jpg' className='bg-transparent form-control mx-auto py-2' name="DoctorPicture" id="DoctorPicture" />
                       </div>
@@ -188,12 +199,12 @@ function AddDoctor({ fetchCountriesBytra }) {
                   </div>
                   <div className="col-md-6">
                     <div className="group-add">
-                      <label className="fs-5 " htmlFor="IDCountry">Country</label>
+                      <label className="fs-5 " htmlFor="IDCountry">{isLang === 'ar' ? 'البلـد' : 'Country'}</label>
                       <div className="input-group">
                         <select onChange={(e) => {
                           getCitiesBytra(e.target.value);
                         }} className='w-100 bg-transparent mx-auto py-2 px-2' required name="IDCountry" id="IDCountry">
-                          <option>choose your country</option>
+                          <option>{isLang === 'ar' ? 'اختر البلـد' : 'choose your country'}</option>
                           {fetchCountriesBytra.map((item, i) => (
                             <option key={i} value={item.IDCountry} >{item.CountryName}</option>
                           ))}
@@ -203,10 +214,10 @@ function AddDoctor({ fetchCountriesBytra }) {
                   </div>
                   <div className="col-md-6">
                     <div className="group-add">
-                      <label className="fs-5 " htmlFor="IDCity">City</label>
+                      <label className="fs-5 " htmlFor="IDCity">{isLang === 'ar' ? 'المدينـة' : 'City'}</label>
                       <div className="input-group">
                         <select onChange={getUserData} className='w-100 bg-transparent mx-auto py-2 px-2' required name="IDCity" id="IDCity">
-                          <option>choose your city</option>
+                          <option>{isLang === 'ar' ? 'اختر المدينـة' : 'choose your city'}</option>
                           {fetchCitiesBytra && fetchCitiesBytra.map((item, i) => (
                             <option key={i} value={item.IDCity} >{item.CityName}</option>
                           ))}
@@ -216,7 +227,7 @@ function AddDoctor({ fetchCountriesBytra }) {
                   </div>
                   <div className="col-md-6">
                     <div className="group-add">
-                      <label className="fs-5 " htmlFor="DoctorLicense">Doctor License</label>
+                      <label className="fs-5 " htmlFor="DoctorLicense">{isLang === 'ar' ? 'رخصـة الطبيـب' : 'Doctor License'}</label>
                       <div className="input-group">
                         <input onChange={getUserData} type="file" accept='png , jpg' className='bg-transparent form-control mx-auto py-2' required name="DoctorLicense" id="DoctorLicense" />
                       </div>
@@ -224,7 +235,7 @@ function AddDoctor({ fetchCountriesBytra }) {
                   </div>
                   <div className="col-md-6">
                     <div className="group-add">
-                      <label className="fs-5 " htmlFor="DoctorLicenseExpiry">License Expiry Date</label>
+                      <label className="fs-5 " htmlFor="DoctorLicenseExpiry">{isLang === 'ar' ? 'تاريخ انتهـاء الرخصـة' : 'License Expiry Date'}</label>
                       <div className="input-group">
                         <input onChange={getUserData} type="date" className='bg-transparent mx-auto py-2 form-control' required name="DoctorLicenseExpiry" id="DoctorLicenseExpiry" />
                       </div>
@@ -232,7 +243,7 @@ function AddDoctor({ fetchCountriesBytra }) {
                   </div>
                   <div className="col-md-6">
                     <div className="group-add password">
-                      <label className="fs-5 " htmlFor="DoctorPassword">Password</label>
+                      <label className="fs-5 " htmlFor="DoctorPassword">{isLang === 'ar' ? 'كلمة المرور' : 'Password'}</label>
                       <div className="input-group">
                         <input onChange={getUserData} type="password" className='bg-transparent mx-auto py-2 form-control' required name="DoctorPassword" id="DoctorPassword" />
                         <i className="fa-regular fa-eye" onClick={showHidePass}></i>
@@ -241,7 +252,7 @@ function AddDoctor({ fetchCountriesBytra }) {
                   </div>
                   <div className="col-md-6">
                     <div className="group-add repaassword">
-                      <label className="fs-5 " htmlFor="repass-user">Confirm</label>
+                      <label className="fs-5 " htmlFor="repass-user">{isLang === 'ar' ? 'تأكيـد كلمـة المرور' : 'Confirm'}</label>
                       <div className="input-group">
                         <input type="password" onChange={getConfirm} className='bg-transparent mx-auto py-2 form-control' required name="repass-user" id="repass-user" />
                         <i className="fa-regular fa-eye" onClick={showHideRePass}></i>
@@ -261,14 +272,16 @@ function AddDoctor({ fetchCountriesBytra }) {
                   <div className='d-flex justify-content-center align-content-center mt-4'>
                       <div className='baseBtn'>
                           <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                              {loadind ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}
+                              {loadind ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 
+                                isLang === 'ar' ? 'حفـظ' : 'Save'
+                              }
                           </Button>
                       </div>
 
                       <div className='baseBtn'>
                           <Link to={'/doctors'}>
                               <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                  Cancel
+                                  {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                               </Button>
                           </Link>
                       </div>

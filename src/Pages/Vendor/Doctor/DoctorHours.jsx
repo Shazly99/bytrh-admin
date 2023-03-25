@@ -1,11 +1,12 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import Component from '../../../constants/Component';
 import Icons from '../../../constants/Icons';
 import { apiheader } from '../../../utils/fetchData';
 import './Doctor.scss';
+import { VendersContext } from '../../../context/Store';
 // import $ from 'jquery';
 // import { AiFillCloseCircle } from 'react-icons/ai';
 
@@ -17,7 +18,6 @@ const DoctorHours = () => {
     const apiDoctorHours = `https://bytrh.com/api/admin/doctors/hours`;
 
     const [fetchDoctorHours, setFetchDoctorHours] = useState([]);
-    // const [fetchHours, setFetchHours] = useState([]);
     const [loading, setLoading] = useState(null);
 
     async function getDoctorHours() {
@@ -41,6 +41,7 @@ const DoctorHours = () => {
     }, [])
 
 
+    let { isLang } = useContext(VendersContext);
 
 
 
@@ -48,10 +49,14 @@ const DoctorHours = () => {
         !loading ?
         <Container fluid>
             <div className="app__addprodects">
-                <Component.SubNav sub__nav={[{ name: "Doctors", path: '/doctors' }, { name: "Doctor Hours", path: `/doctors/doctorHours/${id}` }]} />
+                {isLang === 'ar' ?
+                    <Component.SubNav sub__nav={[{ name: isLang === 'ar' ? 'أوقـات العمـل' : 'Doctor Hours', path: `/doctors/doctorHours/${id}` } , { name: isLang === 'ar' ? 'قائمة الدكاتـرة' : 'Doctors', path: '/doctors' }]} />
+                    :
+                    <Component.SubNav sub__nav={[{ name: isLang === 'ar' ? 'قائمة الدكاتـرة' : 'Doctors', path: '/doctors' }, { name: isLang === 'ar' ? 'أوقـات العمـل' : 'Doctor Hours', path: `/doctors/doctorHours/${id}` }]} />
+                }
             </div > 
             <div className="app__Users mb-3">
-                <Component.ButtonBase title={"Add"} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path={`/doctors/addDoctorHours/${id}`} />
+                <Component.ButtonBase title={isLang === 'ar' ? 'إضـافـة' : 'Add'} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path={`/doctors/addDoctorHours/${id}`} />
             </div> 
             {Object.keys(fetchDoctorHours).length > 0 ?
                 <div className="bg-light py-5 px-3 rounded-4 shadow-sm">
@@ -83,7 +88,7 @@ const DoctorHours = () => {
                 </div>
                 :
                 <div className="bg-light py-5 px-3 rounded-4 shadow-sm d-flex justify-content-center align-items-center">
-                    <h3 className='mb-0' style={{fontWeight: '600'}}>No Consultations..</h3>
+                    <h3 className='mb-0' style={{fontWeight: '600'}}>{isLang === 'ar' ? 'لا توجد حجـوزات..' : 'No Consultations..'}</h3>
                 </div>
             }
 

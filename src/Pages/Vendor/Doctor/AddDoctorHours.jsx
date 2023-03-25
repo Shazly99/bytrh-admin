@@ -1,10 +1,11 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState , useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Select from "react-select";
 import { Button, Container } from 'react-bootstrap';
 import Component from '../../../constants/Component';
 import $ from 'jquery';
+import { VendersContext } from '../../../context/Store';
 // import { apiheader } from './../../../utils/fetchData';
 
 function AddDoctorHours() {
@@ -22,13 +23,13 @@ function AddDoctorHours() {
 
 
   const daysOptions = [
-    { value: "SATURDAY", label: "Saturday" },
-    { value: "SUNDAY", label: "Sunday" },
-    { value: "MONDAY", label: "Monday" },
-    { value: "TUESDAY", label: "Tuesday" },
-    { value: "WEDNESDAY", label: "Wednesday" },
-    { value: "THURSDAY", label: "Thursday" },
-    { value: "FRIDAY", label: "Friday" }
+    { value: "SATURDAY", label: "Saturday", labelAr: 'السبـت' },
+    { value: "SUNDAY", label: "Sunday", labelAr: 'الأحــد' },
+    { value: "MONDAY", label: "Monday", labelAr: 'الأثنين' },
+    { value: "TUESDAY", label: "Tuesday", labelAr: 'الثلاثـاء' },
+    { value: "WEDNESDAY", label: "Wednesday", labelAr: 'الأربعــاء' },
+    { value: "THURSDAY", label: "Thursday", labelAr: 'الخميــس' },
+    { value: "FRIDAY", label: "Friday", labelAr: 'الجمعـة' }
   ];
 
   const [selectedValues, setSelectedValues] = useState([]);
@@ -150,20 +151,34 @@ function AddDoctorHours() {
     }
   }
 
+
+
+  let { isLang } = useContext(VendersContext);
+
+
+
+
+
+
+
   return (
     <Container fluid>
       <div className="app__addprodects">
-        <Component.SubNav sub__nav={[{ name: "Doctor Hours", path: `/doctors/doctorHours/${id}` }, { name: "Add Time", path: `/doctors/addDoctorHours/${id}` }]} />
+        {isLang === 'ar' ?
+            <Component.SubNav sub__nav={[{ name: isLang === 'ar' ? 'إضـافـة موعـد' : 'Add Time', path: `/doctors/addDoctorHours/${id}`} , { name: isLang === 'ar' ? 'أوقـات العمـل' : 'Doctor Hours', path: `/doctors/doctorHours/${id}` }]} />
+            :
+            <Component.SubNav sub__nav={[{ name: isLang === 'ar' ? 'أوقـات العمـل' : 'Doctor Hours', path: `/doctors/doctorHours/${id}` }, { name: isLang === 'ar' ? 'إضـافـة موعـد' : 'Add Time', path: `/doctors/addDoctorHours/${id}` }]} />
+        }
         <div className="app__addprodects__header ">
-          <Component.BaseHeader h1={'Add Time'} />
+          <Component.BaseHeader h1={isLang === 'ar' ? 'إضـافـة موعـد جديد' : 'Add new Time'} />
 
           <div className="mt-4">
               <ul className="nav nav-pills mb-4" id="pills-tab" role="tablist">
                 <li className="nav-item my-0 me-2" role="presentation">
-                  <button className="nav-link text-black mx-0 active" style={{fontWeight: '600' , fontSize: '18px'}} id="pills-single-tab" data-bs-toggle="pill" data-bs-target="#pills-single" type="button" role="tab" aria-controls="pills-single" aria-selected="true">Single</button>
+                  <button className="nav-link text-black mx-0 active" style={{fontWeight: '600' , fontSize: '18px'}} id="pills-single-tab" data-bs-toggle="pill" data-bs-target="#pills-single" type="button" role="tab" aria-controls="pills-single" aria-selected="true">{isLang === 'ar' ? 'يوم فردي' : 'Single'}</button>
                 </li>
                 <li className="nav-item my-0 ms-2" role="presentation">
-                  <button className="nav-link text-black mx-0" style={{fontWeight: '600' , fontSize: '18px'}} id="pills-bulk-tab" data-bs-toggle="pill" data-bs-target="#pills-bulk" type="button" role="tab" aria-controls="pills-bulk" aria-selected="false">Bulk</button>
+                  <button className="nav-link text-black mx-0" style={{fontWeight: '600' , fontSize: '18px'}} id="pills-bulk-tab" data-bs-toggle="pill" data-bs-target="#pills-bulk" type="button" role="tab" aria-controls="pills-bulk" aria-selected="false">{isLang === 'ar' ? 'مجموعة أيام بنفس الموعد' : 'Bulk'}</button>
                 </li>
               </ul>
               <div className="tab-content" id="pills-tabContent">
@@ -176,17 +191,13 @@ function AddDoctorHours() {
 
                           <div className="col-md-6">
                             <div className="group-add">
-                              <label className="fs-5 " htmlFor="day">Day</label>
+                              <label className="fs-5 " htmlFor="day">{isLang === 'ar' ? 'اليـوم' : 'Day'}</label>
                               <div className="input-group">
                                 <select className='w-100 bg-transparent mx-auto py-2 px-2' name="day" id="day" ref={doctorHourDay} required>
-                                  <option>choose a day</option>
-                                  <option value='SATURDAY' >Saturday</option>
-                                  <option value='SUNDAY' >Sunday</option>
-                                  <option value='MONDAY' >Monday</option>
-                                  <option value='TUESDAY' >Tuesday</option>
-                                  <option value='WEDNESDAY' >Wednesday</option>
-                                  <option value='THURSDAY' >Thursday</option>
-                                  <option value='FRIDAY' >Friday</option>
+                                  <option>{isLang === 'ar' ? 'اختر اليوم' : 'choose a Day'}</option>
+                                  {daysOptions.map((el , i) => (
+                                    <option key={i} value={el.value} >{isLang === 'ar' ? el.labelAr : el.label}</option>
+                                  ))}
                                 </select>
                               </div>
                             </div>
@@ -194,12 +205,12 @@ function AddDoctorHours() {
 
                           <div className="col-md-6">
                             <div className="group-add">
-                              <label className="fs-5 " htmlFor="day">Status</label>
+                              <label className="fs-5 " htmlFor="day">{isLang === 'ar' ? 'الحالـة' : 'Status'}</label>
                               <div className="input-group">
                                 <select className='w-100 bg-transparent mx-auto py-2 px-2' name="status" id="status" onChange={changeStatus} ref={doctorHourStatus} required>
-                                  <option>choose the status</option>
-                                  <option value='OPEN' >Open</option>
-                                  <option value='CLOSE' >Close</option>
+                                  <option>{isLang === 'ar' ? 'اختر الحالـة' : 'choose a Status'}</option>
+                                  <option value='OPEN' >{isLang === 'ar' ? 'مفتـوح' : 'Open'}</option>
+                                  <option value='CLOSE' >{isLang === 'ar' ? 'مغلـق' : 'Close'}</option>
                                 </select>
                               </div>
                             </div>
@@ -207,7 +218,7 @@ function AddDoctorHours() {
 
                           <div className="col-md-6">
                             <div className="group-add">
-                              <label className="fs-5 " htmlFor="StartHour">Start</label>
+                              <label className="fs-5 " htmlFor="StartHour">{isLang === 'ar' ? 'وقت البدء' : 'Start'}</label>
                               <div className="input-group">
                                 <input type="time" className='bg-transparent form-control mx-auto py-2 w-100 startHour' name="StartHour" id="StartHour" ref={doctorStartHour} required />
                               </div>
@@ -216,7 +227,7 @@ function AddDoctorHours() {
 
                           <div className="col-md-6">
                             <div className="group-add">
-                              <label className="fs-5 " htmlFor="EndHour">End</label>
+                              <label className="fs-5 " htmlFor="EndHour">{isLang === 'ar' ? 'وقت الإنتهـاء' : 'End'}</label>
                               <div className="input-group">
                                 <input type="time" className='bg-transparent form-control mx-auto py-2 w-100 endHour' name="EndHour" id="EndHour" ref={doctorEndHour} required />
                               </div>
@@ -230,14 +241,16 @@ function AddDoctorHours() {
                           <div className='d-flex justify-content-center align-content-center mt-4'>
                               <div className='baseBtn'>
                                   <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                      {loadindSingle ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}
+                                      {loadindSingle ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 
+                                        isLang === 'ar' ? 'حفـظ' : 'Save'
+                                      }
                                   </Button>
                               </div>
 
                               <div className='baseBtn'>
                                   <Link to={`/doctors/doctorHours/${id}`}>
                                       <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                          Cancel
+                                          {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                                       </Button>
                                   </Link>
                               </div>
@@ -256,7 +269,7 @@ function AddDoctorHours() {
 
                           <div className="col-md-6">
                             <div className="group-add">
-                              <label className="fs-5 " htmlFor="days">Days</label>
+                              <label className="fs-5 " htmlFor="days">{isLang === 'ar' ? 'الأيـام' : 'Days'}</label>
                               <div className="input-group">
                                 <Select
                                   defaultValue={[daysOptions[1], daysOptions[2]]}
@@ -266,7 +279,7 @@ function AddDoctorHours() {
                                   options={daysOptions}
                                   className="basic-multi-select w-100 py-0"
                                   classNamePrefix="select"
-                                  placeholder='choose list of days..'
+                                  placeholder={isLang === 'ar' ? 'اختر مجموعة من الأيام' : 'choose list of days..'}
                                   onChange={handleChange}
                                   value={selectedValues}
                                   required
@@ -277,7 +290,9 @@ function AddDoctorHours() {
 
                           <div className="col-md-6">
                             <div className="group-add">
-                              <label className="fs-5 " htmlFor="serviceLevel">Service Level In Minutes (Between Slots)</label>
+                              <label className="fs-5 " htmlFor="serviceLevel">
+                                {isLang === 'ar' ? 'مستوي الخدمة بالدقائق ( بين الخدمات )' : 'Service Level In Minutes (Between Slots)'}
+                              </label>
                               <div className="input-group">
                                 <input type="number" className='bg-transparent form-control mx-auto py-2 w-100' name="serviceLevel" id="serviceLevel" ref={doctorServiceLevel} required />
                               </div>
@@ -286,7 +301,7 @@ function AddDoctorHours() {
 
                           <div className="col-md-6">
                             <div className="group-add">
-                              <label className="fs-5 " htmlFor="StartBulkHour">Start</label>
+                              <label className="fs-5 " htmlFor="StartBulkHour">{isLang === 'ar' ? 'وقت البدء' : 'Start'}</label>
                               <div className="input-group">
                                 <input type="time" className='bg-transparent form-control mx-auto py-2 w-100 startBulkHour' name="StartBulkHour" id="StartBulkHour" ref={doctorStartBulkHour} required />
                               </div>
@@ -295,7 +310,7 @@ function AddDoctorHours() {
 
                           <div className="col-md-6">
                             <div className="group-add">
-                              <label className="fs-5 " htmlFor="EndBulkHour">End</label>
+                              <label className="fs-5 " htmlFor="EndBulkHour">{isLang === 'ar' ? 'وقت الإنتهـاء' : 'End'}</label>
                               <div className="input-group">
                                 <input type="time" className='bg-transparent form-control mx-auto py-2 w-100 endBulkHour' name="EndBulkHour" id="EndBulkHour" ref={doctorEndBulkHour} required />
                               </div>
@@ -309,14 +324,16 @@ function AddDoctorHours() {
                           <div className='d-flex justify-content-center align-content-center mt-4'>
                               <div className='baseBtn'>
                                   <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                      {loadindBulk ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 'Save'}
+                                      {loadindBulk ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 
+                                        isLang === 'ar' ? 'حفـظ' : 'Save'
+                                      }
                                   </Button>
                               </div>
 
                               <div className='baseBtn'>
                                   <Link to={`/doctors/doctorHours/${id}`}>
                                       <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                          Cancel
+                                          {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                                       </Button>
                                   </Link>
                               </div>

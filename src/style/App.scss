@@ -217,7 +217,6 @@ td {
   color: $mainColor;
   background-color:#000000;
 
-  .loader {}
 
   .loader-image {
     width: 400px !important;
@@ -283,6 +282,16 @@ td {
   left: 15px !important;
 }
 
+.react-tel-input .selected-flag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-group input#DoctorPhone2 {
+  padding-right: 45px !important;
+}
+
 @media screen and (max-width: 768px) {
   .input-group input {
     padding-left: 20px !important;
@@ -292,6 +301,7 @@ td {
   .input-group input#DoctorPhone {
     padding-left: 45px !important;
   }
+
 }
 
 
@@ -384,7 +394,4 @@ td {
     width: 410px;
   }
 
-  h3 {}
-
-  p {}
 }

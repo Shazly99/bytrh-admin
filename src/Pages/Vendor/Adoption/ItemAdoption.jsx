@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState , useContext } from 'react';
 // import { FiEdit3 } from 'react-icons/fi';
 // import { AiOutlineDelete } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import { DropdownButton, Dropdown } from 'react-bootstrap';
 // import { useEffect } from 'react';
 import { apiheader, PostData } from '../../../utils/fetchData';
+import { VendersContext } from '../../../context/Store';
 
 
 export default function ItemAdoption({ id , clientName , petName , petStrain , petPicture , cityName , cate , status , getTokenAdoption }) {
@@ -33,13 +34,16 @@ export default function ItemAdoption({ id , clientName , petName , petStrain , p
     };
 
 
-
-
     let navigate = useNavigate();
 
     const goToAdoptionDetails = (id) => {
         navigate(`./details/${id}`);
     }
+
+
+
+    let { isLang } = useContext(VendersContext);
+
 
 
 
@@ -80,7 +84,7 @@ export default function ItemAdoption({ id , clientName , petName , petStrain , p
                     <span>
                         <DropdownButton
                             id={`dropdown-${id}`}
-                            title="Actions"
+                            title={isLang === 'ar' ? 'الإجراءات' : 'Actions'}
                             variant="outline-success"
                             onSelect={(eventKey) => handleActionSelect(id, eventKey)}
                             className="DropdownButton "
@@ -88,26 +92,42 @@ export default function ItemAdoption({ id , clientName , petName , petStrain , p
                             {
                                 status === "PENDING" ? 
                                 <>
-                                    <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
-                                    <Dropdown.Item eventKey="ADOPTED">Adopted</Dropdown.Item>
-                                    <Dropdown.Item eventKey="CANCELLED">Cancelled</Dropdown.Item>
+                                    <Dropdown.Item eventKey="ACTIVE">
+                                        {isLang === 'ar' ? 'نشـط' : 'Active'}
+                                    </Dropdown.Item>
+                                    <Dropdown.Item eventKey="ADOPTED">
+                                        {isLang === 'ar' ? 'متبنـي' : 'Adopted'}
+                                    </Dropdown.Item>
+                                    <Dropdown.Item eventKey="CANCELLED">
+                                        {isLang === 'ar' ? 'ملغــي' : 'Cancelled'}
+                                    </Dropdown.Item>
                                 </> :
 
                                 status === "ACTIVE" ? 
                                 <>
-                                    <Dropdown.Item eventKey="ADOPTED">Adopted</Dropdown.Item>
-                                    <Dropdown.Item eventKey="CANCELLED">Cancelled</Dropdown.Item>
+                                    <Dropdown.Item eventKey="ADOPTED">
+                                        {isLang === 'ar' ? 'متبنـي' : 'Adopted'}
+                                    </Dropdown.Item>
+                                    <Dropdown.Item eventKey="CANCELLED">
+                                        {isLang === 'ar' ? 'ملغــي' : 'Cancelled'}
+                                    </Dropdown.Item>
                                 </> :
 
                                 status === "CANCELLED" ?
                                 <>
-                                    <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
+                                    <Dropdown.Item eventKey="ACTIVE">
+                                        {isLang === 'ar' ? 'نشـط' : 'Active'}
+                                    </Dropdown.Item>
                                 </> :
                                 
                                 status === "ADOPTED" ?
                                 <>
-                                    <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
-                                    <Dropdown.Item eventKey="CANCELLED">Cancelled</Dropdown.Item>
+                                    <Dropdown.Item eventKey="ACTIVE">
+                                        {isLang === 'ar' ? 'نشـط' : 'Active'}
+                                    </Dropdown.Item>
+                                    <Dropdown.Item eventKey="CANCELLED">
+                                        {isLang === 'ar' ? 'ملغــي' : 'Cancelled'}
+                                    </Dropdown.Item>
                                 </> : ''
                             }
                         </DropdownButton>

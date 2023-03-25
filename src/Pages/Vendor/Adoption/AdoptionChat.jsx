@@ -1,21 +1,23 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useContext } from 'react'
 import { Row, Col, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import ScrollToBottom from 'react-scroll-to-bottom';
-import Img from '../../../assets/Img';
+// import Img from '../../../assets/Img';
 import Component from '../../../constants/Component';
 import { GetData } from '../../../utils/fetchData';
 import { apiheader } from './../../../utils/fetchData';
 import { Player } from '@lottiefiles/react-lottie-player';
+import { VendersContext } from '../../../context/Store';
+
 
 const AdoptionChat = () => {
 
   let { id } = useParams()
   const audioRef = useRef(null);
 
-  function handlePlay() {
-    audioRef.current.play();
-  }
+  // function handlePlay() {
+  //   audioRef.current.play();
+  // }
 
   const [chat, setChat] = useState([])
   const [adoptionDetails, setAdoptionDetails] = useState([])
@@ -32,6 +34,13 @@ const AdoptionChat = () => {
     }
   }, [id])
 
+
+
+  let { isLang } = useContext(VendersContext);
+
+
+
+
   return (
     <>
 
@@ -39,44 +48,49 @@ const AdoptionChat = () => {
         Object.keys(adoptionDetails).length > 0 ?
           <Container fluid className="app__chat__Consult  ">
             <div className='app__chat'>
-              <div >
-                <Component.SubNav sub__nav={[{ name: "Adoption Details", path: `/adoption/details/${adoptionDetails?.IDAdoption}` }, { name: "Chat ", path: `/adoption/chat/${id}` }]} />
+              <div >              
+                {isLang === 'ar' ?
+                    <Component.SubNav sub__nav={[{ name: "المحادثـة", path: `/adoption/chat/${id}` } , { name: "تفاصيـل التبنـي", path: `/adoption/details/${adoptionDetails?.IDAdoption}` }]} />
+                    :
+                    <Component.SubNav sub__nav={[{ name: "Adoption Details", path: `/adoption/details/${adoptionDetails?.IDAdoption}` }, { name: "Chat ", path: `/adoption/chat/${id}` }]} />
+                  }
+              
               </div>
               <div className='app__chat__Consult_details'>
                 <Row>
                   <Col xl={4} lg={4} md={4} sm={6} className='client'>
                     <div className="client_details">
-                      <label htmlFor="">Client Name:</label>
+                      <label htmlFor="">{isLang === 'ar' ? 'اسـم العميـل' : 'Client Name'} :</label>
                       <span>{adoptionDetails?.ClientName}</span>
                     </div>
 
                     <div className="client_details">
-                      <label htmlFor="">Client Phone :</label>
+                      <label htmlFor="">{isLang === 'ar' ? 'رقـم العميـل' : 'Client Phone'} :</label>
                       <span>{adoptionDetails?.ClientPhone}</span>
                     </div>
                   </Col>
                   <Col xl={4} lg={4} md={4} sm={6} className='doctor'>
                     <div className="client_details">
-                      <label htmlFor="">Adopter Name :</label>
+                      <label htmlFor="">{isLang === 'ar' ? 'اسـم المتبنـي' : 'Adopter Name'} :</label>
                       <span>{adoptionDetails?.AdopterName}</span>
                     </div>
 
                     <div className="client_details">
-                      <label htmlFor="">Adopter Phone :</label>
+                      <label htmlFor="">{isLang === 'ar' ? 'رقم تليفون المتبني' : 'Adopter Phone'} :</label>
                       <span>{adoptionDetails?.AdopterPhone}</span>
                     </div>
                   </Col>
 
                   <Col xl={4} lg={4} md={4} sm={6} className='doctor'>
                     <div className="client_details">
-                      <label htmlFor="">Chat Status:</label>
+                      <label htmlFor="">{isLang === 'ar' ? 'حالة المحادثـة' : 'Chat Status'} :</label>
                       {/* <span>{adoptionDetails?.AdoptionChatStatus.charAt(0).toUpperCase() + adoptionDetails?.AdoptionChatStatus.slice(1).toLowerCase()}</span> */}
                       <span>{adoptionDetails.AdoptionChatStatus && adoptionDetails.AdoptionChatStatus[0].toUpperCase() + adoptionDetails.AdoptionChatStatus.slice(1).toLowerCase()}</span>
                     </div>
 
                     {adoptionDetails?.CreateDate !== undefined && adoptionDetails?.CreateDate !== null ?
                       <div className="client_details">
-                        <label htmlFor="">Create Date :</label>
+                        <label htmlFor="">{isLang === 'ar' ? 'تاريخ الإنشـاء' : 'Create Date'} :</label>
                         <span>{adoptionDetails?.CreateDate}</span>
                       </div>
                       :
@@ -86,7 +100,7 @@ const AdoptionChat = () => {
                   </Col>
                 </Row>
               </div>
-              <Component.BaseHeader h2={'Chat Details :'} />
+              <Component.BaseHeader h2={isLang === 'ar' ? 'تفاصيـل المحادثـة :' : 'Chat Details :'} />
 
               <Row className="app__chat__container ">
                 <Col xl={12} lg={12} md={12} sm={12} className='app__chat_messages '>
@@ -106,9 +120,9 @@ const AdoptionChat = () => {
                                 />
                               </div>
                               <h2 className={` ${chat.length === 0 ? 'text-light' : ''}`}>
-                                Welcome, <span className='admin__color'>admin!</span>
+                                {isLang === 'ar' ? 'مرحبـا' : 'Welcome'}, <span className='admin__color'>{isLang === 'ar' ? 'ايهـا المسئــول' : 'admin'}!</span>
                               </h2>
-                              <h4 className={` ${chat.length === 0 ? 'text-light text-center' : ' text-center'}`}>This Chat Is Empty.</h4>
+                              <h4 className={` ${chat.length === 0 ? 'text-light text-center' : ' text-center'}`}>{isLang === 'ar' ? 'هذه المحادثـة فارغـة' : 'This Chat Is Empty'}.</h4>
                             </div>
                             :
                             <>
@@ -134,7 +148,7 @@ const AdoptionChat = () => {
                                           <audio ref={audioRef} controls>
                                             <source src={messageContent.AdoptionChatMessage} type="audio/ogg" />
                                             <source src={messageContent.AdoptionChatMessage} type="audio/mpeg" />
-                                            Your browser does not support the audio element.
+                                            {isLang === 'ar' ? 'متصفحـك لا يدعـم عنصـر الصـوت' : 'Your browser does not support the audio element'}.
                                           </audio>
                                         }
                                       </div>

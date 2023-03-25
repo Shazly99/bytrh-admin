@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Component from '../../../constants/Component';
 import { Container } from 'react-bootstrap';
 import { apiheader } from './../../../utils/fetchData';
 import Loader from '../../../Components/Shared/Loader/Loader';
+import { VendersContext } from '../../../context/Store';
 
 
 export default function DoctorCategory() { 
@@ -76,14 +77,16 @@ export default function DoctorCategory() {
   }
 
 
+  let { isLang } = useContext(VendersContext);
+
+
 
   return (
     <Container fluid>
       <div className="dashpage addsales-page py-5">
         <div className="mb-4">
           <div className="note-page">
-            <Component.BaseHeader h1={'Doctor Animals Categories'} />
-
+            <Component.BaseHeader h1={isLang === 'ar' ? 'أقسـام الحيوانـات' : 'Animals Categories'} />
           </div>
         </div>
 
@@ -96,7 +99,7 @@ export default function DoctorCategory() {
               {fields && fields.map((field, i) => (
                 <div key={i} className="col-md-6">
                   <div className="py-3 px-2 rounded-3 shadow bg-light">
-                    <input type="checkbox" onChange={() => { addField(field.IDAnimalCategory) }} className='me-2' id={field.AnimalCategoryName} name={field.AnimalCategoryName} defaultChecked={field.Checked === 1 ? true : false} />
+                    <input type="checkbox" onChange={() => { addField(field.IDAnimalCategory) }} className={isLang === 'ar' ? 'ms-2' : 'me-2'} id={field.AnimalCategoryName} name={field.AnimalCategoryName} defaultChecked={field.Checked === 1 ? true : false} />
                     <label htmlFor={field.AnimalCategoryName} className='fw-bold'>{field.AnimalCategoryName}</label>
                   </div>
                 </div>
@@ -108,13 +111,13 @@ export default function DoctorCategory() {
 
             <div className="submitAdd-buttons mt-4 d-flex justify-content-center align-items-center">
  
-              <Component.ButtonBase title={"Save"} bg={"primary"}  onclick={() => {
+              <Component.ButtonBase title={isLang === 'ar' ? 'حفــظ' : 'Save'} bg={"primary"}  onclick={() => {
                 getDoctorData();
                 setTimeout(() => {
                   goToBack();
                 }, 500);
               }} />
-              <Component.ButtonBase title={"Cancel"} bg={"primary"} path="/doctors " />
+              <Component.ButtonBase title={isLang === 'ar' ? 'رجــوع' : 'Cancel'} bg={"primary"} path="/doctors " />
             </div>
           </>
 
