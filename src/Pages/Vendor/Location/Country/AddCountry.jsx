@@ -1,13 +1,19 @@
-import React, { useRef } from 'react';
+import React, { useRef,useContext,useEffect ,useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { apiheader, PostData } from '../../../../utils/fetchData';
 import { Col, Container, Row, Form, Button } from 'react-bootstrap';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
- 
+import initialTranslation from "./Translation";
+import { VendersContext } from '../../../../context/Store';
+
 
 const AddCountry = () => {
+  let { isLang } = useContext(VendersContext);
+  const [translate, setTranslate] = useState(initialTranslation)
+  const handelTranslate = () => setTranslate(initialTranslation)
+
   let navigate = useNavigate();
   const CountryNameEn = useRef();
   const CountryNameAr = useRef();
@@ -31,9 +37,9 @@ const AddCountry = () => {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/location/countries/add`, Country, apiheader).then((res) => {
 
       if (res.data.Success === true) {
-        toast.success('New Country added successfully!', {
+        toast.success(<strong>{translate[isLang].toast.add}</strong>, {
           duration: 4000,
-          position: 'top-center',
+          position: 'bottom-center',
           icon: <Icons.Added color='#40AB45' size={25} />,
           iconTheme: {
             primary: '#0a0',
@@ -48,12 +54,16 @@ const AddCountry = () => {
       }
     });
   }
+  useEffect(() => {
+    handelTranslate()
+  })
+  
   return (
     <Container fluid>
       <div className="app__addprodects">
-        <Component.SubNav sub__nav={[{ name: "Countries", path: '/location/country' }, { name: "Add Country ", path: '/location/country/addcountry' }]} />
+        <Component.SubNav sub__nav={[{ name: translate[isLang].add.nav1, path: '/location/country' }, { name: translate[isLang].add.nav2, path: '/location/country/addcountry' }]} />
         <div className="app__addprodects__header ">
-          <Component.BaseHeader h1={'Add New Country'} />
+          <Component.BaseHeader h1={translate[isLang].add.header} />
           <div className="app__addOrder-form">
             <div className="app__addprodects-form">
               <form onSubmit={submit}>
@@ -61,13 +71,13 @@ const AddCountry = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>  Name (En)</Form.Label>
+                      <Form.Label>  {translate[isLang].add.Label1}</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CountryNameEn} />
                     </Form.Group>
 
 
                     <Form.Group controlId="formBasicEmail" className='mt-2'>
-                      <Form.Label>  Time Zone  </Form.Label>
+                      <Form.Label>  {translate[isLang].add.Label2} </Form.Label>
                       <Form.Control type="number" name='firstname' ref={CountryTimeZone} />
                     </Form.Group>
 
@@ -86,12 +96,12 @@ const AddCountry = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>  Name (Ar)</Form.Label>
-                      <Form.Control type="text" name='firstname' ref={CountryNameAr} style={{ direction: 'rtl' }}  />
+                      <Form.Label>{translate[isLang].add.Label3}</Form.Label>
+                      <Form.Control type="text" name='firstname' ref={CountryNameAr} style={{ direction: 'rtl' }} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail" className='mt-2'>
-                      <Form.Label>  Code</Form.Label>
+                      <Form.Label>  {translate[isLang].add.Label4}</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CountryCode} />
                     </Form.Group>
 
@@ -100,14 +110,15 @@ const AddCountry = () => {
 
                     <div className='baseBtn1'>
                       <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Save
+                        {translate[isLang].add.save}
                       </Button>
                     </div>
 
                     <div className='baseBtn'>
                       <Link to={'/location/cities'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Cancel
+                          {translate[isLang].add.cancel}
+
                         </Button>
                       </Link>
                     </div>

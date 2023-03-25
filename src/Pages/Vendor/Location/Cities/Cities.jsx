@@ -1,7 +1,7 @@
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useContext, useEffect, useState } from 'react';
-import { Dropdown, DropdownButton, Table } from "react-bootstrap";
+import { Dropdown, DropdownButton,NavDropdown, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import Component from '../../../../constants/Component';
@@ -9,15 +9,20 @@ import Icons from '../../../../constants/Icons';
 import { VendersContext } from "../../../../context/Store";
 import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
 import useSkeletonTable from '../../../../utils/useSkeletonTable';
+import initialTranslation from "./Translation";
 
 const Cities = () => {
+  let { isLang } = useContext(VendersContext);
+  const [translate, setTranslate] = useState(initialTranslation)
+  const handelTranslate = () => setTranslate(initialTranslation)
+
   const [Cities, setCities] = useState(null)
   const [page, setPage] = useState(1);
   const [PagesNumber, setPagesNumber] = useState('')
   const [searchValue, setSearchValue] = useState('');
   const [isLoader, setIsloader] = useState(false);
   let { SkeletonTable, SkeletonSearch, SkeletonFilters } = useSkeletonTable();
-  let { isLang } = useContext(VendersContext);
+
   const CitiescList = async (page) => {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/location/cities`, { IDPage: page }, apiheader).then(({ data }) => {
       setCities(data.Response.Cities)
@@ -44,12 +49,12 @@ const Cities = () => {
   const handleActionSelect = async (id, action) => {
     if (action === "ACTIVE" || action === "INACTIVE") {
       await CitiescategoriesStatus(id).then((res) => {
-        toast.success('Updated Successfully', {
+        toast.success(<strong>{translate[isLang].toast.update}</strong>, {
           duration: 4000,
-          position: 'top-center',
-          icon: <Icons.UploadItem color='#3182CE' size={20} />,
+          position: 'buttom-center',
+          // icon: <Icons.UploadItem color='#3182CE' size={20} />,
           iconTheme: {
-            primary: '#0a0',
+            primary: '#3182CE',
             secondary: '#fff',
           },
         });
@@ -97,7 +102,7 @@ const Cities = () => {
   };
   useEffect(() => {
     CitiescList(page)
-     window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }, [page])
   useEffect(() => {
   }, [page, PagesNumber])
@@ -109,10 +114,10 @@ const Cities = () => {
           <div className="search-container">
             <div className="search_and__btn w-100">
               {isLoader ? <>
-                <Component.ButtonBase title={"Add "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/location/cities/addcity" />
+                <Component.ButtonBase title={translate[isLang].add.btn} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/location/cities/addcity" />
                 <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
 
-                  <input type="text" placeholder="Search by city....." name="search" value={searchValue} onChange={handleInputChange} />
+                  <input type="text" placeholder={translate[isLang].placeholder} name="search" value={searchValue} onChange={handleInputChange} />
                   <button type="submit" onClick={handleSearchClick}>
                     <Icons.Search color='#fff' size={25} />
                   </button>
@@ -121,70 +126,36 @@ const Cities = () => {
             </div>
 
             <div className='filter__group'>
-              {isLoader ? <>
-                <label>
-                  {
-                    selectedOption === "All" ?
-                      <input
-                        type="radio"
-                        name="filter"
-                        value="All"
-                        checked
-                        onChange={handleOptionChange}
-                        className={`inactive-radio form-check-input `}
-                      /> :
-                      <input
-                        type="radio"
-                        name="filter"
-                        value="All"
-                        checked={selectedOption === "All"}
-                        onChange={handleOptionChange}
-                        className={`inactive-radio form-check-input `}
-                      />
-                  }
-
-                  All
-                </label>
-              </> : SkeletonFilters(10, 90)}
-              {isLoader ? <>
-                <label className='active'>
-                  <input
-                    type="radio"
-                    name="filter"
-                    value="ACTIVE"
-                    checked={selectedOption === "ACTIVE"}
-                    onChange={handleOptionChange}
-                    className="active-radio form-check-input"
-
-                  />
-                  Active
-                </label>
-              </> : SkeletonFilters(10, 90)}
-              {isLoader ? <>
-                <label>
-                  <input
-                    type="radio"
-                    name="filter"
-                    value="INACTIVE"
-                    checked={selectedOption === "INACTIVE"}
-                    onChange={handleOptionChange}
-                    className="inactive-radio form-check-input"
-
-                  />
-                  InActive
-                </label>
-              </> : SkeletonFilters(10, 90)}
-
+              {
+                translate[isLang]?.FilterStatus?.map((item, index) => (
+                  <>
+                    {isLoader ? <>
+                      <label className='active' >
+                        <input
+                          type="radio"
+                          name="filter"
+                          value={item.value}
+                          checked={selectedOption === item.value}
+                          onChange={handleOptionChange}
+                          className="active-radio form-check-input"
+                        />
+                        {item.text}
+                      </label>
+                    </> : SkeletonSearch(10, 90)}
+                  </>
+                ))
+              }
             </div>
           </div>
           {isLoader ? <>
             <Table responsive={true} className='rounded-3 '>
               <thead>
                 <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                  <th>Country Name</th>
-                  <th>Area Name</th>
-                  <th>Area status</th>
-                  <th>Action</th>
+                  {
+                    translate[isLang]?.TableHeader?.map((item, index) => (
+                      <th key={index}>{item}</th>
+                    ))
+                  }
                 </tr>
               </thead>
               <tbody className='text-center'>
@@ -216,20 +187,23 @@ const Cities = () => {
                           <span>
                             <DropdownButton
                               id={`dropdown-${item.IDCity}`}
-                              title="Actions"
+                              title={translate[isLang]?.Actions.action}
                               variant="outline-success"
                               onSelect={(eventKey) => handleActionSelect(item.IDCity, eventKey)}
                               className="DropdownButton "
                               drop={'down-centered'}
                             >
-                              <Dropdown.Item eventKey="Edite" as={Link} to={`/location/cities/editcity/${item.IDCity}`}>
-                                Edit
+                              <Dropdown.Item  className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"}eventKey="Edite" as={Link} to={`/location/cities/editcity/${item.IDCity}`}>
+                                {translate[isLang]?.Actions.edit}
                               </Dropdown.Item>
+                              <NavDropdown.Divider />
+ 
                               {
-                                item?.CityActive === 1 ? '' : item?.UserStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
-                              }
-                              {
-                                item?.CityActive === 0 ? '' : item?.UserStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
+                                translate[isLang].FilterStatus?.filter?.((item) => item.value !== "All").map((status, index) => (
+                                  <React.Fragment key={index}>
+                                    {item?.CityActive === status.CityActive ? '' : item?.UserStatus === status.value ? '' : <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey={status.value}>{status.text}</Dropdown.Item>}
+                                  </React.Fragment>
+                                ))
                               }
                             </DropdownButton>
                           </span>
@@ -246,7 +220,7 @@ const Cities = () => {
         </div>
 
       </div>
-      <div className="pagination ">
+      <div className="pagination " dir="ltr">
         <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
           <Pagination count={pageCount} page={page} onChange={handleChange} />
         </Box>

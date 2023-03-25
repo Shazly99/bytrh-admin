@@ -88,7 +88,7 @@ const routes = [
   },
 
   {
-    nameAr: "المواقع ",
+    nameAr: "المــواقع ",
     nameEn: "Locations ",
     icon: <Icons.location size={19} />,
     Roles: ["Admin"],
@@ -116,7 +116,7 @@ const routes = [
   },
   {
     path: "/consult",
-    nameAr: "استشارة",
+    nameAr: "استشـارات",
     nameEn: "Consults",
     icon: <Icons.consult size={19} />,
     Roles: ["Admin"],
@@ -124,7 +124,7 @@ const routes = [
   },
   {
     path: "/ads",
-    nameAr: "إعلانات",
+    nameAr: "إعلانـات",
     nameEn: "Ads",
     icon: <Icons.ads size={19} />,
     Roles: ["Admin"],
@@ -162,7 +162,7 @@ const routes = [
   },
   {
     path: "/bidding",
-    nameAr: "مزايدة",
+    nameAr: "مـزادات",
     nameEn: "Bidding",
     icon: <Icons.bidding size={19} />,
     Roles: ["Admin"],
@@ -170,7 +170,7 @@ const routes = [
   },
   {
     path: "/adoption",
-    nameAr: "تبني",
+    nameAr: "تبــني",
     nameEn: "Adoption",
     icon: <Icons.pets size={19} />,
     Roles: ["Admin"],

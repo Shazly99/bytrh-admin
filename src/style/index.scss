@@ -9,7 +9,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #000;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -166,3 +166,11 @@ td {
   text-decoration: none;
   background-color: #f1f1f1b2 !important;
 }
+
+// .dropdown-itemAr{
+//   text-align: initial !important;
+// }
+
+// .dropdown-itemEn{
+//   text-align: inherit !important;
+// }

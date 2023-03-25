@@ -9,7 +9,7 @@ import Icons from '../../../constants/Icons';
 import { VendersContext } from "../../../context/Store";
 import useSkeletonTable from '../../../utils/useSkeletonTable';
 import { apiheader, GetData, PostData } from './../../../utils/fetchData';
-
+import './initialTranslate'
 const AnimalCat = () => {
   const [animal, setAnimal] = useState(null)
   const [page, setPage] = useState(1);

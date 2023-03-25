@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Dropdown, DropdownButton, Form, Table } from "react-bootstrap";
+import { Dropdown, DropdownButton, Form, NavDropdown, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
 import Icons from "../../../constants/Icons.js";
 import { apiheader, GetData, PostData } from '../../../utils/fetchData.js';
@@ -8,8 +8,8 @@ import Modal from 'react-bootstrap/Modal';
 import useSkeletonTable from '../../../utils/useSkeletonTable.js';
 import Component from '../../../constants/Component.js';
 import { VendersContext } from '../../../context/Store.js';
-
-const ClientTable = ({ usersList, userList, isLoading,actionsTranslate, statusTranslate, tabelTranslate }) => {
+import './Client.scss'
+const ClientTable = ({ usersList, userList, isLoading,actionsTranslate,toastTranslate, statusTranslate, tabelTranslate }) => {
   let { SkeletonTable } = useSkeletonTable();
   let { isLang } = useContext(VendersContext);
 
@@ -25,12 +25,12 @@ const ClientTable = ({ usersList, userList, isLoading,actionsTranslate, statusTr
   const handleActionSelect = async (id, action) => {
     if (action === "BLOCKED" || action === "ACTIVE" || action === "INACTIVE") {
       await userstatus({ IDClient: id, ClientStatus: action }).then((res) => {
-        toast.success('Updated Successfully', {
+        toast.success(<strong>{toastTranslate.update}</strong>, {
           duration: 4000,
-          position: 'top-center',
-          icon: <Icons.UploadItem color='#3182CE' size={20} />,
+          position: 'bottom-center',
+          // icon: <Icons.UploadItem color='#3182CE' size={20} />,
           iconTheme: {
-            primary: '#0a0',
+            primary: '#3182CE',
             secondary: '#fff',
           },
         });
@@ -52,10 +52,9 @@ const ClientTable = ({ usersList, userList, isLoading,actionsTranslate, statusTr
   const changeWallet = async () => {
     await PostData(`https://bytrh.com/api/admin/clients/wallet/add`, { IDClient: id, Amount: changeBalance.current.value }, apiheader).then((res) => {
       if (res.data.Success === true) {
-        toast.success('wallet updated !', {
+        toast.success(<strong>{toastTranslate.wallet}</strong>, {
           duration: 4000,
-          position: 'top-center',
-          icon: <Icons.UploadItem color='#3182CE' size={20} />,
+          position: 'bottom-center', 
           iconTheme: {
             primary: '#0a0',
             secondary: '#fff',
@@ -73,7 +72,7 @@ const ClientTable = ({ usersList, userList, isLoading,actionsTranslate, statusTr
   const resetPassword = async (idClient) => {
     let data = await GetData(`https://bytrh.com/api/admin/clients/password/reset/${idClient}`, apiheader)
     if (data.Success === true) {
-      toast.success('Password reset successfully!');
+      toast.success(<strong>{toastTranslate.reset}</strong>);
     } else {
       toast.error('password reset failed!');
 
@@ -82,15 +81,13 @@ const ClientTable = ({ usersList, userList, isLoading,actionsTranslate, statusTr
 
   const handleDeleteUser = async () => {
     // Logic for deleting user with ID `selectedUserId`
-    setShowDeleteModal(false);
-
+    setShowDeleteModal(false); 
     await userstatus(selectedUserId).then((res) => {
-      toast.success('user has been deleted', {
+      toast.success(<strong>{toastTranslate.delete}</strong>, {
         duration: 4000,
-        position: 'top-center',
-        icon: <Icons.Bin color='#E20000' size={17} />,
+        position: 'bottom-center', 
         iconTheme: {
-          primary: '#0a0',
+          primary: '#E20000',
           secondary: '#fff',
         },
       });
@@ -202,21 +199,17 @@ const ClientTable = ({ usersList, userList, isLoading,actionsTranslate, statusTr
                               </Button>
                             </Modal.Footer>
                           </Modal>
+                          <NavDropdown.Divider />
+
                           {
                             statusTranslate?.filter?.((item)=>item.value !== "All").map((status, index) => (
                               <React.Fragment key={index}>
                                 {
-                                  item?.ClientStatus === status.value ? '' : <Dropdown.Item eventKey={status.value}>{ status.text }</Dropdown.Item>
+                                  item?.ClientStatus === status.value ? '' : <Dropdown.Item className={isLang ==="ar"?"dropdown-itemAr":"dropdown-itemEn" } eventKey={status.value}>{ status.text }</Dropdown.Item>
                                 }
                               </React.Fragment>
                             ))
-                          }
-                          {/* {
-                            item?.ClientStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
-                          }
-                          {
-                            item?.ClientStatus === "BLOCKED" ? '' : <Dropdown.Item eventKey="BLOCKED">Blocked</Dropdown.Item>
-                          } */}
+                          } 
                         </DropdownButton>
                       </span>
                     </div>

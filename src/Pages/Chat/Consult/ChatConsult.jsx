@@ -153,7 +153,7 @@ const ChatConsult = () => {
           </div>
           <div className="app__addOrder-form ">
             {isLoader ? <>
-              <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }}>Filter by consult status :	</h5>
+              {/* <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }}>Filter by consult status :	</h5> */}
             </> :
               <div style={{ marginBottom: '15px' }}>
                 {SkeletonFilters(19, '25%')}
