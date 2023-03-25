@@ -23,6 +23,14 @@ const routes = [
     nameEn: "Doctors",
     icon: <Icons.doctor size={19} />,
     Roles: ["Admin"]
+    
+  },
+  {
+    path: "/visits",
+    nameAr: "الــزيارات",
+    nameEn: "Visits",
+    icon: <Icons.Visit size={19} />,
+    Roles: ["Admin"]
 
   },
   {

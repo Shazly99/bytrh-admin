@@ -227,6 +227,12 @@ function App() {
           ]
         },
         {
+          path: '/visits', children: [
+            { index: true, element: <ProtectedRoutes><Component.Visits /> </ProtectedRoutes> }, 
+
+          ]
+        },
+        {
           path: '*', element: <Component.Error />
         }
       ],

@@ -1,14 +1,19 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Button, Modal, Table } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
-import Component from '../../constants/Component';
 import Icons from '../../constants/Icons';
-import { GetData, PostData } from '../../utils/fetchData'
+import { GetData, PostData } from '../../utils/fetchData';
 import useSkeletonTable from '../../utils/useSkeletonTable';
+import initialTranslation from '../Settings/Translation';
+import { VendersContext } from './../../context/Store';
 import { apiheader } from './../../utils/fetchData';
-
+ 
 const Contact = () => {
-
+  let { isLang } = useContext(VendersContext);
+  const [translate, setTranslate] = useState(initialTranslation)
+  const handelTranslate = () => {
+    setTranslate(initialTranslation)
+  }
   const [generalSettingData, setGeneralData] = useState(null);
   let edit = useRef();
   const [modalShow, setModalShow] = React.useState(false);
@@ -60,6 +65,7 @@ const Contact = () => {
   useEffect(() => {
     generalData();
     window.scrollTo(0, 0);
+    handelTranslate()
   }, []);
 
   return (
@@ -74,9 +80,11 @@ const Contact = () => {
               <Table responsive={true} className='rounded-3 '>
                 <thead>
                   <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                    <th>Contact Name</th>
-                    <th>Contact Value</th>
-                    <th>Contact Description</th>
+                  {
+                    translate[isLang]?.TableContact?.map((item, index) => (
+                      <th key={index}>{item}</th>
+                    ))
+                  }
                   </tr>
                 </thead>
                 <tbody className='text-center'>
@@ -92,25 +100,28 @@ const Contact = () => {
                           <p style={{ whiteSpace: "pre-wrap", fontSize: '12px', display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '10px', flexDirection: 'column' }}>
                             {item?.GeneralSettingValue}</p>
                           <Button variant="outline-primary" onClick={() => handleModalOpen(index)}>
-                            View & Edit
+                           {translate[isLang]?.Modal?.mainbtn}
                           </Button>
                           <Modal
+                             dir={isLang === "ar" ? "rtl" : "ltr"}
                             show={modalShow && modalIndex === index}
                             onHide={handleModalClose}
                             centered
                           >
                             <Modal.Header closeButton>
-                              <Modal.Title>Setting Value</Modal.Title>
+                              <Modal.Title> {translate[isLang]?.Modal?.titleContact}</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
                               <textarea className="form-control" rows="10" defaultValue={item?.GeneralSettingValue} ref={edit} />
                             </Modal.Body>
                             <Modal.Footer>
                               <Button variant="primary"   onClick={handleModalClose}>
-                                Close
+                              {translate[isLang]?.Modal?.btnClose}
+
                               </Button>
                               <Button variant="outline-primary" onClick={() => editValueSitting(item.IDGeneralSetting)}>
-                                Save changes
+                              {translate[isLang]?.Modal?.btnSave}
+
                               </Button>
                             </Modal.Footer>
                           </Modal>

@@ -3,6 +3,7 @@ import avatar from "./Images/vector (2).png";
 import avatar1 from "./Images/300-21.jpg";
 import logo from "./Images/logo.png";
 import view from "./Images/svg/view.svg";
+import inView from "./Images/svg/inView.svg";
 import added from "./Images/svg/Property 1=outline.svg";
 import added2 from "./Images/svg/Property 1=bulk.svg";
 import translate from "./Images/svg/translate.svg";
@@ -22,6 +23,7 @@ const img = {
     avatar1,
     logo,
     view,
+    inView,
     icon,
     search,
 
