@@ -21,7 +21,7 @@ let initialTranslation = {
             Label2: 'رمز المنطقة  ',
             Label1: 'إسم منطقة (En)',
             Label4: '  إسم الدولة  ',
-            save: "حفظ", cancel: 'إلغاء'
+            save: "حفظ", cancel: 'رجــوع'
         },
         edit: {
             nav1: 'المناطق', nav2: 'تعديل منطقة',
@@ -29,7 +29,7 @@ let initialTranslation = {
             Label3: 'إسم منطقة (Ar)', 
             Label2: '   إسم الدوله',
             Label1: 'إسم منطقة (En)', 
-            save: "حفظ", cancel: 'إلغاء'
+            save: "حفظ", cancel: 'رجــوع'
         },
         toast: {
             update: "تم التحديث بنجاح",

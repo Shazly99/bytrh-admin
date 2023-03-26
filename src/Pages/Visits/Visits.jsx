@@ -175,7 +175,7 @@ const Visits = () => {
           </div>
           <div className="app__addOrder-form ">
 
-            <div className='filter__group__stats row ' style={{ display: 'flex',alignItems:'center', gap: '20px', marginBottom: '25px' }}>
+            <div className='filter__group__stats row ' style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '25px' }}>
               {
                 translate[isLang]?.FilterStatus?.map((item, index) => (
                   <>
@@ -251,11 +251,12 @@ const Visits = () => {
 
                         <td >
                           <div>
-                            <span style={{ height: 'fit-content !important' }}  >
-                              {item?.VisitTotalPrice}
-                            </span>
+                            <h6 className="mb-0  pe-2 color-red">
+                              {item?.VisitTotalPrice} {translate[isLang]?.Actions.currency}
+                            </h6>
                           </div>
                         </td>
+
                         <td >
                           <div>
                             <span style={{ height: 'fit-content !important' }}  >
@@ -276,29 +277,34 @@ const Visits = () => {
                                             ${item.VisitStatus === 'SKIPPED' && 'txt__status'} 
                                             ${item.VisitStatus === 'REJECTED' && 'txt_rejected'}
                                             ${item.VisitStatus === 'ACCEPTED' && 'txt_delivery'}`} >
-                              {
+                     
 
-                                item?.VisitStatus.toLowerCase().charAt(0).toUpperCase() + item?.VisitStatus.slice(1).toLowerCase() === 'No_response' ? 'No Response' :
-                                  item?.VisitStatus.toLowerCase().charAt(0).toUpperCase() + item?.VisitStatus.slice(1).toLowerCase()
+                              {
+                                translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.value === item?.VisitStatus)
+                                  .map((status, index) => (
+                                    <React.Fragment key={index}>
+                                      {item?.VisitStatus === status.value ? status.text : ''}
+                                    </React.Fragment>
+                                  ))
                               }
                             </span>
                           </div>
                         </td>
                         <td>
-                            <div
-                              className="d-flex flex-column justify-content-center align-content-center"
-                              style={{ gap: "0" }}
-                            >
-                              <span className="ClientName">
-                                {" "}
-                                {item?.VisitStartTime.split(" ")[0]}{" "}
-                              </span>
-                              <span className="ClientPhone">
-                                {" "}
-                                {item?.VisitStartTime.split(" ")[1]}
-                              </span>
-                            </div>
-                          </td>
+                          <div
+                            className="d-flex flex-column justify-content-center align-content-center"
+                            style={{ gap: "0" }}
+                          >
+                            <span className="ClientName">
+                              {" "}
+                              {item?.VisitStartTime.split(" ")[0]}{" "}
+                            </span>
+                            <span className="ClientPhone">
+                              {" "}
+                              {item?.VisitStartTime.split(" ")[1]}
+                            </span>
+                          </div>
+                        </td>
                         <td>
                           <div>
                             <span>

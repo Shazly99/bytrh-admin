@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext} from 'react'
 import Component from '../../constants/Component'
 import { Container, Row, Col } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
@@ -10,8 +10,16 @@ import Skeleton from '@mui/material/Skeleton';
 import StoreChat from './StoreChat';
 import ProductRequests from './ProductRequests';
 import Icons from '../../constants/Icons';
+import initialTranslation from './Translation';
+import { VendersContext } from '../../context/Store';
 
 const StoreDetails = () => {
+  let { isLang } = useContext(VendersContext);
+  const [translate, setTranslate] = useState(initialTranslation)
+  const handelTranslate = () => {
+      setTranslate(initialTranslation)
+  }
+
   let { id } = useParams()
   const [animal, setAnimal] = useState([]);
   const [isLoader, setIsloader] = useState(false);
@@ -37,6 +45,7 @@ const StoreDetails = () => {
   useEffect(() => {
     store();
     window.scrollTo(0, 0);
+    handelTranslate()
     return () => {
       store();
     }
@@ -79,12 +88,12 @@ const StoreDetails = () => {
       <div className='app__blog'>
         <Container fluid>
           <div className="app__addprodects">
-            <Component.SubNav sub__nav={[{ name: " Animal Products", path: '/store' }, { name: "Product Details ", path: `/store/details/${id}` }]} />
+            <Component.SubNav sub__nav={[{ name: translate[isLang]?.store?.nav1, path: '/store' }, { name: translate[isLang]?.store?.nav2, path: `/store/details/${id}` }]} />
           </div>
           <Row>
             <Col xl={6} lg={6} md={6} sm={12} className='store_info'>
               <div className="store_header">
-                Product Info
+                {translate[isLang]?.store?.header1}
               </div>
               <div className="store_info_body">
                 <Row >
@@ -96,17 +105,17 @@ const StoreDetails = () => {
                   </Col>
                   <Col xl={7} lg={7} md={7} sm={7} className="store_info_animal">
                     {isLoader ? <div className="summary_blog">
-                      <span className='title'>Category:</span>
+                      <span className='title'>{translate[isLang]?.store?.category}</span>
                       <span className='body'>{animal?.AnimalCategoryName}</span>
                     </div> : SkeletonCard()}
 
                     {isLoader ? <div className="summary_blog">
-                      <span className='title'> Sub Category :</span>
+                      <span className='title'> {translate[isLang]?.store?.subCategory}</span>
                       <span className='body'>{animal?.AnimalSubCategoryName}</span>
                     </div> : SkeletonCard()}
 
                     {isLoader ? <div className="summary_blog">
-                      <span className='title'> Product Type :</span>
+                      <span className='title'> {translate[isLang]?.store?.type}</span>
                       <span className='body'>{animal?.AnimalProductType?.charAt(0).toUpperCase() + animal?.AnimalProductType?.slice(1).toLowerCase()}</span>
                     </div> : SkeletonCard()}
                   </Col>
@@ -115,7 +124,7 @@ const StoreDetails = () => {
             </Col>
             <Col xl={6} lg={6} md={6} sm={12} className='store_info'>
               <div className="store_header">
-                Client Info
+              {translate[isLang]?.store?.cinfo}
               </div>
               <div className="store_info_body">
                 <Row>
@@ -130,19 +139,19 @@ const StoreDetails = () => {
                   <Col xl={7} lg={7} md={7} sm={7} className="store_info_animal">
                     {
                       isLoader ? <div className="summary_blog">
-                        <span className='title'>Name :</span>
+                        <span className='title'> {translate[isLang]?.store?.name}</span>
                         <span className='body'>{animal?.ClientName}</span>
                       </div> : SkeletonCard()
                     }
                     {
                       isLoader ? <div className="summary_blog">
-                        <span className='title'>Phone :</span>
+                        <span className='title'>{translate[isLang]?.store?.phone}</span>
                         <span className='body'>{animal?.ClientPhone}</span>
                       </div> : SkeletonCard()
                     }
                     {
                       isLoader ? <div className="summary_blog">
-                        <span className='title'> City :</span>
+                        <span className='title'> {translate[isLang]?.store?.city}</span>
                         <span className='body'>{animal?.CityName}</span>
                       </div> : SkeletonCard()
                     }
@@ -155,58 +164,58 @@ const StoreDetails = () => {
                 <Col className="summary_blog">
                   {isLoader ? <>
                     <span className='title'>{animal?.AnimalProductPrice}</span>
-                    <span className='body'>Price</span>
+                    <span className='body'>{translate[isLang]?.store?.price}</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
                   {isLoader ? <>
                     <span className='title'>{animal?.AnimalProductAge}</span>
-                    <span className='body'>Age</span>
+                    <span className='body'>{translate[isLang]?.store?.age}</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
                   {isLoader ? <>
                     <span className='title'>{animal?.AnimalProductGender?.charAt(0)?.toUpperCase() + animal?.AnimalProductGender?.slice(1).toLowerCase()}</span>
-                    <span className='body'>Gender</span>
+                    <span className='body'>{translate[isLang]?.store?.gender}</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
                   {isLoader ? <>
                     <span className='title'>{animal?.AnimalProductSize}</span>
-                    <span className='body'>Size</span>
+                    <span className='body'>{translate[isLang]?.store?.size}</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
                   {isLoader ? <>
                     <span className='title'>{animal?.HasBagging === 1 ? <Icons.Check color='#40AB45' size={18} /> : <Icons.Uncheck color='#E20000' size={18} />}</span>
-                    <span className='body'>Bagging</span>
+                    <span className='body'>{translate[isLang]?.store?.bagging}</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
 
                   {isLoader ? <>
                     <span className='title'>{animal?.HasCutting === 1 ? <Icons.Check color='#40AB45' size={18} /> : <Icons.Uncheck color='#E20000' size={18} />}</span>
-                    <span className='body'> Cutting</span>
+                    <span className='body'> {translate[isLang]?.store?.cutting}</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
                   {isLoader ? <>
                     <span className='title'>{animal?.HasDelivery === 1 ? <Icons.Check color='#40AB45' size={18} /> : <Icons.Uncheck color='#E20000' size={18} />}</span>
-                    <span className='body'> Delivery</span>
+                    <span className='body'> {translate[isLang]?.store?.delivery}</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
 
                   {isLoader ? <>
                     <span className='title'>{animal?.AllowPhone === 1 ? <Icons.Check color='#40AB45' size={18} /> : <Icons.Uncheck color='#E20000' size={18} />}</span>
-                    <span className='body'>  Phone</span>
+                    <span className='body'>  {translate[isLang]?.store?.phone}</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
 
                   {isLoader ? <>
                     <span className='title'>{animal?.AllowWhatsapp === 1 ? <Icons.Check color='#40AB45' size={18} /> : <Icons.Uncheck color='#E20000' size={18} />}</span>
-                    <span className='body'>  Whatsapp</span>
+                    <span className='body'>  {translate[isLang]?.store?.whatsapp}</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">
@@ -224,7 +233,7 @@ const StoreDetails = () => {
                       } ${animal.AnimalProductStatus === "ACTIVE" &&
                       "txt_delivered"
                       }`}>{animal?.AnimalProductStatus?.charAt(0)?.toUpperCase() + animal?.AnimalProductStatus?.slice(1).toLowerCase()}</span>
-                    <span className='body'  >Status</span>
+                    <span className='body'  >{translate[isLang]?.store?.status}</span>
                   </> : SkeletonSummary()}
                 </Col>
               </Row>
@@ -232,7 +241,7 @@ const StoreDetails = () => {
             {isLoader ? <>
               {animal?.AnimalProductDescription &&
                 <div className="product_description">
-                  <h3 >Product Description</h3>
+                  <h3 >{translate[isLang]?.store?.des}</h3>
                   <p>{animal?.AnimalProductDescription}</p>
                 </div>
               }
@@ -244,7 +253,7 @@ const StoreDetails = () => {
               <div className=' '  >
                 {isLoader ? <> 
                   <div className="product_description">
-                    <h3 >Product Gallery</h3>
+                    <h3 >{translate[isLang]?.store?.gallery}</h3>
                   </div>
                 </> : <Skeleton variant='rounded' height={30} width="40%" className='mt-3 mb-2' />
                 }
@@ -307,14 +316,14 @@ const StoreDetails = () => {
           <div className="app__store__chat">
             {
               animal?.AnimalProductChats?.length > 0 &&
-              <StoreChat chat={animal?.AnimalProductChats} isLoader={isLoader} />
+              <StoreChat translate={translate[isLang]?.store} chat={animal?.AnimalProductChats} isLoader={isLoader} />
             }
           </div>
 
           <div className="app__store__chat">
             {
               animal?.AnimalProductRequests?.length > 0 &&
-              <ProductRequests Request={animal?.AnimalProductRequests} isLoader={isLoader} />
+              <ProductRequests translate={translate[isLang]?.store}Request={animal?.AnimalProductRequests} isLoader={isLoader} />
             }
           </div>
         </Container>

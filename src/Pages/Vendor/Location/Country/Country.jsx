@@ -181,7 +181,14 @@ const Country = () => {
                                             <td >
                                                 <div>
                                                     <span style={{ height: 'fit-content !important' }} className={`  ${item?.CountryActive === 1 && 'txt_delivered'}  ${item?.CountryActive === 0 && 'txt_rejected'} `} >
-                                                        {item?.CountryActive === 1 ? 'Active' : "InActive"}
+                                                        {
+                                                            translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.CountryActive === item?.CountryActive)
+                                                                .map((status, index) => (
+                                                                    <React.Fragment key={index}>
+                                                                        {item?.CountryActive === status.CountryActive ? status.text : ''}
+                                                                    </React.Fragment>
+                                                                ))
+                                                        }
                                                     </span>
                                                 </div>
                                             </td>
@@ -198,14 +205,14 @@ const Country = () => {
                                                             drop={'down-centered'}
                                                         >
                                                             <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/location/country/editcountry/${item.IDCountry}`}>
-                                                              {  translate[isLang]?.Actions.edit}
+                                                                {translate[isLang]?.Actions.edit}
                                                             </Dropdown.Item>
                                                             <NavDropdown.Divider />
-                                                 
+
                                                             {
                                                                 translate[isLang].FilterStatus?.filter?.((item) => item.value !== "All").map((status, index) => (
                                                                     <React.Fragment key={index}>
-                                                                        {  item?.CountryActive === status.CountryActive ? '' : item?.UserStatus === status.value ? '' : <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey={status.value}>{status.text}</Dropdown.Item>}
+                                                                        {item?.CountryActive === status.CountryActive ? '' : item?.UserStatus === status.value ? '' : <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey={status.value}>{status.text}</Dropdown.Item>}
                                                                     </React.Fragment>
                                                                 ))
                                                             }

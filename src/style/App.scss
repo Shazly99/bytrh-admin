@@ -85,9 +85,9 @@ a {
 
 // input textarea select option 
 input,
-textarea,
-select,
-option {
+textarea/* ,
+// select,
+// option  */{
   background: rgba($color: $colorGrey-1, $alpha: 0.1) !important;
   border: none !important;
   border-radius: $radius-sm !important;

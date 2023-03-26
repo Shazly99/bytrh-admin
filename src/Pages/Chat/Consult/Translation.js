@@ -16,6 +16,11 @@ let initialTranslation = {
             { value: "REJECTED", text: " مرفوض  " },
             { value: "ACCEPTED", text: " قبلت  " },
         ],
+        ConsultType:[ 
+            { value: "NORMAL", text: "عادية  " },
+            { value: "URGENT", text: " خطيرة " },
+        ],
+
         TableHeader: [
             "معلومات العميل  ",
             " معلومات الطبيب  ",
@@ -93,7 +98,11 @@ let initialTranslation = {
             userClient:'Client :',
             userDr:'Dr.',
             btn:'Close'
-        }
+        },
+        ConsultType:[ 
+            { value: "NORMAL", text: "Normal  " },
+            { value: "URGENT", text: " Urgent " },
+        ]
 
     }
 }

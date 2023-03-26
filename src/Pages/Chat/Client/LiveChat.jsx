@@ -141,7 +141,7 @@ function LiveChat() {
                         </div>
                         {
                             chatStatus === 'ONGOING' ?
-                                <ScrollToBottom className="message-container">
+                                <ScrollToBottom dir='ltr'className="message-container">
                                     {clientChatSupport?.map((messageContent, index) => {
                                         return (
                                             <div
@@ -178,7 +178,7 @@ function LiveChat() {
                                     })}
                                 </ScrollToBottom>
                                 :
-                                <ScrollToBottom className="message-container">
+                                <ScrollToBottom dir='ltr'className="message-container">
                                     {clientChatSupportDetail?.map((messageContent, index) => {
                                         return (
                                             <div
