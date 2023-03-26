@@ -260,11 +260,12 @@ const ChatConsult = () => {
                         <div>
                           <span style={{ height: 'fit-content  !important' }} className={`
                                             ${item.ConsultType == 'NORMAL' && 'txt_delivered'} 
-                                            ${item.ConsultType == 'URGENT' && 'txt_rejected'}
-                                            ${item.ConsultType == 'Out For Delivery' && 'txt_delivery'}
-                                            ${item.ConsultType == 'ACTIVE' && 'txt_delivered'}
-                                            ${item.ConsultType == 'INACTIVE' && 'txt_rejected'}`} >
-                            {item?.ConsultType.toLowerCase().charAt(0).toUpperCase() + item?.ConsultType.slice(1).toLowerCase()}
+                                            ${item.ConsultType == 'URGENT' && 'txt_rejected'}   `} >
+                            {translate[isLang].ConsultType && translate[isLang].ConsultType.map((status, index) => (
+                              <React.Fragment key={index}>
+                                {item?.ConsultType === status.value && status.text}
+                              </React.Fragment>
+                            ))}
                           </span>
                         </div>
                       </td>
