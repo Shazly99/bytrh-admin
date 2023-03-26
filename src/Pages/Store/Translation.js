@@ -1,27 +1,25 @@
 let initialTranslation = {
     "ar": {
-        placeholder: {
-            client: ' بحث عن طريق العميل .....',
-            doc: ' بحث عن طريق الطبيب ....'
-        },
+        placeholder: 'البحث بالإسم  أو البريد الإلكتروني أو الهاتف .....',
+
         FilterStatus: [
             { value: "All", text: "الكل" },
             { value: "PENDING", text: " قيد الانتظار  " },
-            { value: "ACCEPTED", text: " قبلت  " },
+            { value: "ACTIVE", text: "   نشيط  " },
             { value: "CANCELLED", text: " الغاء  " },
-            { value: "REJECTED", text: " مرفوض  " },
-            { value: "ONGOING", text: "جاري التنفيذ" },
-            { value: "ENDED", text: " انتهى  " } 
+            { value: "SOLD", text: " مُباع  " },
+            { value: "REJECTED", text: "مرفوض" },
+            { value: "RESERVED", text: " محجوز  " }
         ],
         TableHeader: [
-            "معلومات العميل" ,
-            "معلومات المركز الطبي",
-            "معلومات الطبيب" ,
-            "سعر الزيارة",
-            "نوع الزيارة",
+            "صوره المنتح" ,
+            " مغلومات العميل",
+            " تصنيف فرعي" ,
+            "سعر  ",
+            "نوع المنتج",
             "حالة ",
-            "تاريخ بدء الزيارة ",
-            "الإجراء"
+            "  تاريخ الإنشاء  ",
+            "تفاصبل منتج"
         ],
         Actions: { action: "الإجراءات",vistType:'نوع الزيارة'},
         toast: { endChat: "تم إنهاء الدردشة" }, 
@@ -41,21 +39,21 @@ let initialTranslation = {
         FilterStatus: [
             { value: "All", text: "All" },
             { value: "PENDING", text: " Pending  " },
-            { value: "ACCEPTED", text: " Accepted  " },
+            { value: "ACTIVE", text: "   Active  " },
             { value: "CANCELLED", text: " Cancelled  " },
-            { value: "REJECTED", text: " Rejected  " },
-            { value: "ONGOING", text: "Ongoing" },
-            { value: "ENDED", text: " Ended  " }
+            { value: "SOLD", text: " Sold  " },
+            { value: "REJECTED", text: "Rejected" },
+            { value: "RESERVED", text: " Reserved  " }
         ],
         TableHeader: [
-            "Client Info",
-            "Medical Center Info ",
-            "Doctor Info  ",
-            "Visit Total Price",
-            "Visit Type ",
+            " Product Image",
+            " Client Info ",
+            "SubCategory     ",
+            "Price",
+            "Type ",
             "Status ",
-            "Start Date ",
-            "Action"
+            "Create Date ",
+            "View"
         ],
         Actions: { action: "Actions", vistType:"vist Type"},
         toast: { endChat: "Chat has been ended" },

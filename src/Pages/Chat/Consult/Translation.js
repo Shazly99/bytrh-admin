@@ -10,7 +10,7 @@ let initialTranslation = {
             { value: "PENDING", text: " قيد الانتظار  " },
             { value: "ENDED", text: " انتهى  " },
             { value: "EXPIRED", text: " منتهي الصلاحية  " },
-            { value: "CANCELLED", text: " ألغيت  " },
+            { value: "CANCELLED", text: " الغاء  " },
             { value: "NO_RESPONSE", text: "  لا يوجد رد  " },
             { value: "SKIPPED", text: " تم تخطي  " },
             { value: "REJECTED", text: " مرفوض  " },

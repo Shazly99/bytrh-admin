@@ -49,7 +49,7 @@ function Navber() {
       $('.navbar-expand .navbar-nav .dropdown-menu').css({'left' : '0'})
     }
     else {
-      $('.navbar-expand .navbar-nav .dropdown-menu').css({'left' : '-135px'})
+      $('.navbar-expand .navbar-nav .dropdown-menu').css({'left' : '-50px'})
     }
   }
 
