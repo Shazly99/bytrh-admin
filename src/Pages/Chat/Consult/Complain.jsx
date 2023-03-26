@@ -1,20 +1,21 @@
- import React from 'react'
+import React from 'react'
 import { Modal } from 'react-bootstrap'
 import { Button } from 'react-bootstrap';
 
-const Complain = ({ handleModalClose, modalShow, modalIndex, index, Name, user, Complain }) => {
+const Complain = ({ isLang, translate, handleModalClose, modalShow, modalIndex, index, Name, user, Complain }) => {
     return (
         <>
             <Modal
+                dir={isLang === "ar" ? "rtl" : "ltr"}
                 show={modalShow && modalIndex === index}
                 onHide={handleModalClose}
                 centered
             >
                 <Modal.Header closeButton>
-                    <Modal.Title className='  w-100 text-center'>  Complain Details</Modal.Title>
+                    <Modal.Title className='  w-100 text-center'>  {translate.title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="name"style={{ marginBottom: "18px" }}>
+                    <div className="name" style={{ marginBottom: "18px" }}>
                         <span className='ClientName bold ' style={{ fontSize: '20px', fontFamily: 'Tajawal' }}> {user}  </span>
                         <span >{Name}</span>
                     </div>
@@ -23,7 +24,7 @@ const Complain = ({ handleModalClose, modalShow, modalIndex, index, Name, user, 
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={handleModalClose}>
-                        Close
+                    {translate.btn}
                     </Button>
                 </Modal.Footer>
             </Modal>

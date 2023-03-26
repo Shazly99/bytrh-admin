@@ -1,14 +1,20 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect,useContext, useRef, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
+import { VendersContext } from '../../../../context/Store';
 import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
 import useFetch from './../../../../utils/useFetch';
+import initialTranslation from "./Translation";
 
 
 const EditArea = () => {
+  let { isLang } = useContext(VendersContext);
+  const [translate, setTranslate] = useState(initialTranslation)
+  const handelTranslate = () => setTranslate(initialTranslation)
+ 
   let { id } = useParams()
    let { countries, cities, getCities } = useFetch()
 
@@ -38,12 +44,12 @@ const EditArea = () => {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/location/areas/edit`, Area, apiheader).then((res) => {
 
       if (res.data.Success === true) {
-        toast.success('Area has been updated!', {
+        toast.success(<strong>{translate[isLang].toast.edit}</strong>, {
           duration: 4000,
-          position: 'top-center',
+          position: 'bottom-center',
           icon: <Icons.Added color='#40AB45' size={20} />,
           iconTheme: {
-            primary: '#0a0',
+            primary: '#40AB45',
             secondary: '#fff',
           },
         });
@@ -65,14 +71,15 @@ const EditArea = () => {
   useEffect(() => {
     AreaDetail()
      window.scrollTo(0, 0);
+     handelTranslate()
   }, [id])
 
   return (
     <Container fluid>
       <div className="app__addprodects">
-        <Component.SubNav sub__nav={[{ name: "City", path: '/location/areas' }, { name: "Edit Area ", path: `/location/areas/editareas/${id}` }]} />
+        <Component.SubNav sub__nav={[{ name: translate[isLang].edit.nav1, path: '/location/areas' }, { name: translate[isLang].edit.nav2, path: `/location/areas/editareas/${id}` }]} />
         <div className="app__addprodects__header ">
-          <Component.BaseHeader h1={'Edit Area'} />
+          <Component.BaseHeader h1={translate[isLang].edit.header}/>
           <div className="app__addOrder-form">
             <div className="app__addprodects-form">
               <form onSubmit={submit}>
@@ -80,12 +87,12 @@ const EditArea = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>  Name (En)</Form.Label>
+                      <Form.Label>  {translate[isLang].edit.Label1}</Form.Label>
                       <Form.Control type="text" name='firstname' ref={AreaNameEn} defaultValue={editPage?.AreaNameEn} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
-                      <Form.Label>Country</Form.Label>
+                      <Form.Label>{translate[isLang].edit.Label2}</Form.Label>
                       <Form.Select aria-label="Default select example" onClick={handelSelectCountry}>
                         {
                           countries?.map((item, index) => (
@@ -100,12 +107,12 @@ const EditArea = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>  Name (Ar)</Form.Label>
+                      <Form.Label> {translate[isLang].edit.Label3}</Form.Label>
                       <Form.Control type="text" name='firstname' ref={AreaNameAr} defaultValue={editPage?.AreaNameAr} style={{ direction: 'rtl' }} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail" className='mt-3' >
-                      <Form.Label>City</Form.Label>
+                      <Form.Label>{translate[isLang].edit.Label4}</Form.Label>
 
                       <Form.Select aria-label="Default select example" ref={selectCity}>
                         {
@@ -122,14 +129,15 @@ const EditArea = () => {
 
                     <div className='baseBtn1'>
                       <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Save
+                      {translate[isLang].edit.save}
+
                       </Button>
                     </div>
 
                     <div className='baseBtn'>
                       <Link to={'/location/areas'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Cancel                       
+                        {translate[isLang].edit.cancel}                     
                          </Button>
                       </Link>
                     </div>

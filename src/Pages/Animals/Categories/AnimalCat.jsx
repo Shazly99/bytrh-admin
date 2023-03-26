@@ -9,9 +9,10 @@ import Icons from '../../../constants/Icons';
 import { VendersContext } from "../../../context/Store";
 import useSkeletonTable from '../../../utils/useSkeletonTable';
 import { apiheader, GetData, PostData } from './../../../utils/fetchData';
+ 
 import translateCategories from './translateCategories';
-
-
+ 
+import './initialTranslate' 
 const AnimalCat = () => {
   const [animal, setAnimal] = useState(null)
   const [page, setPage] = useState(1);
@@ -31,7 +32,7 @@ const AnimalCat = () => {
       setPagesNumber(data.Response.Pages);
       const timeoutId = setTimeout(() => {
         setIsloader(true)
-      }, 200);
+      }, 0);
       return () => clearTimeout(timeoutId);
     }).catch((error) => {
       if (error.response && error.response.status === 429) {

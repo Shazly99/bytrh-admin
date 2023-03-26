@@ -35,7 +35,7 @@ const StoreList = () => {
             setPagesNumber(data.Response.Pages);
             const timeoutId = setTimeout(() => {
                 setIsloader(true)
-            }, 200);
+            }, 0);
             return () => clearTimeout(timeoutId);
         })
             .catch((error) => {
@@ -496,7 +496,7 @@ const StoreList = () => {
                                                                 <div className="delete">
                                                                     <DropdownButton
                                                                         title={
-                                                                            <img src={Img.dropdown} loading="lazy" alt={'img dropdown'} />
+                                                                            <img src={Img.dropdown}  alt={'img dropdown'} />
                                                                         }
                                                                         id="dropdown-menu"
                                                                         variant="outline-success"
@@ -576,7 +576,7 @@ const StoreList = () => {
                                                                 <Link
                                                                     to={`/store/details/${item?.IDAnimalProduct}`}
                                                                 >
-                                                                    <img src={Img.view} loading="lazy" alt='img view' />
+                                                                    <img src={Img.view}  alt='img view' />
                                                                 </Link>
                                                             </div>
                                                         </td>

@@ -49,7 +49,7 @@ function Navber() {
       $('.navbar-expand .navbar-nav .dropdown-menu').css({'left' : '0'})
     }
     else {
-      $('.navbar-expand .navbar-nav .dropdown-menu').css({'left' : '-135px'})
+      $('.navbar-expand .navbar-nav .dropdown-menu').css({'left' : '-50px'})
     }
   }
 
@@ -74,7 +74,7 @@ function Navber() {
                     <HiX onClick={() => setToggle(!Toggle)} />
                     <ul >
                       {
-                        routes.map((item, index) => {
+                        routes?.filter((role) => role.Roles.includes("Admin")).map((item, index) => {
 
 
                           // if (item.subRoutes) {
@@ -93,7 +93,7 @@ function Navber() {
                             <li key={index}>
                               <Link to={item.path} onClick={() => setToggle(false)} className='d-flex' >
                                 {item.icon}
-                                {item.name}
+                                {isLang === 'ar' ? item.nameAr : item.nameEn}
                               </Link>
                             </li>
                           )

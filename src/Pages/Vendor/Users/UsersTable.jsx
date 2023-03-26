@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
- import { useEffect } from 'react';
+import React, { useState,useContext } from 'react';
+import { useEffect } from 'react';
 import { Button, Dropdown, DropdownButton, Modal, NavDropdown, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
@@ -7,48 +7,22 @@ import Icons from "../../../constants/Icons.js";
 import { apiheader, PostData } from '../../../utils/fetchData.js';
 import useSkeletonTable from '../../../utils/useSkeletonTable.js';
 import Component from '../../../constants/Component.js';
+import { VendersContext } from '../../../context/Store.js';
 
-function UsersTable({ usersList, userList, isLoader }) {
+function UsersTable({ usersList, userList, isLoader,toastTranslate, actionsTranslate, statusTranslate, tabelTranslate }) {
     let { SkeletonTable } = useSkeletonTable();
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState({});
+    let { isLang } = useContext(VendersContext);
 
     const handleActionSelect = async (id, action) => {
-        if (action === "PENDING") {
+        if (action === "PENDING" || action === "ACTIVE" || action === "INACTIVE") {
             await userstatus({ IDUser: id, UserStatus: action }).then((res) => {
-                toast.success('Updated Successfully', {
+                toast.success(<strong>{toastTranslate.update}</strong>,{
                     duration: 4000,
-                    position: 'top-center',
-                    icon: <Icons.UploadItem color='#3182CE' size={16} />,
+                    position: 'bottom-center', 
                     iconTheme: {
-                        primary: '#0a0',
-                        secondary: '#fff',
-                    },
-                });
-            })
-            await userList()
-        } else if (action === "ACTIVE") {
-            await userstatus({ IDUser: id, UserStatus: action }).then((res) => {
-                toast.success('Updated Successfully', {
-                    duration: 4000,
-                    position: 'top-center',
-                    icon: <Icons.UploadItem color='#3182CE' size={25} />,
-                    iconTheme: {
-                        primary: '#0a0',
-                        secondary: '#fff',
-                    },
-                });
-            })
-            await userList()
-        } else if (action === "INACTIVE") {
-
-            await userstatus({ IDUser: id, UserStatus: action }).then((res) => {
-                toast.success('Updated Successfully', {
-                    duration: 4000,
-                    position: 'top-center',
-                    icon: <Icons.UploadItem color='#3182CE' size={25} />,
-                    iconTheme: {
-                        primary: '#0a0',
+                        primary: '#3182CE',
                         secondary: '#fff',
                     },
                 });
@@ -57,7 +31,6 @@ function UsersTable({ usersList, userList, isLoader }) {
         } else if (action === "DELETED") {
             setSelectedUserId({ IDUser: id, UserStatus: action });
             setShowDeleteModal(true);
-
         }
     };
 
@@ -69,12 +42,11 @@ function UsersTable({ usersList, userList, isLoader }) {
         // Logic for deleting user with ID `selectedUserId`
         setShowDeleteModal(false);
         await userstatus(selectedUserId).then((res) => {
-            toast.success('user has been deleted', {
+            toast.success(<strong>{toastTranslate.delete}</strong>, {
                 duration: 4000,
-                position: 'top-center',
-                icon: <Icons.Bin color='#E20000' size={17} />,
-                iconTheme: {
-                    primary: '#0a0',
+                position: 'bottom-center',
+                 iconTheme: {
+                    primary: '#E20000',
                     secondary: '#fff',
                 },
             });
@@ -92,12 +64,11 @@ function UsersTable({ usersList, userList, isLoader }) {
                 <Table responsive={true} className='rounded-3 '>
                     <thead>
                         <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                            <th>User Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>User State</th>
-                            <th>Role</th>
-                            <th>Action</th>
+                            {
+                                tabelTranslate?.map((item, index) => (
+                                    <th key={index}>{item}</th>
+                                ))
+                            }
                         </tr>
                     </thead>
                     <tbody className='text-center'>
@@ -144,48 +115,45 @@ function UsersTable({ usersList, userList, isLoader }) {
                                             <span>
                                                 <DropdownButton
                                                     id={`dropdown-${item.IDUser}`}
-                                                    title="Actions"
+                                                    title={actionsTranslate[0].name}
                                                     variant="outline-success"
                                                     onSelect={(eventKey) => handleActionSelect(item.IDUser, eventKey)}
                                                     className="DropdownButton "
                                                 >
-                                                    <Dropdown.Item eventKey="Edite" as={Link} to={`/user/editUser/${item.IDUser}`}>
-                                                        Edit
+                                                    <Dropdown.Item eventKey="Edite" className={isLang ==="ar"?"dropdown-itemAr":"dropdown-itemEn" }  as={Link} to={`/user/editUser/${item.IDUser}`}>
+                                                        {actionsTranslate[1].name}
                                                     </Dropdown.Item>
-                                                    <Dropdown.Item eventKey="DELETED">Deleted</Dropdown.Item>
-                                                    
-                                                    <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
+                                                    <Dropdown.Item className={isLang ==="ar"?"dropdown-itemAr":"dropdown-itemEn" }  eventKey="DELETED">{actionsTranslate[2].name}</Dropdown.Item>
+
+                                                    <Modal dir={isLang === "ar" ? "rtl" : "ltr"} show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
                                                         <Modal.Header closeButton>
-                                                            <Modal.Title>Delete User</Modal.Title>
+                                                            <Modal.Title>{actionsTranslate[2].titleModel} {' '}   {item?.UserName}  </Modal.Title>
                                                         </Modal.Header>
                                                         <Modal.Body>
-                                                        <Component.HandelDelete/>
-
+                                                            <Component.HandelDelete />
                                                         </Modal.Body>
                                                         <Modal.Footer className='  d-flex justify-content-center'>
-                                                            <Button variant="danger" style={{border:'#dc3545'}}onClick={() => handleDeleteUser(item.IDUser)}>
-                                                            Delete Now
-
+                                                            <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => handleDeleteUser(item.IDUser)}>
+                                                                {actionsTranslate[2].btn1}
                                                             </Button>
                                                             <Button variant="outline-primary" onClick={() => setShowDeleteModal(false)}>
-                                                                Cancel
+                                                                {actionsTranslate[2].btn2}
+
                                                             </Button>
                                                         </Modal.Footer>
                                                     </Modal>
                                                     <NavDropdown.Divider />
 
+ 
                                                     {
-                                                        item?.UserStatus === "PENDING" ? '' : <Dropdown.Item eventKey="PENDING">Pending</Dropdown.Item>
+                                                        statusTranslate?.filter?.((item) => item.value !== "All").map((status, index) => (
+                                                            <React.Fragment key={index}>
+                                                                {
+                                                                    item?.UserStatus === status.value ? '' : <Dropdown.Item className={isLang ==="ar"?"dropdown-itemAr":"dropdown-itemEn" }  eventKey={status.value}>{status.text}</Dropdown.Item>
+                                                                }
+                                                            </React.Fragment>
+                                                        ))
                                                     }
-                                                    {
-                                                        item?.UserStatus === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
-                                                    }
-                                                    {
-                                                        item?.UserStatus === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
-                                                    }
-                                                    {/* {
-                                                    item?.UserStatus === "BLOCKED" ? '' : <Dropdown.Item eventKey="BLOCKED">Blocked</Dropdown.Item>
-                                                } */}
                                                 </DropdownButton>
                                             </span>
                                         </div>

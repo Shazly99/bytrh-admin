@@ -120,7 +120,7 @@ const Clients = () => {
               }
             </div>
           </div>
-          <Component.ClientTable isLoading={isLoader} tabelTranslate={translate[isLang]?.TableHeader}actionsTranslate={translate[isLang]?.Actions} statusTranslate={translate[isLang]?.FilterStatus} usersList={usersList} userList={userList} />
+          <Component.ClientTable isLoading={isLoader} toastTranslate={translate[isLang]?.toast} tabelTranslate={translate[isLang]?.TableHeader}actionsTranslate={translate[isLang]?.Actions} statusTranslate={translate[isLang]?.FilterStatus} usersList={usersList} userList={userList} />
         </div>
       </div>
       <div className="pagination " dir="ltr">

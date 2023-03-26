@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState ,useContext} from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -6,9 +6,14 @@ import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
 import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
 import useFetch from './../../../../utils/useFetch';
+import initialTranslation from "./Translation";
+import { VendersContext } from './../../../../context/Store';
 
 
 const EditCities = () => {
+  let { isLang } = useContext(VendersContext);
+  const [translate, setTranslate] = useState(initialTranslation)
+  const handelTranslate = () => setTranslate(initialTranslation)
   // let { countries, cities } = useContext(VendersContext);
   let {countries } = useFetch()
 
@@ -58,13 +63,14 @@ const EditCities = () => {
   useEffect(() => {
     cityDetail()
     window.scrollTo(0, 0);
+    handelTranslate()
   }, [id])
   return (
     <Container fluid>
       <div className="app__addprodects">
-        <Component.SubNav sub__nav={[{ name: "Areas", path: '/location/cities' }, { name: "Edit Area ", path: `/location/cities/editcity/${id}` }]} />
+        <Component.SubNav sub__nav={[{ name:  translate[isLang].edit.nav1, path: '/location/cities' }, { name: translate[isLang].edit.nav2, path: `/location/cities/editcity/${id}` }]} />
         <div className="app__addprodects__header ">
-          <Component.BaseHeader h1={'Edit Area'} />
+          <Component.BaseHeader h1={translate[isLang].edit.header} />
           <div className="app__addOrder-form">
             <div className="app__addprodects-form">
               <form onSubmit={submit}>
@@ -72,12 +78,12 @@ const EditCities = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>  Name (En)</Form.Label>
+                      <Form.Label>{translate[isLang].edit.Label1}</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CityNameEn} defaultValue={editPage?.CityNameEn} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
-                      <Form.Label>Countries </Form.Label>
+                      <Form.Label>{translate[isLang].edit.Label2} </Form.Label>
                       <Form.Select aria-label="Default select example" ref={selectCountry} defaultValue="US">
                         {/* <option>Country id</option> */}
                         {
@@ -93,7 +99,7 @@ const EditCities = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>  Name (Ar)</Form.Label>
+                      <Form.Label> {translate[isLang].edit.Label2}</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CityNameAr} defaultValue={editPage?.CityNameAr} style={{ direction: 'rtl' }} />
                     </Form.Group>
 
@@ -103,14 +109,16 @@ const EditCities = () => {
 
                     <div className='baseBtn1'>
                       <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Save
+                      {translate[isLang].edit.save}
+
                       </Button>
                     </div>
 
                     <div className='baseBtn'>
                       <Link to={'/location/cities'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Cancel
+                        {translate[isLang].edit.cancel}                     
+
                         </Button>
                       </Link>
                     </div>

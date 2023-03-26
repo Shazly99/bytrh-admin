@@ -29,11 +29,13 @@ import { RiAdvertisementLine as ads, RiAuctionLine as bidding } from "react-icon
 import { RxUpdate as UploadItem } from "react-icons/rx";
 import { SiAsciidoctor as doctor } from 'react-icons/si';
 import { TfiCommentAlt as comments } from "react-icons/tfi";
+import { GiWalk as Visit } from "react-icons/gi";
 import logout from "../assets/Images/svg/logout.svg";
 import profile from "../assets/Images/Vector.svg";
 
 
 const icons ={
+    Visit,
     Uncheck,
     bidding,
     Language,

@@ -21,7 +21,7 @@ const Bagging = () => {
       setAnimal(data.Response)
       const timeoutId = setTimeout(() => {
         setIsloader(true)
-      }, 200);
+      }, 0);
       return () => clearTimeout(timeoutId);
     }).catch((error) => {
       if (error.response && error.response.status === 429) {

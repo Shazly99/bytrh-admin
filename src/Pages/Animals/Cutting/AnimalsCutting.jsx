@@ -27,7 +27,7 @@ const AnimalsCutting = () => {
       // setPagesNumber(data.Response.Pages);
       const timeoutId = setTimeout(() => {
         setIsloader(true)
-      }, 200);
+      }, 0);
       return () => clearTimeout(timeoutId);
     }).catch((error) => {
       if (error.response && error.response.status === 429) {
@@ -84,6 +84,7 @@ const AnimalsCutting = () => {
 
   return (
     <>
+ 
         <div className="app__Users ">
           {isLoader ? <>
             <Component.ButtonBase title={translateCutting[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/cutting/addcutting" />
@@ -165,6 +166,86 @@ const AnimalsCutting = () => {
           </div>
 
         </div>
+=======
+
+      <div className="app__Users ">
+        {isLoader ? <>
+          <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/cutting/addcutting" />
+        </> :
+          <div className="mt-3 p-2">
+            {SkeletonFilters(40, 150)}
+          </div>
+        }
+        <div className="app__Users-table">
+          {isLoader ? <>
+            <Table responsive={true} className='rounded-3 '>
+              <thead>
+                <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
+                  <th>Cutting Name</th>
+                  <th>Cutting Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody className='text-center'>
+                {
+                  animal?.map((item, index) => (
+                    <tr key={index}>
+
+
+                      <td >
+                        <div>
+                          {item?.CuttingName}
+                        </div>
+                      </td>
+
+                      <td >
+                        <div>
+                          <span style={{ height: 'fit-content !important' }} className={`  ${item?.CuttingActive === 1 && 'txt_delivered'}  ${item?.CuttingActive === 0 && 'txt_rejected'} `} >
+                            {item?.CuttingActive === 1 ? 'Active' : "InActive"}
+                          </span>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div>
+
+                          <span>
+                            <DropdownButton
+                              id={`dropdown-${item.IDCutting}`}
+                              title="Actions"
+                              variant="outline-success"
+                              onSelect={(eventKey) => handleActionSelect(item.IDCutting, eventKey)}
+                              className="DropdownButton "
+                              drop={'down-centered'}
+                            >
+                              <Dropdown.Item eventKey="Edite" as={Link} to={`/animals/cutting/editcutting/${item.IDCutting}`}>
+                                Edit
+                              </Dropdown.Item>
+
+                              {
+                                item?.CuttingActive === 1 ? '' : item?.CuttingActive === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
+                              }
+                              {
+                                item?.CuttingActive === 0 ? '' : item?.CuttingActive === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
+                              }
+                            </DropdownButton>
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                }
+
+              </tbody>
+
+            </Table>
+          </> :
+            SkeletonTable()
+          }
+        </div>
+
+      </div>
+ 
     </>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef,useContext, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
@@ -6,8 +6,15 @@ import { Col, Container, Row, Form, Button } from 'react-bootstrap';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
 import { Link } from 'react-router-dom';
+import initialTranslation from "./Translation";
+import { VendersContext } from '../../../../context/Store';
 
 const EditCountry = () => {
+  let { isLang } = useContext(VendersContext);
+  const [translate, setTranslate] = useState(initialTranslation)
+  const handelTranslate = () => setTranslate(initialTranslation)
+ 
+  
   let { id } = useParams()
   let navigate = useNavigate();
   const CountryNameEn = useRef();
@@ -31,12 +38,12 @@ const EditCountry = () => {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/location/countries/edit`, Country, apiheader).then((res) => {
 
       if (res.data.Success === true) {
-        toast.success('Country has been updated!', {
+        toast.success(<strong>{translate[isLang].toast.edit}</strong>, {
           duration: 4000,
-          position: 'top-center',
+          position: 'bottom-center',
           icon: <Icons.Added color='#40AB45' size={25} />,
           iconTheme: {
-            primary: '#0a0',
+            primary: '#40AB45',
             secondary: '#fff',
           },
         });
@@ -55,13 +62,15 @@ const EditCountry = () => {
    }
   useEffect(() => {
     countryDetail()
+    handelTranslate()
+
   }, [id])
   return (
     <Container fluid>
       <div className="app__addprodects">
-        <Component.SubNav sub__nav={[{ name: "Countries", path: '/location/country' }, { name: "Edit Country ", path: `/location/country/editcountry/${id}` }]} />
+        <Component.SubNav sub__nav={[{ name: translate[isLang].edit.nav1, path: '/location/country' }, { name:translate[isLang].edit.nav2, path: `/location/country/editcountry/${id}` }]} />
         <div className="app__addprodects__header ">
-          <Component.BaseHeader h1={'Edit Country'} />
+          <Component.BaseHeader h1={translate[isLang].edit.header} />
           <div className="app__addOrder-form">
             <div className="app__addprodects-form">
               <form onSubmit={submit}>
@@ -69,13 +78,13 @@ const EditCountry = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>  Name (En)</Form.Label>
+                      <Form.Label>{translate[isLang].edit.Label1}</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CountryNameEn} defaultValue={editPage?.CountryNameEn} />
                     </Form.Group>
 
 
                     <Form.Group controlId="formBasicEmail" className='mt-2' >
-                      <Form.Label>  Time Zone  </Form.Label>
+                      <Form.Label>{translate[isLang].edit.Label2} </Form.Label>
                       <Form.Control type="text" name='firstname' ref={CountryTimeZone} defaultValue={editPage?.CountryTimeZone} />
                     </Form.Group>
 
@@ -85,12 +94,12 @@ const EditCountry = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>  Name (Ar)</Form.Label>
+                      <Form.Label>{translate[isLang].edit.Label3}</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CountryNameAr} defaultValue={editPage?.CountryNameAr} style={{ direction: 'rtl' }} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail" className='mt-2'>
-                      <Form.Label>  Code</Form.Label>
+                      <Form.Label>  {translate[isLang].edit.Label4}</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CountryCode} defaultValue={editPage?.CountryCode} />
                     </Form.Group>
 
@@ -99,14 +108,15 @@ const EditCountry = () => {
 
                     <div className='baseBtn1'>
                       <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Save
+                      {translate[isLang].edit.save}
                       </Button>
                     </div>
 
                     <div className='baseBtn'>
-                      <Link to={'/location/cities'}>
+                      <Link to={'/location/country'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                          Cancel
+                        {translate[isLang].edit.cancel}
+
                         </Button>
                       </Link>
                     </div>

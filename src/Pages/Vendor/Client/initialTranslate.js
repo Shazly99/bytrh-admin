@@ -1,6 +1,6 @@
 let initialTranslate = {
     "ar": {
-        placeholder: 'البحث بالاسم أو البريد الإلكتروني أو الهاتف .....',
+        placeholder: 'البحث بالإسم  أو البريد الإلكتروني أو الهاتف .....',
         FilterStatus: [
             { value: "All", text: "الكل" },
             { value: "ACTIVE", text: "نشط" },
@@ -8,20 +8,27 @@ let initialTranslate = {
             { value: "BLOCKED", text: "محظور" },
         ],
         TableHeader: [
-            "اسم المستخدم",
+            "إسم  المستخدم",
             "دولة",
-            "تسجيل الدخول عن طريق" ,
+            "تسجيل الدخول عن طريق",
             "توازن",
             "حالة",
             "تاريخ التسجيل",
             "الإجراء"
         ],
-        Actions:[
-            {name:"الإجراءات"},
-            {name:"إعادة ضبط كلمة المرور"},
-            {name:"ضبط الرصيد", titleModel:"ضبط الرصيد لـ",btn1:"  ضبط الرصيد",btn2:"إلغاء"},
-            {name:"حذف", titleModel:"حذف العميل",btn1:" إحذف الان",btn2:"إلغاء"},
+        Actions: [
+            { name: "الإجراءات" },
+            { name: "إعادة ضبط كلمة المرور" },
+            { name: "ضبط الرصيد", titleModel: "ضبط الرصيد لـ", btn1: "  ضبط الرصيد", btn2: "إلغاء" },
+            { name: "حذف", titleModel: "حذف العميل", btn1: " إحذف الان", btn2: "إلغاء" },
         ],
+        toast: {
+            update: "تم التحديث بنجاح",
+            wallet: "تم تحديث المحفظة   ",
+            reset: "تم إعادة تعيين كلمة المرور بنجاح ",
+            delete: "تم حذف المستخدم"
+        },
+
     },
     "en": {
         placeholder: 'Search by name or email or phone.....',
@@ -40,13 +47,19 @@ let initialTranslate = {
             "Register Date",
             "Action"
         ],
-        Actions:[
-            {name:"Actions"},
-            {name:"Reset password"},
-            {name:"Set Balance", titleModel:"Set the balance for",btn1:"Set Balance",btn2:"Cancel"},
-            {name:"Deleted", titleModel:"Delete Client",btn1:"Delete Now",btn2:"Cancel"},
+        Actions: [
+            { name: "Actions" },
+            { name: "Reset password" },
+            { name: "Set Balance", titleModel: "Set the balance for", btn1: "Set Balance", btn2: "Cancel" },
+            { name: "Deleted", titleModel: "Delete Client", btn1: "Delete Now", btn2: "Cancel" },
         ],
-        
+        toast: {
+            update: "Updated Successfully",
+            wallet: "wallet updated ",
+            reset: "Password reset successfully ",
+            delete: "user has been deleted "
+        },
+
     }
 }
 

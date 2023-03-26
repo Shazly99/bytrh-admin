@@ -1,14 +1,22 @@
 import { Player } from '@lottiefiles/react-lottie-player';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState ,useContext} from 'react'
 import { Row, Col, Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import Img from '../../../assets/Img';
 import Component from '../../../constants/Component';
+import { VendersContext } from '../../../context/Store';
 import { GetData } from '../../../utils/fetchData';
 import { apiheader } from './../../../utils/fetchData';
+import initialTranslation from "./Translation";
+ 
 
 const LiveConsult = () => {
+  let { isLang } = useContext(VendersContext);
+  const [translate, setTranslate] = useState(initialTranslation)
+  const handelTranslate = () => {
+    setTranslate(initialTranslation)
+  }
   let { id } = useParams()
   const audioRef = useRef(null);
 
@@ -28,6 +36,7 @@ const LiveConsult = () => {
   useEffect(() => {
     ConsultDetails()
     window.scrollTo(0, 0);
+    handelTranslate()
     return () => {
       ConsultDetails()
     }
@@ -40,37 +49,36 @@ const LiveConsult = () => {
           <div className="app__chat__Consult  ">
             <div className='app__chat'>
               <div >
-                <Component.SubNav sub__nav={[{ name: "Consults List", path: '/chat/consult' }, { name: "Consult ", path: `/consult/chat/${id}` }]} />
+                <Component.SubNav sub__nav={[{ name:translate[isLang].consultChat.nav1, path: '/chat/consult' }, { name: translate[isLang].consultChat.nav2, path: `/consult/chat/${id}` }]} />
               </div>
               <div className='app__chat__Consult_details'>
                 <Row>
                   <Col xl={4} lg={4} md={4} sm={6} className='client'>
                   {consultDetails?.ClientName &&                  
                     <div className="client_details">
-                      <label htmlFor="">Client Name:</label>
+                      <label htmlFor="">{translate[isLang].consultChat.clientName}</label>
                       <span>{consultDetails?.ClientName}</span>
                     </div>
                   }
                     {consultDetails?.ClientPhone&&
                     
                     <div className="client_details">
-                      <label htmlFor="">Client Phone :</label>
+                      <label htmlFor="">{translate[isLang].consultChat.clientPhone}</label>
                       <span>{consultDetails?.ClientPhone}</span>
                     </div>
                     }
                   </Col>
                   <Col xl={4} lg={4} md={4} sm={6} className='doctor'>
-                  {consultDetails?.DoctorName&&
-                  
+                  {consultDetails?.DoctorName&& 
                     <div className="client_details">
-                      <label htmlFor="">Doctor Name :</label>
+                      <label htmlFor="">{translate[isLang].consultChat.doctorName}</label>
                       <span>{consultDetails?.DoctorName}</span>
                     </div>
                   }
                     {
                       consultDetails?.DoctorPhone &&
                       <div className="client_details">
-                        <label htmlFor="">Doctor Phone :</label>
+                        <label htmlFor="">{translate[isLang].consultChat.doctorPhone}</label>
                         <span>{consultDetails?.DoctorPhone}</span>
                       </div>
                     }
@@ -80,21 +88,21 @@ const LiveConsult = () => {
                     {
                       consultDetails?.ConsultStatus &&
                       <div className="client_details">
-                        <label htmlFor="">Consult Status:</label>
+                        <label htmlFor="">{translate[isLang].consultChat.Status}</label>
                         <span>{consultDetails?.ConsultStatus.charAt(0).toUpperCase() + consultDetails?.ConsultStatus.slice(1).toLowerCase()}</span>
                       </div>
                     }
                     {
                       consultDetails?.ConsultDate &&
                       <div className="client_details">
-                        <label htmlFor="">Create Date :</label>
+                        <label htmlFor="">{translate[isLang].consultChat.date}</label>
                         <span>{consultDetails?.ConsultDate}</span>
                       </div>
                     }
                   </Col>
                 </Row>
               </div>
-              <Component.BaseHeader h1={'Consult Details :'} />
+              <Component.BaseHeader h1={translate[isLang].consultChat.header} />
 
               <Row className="app__chat__container ">
                 <Col xl={12} lg={12} md={12} sm={12} className='app__chat_messages '>
@@ -112,10 +120,11 @@ const LiveConsult = () => {
                                   autoplay
                                   loop
                                 />
-                              </div>                              <h2 className={` ${chat.length === 0 ? 'text-light' : ''}`}>
-                                Welcome, <span className='admin__color'>admin!</span>
+                              </div>                              
+                              <h2 className={` ${chat.length === 0 ? 'text-light' : ''}`}>
+                              {translate[isLang].consultChat.hello} <span className='admin__color'>{translate[isLang].consultChat.rout}</span>
                               </h2>
-                              <h4 className={` ${chat.length === 0 ? 'text-light text-center' : ' text-center'}`}>This Consults Is Empty.</h4>
+                              <h4 className={` ${chat.length === 0 ? 'text-light text-center' : ' text-center'}`}>{translate[isLang].consultChat.chatEmpty}</h4>
                             </div>
                             :
                             <>
