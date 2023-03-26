@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import Component from '../../constants/Component'
 import { Container, Row, Col, Button, InputGroup, FormControl } from 'react-bootstrap';
 import { VendersContext } from './../../context/Store';
@@ -9,11 +9,11 @@ import Icons from '../../constants/Icons';
 import { useNavigate } from 'react-router-dom';
 import useFetch from './../../utils/useFetch';
 import { Link } from 'react-router-dom';
+import translateADS from './translateAds';
 
 const AddAds = () => {
   let navigate = useNavigate();
 
-  // let { countries } = useContext(VendersContext);
   let { countries, cities, getCities } = useFetch()
   const countriesRef = useRef(null);
   const doctorRef = useRef(null);
@@ -125,13 +125,22 @@ const AddAds = () => {
       }
     });
   }
+
+
+  let { isLang } = useContext(VendersContext);
+
+
+
   return (
     <Container fluid>
       <div className="app__addprodects">
-        <Component.SubNav sub__nav={[{ name: " Ads", path: '/ads' }, { name: "Add New Ads ", path: '/ads/add' }]} />
-
+        {isLang === 'ar' ?
+            <Component.SubNav sub__nav={[{ name: "إضافـة إعـلان جديـد", path: '/ads/add' } , { name: " قائمـة الإعلانـات", path: '/ads' }]} />
+            :
+            <Component.SubNav sub__nav={[{ name: " Ads", path: '/ads' }, { name: "Add New Ads ", path: '/ads/add' }]} />
+        }
         <div className="app__addprodects__header ">
-          <Component.BaseHeader h1={'Add New Ads'} />
+          <Component.BaseHeader h1={translateADS[isLang]?.LabelAddPage} />
           <div className="app__addOrder-form">
 
             <div className="app__addprodects-form">
@@ -139,7 +148,7 @@ const AddAds = () => {
                 <Row>
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
                     <Form.Group>
-                      <Form.Label>Ads Image:</Form.Label>
+                      <Form.Label>{translateADS[isLang]?.labelImageInput}</Form.Label>
                       <FormControl
                         id="custom-file"
                         type="file"
@@ -170,8 +179,9 @@ const AddAds = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail" >
-                      <Form.Label>Country</Form.Label>
+                      <Form.Label>{translateADS[isLang]?.labelCountryInput}</Form.Label>
                       <Form.Select aria-label="Default select example" onClick={handelSelectCountry}>
+                        <option >{translateADS[isLang]?.optionCountry}</option>
                         {
                           countries?.map((item, index) => (
                             <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
@@ -181,7 +191,7 @@ const AddAds = () => {
                     </Form.Group>
 
                     <Form.Group controlId="formBasicStartDate" className='mt-3'>
-                      <Form.Label>Start date:</Form.Label>
+                      <Form.Label>{translateADS[isLang]?.labelStartInput}</Form.Label>
                       <InputGroup>
                         <FormControl type="date" ref={startDateRef} />
                       </InputGroup>
@@ -189,8 +199,9 @@ const AddAds = () => {
 
 
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
-                      <Form.Label>Ads Service</Form.Label>
+                      <Form.Label>{translateADS[isLang]?.labelAdsServiceInput}</Form.Label>
                       <Form.Select aria-label="Default select example" ref={AdsService} onClick={handelSelectService}>
+                        <option >{translateADS[isLang]?.optionAdvertisementService}</option>
                         {
                           ['NONE', 'URGENT_CONSULT', 'CONSULT', 'CLIENT_BLOG', 'DOCTOR_BLOG', 'ADOPTION']?.map((item, index) => (
                             <option key={index} value={item}   >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase()}</option>
@@ -200,8 +211,9 @@ const AddAds = () => {
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
-                      <Form.Label>Ads Location</Form.Label>
+                      <Form.Label>{translateADS[isLang]?.labelAdsLocationInput}</Form.Label>
                       <Form.Select aria-label="Default select example" ref={AdsLocation} >
+                        <option >{translateADS[isLang]?.optionAdvertisementLocation}</option>
                         {
                           ['HOME', 'PAGES', 'INNER_PAGES']?.map((item, index) => (
                             <option key={index} value={item}   >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase()}</option>
@@ -214,9 +226,10 @@ const AddAds = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail" >
-                      <Form.Label>City</Form.Label>
+                      <Form.Label>{translateADS[isLang]?.labelCityInput}</Form.Label>
 
                       <Form.Select aria-label="Default select example" ref={countriesRef}>
+                        <option >{translateADS[isLang]?.optionCity}</option>
                         {
                           cities?.map((item, index) => (
                             <option key={index} value={item?.IDCity}>{item?.CityName}</option>
@@ -228,15 +241,16 @@ const AddAds = () => {
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEndDate" className='mt-3'>
-                      <Form.Label>End date:</Form.Label>
+                      <Form.Label>{translateADS[isLang]?.labelEndInput}</Form.Label>
                       <InputGroup>
                         <FormControl type="date" ref={endDateRef} />
                       </InputGroup>
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
-                      <Form.Label>ID Link  </Form.Label>
+                      <Form.Label>{translateADS[isLang]?.labelLinkInput}</Form.Label>
                       <Form.Select aria-label="Default select example" ref={doctorRef} >
+                        <option >{translateADS[isLang]?.optionAdvertisementLink}</option>
                         {data.doctor?.map((item, index) => (<option key={index} value={item.IDDoctor}>{'  '}{item.DoctorName}</option>))}
                         {data.blog?.map((item, index) => (<option key={index} value={item.IDClientBlog}> {item.BlogTitle}{' (  '}{item.ClientName}{' )  '}</option>))}
                         {data.blogDoc?.map((item, index) => (<option key={index} value={item.IDDoctorBlog}>{item.BlogTitle}{' (   '} {item.DoctorName}{' ) '} </option>))}
@@ -251,14 +265,14 @@ const AddAds = () => {
 
                     <div className='baseBtn1'>
                       <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Save
+                        {translateADS[isLang]?.SaveBTN}
                       </Button>
                     </div>
 
                     <div className='baseBtn'>
                       <Link to={'/ads'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Cancel
+                          {translateADS[isLang]?.CancelBTN}
                         </Button>
                       </Link>
                     </div>

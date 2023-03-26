@@ -165,8 +165,7 @@ const AnimalsCutting = () => {
             }
           </div>
 
-        </div>  
- 
+        </div>
     </>
   )
 }

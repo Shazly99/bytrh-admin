@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useRef, useContext } from 'react'
 import { Container, Row, Col, Button, InputGroup, Form, FormControl } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
-
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import Component from '../../constants/Component';
 import Icons from '../../constants/Icons';
 import { VendersContext } from '../../context/Store';
 import { apiheader, GetData, PostData } from '../../utils/fetchData';
 import useFetch from './../../utils/useFetch';
+import translateADS from './translateAds';
+
 
 const EditAds = () => {
   let { id } = useParams()
@@ -131,20 +132,33 @@ const EditAds = () => {
     window.scrollTo(0, 0);
   }, [id])
 
+
+
+
+  let { isLang } = useContext(VendersContext);
+
+
+
+
+
   return (
     <>
       <Container fluid>
         <div className="app__addprodects">
-          <Component.SubNav sub__nav={[{ name: "Ads", path: '/ads' }, { name: "Edit Ads ", path: `/ads/edit/${id}` }]} />
+          {isLang === 'ar' ?
+            <Component.SubNav sub__nav={[{ name: "تعديـل الإعـلان", path: `/ads/edit/${id}` } , { name: "قائمـة الإعلانــات", path: '/ads' }]} />
+            :
+            <Component.SubNav sub__nav={[{ name: "Ads", path: '/ads' }, { name: "Edit Ads ", path: `/ads/edit/${id}` }]} />
+          }
           <div className="app__addprodects__header ">
-            <Component.BaseHeader h1={'Add Ads'} />
+            <Component.BaseHeader h1={translateADS[isLang]?.LabelEditPage} />
             <div className="app__addOrder-form">
               <div className="app__addprodects-form">
                 <form onSubmit={submit}>
                   <Row>
                     <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
                       <Form.Group>
-                        <Form.Label>Ads Image:</Form.Label>
+                        <Form.Label>{translateADS[isLang]?.labelImageInput}</Form.Label>
                         <FormControl
                           id="custom-file"
                           type="file"
@@ -182,7 +196,7 @@ const EditAds = () => {
 
 
                       <Form.Group controlId="formBasicEmail" className='mt-3'>
-                        <Form.Label>Country</Form.Label>
+                        <Form.Label>{translateADS[isLang]?.labelCountryInput}</Form.Label>
                         <Form.Select aria-label="Default select example" onClick={handelSelectCountry}>
                           {
                             countries?.map((item, index) => (
@@ -193,7 +207,7 @@ const EditAds = () => {
                       </Form.Group>
 
                       <Form.Group controlId="formBasicStartDate" className='mt-3'>
-                        <Form.Label>Start date:</Form.Label>
+                        <Form.Label>{translateADS[isLang]?.labelStartInput}</Form.Label>
                         <InputGroup>
                           <FormControl type="date" ref={startDateRef} defaultValue={editPage?.AdvertisementStartDate?.split(" ")[0]} />
                         </InputGroup>
@@ -201,7 +215,7 @@ const EditAds = () => {
 
 
                       <Form.Group controlId="formBasicEmail" className='mt-3'>
-                        <Form.Label>Ads Service</Form.Label>
+                        <Form.Label>{translateADS[isLang]?.labelAdsServiceInput}</Form.Label>
                         <Form.Select aria-label="Default select example" ref={AdsService} onClick={handelSelectService}>
                           {
                             ['NONE', 'URGENT_CONSULT', 'CONSULT', 'CLIENT_BLOG', 'DOCTOR_BLOG', 'ADOPTION']?.map((item, index) => (
@@ -212,7 +226,7 @@ const EditAds = () => {
                       </Form.Group>
 
                       <Form.Group controlId="formBasicEmail" className='mt-3'>
-                        <Form.Label>Ads Location</Form.Label>
+                        <Form.Label>{translateADS[isLang]?.labelAdsLocationInput}</Form.Label>
                         <Form.Select aria-label="Default select example" ref={AdsLocation} >
                           {
                             ['HOME', 'PAGES', 'INNER_PAGES']?.map((item, index) => (
@@ -224,8 +238,7 @@ const EditAds = () => {
                     </Col>
                     <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
                       <Form.Group controlId="formBasicEmail" className='mt-3' >
-                        <Form.Label>City</Form.Label>
-
+                        <Form.Label>{translateADS[isLang]?.labelCityInput}</Form.Label>
                         <Form.Select aria-label="Default select example" ref={selectCity}>
                           {
                             cities?.map((item, index) => (
@@ -237,21 +250,21 @@ const EditAds = () => {
                       </Form.Group>
 
                       <Form.Group controlId="formBasicStartDate" className='mt-3'>
-                        <Form.Label>Start date:</Form.Label>
+                        <Form.Label>{translateADS[isLang]?.labelEndInput}</Form.Label>
                         <InputGroup>
                           <FormControl type="date" ref={endDateRef} defaultValue={editPage?.AdvertisementEndDate?.split(" ")[0]} />
                         </InputGroup>
                       </Form.Group>
 
                       <Form.Group controlId="formBasicEmail" className='mt-3'>
-                        <Form.Label>ID Link  </Form.Label>
+                        <Form.Label>{translateADS[isLang]?.labelLinkInput}</Form.Label>
                         <Form.Select aria-label="Default select example" ref={doctorRef} >
                           {/* {
                             doctor?.map((item, index) => (
                               <option key={index} value={item.IDDoctor} selected={editPage?.IDLink === item.IDDoctor && item.DoctorName} defaultValue={item.DoctorName} >{item.DoctorName}</option>
                             ))
                           } */}
-
+                          {/* <option >{translateADS[isLang]?.optionAdvertisementLink}</option> */}
                           {data.doctor?.map((item, index) => (<option key={index} value={item.IDDoctor} selected={editPage?.IDLink === item.IDDoctor && item.DoctorName} defaultValue={item.DoctorName}>{'  '}{item.DoctorName}</option>))}
                           {data.blog?.map((item, index) => (<option key={index} value={item.IDClientBlog} selected={editPage?.IDLink === item.IDClientBlog && item.ClientName} defaultValue={item.ClientName}> {item.BlogTitle}{' (  '}{item.ClientName}{' )  '}</option>))}
                           {data.blogDoc?.map((item, index) => (<option key={index} value={item.IDDoctorBlog} selected={editPage?.IDLink === item.IDDoctorBlog && item.DoctorName} defaultValue={item.ClientName}>{item.BlogTitle}{' (   '} {item.DoctorName}{' ) '} </option>))}
@@ -263,14 +276,14 @@ const EditAds = () => {
 
                       <div className='baseBtn1'>
                         <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                          Save
+                          {translateADS[isLang]?.SaveBTN}
                         </Button>
                       </div>
 
                       <div className='baseBtn'>
                         <Link to={'/ads'}>
                           <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                          Cancel
+                            {translateADS[isLang]?.CancelBTN}
                           </Button>
                         </Link>
                       </div>

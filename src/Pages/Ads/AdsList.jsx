@@ -15,9 +15,11 @@ import Icons from '../../constants/Icons';
 import { apiheader, GetData } from '../../utils/fetchData';
 import useFetch from '../../utils/useFetch';
 import useSkeletonTable from "../../utils/useSkeletonTable";
-
 import Modal from 'react-bootstrap/Modal';
 import { VendersContext } from "../../context/Store";
+import translateADS from './translateAds';
+
+
 
 const AdsList = () => {
   let { isLang } = useContext(VendersContext);
@@ -201,36 +203,40 @@ const AdsList = () => {
     window.scrollTo(0, 0);
   }, [page]);
 
+
+
+
   return (
 
     <>
       <div className="app__Users ">
-        <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/ads/add" />
+        <Component.ButtonBase title={translateADS[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/ads/add" />
         <div className="app__Users-table">
           <div className="search-container">
           <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
               <div className=' app__addOrder-form'>
                 <div className="d-flex flex-column row justify-content-between">
-                  <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }} className='col'>Filter by Start Date and End Date :	</h5>
+                  <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }} className='col'>{translateADS[isLang]?.labelFilterDate}</h5>
                   <div className='d-flex flex-row justify-content-between'>
                     <DateRangePicker
                       ranges={[dateRange]}
                       onChange={handleSelect}
                       onApply={handleApply}
                     >
-                      <Button variant="outline-primary">Select Start Date & End Date</Button>
+                      <Button variant="outline-primary">{translateADS[isLang]?.buttonSelectDate}</Button>
                     </DateRangePicker>
-                    {startDate && <p> <strong>Start Date : </strong>{startDate} </p>}
-                    {endDate && <p> <strong>End Date : </strong>{endDate} </p>}
+                    {startDate && <p> <strong>{translateADS[isLang]?.startDate}</strong>{startDate} </p>}
+                    {endDate && <p> <strong>{translateADS[isLang]?.endDate}</strong>{endDate} </p>}
                   </div>
 
                 </div>
-                <h5 style={{ marginTop: '15px', color: '#4A4A4A' }} className='col'>Filter by City || Ads Location || Ads Service :	</h5>
+                <h5 style={{ marginTop: '15px', color: '#4A4A4A' }} className='col'>{translateADS[isLang]?.textFilterInputs}</h5>
                 <Row className='d-flex flex-row justify-content-between'>
                   <Col className='w-100'>
                     <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry}>
-                      <Form.Label>Country</Form.Label>
+                      <Form.Label>{translateADS[isLang]?.labelCountry}</Form.Label>
                       <Form.Select aria-label="Default select example" >
+                        <option>{translateADS[isLang]?.optionCountry}</option>
                         {
                           countries?.map((item, index) => (
                             <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
@@ -242,9 +248,9 @@ const AdsList = () => {
 
                   <Col className='w-100'>
                     <Form.Group controlId="formBasicEmail"   >
-                      <Form.Label>City</Form.Label>
+                      <Form.Label>{translateADS[isLang]?.labelCity}</Form.Label>
                       <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={countriesRef}>
-                        <option value={'cities'}>all city</option>
+                        <option>{translateADS[isLang]?.optionCity}</option>
                         {
                           cities?.map((item, index) => (
                             <option key={index} value={item?.IDCity}>{item?.CityName}</option>
@@ -256,11 +262,9 @@ const AdsList = () => {
                   </Col>
                   <Col className='w-100'>
                     <Form.Group controlId="formBasicEmail"  >
-                      <Form.Label  >Advertisement Location</Form.Label>
-
-
+                      <Form.Label  >{translateADS[isLang]?.labelAdvertisementLocation}</Form.Label>
                       <Form.Select aria-label="Default select example" ref={adsLocation} onClick={handelAdvertisementLocation} >
-                        <option value={'ads'}  >All Ads</option>
+                        <option>{translateADS[isLang]?.optionAdvertisementLocation}</option>
                         {
                           ['HOME', 'PAGES', 'INNER_PAGES']?.map((item, index) => (
                             <option key={index} value={item}  >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase().replace('_', " ")}</option>
@@ -272,9 +276,9 @@ const AdsList = () => {
 
                   <Col className='w-100'>
                     <Form.Group controlId="formBasicEmail"   >
-                      <Form.Label  >Advertisement Service</Form.Label>
+                      <Form.Label  >{translateADS[isLang]?.labelAdvertisementService}</Form.Label>
                       <Form.Select aria-label="Default select example" ref={adsService} onClick={handelAdvertisementService} >
-                        <option value={'ads'}  >All Ads</option>
+                        <option>{translateADS[isLang]?.optionAdvertisementService}</option>
                         {
                           ['NONE', 'URGENT_CONSULT', 'CONSULT', 'DOCTOR_BLOG', 'CLIENT_BLOG', 'ADOPTION']?.map((item, index) => (
                             <option key={index} value={item}>{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase().replace('_', " ")}</option>
@@ -296,12 +300,9 @@ const AdsList = () => {
             <Table responsive={true} className='rounded-3 '>
               <thead>
                 <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                  <th> Image</th>
-                  <th> Service</th>
-                  <th>Start-Date</th>
-                  <th> End-Date  </th>
-                  <th> Location</th>
-                  <th>Action</th>
+                  {translateADS[isLang]?.TableHeader?.map((el , i) => (
+                      <th key={i}>{el}</th>
+                  ))}
                 </tr>
               </thead>
 
@@ -356,34 +357,33 @@ const AdsList = () => {
                           <span>
                             <DropdownButton
                               id={`dropdown-${item.IDAdvertisement}`}
-                              title="Actions"
+                              title={translateADS[isLang]?.ActionsLabel}
                               variant="outline-success"
                               onSelect={(eventKey) => handleActionSelect(item.IDAdvertisement, index)}
                               className="DropdownButton "
                               drop={'down-centered'}
                             >
                               <Dropdown.Item eventKey="Edite" as={Link} to={`/ads/edit/${item.IDAdvertisement}`}>
-                                Edit
+                                {isLang === 'ar' ? 'تعديــل' : 'Edit'}
                               </Dropdown.Item>
 
                               <Dropdown.Item eventKey="DELETE"   >
-                                Delete
+                                {isLang === 'ar' ? 'حـذف' : 'Delete'}
                               </Dropdown.Item>
 
 
-                              <Modal show={showDeleteModal && modalIndexEdit === index} onHide={() => setShowDeleteModal(false)} centered>
+                              <Modal show={showDeleteModal && modalIndexEdit === index} onHide={() => setShowDeleteModal(false)} centered dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
                                 <Modal.Header closeButton>
-                                  <Modal.Title>Delete Advertisement</Modal.Title>
+                                  <Modal.Title>{translateADS[isLang]?.headerModalDel}</Modal.Title>
                                 </Modal.Header>
                                 <Modal.Body> 
                                   <Component.HandelDelete/>
                                 </Modal.Body>
                                 <Modal.Footer className='  d-flex justify-content-center'>
                                   <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => handleDeleteUser(item.IDUser)}>
-                                    Delete Now
-                                  </Button>
+                                    {translateADS[isLang]?.btnModalDel}                                  </Button>
                                   <Button variant="outline-primary" onClick={() => setShowDeleteModal(false)}>
-                                    Cancel
+                                    {translateADS[isLang]?.CancelBTN}
                                   </Button>
                                 </Modal.Footer>
                               </Modal>
