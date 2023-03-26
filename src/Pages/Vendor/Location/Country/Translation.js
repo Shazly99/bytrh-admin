@@ -22,7 +22,7 @@ let initialTranslation = {
             Label2: 'المنطقة الزمنية',
             Label1: 'إسم الدولة (En)',
             Label4: 'الرقم الدولي   ',
-            save: "حفظ", cancel: 'إلغاء'
+            save: "حفظ", cancel: 'رجــوع'
         },
 
         edit: {
@@ -32,7 +32,7 @@ let initialTranslation = {
             Label2: 'المنطقة الزمنية',
             Label1: 'إسم الدولة (En)',
             Label4: 'الرقم الدولي   ',
-            save: "حفظ", cancel: 'إلغاء'
+            save: "حفظ", cancel: 'رجــوع'
         },
         toast:
         {

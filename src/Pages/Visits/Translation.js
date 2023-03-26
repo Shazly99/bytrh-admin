@@ -23,7 +23,7 @@ let initialTranslation = {
             "تاريخ بدء الزيارة ",
             "الإجراء"
         ],
-        Actions: { action: "الإجراءات",vistType:'نوع الزيارة'},
+        Actions: { action: "الإجراءات",vistType:'نوع الزيارة',currency:"ريال سعودي "},
         toast: { endChat: "تم إنهاء الدردشة" }, 
         filterVisitType:[
             { value: "All", text: "جميع انواع الزيارات" },
@@ -57,7 +57,7 @@ let initialTranslation = {
             "Start Date ",
             "Action"
         ],
-        Actions: { action: "Actions", vistType:"vist Type"},
+        Actions: { action: "Actions", vistType:"vist Type",currency:"SAR"},
         toast: { endChat: "Chat has been ended" },
         filterVisitType:[
             { value: "All", text: " All visits type"    },

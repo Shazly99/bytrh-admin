@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 import Icons from '../../constants/Icons';
 
-const ProductRequests = ({ Request, isLoader }) => {
+const ProductRequests = ({ translate,Request, isLoader }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -49,7 +49,7 @@ const ProductRequests = ({ Request, isLoader }) => {
             {isLoader ? <>
                 {Request &&
                     <div className="product_description">
-                        <h3 > Animal Product Requests  </h3>
+                        <h3 >{translate.requestsTitle}  </h3>
                     </div>
                 }
             </> : SkeletonHeader()}
@@ -59,16 +59,11 @@ const ProductRequests = ({ Request, isLoader }) => {
                     <Table responsive={true} striped bordered hover size="sm">
                         <thead>
                             <tr>
-                                <th >  Buyer Info</th>
-                                {/*     <th>Phone</th> */}
-                                <th>Price</th>
-                                <th>Cutting Fees</th>
-                                <th>Bagging Fees</th>
-                                <th>Delivery Fees</th>
-                                <th>Delivery Request</th>
-                                <th>Total Price</th>
-                                <th>Note</th>
-                                <th className=' text-center'>  Status</th>
+                            {
+                                    translate?.Requests?.map((item, index) => (
+                                        <th className='text-center'key={index}>{item}</th>
+                                    ))
+                                }
                             </tr>
                         </thead>
                         <tbody>

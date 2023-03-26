@@ -12,10 +12,17 @@ import { VendersContext } from "../../context/Store";
 import useFetch from "../../utils/useFetch";
 import useSkeletonTable from "../../utils/useSkeletonTable";
 import { apiheader, PostData } from "./../../utils/fetchData";
+import initialTranslation from "./Translation";
+
 
 const StoreList = () => {
-    let { SkeletonTable } = useSkeletonTable();
     let { isLang } = useContext(VendersContext);
+    const [translate, setTranslate] = useState(initialTranslation)
+    const handelTranslate = () => {
+        setTranslate(initialTranslation)
+    }
+
+    let { SkeletonTable } = useSkeletonTable();
     const [animal, setAnimal] = useState([]);
     const [page, setPage] = useState(1);
     const [PagesNumber, setPagesNumber] = useState("");
@@ -94,7 +101,6 @@ const StoreList = () => {
     // const handleSearchClick = () => {
     // };
     const handleInputChange = (event) => {
-
         if (event.target.value === '') {
             store(page)
         }
@@ -102,7 +108,6 @@ const StoreList = () => {
         searchGetData(event.target.value);
     };
     const searchGetData = async (searchValue) => {
-
         let { data } = await PostData(`https://bytrh.com/api/admin/animalproducts`, { IDPage: page, SearchKey: searchValue }, apiheader)
         setAnimal(data.Response.AnimalProducts);
         setPagesNumber(data.Response.Pages);
@@ -253,6 +258,7 @@ const StoreList = () => {
         store(page);
         animalSubCategoryGet()
         window.scrollTo(0, 0);
+        handelTranslate()
     }, [page, isLoader]);
     useEffect(() => { }, [page, PagesNumber]);
     const SkeletonSearch = (w, h) => {
@@ -287,8 +293,8 @@ const StoreList = () => {
                         <div className='  w-100'>
 
                             {isLoader ? <>
-                                <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}> 
-                                    <input type="text" placeholder="Search by client name or email....." name="search" value={searchValue} onChange={handleInputChange} />
+                                <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
+                                    <input type="text" placeholder={translate[isLang]?.placeholder} name="search" value={searchValue} onChange={handleInputChange} />
                                     <button type="submit" >
                                         <Icons.Search color='#fff' size={25} />
                                     </button>
@@ -301,8 +307,8 @@ const StoreList = () => {
                                         {isLoader ? <>
                                             <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry} ref={countryRef}>
                                                 <Form.Select aria-label="Default select example" >
-                                                    <option selected disabled hidden>Select Country</option>
-                                                    <option value={'country'} >Countries</option>
+                                                    <option selected disabled hidden value={'Select Country'}>{translate[isLang]?.filter?.Country}  </option>
+                                                    <option value={'country'} >{translate[isLang]?.filter?.allCountry}</option>
 
                                                     {
                                                         countries?.map((item, index) => (
@@ -318,9 +324,9 @@ const StoreList = () => {
                                         {isLoader ? <>
                                             <Form.Group controlId="formBasicEmail"   >
                                                 <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={cityRef}>
-                                                    <option selected disabled hidden>Select city</option>
+                                                    <option selected disabled hidden value={'Select city'}> {translate[isLang]?.filter?.city}  </option>
 
-                                                    <option value={'cities'} >Cities</option>
+                                                    <option value={'cities'} >{translate[isLang]?.filter?.allCity}</option>
 
                                                     {
                                                         cities?.map((item, index) => (
@@ -337,9 +343,9 @@ const StoreList = () => {
                                         {isLoader ? <>
                                             <Form.Group controlId="formBasicEmail"   >
                                                 <Form.Select aria-label="Default select example" onClick={handelSelectArea} ref={areaRef}>
-                                                    <option selected disabled hidden>Select Area</option>
+                                                    <option selected disabled hidden value={'Select Area'}>  {translate[isLang]?.filter?.area}  </option>
 
-                                                    <option value={'Areas'} >Areas</option>
+                                                    <option value={'Areas'} > {translate[isLang]?.filter?.allarea} </option>
 
                                                     {
                                                         areas?.map((item, index) => (
@@ -358,9 +364,9 @@ const StoreList = () => {
                                             <Form.Group controlId="formBasicEmail"  >
                                                 {/* <Form.Label  >Product Type </Form.Label> */}
                                                 <Form.Select aria-label="Default select example" ref={animalProductType} onClick={handelAdvertisement} >
-                                                    <option selected disabled hidden>Select Product Type</option>
+                                                    <option selected disabled hidden value={'Select Product Type'}> {translate[isLang]?.filter?.Product} </option>
 
-                                                    <option value={'All'}  >Animals Product Type</option>
+                                                    <option value={'All'}  > {translate[isLang]?.filter?.Products} </option>
                                                     {
                                                         ['SINGLE', 'GROUP']?.map((item, index) => (
                                                             <option key={index} value={item}  >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase()}</option>
@@ -377,9 +383,9 @@ const StoreList = () => {
                                             <Form.Group controlId="formBasicEmail"  >
                                                 {/* <Form.Label  >  Product Status </Form.Label> */}
                                                 <Form.Select aria-label="Default select example" ref={statusRef} onClick={handelanimalProductStatus} >
-                                                    <option selected disabled hidden>Select Status</option>
+                                                    <option selected disabled hidden value={'Select Status'}> {translate[isLang]?.filter?.status}</option>
 
-                                                    <option value={'All'}  > All Status</option>
+                                                    <option value={'All'}  > {translate[isLang]?.filter?.allStatus} </option>
                                                     {
                                                         ['PENDING', 'ACTIVE', 'CANCELLED', 'SOLD', 'REJECTED', 'RESERVED']?.map((item, index) => (
                                                             <option key={index} value={item}  >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase()}</option>
@@ -396,8 +402,8 @@ const StoreList = () => {
 
                                                 {/* <Form.Label  >  SubCategory </Form.Label> */}
                                                 <Form.Select aria-label="Default select example" ref={animalSubCategoryRef} onClick={handelanimalSubCategory} >
-                                                    <option selected disabled hidden>Select SubCategory</option>
-                                                    <option value={'All'}  >Animal SubCategory</option>
+                                                    <option selected disabled hidden value={'Select SubCategory'}> {translate[isLang]?.filter?.SubCategory}</option>
+                                                    <option value={'All'}  >{translate[isLang]?.filter?.allSubCategory}  </option>
                                                     {
                                                         animalSubCategory?.map((item, index) => (
                                                             <option key={index} value={item.IDAnimalSubCategory}  >{item?.AnimalSubCategoryName}</option>
@@ -416,176 +422,145 @@ const StoreList = () => {
                         <>
                             {
                                 animal.length > 0 ?
-                                <Table responsive={true} className="rounded-3 ">
-                                <thead>
-                                    <tr className="text-center  " style={{ background: "#F9F9F9" }} >
-                                        <th >  Product Image    </th>
-                                        <th >Client Info  </th>
-                                        <th > SubCategory    </th>
-                                        <th > Price    </th>
-                                        <th > Type  </th>
-                                        <th > Status  </th>
-                                        <th >Create Date  </th>
-                                        <th >View  </th>
+                                    <Table responsive={true} className="rounded-3 ">
+                                        <thead>
+                                            <tr className="text-center  " style={{ background: "#F9F9F9" }} >
+                                                {
+                                                    translate[isLang]?.TableHeader?.map((item, index) => (
+                                                        <th key={index}>{item}</th>
+                                                    ))
+                                                }
 
-                                    </tr>
-                                </thead>
-                                <tbody className="text-center">
-                         
-                                                {animal?.map((item, index) => (
-                                                    <tr key={index}>
-                                                        <td>
-                                                            <div style={{ maxWidth: "170px" }}>
-                                                                <img
-                                                                    src={item?.AnimalProductImage}
-                                                                    className="w-100 rounded-3"
-                                                                    alt={item?.AnimalProductTypeName}
-                                                                    loading="lazy"
-                                                                />
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div
-                                                                className="d-flex flex-column justify-content-center align-content-center"
-                                                                style={{ gap: "0" }}
-                                                            >
-                                                                <span className="ClientName">
-                                                                    {item?.ClientName}
-                                                                </span>
-                                                                <span className="ClientPhone">
-                                                                    {item?.ClientPhone}
-                                                                </span>
-                                                            </div>
-                                                        </td>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="text-center">
 
-                                                        <td>
-                                                            <div>{item?.AnimalSubCategoryName}</div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="d-flex gap-1">
-                                                                <h6 className="mb-0  pe-2 color-red">
-                                                                    {item?.AnimalProductPrice} SAR
-                                                                </h6>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div>
-                                                                {item?.AnimalProductType.charAt(0).toUpperCase() +
-                                                                    item?.AnimalProductType.slice(1).toLowerCase()}
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="blog__status">
-                                                                <span
-                                                                    style={{ height: "fit-content  important" }}
-                                                                    className={`  ${item.AnimalProductStatus === "PENDING" &&
-                                                                        "txt_pending"
-                                                                        } ${item.AnimalProductStatus === "CANCELLED" &&
-                                                                        "txt_rejected"
-                                                                        }   ${item.AnimalProductStatus === "RESERVED" &&
-                                                                        "txt_delivery"
-                                                                        } ${item.AnimalProductStatus === "REJECTED" &&
-                                                                        "txt_rejected"
-                                                                        }   ${item.AnimalProductStatus === "SOLD" &&
-                                                                        "txt__status"
-                                                                        } ${item.AnimalProductStatus === "ACTIVE" &&
-                                                                        "txt_delivered"
-                                                                        }`}
-                                                                > {item?.AnimalProductStatus.charAt(0).toUpperCase() + item?.AnimalProductStatus.slice(1).toLowerCase()}
-                                                                </span>
-                                                                <div className="delete">
-                                                                    <DropdownButton
-                                                                        title={
-                                                                            <img src={Img.dropdown}  alt={'img dropdown'} />
-                                                                        }
-                                                                        id="dropdown-menu"
-                                                                        variant="outline-success"
-                                                                        onClick={() => setShowDropdown(!showDropdown)}
-                                                                        onSelect={(eventKey) =>
-                                                                            handleActionSelect(
-                                                                                item.IDAnimalProduct,
-                                                                                eventKey
-                                                                            )
-                                                                        }
-                                                                        className="DropdownButton "
-                                                                        drop={"down-centered"}
-                                                                    >
-                                                                        {item?.AnimalProductStatus === "PENDING" ? (
-                                                                            ""
-                                                                        ) : (
-                                                                            <Dropdown.Item eventKey="PENDING">
-                                                                                Pending
-                                                                            </Dropdown.Item>
-                                                                        )}
-                                                                        {item?.AnimalProductStatus === "ACTIVE" ? (
-                                                                            ""
-                                                                        ) : (
-                                                                            <Dropdown.Item eventKey="ACTIVE">
-                                                                                Active
-                                                                            </Dropdown.Item>
-                                                                        )}
-                                                                        {item?.AnimalProductStatus === "CANCELLED" ? (
-                                                                            ""
-                                                                        ) : (
-                                                                            <Dropdown.Item eventKey="CANCELLED">
-                                                                                Cancelled
-                                                                            </Dropdown.Item>
-                                                                        )}
-                                                                        {item?.AnimalProductStatus === "SOLD" ? (
-                                                                            ""
-                                                                        ) : (
-                                                                            <Dropdown.Item eventKey="SOLD">
-                                                                                Sold
-                                                                            </Dropdown.Item>
-                                                                        )}
-                                                                        {item?.AnimalProductStatus === "REJECTED" ? (
-                                                                            ""
-                                                                        ) : (
-                                                                            <Dropdown.Item eventKey="REJECTED">
-                                                                                Rejected
-                                                                            </Dropdown.Item>
-                                                                        )}
-                                                                        {item?.AnimalProductStatus === "RESERVED" ? (
-                                                                            ""
-                                                                        ) : (
-                                                                            <Dropdown.Item eventKey="RESERVED">
-                                                                                Reserved
-                                                                            </Dropdown.Item>
-                                                                        )}
-                                                                    </DropdownButton>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div
-                                                                className="d-flex flex-column justify-content-center align-content-center"
-                                                                style={{ gap: "0" }}
-                                                            >
-                                                                <span className="ClientName">
-                                                                    {" "}
-                                                                    {item?.CreateDate.split(" ")[0]}{" "}
-                                                                </span>
-                                                                <span className="ClientPhone">
-                                                                    {" "}
-                                                                    {item?.CreateDate.split(" ")[1]}
-                                                                </span>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div>
-                                                                <Link
-                                                                    to={`/store/details/${item?.IDAnimalProduct}`}
+                                            {animal?.map((item, index) => (
+                                                <tr key={index}>
+                                                    <td>
+                                                        <div style={{ maxWidth: "170px" }}>
+                                                            <img
+                                                                src={item?.AnimalProductImage}
+                                                                className="w-100 rounded-3"
+                                                                alt={item?.AnimalProductTypeName}
+                                                                loading="lazy"
+                                                            />
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div
+                                                            className="d-flex flex-column justify-content-center align-content-center"
+                                                            style={{ gap: "0" }}
+                                                        >
+                                                            <span className="ClientName">
+                                                                {item?.ClientName}
+                                                            </span>
+                                                            <span className="ClientPhone">
+                                                                {item?.ClientPhone}
+                                                            </span>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div>{item?.AnimalSubCategoryName}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div className="d-flex gap-1">
+                                                            <h6 className="mb-0  pe-2 color-red">
+                                                                {item?.AnimalProductPrice} SAR
+                                                            </h6>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div>
+                                                            {item?.AnimalProductType.charAt(0).toUpperCase() +
+                                                                item?.AnimalProductType.slice(1).toLowerCase()}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div className="blog__status">
+                                                            <span
+                                                                style={{ height: "fit-content  important" }}
+                                                                className={`  ${item.AnimalProductStatus === "PENDING" &&
+                                                                    "txt_pending"
+                                                                    } ${item.AnimalProductStatus === "CANCELLED" &&
+                                                                    "txt_rejected"
+                                                                    }   ${item.AnimalProductStatus === "RESERVED" &&
+                                                                    "txt_delivery"
+                                                                    } ${item.AnimalProductStatus === "REJECTED" &&
+                                                                    "txt_rejected"
+                                                                    }   ${item.AnimalProductStatus === "SOLD" &&
+                                                                    "txt__status"
+                                                                    } ${item.AnimalProductStatus === "ACTIVE" &&
+                                                                    "txt_delivered"
+                                                                    }`}
+                                                            > {item?.AnimalProductStatus.charAt(0).toUpperCase() + item?.AnimalProductStatus.slice(1).toLowerCase()}
+                                                            </span>
+                                                            <div className="delete">
+                                                                <DropdownButton
+                                                                    title={
+                                                                        <img src={Img.dropdown} alt={'img dropdown'} />
+                                                                    }
+                                                                    id="dropdown-menu"
+                                                                    variant="outline-success"
+                                                                    onClick={() => setShowDropdown(!showDropdown)}
+                                                                    onSelect={(eventKey) =>
+                                                                        handleActionSelect(
+                                                                            item.IDAnimalProduct,
+                                                                            eventKey
+                                                                        )
+                                                                    }
+                                                                    className="DropdownButton "
+                                                                    drop={"down-centered"}
                                                                 >
-                                                                    <img src={Img.view}  alt='img view' />
-                                                                </Link>
+                                                                    {
+                                                                        translate[isLang]?.FilterStatus?.filter?.((item) => item.value !== "All")?.map((Status, index) => (
+                                                                            <>
+                                                                                {item?.AnimalProductStatus ===  Status.value? (
+                                                                                    ""
+                                                                                ) : (
+                                                                                    <Dropdown.Item eventKey={Status.value}className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"}>
+                                                                                        {Status.text}
+                                                                                    </Dropdown.Item>
+                                                                                )}
+                                                                            </>
+                                                                        ))
+                                                                    }
+                                                                    
+                                                                </DropdownButton>
                                                             </div>
-                                                        </td>
-                                                    </tr>
-                                                ))}
-                                 
-                                </tbody>
-                            </Table>
-                                :
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div
+                                                            className="d-flex flex-column justify-content-center align-content-center"
+                                                            style={{ gap: "0" }}
+                                                        >
+                                                            <span className="ClientName">
+                                                                {" "}
+                                                                {item?.CreateDate.split(" ")[0]}{" "}
+                                                            </span>
+                                                            <span className="ClientPhone">
+                                                                {" "}
+                                                                {item?.CreateDate.split(" ")[1]}
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div>
+                                                            <Link
+                                                                to={`/store/details/${item?.IDAnimalProduct}`}
+                                                            >
+                                                                <img src={Img.view} alt='img view' />
+                                                            </Link>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))}
+
+                                        </tbody>
+                                    </Table>
+                                    :
                                     <Component.DataNotFound />
                             }
                         </>
@@ -594,7 +569,7 @@ const StoreList = () => {
 
                 </div>
             </div>
-            <div className="pagination ">
+            <div className="pagination " dir="ltr">
                 <Box
                     sx={{
                         margin: "auto",

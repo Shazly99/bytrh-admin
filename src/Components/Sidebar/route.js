@@ -162,7 +162,7 @@ const routes = [
   },
   {
     path: "/store",
-    nameAr: "محل",
+    nameAr: "متجر",
     nameEn: "Store",
     icon: <Icons.shop size={19} />,
     Roles: ["Admin"],

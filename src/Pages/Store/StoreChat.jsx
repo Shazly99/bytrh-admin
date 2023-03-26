@@ -4,9 +4,10 @@ import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 
-const StoreChat = ({ chat, isLoader }) => {
+const StoreChat = ({ chat, isLoader, translate }) => {
 
-    useEffect(() => { window.scrollTo(0, 0);
+    useEffect(() => {
+        window.scrollTo(0, 0);
         console.log(chat);
     }, [isLoader])
     const SkeletonHeader = () => {
@@ -20,7 +21,7 @@ const StoreChat = ({ chat, isLoader }) => {
         return (
 
 
-            <Table responsive={true}striped bordered hover size="sm" className='Skeleton_table'>
+            <Table responsive={true} striped bordered hover size="sm" className='Skeleton_table'>
                 <thead>
                     <tr  >
                         <th style={{ padding: '15px !important', textAlign: 'center', margin: 'auto' }}>  <Skeleton variant='rounded' height={10} width="30%" /></th>
@@ -47,7 +48,7 @@ const StoreChat = ({ chat, isLoader }) => {
             {isLoader ? <>
                 {chat &&
                     <div className="product_description">
-                        <h3 >Buyer Chat</h3>
+                        <h3 >{translate.chatTitle}</h3>
                     </div>
                 }
             </> : SkeletonHeader()}
@@ -57,18 +58,20 @@ const StoreChat = ({ chat, isLoader }) => {
                     <Table striped bordered hover size="sm">
                         <thead>
                             <tr>
-                                <th className='first_th'>  Name</th>
-                                <th>  Phone</th>
-                                <th className='last_th'>  Status</th>
+                                {
+                                    translate?.chat?.map((item, index) => (
+                                        <th className='text-center'key={index}>{item}</th>
+                                    ))
+                                }
                             </tr>
                         </thead>
                         <tbody>
                             {
                                 chat?.map((item, index) => (
                                     <tr key={index}>
-                                        <td className='first_th'>   <Link to={`/store/details/${item.IDAnimalProduct}/chat/${item.IDAnimalProductChat}`} className='d-block'> {item.BuyerName} </Link></td>
+                                        <td  className='text-center'>   <Link to={`/store/details/${item.IDAnimalProduct}/chat/${item.IDAnimalProductChat}`} className='d-block'> {item.BuyerName} </Link></td>
                                         <td className='text-center'><Link to={`/store/details/${item.IDAnimalProduct}/chat/${item.IDAnimalProductChat}`} className='d-block'>{item.BuyerPhone}</Link></td>
-                                        <td className='last_th'><Link to={`/store/details/${item.IDAnimalProduct}/chat/${item.IDAnimalProductChat}`}k className='d-block'> {item.ChatStatus.charAt(0).toUpperCase() + item.ChatStatus.slice(1).toLowerCase()}</Link></td>
+                                        <td  className='text-center'><Link to={`/store/details/${item.IDAnimalProduct}/chat/${item.IDAnimalProductChat}`} k className='d-block'> {item.ChatStatus.charAt(0).toUpperCase() + item.ChatStatus.slice(1).toLowerCase()}</Link></td>
                                     </tr>
                                 ))
                             }

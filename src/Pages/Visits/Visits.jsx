@@ -175,7 +175,7 @@ const Visits = () => {
           </div>
           <div className="app__addOrder-form ">
 
-            <div className='filter__group__stats row ' style={{ display: 'flex',alignItems:'center', gap: '20px', marginBottom: '25px' }}>
+            <div className='filter__group__stats row ' style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '25px' }}>
               {
                 translate[isLang]?.FilterStatus?.map((item, index) => (
                   <>
@@ -250,12 +250,13 @@ const Visits = () => {
                         </td>
 
                         <td >
-                          <div>
-                            <span style={{ height: 'fit-content !important' }}  >
-                              {item?.VisitTotalPrice}
-                            </span>
+                          <div> 
+                        <h6 className="mb-0  pe-2 color-red">
+                          {item?.VisitTotalPrice} {translate[isLang]?.Actions.currency}
+                        </h6> 
                           </div>
                         </td>
+
                         <td >
                           <div>
                             <span style={{ height: 'fit-content !important' }}  >
@@ -285,20 +286,20 @@ const Visits = () => {
                           </div>
                         </td>
                         <td>
-                            <div
-                              className="d-flex flex-column justify-content-center align-content-center"
-                              style={{ gap: "0" }}
-                            >
-                              <span className="ClientName">
-                                {" "}
-                                {item?.VisitStartTime.split(" ")[0]}{" "}
-                              </span>
-                              <span className="ClientPhone">
-                                {" "}
-                                {item?.VisitStartTime.split(" ")[1]}
-                              </span>
-                            </div>
-                          </td>
+                          <div
+                            className="d-flex flex-column justify-content-center align-content-center"
+                            style={{ gap: "0" }}
+                          >
+                            <span className="ClientName">
+                              {" "}
+                              {item?.VisitStartTime.split(" ")[0]}{" "}
+                            </span>
+                            <span className="ClientPhone">
+                              {" "}
+                              {item?.VisitStartTime.split(" ")[1]}
+                            </span>
+                          </div>
+                        </td>
                         <td>
                           <div>
                             <span>

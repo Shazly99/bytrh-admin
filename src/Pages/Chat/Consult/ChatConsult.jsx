@@ -172,7 +172,7 @@ const ChatConsult = () => {
 
             <div className='filter__group__stats row ' style={{ display: 'flex', gap: '20px', marginBottom: '25px' }}>
               {
-                translate[isLang]?.FilterStatus?.map((item, index) => (
+                translate[isLang]?.FilterStatus?.filter?.((item) => item.value !== "All")?.map((item, index) => (
                   <>
                     {isLoader ? <>
                       <label className='col active d-flex justify-content-center align-item-center m-0 p-0 '  >
