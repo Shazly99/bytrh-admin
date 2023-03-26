@@ -494,7 +494,15 @@ const StoreList = () => {
                                                                     } ${item.AnimalProductStatus === "ACTIVE" &&
                                                                     "txt_delivered"
                                                                     }`}
-                                                            > {item?.AnimalProductStatus.charAt(0).toUpperCase() + item?.AnimalProductStatus.slice(1).toLowerCase()}
+                                                            >
+                                                                {
+                                                                    translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.value === item?.AnimalProductStatus)
+                                                                        .map((status, index) => (
+                                                                            <React.Fragment key={index}>
+                                                                                {item?.AnimalProductStatus === status.value ? status.text : ''}
+                                                                            </React.Fragment>
+                                                                        ))
+                                                                }
                                                             </span>
                                                             <div className="delete">
                                                                 <DropdownButton
@@ -516,17 +524,17 @@ const StoreList = () => {
                                                                     {
                                                                         translate[isLang]?.FilterStatus?.filter?.((item) => item.value !== "All")?.map((Status, index) => (
                                                                             <>
-                                                                                {item?.AnimalProductStatus ===  Status.value? (
+                                                                                {item?.AnimalProductStatus === Status.value ? (
                                                                                     ""
                                                                                 ) : (
-                                                                                    <Dropdown.Item eventKey={Status.value}className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"}>
+                                                                                    <Dropdown.Item eventKey={Status.value} className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"}>
                                                                                         {Status.text}
                                                                                     </Dropdown.Item>
                                                                                 )}
                                                                             </>
                                                                         ))
                                                                     }
-                                                                    
+
                                                                 </DropdownButton>
                                                             </div>
                                                         </div>

@@ -250,10 +250,10 @@ const Visits = () => {
                         </td>
 
                         <td >
-                          <div> 
-                        <h6 className="mb-0  pe-2 color-red">
-                          {item?.VisitTotalPrice} {translate[isLang]?.Actions.currency}
-                        </h6> 
+                          <div>
+                            <h6 className="mb-0  pe-2 color-red">
+                              {item?.VisitTotalPrice} {translate[isLang]?.Actions.currency}
+                            </h6>
                           </div>
                         </td>
 
@@ -277,10 +277,15 @@ const Visits = () => {
                                             ${item.VisitStatus === 'SKIPPED' && 'txt__status'} 
                                             ${item.VisitStatus === 'REJECTED' && 'txt_rejected'}
                                             ${item.VisitStatus === 'ACCEPTED' && 'txt_delivery'}`} >
-                              {
+                     
 
-                                item?.VisitStatus.toLowerCase().charAt(0).toUpperCase() + item?.VisitStatus.slice(1).toLowerCase() === 'No_response' ? 'No Response' :
-                                  item?.VisitStatus.toLowerCase().charAt(0).toUpperCase() + item?.VisitStatus.slice(1).toLowerCase()
+                              {
+                                translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.value === item?.VisitStatus)
+                                  .map((status, index) => (
+                                    <React.Fragment key={index}>
+                                      {item?.VisitStatus === status.value ? status.text : ''}
+                                    </React.Fragment>
+                                  ))
                               }
                             </span>
                           </div>

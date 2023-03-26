@@ -480,7 +480,15 @@ const Bidding = () => {
                                   } ${item.AnimalProductStatus === "ACTIVE" &&
                                   "txt_delivered"
                                   }`}
-                              > {item?.AnimalProductStatus.charAt(0).toUpperCase() + item?.AnimalProductStatus.slice(1).toLowerCase()}
+                              > 
+                                                            {
+                                translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.value === item?.AnimalProductStatus)
+                                  .map((status, index) => (
+                                    <React.Fragment key={index}>
+                                      {item?.AnimalProductStatus === status.value ? status.text : ''}
+                                    </React.Fragment>
+                                  ))
+                              }
                               </span>
                               <div className="delete">
                                 <DropdownButton
