@@ -10,7 +10,7 @@ import "./login.scss";
 
 
 let validationSchemaPhone= Yup.object().shape({
-    UserName: Yup.string().required('Mobile phone is required').matches(/^\+\d{12,14}$/, 'Mobile phone must be between 1 and 14 digits'),
+    UserName: Yup.string().required('Mobile phone is required')/* .matches(/^\+\d{12,14}$/, 'Mobile phone must be between 1 and 14 digits') */,
     Password: Yup.string().required('Password is required').min(3, 'Password must be at least 3 characters long').max(10, 'Password must be at most 10 characters long'),
 });
 
@@ -85,7 +85,7 @@ const Login = () => {
                                                         name="UserName"
                                                         type="text"
                                                         onChange={formikPhoneNumber.handleChange}
-                                                        value={formikPhoneNumber.values.UserName}
+                                                        value={ formikPhoneNumber.values.UserName}
                                                         className={`  py-2 form-control       border-0   shadow-lg`} />
                                                     {formikPhoneNumber.errors.UserName ? <span className='error__handel' >{formikPhoneNumber.errors.UserName}</span> : null}
                                                 </div>

@@ -146,7 +146,7 @@ const ClientTable = ({ usersList, userList, isLoading,actionsTranslate,toastTran
                                         ${item.ClientStatus === 'INACTIVE' && 'txt_rejected'}
                                         ${item.ClientStatus === 'BLOCKED' && 'txt_blocked'}
                                         `}  > 
-                        {
+                              {
                                 statusTranslate?.filter((itemfilter) => itemfilter.value === item?.ClientStatus)
                                   .map((status, index) => (
                                     <React.Fragment key={index}>
