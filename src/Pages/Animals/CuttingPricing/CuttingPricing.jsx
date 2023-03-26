@@ -1,12 +1,15 @@
  import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { Button, Modal, Table } from "react-bootstrap";
 import { toast } from "react-hot-toast";
 import Component from "../../../constants/Component";
 import Icons from "../../../constants/Icons";
 import useSkeletonTable from "../../../utils/useSkeletonTable";
 import { apiheader, GetData, PostData } from "./../../../utils/fetchData";
+import { VendersContext } from "../../../context/Store";
+import translateCuttingPrice from './cuttingPrice';
+
 
 const CuttingPricing = () => {
   const [animal, setAnimal] = useState(null);
@@ -122,12 +125,17 @@ const CuttingPricing = () => {
   }, [page]);
   useEffect(() => { }, [page, PagesNumber]);
 
+
+
+  let { isLang } = useContext(VendersContext);
+
+
   return (
     <>
       <div className="app__Users ">
         {isLoader ? <>
           <Component.ButtonBase
-            title={"Add  "}
+            title={translateCuttingPrice[isLang]?.addBTN}
             bg={"primary"}
             icon={<Icons.Add size={21} color={"#ffffffb4"} />}
             path="/animals/cuttingprice/addcuttingprice"
@@ -146,10 +154,9 @@ const CuttingPricing = () => {
                   className="text-center  "
                   style={{ background: "#F9F9F9" }}
                 >
-                  <th>Animal SubCategory  </th>
-                  <th>Cutting Name</th>
-                  <th>Cutting Price </th>
-                  <th>Action</th>
+                  {translateCuttingPrice[isLang]?.TableHeader?.map((el , i) => (
+                      <th key={i}>{el}</th>
+                  ))}
                 </tr>
               </thead>
               <tbody className="text-center">
@@ -164,7 +171,7 @@ const CuttingPricing = () => {
 
                     <td>
                       <div className="d-flex gap-1">
-                        <h6 className="mb-0  pe-2 color-red">{item?.SubCategoryCuttingPrice}{' '}SAR</h6>
+                        <h6 className={`mb-0 ${isLang === 'ar' ? 'ps-2' : 'pe-2'} color-red`}>{item?.SubCategoryCuttingPrice}{' '}{isLang === 'ar' ? 'ريـال' : 'SAR'}</h6>
                         <Icons.edit
                           onClick={() => handleModalOpenEdit(index)}
                         />
@@ -172,9 +179,10 @@ const CuttingPricing = () => {
                           show={modalShowEdit && modalIndexEdit === index}
                           onHide={handleModalCloseEdit}
                           centered
+                          dir={isLang === 'ar' ? 'rtl' : 'ltr'}
                         >
                           <Modal.Header closeButton>
-                            <Modal.Title className='  w-100 text-center'>  price Details</Modal.Title>
+                            <Modal.Title className='w-100 text-center'>{translateCuttingPrice[isLang]?.ModalHeader}</Modal.Title>
                           </Modal.Header>
                           <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
                             <input className="form-control" defaultValue={item.SubCategoryCuttingPrice} ref={changePrice} />
@@ -182,10 +190,10 @@ const CuttingPricing = () => {
                           <Modal.Footer className="d-flex justify-content-center align-items-center">
 
                             <Button variant="outline-primary" onClick={handleModalCloseEdit}>
-                              Cancel
+                              {translateCuttingPrice[isLang]?.CancelBTN}
                             </Button>
                             <Button   onClick={() => handleChangePrice(item.IDAnimalSubCategory, item.IDCutting)}>
-                              Set Price
+                              {translateCuttingPrice[isLang]?.ModalSetPrice}
                             </Button>
                           </Modal.Footer>
                         </Modal>
@@ -201,27 +209,29 @@ const CuttingPricing = () => {
                             variant=" outline-sucess"
                             onClick={() => handleModalOpen(index)}
                             className="DropdownButton outline-sucess"
-                          >Detete</Button>
+                          >
+                            {isLang === 'ar' ? 'حـذف' : 'Detete'}
+                          </Button>
                           <Modal
                             show={modalShow && modalIndex === index}
                             onHide={handleModalClose}
                             centered
+                            dir={isLang === 'ar' ? 'rtl' : 'ltr'}
                           >
                             <Modal.Header closeButton>
-                              <Modal.Title className='  w-100 '> Delete Cutting Price </Modal.Title>
+                            <Modal.Title className='  w-100 '>{translateCuttingPrice[isLang]?.ModalHeaderDel}</Modal.Title>
                             </Modal.Header>
                             <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
-                            <Component.HandelDelete/>
-                         
+                                <Component.HandelDelete/>
                                 <input className="form-control" defaultValue={item.SubCategoryCuttingPrice} disabled />
                             </Modal.Body>
                             <Modal.Footer className="d-flex justify-content-center align-items-center">
 
                               <Button variant="danger"style={{border:'#dc3545'}}  onClick={() => handleActionSelect(item.IDSubCategoryCutting)}>
-                                Delete now
+                                {translateCuttingPrice[isLang]?.ModalDelPrice}
                               </Button>
                               <Button variant="outline-primary" onClick={handleModalClose}>
-                                Cancel
+                                {translateCuttingPrice[isLang]?.CancelBTN}
                               </Button>
                             </Modal.Footer>
                           </Modal>
