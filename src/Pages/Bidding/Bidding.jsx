@@ -12,9 +12,15 @@ import { VendersContext } from "../../context/Store";
 import useFetch from "../../utils/useFetch";
 import useSkeletonTable from "../../utils/useSkeletonTable";
 import { apiheader, PostData } from "./../../utils/fetchData";
+import initialTranslation from "./Translation";
 
 const Bidding = () => {
-  let { SkeletonTable  } = useSkeletonTable();
+  let { isLang } = useContext(VendersContext);
+  const [translate, setTranslate] = useState(initialTranslation)
+  const handelTranslate = () => {
+    setTranslate(initialTranslation)
+  }
+  let { SkeletonTable } = useSkeletonTable();
 
   const [animal, setAnimal] = useState([]);
   const [page, setPage] = useState(1);
@@ -23,7 +29,6 @@ const Bidding = () => {
   const [isLoader, setIsloader] = useState(false);
   // **pagination
   const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
-  let { isLang } = useContext(VendersContext);
 
   // **get store
   const store = async (page) => {
@@ -254,6 +259,7 @@ const Bidding = () => {
     store(page);
     animalSubCategoryGet()
     window.scrollTo(0, 0);
+    handelTranslate()
   }, [page, isLoader]);
   useEffect(() => { }, [page, PagesNumber]);
   const SkeletonSearch = (w, h) => {
@@ -271,14 +277,6 @@ const Bidding = () => {
       </div>
     )
   }
-  const SkeletonTables = (w) => {
-    return (
-      <div className="d-flex justify-content-center">
-        <Skeleton variant='rounded' animation='wave' height={15} width={w} />
-      </div>
-
-    )
-  }
   return (
 
     <>
@@ -288,7 +286,7 @@ const Bidding = () => {
             <div className='  w-100'>
               {isLoader ? <>
                 <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
-                  <input type="text" placeholder="Search by client name or email....." name="search" value={searchValue} onChange={handleInputChange} />
+                  <input type="text" placeholder={translate[isLang]?.placeholder} name="search" value={searchValue} onChange={handleInputChange} />
                   <button type="submit" >
                     <Icons.Search color='#fff' size={25} />
                   </button>
@@ -301,8 +299,8 @@ const Bidding = () => {
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry} ref={countryRef}>
                         <Form.Select aria-label="Default select example" >
-                          <option  selected disabled hidden>Select Country</option>
-                          <option value={'country'} >Countries</option>
+                          <option selected disabled hidden value={'Select Country'}>{translate[isLang]?.filter?.Country}  </option>
+                          <option value={'country'} >{translate[isLang]?.filter?.allCountry}</option>
                           {
                             countries?.map((item, index) => (
                               <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
@@ -317,17 +315,14 @@ const Bidding = () => {
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"   >
                         <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={cityRef}>
-                          <option  selected disabled hidden>Select city</option>
-
-                          <option value={'cities'} > Cities</option>
-
+                          <option selected disabled hidden value={'Select city'}> {translate[isLang]?.filter?.city}  </option> 
+                          <option value={'cities'} >{translate[isLang]?.filter?.allCity}</option> 
                           {
                             cities?.map((item, index) => (
                               <option key={index} value={item?.IDCity}>{item?.CityName}</option>
                             ))
                           }
-                        </Form.Select>
-
+                        </Form.Select> 
                       </Form.Group>
                     </> : SkeletonFilter()}
                   </Col>
@@ -336,17 +331,14 @@ const Bidding = () => {
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"   >
                         <Form.Select aria-label="Default select example" onClick={handelSelectArea} ref={areaRef}>
-                          <option  selected disabled hidden>Select Area</option>
-
-                          <option value={'Areas'} >Areas</option>
-
+                          <option selected disabled hidden value={'Select Area'}>  {translate[isLang]?.filter?.area}  </option> 
+                          <option value={'Areas'} > {translate[isLang]?.filter?.allarea} </option> 
                           {
                             areas?.map((item, index) => (
                               <option key={index} value={item?.IDArea}>{item?.AreaName}</option>
                             ))
                           }
-                        </Form.Select>
-
+                        </Form.Select> 
                       </Form.Group>
                     </> : SkeletonFilter()}
                   </Col>
@@ -357,12 +349,12 @@ const Bidding = () => {
                       <Form.Group controlId="formBasicEmail"  >
                         {/* <Form.Label  >Product Type </Form.Label> */}
                         <Form.Select aria-label="Default select example" ref={animalProductType} onClick={handelAdvertisement} >
-                          <option  selected disabled hidden > Select Product Type</option>
-
-                          <option value={'All'}  >Animals Product Type</option>
+                          <option selected disabled hidden value={'Select Product Type'}> {translate[isLang]?.filter?.Product} </option>
                           {
-                            ['SINGLE', 'GROUP']?.map((item, index) => (
-                              <option key={index} value={item}  >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase()}</option>
+                            translate[isLang]?.Filtertype?.map((Status, index) => (
+                              <> 
+                              <option key={index} value={Status.value}  >{Status.text}</option>
+                              </>
                             ))
                           }
                         </Form.Select>
@@ -376,12 +368,14 @@ const Bidding = () => {
                       <Form.Group controlId="formBasicEmail"  >
                         {/* <Form.Label  >  Product Status </Form.Label> */}
                         <Form.Select aria-label="Default select example" ref={statusRef} onClick={handelanimalProductStatus} >
-                          <option selected disabled hidden >Select Status</option>
+                          <option selected disabled hidden value={'Select Status'}> {translate[isLang]?.filter?.status}</option>
 
-                          <option value={'All'}  > All Status</option>
+                        
                           {
-                            ['PENDING', 'ACTIVE', 'CANCELLED', 'SOLD', 'REJECTED', 'RESERVED']?.map((item, index) => (
-                              <option key={index} value={item}  >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase()}</option>
+                            translate[isLang]?.FilterStatus?.map((Status, index) => (
+                              <> 
+                              <option key={index} value={Status.value}  >{Status.text}</option>
+                              </>
                             ))
                           }
                         </Form.Select>
@@ -394,9 +388,9 @@ const Bidding = () => {
                       <Form.Group controlId="formBasicEmail"  >
                         {/* <Form.Label  >  SubCategory </Form.Label> */}
                         <Form.Select aria-label="Default select example" ref={animalSubCategoryRef} onClick={handelanimalSubCategory} >
-                          <option selected disabled hidden >Select SubCategory</option>
+                          <option selected disabled hidden value={'Select SubCategory'}> {translate[isLang]?.filter?.SubCategory}</option>
+                          <option value={'All'}  >{translate[isLang]?.filter?.allSubCategory}  </option>
 
-                          <option value={'All'}  >Animal SubCategory</option>
                           {
                             animalSubCategory?.map((item, index) => (
                               <option key={index} value={item.IDAnimalSubCategory}  >{item?.AnimalSubCategoryName}</option>
@@ -419,17 +413,11 @@ const Bidding = () => {
                   <Table responsive={true} className="rounded-3 ">
                     <thead>
                       <tr className="text-center  " style={{ background: "#F9F9F9" }} >
-                        <th > Product Image</th>
-                        <th >Client Info</th>
-                        <th >SubCategory</th>
-                        <th >Price</th>
-                        <th >Type</th>
-                        <th >Status</th>
-                        <th >Start Date</th>
-                        <th >End Date</th>
-                        <th >Create Date</th>
-                        <th >View</th>
-
+                        {
+                          translate[isLang]?.TableHeader?.map((item, index) => (
+                            <th key={index}>{item}</th>
+                          ))
+                        }
                       </tr>
                     </thead>
                     <tbody className="text-center">
@@ -465,7 +453,7 @@ const Bidding = () => {
                           <td>
                             <div className="d-flex gap-1">
                               <h6 className="mb-0  pe-2 color-red">
-                                {item?.AnimalProductPrice} SAR
+                                {item?.AnimalProductPrice}  {translate[isLang]?.Actions.currency}
                               </h6>
                             </div>
                           </td>
@@ -492,12 +480,20 @@ const Bidding = () => {
                                   } ${item.AnimalProductStatus === "ACTIVE" &&
                                   "txt_delivered"
                                   }`}
-                              > {item?.AnimalProductStatus.charAt(0).toUpperCase() + item?.AnimalProductStatus.slice(1).toLowerCase()}
+                              > 
+                                                            {
+                                translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.value === item?.AnimalProductStatus)
+                                  .map((status, index) => (
+                                    <React.Fragment key={index}>
+                                      {item?.AnimalProductStatus === status.value ? status.text : ''}
+                                    </React.Fragment>
+                                  ))
+                              }
                               </span>
                               <div className="delete">
                                 <DropdownButton
                                   title={
-                                    <img src={Img.dropdown}   alt="Img.dropdown" />
+                                    <img src={Img.dropdown} alt="Img.dropdown" />
                                   }
                                   id="dropdown-menu"
                                   variant="outline-success"
@@ -511,48 +507,19 @@ const Bidding = () => {
                                   className="DropdownButton "
                                   drop={"down-centered"}
                                 >
-                                  {item?.AnimalProductStatus === "PENDING" ? (
-                                    ""
-                                  ) : (
-                                    <Dropdown.Item eventKey="PENDING">
-                                      Pending
-                                    </Dropdown.Item>
-                                  )}
-                                  {item?.AnimalProductStatus === "ACTIVE" ? (
-                                    ""
-                                  ) : (
-                                    <Dropdown.Item eventKey="ACTIVE">
-                                      Active
-                                    </Dropdown.Item>
-                                  )}
-                                  {item?.AnimalProductStatus === "CANCELLED" ? (
-                                    ""
-                                  ) : (
-                                    <Dropdown.Item eventKey="CANCELLED">
-                                      Cancelled
-                                    </Dropdown.Item>
-                                  )}
-                                  {item?.AnimalProductStatus === "SOLD" ? (
-                                    ""
-                                  ) : (
-                                    <Dropdown.Item eventKey="SOLD">
-                                      Sold
-                                    </Dropdown.Item>
-                                  )}
-                                  {item?.AnimalProductStatus === "REJECTED" ? (
-                                    ""
-                                  ) : (
-                                    <Dropdown.Item eventKey="REJECTED">
-                                      Rejected
-                                    </Dropdown.Item>
-                                  )}
-                                  {item?.AnimalProductStatus === "RESERVED" ? (
-                                    ""
-                                  ) : (
-                                    <Dropdown.Item eventKey="RESERVED">
-                                      Reserved
-                                    </Dropdown.Item>
-                                  )}
+                                  {
+                                    translate[isLang]?.FilterStatus?.filter?.((item) => item.value !== "All")?.map((Status, index) => (
+                                      <>
+                                        {item?.AnimalProductStatus === Status.value ? (
+                                          ""
+                                        ) : (
+                                          <Dropdown.Item eventKey={Status.value} className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"}>
+                                            {Status.text}
+                                          </Dropdown.Item>
+                                        )}
+                                      </>
+                                    ))
+                                  }
                                 </DropdownButton>
                               </div>
                             </div>
@@ -607,7 +574,7 @@ const Bidding = () => {
                               <Link
                                 to={`/bidding/details/${item?.IDAnimalProduct}`}
                               >
-                                <img src={Img.view}   alt='img view' />
+                                <img src={Img.view} alt='img view' />
                               </Link>
                             </div>
                           </td>

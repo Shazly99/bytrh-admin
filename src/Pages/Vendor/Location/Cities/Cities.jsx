@@ -177,7 +177,14 @@ const Cities = () => {
                       <td >
                         <div>
                           <span style={{ height: 'fit-content !important' }} className={`  ${item?.CityActive === 1 && 'txt_delivered'}  ${item?.CityActive === 0 && 'txt_rejected'} `} >
-                            {item?.CityActive === 1 ? 'Active' : "InActive"}
+                          {
+                                translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.CityActive === item?.CityActive)
+                                  .map((status, index) => (
+                                    <React.Fragment key={index}>
+                                      {item?.CityActive === status.CityActive ? status.text : ''}
+                                    </React.Fragment>
+                                  ))
+                              }
                           </span>
                         </div>
                       </td>

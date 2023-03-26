@@ -1,6 +1,6 @@
 import { Player } from '@lottiefiles/react-lottie-player';
 import { Skeleton } from '@mui/material';
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef,useContext } from 'react'
 import { Container, Row, Col } from 'react-bootstrap';
 
 import { useParams } from 'react-router-dom';
@@ -8,8 +8,15 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 import Img from '../../assets/Img';
 import Component from '../../constants/Component';
 import { GetData, apiheader } from '../../utils/fetchData';
+import { VendersContext } from "../../context/Store";
+import initialTranslation from "./Translation";
 
 const StoreChatDetails = () => {
+    let { isLang } = useContext(VendersContext);
+    const [translate, setTranslate] = useState(initialTranslation)
+    const handelTranslate = () => {
+        setTranslate(initialTranslation)
+    }
     let { id } = useParams()
     const [animal, setAnimal] = useState([]);
     const [isLoader, setIsloader] = useState(false);
@@ -38,6 +45,7 @@ const StoreChatDetails = () => {
     useEffect(() => {
         store();
         window.scrollTo(0, 0);
+        handelTranslate()
         return () => {
             store();
         }
@@ -60,12 +68,12 @@ const StoreChatDetails = () => {
         <div className='app__blog'>
             <Container fluid>
                 <div className="app__addprodects">
-                    <Component.SubNav sub__nav={[{ name: "   Product Details  ", path: `/store/details/${animal.IDAnimalProduct}` }, { name: "Chat Details ", path: `/store/details/${animal.IDAnimalProduct}/chat/${id}` }]} />
+                    <Component.SubNav sub__nav={[{ name:  translate[isLang]?.store?.nav3, path: `/store/details/${animal.IDAnimalProduct}` }, { name:  translate[isLang]?.store?.nav4, path: `/store/details/${animal.IDAnimalProduct}/chat/${id}` }]} />
                 </div>
                 <Row>
                     <Col xl={6} lg={6} md={6} sm={12} className='store_info'>
                         <div className="store_header">
-                            Buyer Info
+                        {translate[isLang]?.store?.buyerInfo}
                         </div>
                         <div className="store_info_body">
                             <Row >
@@ -77,17 +85,17 @@ const StoreChatDetails = () => {
                                 </Col>
                                 <Col xl={7} lg={7} md={7} sm={7} className="store_info_animal">
                                     {isLoader ? <div className="summary_blog">
-                                        <span className='title'>Name :</span>
+                                        <span className='title'>{translate[isLang]?.store?.name}</span>
                                         <span className='body'>{animal?.BuyerName}</span>
                                     </div> : SkeletonCard()}
 
                                     {isLoader ? <div className="summary_blog">
-                                        <span className='title'> Phone :</span>
+                                        <span className='title'>{translate[isLang]?.store?.phone}</span>
                                         <span className='body'>{animal?.BuyerPhone}</span>
                                     </div> : SkeletonCard()}
 
                                     {isLoader ? <div className="summary_blog">
-                                        <span className='title'> Chat Status :</span>
+                                        <span className='title'>{translate[isLang]?.store?.status}</span>
                                         <span className='body'>{animal?.ChatStatus?.charAt(0).toUpperCase() + animal?.ChatStatus?.slice(1).toLowerCase()}</span>
                                     </div> : SkeletonCard()}
                                 </Col>
@@ -96,7 +104,7 @@ const StoreChatDetails = () => {
                     </Col>
                     <Col xl={6} lg={6} md={6} sm={12} className='store_info'>
                         <div className="store_header">
-                            Client Info
+                        {translate[isLang]?.store?.cinfo}
                         </div>
                         <div className="store_info_body">
                             <Row>
@@ -111,19 +119,19 @@ const StoreChatDetails = () => {
                                 <Col xl={7} lg={7} md={7} sm={7} className="store_info_animal">
                                     {
                                         isLoader ? <div className="summary_blog">
-                                            <span className='title'>Name :</span>
+                                            <span className='title'>{translate[isLang]?.store?.name}</span>
                                             <span className='body'>{animal?.ClientName}</span>
                                         </div> : SkeletonCard()
                                     }
                                     {
                                         isLoader ? <div className="summary_blog">
-                                            <span className='title'>Phone :</span>
+                                            <span className='title'>{translate[isLang]?.store?.phone}</span>
                                             <span className='body'>{animal?.ClientPhone}</span>
                                         </div> : SkeletonCard()
                                     }
                                     {
                                         isLoader ? <div className="summary_blog">
-                                            <span className='title'> City :</span>
+                                            <span className='title'> {translate[isLang]?.store?.city}</span>
                                             <span className='body'>{animal?.CityName}</span>
                                         </div> : SkeletonCard()
                                     }
@@ -134,12 +142,12 @@ const StoreChatDetails = () => {
                 </Row>
                 <div className="app__chat__Consult  mt-3  ">
                     <div className='app__chat'>
-                        <Component.BaseHeader h2={'Chat Details :'} />
+                        <Component.BaseHeader h2={translate[isLang]?.store?.nav4} />
                         <Row className="app__chat__container " style={{ marginTop: '0' }}>
                             <Col xl={12} lg={12} md={12} sm={12} className='app__chat_messages '>
                                 <div className='shadow app__chat_list-card'>
-                                    <div className={`app__Live_chat chat-body   ${animal?.ChatDetails?.length === 0 ? 'bg-dark' : ''} `} style={{ background: 'rgb(217 217 217 / 28%)' }}>
-                                        <ScrollToBottom className="message-container">
+                                    <div dir='ltr' className={`app__Live_chat chat-body   ${animal?.ChatDetails?.length === 0 ? 'bg-dark' : ''} `} style={{ background: 'rgb(217 217 217 / 28%)' }}>
+                                        <ScrollToBottom dir='ltr'className="message-container">
                                             {
                                                 animal?.ChatDetails?.length === 0 ?
                                                     <div className="empty_chat   w-100 h-100 d-flex justify-content-center align-items-center flex-column">
@@ -148,12 +156,12 @@ const StoreChatDetails = () => {
                                                                 className="expired-image w-75"
                                                                 // src="https://assets4.lottiefiles.com/packages/lf20_3vbOcw.json"
                                                                 src="https://assets7.lottiefiles.com/packages/lf20_qwl4gi2d.json"
-
                                                                 autoplay
                                                                 loop
                                                             />
-                                                        </div>                                                        <h2 className={` ${animal?.ChatDetails?.length === 0 ? 'text-light' : ''}`}>
-                                                            Welcome, <span className='admin__color'>admin!</span>
+                                                        </div>                                                       
+                                                         <h2 className={` ${animal?.ChatDetails?.length === 0 ? 'text-light' : ''}`}>
+                                                         {translate[isLang]?.store?.hello}, <span className='admin__color'>{translate[isLang]?.store?.rout}!</span>
                                                         </h2>
                                                         <h4 className={` ${animal?.ChatDetails?.length === 0 ? 'text-light text-center' : ' text-center'}`}>This Chat Is Empty.</h4>
                                                     </div>

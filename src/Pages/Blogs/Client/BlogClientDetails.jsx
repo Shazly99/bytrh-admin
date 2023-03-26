@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Col, Container, Dropdown, DropdownButton, Row } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-hot-toast';
 import { useParams } from 'react-router-dom';
 import Img from '../../../assets/Img';
 import Component from '../../../constants/Component';
-import Icons from '../../../constants/Icons';
+import { VendersContext } from '../../../context/Store';
 import { apiheader, GetData } from '../../../utils/fetchData';
 import '../blog.scss';
+import initialTranslation from './Translation';
 
 const BlogClientDetails = () => {
+  let { isLang } = useContext(VendersContext);
+  const [translate, setTranslate] = useState(initialTranslation)
+  const handelTranslate = () => {
+      setTranslate(initialTranslation)
+  }
   let { id } = useParams()
   const [lgShow, setLgShow] = useState(false);
   const [blogsDetails, setBlogsDetails] = useState(null)
@@ -47,12 +53,13 @@ const BlogClientDetails = () => {
     // perform delete action using the id
     await GetData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs/comments/remove/${idComment}`).then((res) => {
       if (res.Success === true) {
-        toast.success('The comment has been deleted ', {
+        handleModalCloseEdit()
+        toast.success(<strong>{translate[isLang]?.blogDetails?.toast}</strong>, {
           duration: 4000,
-          position: 'top-center',
-          icon: <Icons.Bin color='#E20000' size={20} />,
+          position: 'bottom-center',
+          // icon: <Icons.Bin color='#E20000' size={20} />,
           iconTheme: {
-            primary: '#0a0',
+            primary: '#E20000',
             secondary: '#fff',
           },
         });
@@ -66,6 +73,7 @@ const BlogClientDetails = () => {
   useEffect(() => {
     BlogList()
     window.scrollTo(0, 0);
+    handelTranslate()
   }, [id])
 
   return (
@@ -76,13 +84,14 @@ const BlogClientDetails = () => {
           <div className='app__blog'>
             <Container fluid>
               <div className="app__addprodects">
-                <Component.SubNav sub__nav={[{ name: " Blogs", path: '/blogs/client' }, { name: "Blog Details ", path: `/blogs/client/details/${id}` }]} />
+                <Component.SubNav sub__nav={[{ name: translate[isLang]?.blogDetails?.nav1, path: '/blogs/client' }, { name:translate[isLang]?.blogDetails?.nav2, path: `/blogs/client/details/${id}` }]} />
                 {clientBlogGallery?.length > 0 &&
                   <>
                     <div className="app__addprodects__header ">
-                      <Component.BaseHeader h2={'BLog Gallery'} />
-                      <a onClick={() => setLgShow(true)} className='blog__popup'>show more</a>
+                      <Component.BaseHeader h2={translate[isLang]?.blogDetails?.galleryTitle} />
+                      <a onClick={() => setLgShow(true)} className='blog__popup'>{translate[isLang]?.blogDetails?.galleryBtn}  </a>
                       <Modal
+                      dir={isLang === "ar"?'rtl':'ltr'}
                         size="xl"
                         show={lgShow}
                         onHide={() => setLgShow(false)}
@@ -91,7 +100,7 @@ const BlogClientDetails = () => {
                       >
                         <Modal.Header closeButton>
                           <Modal.Title id="example-custom-modal-styling-title">
-                            BLog Gallery
+                          {translate[isLang]?.blogDetails?.galleryTitle}
                           </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
@@ -169,32 +178,32 @@ const BlogClientDetails = () => {
                     <Row>
                       <Col className="summary_blog">
                         <span className='title'>{blogsDetails?.BlogLikes}</span>
-                        <span className='body'>Likes</span>
+                        <span className='body'>{translate[isLang]?.blogDetails?.like}</span>
                       </Col>
                       <Col className="summary_blog">
                         <span className='title'>{blogsDetails?.BlogComments}</span>
-                        <span className='body'>Comments</span>
+                        <span className='body'>{translate[isLang]?.blogDetails?.comment}</span>
                       </Col>
                       <Col className="summary_blog">
                         <span className='title'>{blogsDetails?.BlogVisibility.charAt(0).toUpperCase() + blogsDetails?.BlogVisibility.slice(1).toLowerCase()}</span>
-                        <span className='body'>Visibility</span>
+                        <span className='body'>{translate[isLang]?.blogDetails?.Visibility}</span>
                       </Col>
 
                       <Col className="summary_blog">
                         <span className='title'>{blogsDetails?.AnimalCategoryNameEn}</span>
-                        <span className='body'>Category Name (EN)</span>
+                        <span className='body'>{translate[isLang]?.blogDetails?.nameEn}</span>
                       </Col>
 
                       <Col className="summary_blog">
                         <span className='title'>{blogsDetails?.AnimalCategoryNameAr}</span>
-                        <span className='body'>Category Name (Ar)</span>
+                        <span className='body'>{translate[isLang]?.blogDetails?.nameAr}</span>
                       </Col>
                     </Row>
                   </div>
                   {blogsDetails?.BlogComments !== 0 ?
                     <div className="comment">
                       <div className="title">
-                        <h3>Comments</h3>
+                        <h3>{translate[isLang]?.blogDetails?.comment}</h3>
                       </div>
 
                       <div className="content">
@@ -221,14 +230,15 @@ const BlogClientDetails = () => {
                                         id="dropdown-menu"
                                         onClick={() => setShowDropdown(!showDropdown)}
                                       >
-                                        <Dropdown.Item onClick={() => handleModalOpenEdit(index)}>Delete</Dropdown.Item>
+                                        <Dropdown.Item onClick={() => handleModalOpenEdit(index)}>{translate[isLang]?.blogDetails?.deleteBtn}</Dropdown.Item>
                                         <Modal
+                                        dir={isLang ==="ar"?'rtl':'ltr'}
                                           show={modalShowEdit && modalIndexEdit === index}
                                           onHide={handleModalCloseEdit}
                                           centered
                                         >
                                           <Modal.Header closeButton>
-                                            <Modal.Title className='  w-100 text-center'>  price Details</Modal.Title>
+                                            <Modal.Title className='  w-100 '>{translate[isLang]?.blogDetails?.deleteTitle}</Modal.Title>
                                           </Modal.Header>
                                           <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
                                             <Component.HandelDelete />
@@ -236,10 +246,10 @@ const BlogClientDetails = () => {
                                           <Modal.Footer className="d-flex justify-content-center align-items-center">
 
                                             <Button variant="outline-primary" onClick={handleModalCloseEdit}>
-                                              Cancel
+                                              {translate[isLang]?.blogDetails?.cancel}
                                             </Button>
                                             <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => handleDelete(item.IDClientBlogComment)}>
-                                              Delete now
+                                             {translate[isLang]?.blogDetails?.deleteBtn}
                                             </Button>
                                           </Modal.Footer>
                                         </Modal>

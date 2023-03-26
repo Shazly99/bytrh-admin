@@ -10,8 +10,14 @@ import { apiheader, PostData } from '../../../utils/fetchData';
 import Component from '../../../constants/Component';
 import useSkeletonTable from '../../../utils/useSkeletonTable';
 import { VendersContext } from '../../../context/Store';
+import initialTranslation from "./Translation";
 
 export const BlogDoctor = () => {
+    let { isLang } = useContext(VendersContext);
+    const [translate, setTranslate] = useState(initialTranslation)
+    const handelTranslate = () => {
+        setTranslate(initialTranslation)
+    }
     const animalRef = useRef();
 
     const [blogs, setBlogs] = useState(null)
@@ -20,7 +26,7 @@ export const BlogDoctor = () => {
     const [showDropdown, setShowDropdown] = useState(false);
     const [isLoader, setIsloader] = useState(false);
     let { SkeletonTable, SkeletonSearchsingel, SkeletonFilterBlogs } = useSkeletonTable();
-    let { isLang } = useContext(VendersContext);
+
 
     const BlogsList = async () => {
         await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs`, { IDPage: page }, apiheader).then(({ data }) => {
@@ -48,12 +54,12 @@ export const BlogDoctor = () => {
     const handleActionSelect = async (id, action) => {
         if (action === "PENDING" || action === "REJECTED" || action === "POSTED" || action === "REMOVED") {
             await ChangeBlogsStatus({ IDDoctorBlog: id, BlogStatus: action }).then((res) => {
-                toast.success('Updated Successfully', {
+                toast.success(<strong>{translate[isLang]?.blogDetails?.toastUpdate}</strong>, {
                     duration: 4000,
-                    position: 'top-center',
-                    icon: <Icons.UploadItem color='#3182CE' size={20} />,
+                    position: 'bottom-center',
+                    // icon: <Icons.UploadItem color='#3182CE' size={20} />,
                     iconTheme: {
-                        primary: '#0a0',
+                        primary: '#3182CE',
                         secondary: '#fff',
                     },
                 });
@@ -112,8 +118,10 @@ export const BlogDoctor = () => {
 
 
         const selectedCountryId = event.target.value;
-        if (selectedCountryId === "Animal Category") {
+        if (selectedCountryId === "All") {
             BlogsList()
+        } else if (selectedCountryId === 'Select Category') {
+            return false
         } else {
             await animalcategories()
             let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs`, { IDPage: page, IDAnimalCategory: selectedCountryId }, apiheader)
@@ -144,7 +152,7 @@ export const BlogDoctor = () => {
                     <div className="search-container">
                         {isLoader ? <>
                             <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
-                                <input type="text" placeholder="Search by  Client Name,Email,Phone....." name="search" value={searchBlog} onChange={handleInputChange} />
+                                <input type="text" placeholder={translate[isLang]?.placeholder} name="search" value={searchBlog} onChange={handleInputChange} />
                                 <button type="submit" onClick={handleSearchClick}>
                                     <Icons.Search color='#fff' size={25} />
                                 </button>
@@ -154,81 +162,34 @@ export const BlogDoctor = () => {
                     <div className="app__addOrder-form  overflow-hidden">
                         <Row>
                             <Col xl={6} lg={6} md={6} sm={12} xs={12} >
-                                {isLoader ? <>
-                                    <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }}>Filter by Blogs status :	</h5>
-                                    <div className='filter__group__stats row ' style={{ display: 'flex', gap: '0px', marginBottom: '25px' }}>
-                                        <label className='col active'>
-                                            {
-                                                selectedOption === "All" ?
-                                                    <input
-                                                        type="radio"
-                                                        name="filter"
-                                                        value="All"
-                                                        checked
-                                                        onChange={handleOptionChange}
-                                                        className={`inactive-radio form-check-input `}
-                                                    /> :
-                                                    <input
-                                                        type="radio"
-                                                        name="filter"
-                                                        value="All"
-                                                        checked={selectedOption === "All"}
-                                                        onChange={handleOptionChange}
-                                                        className={`inactive-radio form-check-input `}
-                                                    />
-                                            }
+                                <div className='filter__group__stats row ' style={{ display: 'flex', gap: '20px', marginBottom: '25px' }}>
+                                    {
+                                        translate[isLang]?.FilterStatus?.map((item, index) => (
+                                            <>
+                                                {isLoader ? <>
+                                                    <label className='col active d-flex justify-content-center align-item-center m-0 p-0 '  >
+                                                        <input
+                                                            type="radio"
+                                                            name="filter"
+                                                            value={item.value}
+                                                            checked={selectedOption === item.value}
+                                                            onChange={handleOptionChange}
+                                                            className="active-radio form-check-input"
+                                                        />
+                                                        {item.text}
+                                                    </label>
+                                                </> : SkeletonFilterBlogs(10, 90)}
+                                            </>
+                                        ))
+                                    }
 
-                                            All
-                                        </label>
-                                        <label className='col active'>
-                                            <input
-                                                className="  form-check-input"
-                                                type="radio"
-                                                name="filter"
-                                                value="POSTED"
-                                                checked={selectedOption === "POSTED"}
-                                                onChange={handleOptionChange}
-                                            />Posted
-                                        </label>        <label className='col active'>
-                                            <input
-                                                className="  form-check-input"
-                                                type="radio"
-                                                name="filter"
-                                                value="REJECTED"
-                                                checked={selectedOption === "REJECTED"}
-                                                onChange={handleOptionChange}
-                                            />Rejected
-                                        </label>
-                                        <label className='col active'>
-                                            <input
-                                                className="  form-check-input"
-                                                type="radio"
-                                                name="filter"
-                                                value="PENDING"
-                                                checked={selectedOption === "PENDING"}
-                                                onChange={handleOptionChange}
-                                            />
-                                            Pending
-                                        </label>
-                                        <label className='col active'>
-                                            <input
-                                                className="  form-check-input"
-                                                type="radio"
-                                                name="filter"
-                                                value="REMOVED"
-                                                checked={selectedOption === "REMOVED"}
-                                                onChange={handleOptionChange}
-                                            />Remove
-                                        </label>
-
-                                    </div>
-                                </> : SkeletonFilterBlogs()}
+                                </div>
                             </Col>
                             <Col xl={6} lg={6} md={6} sm={12} xs={12} className='Filter_by_Animal' >
                                 {isLoader ? <>
-                                    <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }}>Filter by Animal Category :	</h5>
                                     <Form.Select aria-label="Default select example" ref={animalRef} onClick={handelSelectAnimalCategory}>
-                                        <option >Animal Category </option>
+                                    <option selected disabled hidden value={'Select Category'}> {translate[isLang]?.filter?.Category}</option>
+                                        <option value={'All'}  >{translate[isLang]?.filter?.allCategory}  </option>
 
                                         {
                                             animal?.map((item, index) => (
@@ -246,14 +207,11 @@ export const BlogDoctor = () => {
                         <Table responsive={true} className='rounded-3 '>
                             <thead>
                                 <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                                    <th>DoctorName  </th>
-                                    <th>Blog Title</th>
-                                    <th>Animal Category</th>
-                                    <th>Blog Status</th>
-                                    <th>Blog Visibility</th>
-                                    <th>Blog Date</th>
-                                    <th>Blog Stats</th>
-                                    <th>View Blog</th>
+                                {
+                                        translate[isLang]?.TableHeader?.map((item, index) => (
+                                            <th key={index}>{item}</th>
+                                        ))
+                                    }
                                 </tr>
                             </thead>
                             <tbody className='text-center'>
@@ -285,8 +243,14 @@ export const BlogDoctor = () => {
                                                                 ${item.BlogStatus == 'REJECTED' && 'txt_rejected'} 
                                                                 ${item.BlogStatus == 'POSTED' && 'txt_delivered'}
                                                                 ${item.BlogStatus == 'REMOVED' && 'txt_cancel'}`} >
-                                                        {item?.BlogStatus.charAt(0).toUpperCase() + item?.BlogStatus.slice(1).toLowerCase()}
-                                                    </span>
+                                         {
+                                                            translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.value === item?.BlogStatus)
+                                                                .map((status, index) => (
+                                                                    <React.Fragment key={index}>
+                                                                        {item?.BlogStatus === status.value ? status.text : ''}
+                                                                    </React.Fragment>
+                                                                ))
+                                                        }                                                    </span>
                                                     <div className='delete'>
                                                         <DropdownButton
                                                             title={<Icons.dotes size={20} />}
@@ -298,26 +262,26 @@ export const BlogDoctor = () => {
                                                             className="DropdownButton "
                                                             drop={'down-centered'}
                                                         >
-                                                            {
+                                                             {
                                                                 item.BlogStatus === 'PENDING' &&
                                                                 <>
-                                                                    <Dropdown.Item eventKey="POSTED">Post</Dropdown.Item>
-                                                                    <Dropdown.Item eventKey="REJECTED">Rejected</Dropdown.Item>
+                                                                    <Dropdown.Item  className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="POSTED">{translate[isLang].FilterStatus[3].text2}</Dropdown.Item>
+                                                                    <Dropdown.Item  className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="REJECTED">{translate[isLang].FilterStatus[2].text2}</Dropdown.Item>
                                                                 </>
-
                                                             }
                                                             {
                                                                 item.BlogStatus === 'REJECTED' &&
-                                                                <Dropdown.Item eventKey="POSTED">Post</Dropdown.Item>
+                                                                <Dropdown.Item  className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="POSTED">{translate[isLang].FilterStatus[3].text2}</Dropdown.Item>
                                                             }
                                                             {
                                                                 item.BlogStatus === 'REMOVED' &&
-                                                                <Dropdown.Item eventKey="POSTED">Post</Dropdown.Item>
+                                                                <Dropdown.Item  className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="POSTED">{translate[isLang].FilterStatus[3].text2}</Dropdown.Item>
                                                             }
                                                             {
                                                                 item.BlogStatus === 'POSTED' &&
-                                                                <Dropdown.Item eventKey="REMOVED">Removed</Dropdown.Item>
-                                                            }
+                                                                <Dropdown.Item  className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="REMOVED">{translate[isLang].FilterStatus[4].text2}</Dropdown.Item>
+                                                            } 
+
                                                         </DropdownButton>
                                                     </div>
                                                 </div>

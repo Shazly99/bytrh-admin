@@ -10,6 +10,11 @@ let initialTranslation = {
             { value: "REJECTED", text: "مرفـوض" },
             { value: "RESERVED", text: " محجــوز  " }
         ],
+        Filtertype: [
+            { value: "All", text: "جميع انواع المنتجات" },
+            { value: "SINGLE", text: " فردي  " },
+            { value: "GROUP", text: "   مجموعة  " }, 
+        ],
         TableHeader: [
             "صوره المنتح" ,
             " معلومات العميل",
@@ -17,53 +22,38 @@ let initialTranslation = {
             "سعر  ",
             "نوع المنتج",
             "حالة ",
+            "تاريخ البدء ",
+            "تاريخ الانتهاء ",
             "  تاريخ الإنشاء  ",
             "تفاصبل منتج"
         ],  
-        store:{
-            nav1:'منتجات حيوانية',nav2:'تفاصيل المنتج',
-            nav3:'تفاصيل المنتج',nav4:'تفاصيل الدردشة',
-
+        bidding:{
+            nav1:' المزايدة على الحيوانات  ',nav2:'تفاصيل المزايدة',
             header1:'معلومات المنتج',
             category:'فئة',
             subCategory:'تصنيف فرعي',
             type:'نوع المنتج',
-            cinfo:'معلومات العميل',
-            buyerInfo:'معلومات المشتري',
-            name:'إســم',
+            cinfo:'معلومات العميل', 
+            name:'اسم',
             phone:'هاتف',
             city:'مدينة',
             price:'سعر',
             age:'عمر',
-            gender:'نوع الجنس',
-            size:'مقاس',
-            bagging:'تكييس',
-            cutting:'قطع',
-            delivery:'توصيل',
+            gender:'جنس',
+            size:'مقاس',  
             whatsapp:'واتس اب',
             status:'حالة',
+            endDate:'تاريخ الانتهاء',
+            startDate:'تاريخ البدء',
+            entryFees:'رسوم الدخول',
+            minAmount:'المبلغ الأدنى',
+            productName:'اسم المنتج',
             des:'وصف المنتج',
-            gallery:'معرض المنتجات',
-            chatTitle:'دردشة المشتري',
-            chat:[
-                'إســم المشتري',
-                'هاتف',
-                'الحالــة'
-            ], 
-            headerChat:'تفاصيل المحادثـــة  ',
-            hello:'مرحباً',
-            rout:'مسؤل',
-            chatEmpty:'هذه المحادثـــة فارغة..',
-            requestsTitle:'طلبات المنتجات الحيوانية',
+            gallery:'معرض المنتجات',  
+            requestsTitle:'    طلبات المنتجات الحيوانية',
             Requests:[
                 'معلومات المشتري',
-                'سعر',
-                'رسوم القطع',
-                'رسوم التعبئة',
-                'رسوم التوصيل',
-                'طلب توصيل',
-                'السعر الكلي',
-                'ملحوظة',
+                'سعلا المنتج ', 
                 'حالة', 
             ]
 
@@ -76,13 +66,13 @@ let initialTranslation = {
             area:'حدد المنطقة',
             allarea:'المناطق',
             Product:'نوع المنتج',
-            Products:'  أنواع المنتجات الحيوانية  ',
+            Products:'    حدد نوع المنتج    ',
             status:'حدد الحالة',
             allStatus:'كل الحالة',
             SubCategory:'حدد الفئة الفرعية',
             allSubCategory:'فئة الحيوانات'
-        }
-        
+        }  ,
+        Actions: { action: "الإجراءات",currency:"ريال سعودي "},
 
     },
     "en": {
@@ -96,6 +86,11 @@ let initialTranslation = {
             { value: "REJECTED", text: "Rejected" },
             { value: "RESERVED", text: " Reserved  " }
         ],
+        Filtertype: [
+            { value: "All", text: "All" },
+            { value: "SINGLE", text: " Single  " },
+            { value: "GROUP", text: "   Group  " }, 
+        ],
         TableHeader: [
             " Product Image",
             " Client Info ",
@@ -103,52 +98,38 @@ let initialTranslation = {
             "Price",
             "Type ",
             "Status ",
+            "Start  Date ",
+            "End  Date ",
             "Create Date ",
             "View"
         ],  
-        store:{
-            nav1:'Animal Products',nav2:'Product Details',
-            nav3:'Product Details',nav4:'Chat Details',
+        bidding:{
+            nav1:'Animal bidding',nav2:'Bidding details',
             header1:'Product Info',
             category:'Category',
             subCategory:'Sub Category',
             type:'Product Type',
-            cinfo:'Client Info',
-            buyerInfo:'Buyer Info',
+            cinfo:'Client Info', 
             name:'Name',
             phone:'Phone',
             city:'City',
             price:'Price',
             age:'Age',
             gender:'Gender',
-            size:'Size',
-            bagging:'Bagging',
-            cutting:'Cutting',
-            delivery:'Delivery',
+            size:'Size',  
             whatsapp:'Whatsapp',
             status:'Status',
+            endDate:'End Date',
+            startDate:'Start Date',
+            entryFees:'Entry Fees',
+            minAmount:'Min Amount',
+            productName:'Product Name',
             des:'Product Description',
-            gallery:'Product Gallery',
-            chatTitle:'Buyer Chat',
-            chat:[
-                'Name',
-                'Phone',
-                'Status'
-            ], 
-            headerChat:'تفاصيل الاستشارة :',
-            hello:'مرحباً',
-            rout:'مسؤل',
-            chatEmpty:'هذه الاستشارة فارغة..',
+            gallery:'Product Gallery',  
             requestsTitle:'Animal Product Requests',
             Requests:[
                 'Buyer Info',
-                'Price',
-                'Cutting Fees',
-                'Bagging Fees',
-                'Delivery Fees',
-                'Delivery Request',
-                'Total Price',
-                'Note',
+                'Price', 
                 'Status', 
             ]
 
@@ -166,7 +147,9 @@ let initialTranslation = {
             allStatus:'All Status',
             SubCategory:'Select SubCategory',
             allSubCategory:'Animals SubCategory'
-        }
+        },
+        Actions: { action: "Actions",currency:"SAR"},
+
     }
 }
 

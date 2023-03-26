@@ -19,8 +19,8 @@ let initialTranslate = {
         Actions: [
             { name: "الإجراءات" },
             { name: "إعادة ضبط كلمة المرور" },
-            { name: "ضبط الرصيد", titleModel: "ضبط الرصيد لـ", btn1: "  ضبط الرصيد", btn2: "إلغاء" },
-            { name: "حذف", titleModel: "حذف العميل", btn1: " إحذف الان", btn2: "إلغاء" },
+            { name: "ضبط الرصيد", titleModel: "ضبط الرصيد لـ", btn1: "  ضبط الرصيد", btn2: "رجــوع" },
+            { name: "حذف", titleModel: "حذف العميل", btn1: " إحذف الان", btn2: "رجــوع" },
         ],
         toast: {
             update: "تم التحديث بنجاح",

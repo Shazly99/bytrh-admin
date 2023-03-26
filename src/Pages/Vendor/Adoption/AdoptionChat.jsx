@@ -106,7 +106,7 @@ const AdoptionChat = () => {
                 <Col xl={12} lg={12} md={12} sm={12} className='app__chat_messages '>
                   <div className='shadow app__chat_list-card'>
                     <div className={`app__Live_chat chat-body   ${chat.length === 0 ? ' bg-dark' : ''} `} style={{ background: 'rgb(217 217 217 / 28%)' }}>
-                      <ScrollToBottom className="message-container">
+                      <ScrollToBottom dir='ltr'className="message-container">
                         {
                           chat.length === 0 ?
                             <div className="empty_chat   w-100 h-100 d-flex justify-content-center align-items-center flex-column">

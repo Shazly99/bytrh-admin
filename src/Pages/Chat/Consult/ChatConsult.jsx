@@ -172,7 +172,7 @@ const ChatConsult = () => {
 
             <div className='filter__group__stats row ' style={{ display: 'flex', gap: '20px', marginBottom: '25px' }}>
               {
-                translate[isLang]?.FilterStatus?.map((item, index) => (
+                translate[isLang]?.FilterStatus?.filter?.((item) => item.value !== "All")?.map((item, index) => (
                   <>
                     {isLoader ? <>
                       <label className='col active d-flex justify-content-center align-item-center m-0 p-0 '  >
@@ -260,11 +260,12 @@ const ChatConsult = () => {
                         <div>
                           <span style={{ height: 'fit-content  !important' }} className={`
                                             ${item.ConsultType == 'NORMAL' && 'txt_delivered'} 
-                                            ${item.ConsultType == 'URGENT' && 'txt_rejected'}
-                                            ${item.ConsultType == 'Out For Delivery' && 'txt_delivery'}
-                                            ${item.ConsultType == 'ACTIVE' && 'txt_delivered'}
-                                            ${item.ConsultType == 'INACTIVE' && 'txt_rejected'}`} >
-                            {item?.ConsultType.toLowerCase().charAt(0).toUpperCase() + item?.ConsultType.slice(1).toLowerCase()}
+                                            ${item.ConsultType == 'URGENT' && 'txt_rejected'}   `} >
+                            {translate[isLang].ConsultType && translate[isLang].ConsultType.map((status, index) => (
+                              <React.Fragment key={index}>
+                                {item?.ConsultType === status.value && status.text}
+                              </React.Fragment>
+                            ))}
                           </span>
                         </div>
                       </td>
@@ -285,11 +286,12 @@ const ChatConsult = () => {
                                             ${item.ConsultStatus == 'SKIPPED' && 'txt__status'} 
                                             ${item.ConsultStatus == 'REJECTED' && 'txt_rejected'}
                                             ${item.ConsultStatus == 'ACCEPTED' && 'txt_delivery'}`} >
-                            {
+                            {translate[isLang].FilterStatus && translate[isLang].FilterStatus.map((status, index) => (
+                              <React.Fragment key={index}>
+                                {item?.ConsultStatus === status.value && status.text}
+                              </React.Fragment>
+                            ))}
 
-                              item?.ConsultStatus.toLowerCase().charAt(0).toUpperCase() + item?.ConsultStatus.slice(1).toLowerCase() === 'No_response' ? 'No Response' :
-                                item?.ConsultStatus.toLowerCase().charAt(0).toUpperCase() + item?.ConsultStatus.slice(1).toLowerCase()
-                            }
                           </span>
                         </div>
                       </td>
