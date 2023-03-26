@@ -213,14 +213,20 @@ export default function DoctorProfile() {
       {!loading ?
         <div className="container-fluid py-2">
 
-          <div className="row gx-lg-4 gx-0 gy-lg-0 gy-4 d-flex justify-content-lg-start justify-content-center mb-4">
+          {isLang === 'ar' ?
+              <Component.SubNav sub__nav={[{ name: 'صفحـة الطبيـب الشخصيـة', path: `/doctors/doctorProfile/${id}`} , { name: 'قائمـة الأطبـاء', path: `/doctors` }]} />
+              :
+              <Component.SubNav sub__nav={[{ name: 'Doctors', path: `/doctors` }, { name: 'Doctor Profile', path: `/doctors/doctorProfile/${id}` }]} />
+          }
+
+          <div className="row gx-lg-4 gx-0 gy-lg-0 gy-4 d-flex justify-content-lg-start justify-content-center mt-2 mb-4">
 
             <div className="col-lg-7">
               <div className="doc-info bg-light shadow-sm rounded-3 p-2 h-100">
                 <div className="row gx-md-3 gx-2 gy-0 d-flex align-items-center">
                   <div className="col-4">
                     <div className="img-doc">
-                      <img src={fetchDoctor.DoctorPicture} className='img-fluid d-block rounded-3' loading='lazy' alt="doctor" />
+                      <img src={fetchDoctor.DoctorPicture} className='img-fluid d-block rounded-3 w-100' style={{objectFit: 'fill'}} loading='lazy' alt="doctor" />
                     </div>
                   </div>
                   <div className="col-8">
@@ -255,7 +261,7 @@ export default function DoctorProfile() {
                   {isLang === 'ar' ? 'الرخصـة المهنيـة' : 'Profissional License'}
                 </h6>
                 <img src={fetchDoctorLicense.DoctorDocumentPath} className='img-fluid d-block rounded-3' loading='lazy' alt="license" />
-                <div className="d-flex mt-2">
+                <div className="d-flex mt-3">
                   <small className='my-0 text-black-50 me-1' style={{ fontWeight: '500' }}>
                     {isLang === 'ar' ? 'تاريخ إنتهاء الصلاحيـة' : 'Expire Date'}:
                   </small>
@@ -273,7 +279,7 @@ export default function DoctorProfile() {
                 <h6 className='mb-sm-3 mb-4 fw-bold'>
                   {isLang === 'ar' ? 'أسعـار الخدمـات' : 'Services Prices'}
                 </h6>
-                <div className="row gx-sm-4 gx-0 gy-sm-0 gy-4 d-flex justify-content-sm-start justify-content-center">
+                <div className="row gx-sm-4 gx-0 gy-4 d-flex justify-content-sm-start justify-content-center">
 
                   {fetchDoctorPricing.map((price, i) => (
                     <div key={i} className="col-sm-6">
@@ -404,7 +410,13 @@ export default function DoctorProfile() {
                                       {isLang === 'ar' ? 'استشــارة' : 'Consult'}
                                     </option>
                                     <option value='URGENT_CONSULT' >
-                                      {isLang === 'ar' ? 'استشــارة عاجلـة' : 'Urgent_consult'}
+                                      {isLang === 'ar' ? 'استشــارة عاجلـة' : 'Urgent Consult'}
+                                    </option>
+                                    <option value='VISIT'>
+                                      {isLang === 'ar' ? 'زيـارة' : 'Visit'}
+                                    </option>
+                                    <option value='HOME_VISIT' >
+                                      {isLang === 'ar' ? 'زيـارة منزليـة' : 'Home Visit'}
                                     </option>
                                   </select>
                                 </div>
@@ -435,7 +447,7 @@ export default function DoctorProfile() {
 
 
                       <div className="price position-relative">
-                        <h6 className='mb-3'>{price.DoctorPricingService[0].toUpperCase() + price.DoctorPricingService.slice(1).toLowerCase()}</h6>
+                        <h6 className='mb-3'>{`${price.DoctorPricingService[0].toUpperCase() + price.DoctorPricingService.slice(1).toLowerCase()}`.replace('_' , ' ')}</h6>
                         <div className="service-level d-flex justify-content-between mb-2">
                           <h6 className='mb-1'>{isLang === 'ar' ? 'مستـوي الخدمـة' : 'Service Level'} <span className='text-black-50' style={{ fontSize: '12px' }}>({isLang === 'ar' ? 'تبدأ من' : 'start from'})</span> :</h6>
                           <h6 className={`mb-0 fw-bold ${isLang === 'ar' ? 'ps-2' : 'pe-2'} color-red`}>{price.DoctorServiceLevel} {isLang === 'ar' ? 'ريـال' : 'SAR'}</h6>

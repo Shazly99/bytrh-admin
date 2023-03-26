@@ -224,7 +224,11 @@ const AnimalCat = () => {
                       <td >
                         <div>
                           <span style={{ height: 'fit-content !important' }} className={`  ${item?.AnimalCategoryActive === 1 && 'txt_delivered'}  ${item?.AnimalCategoryActive === 0 && 'txt_rejected'} `} >
-                            {item?.AnimalCategoryActive === 1 ? 'Active' : "InActive"}
+                            {item?.AnimalCategoryActive === 1 ? 
+                                isLang === 'ar' ? 'نشــط' : 'Active'
+                              : 
+                                isLang === 'ar' ? 'غير نشـط' : 'InActive'
+                            }
                           </span>
                         </div>
                       </td>
