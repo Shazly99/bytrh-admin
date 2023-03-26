@@ -184,7 +184,14 @@ const Areas = () => {
                       <td >
                         <div>
                           <span style={{ height: 'fit-content !important' }} className={`  ${item?.AreaActive === 1 && 'txt_delivered'}  ${item?.AreaActive === 0 && 'txt_rejected'} `} >
-                            {item?.AreaActive === 1 ? 'Active' : "InActive"}
+                          {
+                                translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.AreaActive === item?.AreaActive)
+                                  .map((status, index) => (
+                                    <React.Fragment key={index}>
+                                      {item?.AreaActive === status.AreaActive ? status.text : ''}
+                                    </React.Fragment>
+                                  ))
+                              }
                           </span>
                         </div>
                       </td>

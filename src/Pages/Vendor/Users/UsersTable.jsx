@@ -99,7 +99,14 @@ function UsersTable({ usersList, userList, isLoader,toastTranslate, actionsTrans
                                           ${item.UserStatus === 'Out For Delivery' && 'txt_delivery'}
                                           ${item.UserStatus === 'ACTIVE' && 'txt_delivered'}
                                           ${item.UserStatus === 'INACTIVE' && 'txt_rejected'}`} >
-                                                {item?.UserStatus.toLowerCase().charAt(0).toUpperCase() + item?.UserStatus.slice(1).toLowerCase()}
+                                                                       {
+                                statusTranslate?.filter((itemfilter) => itemfilter.value === item?.UserStatus)
+                                  .map((status, index) => (
+                                    <React.Fragment key={index}>
+                                      {item?.UserStatus === status.value ? status.text : ''}
+                                    </React.Fragment>
+                                  ))
+                              }
                                             </span>
                                         </div>
                                     </td>

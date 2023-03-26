@@ -285,11 +285,12 @@ const ChatConsult = () => {
                                             ${item.ConsultStatus == 'SKIPPED' && 'txt__status'} 
                                             ${item.ConsultStatus == 'REJECTED' && 'txt_rejected'}
                                             ${item.ConsultStatus == 'ACCEPTED' && 'txt_delivery'}`} >
-                            {
+                            {translate[isLang].FilterStatus && translate[isLang].FilterStatus.map((status, index) => (
+                              <React.Fragment key={index}>
+                                {item?.ConsultStatus === status.value && status.text}
+                              </React.Fragment>
+                            ))}
 
-                              item?.ConsultStatus.toLowerCase().charAt(0).toUpperCase() + item?.ConsultStatus.slice(1).toLowerCase() === 'No_response' ? 'No Response' :
-                                item?.ConsultStatus.toLowerCase().charAt(0).toUpperCase() + item?.ConsultStatus.slice(1).toLowerCase()
-                            }
                           </span>
                         </div>
                       </td>
