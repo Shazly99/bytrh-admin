@@ -83,7 +83,7 @@ const AddBaggingPricing = () => {
             <Component.SubNav sub__nav={[{ name: "إضافـة سعـر التكييـس", path: '/animals/baggingprice/addbaggingprice' } , { name: "قائمـة أسعـار التكييـس", path: '/animals/baggingprice' }]} />
             :
             <Component.SubNav sub__nav={[{ name: "Bagging Prices", path: '/animals/baggingprice' }, { name: "Add Bagging price ", path: '/animals/baggingprice/addbaggingprice' }]} />
-          }
+        }
         <div className="app__addprodects__header ">
           <Component.BaseHeader h1={translateBaggingPrice[isLang]?.LabelAddPage} />
           <div className="app__addOrder-form">
