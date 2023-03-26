@@ -1,10 +1,15 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useRef, useEffect, useState, useContext } from 'react'
 import { apiheader, GetData, PostData } from '../../../utils/fetchData';
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Col, Container, Row, Form, Button, FormControl } from 'react-bootstrap';
 import Icons from '../../../constants/Icons';
 import Component from '../../../constants/Component'
+import { VendersContext } from "../../../context/Store";
+import translateSubCategories from './translateSubCate';
+
+
+
 const EditAnimalsSubCategories = () => {
   let { id } = useParams()
   let navigate = useNavigate();
@@ -94,20 +99,29 @@ const EditAnimalsSubCategories = () => {
   useEffect(() => {
   }, [id])
 
+
+  let { isLang } = useContext(VendersContext);
+
+
   return (
     <Container fluid>
       <div className="app__addprodects">
-        <Component.SubNav sub__nav={[{ name: "Animal Categories", path: '/animals/subcategories' }, { name: "Edit Categorie ", path: `/animals/subcategories/editsubcategories/${id}` }]} />
+
+        {isLang === 'ar' ?
+            <Component.SubNav sub__nav={[{ name: "تعديل الفئـة الفرعيــة", path: `/animals/subcategories/editsubcategories/${id}` } , { name: "قائمـة الفئـات الفرعيـة", path: '/animals/subcategories' }]} />
+            :
+            <Component.SubNav sub__nav={[{ name: "Animal Sub Categories", path: '/animals/subcategories' }, { name: "Edit Category ", path: `/animals/subcategories/editsubcategories/${id}` }]} />
+        }
 
         <div className="app__addprodects__header ">
-          <Component.BaseHeader h1={'Edit Animal Categories'} />
+          <Component.BaseHeader h1={translateSubCategories[isLang]?.LabelEditPage} />
           <div className="app__addOrder-form">
             <div className="app__addprodects-form">
               <form onSubmit={submit}>
                 <Row>
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
                     <Form.Group>
-                      <Form.Label>Ads Image:</Form.Label>
+                      <Form.Label>{translateSubCategories[isLang]?.LabelAddImage}</Form.Label>
                       <FormControl
                         id="custom-file"
                         type="file"
@@ -144,13 +158,13 @@ const EditAnimalsSubCategories = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label> Name (En)</Form.Label>
+                      <Form.Label>{translateSubCategories[isLang]?.LabelAddNameEN}</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CategoryNameEn} defaultValue={editPage?.AnimalSubCategoryNameEn} />
                     </Form.Group>
 
 
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
-                      <Form.Label>Animal Category</Form.Label>
+                      <Form.Label>{translateSubCategories[isLang]?.LabelAddCate}</Form.Label>
 
                       <Form.Select aria-label="Default select example" ref={animalCategoryRef}>
                         {
@@ -162,11 +176,11 @@ const EditAnimalsSubCategories = () => {
 
                     </Form.Group>
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
-                      <Form.Label>Animal Cut</Form.Label>
+                      <Form.Label>{translateSubCategories[isLang]?.LabelAddCut}</Form.Label>
 
                       <Form.Select aria-label="Default select example" ref={animalCutRef}>
                         {
-                           [{IDCutting:1,CuttingName:'Yes'},{IDCutting:0,CuttingName:'No'}]?.map((item, index) => (
+                          [{IDCutting:1,CuttingName: isLang === 'ar' ? 'نعـم' : 'Yes'},{IDCutting:0,CuttingName: isLang === 'ar' ? 'لا' : 'No'}]?.map((item, index) => (
                             <option key={index} value={item?.IDCutting} selected={Number(editPage?.IDCutting) === 1 ? "Yes":"No"}>{item?.CuttingName}</option>
                           ))
                         }
@@ -177,15 +191,15 @@ const EditAnimalsSubCategories = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail" >
-                      <Form.Label> Name (Ar)</Form.Label>
+                      <Form.Label>{translateSubCategories[isLang]?.LabelAddNameAR}</Form.Label>
                       <Form.Control type="text" name='email' ref={CategoryNameAr} defaultValue={editPage?.AnimalSubCategoryNameAr} style={{ direction: 'rtl' }} />
                     </Form.Group>
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
-                      <Form.Label>Animal Bagging</Form.Label>
+                      <Form.Label>{translateSubCategories[isLang]?.LabelAddBag}</Form.Label>
 
                       <Form.Select aria-label="Default select example" ref={animalBaggingRef}>
                         {
-                          [{ IDBagging: 1, BaggingName: 'Yes' }, { IDBagging: 0, BaggingName: 'No' }]?.map((item, index) => (
+                          [{ IDBagging: 1, BaggingName:  isLang === 'ar' ? 'نعـم' : 'Yes' }, { IDBagging: 0, BaggingName: isLang === 'ar' ? 'لا' : 'No' }]?.map((item, index) => (
                             <option key={index} value={item?.IDBagging} selected={Number(editPage?.IDBagging) === 1 ? "Yes":"No"}>{item?.BaggingName}</option>
                           ))
                         }
@@ -197,14 +211,14 @@ const EditAnimalsSubCategories = () => {
 
                     <div className='baseBtn1'>
                       <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Save
+                        {translateSubCategories[isLang]?.SaveBTN}
                       </Button>
                     </div>
 
                     <div className='baseBtn'>
                       <Link to={'/animals/subcategories'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                          Cancel
+                          {translateSubCategories[isLang]?.CancelBTN}
                         </Button>
                       </Link>
                     </div>

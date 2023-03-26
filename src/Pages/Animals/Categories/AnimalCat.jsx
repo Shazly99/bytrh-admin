@@ -9,6 +9,8 @@ import Icons from '../../../constants/Icons';
 import { VendersContext } from "../../../context/Store";
 import useSkeletonTable from '../../../utils/useSkeletonTable';
 import { apiheader, GetData, PostData } from './../../../utils/fetchData';
+import translateCategories from './translateCategories';
+
 
 const AnimalCat = () => {
   const [animal, setAnimal] = useState(null)
@@ -119,6 +121,8 @@ const AnimalCat = () => {
   }, [page])
   useEffect(() => {
   }, [page, PagesNumber])
+
+
   return (
     <>
       <div className="app__Users ">
@@ -126,9 +130,9 @@ const AnimalCat = () => {
           <div className="search-container">
             <div className="search_and__btn w-100" >
               {isLoader ? <>
-                <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/categories/addAnimal" />
+                <Component.ButtonBase title={translateCategories[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/categories/addAnimal" />
                 <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
-                  <input   type="text" placeholder="Search by animal category....." name="search" value={searchValue} onChange={handleInputChange} />
+                  <input   type="text" placeholder={translateCategories[isLang]?.placeholder} name="search" value={searchValue} onChange={handleInputChange} />
                   <button type="submit" onClick={handleSearchClick}>
                     <Icons.Search color='#fff' size={25} />
                   </button>
@@ -158,7 +162,7 @@ const AnimalCat = () => {
                       />
                   }
 
-                  All
+                  {isLang === 'ar' ? 'الكـل' : 'All'}
                 </label>
               </> : SkeletonFilters(10, 90)}
               {isLoader ? <>
@@ -172,11 +176,11 @@ const AnimalCat = () => {
                     className="active-radio form-check-input"
 
                   />
-                  Active
+                  {isLang === 'ar' ? 'نشــط' : 'Active'}
                 </label>
               </> : SkeletonFilters(10, 90)}
               {isLoader ? <>
-                <label>
+                <label style={{whiteSpace: 'nowrap'}}>
                   <input
                     type="radio"
                     name="filter"
@@ -184,9 +188,8 @@ const AnimalCat = () => {
                     checked={selectedOption === "INACTIVE"}
                     onChange={handleOptionChange}
                     className="inactive-radio form-check-input"
-
                   />
-                  InActive
+                  {isLang === 'ar' ? 'غير نشـط' : 'InActive'}
                 </label>
               </> : SkeletonFilters(10, 90)}
             </div>
@@ -195,10 +198,9 @@ const AnimalCat = () => {
             <Table responsive={true} className='rounded-3 '>
               <thead>
                 <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                  <th>Image</th>
-                  <th>Animal Category Name</th>
-                  <th>Animal Category Status</th>
-                  <th>Action</th>
+                  {translateCategories[isLang]?.TableHeader?.map((el , i) => (
+                      <th key={i}>{el}</th>
+                  ))}
                 </tr>
               </thead>
               <tbody className='text-center'>
@@ -231,21 +233,27 @@ const AnimalCat = () => {
                           <span>
                             <DropdownButton
                               id={`dropdown-${item.IDAnimalCategory}`}
-                              title="Actions"
+                              title={translateCategories[isLang].ActionsLabel}
                               variant="outline-success"
                               onSelect={(eventKey) => handleActionSelect(item.IDAnimalCategory, eventKey)}
                               className="DropdownButton "
                               drop={'down-centered'}
                             >
                               <Dropdown.Item eventKey="Edite" as={Link} to={`/animals/categories/editAnimal/${item.IDAnimalCategory}`}>
-                                Edit
+                                {isLang === 'ar' ? 'تعديـل' : 'Edit'}
                               </Dropdown.Item>
 
+                              <div className="w-100 bg-dark opacity-25" style={{height: '1px'}}></div>
+
                               {
-                                item?.AnimalCategoryActive === 1 ? '' : item?.AnimalCategoryActive === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
+                                item?.AnimalCategoryActive === 1 ? '' : item?.AnimalCategoryActive === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">
+                                  {isLang === 'ar' ? 'نشـط' : 'Active'}
+                                </Dropdown.Item>
                               }
                               {
-                                item?.AnimalCategoryActive === 0 ? '' : item?.AnimalCategoryActive === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
+                                item?.AnimalCategoryActive === 0 ? '' : item?.AnimalCategoryActive === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">
+                                  {isLang === 'ar' ? 'غير نشـط' : 'InActive'}
+                                </Dropdown.Item>
                               }
                             </DropdownButton>
                           </span>
