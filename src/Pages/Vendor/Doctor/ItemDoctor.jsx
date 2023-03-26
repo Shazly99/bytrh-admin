@@ -146,7 +146,12 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                 ${status == 'BLOCKED' && 'txt_blocked'}
                                 ${status == 'ACTIVE' && 'txt_delivered'}
                                 ${status == 'OFFLINE' && 'txt_rejected'}`} >
-                            {status && status[0].toUpperCase()}{status.slice(1).toLowerCase()}
+                            {isLang === 'en' && status && status[0].toUpperCase()}{isLang === 'en' && status && status.slice(1).toLowerCase()}
+                            {isLang === 'ar' && status === 'ACTIVE' ? 'نشــط' : ''}
+                            {isLang === 'ar' && status === 'PENDING' ? 'قيـد الإنتظـار' : ''}
+                            {isLang === 'ar' && status === 'BLOCKED' ? 'محظــور' : ''}
+                            {isLang === 'ar' && status === 'OFFLINE' ? 'مغلـق' : ''}
+                            {isLang === 'ar' && status === 'NOT_VERIFIED' ? 'غير مثبـت' : ''}
                         </span>
                     </div>
                 </td>

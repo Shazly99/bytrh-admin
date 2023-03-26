@@ -1,7 +1,7 @@
 let translateSubCategories = {
     'en' :
     {
-        placeholder : 'Search by animal category..',
+        placeholder : 'Search by animal sub category..',
         addBTN: 'Add',
         FilterStatus: [
             { value: "All", text: "All" },
@@ -32,7 +32,7 @@ let translateSubCategories = {
     },
     'ar' :
     {
-        placeholder : 'البحـث بواسطة فئـة الحيـوان..',
+        placeholder : 'البحـث بواسطة فئـة الحيـوان الفرعيـة..',
         addBTN: 'إضافـة',
         FilterStatus: [
             { value: "All", text: "الكـل" },

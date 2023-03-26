@@ -98,7 +98,7 @@ export default function Adoption() {
                 }}
                 onKeyDown={handelClickSearch}
 
-                type="text" placeholder={isLang === 'ar' ? 'البحث بالإسم..' : 'Search by name'} name="search" />
+                type="text" placeholder={isLang === 'ar' ? 'البحث بإسـم العميـل..' : 'Search by client name'} name="search" />
               <button type="submit" onClick={() => {
                 localStorage.removeItem('searchAdoption');
 

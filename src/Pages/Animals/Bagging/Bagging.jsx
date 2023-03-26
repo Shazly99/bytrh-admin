@@ -100,7 +100,11 @@ const Bagging = () => {
                       <td >
                         <div>
                           <span style={{ height: 'fit-content !important' }} className={`  ${item?.BaggingActive === 1 && 'txt_delivered'}  ${item?.BaggingActive === 0 && 'txt_rejected'} `} >
-                            {item?.BaggingActive === 1 ? 'Active' : "InActive"}
+                            {item?.BaggingActive === 1 ? 
+                                isLang === 'ar' ? 'نشــط' : 'Active'
+                                : 
+                                isLang === 'ar' ? 'غير نشـط' : 'InActive'
+                            }
                           </span>
                         </div>
                       </td>

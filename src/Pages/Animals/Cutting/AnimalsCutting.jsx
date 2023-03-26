@@ -118,7 +118,11 @@ const AnimalsCutting = () => {
                         <td >
                           <div>
                             <span style={{ height: 'fit-content !important' }} className={`  ${item?.CuttingActive === 1 && 'txt_delivered'}  ${item?.CuttingActive === 0 && 'txt_rejected'} `} >
-                              {item?.CuttingActive === 1 ? 'Active' : "InActive"}
+                              {item?.CuttingActive === 1 ? 
+                                  isLang === 'ar' ? 'نشــط' : 'Active'
+                                  : 
+                                  isLang === 'ar' ? 'غير نشـط' : 'InActive'
+                              }
                             </span>
                           </div>
                         </td>

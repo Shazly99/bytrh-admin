@@ -70,17 +70,21 @@ export default function ItemAdoption({ id , clientName , petName , petStrain , p
                 <td>
                     <div>{clientName ? clientName : '_'}</div>
                 </td>
-                <td className='text-center '>
+                <td className='text-center'>
                     <span style={{ height: 'fit-content !important' }} className={`
                             ${status == 'PENDING' && 'txt_pending'} 
                             ${status == 'CANCELLED' && 'txt_cancel'}
                             ${status == 'ADOPTED' && 'txt_blocked'}
                             ${status == 'ACTIVE' && 'txt_delivered'} py-2`} >
-                            {status && status[0].toUpperCase()}{status.slice(1).toLowerCase()}
+                        {isLang === 'en' && status && status[0].toUpperCase()}{isLang === 'en' && status && status.slice(1).toLowerCase()}
+                        {isLang === 'ar' && status === 'ACTIVE' ? 'نشــط' : ''}
+                        {isLang === 'ar' && status === 'PENDING' ? 'قيـد الإنتظـار' : ''}
+                        {isLang === 'ar' && status === 'ADOPTED' ? 'متبنـي' : ''}
+                        {isLang === 'ar' && status === 'CANCELLED' ? 'ملغــي' : ''}
                     </span>
                 </td>
 
-                <td>
+                <td className='text-center'>
                     <span>
                         <DropdownButton
                             id={`dropdown-${id}`}

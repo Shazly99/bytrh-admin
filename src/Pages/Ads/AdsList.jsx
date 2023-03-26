@@ -317,6 +317,7 @@ const AdsList = () => {
                               loading="lazy"
                               src={item.AdvertisementImage} // use normal <img> attributes as props
                               className="w-100 rounded-2"
+                              style={{maxHeight: '200px'}}
                             /> :
 
                             <img
@@ -324,6 +325,7 @@ const AdsList = () => {
                               loading="lazy"
                               src={Img.defaultImg} // use normal <img> attributes as props
                               className="w-100 rounded-2"
+                              style={{maxHeight: '200px'}}
                             />
 
                         }

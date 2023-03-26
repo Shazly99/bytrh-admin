@@ -135,7 +135,7 @@ const AnimalsSubCategories = () => {
                             {isLoader ? <>
                                 <Component.ButtonBase title={translateSubCategories[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/subcategories/addsubcategories" />
                                 <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
-                                    <input className='shadow' type="text" placeholder={translateSubCategories[isLang]?.placeholder} name="search" value={searchValue} onChange={handleInputChange} />
+                                    <input type="text" placeholder={translateSubCategories[isLang]?.placeholder} name="search" value={searchValue} onChange={handleInputChange} />
                                     <button type="submit" onClick={handleSearchClick}>
                                         <Icons.Search color='#fff' size={25} />
                                     </button>
@@ -233,7 +233,11 @@ const AnimalsSubCategories = () => {
                                             <td >
                                                 <div>
                                                     <span style={{ height: 'fit-content !important' }} className={`  ${item?.AnimalSubCategorActive === 1 && 'txt_delivered'}  ${item?.AnimalSubCategorActive === 0 && 'txt_rejected'} `} >
-                                                        {item?.AnimalSubCategorActive === 1 ? 'Active' : "InActive"}
+                                                        {item?.AnimalSubCategorActive === 1 ? 
+                                                            isLang === 'ar' ? 'نشــط' : 'Active'
+                                                            : 
+                                                            isLang === 'ar' ? 'غير نشـط' : 'InActive'
+                                                        }
                                                     </span>
                                                 </div>
                                             </td>
