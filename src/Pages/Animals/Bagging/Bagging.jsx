@@ -1,12 +1,15 @@
 import React from 'react';
 import { Dropdown, DropdownButton, NavDropdown, Table } from "react-bootstrap";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import Component from '../../../constants/Component';
 import Icons from '../../../constants/Icons';
 import useSkeletonTable from '../../../utils/useSkeletonTable';
 import { apiheader, GetData, PostData } from './../../../utils/fetchData';
+import { VendersContext } from "../../../context/Store";
+import translateBagging from './translateBagging';
+
 
 const Bagging = () => {
   const [animal, setAnimal] = useState(null)
@@ -57,12 +60,16 @@ const Bagging = () => {
   // useEffect(() => {
   // }, [page, PagesNumber])
 
+
+  let { isLang } = useContext(VendersContext);
+
+
   return (
     <>
 
       <div className="app__Users ">
         {isLoader ? <>
-          <Component.ButtonBase title={"Add    "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/bagging/addbagging" />
+          <Component.ButtonBase title={translateBagging[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/bagging/addbagging" />
         </> :
           <div className="mt-3 p-2">
             {SkeletonFilters(40, 150)}
@@ -73,9 +80,9 @@ const Bagging = () => {
             <Table responsive={true} className='rounded-3 '>
               <thead>
                 <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                  <th>Bagging Name</th>
-                  <th>Bagging Status</th>
-                  <th>Action</th>
+                  {translateBagging[isLang]?.TableHeader?.map((el , i) => (
+                      <th key={i}>{el}</th>
+                  ))}
                 </tr>
               </thead>
               <tbody className='text-center'>
@@ -104,22 +111,26 @@ const Bagging = () => {
                           <span>
                             <DropdownButton
                               id={`dropdown-${item.IDBagging}`}
-                              title="Actions"
+                              title={translateBagging[isLang].ActionsLabel}
                               variant="outline-success"
                               onSelect={(eventKey) => handleActionSelect(item.IDBagging, eventKey)}
                               className="DropdownButton "
                               drop={'down-centered'}
                             >
                               <Dropdown.Item eventKey="Edite" as={Link} to={`/animals/bagging/editbagging/${item.IDBagging}`}>
-                                Edit
+                                {isLang === 'ar' ? 'تعديـل' : 'Edit'}
                               </Dropdown.Item>
                               <NavDropdown.Divider />
 
                               {
-                                item?.BaggingActive === 1 ? '' : item?.BaggingActive === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
+                                item?.BaggingActive === 1 ? '' : item?.BaggingActive === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">
+                                    {isLang === 'ar' ? 'نشـط' : 'Active'}
+                                </Dropdown.Item>
                               }
                               {
-                                item?.BaggingActive === 0 ? '' : item?.BaggingActive === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
+                                item?.BaggingActive === 0 ? '' : item?.BaggingActive === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">
+                                    {isLang === 'ar' ? 'غير نشـط' : 'InActive'}
+                                </Dropdown.Item>
                               }
                             </DropdownButton>
                           </span>

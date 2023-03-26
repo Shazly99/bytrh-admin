@@ -1,17 +1,18 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useContext } from 'react';
 import Component from '../../../constants/Component'
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { apiheader, PostData } from '../../../utils/fetchData';
 import Icons from '../../../constants/Icons';
-import { Col, Container, Row, Form, Button, FormControl } from 'react-bootstrap';
-
+import { Col, Container, Row, Form, Button } from 'react-bootstrap';
+import { VendersContext } from "../../../context/Store";
+import translateCutting from './translateCutting';
 
 const AddAnimalsCutting = () => {
   let navigate = useNavigate();
   const cuttingsNameEn = useRef();
   const cuttingsNameAr = useRef();
- 
+
   const submit = e => {
     e.preventDefault()
     addNewCategory({
@@ -41,21 +42,30 @@ const AddAnimalsCutting = () => {
       }
     });
   }
+
+
+  let { isLang } = useContext(VendersContext);
+
+
   return (
     <Container fluid>
     <div className="app__addprodects">
-        <Component.SubNav sub__nav={[{ name: "Animal Categories", path: '/animals/cutting' }, { name: "Add Category ", path: '/animals/cutting/addcutting' }]} />
+        {isLang === 'ar' ?
+            <Component.SubNav sub__nav={[{ name: "إضافـة اسـم تقطيـع", path: '/animals/cutting/addcutting' } , { name: "قائمـة القواطـع", path: '/animals/cutting' }]} />
+            :
+            <Component.SubNav sub__nav={[{ name: "Animals Cutting", path: '/animals/cutting' }, { name: "Add a Cutting ", path: '/animals/cutting/addcutting' }]} />
+        }
         <div className="app__addprodects__header ">
-            <Component.BaseHeader h1={'Add Cutting Name   '} />
+            <Component.BaseHeader h1={translateCutting[isLang]?.LabelAddPage} />
             <div className="app__addOrder-form">
                 <div className="app__addprodects-form">
                     <form onSubmit={submit}>
-         
+
                         <Row>
                             <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                                 <Form.Group controlId="formBasicEmail">
-                                    <Form.Label>  Name (En)</Form.Label>
+                                    <Form.Label>{translateCutting[isLang]?.LabelAddNameEN}</Form.Label>
                                     <Form.Control type="text" name='firstname' ref={cuttingsNameEn} />
                                 </Form.Group>
 
@@ -63,7 +73,7 @@ const AddAnimalsCutting = () => {
                             <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                                 <Form.Group controlId="formBasicEmail" >
-                                    <Form.Label> Name (Ar)</Form.Label>
+                                    <Form.Label>{translateCutting[isLang]?.LabelAddNameAR}</Form.Label>
                                     <Form.Control type="text" name='email' ref={cuttingsNameAr} style={{ direction: 'rtl' }} />
                                 </Form.Group>
 
@@ -72,14 +82,14 @@ const AddAnimalsCutting = () => {
 
                                 <div className='baseBtn1'>
                                     <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                        Save
+                                        {translateCutting[isLang]?.SaveBTN}
                                     </Button>
                                 </div>
 
                                 <div className='baseBtn'>
                                     <Link to={'/animals/cutting'}>
                                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                            Cancel
+                                          {translateCutting[isLang]?.CancelBTN}
                                         </Button>
                                     </Link>
                                 </div>

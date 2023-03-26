@@ -86,7 +86,7 @@ const AnimalsCutting = () => {
     <>
         <div className="app__Users ">
           {isLoader ? <>
-            <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/cutting/addcutting" />
+            <Component.ButtonBase title={translateCutting[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/cutting/addcutting" />
           </> :
             <div className="mt-3 p-2">
               {SkeletonFilters(40, 150)}
@@ -97,9 +97,9 @@ const AnimalsCutting = () => {
               <Table responsive={true} className='rounded-3 '>
                 <thead>
                   <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                    <th>Cutting Name</th>
-                    <th>Cutting Status</th>
-                    <th>Action</th>
+                    {translateCutting[isLang]?.TableHeader?.map((el , i) => (
+                        <th key={i}>{el}</th>
+                    ))}
                   </tr>
                 </thead>
                 <tbody className='text-center'>
@@ -128,21 +128,25 @@ const AnimalsCutting = () => {
                             <span>
                               <DropdownButton
                                 id={`dropdown-${item.IDCutting}`}
-                                title="Actions"
+                                title={translateCutting[isLang].ActionsLabel}
                                 variant="outline-success"
                                 onSelect={(eventKey) => handleActionSelect(item.IDCutting, eventKey)}
                                 className="DropdownButton "
                                 drop={'down-centered'}
                               >
                                 <Dropdown.Item eventKey="Edite" as={Link} to={`/animals/cutting/editcutting/${item.IDCutting}`}>
-                                  Edit
+                                  {isLang === 'ar' ? 'تعديـل' : 'Edit'}
                                 </Dropdown.Item>
 
                                 {
-                                  item?.CuttingActive === 1 ? '' : item?.CuttingActive === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
+                                  item?.CuttingActive === 1 ? '' : item?.CuttingActive === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">
+                                    {isLang === 'ar' ? 'نشـط' : 'Active'}
+                                  </Dropdown.Item>
                                 }
                                 {
-                                  item?.CuttingActive === 0 ? '' : item?.CuttingActive === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
+                                  item?.CuttingActive === 0 ? '' : item?.CuttingActive === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">
+                                    {isLang === 'ar' ? 'غير نشـط' : 'InActive'}
+                                  </Dropdown.Item>
                                 }
                               </DropdownButton>
                             </span>
