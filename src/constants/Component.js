@@ -85,6 +85,7 @@ import BiddingDetails from './../Pages/Bidding/BiddingDetails';
 import BiddingRequests from './../Pages/Bidding/BiddingRequests';
 import DataNotFound from './../Components/Shared/DataNotFound/DataNotFound';
 import HandelDelete from './../Components/Shared/HandelDelete/HandelDelete';
+import Visits from './../Pages/Visits/Visits';
 
 const Component= {
     // Layout 
@@ -195,6 +196,10 @@ const Component= {
     AdoptionChat,
     HandelDelete,
     Error,
+
+
+    // Visits
+    Visits
 }
 
 export default Component

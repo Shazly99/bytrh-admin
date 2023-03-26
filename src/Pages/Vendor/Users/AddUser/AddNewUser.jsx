@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import { useState, useEffect } from "react";
+import React, { useRef, useContext, useState, useEffect } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Component from '../../../../constants/Component';
@@ -9,14 +8,21 @@ import 'react-phone-input-2/lib/style.css'
 import Form from 'react-bootstrap/Form';
 import { apiheader, PostData } from '../../../../utils/fetchData';
 import { Link, useNavigate } from 'react-router-dom';
-import {   toast } from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import useFetch from '../../../../utils/useFetch';
+import { VendersContext } from '../../../../context/Store';
+import initialTranslate from '../initialTranslate';
 
 const AddNewUser = () => {
+    let { isLang } = useContext(VendersContext);
+    const [translate, setTranslate] = useState(initialTranslate)
+    const handelTranslate = () => {
+        setTranslate(initialTranslate)
+    }
     let navigate = useNavigate();
     const countriesRef = useRef(null);
 
-     let { countries, cities, getCities } = useFetch()
+    let { countries, cities, getCities } = useFetch()
 
     const [phoneNumber, setPhoneNumber] = useState('');
     const [Country, setCountry] = useState({});
@@ -25,7 +31,7 @@ const AddNewUser = () => {
     const password = useRef();
     const handelSelectCountry = (event) => {
         const selectedCountryId = event.target.value;
-         getCities(selectedCountryId)
+        getCities(selectedCountryId)
     }
 
     const onChangeHandler = (phone, country, e) => {
@@ -35,21 +41,6 @@ const AddNewUser = () => {
 
     const submit = e => {
         e.preventDefault()
-        // setData({
-        //     UserEmail: email.current.value,
-        //     UserPassword: password.current.value,
-        //     UserPhone: '+' + phoneNumber,
-        //     UserPhoneFlag: '+' + Country,
-        //     UserName: username.current.value,
-        //     IDCity: 1
-        // })
-         //     UserEmail: email.current.value,
-        //     UserPassword: password.current.value,
-        //     UserPhone: '+' + phoneNumber,
-        //     UserPhoneFlag: '+' + Country,
-        //     UserName: username.current.value,
-        //     IDCity: 1
-        // });
         addNewUser({
             UserEmail: email.current.value,
             UserPassword: password.current.value,
@@ -64,9 +55,9 @@ const AddNewUser = () => {
         await PostData(`https://bytrh.com/api/admin/users/add`, newUser, apiheader).then((res) => {
 
             if (res.data.Success === true) {
-                toast.success('New user added successfully!', {
+                toast.success(<strong>{translate[isLang].toast.add}</strong>, {
                     duration: 4000,
-                    position: 'top-center',
+                    position: 'bottom-center',
                     icon: <Icons.Added color='#40AB45' size={25} />,
                     iconTheme: {
                         primary: '#0a0',
@@ -83,15 +74,16 @@ const AddNewUser = () => {
     }
 
     useEffect(() => {
-    }, [ phoneNumber])
+        handelTranslate()
+    }, [phoneNumber, isLang])
 
     return (
         <>
             <Container fluid>
                 <div className="app__addprodects">
-                    <Component.SubNav sub__nav={[{ name: "Users", path: '/user' }, { name: "Add User", path: '/user/addUser' }]} />
+                    <Component.SubNav sub__nav={[{ name: translate[isLang]?.add[1]?.nav1, path: '/user' }, { name: translate[isLang]?.add[1]?.nav2, path: '/user/addUser' }]} />
                     <div className="app__addprodects__header ">
-                        <Component.BaseHeader h1={'Add New Users'} />
+                        <Component.BaseHeader h1={translate[isLang]?.add[2]?.header} />
                         <div className="app__addOrder-form">
                             <div className="app__addprodects-form">
                                 <form onSubmit={submit}>
@@ -99,12 +91,12 @@ const AddNewUser = () => {
                                         <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                                             <Form.Group controlId="formBasicEmail">
-                                                <Form.Label>Users Name</Form.Label>
+                                                <Form.Label>{translate[isLang]?.add[2]?.Label1}</Form.Label>
                                                 <Form.Control type="text" name='firstname' ref={username} />
                                             </Form.Group>
 
                                             <Form.Group controlId="formBasicEmail" className='mt-3'>
-                                                <Form.Label>Email</Form.Label>
+                                                <Form.Label>{translate[isLang]?.add[2]?.Label2}</Form.Label>
                                                 <Form.Control type="email" name='email' ref={email} />
                                             </Form.Group>
 
@@ -121,7 +113,7 @@ const AddNewUser = () => {
 
 
                                             <Form.Group controlId="formBasicEmail" className='mt-3'>
-                                                <Form.Label>Country</Form.Label>
+                                                <Form.Label>{translate[isLang]?.add[2]?.Label3}</Form.Label>
                                                 <Form.Select aria-label="Default select example" onClick={handelSelectCountry}>
                                                     {/* <option>{countries[1].CountryName}</option> */}
                                                     {
@@ -134,30 +126,33 @@ const AddNewUser = () => {
                                         </Col>
                                         <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
                                             <Form.Group controlId="formBasicEmail"  >
-                                                <Form.Label>Mobile</Form.Label>
-                                                <PhoneInput
-                                                    country='sa'
-                                                    // onlyCountries={['eg', 'sa']} 
-                                                    preferredCountries={['eg', 'sa', "ae"]}
-                                                    value={phoneNumber}
-                                                    onChange={onChangeHandler}
-                                                    enableSearch={true}
-                                                    inputClass={'w-100'}
-                                                    inputStyle={{ width: '300px' }}
-                                                    searchPlaceholder="Country number..."
-                                                    inputExtraProps={{
-                                                        autoFocus: true,
-                                                    }}
-                                                />
+                                                <Form.Label  >{translate[isLang]?.add[2]?.Label4}</Form.Label>
+                                                <div dir='ltr'>
+                                                    <PhoneInput
+                                                        country='sa'
+                                                        // onlyCountries={['eg', 'sa']} 
+                                                        preferredCountries={['eg', 'sa', "ae"]}
+                                                        value={phoneNumber}
+                                                        onChange={onChangeHandler}
+                                                        enableSearch={true}
+                                                        inputClass={'w-100'}
+                                                        inputStyle={{ width: '300px' }}
+                                                        searchPlaceholder="Country number..."
+                                                        inputExtraProps={{
+                                                            autoFocus: true,
+
+                                                        }}
+                                                    />
+                                                </div>
                                             </Form.Group>
                                             <Form.Group controlId="formBasicEmail" className='mt-3'>
-                                                <Form.Label>Password</Form.Label>
+                                                <Form.Label>{translate[isLang]?.add[2]?.Label5}</Form.Label>
                                                 <Form.Control type="password" ref={password} />
                                             </Form.Group>
 
 
                                             <Form.Group controlId="formBasicEmail" className='mt-3'>
-                                                <Form.Label>City</Form.Label>
+                                                <Form.Label>{translate[isLang]?.add[2]?.Label6}</Form.Label>
 
                                                 <Form.Select aria-label="Default select example" ref={countriesRef}>
 
@@ -175,14 +170,15 @@ const AddNewUser = () => {
 
                                             <div className='baseBtn1'>
                                                 <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                                    Save
+                                                    {translate[isLang]?.add[3]?.save}
                                                 </Button>
                                             </div>
 
                                             <div className='baseBtn'>
                                                 <Link to={'/user'}>
-                                                    <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                                    Cancel
+                                                    <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                                                        {translate[isLang]?.add[3]?.cancel}
+
                                                     </Button>
                                                 </Link>
                                             </div>

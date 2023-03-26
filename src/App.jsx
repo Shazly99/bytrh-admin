@@ -227,6 +227,12 @@ function App() {
           ]
         },
         {
+          path: '/visits', children: [
+            { index: true, element: <ProtectedRoutes><Component.Visits /> </ProtectedRoutes> }, 
+
+          ]
+        },
+        {
           path: '*', element: <Component.Error />
         }
       ],
@@ -276,14 +282,14 @@ function App() {
             fontFamily: ' Arial, Helvetica, sans-serif',
             textTransform: 'capitalize',
             zIndex: '9999',
-            background: '#000',
-            color: '#fff',
+       /*      background: '#000',
+            color: '#fff', */
             borderRadius: '10px',
             boxShadow:'10px 10px 10px rgba(188, 188, 188, 0.16)',
              
             
-            /*  background: '#333',
-             color: '#fff', */
+             background: '#fff',
+             color: '#000',
           },
         }}
         containerStyle={{

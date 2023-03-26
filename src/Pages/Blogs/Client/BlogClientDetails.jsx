@@ -217,7 +217,7 @@ const BlogClientDetails = () => {
                                     </div>
                                     <div className="delete">
                                       <DropdownButton
-                                        title={<img src={Img.dropdown} loading="lazy" />}
+                                        title={<img src={Img.dropdown}   />}
                                         id="dropdown-menu"
                                         onClick={() => setShowDropdown(!showDropdown)}
                                       >

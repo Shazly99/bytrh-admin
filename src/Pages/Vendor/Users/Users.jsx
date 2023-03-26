@@ -8,36 +8,36 @@ import { PostData } from '../../../utils/fetchData';
 import useSkeletonTable from '../../../utils/useSkeletonTable';
 import { apiheader } from './../../../utils/fetchData';
 import './Users.scss';
+import initialTranslate from './initialTranslate';
 
 function Users() {
   let { isLang } = useContext(VendersContext);
-
+  const [translate, setTranslate] = useState(initialTranslate)
+  const handelTranslate = () => {
+    setTranslate(initialTranslate)
+  }
   const [page, setPage] = useState(1);
   const [usersList, setuserList] = useState(null);
   const [PagesNumber, setPagesNumber] = useState('')
   const [isLoader, setIsloader] = useState(false);
-  let { SkeletonSearch, SkeletonFilters } = useSkeletonTable();
+  let { SkeletonSearch } = useSkeletonTable();
   const handleChange = (event, value) => {
     setPage(value);
   };
-  const test = () => {
-
-  }
+ 
 
   const userList = async (page) => {
     try {
       await PostData(`https://bytrh.com/api/admin/users`, { IDPage: page }, apiheader).then(({ data }) => {
-
         setuserList(data.Response.Users);
         setPagesNumber(data.Response.Pages);
         console.log(data.Response.Pages)
         const timeoutId = setTimeout(() => {
           setIsloader(true)
-        }, 200);
+        }, 0);
         return () => clearTimeout(timeoutId);
       });
-    } catch (error) {
-      console.log(error);
+    } catch (error) { 
       if (error.response && error.response.status === 429) {
         const retryAfter = error.response.headers['retry-after'];
         setTimeout(() => {
@@ -49,6 +49,7 @@ function Users() {
   useEffect(() => {
     window.scrollTo(0, 0);
     userList(page)
+    handelTranslate()
   }, [page])
   // to fixed problem because Pagination count need a number 
   const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
@@ -61,8 +62,7 @@ function Users() {
   const searchGetData = async (searchValue) => {
     let { data } = await PostData(`https://bytrh.com/api/admin/users`, { IDPage: page, SearchKey: searchValue }, apiheader)
     setuserList(data.Response.Users)
-    setPagesNumber(data.Response.Pages);
-
+    setPagesNumber(data.Response.Pages); 
   }
   const handleInputChange = (event) => {
     if (event.target.value === '') {
@@ -96,9 +96,9 @@ function Users() {
 
             <div className="search_and__btn   w-100">
               {isLoader ? <>
-                <Component.ButtonBase onclick={test} title={"Add "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/user/addUser" />
+                <Component.ButtonBase  title={translate[isLang].add[0].btn} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/user/addUser" />
                 <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
-                  <input type="text" placeholder="Search by name or email or phone....." name="search" value={searchValue} onChange={handleInputChange} />
+                  <input placeholder={translate[isLang]?.placeholder} type="text"   name="search" value={searchValue} onChange={handleInputChange} />
                   <button  type="submit" onClick={handleSearchClick}>
                     <Icons.Search color='#fff' size={25} />
                   </button >
@@ -106,84 +106,32 @@ function Users() {
               </> : SkeletonSearch(40, "100%")}
             </div>
             <div className='filter__group'>
-              {isLoader ? <>
-                <label>
-                  {
-                    selectedOption === "All" ?
-                      <input
-                        type="radio"
-                        name="filter"
-                        value="All"
-                        checked
-                        onChange={handleOptionChange}
-                        className={`inactive-radio form-check-input `}
-                      /> :
-                      <input
-                        type="radio"
-                        name="filter"
-                        value="All"
-                        checked={selectedOption === "All"}
-                        onChange={handleOptionChange}
-                        className={`inactive-radio form-check-input `}
-                      />
-                  }
-
-                  All
-                </label>
-              </> : SkeletonFilters(10, 90)}
-
-              {isLoader ? <>
-                <label className='active'>
-                  <input
-                    type="radio"
-                    name="filter"
-                    value="ACTIVE"
-                    checked={selectedOption === "ACTIVE"}
-                    onChange={handleOptionChange}
-                    className="active-radio form-check-input"
-
-                  />
-                  Active
-                </label>
-              </> : SkeletonFilters(10, 90)}
-
-              {isLoader ? <>
-                <label>
-                  <input
-                    type="radio"
-                    name="filter"
-                    value="INACTIVE"
-                    checked={selectedOption === "INACTIVE"}
-                    onChange={handleOptionChange}
-                    className="inactive-radio form-check-input"
-
-                  />
-                  InActive
-                </label>
-              </> : SkeletonFilters(10, 90)}
-
-              {isLoader ? <>
-                <label>
-                  <input
-                    type="radio"
-                    name="filter"
-                    value="PENDING"
-                    checked={selectedOption === "PENDING"}
-                    onChange={handleOptionChange}
-                    className="inactive-radio form-check-input"
-
-                  />
-                  Pending
-                </label>
-              </> : SkeletonFilters(10, 90)}
-
+              {
+                translate[isLang]?.FilterStatus?.map((item, index) => (
+                  <>
+                    {isLoader ? <>
+                      <label className='active' >
+                        <input
+                          type="radio"
+                          name="filter"
+                          value={item.value}
+                          checked={selectedOption === item.value}
+                          onChange={handleOptionChange}
+                          className="active-radio form-check-input"
+                        />
+                        {item.text }
+                      </label>
+                    </> : SkeletonSearch(10, 90)}
+                  </>
+                ))
+              }
             </div>
           </div>
-          <Component.UsersTable isLoader={isLoader} usersList={usersList} userList={userList} />
+          <Component.UsersTable isLoader={isLoader} toastTranslate={translate[isLang]?.toast}  tabelTranslate={translate[isLang]?.TableHeader}actionsTranslate={translate[isLang]?.Actions} statusTranslate={translate[isLang]?.FilterStatus} usersList={usersList} userList={userList} />
         </div>
 
       </div>
-      <div className="pagination ">
+      <div className="pagination " dir="ltr">
         <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
           <Pagination count={pageCount} page={page} onChange={handleChange} />
         </Box>

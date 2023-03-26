@@ -54,7 +54,7 @@ const BaggingPricing = () => {
         setPagesNumber(data.Response.Pages);
         const timeoutId = setTimeout(() => {
           setIsloader(true)
-        }, 200);
+        }, 0);
         return () => clearTimeout(timeoutId);
       })
       .catch((error) => {

@@ -36,7 +36,7 @@ const Bidding = () => {
       setPagesNumber(data.Response.Pages);
       const timeoutId = setTimeout(() => {
         setIsloader(true)
-      }, 200);
+      }, 0);
       return () => clearTimeout(timeoutId);
     })
       .catch((error) => {
@@ -497,7 +497,7 @@ const Bidding = () => {
                               <div className="delete">
                                 <DropdownButton
                                   title={
-                                    <img src={Img.dropdown} loading="lazy" alt="Img.dropdown" />
+                                    <img src={Img.dropdown}   alt="Img.dropdown" />
                                   }
                                   id="dropdown-menu"
                                   variant="outline-success"
@@ -607,7 +607,7 @@ const Bidding = () => {
                               <Link
                                 to={`/bidding/details/${item?.IDAnimalProduct}`}
                               >
-                                <img src={Img.view} loading="lazy" alt='img view' />
+                                <img src={Img.view}   alt='img view' />
                               </Link>
                             </div>
                           </td>

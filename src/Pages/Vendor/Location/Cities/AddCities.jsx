@@ -1,13 +1,19 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useContext,useEffect,useState, useRef } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
+import { VendersContext } from '../../../../context/Store';
 import { apiheader, PostData } from '../../../../utils/fetchData';
 import useFetch from './../../../../utils/useFetch';
+import initialTranslation from "./Translation";
+
 const AddCities = () => {
-  // let { countries ,cities} = useContext(VendersContext);
+  let { isLang } = useContext(VendersContext);
+  const [translate, setTranslate] = useState(initialTranslation)
+  const handelTranslate = () => setTranslate(initialTranslation)
+
   let { countries } = useFetch()
 
   let navigate = useNavigate();
@@ -51,15 +57,16 @@ const AddCities = () => {
   }
   useEffect(() => {
     window.scrollTo(0, 0);
+    handelTranslate()
   }, [])
 
   return (
     <Container fluid>
       <div className="app__addprodects">
-        <Component.SubNav sub__nav={[{ name: "Areas", path: '/location/cities' }, { name: "Add Area ", path: '/location/cities/addcity' }]} />
+        <Component.SubNav sub__nav={[{ name:  translate[isLang].add.nav1, path: '/location/cities' }, { name: translate[isLang].add.nav2, path: '/location/cities/addcity' }]} />
 
         <div className="app__addprodects__header ">
-          <Component.BaseHeader h1={'Add New Area'} />
+          <Component.BaseHeader h1={translate[isLang].add.header}/>
           <div className="app__addOrder-form">
             <div className="app__addprodects-form">
               <form onSubmit={submit}>
@@ -67,7 +74,7 @@ const AddCities = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>  Name (En)</Form.Label>
+                      <Form.Label>  {translate[isLang].add.Label1}</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CityNameEn} />
                     </Form.Group>
 
@@ -82,7 +89,7 @@ const AddCities = () => {
 
                     </Form.Group> */}
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
-                      <Form.Label>  Code</Form.Label>
+                      <Form.Label>   {translate[isLang].add.Label2}</Form.Label>
                       <Form.Control type="number" name='firstname' ref={CityCode} />
                     </Form.Group>
 
@@ -91,12 +98,12 @@ const AddCities = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>  Name (Ar)</Form.Label>
+                      <Form.Label> {translate[isLang].add.Label3}</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CityNameAr} style={{ direction: 'rtl' }} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
-                      <Form.Label>Country</Form.Label>
+                      <Form.Label> {translate[isLang].add.Label4}</Form.Label>
 
                       <Form.Select aria-label="Default select example" ref={countriesRef}>
                         {/* <option>Country id</option> */}
@@ -115,14 +122,16 @@ const AddCities = () => {
 
                     <div className='baseBtn1'>
                       <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Save
+                      {translate[isLang].add.save}
+
                       </Button>
                     </div>
 
                     <div className='baseBtn'>
                       <Link to={'/location/cities'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                          Cancel
+                        {translate[isLang].add.cancel}
+
                         </Button>
                       </Link>
                     </div>
