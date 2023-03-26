@@ -1,16 +1,18 @@
 import React from 'react'
-import { Table, DropdownButton, Dropdown, NavDropdown } from "react-bootstrap";
+import { Table, DropdownButton, Dropdown } from "react-bootstrap";
 
 import Component from '../../../constants/Component'
 import Icons from '../../../constants/Icons'
 import { GetData, PostData, apiheader } from './../../../utils/fetchData';
-import { useEffect } from 'react';
+import { useEffect , useContext } from 'react';
 import { useState } from 'react';
-import { Pagination } from "@mui/material";
-import Box from "@mui/material/Box";
+// import { Pagination } from "@mui/material";
+// import Box from "@mui/material/Box";
 import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import useSkeletonTable from '../../../utils/useSkeletonTable';
+import { VendersContext } from "../../../context/Store";
+import translateCutting from './translateCutting';
 
 
 const AnimalsCutting = () => {
@@ -75,11 +77,92 @@ const AnimalsCutting = () => {
     window.scrollTo(0, 0);
     cuttings()
   }, [])
-  // useEffect(() => {
-  // }, [page, PagesNumber])
+
+
+  let { isLang } = useContext(VendersContext);
+
 
   return (
     <>
+ 
+        <div className="app__Users ">
+          {isLoader ? <>
+            <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/cutting/addcutting" />
+          </> :
+            <div className="mt-3 p-2">
+              {SkeletonFilters(40, 150)}
+            </div>
+          }
+          <div className="app__Users-table"> 
+            {isLoader ? <>
+              <Table responsive={true} className='rounded-3 '>
+                <thead>
+                  <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
+                    <th>Cutting Name</th>
+                    <th>Cutting Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody className='text-center'>
+                  {
+                    animal?.map((item, index) => (
+                      <tr key={index}>
+
+
+                        <td >
+                          <div>
+                            {item?.CuttingName}
+                          </div>
+                        </td>
+
+                        <td >
+                          <div>
+                            <span style={{ height: 'fit-content !important' }} className={`  ${item?.CuttingActive === 1 && 'txt_delivered'}  ${item?.CuttingActive === 0 && 'txt_rejected'} `} >
+                              {item?.CuttingActive === 1 ? 'Active' : "InActive"}
+                            </span>
+                          </div>
+                        </td>
+
+                        <td>
+                          <div>
+
+                            <span>
+                              <DropdownButton
+                                id={`dropdown-${item.IDCutting}`}
+                                title="Actions"
+                                variant="outline-success"
+                                onSelect={(eventKey) => handleActionSelect(item.IDCutting, eventKey)}
+                                className="DropdownButton "
+                                drop={'down-centered'}
+                              >
+                                <Dropdown.Item eventKey="Edite" as={Link} to={`/animals/cutting/editcutting/${item.IDCutting}`}>
+                                  Edit
+                                </Dropdown.Item>
+
+                                {
+                                  item?.CuttingActive === 1 ? '' : item?.CuttingActive === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
+                                }
+                                {
+                                  item?.CuttingActive === 0 ? '' : item?.CuttingActive === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
+                                }
+                              </DropdownButton>
+                            </span>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  }
+
+                </tbody>
+
+              </Table>
+            </> :
+              SkeletonTable()
+            }
+          </div>
+
+        </div>
+=======
 
       <div className="app__Users ">
         {isLoader ? <>
@@ -158,8 +241,7 @@ const AnimalsCutting = () => {
         </div>
 
       </div>
-
-
+ 
     </>
   )
 }

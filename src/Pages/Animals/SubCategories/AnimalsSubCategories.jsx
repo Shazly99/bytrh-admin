@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import useSkeletonTable from '../../../utils/useSkeletonTable';
 import { VendersContext } from '../../../context/Store';
+import translateSubCategories from './translateSubCate';
 
 
 const AnimalsSubCategories = () => {
@@ -122,6 +123,9 @@ const AnimalsSubCategories = () => {
     }, [page])
     useEffect(() => {
     }, [page, PagesNumber])
+
+
+
     return (
         <>
             <div className="app__Users ">
@@ -129,9 +133,9 @@ const AnimalsSubCategories = () => {
                     <div className="search-container">
                         <div className="search_and__btn w-100">
                             {isLoader ? <>
-                                <Component.ButtonBase title={"Add  "} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/subcategories/addsubcategories" />
+                                <Component.ButtonBase title={translateSubCategories[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/subcategories/addsubcategories" />
                                 <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
-                                    <input className='shadow' type="text" placeholder="Search by animal category....." name="search" value={searchValue} onChange={handleInputChange} />
+                                    <input className='shadow' type="text" placeholder={translateSubCategories[isLang]?.placeholder} name="search" value={searchValue} onChange={handleInputChange} />
                                     <button type="submit" onClick={handleSearchClick}>
                                         <Icons.Search color='#fff' size={25} />
                                     </button>
@@ -161,7 +165,7 @@ const AnimalsSubCategories = () => {
                                             />
                                     }
 
-                                    All
+                                    {isLang === 'ar' ? 'الكـل' : 'All'}
                                 </label>
                             </> : SkeletonFilters(10, 90)}
                             {isLoader ? <>
@@ -175,11 +179,11 @@ const AnimalsSubCategories = () => {
                                         className="active-radio form-check-input"
 
                                     />
-                                    Active
+                                        {isLang === 'ar' ? 'نشــط' : 'Active'}
                                 </label>
                             </> : SkeletonFilters(10, 90)}
                             {isLoader ? <>
-                                <label>
+                                <label style={{whiteSpace: 'nowrap'}}>
                                     <input
                                         type="radio"
                                         name="filter"
@@ -189,7 +193,7 @@ const AnimalsSubCategories = () => {
                                         className="inactive-radio form-check-input"
 
                                     />
-                                    InActive
+                                        {isLang === 'ar' ? 'غير نشـط' : 'InActive'}
                                 </label>
                             </> : SkeletonFilters(10, 90)}
 
@@ -199,11 +203,9 @@ const AnimalsSubCategories = () => {
                         <Table responsive={true} className='rounded-3 '>
                             <thead>
                                 <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                                    <th>Image</th>
-                                    <th>Animal Category Name</th>
-                                    <th>Sub Category Name</th>
-                                    <th>Sub Category Status</th>
-                                    <th>Action</th>
+                                    {translateSubCategories[isLang]?.TableHeader?.map((el , i) => (
+                                        <th key={i}>{el}</th>
+                                    ))}
                                 </tr>
                             </thead>
                             <tbody className='text-center'>
@@ -242,21 +244,27 @@ const AnimalsSubCategories = () => {
                                                     <span>
                                                         <DropdownButton
                                                             id={`dropdown-${item.IDAnimalSubCategory}`}
-                                                            title="Actions"
+                                                            title={translateSubCategories[isLang].ActionsLabel}
                                                             variant="outline-success"
                                                             onSelect={(eventKey) => handleActionSelect(item.IDAnimalSubCategory, eventKey)}
                                                             className="DropdownButton "
                                                             drop={'down-centered'}
                                                         >
                                                             <Dropdown.Item eventKey="Edite" as={Link} to={`/animals/subcategories/editsubcategories/${item.IDAnimalSubCategory}`}>
-                                                                Edit
+                                                                {isLang === 'ar' ? 'تعديـل' : 'Edit'}
                                                             </Dropdown.Item>
 
+                                                            <div className="w-100 bg-dark opacity-25" style={{height: '1px'}}></div>
+
                                                             {
-                                                                item?.AnimalSubCategorActive === 1 ? '' : item?.AnimalSubCategorActive === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">Active</Dropdown.Item>
+                                                                item?.AnimalSubCategorActive === 1 ? '' : item?.AnimalSubCategorActive === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">
+                                                                    {isLang === 'ar' ? 'نشـط' : 'Active'}
+                                                                </Dropdown.Item>
                                                             }
                                                             {
-                                                                item?.AnimalSubCategorActive === 0 ? '' : item?.AnimalSubCategorActive === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">InActive</Dropdown.Item>
+                                                                item?.AnimalSubCategorActive === 0 ? '' : item?.AnimalSubCategorActive === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">
+                                                                    {isLang === 'ar' ? 'غير نشـط' : 'InActive'}
+                                                                </Dropdown.Item>
                                                             }
                                                         </DropdownButton>
                                                     </span>

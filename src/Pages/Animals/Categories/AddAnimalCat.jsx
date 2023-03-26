@@ -1,11 +1,12 @@
-import React, { useRef ,useState} from 'react';
+import React, { useRef , useState , useContext} from 'react';
 import Component from '../../../constants/Component'
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { apiheader, PostData } from '../../../utils/fetchData';
 import Icons from '../../../constants/Icons';
 import { Col, Container, Row, Form, Button, FormControl } from 'react-bootstrap';
-
+import { VendersContext } from "../../../context/Store";
+import translateCategories from './translateCategories';
 
 const AddAnimalCat = () => {
     let navigate = useNavigate();
@@ -50,19 +51,27 @@ const AddAnimalCat = () => {
         });
     }
 
+
+    let { isLang } = useContext(VendersContext);
+
+
     return (
         <Container fluid>
             <div className="app__addprodects">
-                <Component.SubNav sub__nav={[{ name: "Animal Categories", path: '/animals/categories' }, { name: "Add Category ", path: '/animals/categories/addAnimal' }]} />
+                {isLang === 'ar' ?
+                    <Component.SubNav sub__nav={[{ name: "إضافـة فئـة", path: '/animals/categories/addAnimal' } , { name: "قائمــة الفئــات", path: '/animals/categories' }]} />
+                    :
+                    <Component.SubNav sub__nav={[{ name: "Animal Categories", path: '/animals/categories' }, { name: "Add Category ", path: '/animals/categories/addAnimal' }]} />
+                }
                 <div className="app__addprodects__header ">
-                    <Component.BaseHeader h1={'Add  '} />
+                    <Component.BaseHeader h1={translateCategories[isLang]?.LabelAddPage} />
                     <div className="app__addOrder-form">
                         <div className="app__addprodects-form">
                             <form onSubmit={submit}>
                                 <Row>
                                     <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
                                         <Form.Group>
-                                            <Form.Label>Ads Image:</Form.Label>
+                                            <Form.Label>{translateCategories[isLang]?.LabelAddImage}</Form.Label>
                                             <FormControl
                                                 id="custom-file"
                                                 type="file"
@@ -91,32 +100,32 @@ const AddAnimalCat = () => {
                                 <Row>
                                     <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
-                                        <Form.Group controlId="formBasicEmail">
-                                            <Form.Label>Animal Category Name (En)</Form.Label>
+                                        <Form.Group controlId="firstname">
+                                            <Form.Label>{translateCategories[isLang]?.LabelAddNameEN}</Form.Label>
                                             <Form.Control type="text" name='firstname' ref={CategoryNameEn} />
                                         </Form.Group>
 
                                     </Col>
                                     <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
-                                        <Form.Group controlId="formBasicEmail" >
-                                            <Form.Label>Animal Category Name (Ar)</Form.Label>
+                                        <Form.Group controlId="email" >
+                                            <Form.Label>{translateCategories[isLang]?.LabelAddNameAR}</Form.Label>
                                             <Form.Control type="text" name='email' ref={CategoryNameAr} style={{ direction: 'rtl' }} />
                                         </Form.Group>
 
                                     </Col>
                                     <div className='d-flex justify-content-center align-content-center my-5'>
 
-                                        <div className='baseBtn1'>
+                                        <div className='baseBtn'>
                                             <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                                Save
+                                                {translateCategories[isLang]?.SaveBTN}
                                             </Button>
                                         </div>
 
                                         <div className='baseBtn'>
                                             <Link to={'/animals/categories'}>
                                                 <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                                    Cancel
+                                                    {translateCategories[isLang]?.CancelBTN}
                                                 </Button>
                                             </Link>
                                         </div>
