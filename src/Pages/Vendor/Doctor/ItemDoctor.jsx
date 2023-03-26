@@ -178,6 +178,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                 <Dropdown.Item eventKey="balance" onClick={handleShowModal}>
                                     {isLang === 'ar' ? 'ضبـط التوازن' : 'Set Balance'}
                                 </Dropdown.Item>
+                                <div className="w-100 bg-dark opacity-25" style={{height: '1px'}}></div>
                                 <Modal show={showModal} onHide={handleCloseModal} centered dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
                                     <Modal.Header closeButton>
                                         <Modal.Title>
