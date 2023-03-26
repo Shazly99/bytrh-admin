@@ -1,51 +1,35 @@
 let translateCutting = {
     'en' :
     {
-        placeholder : 'Search by animal category..',
         addBTN: 'Add',
-        FilterStatus: [
-            { value: "All", text: "All" },
-            { value: "ACTIVE", text: "Active" },
-            { value: "INACTIVE", text: " InActive  " },
-        ],
         TableHeader: [
-            "Image",
-            "Category",
+            "Cutting Name",
             "Status",
             "Action",
         ],
         ActionsLabel: 'Actions',
-        LabelAddPage: 'Add new Category',
-        LabelAddImage: 'Image Pet',
-        LabelAddNameAR: 'Name Pet (Arabic)',
-        LabelAddNameEN: 'Name Pet (English)',
+        LabelAddPage: 'Add new Cutting',
+        LabelAddNameAR: 'Cutting Name (Arabic)',
+        LabelAddNameEN: 'Cutting Name (English)',
         SaveBTN: 'Save',
         CancelBTN: 'Cancel',
-        LabelEditPage: 'Edit Animal Categories',
+        LabelEditPage: 'Edit Cutting Name',
     },
     'ar' :
     {
-        placeholder : 'البحـث بواسطة فئـة الحيـوان..',
         addBTN: 'إضافـة',
-        FilterStatus: [
-            { value: "All", text: "الكـل" },
-            { value: "ACTIVE", text: "نشـط" },
-            { value: "INACTIVE", text: "غير نشـط" },
-        ],
         TableHeader: [
-            "الصـورة",
-            "الفئـة",
-            "الحالــة",
+            "اسـم التقطيـع",
+            "الحالـة",
             "الإجـراء",
         ],
         ActionsLabel: 'الإجـراءات',
-        LabelAddPage: 'إضافـة فئـة جديـدة',
-        LabelAddImage: 'صورة الحيـوان',
-        LabelAddNameAR: 'اسـم الحيوان بالعربي',
-        LabelAddNameEN: 'اسـم الحيوان بالإنجليزي',
+        LabelAddPage: 'إضافـة اسـم تقطيـع جديـد',
+        LabelAddNameAR: 'اسـم التقطيـع (عربي)',
+        LabelAddNameEN: 'اسـم التقطيـع (انجليزي)',
         SaveBTN: 'حفـظ',
         CancelBTN: 'رجـوع',
-        LabelEditPage: 'تعديــل فئـة الحيـوان',
+        LabelEditPage: 'تعديـل اسـم التقطيـع',
     }
 }
 

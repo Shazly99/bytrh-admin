@@ -1,10 +1,12 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useContext } from 'react';
 import Component from '../../../constants/Component'
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import { apiheader, PostData } from '../../../utils/fetchData';
 import Icons from '../../../constants/Icons';
-import { Col, Container, Row, Form, Button, FormControl } from 'react-bootstrap';
+import { Col, Container, Row, Form, Button } from 'react-bootstrap';
+import { VendersContext } from "../../../context/Store";
+import translateBagging from './translateBagging';
 
 
 const AddBagging = () => {
@@ -41,12 +43,22 @@ const AddBagging = () => {
       }
     });
   }
+
+
+  let { isLang } = useContext(VendersContext);
+
+
+
   return (
     <Container fluid>
       <div className="app__addprodects">
-        <Component.SubNav sub__nav={[{ name: "Baggings", path: '/animals/bagging' }, { name: "Add Bagging ", path: '/animals/bagging/addbagging' }]} />
+        {isLang === 'ar' ?
+            <Component.SubNav sub__nav={[{ name: "إضافـة اسـم تكييس", path: '/animals/bagging/addbagging' } , { name: "قائمـة التكييس", path: '/animals/bagging' }]} />
+            :
+            <Component.SubNav sub__nav={[{ name: "Baggings", path: '/animals/bagging' }, { name: "Add Bagging ", path: '/animals/bagging/addbagging' }]} />
+        }
         <div className="app__addprodects__header ">
-          <Component.BaseHeader h1={'Add New Bagging '} />
+          <Component.BaseHeader h1={translateBagging[isLang]?.LabelAddPage} />
           <div className="app__addOrder-form">
             <div className="app__addprodects-form">
               <form onSubmit={submit}>
@@ -55,7 +67,7 @@ const AddBagging = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail">
-                      <Form.Label>  Name (En)</Form.Label>
+                      <Form.Label>{translateBagging[isLang]?.LabelAddNameEN}</Form.Label>
                       <Form.Control type="text" name='firstname' ref={baggingNameEn} />
                     </Form.Group>
 
@@ -63,7 +75,7 @@ const AddBagging = () => {
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
                     <Form.Group controlId="formBasicEmail" >
-                      <Form.Label> Name (Ar)</Form.Label>
+                      <Form.Label>{translateBagging[isLang]?.LabelAddNameAR}</Form.Label>
                       <Form.Control type="text" name='email' ref={baggingNameAr} style={{ direction: 'rtl' }} />
                     </Form.Group>
 
@@ -72,14 +84,14 @@ const AddBagging = () => {
 
                     <div className='baseBtn1'>
                       <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                        Save
+                        {translateBagging[isLang]?.SaveBTN}
                       </Button>
                     </div>
 
                     <div className='baseBtn'>
                       <Link to={'/animals/bagging'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                          Cancel
+                          {translateBagging[isLang]?.CancelBTN}
                         </Button>
                       </Link>
                     </div>

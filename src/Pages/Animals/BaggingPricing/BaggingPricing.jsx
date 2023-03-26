@@ -1,13 +1,16 @@
  
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { Button, Modal, Table } from "react-bootstrap";
 import { toast } from "react-hot-toast";
 import Component from "../../../constants/Component";
 import Icons from "../../../constants/Icons";
 import useSkeletonTable from "../../../utils/useSkeletonTable";
 import { apiheader, GetData, PostData } from "./../../../utils/fetchData";
+import { VendersContext } from "../../../context/Store";
+import translateBaggingPrice from './baggingPrice';
+
 
 const BaggingPricing = () => {
   const [animal, setAnimal] = useState(null);
@@ -126,6 +129,10 @@ const BaggingPricing = () => {
   }, [page]);
   useEffect(() => { }, [page, PagesNumber]);
 
+
+  let { isLang } = useContext(VendersContext);
+
+
   return (
     <>
 
@@ -133,7 +140,7 @@ const BaggingPricing = () => {
 
         {isLoader ? <>
           <Component.ButtonBase
-            title={"Add  "}
+            title={translateBaggingPrice[isLang]?.addBTN}
             bg={"primary"}
             icon={<Icons.Add size={21} color={"#ffffffb4"} />}
             path="/animals/baggingprice/addbaggingprice"
@@ -151,10 +158,9 @@ const BaggingPricing = () => {
                   className="text-center  "
                   style={{ background: "#F9F9F9" }}
                 >
-                  <th>Animal SubCategory  </th>
-                  <th>Bagging Name</th>
-                  <th>Bagging Price </th>
-                  <th>Action</th>
+                  {translateBaggingPrice[isLang]?.TableHeader?.map((el , i) => (
+                      <th key={i}>{el}</th>
+                  ))}
                 </tr>
               </thead>
               <tbody className="text-center">
@@ -169,7 +175,7 @@ const BaggingPricing = () => {
 
                     <td>
                       <div className="d-flex gap-1">
-                        <h6 className="mb-0  pe-2 color-red">{item?.SubCategoryBaggingPrice}{' '}SAR</h6>
+                        <h6 className={`mb-0 ${isLang === 'ar' ? 'ps-2' : 'pe-2'} color-red`}>{item?.SubCategoryBaggingPrice}{' '}{isLang === 'ar' ? 'ريـال' : 'SAR'}</h6>
                         <Icons.edit
                           onClick={() => handleModalOpenEdit(index)}
                         />
@@ -177,9 +183,10 @@ const BaggingPricing = () => {
                           show={modalShowEdit && modalIndexEdit === index}
                           onHide={handleModalCloseEdit}
                           centered
+                          dir={isLang === 'ar' ? 'rtl' : 'ltr'}
                         >
                           <Modal.Header closeButton>
-                            <Modal.Title className='  w-100 text-center'>  price Details</Modal.Title>
+                            <Modal.Title className='w-100 text-center'>{translateBaggingPrice[isLang]?.ModalHeader}</Modal.Title>
                           </Modal.Header>
                           <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
                             <input className="form-control" defaultValue={item.SubCategoryBaggingPrice} ref={changePrice} />
@@ -187,10 +194,10 @@ const BaggingPricing = () => {
                           <Modal.Footer className="d-flex justify-content-center align-items-center">
 
                             <Button variant="outline-primary" onClick={handleModalCloseEdit}>
-                              Cancel
+                              {translateBaggingPrice[isLang]?.CancelBTN}
                             </Button>
                             <Button   onClick={() => handleChangePrice(item.IDAnimalSubCategory, item.IDBagging)}>
-                              Set Price
+                              {translateBaggingPrice[isLang]?.ModalSetPrice}
                             </Button>
                           </Modal.Footer>
                         </Modal>
@@ -206,14 +213,17 @@ const BaggingPricing = () => {
                             variant=" outline-sucess"
                             onClick={() => handleModalOpen(index)}
                             className="DropdownButton outline-sucess"
-                          >Detete</Button>
+                          >
+                            {isLang === 'ar' ? 'حـذف' : 'Detete'}
+                          </Button>
                           <Modal
                             show={modalShow && modalIndex === index}
                             onHide={handleModalClose}
                             centered
+                            dir={isLang === 'ar' ? 'rtl' : 'ltr'}
                           >
                             <Modal.Header closeButton>
-                              <Modal.Title className='  w-100 '> Delete Bagging Price  </Modal.Title>
+                              <Modal.Title className='  w-100 '>{translateBaggingPrice[isLang]?.ModalHeaderDel}</Modal.Title>
                             </Modal.Header>
                             <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
                             <Component.HandelDelete/>
@@ -223,10 +233,10 @@ const BaggingPricing = () => {
                             <Modal.Footer className="d-flex justify-content-center align-items-center">
 
                               <Button variant="danger" style={{border:'#dc3545'}} onClick={() => handleActionSelect(item.IDSubCategoryCutting)}>
-                                Delete now
+                                {translateBaggingPrice[isLang]?.ModalDelPrice}
                               </Button>
                               <Button variant="outline-primary" onClick={handleModalClose}>
-                                Cancel
+                                {translateBaggingPrice[isLang]?.CancelBTN}
                               </Button>
                             </Modal.Footer>
                           </Modal>
