@@ -35,6 +35,7 @@ const Login = () => {
                 if (data.Success === true) { 
                     localStorage.setItem("token", data.Response.AccessToken);
                     localStorage.setItem("IDUser", data.Response.IDUser);
+                    localStorage.setItem("Role", data.Response.IDRole);
                     toast.success(data.ApiMsg);
                     navigate('/');
                 } else {
