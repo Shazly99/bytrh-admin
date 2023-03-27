@@ -27,7 +27,6 @@ function Dashboard() {
   }
   useEffect(() => {
     handelTranslate()
-    console.log(isLang);
   }, [isLang])
 
   return (

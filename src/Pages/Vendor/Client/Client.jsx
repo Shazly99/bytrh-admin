@@ -26,7 +26,6 @@ const Clients = () => {
 
   const userList = _.debounce(async (page) => {
     await PostData(`https://bytrh.com/api/admin/clients`, { IDPage: page }, apiheader).then(({ data }) => {
-      console.log(data);
       setuserList(data.Response.Clients)
       setPagesNumber(data.Response.Pages);
       const timeoutId = setTimeout(() => {
@@ -103,7 +102,7 @@ const Clients = () => {
                 translate[isLang]?.FilterStatus?.map((item, index) => (
                   <>
                     {isLoader ? <>
-                      <label className='active' >
+                      <label key={index} className='active' >
                         <input
                           type="radio"
                           name="filter"

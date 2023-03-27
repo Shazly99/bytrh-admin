@@ -44,18 +44,18 @@ function Navber() {
   }
 
 
-  const changeDir = () => {
-    if(isLang === 'ar') {
-      $('.navbar-expand .navbar-nav .dropdown-menu').css({'left' : '0'})
-    }
-    else {
-      $('.navbar-expand .navbar-nav .dropdown-menu').css({'left' : '-135px'})
-    }
-  }
+  // const changeDir = () => {
+  //   if(isLang === 'ar') {
+  //     $('.navbar-expand .navbar-nav .dropdown-menu').css({'left' : '0'})
+  //   }
+  //   else {
+  //     $('.navbar-expand .navbar-nav .dropdown-menu').css({'left' : '-135px'})
+  //   }
+  // }
 
-  useEffect(() => {
-    changeDir();
-  }, [isLang])
+  // useEffect(() => {
+  //   changeDir();
+  // }, [isLang])
   
 
 
@@ -132,10 +132,69 @@ onClick={() => window.location.reload()} */}
           <Navbar.Toggle />
 
           <Navbar.Collapse className="navEnd justify-content-end">
+              <nav className="chat__icon">
+                <div className="dropdown" id="basic-nav-dropdown">
+                  <div className="btn dropdown-toggle border-0"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <Icons.Chat size={22} />
+                  </div>
 
-            <Nav className="chat__icon">
+                  <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{left: isLang === 'ar' ? '0' : '-100px'}}>
+                    <li>
+                      <Link to="/chat/clients" className="dropdown-item" >
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <Icons.Chatuser className={isLang === 'ar' ? 'ms-2' : 'me-2'} />
+                          <span>{isLang === 'ar' ? 'محادثات العملاء' : 'Chat clients'} </span>
+                        </div>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/chat/doctors" className="dropdown-item" >
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <Icons.ChatDoc className={isLang === 'ar' ? 'ms-2' : 'me-2'} />
+                          <span>{isLang === 'ar' ? 'محادثات الأطباء' : 'Chat doctors'}</span>
+                        </div>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+
+              <nav>
+                <div className="dropdown" id="basic-nav-dropdown2">
+                  <div className="btn dropdown-toggle border-0"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img loading="lazy" src={Img.avatar1} alt='Img avatar1' width="40" height="40" style={{ borderRadius: '10px' }} />
+                  </div>
+
+                  <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{left: isLang === 'ar' ? '0' : '-100px'}}>
+                    <li>
+                      <Link to="/venderProfile" className="dropdown-item" >
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.profile} alt="profile" width={18} height={18} />
+                          <span>{isLang === 'ar' ? 'الملـف الشخصـي' : 'My Profile'}</span>
+                        </div>
+                      </Link>
+                    </li>
+
+                    <NavDropdown.Divider />
+
+                    <li>
+                      <Link to={'/auth/login'} onClick={LogOut} className="dropdown-item" >
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.logout} alt="logout" width={18} height={18} />
+                          <span>
+                            {isLang === 'ar' ? 'تسجيـل الخروج' : 'Logout'}
+                          </span>
+                        </div>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+
+
+            {/* <Nav className="chat__icon">
               <NavDropdown title={<Icons.Chat size={21} />} id="basic-nav-dropdown">
-                <div style={{ maxHeight: '60vh', overflowY: 'auto' }}>
+                <div style={{ maxHeight: '60vh', overflowY: 'auto', left: isLang === 'ar' ? '0' : '-130px' }} className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`}>
                   <LinkContainer to="/chat/clients">
                     <NavDropdown.Item  >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -149,7 +208,6 @@ onClick={() => window.location.reload()} */}
                     <NavDropdown.Item  >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
                         <Icons.ChatDoc className={isLang === 'ar' ? 'ms-2' : 'me-2'} />
-
                         <span>{isLang === 'ar' ? 'محادثات الأطباء' : 'Chat doctors'}</span>
                       </div>
                     </NavDropdown.Item>
@@ -158,18 +216,16 @@ onClick={() => window.location.reload()} */}
                 </div>
               </NavDropdown>
               <span className='bullet bullet-dot bg-success h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink'></span>
+            </Nav> */}
 
-            </Nav>
-
-            <Nav>
-              <NavDropdown title={<img loading="lazy" src={Img.avatar1} alt='Img avatar1' width="40" height="40" style={{ borderRadius: '10px' }} />} id="basic-nav-dropdown"  >
+            {/* <Nav>
+              <NavDropdown title={<img loading="lazy" src={Img.avatar1} alt='Img avatar1' width="40" height="40" style={{ borderRadius: '10px' }} />} id="basic-nav-dropdown2"  >
                 <div style={{ maxHeight: '60vh', overflowY: 'auto' }}>
 
                   <LinkContainer to="/venderProfile">
                     <NavDropdown.Item  >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
                         <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.profile} alt="profile" width={18} height={18} />
-                        {/* <Icons.profile size={20} /> */}
                         <span>{isLang === 'ar' ? 'الملـف الشخصـي' : 'My Profile'}</span>
                       </div>
                     </NavDropdown.Item>
@@ -191,8 +247,7 @@ onClick={() => window.location.reload()} */}
 
                 </div>
               </NavDropdown>
-
-            </Nav>
+            </Nav> */}
 
           </Navbar.Collapse>
 
