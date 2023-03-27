@@ -43,19 +43,7 @@ function Navber() {
     }
   }
 
-
-  // const changeDir = () => {
-  //   if(isLang === 'ar') {
-  //     $('.navbar-expand .navbar-nav .dropdown-menu').css({'left' : '0'})
-  //   }
-  //   else {
-  //     $('.navbar-expand .navbar-nav .dropdown-menu').css({'left' : '-135px'})
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   changeDir();
-  // }, [isLang])
+ 
   
 
 
@@ -121,10 +109,8 @@ function Navber() {
                 className={`DropdownButton`}
                 style={{left: isLang === 'ar' ? '-30px' : '0px'}}
               >
-                <Dropdown.Item eventKey="ar"  >عربي</Dropdown.Item>
-                <Dropdown.Item eventKey="en" >English</Dropdown.Item>
-               {/*  onClick={() => window.location.reload()}
-onClick={() => window.location.reload()} */}
+                <Dropdown.Item eventKey="ar" onClick={() => window.location.reload() }>عربي</Dropdown.Item>
+                <Dropdown.Item eventKey="en" onClick={() => window.location.reload()}>English</Dropdown.Item>
               </DropdownButton>
             </span>
           </Navbar.Collapse>

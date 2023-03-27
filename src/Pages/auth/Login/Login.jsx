@@ -76,7 +76,7 @@ const Login = () => {
                                 {/* <Component.BaseHeader h1={'Bytrh'} colorW="logoBaytrh" /> */}
                                 <div className="w-75" >
                                     {
-                                        !anthorWay ?
+                                        anthorWay ?
                                             <form onSubmit={formikPhoneNumber.handleSubmit}>
                                                 <div className="email ">
                                                     <label htmlFor="UserName" >Phone Number</label>

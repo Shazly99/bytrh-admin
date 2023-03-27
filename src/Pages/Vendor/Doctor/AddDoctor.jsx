@@ -7,6 +7,7 @@ import 'react-phone-input-2/lib/style.css';
 import { Button, Container } from 'react-bootstrap';
 import Component from '../../../constants/Component';
 import { VendersContext } from '../../../context/Store';
+import CircularProgress from '@mui/material/CircularProgress';
 
 // import { apiheader } from './../../../utils/fetchData';
 
@@ -272,7 +273,7 @@ function AddDoctor({ fetchCountriesBytra }) {
                   <div className='d-flex justify-content-center align-content-center mt-4'>
                       <div className='baseBtn'>
                           <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                              {loadind ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 
+                              {loadind ? <CircularProgress size={15} color='secondary' />: 
                                 isLang === 'ar' ? 'حفـظ' : 'Save'
                               }
                           </Button>
