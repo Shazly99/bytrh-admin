@@ -14,6 +14,7 @@ const routes = [
     nameAr: "عملاء ", 
     icon: <Icons.Clients size={19} />,
     Roles: ["Admin"]
+    
   },
   {
     path: "/doctors",
