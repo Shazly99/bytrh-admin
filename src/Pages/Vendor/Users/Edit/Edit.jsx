@@ -132,7 +132,6 @@ const Edit = () => {
                                                     }
                                                 </Form.Select>
                                             </Form.Group>
-
                                         </Col>
                                         <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
                                             <Form.Group controlId="formBasicEmail"  >
