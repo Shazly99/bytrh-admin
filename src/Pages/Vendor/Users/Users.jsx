@@ -31,7 +31,6 @@ function Users() {
       await PostData(`https://bytrh.com/api/admin/users`, { IDPage: page }, apiheader).then(({ data }) => {
         setuserList(data.Response.Users);
         setPagesNumber(data.Response.Pages);
-        console.log(data.Response.Pages)
         const timeoutId = setTimeout(() => {
           setIsloader(true)
         }, 0);
