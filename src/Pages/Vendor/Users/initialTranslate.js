@@ -23,32 +23,19 @@ let initialTranslate = {
         add: [
             { btn: 'إضافه' },
             { nav1: 'المستخدمين', nav2: 'إضافة مستخدم' },
-            {
-                header: 'إضافه مستخدم جديد',
-                Label1: 'إسم المستخدم', Label2: 'البريد الألكتروني ', Label3: 'الدوله', Label4: 'رقم الهاتف ', Label5: 'الرقم السري ', Label6: 'مدينه'
-
-            },
+            { header: 'إضافه مستخدم جديد', Label1: 'إسم المستخدم', Label2: 'البريد الألكتروني ', Label3: 'الدوله', Label4: 'رقم الهاتف ', Label5: 'الرقم السري ', Label6: 'مدينه' },
             { save: "حفظ", cancel: 'رجــوع' }
         ],
-        roule: {
-            name: 'رتبــه'
-        },
         edit: [
             { nav1: 'المستخدمين', nav2: 'تعديل المستخدم' },
-            {
-                header: 'تعديل بيانات المستخدم',
-                Label1: 'إسم المستخدم', Label2: 'البريد الألكتروني ', Label3: 'الدوله', Label4: 'رقم الهاتف ',
-                Label5: 'الرقم السري ', Label6: 'مدينه'
-
-            },
+            { header: 'تعديل بيانات المستخدم', Label1: 'إسم المستخدم', Label2: 'البريد الألكتروني ', Label3: 'الدوله', Label4: 'رقم الهاتف ', Label5: 'الرقم السري ', Label6: 'مدينه' },
             { save: "حفظ", cancel: 'رجــوع' }
         ],
         toast: {
             add: 'تمت إضافة مستخدم جديد بنجاح',
             update: "تم التحديث بنجاح",
             delete: "تم حذف المستخدم",
-            edit: "تم تحديث بيانات المستخدم",
-            updatePassword:'تم تغيير الرقم السري بنجاح'
+            edit: "تم تحديث بيانات المستخدم"
         },
 
     },
@@ -79,10 +66,6 @@ let initialTranslate = {
             { header: 'Add New User', Label1: 'Users Name', Label2: 'Email', Label3: 'Country', Label4: 'Mobile phone', Label5: 'Password', Label6: 'City' },
             { save: "Save", cancel: 'Cancel' }
         ],
-        roule: {
-            name: 'Roles',
-
-        },
         edit: [
             { nav1: 'Users', nav2: 'Edit User' },
             { header: 'Edit User', Label1: 'Users Name', Label2: 'Email', Label3: 'Country', Label4: 'Mobile phone', Label5: 'Password', Label6: 'City' },
@@ -93,9 +76,7 @@ let initialTranslate = {
             delete: "user has been deleted ",
             add: 'New user added successfully!',
             edit: "User data has been updated ",
-            updatePassword:' Password has been changed successfully'
-
-        }
+        }  
     }
 }
 

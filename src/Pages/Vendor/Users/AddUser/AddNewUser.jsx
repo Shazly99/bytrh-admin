@@ -6,7 +6,7 @@ import Icons from '../../../../constants/Icons';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import Form from 'react-bootstrap/Form';
-import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
+import { apiheader, PostData } from '../../../../utils/fetchData';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
 import useFetch from '../../../../utils/useFetch';
@@ -20,9 +20,7 @@ const AddNewUser = () => {
         setTranslate(initialTranslate)
     }
     let navigate = useNavigate();
-    const [role, setRole] = useState(null);
     const countriesRef = useRef(null);
-    const ruleRef = useRef(null);
 
     let { countries, cities, getCities } = useFetch()
 
@@ -35,7 +33,6 @@ const AddNewUser = () => {
         const selectedCountryId = event.target.value;
         getCities(selectedCountryId)
     }
- 
 
     const onChangeHandler = (phone, country, e) => {
         setPhoneNumber(phone)
@@ -50,7 +47,6 @@ const AddNewUser = () => {
             UserPhone: '+' + phoneNumber,
             UserPhoneFlag: '+' + Country,
             UserName: username.current.value,
-            IDRole: ruleRef.current.value,
             IDCity: countriesRef.current.value
         })
     }
@@ -77,16 +73,8 @@ const AddNewUser = () => {
         });
     }
 
-    async function rolesList(newUser) {
-       let data= await GetData(`https://bytrh.com/api/admin/roles`, apiheader)
-       setRole(data.Response);
-    }
-
-
     useEffect(() => {
         handelTranslate()
-
-        rolesList()
     }, [phoneNumber, isLang])
 
     return (
@@ -135,18 +123,6 @@ const AddNewUser = () => {
                                                     }
                                                 </Form.Select>
                                             </Form.Group>
-
-                                            <Form.Group controlId="formBasicEmail" className='mt-3'>
-                                                <Form.Label>{translate[isLang]?.roule.name} </Form.Label>
-                                                <Form.Select aria-label="Default select example" ref={ruleRef}  >
-                                                    {/* <option>{countries[1].CountryName}</option> */}
-                                                    {
-                                                        role?.map((item, index) => (
-                                                            <option key={index} value={item?.IDRole}  >{item?.RoleName}</option>
-                                                        ))
-                                                    }
-                                                </Form.Select>
-                                            </Form.Group>
                                         </Col>
                                         <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
                                             <Form.Group controlId="formBasicEmail"  >
@@ -177,6 +153,7 @@ const AddNewUser = () => {
 
                                             <Form.Group controlId="formBasicEmail" className='mt-3'>
                                                 <Form.Label>{translate[isLang]?.add[2]?.Label6}</Form.Label>
+
                                                 <Form.Select aria-label="Default select example" ref={countriesRef}>
 
                                                     {
@@ -201,6 +178,7 @@ const AddNewUser = () => {
                                                 <Link to={'/user'}>
                                                     <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                                         {translate[isLang]?.add[3]?.cancel}
+
                                                     </Button>
                                                 </Link>
                                             </div>

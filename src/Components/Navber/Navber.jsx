@@ -147,8 +147,6 @@ onClick={() => window.location.reload()} */}
                         </div>
                       </Link>
                     </li>
-                    <NavDropdown.Divider />
-
                     <li>
                       <Link to="/chat/doctors" className="dropdown-item" >
                         <div style={{ display: 'flex', alignItems: 'center' }}>

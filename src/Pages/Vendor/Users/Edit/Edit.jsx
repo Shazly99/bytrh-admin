@@ -1,4 +1,4 @@
-import { Container, Modal } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 import Component from '../../../../constants/Component'
 import React, { useContext, useRef } from 'react';
 import { useState, useEffect } from "react";
@@ -21,40 +21,34 @@ const Edit = () => {
         setTranslate(initialTranslate)
     }
     let navigate = useNavigate();
-    const [role, setRole] = useState(null);
-
     let { countries, cities, getCities } = useFetch()
     let { id } = useParams()
     const [userData, setUserData] = useState({});
     const selectCity = useRef();
-    const ruleRef = useRef(null);
 
     const [phoneNumber, setPhoneNumber] = useState('');
     const [Country, setCountry] = useState('');
     const username = useRef();
     const email = useRef();
     const password = useRef();
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
- 
+
+    // const onChangeHandler = (phone, country, e) => {
+    //     setPhoneNumber(phone)
+    //     setCountry(country.dialCode)
+    // }
     const handelSelectCountry = (event) => {
         const selectedCountryId = event.target.value;
         getCities(selectedCountryId)
     }
-    async function rolesList() {
-        let data = await GetData(`https://bytrh.com/api/admin/roles`, apiheader)
-        setRole(data.Response);
-    }
     const submit = e => {
         e.preventDefault()
         addNewUser({
-            UserEmail: email.current.value, 
+            UserEmail: email.current.value,
+            // UserPassword: password.current.value,
             UserPhone: phoneNumber,
             UserPhoneFlag: Country,
             UserName: username.current.value,
             IDCity: selectCity.current.value,
-            IDRole: ruleRef.current.value,
             IDUser: id
         }).then(res => {
 
@@ -64,6 +58,7 @@ const Edit = () => {
 
     async function addNewUser(editUserData) {
         let { data } = await PostData(`https://bytrh.com/api/admin/users/edit`, editUserData, apiheader);
+
         if (data.Success === true) {
             toast.success(<strong>{translate[isLang].toast.edit}</strong>, {
                 duration: 4000,
@@ -90,44 +85,9 @@ const Edit = () => {
         setPhoneNumber(data.Response.UserPhone)
         console.log(data);
     }
-
-
-
-
-    const updateData = e => {
-        updatePassword({
-            UserPassword: password.current.value,
-            IDUser: id
-        })
-        console.log({
-            UserPassword: password.current.value,
-            IDUser: id
-        });
-    }
-
-
-    const updatePassword = async (password) => { 
-        let { data } = await PostData(`https://bytrh.com/api/admin/users/edit`, password, apiheader)
-        console.log(data);
-        if (data.Success === true) {
-            toast.success(<strong>{translate[isLang].toast.updatePassword}</strong>, {
-                duration: 4000,
-                position: 'bottom-center',
-                icon: <Icons.Added color='#40AB45' size={25} />,
-                iconTheme: {
-                    primary: '#0a0',
-                    secondary: '#fff',
-                },
-            });
-            handleClose()
-        } else {
-            toast.error(data.ApiMsg)
-        }
-    }
     useEffect(() => {
         diplayUserData()
         handelTranslate()
-        rolesList()
     }, [isLang])
     return (
         <>
@@ -163,28 +123,24 @@ const Edit = () => {
                                                 </Form.Select>
                                             </div> */}
                                             <Form.Group controlId="formBasicEmail" className='mt-3'>
-                                                <Form.Label>{translate[isLang]?.roule.name} </Form.Label>
-                                                <Form.Select aria-label="Default select example" ref={ruleRef}  >
-                                                    {/* <option>{countries[1].CountryName}</option> */}
+                                                <Form.Label>{translate[isLang]?.edit[1]?.Label3}</Form.Label>
+                                                <Form.Select aria-label="Default select example" onClick={handelSelectCountry}>
                                                     {
-                                                        role?.map((item, index) => (
-                                                            <option key={index} value={item?.IDRole} selected={userData?.IDRole === item?.IDRole && item?.RoleName}  >{item?.RoleName}</option>
+                                                        countries?.map((item, index) => (
+                                                            <option key={index} value={item?.IDCountry} selected={userData?.IDCountry === item?.IDCountry && item?.CountryName}  >{item?.CountryName}  </option>
                                                         ))
                                                     }
                                                 </Form.Select>
                                             </Form.Group>
-
-
-
 
                                         </Col>
                                         <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
                                             <Form.Group controlId="formBasicEmail"  >
                                                 <Form.Label>{translate[isLang]?.edit[1]?.Label4}</Form.Label>
                                                 <div dir='ltr'>
-                                                    <PhoneInput
+                                                    <PhoneInput  
                                                         value={userData?.UserPhone}
-                                                        preferredCountries={['eg', 'sa', "ae"]}
+                                                        preferredCountries={['eg', 'sa', "ae"]} 
                                                         enableSearch={true}
                                                         inputClass={'w-100'}
                                                         inputStyle={{ width: '300px' }}
@@ -196,7 +152,7 @@ const Edit = () => {
                                                             name: 'UserPhone',
                                                             required: true,
                                                             id: 'UserPhone',
-                                                            value: phoneNumber
+                                                            value: phoneNumber 
                                                         }}
                                                         onChange={(UserPhone, UserPhoneFlag, e) => {
                                                             setPhoneNumber(`+${UserPhone}`)
@@ -205,17 +161,9 @@ const Edit = () => {
                                                     />
                                                 </div>
                                             </Form.Group>
-
-
                                             <Form.Group controlId="formBasicEmail" className='mt-3'>
-                                                <Form.Label>{translate[isLang]?.edit[1]?.Label3}</Form.Label>
-                                                <Form.Select aria-label="Default select example" onClick={handelSelectCountry}>
-                                                    {
-                                                        countries?.map((item, index) => (
-                                                            <option key={index} value={item?.IDCountry} selected={userData?.IDCountry === item?.IDCountry && item?.CountryName}  >{item?.CountryName}  </option>
-                                                        ))
-                                                    }
-                                                </Form.Select>
+                                                <Form.Label>{translate[isLang]?.edit[1]?.Label5}</Form.Label>
+                                                <Form.Control type="password" ref={password} defaultValue={userData?.UserPassword} />
                                             </Form.Group>
                                             <Form.Group controlId="formBasicEmail" className='mt-3' >
                                                 <Form.Label>{translate[isLang]?.edit[1]?.Label6}</Form.Label>
@@ -251,34 +199,8 @@ const Edit = () => {
                                             </div>
                                         </div>
                                     </Row>
-                                </form>
-                                <div className="pp__profile-model">
-                                    <a className='app__profile-model-a' onClick={handleShow}>
-                                        Change Password
-                                    </a>
-                                    <Modal show={show} onHide={handleClose} centered>
-                                        <Modal.Header closeButton className=' d-flex justify-content-center align-items-center'>
-                                            <Modal.Title className=' w-100 text-center' >Change Password</Modal.Title>
-                                        </Modal.Header>
-                                        <form onSubmit={updatePassword}>
-                                            <Modal.Body>
-                                                <Form.Group controlId="formBasicEmail" className='mt-3'>
-                                                    <Form.Label>{translate[isLang]?.edit[1]?.Label5}</Form.Label>
-                                                    <Form.Control type="password" ref={password} />
-                                                </Form.Group>
-                                            </Modal.Body>
-                                            <Modal.Footer className='d-flex justify-content-center align-items-center  p-0 m-0 '>
-                                                <div className='baseBtn1'>
-                                                    <Button onClick={updateData} variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                                        update password
-                                                    </Button>
-                                                </div>
 
-                                                
-                                            </Modal.Footer>
-                                        </form>
-                                    </Modal>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
