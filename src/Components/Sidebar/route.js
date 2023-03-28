@@ -1,43 +1,43 @@
-import Icons from "../../constants/Icons"; 
+import Icons from "../../constants/Icons";
 import LogoSvg from "../../assets/svg/LogoSvg";
- 
+
 const routes = [
   {
     path: "/",
     nameEn: "Dashboard",
     nameAr: "لوحة القيادة",
-    icon: <LogoSvg.Dashboard className="logoSvg" style={{width:19}}/>,
-    Roles: ["Admin","Medical Center"]
+    icon: <LogoSvg.Dashboard className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1, 2]
   },
   {
     path: "/client",
     nameEn: "Clients",
     nameAr: "عملاء ",
-    icon: <LogoSvg.Clients className="logoSvg" style={{width:19}}/>,
-    Roles: ["Admin","Medical Center"]
+    icon: <LogoSvg.Clients className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1]
   },
   {
     path: "/doctors",
     nameAr: "الأطباء",
     nameEn: "Doctors",
-    icon:<LogoSvg.Doctors className="logoSvg" style={{width:19}}/>,
-    Roles: ["Admin"]
+    icon: <LogoSvg.Doctors className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1]
 
   },
   {
     path: "/visits",
     nameAr: "الــزيارات",
     nameEn: "Visits",
-    icon: <LogoSvg.Visits className="logoSvg" style={{width:19}}/>,
-    Roles: ["Admin"]
+    icon: <LogoSvg.Visits className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1]
 
   },
   {
     path: "/user",
     nameAr: "المستخدمين",
     nameEn: "Users",
-    icon: <LogoSvg.Users className="logoSvg" style={{width:19}}/>,
-    Roles: ["Admin","Medical Center"]
+    icon: <LogoSvg.Users className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1, 2]
 
   },
   // {
@@ -49,8 +49,8 @@ const routes = [
   {
     nameAr: "الحيوانات ",
     nameEn: "Animals ",
-    icon: <LogoSvg.Animals className="logoSvg" style={{width:19}}/>,
-    Roles: ["Admin"],
+    icon: <LogoSvg.Animals className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1],
     subRoutes: [
       {
         path: "/animals/categories",
@@ -97,8 +97,8 @@ const routes = [
   {
     nameAr: "المــواقع ",
     nameEn: "Locations ",
-    icon: <LogoSvg.Location className="logoSvg" style={{width:19}}/>,
-    Roles: ["Admin"],
+    icon: <LogoSvg.Location className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1],
     subRoutes: [
       {
         path: "/location/country",
@@ -125,23 +125,23 @@ const routes = [
     path: "/consult",
     nameAr: "استشـارات",
     nameEn: "Consults",
-    icon: <LogoSvg.Consults className="logoSvg" style={{width:19}}/>,
-    Roles: ["Admin"],
+    icon: <LogoSvg.Consults className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1],
 
   },
   {
     path: "/ads",
     nameAr: "إعلانـات",
     nameEn: "Ads",
-    icon: <LogoSvg.Ads className="logoSvg" style={{width:19}}/>,
-    Roles: ["Admin"],
+    icon: <LogoSvg.Ads className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1],
 
   },
   {
     nameAr: "المدونات ",
     nameEn: "Blogs ",
-    icon:<LogoSvg.Blogs className="logoSvg" style={{width:19}}/>,
-    Roles: ["Admin"],
+    icon: <LogoSvg.Blogs className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1],
 
     subRoutes: [
       {
@@ -163,39 +163,39 @@ const routes = [
     path: "/store",
     nameAr: "متجر",
     nameEn: "Store",
-    icon:<LogoSvg.Store className="logoSvg" style={{width:19}}/>,
-    Roles: ["Admin"],
+    icon: <LogoSvg.Store className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1],
 
   },
   {
     path: "/bidding",
     nameAr: "مـزادات",
     nameEn: "Bidding",
-    icon:<LogoSvg.Bidding className="logoSvg" style={{width:19}}/>,
-    Roles: ["Admin"],
+    icon: <LogoSvg.Bidding className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1],
 
   },
   {
     path: "/adoption",
     nameAr: "تبــني",
     nameEn: "Adoption",
-    icon: <LogoSvg.Adoption className="logoSvg" style={{width:19}}/>,
-    Roles: ["Admin"],
+    icon: <LogoSvg.Adoption className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1],
 
   },
   {
     path: "/settings/general",
     nameAr: "إعدادات",
     nameEn: "Settings",
-    icon: <LogoSvg.Settings className="logoSvg" style={{width:19}}/>,
-    Roles: ["Admin", "doctor"],
+    icon: <LogoSvg.Settings className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1],
   },
   {
     path: "/contact",
     nameAr: "اتصال",
     nameEn: "Contact",
-    icon: <LogoSvg.Contact className="logoSvg" style={{width:19}}/>,
-    Roles: ["Admin", "doctor"],
+    icon: <LogoSvg.Contact className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1],
   },
 ];
 
