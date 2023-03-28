@@ -1,34 +1,34 @@
-import Icons from "../../constants/Icons";
-
+import Icons from "../../constants/Icons"; 
+import LogoSvg from "../../assets/svg/LogoSvg";
+ 
 const routes = [
   {
     path: "/",
     nameEn: "Dashboard",
     nameAr: "لوحة القيادة",
-    icon: <Icons.Dashboard size={19} />,
+    icon: <LogoSvg.Dashboard className="logoSvg" style={{width:19}}/>,
     Roles: ["Admin"]
   },
   {
     path: "/client",
     nameEn: "Clients",
     nameAr: "عملاء ",
-
-    icon: <Icons.Clients size={19} />,
-    Roles: ["Admin"]  
+    icon: <LogoSvg.Clients className="logoSvg" style={{width:19}}/>,
+    Roles: ["Admin"]
   },
   {
     path: "/doctors",
     nameAr: "الأطباء",
     nameEn: "Doctors",
-    icon: <Icons.doctor size={19} />,
+    icon:<LogoSvg.Doctors className="logoSvg" style={{width:19}}/>,
     Roles: ["Admin"]
-    
+
   },
   {
     path: "/visits",
     nameAr: "الــزيارات",
     nameEn: "Visits",
-    icon: <Icons.Visit size={19} />,
+    icon: <LogoSvg.Visits className="logoSvg" style={{width:19}}/>,
     Roles: ["Admin"]
 
   },
@@ -36,7 +36,7 @@ const routes = [
     path: "/user",
     nameAr: "المستخدمين",
     nameEn: "Users",
-    icon: <Icons.user size={19} />,
+    icon: <LogoSvg.Users className="logoSvg" style={{width:19}}/>,
     Roles: ["Admin"]
 
   },
@@ -49,7 +49,7 @@ const routes = [
   {
     nameAr: "الحيوانات ",
     nameEn: "Animals ",
-    icon: <Icons.category size={19} />,
+    icon: <LogoSvg.Animals className="logoSvg" style={{width:19}}/>,
     Roles: ["Admin"],
     subRoutes: [
       {
@@ -97,7 +97,7 @@ const routes = [
   {
     nameAr: "المــواقع ",
     nameEn: "Locations ",
-    icon: <Icons.location size={19} />,
+    icon: <LogoSvg.Location className="logoSvg" style={{width:19}}/>,
     Roles: ["Admin"],
     subRoutes: [
       {
@@ -125,7 +125,7 @@ const routes = [
     path: "/consult",
     nameAr: "استشـارات",
     nameEn: "Consults",
-    icon: <Icons.consult size={19} />,
+    icon: <LogoSvg.Consults className="logoSvg" style={{width:19}}/>,
     Roles: ["Admin"],
 
   },
@@ -133,14 +133,14 @@ const routes = [
     path: "/ads",
     nameAr: "إعلانـات",
     nameEn: "Ads",
-    icon: <Icons.ads size={19} />,
+    icon: <LogoSvg.Ads className="logoSvg" style={{width:19}}/>,
     Roles: ["Admin"],
 
   },
   {
     nameAr: "المدونات ",
     nameEn: "Blogs ",
-    icon: <Icons.blog size={19} />,
+    icon:<LogoSvg.Blogs className="logoSvg" style={{width:19}}/>,
     Roles: ["Admin"],
 
     subRoutes: [
@@ -163,7 +163,7 @@ const routes = [
     path: "/store",
     nameAr: "متجر",
     nameEn: "Store",
-    icon: <Icons.shop size={19} />,
+    icon:<LogoSvg.Store className="logoSvg" style={{width:19}}/>,
     Roles: ["Admin"],
 
   },
@@ -171,7 +171,7 @@ const routes = [
     path: "/bidding",
     nameAr: "مـزادات",
     nameEn: "Bidding",
-    icon: <Icons.bidding size={19} />,
+    icon:<LogoSvg.Bidding className="logoSvg" style={{width:19}}/>,
     Roles: ["Admin"],
 
   },
@@ -179,7 +179,7 @@ const routes = [
     path: "/adoption",
     nameAr: "تبــني",
     nameEn: "Adoption",
-    icon: <Icons.pets size={19} />,
+    icon: <LogoSvg.Adoption className="logoSvg" style={{width:19}}/>,
     Roles: ["Admin"],
 
   },
@@ -187,15 +187,15 @@ const routes = [
     path: "/settings/general",
     nameAr: "إعدادات",
     nameEn: "Settings",
-    icon: <Icons.settings size={19} />,
-    Roles: ["Admin","doctor"],
+    icon: <LogoSvg.Settings className="logoSvg" style={{width:19}}/>,
+    Roles: ["Admin", "doctor"],
   },
   {
     path: "/contact",
     nameAr: "اتصال",
     nameEn: "Contact",
-    icon: <Icons.contact size={19} />,
-    Roles: ["Admin","doctor"],
+    icon: <LogoSvg.Contact className="logoSvg" style={{width:19}}/>,
+    Roles: ["Admin", "doctor"],
   },
 ];
 

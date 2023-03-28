@@ -29,9 +29,9 @@ function App() {
 
   function ProtectedRoutes({ children }) {
     if (localStorage.getItem('token')) {
-      // return children
+      return children
     } else {
-      // return <Navigate to="/auth/login" replace={true} />
+      return <Navigate to="/auth/login" replace={true} />
     }
   }
   const root = createBrowserRouter([

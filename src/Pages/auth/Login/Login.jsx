@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import Img from '../../../assets/Img';
+import LogoSvg from '../../../assets/svg/LogoSvg';
 import "./login.scss";
 
 
@@ -101,7 +102,10 @@ const Login = () => {
                                                     />
                                                     {formikPhoneNumber.errors.Password ? <span className='error__handel'>{formikPhoneNumber.errors.Password}</span> : null}
                                                 </div>
-                                                <button className='app__login-btn mt-3' type='submit'>Login</button>
+                                                <button className='app__login-btn p-button p-component p-button-rounded p-button-icon-only' type='submit'>
+                                           
+                                                <span className="p-button-icon p-c pi pi-arrow-right"></span>
+                                                </button>
                                                 <button className='anther_way_toLgoin  ' onClick={() => setAnthorWay(!anthorWay)} >Do you want to log in with email?</button>
                                             </form>   :
                                             <form onSubmit={formik.handleSubmit}>
@@ -128,7 +132,9 @@ const Login = () => {
                                                     /> 
                                                     {formik.errors.Password ? <span className='error__handel'>{formik.errors.Password}</span> : null}
                                                 </div>
-                                                <button className='app__login-btn mt-3' type='submit'>Login</button>
+                                                <button className='app__login-btn mt-3' type='submit'>
+                                                    <LogoSvg.ArrowRight className='app__login-btn-icons '/>
+                                                </button>
                                                 <button className='anther_way_toLgoin ' onClick={() => setAnthorWay(!anthorWay)} >Do you want to log in with phone number?</button>
                                             </form>
                                     }
