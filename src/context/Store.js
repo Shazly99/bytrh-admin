@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { GetData ,apiheader} from '../utils/fetchData';
 
 
 export const VendersContext = createContext([])
@@ -28,15 +29,22 @@ function VenderContext({ children }) {
       return localStorage.setItem('langChange', isLang)
     }
   }
+  const [roleAdmin, setRole] = useState(null);
+  async function rolesList(newUser) {
+    let data= await GetData(`https://bytrh.com/api/admin/roles`, apiheader)
+    setRole(data.Response);
+  }
+
   useEffect(() => {
     setUser(localStorage.getItem("IDUser"))
     chnageLang()
+    rolesList()
   }, [userId, isLang])
 
 
   return (
     <>
-      <VendersContext.Provider value={{ isLang, setIsLang, isOpen, setIsOpen, toggle, LogOut, userId }}>
+      <VendersContext.Provider value={{ roleAdmin,isLang, setIsLang, isOpen, setIsOpen, toggle, LogOut, userId }}>
         {children}
       </VendersContext.Provider>
     </>

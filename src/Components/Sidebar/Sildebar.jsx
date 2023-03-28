@@ -9,7 +9,7 @@ import './Sidebar.scss';
 import SidebarMenu from './SidebarMenu';
 
 const Sidebar = ({ children }) => {
-  let { isLang, isOpen, toggle, LogOut, setIsOpen } = useContext(VendersContext);
+  let { isLang, isOpen, toggle, roleAdmin, setIsOpen } = useContext(VendersContext);
 
 
   const showAnimation = {
@@ -66,7 +66,7 @@ const Sidebar = ({ children }) => {
             </div>
             <section className={isLang === 'ar' ? 'routes routesAr' : 'routes'}   >
               {
-                routes?.filter((role) => role.Roles.includes("Admin")).map((root, i) => {
+                routes?.filter((role) => role.Roles.includes(roleAdmin?.find(r => r.IDRole === parseInt(localStorage.getItem("Role"))).RoleName)).map((root, i) => {
                   if (root.subRoutes) {
                     return (
                       <SidebarMenu

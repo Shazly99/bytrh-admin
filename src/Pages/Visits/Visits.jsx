@@ -178,7 +178,7 @@ const Visits = () => {
             <div className='filter__group__stats row ' style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '25px' }}>
               {
                 translate[isLang]?.FilterStatus?.map((item, index) => (
-                  <>
+                  <React.Fragment key={index}>
                     {isLoader ? <>
                       <label className='col active d-flex justify-content-center align-item-center m-0 p-0 '  >
                         <input
@@ -192,7 +192,7 @@ const Visits = () => {
                         {item.text}
                       </label>
                     </> : SkeletonFilters(10, 90)}
-                  </>
+                  </React.Fragment>
                 ))
               }
               <Col xl={2} lg={2} md={6} sm={12} className='mt-2' >

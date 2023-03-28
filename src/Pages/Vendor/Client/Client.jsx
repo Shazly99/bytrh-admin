@@ -100,9 +100,9 @@ const Clients = () => {
             <div className='filter__group'>
               {
                 translate[isLang]?.FilterStatus?.map((item, index) => (
-                  <>
+                  <React.Fragment key={index}>
                     {isLoader ? <>
-                      <label key={index} className='active' >
+                      <label  className='active' >
                         <input
                           type="radio"
                           name="filter"
@@ -114,7 +114,7 @@ const Clients = () => {
                         {item.text }
                       </label>
                     </> : SkeletonSearch(10, 90)}
-                  </>
+                  </React.Fragment>
                 ))
               }
             </div>
