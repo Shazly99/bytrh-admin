@@ -66,7 +66,7 @@ const Sidebar = ({ children }) => {
             </div>
             <section className={isLang === 'ar' ? 'routes routesAr' : 'routes'}   >
               {
-                routes?.filter((role) => role.Roles.includes(roleAdmin?.find(r => r.IDRole === parseInt(localStorage.getItem("Role"))).RoleName)).map((root, i) => {
+                routes?.filter((role) => role.Roles.includes( "Admin" /* roleAdmin?.find(r => r.IDRole === parseInt(localStorage.getItem("Role"))).RoleName */)).map((root, i) => {
                   if (root.subRoutes) {
                     return (
                       <SidebarMenu
