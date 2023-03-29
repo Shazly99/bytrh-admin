@@ -139,10 +139,10 @@ const Login = () => {
                                                     />
                                                     {formikPhoneNumber.errors.Password ? <span className='error__handel'>{formikPhoneNumber.errors.Password}</span> : null}
                                                 </div>
-                                                <button className='anther_way_toLgoin  ' onClick={() => setAnthorWay(!anthorWay)} >Sign In by email?</button>
+                                                <div className='anther_way_toLgoin  ' onClick={() => setAnthorWay(!anthorWay)} >Sign In by email?</div>
                                                 <div className='w-100  d-flex align-items-center justify-content-center'>
                                                 <button disabled={!isValidPass} className={`${!isValidPass ? 'app__login-btn opisity ' : 'app__login-btn opisity1'} mt-3 `} type='submit'>
-                                                        {loadPassword ? <CircularProgress size={18} color='secondary' /> :
+                                                        {loadPassword ? <CircularProgress size={18} className={'customProgress'} />  :
                                                             <LogoSvg.ArrowRight className='app__login-btn-icons ' />
                                                         }
                                                     </button>
@@ -175,10 +175,10 @@ const Login = () => {
                                                     />
                                                     {formik.errors.Password ? <span className='error__handel'>{formik.errors.Password}</span> : null}
                                                 </div>
-                                                <button className='anther_way_toLgoin ' onClick={() => setAnthorWay(!anthorWay)} > Sign In by phone number?</button>
+                                                <div className='anther_way_toLgoin ' onClick={() => setAnthorWay(!anthorWay)} > Sign In by phone number?</div>
                                                 <div className='w-100  d-flex align-items-center justify-content-center'>
                                                     <button disabled={!isValid} className={`${!isValid ? 'app__login-btn opisity ' : 'app__login-btn opisity1'} mt-3 `} type='submit'>
-                                                        {loademail ? <CircularProgress size={18} color='secondary' /> :
+                                                        {loademail ? <CircularProgress size={18} className={'customProgress'} /> :
                                                             <LogoSvg.ArrowRight className='app__login-btn-icons ' />
                                                         }
                                                     </button>
