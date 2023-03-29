@@ -87,7 +87,7 @@ function UsersTable({ usersList, userList, isLoader,toastTranslate, actionsTrans
                                         </div>
                                     </td>
                                     <td>
-                                        <div className='color-red'>
+                                        <div className='color-red ClientPhone'>
                                             {item?.UserPhone}
                                         </div>
                                     </td>

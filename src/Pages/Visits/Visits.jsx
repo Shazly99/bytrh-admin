@@ -11,6 +11,8 @@ import { VendersContext } from '../../context/Store';
 import initialTranslation from './Translation';
 import icons from './../../constants/Icons';
 import axios from 'axios';
+import LogoSvg from '../../assets/svg/LogoSvg';
+import { Link } from 'react-router-dom';
 const Visits = () => {
   let { isLang } = useContext(VendersContext);
   const [translate, setTranslate] = useState(initialTranslation)
@@ -277,7 +279,7 @@ const Visits = () => {
                                             ${item.VisitStatus === 'SKIPPED' && 'txt__status'} 
                                             ${item.VisitStatus === 'REJECTED' && 'txt_rejected'}
                                             ${item.VisitStatus === 'ACCEPTED' && 'txt_delivery'}`} >
-                     
+
 
                               {
                                 translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.value === item?.VisitStatus)
@@ -327,6 +329,16 @@ const Visits = () => {
                                 }
                               </DropdownButton>
                             </span>
+                          </div>
+                        </td>
+
+                        <td>
+                          <div>
+                            <Link
+                              to={`/visits/details/${item?.IDVisit}`}
+                            >
+                             <LogoSvg.view className="logoSvg" style={{ width: 19 }} />
+                            </Link>
                           </div>
                         </td>
                       </tr>

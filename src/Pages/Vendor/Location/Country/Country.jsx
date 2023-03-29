@@ -173,7 +173,7 @@ const Country = () => {
                                                 </div>
                                             </td>
                                             <td >
-                                                <div>
+                                                <div className="ClientPhone">
                                                     {item?.CountryTimeZone}
                                                 </div>
                                             </td>

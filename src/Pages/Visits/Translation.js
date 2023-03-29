@@ -11,26 +11,49 @@ let initialTranslation = {
             { value: "CANCELLED", text: " الغاء  " },
             { value: "REJECTED", text: " مرفوض  " },
             { value: "ONGOING", text: "جاري التنفيذ" },
-            { value: "ENDED", text: " انتهى  " } 
+            { value: "ENDED", text: " انتهى  " }
         ],
         TableHeader: [
-            "معلومات العميل" ,
+            "معلومات العميل",
             "معلومات المركز الطبي",
-            "معلومات الطبيب" ,
+            "معلومات الطبيب",
             "سعر الزيارة",
             "نوع الزيارة",
             "حالة ",
             "تاريخ بدء الزيارة ",
-            "الإجراء"
+            "الإجراء",
+            "تفاصبل الزيارة"
+
         ],
-        Actions: { action: "الإجراءات",vistType:'نوع الزيارة',currency:"ريال سعودي "},
-        toast: { endChat: "تم إنهاء الدردشة" }, 
-        filterVisitType:[
+        Actions: { action: "الإجراءات", vistType: 'نوع الزيارة', currency: "ريال سعودي " },
+        toast: { endChat: "تم إنهاء الدردشة" },
+        filterVisitType: [
             { value: "All", text: "جميع انواع الزيارات" },
             { value: "HOME", text: " منزليه  " },
             { value: "CENTER", text: " بالمركز  " },
-        ], 
-        
+        ],
+        VisitDetails: {
+            nav1: 'الزيارات',
+            nav2: 'تفاصيل الزيارة',
+            clientInfo: 'معلومات العميل',
+            doctorInfo: 'معلومات الطبيب',
+            VisitDistance: 'مسافة',
+            PaymentMethod: 'طريقة الدفع   ',
+            VisitPrice: ' سعر',
+            VisitServicePrice: ' سعر الخدمة',
+            VisitTrafficPrice: ' سعر المرور',
+            VisitTotalPrice: ' السعر الكلي',
+            VisitStartTime: '  وقت البدء  ',
+            VisitType: '    يكتب ',
+            VisitStatus: '   حالة  ',
+            MedicalCenterName: '  اسم المركز الطبي  ',
+            MedicalCenterPhone: '   هاتف المركز الطبي  ',
+            VisitNote: 'ملاحظات الزيارة',
+            ClientName: '  اسم العميل  ',
+            ClientPhone: '   هاتف العميل  ',
+            DoctorName: '  اسم الطبيب  ',
+            DoctorPhone: 'هاتف الطبيب',
+        }
 
     },
     "en": {
@@ -55,15 +78,39 @@ let initialTranslation = {
             "Visit Type ",
             "Status ",
             "Start Date ",
-            "Action"
+            "Action",
+            "View",
         ],
-        Actions: { action: "Actions", vistType:"vist Type",currency:"SAR"},
+        Actions: { action: "Actions", vistType: "vist Type", currency: "SAR" },
         toast: { endChat: "Chat has been ended" },
-        filterVisitType:[
-            { value: "All", text: " All visits type"    },
+        filterVisitType: [
+            { value: "All", text: " All visits type" },
             { value: "HOME", text: " Home  " },
             { value: "CENTER", text: " Center  " },
-        ]
+        ],
+        VisitDetails: {
+            nav1: 'Visits',
+            nav2: 'Visit details',
+            clientInfo: 'Client Info',
+            doctorInfo: 'Doctor Info', 
+            VisitDistance: 'Distance',
+            PaymentMethod: 'Payment Method',
+            VisitPrice: ' Price',
+            VisitServicePrice: ' Service Price',
+            VisitTrafficPrice: ' Traffic Price',
+            VisitTotalPrice: ' Total Price',
+            VisitStartTime: '  Start Time  ',
+            VisitType: ' Visit type  ',
+            VisitStatus: '   Status  ',
+            MedicalCenterName: '  Medical Center Name  ',
+            MedicalCenterPhone: '  Medical Center Phone  ',
+            VisitNote: 'Visit note',
+            ClientName: '  Client Name  ',
+            ClientPhone: '  Client Phone  ',
+            DoctorName: '  Doctor Name  ',
+            DoctorPhone: 'Doctor Phone',
+            DoctorPhone: 'Doctor Phone',
+        }
 
     }
 }

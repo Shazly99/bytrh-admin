@@ -89,6 +89,7 @@ import Visits from './../Pages/Visits/Visits';
 import ConsultTime from './../Pages/ConsultTime/ConsultTime';
 import SingleConsultTime from './../Pages/ConsultTime/SingleConsultTime';
 import AddConsultTime from './../Pages/ConsultTime/AddConsultTime';
+import VisitDetails from './../Pages/Visits/VisitDetails';
 
 const Component= {
     // Layout 
@@ -203,7 +204,7 @@ const Component= {
 
     // Visits
     Visits,
-
+    VisitDetails,
     // Consult Time
     ConsultTime,
     SingleConsultTime,

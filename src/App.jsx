@@ -77,7 +77,7 @@ function App() {
         },
 
         // ToDo user profile
-        { path: '/venderProfile', element: <ProtectedRoutes>  <Component.Profile /></ProtectedRoutes> },
+        { path: '/profile', element: <ProtectedRoutes>  <Component.Profile /></ProtectedRoutes> },
         { path: '/contact', element: <ProtectedRoutes>  <Component.Contact /></ProtectedRoutes> },
         // ToDo Animals   
         {
@@ -229,6 +229,7 @@ function App() {
         {
           path: '/visits', children: [
             { index: true, element: <ProtectedRoutes><Component.Visits /> </ProtectedRoutes> }, 
+            { path: 'details/:id', element: <ProtectedRoutes><Component.VisitDetails /> </ProtectedRoutes> }, 
           ]
         },
         {

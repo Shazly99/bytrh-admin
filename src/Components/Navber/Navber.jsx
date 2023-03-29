@@ -109,8 +109,8 @@ function Navber() {
                 className={`DropdownButton`}
                 style={{left: isLang === 'ar' ? '-30px' : '0px'}}
               >
-                <Dropdown.Item eventKey="ar" onClick={() => window.location.reload() }>عربي</Dropdown.Item>
-                <Dropdown.Item eventKey="en" onClick={() => window.location.reload()}>English</Dropdown.Item>
+                <Dropdown.Item eventKey="ar" /* onClick={() => window.location.reload() } */>عربي</Dropdown.Item>
+                <Dropdown.Item eventKey="en"/*  onClick={() => window.location.reload()} */>English</Dropdown.Item>
               </DropdownButton>
             </span>
           </Navbar.Collapse>
@@ -154,7 +154,7 @@ function Navber() {
 
                   <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{left: isLang === 'ar' ? '0' : '-100px'}}>
                     <li>
-                      <Link to="/venderProfile" className="dropdown-item" >
+                      <Link to="/profile" className="dropdown-item" >
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                           <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.profile} alt="profile" width={18} height={18} />
                           <span>{isLang === 'ar' ? 'الملـف الشخصـي' : 'My Profile'}</span>
@@ -209,7 +209,7 @@ function Navber() {
               <NavDropdown title={<img loading="lazy" src={Img.avatar1} alt='Img avatar1' width="40" height="40" style={{ borderRadius: '10px' }} />} id="basic-nav-dropdown2"  >
                 <div style={{ maxHeight: '60vh', overflowY: 'auto' }}>
 
-                  <LinkContainer to="/venderProfile">
+                  <LinkContainer to="/profile">
                     <NavDropdown.Item  >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
                         <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.profile} alt="profile" width={18} height={18} />
