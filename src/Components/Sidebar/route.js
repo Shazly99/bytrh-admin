@@ -195,7 +195,7 @@ const routes = [
     nameAr: "أوقات الإستشـارة",
     nameEn: "Consult Times",
     icon: <Icons.time size={19} />,
-    Roles: ["Admin", "doctor"],
+    Roles: [1],
   },
   {
     path: "/contact",
