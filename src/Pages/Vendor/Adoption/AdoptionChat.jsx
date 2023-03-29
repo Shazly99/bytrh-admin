@@ -141,7 +141,7 @@ const AdoptionChat = () => {
                                         }
                                         {
                                           messageContent.AdoptionChatType === "IMAGE" &&
-                                          <img loading="lazy" src={messageContent.AdoptionChatMessage} width="100%" className='rounded-3 w-50' />
+                                          <img loading="lazy" alt='presonal-img' src={messageContent.AdoptionChatMessage} width="100%" className='rounded-3 w-50' />
                                         }
                                         {
                                           messageContent.AdoptionChatType === "AUDIO" &&

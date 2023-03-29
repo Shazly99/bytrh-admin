@@ -38,14 +38,14 @@ export default function DoctorCategory() {
 
   const [message, setMessage] = useState('');
 
-  const [loadindAdd, setLoadindAdd] = useState(false);
+  // const [loadindAdd, setLoadindAdd] = useState(false);
 
   const [apiCode, setApiCode] = useState(null);
 
 
   async function addField(el) {
 
-    setLoadindAdd(true);
+    // setLoadindAdd(true);
     let { data } = await axios({
       method: 'post',
       url: `https://bytrh.com/api/admin/doctors/animalfields/add`,
@@ -60,7 +60,7 @@ export default function DoctorCategory() {
     });
 
     setMessage(data.ApiMsg);
-    setLoadindAdd(false);
+    // setLoadindAdd(false);
 
     if (data.Success === true) {
       setApiCode(data.Success);

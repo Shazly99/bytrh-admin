@@ -229,7 +229,12 @@ function App() {
         {
           path: '/visits', children: [
             { index: true, element: <ProtectedRoutes><Component.Visits /> </ProtectedRoutes> }, 
-
+          ]
+        },
+        {
+          path: '/consultTime', children: [
+            { index: true, element: <ProtectedRoutes><Component.ConsultTime /> </ProtectedRoutes> }, 
+            { path: 'add', element: <ProtectedRoutes><Component.AddConsultTime /> </ProtectedRoutes> }
           ]
         },
         {

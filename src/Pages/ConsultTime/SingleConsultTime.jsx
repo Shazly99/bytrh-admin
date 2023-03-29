@@ -1,23 +1,24 @@
 import React, { useState , useContext } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
-import './Doctor.scss';
+import './ConsultTime.scss';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
-import { apiheader } from '../../../utils/fetchData'; 
-import Component from '../../../constants/Component';
-import { VendersContext } from '../../../context/Store';
+import { apiheader } from '../../utils/fetchData'; 
+import Component from '../../constants/Component';
+import { VendersContext } from '../../context/Store';
 import CircularProgress from '@mui/material/CircularProgress';
+import translateConsultTimes from './translateConsultTimes';
 
 
 
-const SingleHour = ({ DoctorTime, getDoctorHours }) => {
+const SingleConsultTime = ({ item , getConsultTime }) => {
 
 
     const [showRemove, setShowRemove] = useState(false);
     const handleCloseRemove = () => setShowRemove(false);
     const handleShowRemove = () => setShowRemove(true);
 
-    const apiRemoveHours = `https://bytrh.com/api/admin/doctors/hours/remove/`;
+    const apiRemoveHours = `https://bytrh.com/api/admin/consult/timevalues/status/`;
 
     const [messageRemove, setMessageRemove] = useState('');
     const [apiCodeRemove, setApiCodeRemove] = useState();
@@ -26,24 +27,24 @@ const SingleHour = ({ DoctorTime, getDoctorHours }) => {
     const handleRemoveHour = async (id) => {
         setLoadingRemove(true);
         await axios.get(apiRemoveHours + id, {}, apiheader)
-            .then(res => {
-                if (res.data.Success === true) {
-                    setApiCodeRemove(res.data.Success)
-                    setMessageRemove(res.data.ApiMsg);
-                    setLoadingRemove(false);
-                    setTimeout(() => {
-                        getDoctorHours()
-                    }, 1000);
-                }
-                else {
-                    setApiCodeRemove(res.data.Success)
-                    setMessageRemove(res.data.ApiMsg);
-                    setLoadingRemove(false);
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        .then(res => {
+            if (res.data.Success === true) {
+                setApiCodeRemove(res.data.Success)
+                setMessageRemove(res.data.ApiMsg);
+                setLoadingRemove(false);
+                setTimeout(() => {
+                    getConsultTime()
+                }, 1000);
+            }
+            else {
+                setApiCodeRemove(res.data.Success)
+                setMessageRemove(res.data.ApiMsg);
+                setLoadingRemove(false);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
 
 
@@ -57,7 +58,7 @@ const SingleHour = ({ DoctorTime, getDoctorHours }) => {
         <div className="col-xl-2 col-lg-3 col-md-4 col-6">
             <div className="inf-time text-center py-4 px-3 rounded-3 shadow-sm position-relative" style={{ whiteSpace: 'nowrap', backgroundColor: '#F1F1F1', fontWeight: '600' }}>
                 <h6 className='mb-0'>
-                    {DoctorTime.DoctorStartHour.slice(0, 5)} {Number(DoctorTime.DoctorStartHour.slice(0, 2)) < 12 ? isLang === 'ar' ? 'ص' : 'AM' : isLang === 'ar' ? 'م' : 'PM'} - {DoctorTime.DoctorEndHour.slice(0, 5)} {Number(DoctorTime.DoctorEndHour.slice(0, 2)) < 12 ? isLang === 'ar' ? 'ص' : 'AM' : isLang === 'ar' ? 'م' : 'PM'}
+                    {item.ConsultTimeValue} {Number(item.ConsultTimeValue) < 2 && isLang === 'ar' && translateConsultTimes['ar']?.min} {Number(item.ConsultTimeValue) < 2 && isLang === 'en' && translateConsultTimes['en']?.min} {Number(item.ConsultTimeValue) === 2 && isLang === 'ar' && translateConsultTimes['ar']?.min2} {Number(item.ConsultTimeValue) === 2 && isLang === 'en' && translateConsultTimes['en']?.min2} {Number(item.ConsultTimeValue) > 2 && Number(item.ConsultTimeValue) < 11 && isLang === 'ar' && translateConsultTimes['ar']?.mins} {Number(item.ConsultTimeValue) > 10 && isLang === 'ar' && translateConsultTimes['ar']?.min} {Number(item.ConsultTimeValue) > 2 && isLang === 'en' && translateConsultTimes['en']?.mins}
                 </h6>
                 <AiFillCloseCircle className={`position-absolute top-0 ${isLang === 'ar' ? 'start-0' : 'end-0'} translate-middle-y h3 color-red`} onClick={handleShowRemove} style={{ cursor: 'pointer' }} />
             </div>
@@ -66,7 +67,7 @@ const SingleHour = ({ DoctorTime, getDoctorHours }) => {
                 <Modal.Header closeButton>
                     <Modal.Title className='text-center w-100  '>
                         <h5 className='mb-0 text-warning'>
-                            {isLang === 'ar' ? 'تحذيـر..' : 'Warning Remove..'}
+                            {translateConsultTimes[isLang]?.worningLabel}
                         </h5>
                     </Modal.Title>
                 </Modal.Header>
@@ -79,16 +80,16 @@ const SingleHour = ({ DoctorTime, getDoctorHours }) => {
                     <div className='d-flex justify-content-center align-content-center'>
                         <div className={`baseBtn ${isLang === 'ar' ? 'ps-0 ms-2' : 'pe-0 me-2'}`}>
                             <Button onClick={() => {
-                                handleRemoveHour(DoctorTime.IDDoctorHour)
+                                handleRemoveHour(item.IDConsultTimeValue)
                             }} variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                {loadingRemove ? <CircularProgress size={27} style={{color: '#fff'}} />:
-                                    isLang === 'ar' ? 'تأكيـد' : 'Confirm'}
+                                {loadingRemove ? <CircularProgress size={27} style={{color: '#fff'}} /> :
+                                    translateConsultTimes[isLang]?.confirmBTN}
                             </Button>
                         </div>
 
                         <div className='baseBtn ps-0'>
                             <Button onClick={handleCloseRemove} variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
+                                {translateConsultTimes[isLang]?.cancelBTN}
                             </Button>
                         </div>
                     </div>
@@ -99,4 +100,4 @@ const SingleHour = ({ DoctorTime, getDoctorHours }) => {
     )
 }
 
-export default SingleHour
+export default SingleConsultTime

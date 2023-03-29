@@ -12,8 +12,10 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal'; 
 import Component from '../../../constants/Component';
 import { VendersContext } from '../../../context/Store';
+import CircularProgress from '@mui/material/CircularProgress';
 
- 
+
+
 export default function DoctorProfile() {
 
   let { id } = useParams();
@@ -321,7 +323,8 @@ export default function DoctorProfile() {
                                 <div className='d-flex justify-content-center align-content-center mt-4'>
                                   <div className={`baseBtn ${isLang === 'ar' ? 'ps-0 ms-2' : 'pe-0 me-2'}`}>
                                     <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                      {loadingEdit ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : isLang === 'ar' ? 'حفـظ' : 'Save'}
+                                      {loadingEdit ? <CircularProgress size={27} style={{color: '#fff'}} /> : 
+                                        isLang === 'ar' ? 'حفـظ' : 'Save'}
                                     </Button>
                                   </div>
 
@@ -353,7 +356,8 @@ export default function DoctorProfile() {
                               <div className='d-flex justify-content-center align-content-center'>
                               <div className={`baseBtn ${isLang === 'ar' ? 'ps-0 ms-2' : 'pe-0 me-2'}`}>
                                   <Button onClick={removeConfirm} variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                    {loadingRemove ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : isLang === 'ar' ? 'تأكيـد' : 'Confirm'}
+                                    {loadingRemove ? <CircularProgress size={27} style={{color: '#fff'}} /> : 
+                                      isLang === 'ar' ? 'تأكيـد' : 'Confirm'}
                                   </Button>
                                 </div>
 
@@ -427,7 +431,8 @@ export default function DoctorProfile() {
                               <div className='d-flex justify-content-center align-content-center mt-4'>
                                 <div className={`baseBtn ${isLang === 'ar' ? 'ps-0 ms-2' : 'pe-0 me-2'}`}>
                                   <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                    {loadingAdd ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : isLang === 'ar' ? 'حفـظ' : 'Save'}
+                                    {loadingAdd ? <CircularProgress size={27} style={{color: '#fff'}} /> : 
+                                      isLang === 'ar' ? 'حفـظ' : 'Save'}
                                   </Button>
                                 </div>
 

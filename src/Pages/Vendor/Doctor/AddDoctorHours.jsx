@@ -6,6 +6,7 @@ import { Button, Container } from 'react-bootstrap';
 import Component from '../../../constants/Component';
 import $ from 'jquery';
 import { VendersContext } from '../../../context/Store';
+import CircularProgress from '@mui/material/CircularProgress';
 // import { apiheader } from './../../../utils/fetchData';
 
 function AddDoctorHours() {
@@ -241,7 +242,7 @@ function AddDoctorHours() {
                           <div className='d-flex justify-content-center align-content-center mt-4'>
                               <div className='baseBtn'>
                                   <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                      {loadindSingle ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 
+                                      {loadindSingle ? <CircularProgress size={27} style={{color: '#fff'}} /> : 
                                         isLang === 'ar' ? 'حفـظ' : 'Save'
                                       }
                                   </Button>
@@ -324,7 +325,7 @@ function AddDoctorHours() {
                           <div className='d-flex justify-content-center align-content-center mt-4'>
                               <div className='baseBtn'>
                                   <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                      {loadindBulk ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 
+                                      {loadindBulk ? <CircularProgress size={27} style={{color: '#fff'}} />: 
                                         isLang === 'ar' ? 'حفـظ' : 'Save'
                                       }
                                   </Button>

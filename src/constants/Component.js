@@ -86,6 +86,9 @@ import BiddingRequests from './../Pages/Bidding/BiddingRequests';
 import DataNotFound from './../Components/Shared/DataNotFound/DataNotFound';
 import HandelDelete from './../Components/Shared/HandelDelete/HandelDelete';
 import Visits from './../Pages/Visits/Visits';
+import ConsultTime from './../Pages/ConsultTime/ConsultTime';
+import SingleConsultTime from './../Pages/ConsultTime/SingleConsultTime';
+import AddConsultTime from './../Pages/ConsultTime/AddConsultTime';
 
 const Component= {
     // Layout 
@@ -199,7 +202,12 @@ const Component= {
 
 
     // Visits
-    Visits
+    Visits,
+
+    // Consult Time
+    ConsultTime,
+    SingleConsultTime,
+    AddConsultTime,
 }
 
 export default Component
