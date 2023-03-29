@@ -9,6 +9,22 @@ import useSkeletonTable from '../../../utils/useSkeletonTable';
 import { apiheader } from './../../../utils/fetchData';
 import './Users.scss';
 import initialTranslate from './initialTranslate';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  components: {
+    MuiPagination: {
+      styleOverrides: {
+        root: {
+          '&.Mui-selected': {
+            backgroundColor: '$mainColor',
+            color: '#FFFFFF',
+          },
+        },
+      },
+    },
+  },
+});
 
 function Users() {
   let { isLang } = useContext(VendersContext);
@@ -132,7 +148,9 @@ function Users() {
       </div>
       <div className="pagination " dir="ltr">
         <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-          <Pagination count={pageCount} page={page} onChange={handleChange} />
+        <ThemeProvider theme={theme}>
+            <Pagination count={pageCount} page={page} onChange={handleChange} />
+          </ThemeProvider>
         </Box>
       </div>
 
