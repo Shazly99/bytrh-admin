@@ -1,6 +1,6 @@
 import React, { useState , useContext } from 'react';
 import $ from 'jquery';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
@@ -8,7 +8,7 @@ import { Button, Container } from 'react-bootstrap';
 import Component from '../../../constants/Component';
 import { VendersContext } from '../../../context/Store';
 import CircularProgress from '@mui/material/CircularProgress';
-
+import { BsEyeFill } from 'react-icons/bs';
 // import { apiheader } from './../../../utils/fetchData';
 
 
@@ -27,7 +27,7 @@ function AddDoctor({ fetchCountriesBytra }) {
       })
   }
 
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
 
   const [message, setMessage] = useState('');
 
@@ -115,7 +115,8 @@ function AddDoctor({ fetchCountriesBytra }) {
       if (data.Success === true) {
         setApiCode(data.Success);
         setTimeout(() => {
-          navigate('/doctors');
+          // navigate('/doctors');
+          window.history.go(-1);
         }, 1500);
       }
 
@@ -245,18 +246,18 @@ function AddDoctor({ fetchCountriesBytra }) {
                   <div className="col-md-6">
                     <div className="group-add password">
                       <label className="fs-5 " htmlFor="DoctorPassword">{isLang === 'ar' ? 'كلمة المرور' : 'Password'}</label>
-                      <div className="input-group">
+                      <div className="input-group align-items-center">
                         <input onChange={getUserData} type="password" className='bg-transparent mx-auto py-2 form-control' required name="DoctorPassword" id="DoctorPassword" />
-                        <i className="fa-regular fa-eye" onClick={showHidePass}></i>
+                        <BsEyeFill style={{fontSize: '22px' , cursor: 'pointer'}} onClick={showHidePass} />
                       </div>
                     </div>
                   </div>
                   <div className="col-md-6">
                     <div className="group-add repaassword">
                       <label className="fs-5 " htmlFor="repass-user">{isLang === 'ar' ? 'تأكيـد كلمـة المرور' : 'Confirm'}</label>
-                      <div className="input-group">
+                      <div className="input-group align-items-center">
                         <input type="password" onChange={getConfirm} className='bg-transparent mx-auto py-2 form-control' required name="repass-user" id="repass-user" />
-                        <i className="fa-regular fa-eye" onClick={showHideRePass}></i>
+                        <BsEyeFill style={{fontSize: '22px' , cursor: 'pointer'}} onClick={showHideRePass} />
                       </div>
                     </div>
                   </div>
@@ -273,7 +274,7 @@ function AddDoctor({ fetchCountriesBytra }) {
                   <div className='d-flex justify-content-center align-content-center mt-4'>
                       <div className='baseBtn'>
                           <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                              {loadind ? <CircularProgress size={15} color='secondary' />: 
+                              {loadind ? <CircularProgress size={27} style={{color: '#fff'}} />: 
                                 isLang === 'ar' ? 'حفـظ' : 'Save'
                               }
                           </Button>

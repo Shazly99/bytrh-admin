@@ -1,9 +1,8 @@
-import React, { useState , useContext } from 'react';
+import React, { useContext } from 'react';
 // import { FiEdit3 } from 'react-icons/fi';
 // import { AiOutlineDelete } from 'react-icons/ai';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { DropdownButton, Dropdown } from 'react-bootstrap';
-// import { useEffect } from 'react';
 import { apiheader, PostData } from '../../../utils/fetchData';
 import { VendersContext } from '../../../context/Store';
 
@@ -13,7 +12,7 @@ export default function ItemAdoption({ id , clientName , petName , petStrain , p
 
 
     const userstatus = async (status) => {
-        let { data } = await PostData(`https://bytrh.com/api/admin/adoptions/status`, status, apiheader)
+        await PostData(`https://bytrh.com/api/admin/adoptions/status`, status, apiheader)
     }
 
 

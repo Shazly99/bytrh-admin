@@ -15,7 +15,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
     let { isLang } = useContext(VendersContext);
 
 
-    const [idDoc, setId] = useState(null);
+    // const [idDoc, setId] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const handleShowModal = () => setShowModal(true);
     const handleCloseModal = () => setShowModal(false);
@@ -36,10 +36,10 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
             // await userstatus({ IDDoctor: id, DoctorStatus: action })
             // await getTokenDoctors()
             handleShowRemove();
-
-        } else if (action === "balance") {
-            setId(id)
         }
+        // else if (action === "balance") {
+        //     setId(id)
+        // }
     };
     // async function name() {
     //     await changeWallet({ IDDoctor: idDoc, Amount: changeBalance })

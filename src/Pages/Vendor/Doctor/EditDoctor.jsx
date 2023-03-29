@@ -12,6 +12,7 @@ import Component from '../../../constants/Component';
 import { apiheader } from './../../../utils/fetchData';
 import { Button } from 'react-bootstrap/';
 import { VendersContext } from '../../../context/Store';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 
@@ -237,7 +238,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
                   <div className='d-flex justify-content-center align-content-center mt-4'>
                       <div className='baseBtn'>
                           <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                              {loadind ? <i className="fa fa-spinner fa-spin text-white fs-4"></i> : 
+                              {loadind ? <CircularProgress size={27} style={{color: '#fff'}} /> : 
                                 isLang === 'ar' ? 'حفـظ' : 'Save'
                               }
                           </Button>
