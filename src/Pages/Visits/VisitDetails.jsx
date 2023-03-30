@@ -12,7 +12,7 @@ import Map from './Map';
 import initialTranslation from './Translation';
 import './visit.scss'
 const VisitDetails = () => {
- 
+
     let { isLang } = useContext(VendersContext);
     const [translate, setTranslate] = useState(initialTranslation)
     const handelTranslate = () => {
@@ -22,11 +22,14 @@ const VisitDetails = () => {
     const [visit, setvisit] = useState([]);
     const [isLoader, setIsloader] = useState(false);
 
+    const [latStart, setLatStart] = useState(null);
+    const [longStart, setlongStart] = useState(null);
+
     // get visitDetails
     const visitDetails = async () => {
         await GetData(`${process.env.REACT_APP_API_URL}/admin/visits/details/${id}`, apiheader).then((res) => {
             setvisit(res.Response);
-            console.log(res.Response);
+
             const timeoutId = setTimeout(() => {
                 setIsloader(true)
             }, 0);
@@ -239,14 +242,17 @@ const VisitDetails = () => {
                             </Row>
                         </div>
 
-                    </Row>
-                    <Map
-                        DoctorLat={parseFloat(visit?.DoctorLatitude)}
-                        DoctorLong={parseFloat(visit?.DoctorLongitude)}
-                        VisitLat={parseFloat(visit?.VisitLatitude)}
-                        VisitLong={parseFloat(visit?.VisitLongitude)}
-                    />
- 
+                    </Row> 
+                    <div className="map">
+                        
+                    </div>
+                        <Map
+                            VisitLat={visit?.VisitLatitude}
+                            VisitLong={visit?.VisitLongitude}
+                            DoctorLat={visit?.DoctorLatitude}
+                            DoctorLong={visit?.DoctorLongitude}
+                        />
+
                 </Container>
             </div>
         </>

@@ -13,6 +13,7 @@ import icons from './../../constants/Icons';
 import axios from 'axios';
 import LogoSvg from '../../assets/svg/LogoSvg';
 import { Link } from 'react-router-dom';
+import MapModal from './MapModal';
 const Visits = () => {
   let { isLang } = useContext(VendersContext);
   const [translate, setTranslate] = useState(initialTranslation)
@@ -358,6 +359,7 @@ const Visits = () => {
             }
           </div>
         </div>
+            <MapModal/>
 
       </div>
 

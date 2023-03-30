@@ -239,6 +239,11 @@ function App() {
           ]
         },
         {
+          path: '/doctorfree', children: [
+            { index: true, element: <ProtectedRoutes><Component.DoctorFreeList /> </ProtectedRoutes> }, 
+          ]
+        },
+        {
           path: '*', element: <Component.Error />
         }
       ],

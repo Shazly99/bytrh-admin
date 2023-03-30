@@ -18,12 +18,21 @@ const routes = [
   },
   {
     path: "/doctors",
-    nameAr: "الأطباء",
+    nameAr: " الطبيب الحرة",
     nameEn: "Doctors",
+    icon: <LogoSvg.Doctors className="logoSvg" style={{ width: 19 }} />,
+    Roles: [2]
+
+  },
+  {
+    path: "/doctorfree",
+    nameAr: "الأطباء",
+    nameEn: "Doctors Free",
     icon: <LogoSvg.Doctors className="logoSvg" style={{ width: 19 }} />,
     Roles: [1,2]
 
   },
+  
   {
     path: "/visits",
     nameAr: "الــزيارات",

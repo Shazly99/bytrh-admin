@@ -92,6 +92,7 @@ import AddConsultTime from './../Pages/ConsultTime/AddConsultTime';
 import VisitDetails from './../Pages/Visits/VisitDetails';
 import Register from './../Pages/auth/MedicalCenter/Register/Register';
 import LoginMedicalCenter from './../Pages/auth/MedicalCenter/Login/LoginMedicalCenter';
+import DoctorFreeList from './../Pages/MedicalCenter/DoctorFree/DoctorFreeList';
  
 const Component= {
     // Layout 
@@ -208,6 +209,8 @@ const Component= {
     // Visits
     Visits,
     VisitDetails,
+    // DoctorFree
+    DoctorFreeList,
     // Consult Time
     ConsultTime,
     SingleConsultTime,

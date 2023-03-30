@@ -1,55 +1,82 @@
-import { GoogleMap, Marker, Polyline, useLoadScript } from "@react-google-maps/api";
-import React, { useMemo } from 'react';
-import './visit.scss';
+import React, { useState, useEffect } from 'react';
+import {
+  withGoogleMap,
+  GoogleMap,
+  Marker,
+  Polyline,
+} from 'react-google-maps'; 
+function Map({ VisitLat, VisitLong, DoctorLat, DoctorLong }) {
+  const [markers, setMarkers] = useState([]);
+  const [startPoint, setStartPoint] = useState({ lat: DoctorLat, lng: DoctorLong });
+  const [endPoint, setEndPoint] = useState({ lat: VisitLat, lng: VisitLong });
+  const [path, setPath] = useState([]);
 
-const Map = (
-    DoctorLat,
-    DoctorLong,
-    VisitLat,
-    VisitLong) => {
-    const { isLoaded } = useLoadScript({
-        googleMapsApiKey: 'AIzaSyDaOQ1qVIyrLaSM819j3CxVv8OYLgJiYg4',
-    });
+  useEffect(() => {
+    setMarkers([startPoint, endPoint]);
+    console.log(endPoint);
+  }, [startPoint, endPoint]);
+  useEffect(() => {
+    setStartPoint({ lat: DoctorLat, lng: DoctorLong })
+    setEndPoint({ lat: VisitLat, lng: VisitLong })
+  }, [DoctorLat, DoctorLong, VisitLat, VisitLong]);
 
-    if (!isLoaded) return <div>Loading...</div>;
-    return <GoogleMaps
-        DoctorLat={DoctorLat}
-        DoctorLong={DoctorLong}
-        VisitLat={VisitLat}
-        VisitLong={VisitLong}
-    />;
+
+
+
+  function handleMarkerClick(marker) {
+    console.log(marker);
+  }
+
+  function handlePathUpdate(newPath) {
+    setPath(newPath);
+  }
+  const waveSymbol = {
+    path: 'M 0,-1 0,1',
+    strokeOpacity: 1,
+    scale: 4,
+  };
+
+  // ..
+  const MapComponent = withGoogleMap(props => (
+    <GoogleMap
+      defaultZoom={14}
+      defaultCenter={{ lat: DoctorLat, lng: DoctorLong }}
+      onClick={props.onMapClick}
+    >
+      {props.children}
+      <Polyline path={path}
+        options={{
+          strokeColor: '#FF0000',
+          geodesic: true, 
+          strokeOpacity: 0.7
+        }} />
+    </GoogleMap>
+  ));
+  useEffect(() => {
+    setMarkers([startPoint, endPoint]);
+    setPath([startPoint, endPoint]);
+  }, [startPoint, endPoint]);
+  return (
+    <div>
+      <MapComponent
+        containerElement={<div style={{ height: '500px' }} />}
+        mapElement={<div style={{ height: '100%' }} />}
+
+      >
+        {markers.map((marker, index) => (
+          <Marker
+            key={index}
+            position={{ lat: marker.lat, lng: marker.lng }}
+            onClick={() => handleMarkerClick(marker)}
+            icon={{
+              url: `https://maps.google.com/mapfiles/ms/icons/${index === 0 ? 'red' : 'green'}-dot.png`,
+              // scaledSize: new window.google.maps.Size(50, 50),
+            }}
+          />
+        ))}
+      </MapComponent>
+    </div>
+  );
 }
 
-export default Map
-
-function GoogleMaps(
-    DoctorLat,
-    DoctorLong,
-    VisitLat,
-    VisitLong
-) {
-
-    const center = useMemo(() => ({ lat:VisitLat, lng: VisitLong }), []);
-
-    // const startPoint = { lat: parseFloat('24.83275'), lng: parseFloat('39.7212279') };
-    const endPoint = { lat: DoctorLat, lng:DoctorLong };
-    const lineOptions = {
-        strokeColor: "red", // Set the line color
-        strokeOpacity: 0.8,
-        strokeWeight: 2,
-        clickable: false,
-        draggable: false,
-        editable: false,
-        visible: true,
-        zIndex: 1,
-    };
-    return (
-        <div className="map">
-            <GoogleMap zoom={20} center={center} mapContainerClassName="map-container">
-                <Marker position={endPoint} clickable={true} /> //shazloka
-                <Polyline path={[center, endPoint]} options={lineOptions} />
-                <Marker position={center} clickable={true} />
-            </GoogleMap>
-        </div>
-    );
-}
+export default Map;
