@@ -1,15 +1,18 @@
 import CircularProgress from '@mui/material/CircularProgress';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Container, Col, Row, Form, FormControl } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import LogoSvg from '../../../../assets/svg/LogoSvg';
-import "../Login/login.scss";
+// import "../Login/login.scss";
 import "./SignUp.scss";
-import PhoneInput from 'react-phone-input-2'
+import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css'
 import useFetch from '../../../../utils/useFetch';
 import { toast } from 'react-hot-toast';
 import { apiheader, PostData } from '../../../../utils/fetchData';
+import defaultImg from '../../../../assets/Images/300-21.jpg'
+
+
 const Register = () => {
     const [medicalcenterType, setmedicalcenterType] = useState('');
     const [idArea, setIdArea] = useState(null);
@@ -40,6 +43,7 @@ const Register = () => {
     }
     let navigate = useNavigate();
     // TODO:: select image
+    // const [selectedImage, setSelectedImage] = useState('../../../../assets/Images/300-21.jpg');
     const [selectedImage, setSelectedImage] = useState(null);
     const fileInputRef = useRef(null);
 
@@ -48,9 +52,10 @@ const Register = () => {
     };
     const SignIn = e => {
         e.preventDefault()
+        setLoadEmail(true);
         addNewAccount({
             MedicalCenterType: medicalcenterType,
-            MedicalCenterPicture: selectedImage,
+            // MedicalCenterPicture: selectedImage,
             IDArea: idArea,
             MedicalCenterName: MedicalCenterNameRef.current.value,
             MedicalCenterAddress: MedicalCenterAddressRef.current.value,
@@ -64,14 +69,14 @@ const Register = () => {
         })
     }
 
-    const [isValid, setIsValid] = useState(false);
+    // const [isValid, setIsValid] = useState(false);
     async function addNewAccount(data) {
         await PostData(`${process.env.REACT_APP_API_URL}/admin/medicalcenter/register`, data, apiheader).then((res) => {
-            console.log(res);
+            setLoadEmail(false);
             if (res.data.Success === true) {
-                localStorage.setItem("token", res.data.Response.AccessToken.accessToken);
-                localStorage.setItem("IDUser",res. data.Response.IDUser); 
-                localStorage.setItem("Role", res.data.Response.IDRole); 
+                localStorage.setItem("token" , res.data.Response.AccessToken.accessToken);
+                localStorage.setItem("IDUser" , res.data.Response.IDUser); 
+                localStorage.setItem("Role" , res.data.Response.IDRole); 
                 toast.success(res.data.ApiMsg);
                 
                 setTimeout(() => {
@@ -91,10 +96,10 @@ const Register = () => {
                             <label className='Sign__Up-header'>Sign Up</label>
                             <div className="w-75" >
                                 <form className='app__login ' onSubmit={SignIn}>
-                                    <Row className='Medical_Center_Picture_Form'>
+                                    <Row className='Medical_Center_Picture_Form gy-md-0 gy-4'>
                                         <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
                                             <Form.Group className='Medical_Center_Picture'>
-                                                <Form.Label>  Medical Center Picture</Form.Label>
+                                                <Form.Label htmlFor='custom-file'>  Medical Center Picture</Form.Label>
                                                 <FormControl
                                                     id="custom-file"
                                                     type="file"
@@ -102,21 +107,27 @@ const Register = () => {
                                                     ref={fileInputRef}
                                                     onChange={handleImageSelect}
                                                     accept="image/*"
-
                                                 />
                                             </Form.Group>
                                         </Col>
                                         <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en d-flex justify-content-center">
                                             <Form.Group>
-                                                <div className="mt-3  " style={{ width: "200px " }}>
-                                                    {selectedImage && (
+                                                <div className="mt-3 " style={{ width: "200px " }}>
+                                                    {selectedImage ? (
                                                         <img
                                                             loading="lazy"
                                                             src={URL.createObjectURL(selectedImage)}
                                                             alt={selectedImage.name}
-                                                            className='rounded-3 w-100'
+                                                            className=' rounded-circle mx-auto'
                                                         />
-                                                    )}
+                                                    ) : 
+                                                        <img
+                                                            loading="lazy"
+                                                            src={defaultImg}
+                                                            alt={'medical-center'}
+                                                            className=' rounded-circle mx-auto'
+                                                        />
+                                                    }
                                                 </div>
                                             </Form.Group>
                                         </Col>
@@ -136,12 +147,12 @@ const Register = () => {
                                         </Col>
                                         <Col xl={6} lg={6} md={6} sm={12}>
                                             <div className="email ">
-                                                <label htmlFor="Password">Medical center address</label>
+                                                <label htmlFor="Address">Medical center address</label>
                                                 <input
                                                     ref={MedicalCenterAddressRef}
 
-                                                    id="Password"
-                                                    name="Password"
+                                                    id="Address"
+                                                    name="Address"
                                                     type="text"
                                                     className={`  py-2 form-control border-0   shadow-lg`}
                                                     placeholder='Medical center address'
@@ -152,7 +163,7 @@ const Register = () => {
                                     <Row>
                                         <Col xl={6} lg={6} md={6} sm={12}>
                                             <div className="email ">
-                                                <Form.Label  >phone</Form.Label>
+                                                <Form.Label  >Phone</Form.Label>
                                                 <div dir='ltr'>
                                                     <PhoneInput
                                                         country='sa'
@@ -174,11 +185,11 @@ const Register = () => {
                                         </Col>
                                         <Col xl={6} lg={6} md={6} sm={12}>
                                             <div className="email ">
-                                                <label htmlFor="Password">Medical center email</label>
+                                                <label htmlFor="email">Medical center email</label>
                                                 <input
                                                     ref={MedicalCenterEmailRef}
-                                                    id="Password"
-                                                    name="Password"
+                                                    id="email"
+                                                    name="email"
                                                     type="email"
                                                     className={`  py-2 form-control border-0   shadow-lg`}
                                                     placeholder='Medical center email'
@@ -189,8 +200,9 @@ const Register = () => {
                                     <Row>
                                         <Col xl={6} lg={6} md={6} sm={12}>
                                             <div className="email " onClick={handelSelectCountry} >
-                                                <Form.Label  >Select Country</Form.Label>
-                                                <Form.Select aria-label="Default select example" >
+                                                <Form.Label  htmlFor='country'>Select Country</Form.Label>
+                                                <Form.Select aria-label="Default select example" name='country' id='country'>
+                                                    <option>Select Country </option>
                                                     {
                                                         countries?.map((item, index) => (
                                                             <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
@@ -202,9 +214,9 @@ const Register = () => {
 
                                         <Col xl={6} lg={6} md={6} sm={12}>
                                             <div className="email " onClick={handelSelectCity}  >
-                                                <Form.Label  >Select City</Form.Label>
-                                                <Form.Select aria-label="Default select example" >
-                                                    <option selected disabled hidden value={'Select Country'}>Select city </option>
+                                                <Form.Label  htmlFor='city'>Select City</Form.Label>
+                                                <Form.Select aria-label="Default select example" name='city' id='city'>
+                                                    <option>Select city </option>
                                                     {
                                                         cities?.map((item, index) => (
                                                             <option key={index} value={item?.IDCity}>{item?.CityName}</option>
@@ -217,8 +229,9 @@ const Register = () => {
                                     <Row>
                                         <Col xl={6} lg={6} md={6} sm={12}>
                                             <div className="email " onClick={handelSelectArea} >
-                                                <Form.Label  >Select Area</Form.Label>
-                                                <Form.Select aria-label="Default select example" >
+                                                <Form.Label htmlFor='area' >Select Area</Form.Label>
+                                                <Form.Select aria-label="Default select example" name='area' id='area'>
+                                                    <option>Select Area </option>
                                                     {
                                                         areas?.map((item, index) => (
                                                             <option key={index} value={item?.IDArea}>{item?.AreaName}</option>
@@ -230,13 +243,12 @@ const Register = () => {
 
                                         <Col xl={6} lg={6} md={6} sm={12}>
                                             <div className="email " onClick={handelMedicalCenterType} >
-                                                <Form.Label  >Select Area</Form.Label>
-                                                <Form.Select aria-label="Default select example" >
+                                                <Form.Label  htmlFor='medicalType'>Select Medical Type</Form.Label>
+                                                <Form.Select aria-label="Default select example" name='medicalType' id='medicalType'>
+                                                    <option >Select Medical Type </option>
                                                     {
                                                         ['CENTER', 'CLINIC']?.map((Status, index) => (
-                                                            <>
-                                                                <option key={index} value={Status}  >{Status}</option>
-                                                            </>
+                                                            <option key={index} value={Status}  >{Status}</option>
                                                         ))
                                                     }
                                                 </Form.Select>
@@ -247,26 +259,26 @@ const Register = () => {
                                     <Row>
                                         <Col xl={6} lg={6} md={6} sm={12}>
                                             <div className="email ">
-                                                <label htmlFor="UserName" >Latitude</label>
+                                                <label htmlFor="lat" >Latitude</label>
                                                 <input
                                                     ref={letRef}
-                                                    id="UserName"
-                                                    name="UserName"
+                                                    id="lat"
+                                                    name="lat"
                                                     type="text"
-                                                    placeholder="Medical center name"
+                                                    placeholder="Latitude.."
                                                     className={`  py-2 form-control border-0   shadow-lg`} />
                                             </div>
                                         </Col>
                                         <Col xl={6} lg={6} md={6} sm={12}>
                                             <div className="email ">
-                                                <label htmlFor="Password">Longitude</label>
+                                                <label htmlFor="long">Longitude</label>
                                                 <input
                                                     ref={longRef}
-                                                    id="Password"
-                                                    name="Password"
+                                                    id="long"
+                                                    name="long"
                                                     type="text"
                                                     className={`  py-2 form-control border-0   shadow-lg`}
-                                                    placeholder='Medical center address'
+                                                    placeholder="Longitude.."
                                                 />
                                             </div>
                                         </Col>

@@ -17,14 +17,13 @@ import { VendersContext } from '../../../context/Store';
 export default function Doctors() {
 
 
-  // const token = localStorage.getItem('userToken');
   const URL_Doctors = `https://bytrh.com/api/admin/doctors`;
 
   const [pagesCountDoctors, setPagesCountDoctors] = useState(0);
   const [countDoctors, setCountDoctors] = useState(1);
   const [searchKeyDoctors, setSearchKeyDoctors] = useState(null);
-  const [loadingDoctors, setLoadingDoctors] = useState(false)
-  const [fetchDoctors, setFetchDoctors] = useState([])
+  const [loadingDoctors, setLoadingDoctors] = useState(false);
+  const [fetchDoctors, setFetchDoctors] = useState([]);
 
   async function getTokenDoctors() {
     setLoadingDoctors(true);
@@ -37,12 +36,18 @@ export default function Doctors() {
       setPagesCountDoctors(res.data.Response.Pages);
       setLoadingDoctors(false);
     })
-      .catch((error) => {
+    .catch((error) => {
         console.log(error);
     });
   }
   useEffect(() => {
+    let timeOut = setTimeout(() => {
       getTokenDoctors();
+    }, 200);
+
+      return(() => {
+        clearTimeout(timeOut);
+      })
   }, [countDoctors]);
 
 
@@ -55,20 +60,25 @@ export default function Doctors() {
       $('body').addClass('d-none');
       $('body').removeClass('d-block')
     }
-    $('body').addClass('d-block');
-    $('body').removeClass('d-none')
+    else {
+      $('body').addClass('d-block');
+      $('body').removeClass('d-none')
+    }
   }, [loadingDoctors]);
 
 
-  const handleChange = (event, value) => {
+  const handleChange = (value) => {
     setCountDoctors(value); 
   };
 
-  const [valueSearch, setValueSearch] = useState('')
+  // const [valueSearch, setValueSearch] = useState('')
 
   const handelSearch = () => {
-    setSearchKeyDoctors(valueSearch);
+    // setSearchKeyDoctors(valueSearch);
     setCountDoctors(1);
+    setTimeout(() => {
+      handelSearchEvent()
+    }, 100);
   }
 
   const handelClickSearch = (e) => {
@@ -102,55 +112,58 @@ export default function Doctors() {
                 console.log(error);
             });
       }  else if (selectedValue === "All") {
-            getTokenDoctors();
+        setLoadingDoctors(true);
+          await axios.post(URL_Doctors, {
+            IDPage: countDoctors,
+            // SearchKey: searchKeyDoctors
+          }, apiheader)
+          .then(res => {
+            setFetchDoctors(res.data.Response.Doctors);
+            setPagesCountDoctors(res.data.Response.Pages);
+            setLoadingDoctors(false);
+          })
+          .catch((error) => {
+              console.log(error);
+          });
       }
     };
 
 
-    useEffect(() => {
-      setCountDoctors(1);
-      setLoadingDoctors(true);
-      axios.post(URL_Doctors, {
-        IDPage: 1,
-        SearchKey: searchKeyDoctors,
-        DoctorStatus: selectedOption !== "All" ? selectedOption : null,
-      }, apiheader)
-      .then(res => {
-        setFetchDoctors(res.data.Response.Doctors);
-        setPagesCountDoctors(res.data.Response.Pages);
-        setLoadingDoctors(false);
-      })
-        .catch((error) => {
-          console.log(error);
-      });
-    }, [searchKeyDoctors , selectedOption]);
+    const handelSearchEvent = () => {
+      if(searchKeyDoctors === '' && selectedOption === 'All') {
+        getTokenDoctors();
+      }
+      else {
+        // setCountDoctors(1);
+        setLoadingDoctors(true);
+        axios.post(URL_Doctors, {
+          IDPage: 1,
+          SearchKey: searchKeyDoctors !== null && searchKeyDoctors !== undefined ? searchKeyDoctors : null,
+          DoctorStatus: selectedOption !== "All" ? selectedOption : null,
+        }, apiheader)
+        .then(res => {
+          setFetchDoctors(res.data.Response.Doctors);
+          setPagesCountDoctors(res.data.Response.Pages);
+          setLoadingDoctors(false);
+        })
+          .catch((error) => {
+            console.log(error);
+        });
+      }
+    }
+
+    // useEffect(() => {
+    //   let timeOut = setTimeout(() => {
+    //     handelSearchEvent();
+    //   }, 200);
+    //   return(() => {
+    //     clearTimeout(timeOut);
+    //   })
+    // }, [searchKeyDoctors , selectedOption]);
 
 
 
     let { isLang } = useContext(VendersContext);
-    // let initialTranslate = {
-    //   "ar": {
-    //     hello: 'مرحبًا بك في لوحة تحكم بيطرة '
-    //   },
-    //   "en": {
-    //     hello: 'Welcome to Dashboard Bytrh'
-    //   }
-    // }
-    // const [translate, setTranslate] = useState(initialTranslate)
-  
-    // const handelTranslate = () => {
-    //   setTranslate({
-    //     "ar": {
-    //       hello: 'مرحبًا بك في لوحة تحكم بيطرة '
-    //     },
-    //     "en": {
-    //       hello: 'Welcome to Dashboard Bytrh'
-    //     }
-    //   })
-    // }
-    // useEffect(() => {
-    //   handelTranslate()
-    // }, [isLang])
 
 
 
@@ -172,12 +185,15 @@ export default function Doctors() {
                 value={localStorage.getItem('searchDoctors') ? localStorage.getItem('searchDoctors') : ''}
                 onChange={(e) => {
                   localStorage.setItem('searchDoctors', e.target.value);
-                  setValueSearch(e.target.value);
+                  // setValueSearch(e.target.value);
+                  setSearchKeyDoctors(e.target.value);
                 }}
                 onKeyDown={handelClickSearch}
-                type="text" placeholder={isLang === 'ar' ? 'البحث بالإسم أو رقم التليفون..' : 'Search by name or phone..'} name="search" />
+                type="text" placeholder={isLang === 'ar' ? 'البحث بالإسم أو رقم التليفون..' : 'Search by name or phone..'} name="search" 
+              />
               <button type="submit" onClick={() => {
-                localStorage.removeItem('searchDoctors');
+                // localStorage.removeItem('searchDoctors');
+                localStorage.setItem('searchDoctors' , searchKeyDoctors);
               }}>
                 <Icons.Search onClick={handelSearch} color='#fff' size={25} />
               </button>
@@ -265,7 +281,7 @@ export default function Doctors() {
 
             <div className="total-table">
 
-              {Object.keys(fetchDoctors).length > 0 ?
+              {fetchDoctors?.length > 0 ?
                 <> 
                   <div className="app__Users-table  ">
                     <Table responsive={true} className='rounded-3 '>
@@ -306,7 +322,7 @@ export default function Doctors() {
 
                   <div className="pagination mt-2">
                     <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-                      <Pagination count={pagesCountDoctors} page={countDoctors} onChange={handleChange}  />
+                      <Pagination count={pagesCountDoctors} page={countDoctors} onChange={() => handleChange(countDoctors)}  />
                     </Box>
                   </div>
                 </>
