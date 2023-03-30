@@ -18,7 +18,7 @@ function VenderContext({ children }) {
   function LogOut() {
     localStorage.removeItem('token')
     localStorage.removeItem("IDUser");
-    return <Navigate to="/auth/login" replace={true} />
+    return <Navigate to="/admin/login" replace={true} />
   }
 
   const chnageLang = () => {

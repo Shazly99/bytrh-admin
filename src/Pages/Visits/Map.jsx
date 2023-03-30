@@ -2,23 +2,37 @@ import { GoogleMap, Marker, Polyline, useLoadScript } from "@react-google-maps/a
 import React, { useMemo } from 'react';
 import './visit.scss';
 
-const Map = ( ) => {
+const Map = (
+    DoctorLat,
+    DoctorLong,
+    VisitLat,
+    VisitLong) => {
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: 'AIzaSyDaOQ1qVIyrLaSM819j3CxVv8OYLgJiYg4',
     });
 
     if (!isLoaded) return <div>Loading...</div>;
-    return <GoogleMaps />;
+    return <GoogleMaps
+        DoctorLat={DoctorLat}
+        DoctorLong={DoctorLong}
+        VisitLat={VisitLat}
+        VisitLong={VisitLong}
+    />;
 }
 
 export default Map
 
-function GoogleMaps() {
+function GoogleMaps(
+    DoctorLat,
+    DoctorLong,
+    VisitLat,
+    VisitLong
+) {
 
-    const center = useMemo(() => ({ lat: parseFloat('24.83275'), lng: parseFloat('46.681139') }), []);
+    const center = useMemo(() => ({ lat:VisitLat, lng: VisitLong }), []);
 
     // const startPoint = { lat: parseFloat('24.83275'), lng: parseFloat('39.7212279') };
-    const endPoint = { lat: parseFloat('24.832493  '), lng: parseFloat(' 46.681228') };
+    const endPoint = { lat: DoctorLat, lng:DoctorLong };
     const lineOptions = {
         strokeColor: "red", // Set the line color
         strokeOpacity: 0.8,
@@ -32,9 +46,9 @@ function GoogleMaps() {
     return (
         <div className="map">
             <GoogleMap zoom={20} center={center} mapContainerClassName="map-container">
-                <Marker position={endPoint} clickable={true} /> 
+                <Marker position={endPoint} clickable={true} /> //shazloka
                 <Polyline path={[center, endPoint]} options={lineOptions} />
-                <Marker position={center} clickable={true} />  
+                <Marker position={center} clickable={true} />
             </GoogleMap>
         </div>
     );

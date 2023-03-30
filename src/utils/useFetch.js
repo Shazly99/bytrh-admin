@@ -31,8 +31,8 @@ const useFetch = () => {
 
     useEffect(() => {
         getCountries()
-        getCities()
-        getAreas() 
+        getCities(1)
+        getAreas(1) 
     }, [])
 
 

@@ -90,7 +90,9 @@ import ConsultTime from './../Pages/ConsultTime/ConsultTime';
 import SingleConsultTime from './../Pages/ConsultTime/SingleConsultTime';
 import AddConsultTime from './../Pages/ConsultTime/AddConsultTime';
 import VisitDetails from './../Pages/Visits/VisitDetails';
-
+import Register from './../Pages/auth/MedicalCenter/Register/Register';
+import LoginMedicalCenter from './../Pages/auth/MedicalCenter/Login/LoginMedicalCenter';
+ 
 const Component= {
     // Layout 
     Vendor,
@@ -113,7 +115,8 @@ const Component= {
 
     // Auth
     Login,
-
+    Register,
+    LoginMedicalCenter,
     // chat component
     ChatClient,
     ClientList,
