@@ -165,7 +165,7 @@ function Navber() {
                     <NavDropdown.Divider />
 
                     <li>
-                      <Link to={'/auth/login'} onClick={LogOut} className="dropdown-item" >
+                      <Link to={'/admin/login'} onClick={LogOut} className="dropdown-item" >
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                           <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.logout} alt="logout" width={18} height={18} />
                           <span>

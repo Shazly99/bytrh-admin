@@ -31,7 +31,7 @@ function App() {
     if (localStorage.getItem('token')) {
       return children
     } else {
-      return <Navigate to="/auth/login" replace={true} />
+      return <Navigate to="/admin/login" replace={true} />
     }
   }
   const root = createBrowserRouter([
@@ -270,8 +270,14 @@ function App() {
     },
 
     {
-      path: '/auth/', element: <Component.Auth />, children: [
+      path: '/admin/', element: <Component.Auth />, children: [
         { path: 'login', element: <Component.Login /> },
+      ]
+    },
+    {
+      path: '/medicalcenter/', element: <Component.Auth />, children: [
+        { path: 'login', element: <Component.LoginMedicalCenter /> },
+        { path: 'register', element: <Component.Register /> },
       ]
     }
 

@@ -21,7 +21,7 @@ const routes = [
     nameAr: "الأطباء",
     nameEn: "Doctors",
     icon: <LogoSvg.Doctors className="logoSvg" style={{ width: 19 }} />,
-    Roles: [1]
+    Roles: [1,2]
 
   },
   {
@@ -29,7 +29,7 @@ const routes = [
     nameAr: "الــزيارات",
     nameEn: "Visits",
     icon: <LogoSvg.Visits className="logoSvg" style={{ width: 19 }} />,
-    Roles: [1]
+    Roles: [1,2]
 
   },
   {
@@ -126,7 +126,7 @@ const routes = [
     nameAr: "استشـارات",
     nameEn: "Consults",
     icon: <LogoSvg.Consults className="logoSvg" style={{ width: 19 }} />,
-    Roles: [1],
+    Roles: [1,2],
 
   },
   {
@@ -158,6 +158,14 @@ const routes = [
       },
 
     ],
+  },
+  {
+    path: "/blogs/doctor",
+    nameAr: "المدونات ",
+    nameEn: "Doctor Blogs ",
+    icon: <LogoSvg.Blogs className="logoSvg" style={{ width: 19 }} />,
+    Roles: [2],
+ 
   },
   {
     path: "/store",

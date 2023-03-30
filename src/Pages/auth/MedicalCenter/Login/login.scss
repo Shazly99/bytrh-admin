@@ -1,4 +1,4 @@
-@import '../../../style/varibale';
+@import '../../../../style/varibale';
 
 .app__auth {
     background-color: #000000;
@@ -7,7 +7,7 @@
     display: flex;
     justify-content: center;
     // justify-content: end;
-    min-height: 100vh;
+
     .app__login {
         width: 100%;
 
@@ -132,7 +132,7 @@
 }
 
 .anther_way_toLgoin {
-    color: $mainColor;
+    color: $secondColor;
     text-align: center;
     cursor: pointer;
     display: block;

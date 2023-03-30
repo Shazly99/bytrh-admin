@@ -1,0 +1,47 @@
+@import '../../../../style/varibale';
+
+.Sign__Up-header {
+    color: #fff !important;
+    color: var(--dsetext-color, #010101);
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: .06em;
+    line-height: 29px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-bottom: 25px;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+.sign-in-container .app__login-left .app__login .email input {
+    background: #fff !important;
+    height: 36px !important;
+    border-radius: 8px !important;
+    padding: 20px;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16);
+}
+
+.sign-in-container {
+    .app__login-left {
+        margin-top: 40px !important;
+        margin-bottom: 10px !important; 
+    }
+}
+
+.Medical_Center_Picture_Form{
+display: flex;
+justify-content: center;
+align-items: center ;
+    .Medical_Center_Picture{
+    
+        label{
+            color: #fff !important;
+    
+        }
+        input{
+            background-color: #fff !important;
+        }
+    }
+}

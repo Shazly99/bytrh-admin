@@ -7,7 +7,7 @@ const Auth = () => {
 
     return (
         <>
-            <div className="app__auth  vh-100" dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
+            <div className="app__auth  " dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
                 <Outlet></Outlet>
             </div>
         </>
