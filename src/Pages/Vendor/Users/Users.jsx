@@ -123,7 +123,7 @@ function Users() {
             <div className='filter__group'>
               {
                 translate[isLang]?.FilterStatus?.map((item, index) => (
-                  <>
+                  <React.Fragment key={index}>
                     {isLoader ? <>
                       <label className='active' >
                         <input
@@ -137,7 +137,7 @@ function Users() {
                         {item.text }
                       </label>
                     </> : SkeletonSearch(10, 90)}
-                  </>
+                  </React.Fragment>
                 ))
               }
             </div>
