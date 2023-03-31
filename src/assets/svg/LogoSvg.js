@@ -17,6 +17,7 @@ import { ReactComponent as Contact } from '../../assets/svg/call-calling.svg';
 // ===========================================================================
 import { ReactComponent as ArrowRight } from '../../assets/svg/arrow-right.svg';
 import { ReactComponent as view } from '../../assets/svg/view.svg';
+import { ReactComponent as addImage } from '../../assets/svg/camera.svg';
 
 const LogoSvg = {
     // ==============================Sidebar======================================
@@ -37,7 +38,8 @@ const LogoSvg = {
     Contact,
     // ===========================================================================
     ArrowRight,
-    view
+    view,
+    addImage
 }
 
 export default LogoSvg;

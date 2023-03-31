@@ -8,7 +8,7 @@ import Icons from '../../constants/Icons';
 import { VendersContext } from '../../context/Store';
 import { GetData } from '../../utils/fetchData';
 import { apiheader } from './../../utils/fetchData';
-import Map from './Map';
+import Map from '../../GoogleMap/Map';
 import initialTranslation from './Translation';
 import './visit.scss'
 const VisitDetails = () => {

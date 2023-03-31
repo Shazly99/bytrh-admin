@@ -61,7 +61,6 @@ function Map({ VisitLat, VisitLong, DoctorLat, DoctorLong }) {
       <MapComponent
         containerElement={<div style={{ height: '500px' }} />}
         mapElement={<div style={{ height: '100%' }} />}
-
       >
         {markers.map((marker, index) => (
           <Marker

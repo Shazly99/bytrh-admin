@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   GoogleMap,
   Marker,
   InfoWindow,
   useLoadScript,
 } from '@react-google-maps/api';
+import { VendersContext } from '../context/Store';
 
 const libraries = ['places'];
 const mapContainerStyle = {
@@ -13,6 +14,8 @@ const mapContainerStyle = {
 };
 
 function MapModal() {
+  let { userLocationMap ,setLoctionMap } = useContext(VendersContext);
+
   const [markers, setMarkers] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
 
@@ -27,6 +30,7 @@ function MapModal() {
     const newMarker = { lat, lng };
     setMarkers([...markers, newMarker]);
     setSelectedMarker(newMarker);
+    setLoctionMap(newMarker); 
   };
 
   const handleMarkerClick = marker => {
@@ -55,7 +59,7 @@ function MapModal() {
           onClick={() => handleMarkerClick(marker)}
         />
       ))}
-      {selectedMarker && (
+      {/* {selectedMarker && (
         <InfoWindow
           position={{
             lat: selectedMarker.lat,
@@ -68,7 +72,7 @@ function MapModal() {
             <p>Longitude: {selectedMarker.lng}</p>
           </div>
         </InfoWindow>
-      )}
+      )} */}
     </GoogleMap>
   );
 }
