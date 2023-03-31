@@ -17,8 +17,8 @@
             align-items: center;
             flex-direction: column; 
             img {
-                width: 227px !important;
-                height: 172px !important;
+                width: 227px ;
+                height: 172px ;
             }
 
             .email {
@@ -43,10 +43,10 @@
                 }
 
                 input {
-                    background: #F9F9F9 !important;
-                    height: 50px !important;
+                    background: #F9F9F9 ;
+                    height: 50px ;
                     /* Shadow */ 
-                    border-radius: 10px !important;
+                    border-radius: 10px ;
                     padding: 20px;
                     outline: none;
                     box-shadow: 0 2px 4px rgba(0,0,0,.16);
