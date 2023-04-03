@@ -33,7 +33,7 @@ function Dashboard() {
 
   return (
     <>
-    <MapModal/>
+    {/* <MapModal/> */}
       <div className="welcome__page   bg-body  " style={{ display: 'flex ', justifyContent: 'center', alignItems: 'center' }}>
         <div className="title_bytrh shadow-lg rounded-3">
           <h3>{translate[isLang]?.hello} </h3>
