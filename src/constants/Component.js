@@ -93,6 +93,7 @@ import VisitDetails from './../Pages/Visits/VisitDetails';
 import Register from './../Pages/auth/MedicalCenter/Register/Register';
 import LoginMedicalCenter from './../Pages/auth/MedicalCenter/Login/LoginMedicalCenter';
 import DoctorFreeList from './../Pages/MedicalCenter/DoctorFree/DoctorFreeList';
+import InvalidRole from './../Components/Shared/InvalidRole/InvalidRole';
  
 const Component= {
     // Layout 
@@ -107,6 +108,7 @@ const Component= {
     ChartColumn,
     ChartLine,
     AddNewUser,
+    InvalidRole,
     Users,
     UsersTable,
     Profile,

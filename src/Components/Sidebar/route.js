@@ -21,7 +21,7 @@ const routes = [
     nameAr: " الطبيب الحرة",
     nameEn: "Doctors",
     icon: <LogoSvg.Doctors className="logoSvg" style={{ width: 19 }} />,
-    Roles: [2]
+    Roles: [1,2]
 
   },
   {
@@ -29,7 +29,7 @@ const routes = [
     nameAr: "الأطباء",
     nameEn: "Doctors Free",
     icon: <LogoSvg.FreeDoctor className="logoSvg" style={{ width: 19 }} />,
-    Roles: [1,2]
+    Roles: [2]
 
   },
   

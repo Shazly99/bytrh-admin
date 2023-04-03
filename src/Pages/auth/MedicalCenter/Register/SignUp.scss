@@ -94,5 +94,17 @@ align-items: center ;
         .expired-image{
             width: 100% !important; 
         }
+        
+    }
+}
+
+.expired-container{
+  
+    .contact{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
     }
 }

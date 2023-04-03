@@ -43,8 +43,8 @@ function Navber() {
     }
   }
 
- 
-  
+
+
 
 
   return (
@@ -97,6 +97,7 @@ function Navber() {
             </div>
 
             <span className='chang__lang '>
+
               <DropdownButton
                 id={`dropdown-1`}
                 title={
@@ -107,24 +108,27 @@ function Navber() {
                 variant="outline-"
                 onSelect={(eventKey) => handleActionSelect(eventKey)}
                 className={`DropdownButton`}
-                style={{left: isLang === 'ar' ? '-30px' : '0px'}}
+                style={{ left: isLang === 'ar' ? '-30px' : '0px' }}
               >
                 <Dropdown.Item eventKey="ar" /* onClick={() => window.location.reload() } */>عربي</Dropdown.Item>
                 <Dropdown.Item eventKey="en"/*  onClick={() => window.location.reload()} */>English</Dropdown.Item>
               </DropdownButton>
+
             </span>
           </Navbar.Collapse>
 
           <Navbar.Toggle />
 
-          <Navbar.Collapse className="navEnd justify-content-end">
+            <Navbar.Collapse className="navEnd justify-content-end">
+          {
+            localStorage.getItem('Role') == 1 &&
               <nav className="chat__icon">
                 <div className="dropdown" id="basic-nav-dropdown">
-                  <div className="btn dropdown-toggle border-0"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <div className="btn dropdown-toggle border-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <Icons.Chat size={22} />
                   </div>
 
-                  <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{left: isLang === 'ar' ? '0' : '-100px'}}>
+                  <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{ left: isLang === 'ar' ? '0' : '-100px' }}>
                     <li>
                       <Link to="/chat/clients" className="dropdown-item" >
                         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -145,14 +149,14 @@ function Navber() {
                   </ul>
                 </div>
               </nav>
-
+}
               <nav>
                 <div className="dropdown" id="basic-nav-dropdown2">
-                  <div className="btn dropdown-toggle border-0"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img loading="lazy" src={Img.avatar1} alt='Img avatar1' width="40" height="40" style={{ borderRadius: '10px' }} />
+                  <div className="btn dropdown-toggle border-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img loading="lazy" src={Img.avatar1} alt='Img avatar1' width="40" height="40" style={{ borderRadius: '10px' }} />
                   </div>
 
-                  <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{left: isLang === 'ar' ? '0' : '-100px'}}>
+                  <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{ left: isLang === 'ar' ? '0' : '-100px' }}>
                     <li>
                       <Link to="/profile" className="dropdown-item" >
                         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -179,7 +183,7 @@ function Navber() {
               </nav>
 
 
-            {/* <Nav className="chat__icon">
+              {/* <Nav className="chat__icon">
               <NavDropdown title={<Icons.Chat size={21} />} id="basic-nav-dropdown">
                 <div style={{ maxHeight: '60vh', overflowY: 'auto', left: isLang === 'ar' ? '0' : '-130px' }} className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`}>
                   <LinkContainer to="/chat/clients">
@@ -205,7 +209,7 @@ function Navber() {
               <span className='bullet bullet-dot bg-success h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink'></span>
             </Nav> */}
 
-            {/* <Nav>
+              {/* <Nav>
               <NavDropdown title={<img loading="lazy" src={Img.avatar1} alt='Img avatar1' width="40" height="40" style={{ borderRadius: '10px' }} />} id="basic-nav-dropdown2"  >
                 <div style={{ maxHeight: '60vh', overflowY: 'auto' }}>
 
@@ -236,7 +240,8 @@ function Navber() {
               </NavDropdown>
             </Nav> */}
 
-          </Navbar.Collapse>
+            </Navbar.Collapse>
+          
 
 
         </Container>

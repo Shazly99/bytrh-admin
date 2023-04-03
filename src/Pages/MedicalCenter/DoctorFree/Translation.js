@@ -11,12 +11,13 @@ let initialTranslation = {
             { value: "RESERVED", text: " محجــوز  " }
         ],
         TableHeader: [
-            " Doctor Info",
-            "Country",
-            "Doctor Type",
-            "Doctor Balance",
-            "Status",
-            "Create Date"
+            " معلومات الطبيب",
+            "دولة",
+            "نوع الطبيب",
+            "ميزان الطبيب",
+            "حالة",
+            "تاريخ الإنشاء",
+            "الإجراء",
         ],
         store: {
             nav1: 'منتجات حيوانية', nav2: 'تفاصيل المنتج',
@@ -101,6 +102,8 @@ let initialTranslation = {
             "Doctor Balance",
             "Status ",
             "Create Date ",
+            "Action",
+
         ],
         store: {
             nav1: 'Animal Products', nav2: 'Product Details',
