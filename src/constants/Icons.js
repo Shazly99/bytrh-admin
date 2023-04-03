@@ -16,7 +16,7 @@ import { SlLike as like, SlNotebook as list } from "react-icons/sl";
 import { FaUserMd as ChatDoc } from "react-icons/fa";
 import { IoSettingsOutline as settings } from "react-icons/io5";
 import { RiSendPlaneFill as send, RiUserVoiceFill as Chatuser } from "react-icons/ri";
-import { RxDotFilled as dote } from "react-icons/rx";
+import { RxDotFilled as Dote } from "react-icons/rx";
 import { TbReportAnalytics as report } from "react-icons/tb";
 
 import { BsChatSquareTextFill as Chat, BsCheck2Circle as Check, BsImage as imageUpload, BsThreeDotsVertical as dotes } from "react-icons/bs";
@@ -61,7 +61,7 @@ const icons ={
     Dashboard,
     notification,
     Search,
-    dote,
+    Dote,
     report,
     list,
     user,
