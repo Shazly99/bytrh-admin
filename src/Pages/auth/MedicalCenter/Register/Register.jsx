@@ -100,9 +100,9 @@ const Register = () => {
             <Container fluid >
                 <Row>
                     <div className='  sign-in-container  d-flex justify-content-center  align-content-center '>
-                        <div className='app__login-left  w-75 py-4  '>
+                        <div className='app__login-left  w-75    py-4  '>
                             <label className='Sign__Up-header'>Sign Up</label>
-                            <div className="w-75" >
+                            <div className="Sign__Up-form" >
                                 <form className='app__login ' onSubmit={SignIn}>
                                     <Row className='Medical_Center_Picture_Form gy-md-0 gy-4'>
 
@@ -301,7 +301,7 @@ const Register = () => {
                                                     name="Password"
                                                     type="password"
                                                     className={`  py-2 form-control border-0   shadow-lg`}
-                                                    placeholder='Medical center address'
+                                                    placeholder='Password'
                                                 />
                                             </div>
                                         </Col>
