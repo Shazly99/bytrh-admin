@@ -53,6 +53,8 @@ let initialTranslation = {
             ClientPhone: '   هاتف العميل  ',
             DoctorName: '  اسم الطبيب  ',
             DoctorPhone: 'هاتف الطبيب',
+            RouteVisit:'مسار طريق الزيارة',
+
         }
 
     },
@@ -110,6 +112,7 @@ let initialTranslation = {
             DoctorName: '  Doctor Name  ',
             DoctorPhone: 'Doctor Phone',
             DoctorPhone: 'Doctor Phone',
+            RouteVisit:'Route of the visit',
         }
 
     }

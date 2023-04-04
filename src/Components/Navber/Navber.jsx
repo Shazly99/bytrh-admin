@@ -127,7 +127,7 @@ function Navber() {
                   </li>
 
                   <NavDropdown.Divider />
-
+                  { localStorage.getItem('Role') == 1 &&
                   <li>
                     <Link to={'/admin/login'} onClick={LogOut} className="dropdown-item" >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -137,7 +137,19 @@ function Navber() {
                         </span>
                       </div>
                     </Link>
-                  </li>
+                  </li>}
+
+                  { localStorage.getItem('Role') == 2 &&
+                  <li>
+                    <Link to={'/medicalcenter/login'} onClick={LogOut} className="dropdown-item" >
+                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.logout} alt="logout" width={18} height={18} />
+                        <span>
+                          {isLang === 'ar' ? 'تسجيـل الخروج' : 'Logout'}
+                        </span>
+                      </div>
+                    </Link>
+                  </li>}
                 </ul>
               </div>
             </nav>

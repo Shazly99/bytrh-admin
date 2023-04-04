@@ -58,7 +58,7 @@ function Map({ VisitLat, VisitLong, DoctorLat, DoctorLong }) {
   return (
     <div>
       <MapComponent
-        containerElement={<div style={{ height: '500px' }} />}
+        containerElement={<div style={{ height: '600px'  }} className='shadow-sm   rounded-2 overflow-hidden ' />}
         mapElement={<div style={{ height: '100%' }} />}
       >
         {markers.map((marker, index) => (
@@ -66,10 +66,23 @@ function Map({ VisitLat, VisitLong, DoctorLat, DoctorLong }) {
             key={index}
             position={{ lat: marker.lat, lng: marker.lng }}
             onClick={() => handleMarkerClick(marker)}
-            icon={{
+             icon={{
               url: `https://maps.google.com/mapfiles/ms/icons/${index === 0 ? 'red' : 'green'}-dot.png`,
               // scaledSize: new window.google.maps.Size(50, 50),
+              labelOrigin: new window.google.maps.Point(15, -10),
+
             }}
+            label={{
+              text: index === 0 ? 'Doctor' : 'Visitor',
+              color: index === 0 ? '#202124' : '#202124',
+              fontSize: '16px',
+              fontWeight: 'bolder',
+              fontFamily: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+              borderRadius: '4px', 
+              padding: '4px 8px',
+            }}
+            
+            title={index === 0 ? 'Doctor' : 'Visitor'}
           />
         ))}
       </MapComponent>

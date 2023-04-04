@@ -149,8 +149,12 @@ const VisitDetails = () => {
                                         }
                                         {
                                             isLoader ? <div className="summary_blog">
-                                                <span className='title'>{translate[isLang]?.VisitDetails?.MedicalCenterName}</span>
-                                                <span className={`${isLang === 'ar' ? 'text-end' : 'text-start'} body ClientPhone`}>{visit?.MedicalCenterName} ({visit?.MedicalCenterPhone} ) </span>
+                                                {visit?.MedicalCenterName &&
+                                                    <>
+                                                        <span className='title'>{translate[isLang]?.VisitDetails?.MedicalCenterName}</span>
+                                                        <span className={`${isLang === 'ar' ? 'text-end' : 'text-start'} body ClientPhone`}>{visit?.MedicalCenterName} ({visit?.MedicalCenterPhone} ) </span>
+                                                    </>
+                                                }
                                             </div> : SkeletonCard()
                                         }
                                     </Col>
@@ -242,16 +246,19 @@ const VisitDetails = () => {
                             </Row>
                         </div>
 
-                    </Row> 
+                    </Row>
                     <div className="map">
-                        
+
                     </div>
+                    <div className="  p-3  mb-5   border-2" style={{ borderRadius: '5px', background: '#F9F9F9' }}>
+                        <label className='Sign__Up-header text-dark'>{translate[isLang]?.VisitDetails?.RouteVisit}</label>
                         <Map
                             VisitLat={visit?.VisitLatitude}
                             VisitLong={visit?.VisitLongitude}
                             DoctorLat={visit?.DoctorLatitude}
                             DoctorLong={visit?.DoctorLongitude}
                         />
+                    </div>
 
                 </Container>
             </div>

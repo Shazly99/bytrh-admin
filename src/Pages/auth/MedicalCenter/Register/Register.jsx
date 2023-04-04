@@ -322,13 +322,13 @@ const Register = () => {
                                                     <MapModal />
 {
     userLocationMap?.lat&&
-                                                    <h4 className='long__lat-header'>
+                                                    <h4 className=' Sign__Up-header text-dark mt-2 mb-2' >
                                                         Geographic coordinate
                                                     </h4>
 }
-                                                    <span>{userLocationMap?.lat}</span>
+                                                    <span>(  {userLocationMap?.lat}</span>
                                                     { "  -  " }
-                                                    <span>{userLocationMap?.lng}</span>
+                                                    <span>{userLocationMap?.lng} )</span>
                                                 </Modal.Body>
                                                 <Modal.Footer>
 
