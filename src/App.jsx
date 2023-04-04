@@ -263,6 +263,15 @@ function App() {
           ]
         },
         {
+          path: '/doctor', children: [
+            { path: 'request', element: <ProtectedRoutes allowedRoles={['1','2']}><Component.DoctorRequest /> </ProtectedRoutes> },
+          ]
+        },
+        {
+          path: '/medicalcenter', children: [
+            { index: true, element: <ProtectedRoutes allowedRoles={[ '1','2']}><Component.Centers /> </ProtectedRoutes> },          ]
+        },
+        {
           path: '*', element: <Component.Error />
         }
       ],

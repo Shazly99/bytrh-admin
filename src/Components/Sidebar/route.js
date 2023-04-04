@@ -16,23 +16,41 @@ const routes = [
     icon: <LogoSvg.Clients className="logoSvg" style={{ width: 19 }} />,
     Roles: [1]
   },
-  {
-    path: "/doctors",
-    nameAr: " الطبيب الحرة",
+  { 
+    nameAr: "الأطباء",
     nameEn: "Doctors",
     icon: <LogoSvg.Doctors className="logoSvg" style={{ width: 19 }} />,
-    Roles: [1,2]
-
+    Roles: [1,2],
+    subRoutes: [
+      {
+        path: "/doctors",
+        nameAr: "قائمة الأطباء ",
+        nameEn: "List",
+        icon: <Icons.Dote size={19} />,
+      },       
+      {
+        path: "/doctorfree",
+        nameAr: " الطبيب الحرة",
+        nameEn: "Free",
+        icon: <Icons.Dote size={19} />,
+      }, 
+      {
+        path: "/doctor/request",
+        nameAr: "طلبات",
+        nameEn: "Request",
+        icon: <Icons.Dote size={19} />,
+      }, 
+      
+    ],
   },
   {
-    path: "/doctorfree",
-    nameAr: "الأطباء",
-    nameEn: "Doctors Free",
-    icon: <LogoSvg.FreeDoctor className="logoSvg" style={{ width: 19 }} />,
+    path: "/medicalcenter",
+    nameAr: "مركــز طبـــي",
+    nameEn: "Medical Center",
+    icon: <LogoSvg.Visits className="logoSvg" style={{ width: 19 }} />,
     Roles: [2]
 
   },
-  
   {
     path: "/visits",
     nameAr: "الــزيارات",

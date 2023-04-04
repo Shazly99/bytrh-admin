@@ -94,6 +94,8 @@ import Register from './../Pages/auth/MedicalCenter/Register/Register';
 import LoginMedicalCenter from './../Pages/auth/MedicalCenter/Login/LoginMedicalCenter';
 import DoctorFreeList from './../Pages/MedicalCenter/DoctorFree/DoctorFreeList';
 import InvalidRole from './../Components/Shared/InvalidRole/InvalidRole';
+import Centers from './../Pages/MedicalCenter/Centers/Centers';
+import DoctorRequest from './../Pages/MedicalCenter/Request/DoctorRequest';
  
 const Component= {
     // Layout 
@@ -211,7 +213,9 @@ const Component= {
     // Visits
     Visits,
     VisitDetails,
-    // DoctorFree
+    // medical center
+    Centers,
+    DoctorRequest,
     DoctorFreeList,
     // Consult Time
     ConsultTime,

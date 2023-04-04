@@ -1,10 +1,9 @@
 import CircularProgress from '@mui/material/CircularProgress';
 import React, { useContext, useRef, useState } from 'react';
-import { Container, Col, Row, Form, FormControl } from 'react-bootstrap';
+import { Container, Col, Row, Form  } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import LogoSvg from '../../../../assets/svg/LogoSvg';
-// import "../Login/login.scss";
-import "./SignUp.scss";
+ import "./SignUp.scss";
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css'
 import useFetch from '../../../../utils/useFetch';
@@ -19,7 +18,7 @@ import { VendersContext } from '../../../../context/Store';
 
 const Register = () => {
     const [show, setShow] = useState(false);
-    let { userLocationMap, setLoctionMap } = useContext(VendersContext);
+    let { userLocationMap  } = useContext(VendersContext);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -27,9 +26,7 @@ const Register = () => {
     const [idArea, setIdArea] = useState(null);
     const MedicalCenterEmailRef = useRef();
     const MedicalCenterNameRef = useRef();
-    const MedicalCenterAddressRef = useRef();
-    const letRef = useRef();
-    const longRef = useRef();
+    const MedicalCenterAddressRef = useRef(); 
     const passwordRef = useRef();
 
     // !Add  city and country and area  
@@ -54,8 +51,7 @@ const Register = () => {
     // TODO:: select image
     // const [selectedImage, setSelectedImage] = useState('../../../../assets/Images/300-21.jpg');
     const [selectedImage, setSelectedImage] = useState(null);
-    const fileInputRef = useRef(null);
-
+ 
     const handleImageSelect = (event) => {
         setSelectedImage(event.target.files[0]);
     };
@@ -117,7 +113,7 @@ const Register = () => {
                                                             src={URL.createObjectURL(selectedImage)}
                                                             alt={selectedImage.name}
                                                             className=' rounded-circle mx-auto '
-                                                            style={{ border: '6px solid #fff', width: '100%' }}
+                                                            style={{ border: '6px solid #fff', width: '190px',height:'172' }}
                                                         />
                                                     ) :
                                                         <div className="expired-container">
@@ -133,7 +129,7 @@ const Register = () => {
                                                         <input type="file" id="file-input" accept="image/*" onChange={handleImageSelect} style={{ display: 'none' }} />
                                                         <label htmlFor="file-input" className="btn__porfile  " style={{ pointerEvents: 'all' }}>
 
-                                                            <LogoSvg.addImage />
+                                                            <LogoSvg.AddImage />
                                                         </label>
                                                     </div>
                                                 </div>

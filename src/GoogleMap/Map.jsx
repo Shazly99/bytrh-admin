@@ -10,18 +10,15 @@ function Map({ VisitLat, VisitLong, DoctorLat, DoctorLong }) {
   const [startPoint, setStartPoint] = useState({ lat: DoctorLat, lng: DoctorLong });
   const [endPoint, setEndPoint] = useState({ lat: VisitLat, lng: VisitLong });
   const [path, setPath] = useState([]);
-
+ 
   useEffect(() => {
     setMarkers([startPoint, endPoint]);
-    console.log(endPoint);
+    console.log(startPoint);
   }, [startPoint, endPoint]);
   useEffect(() => {
     setStartPoint({ lat: DoctorLat, lng: DoctorLong })
     setEndPoint({ lat: VisitLat, lng: VisitLong })
-  }, [DoctorLat, DoctorLong, VisitLat, VisitLong]);
-
-
-
+  }, [DoctorLat, DoctorLong, VisitLat, VisitLong]); 
 
   function handleMarkerClick(marker) {
     console.log(marker);
@@ -35,14 +32,14 @@ function Map({ VisitLat, VisitLong, DoctorLat, DoctorLong }) {
     strokeOpacity: 1,
     scale: 4,
   };
-
-  // ..
+  
   const MapComponent = withGoogleMap(props => (
     <GoogleMap
       defaultZoom={14}
       defaultCenter={{ lat: DoctorLat, lng: DoctorLong }}
       onClick={props.onMapClick}
     >
+
       {props.children}
       <Polyline path={path}
         options={{
@@ -50,12 +47,14 @@ function Map({ VisitLat, VisitLong, DoctorLat, DoctorLong }) {
           geodesic: true, 
           strokeOpacity: 0.7
         }} />
+        
     </GoogleMap>
   ));
   useEffect(() => {
     setMarkers([startPoint, endPoint]);
     setPath([startPoint, endPoint]);
   }, [startPoint, endPoint]);
+  
   return (
     <div>
       <MapComponent

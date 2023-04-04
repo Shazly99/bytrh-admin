@@ -6,8 +6,8 @@ const DataNotFound = () => {
         <div className="no-result-container">
             <Player
                 className="no-result-image"
-                // src="https://assets7.lottiefiles.com/packages/lf20_ttvteyvs.json"
-                src={'https://assets7.lottiefiles.com/packages/lf20_jP0UkE.json'}
+                src="https://assets7.lottiefiles.com/packages/lf20_ttvteyvs.json"
+                
                 autoplay
                 loop
             />

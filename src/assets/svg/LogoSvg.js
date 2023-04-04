@@ -18,7 +18,7 @@ import { ReactComponent as Contact } from '../../assets/svg/call-calling.svg';
 // ===========================================================================
 import { ReactComponent as ArrowRight } from '../../assets/svg/arrow-right.svg';
 import { ReactComponent as view } from '../../assets/svg/view.svg';
-import { ReactComponent as addImage } from '../../assets/svg/camera.svg';
+import { ReactComponent as AddImage } from '../../assets/svg/camera.svg';
 import { ReactComponent as CurrentLocation } from '../../assets/svg/gps.svg';
  
 const LogoSvg = {
@@ -42,7 +42,7 @@ const LogoSvg = {
     // ===========================================================================
     ArrowRight,
     view,
-    addImage,
+    AddImage,
     CurrentLocation
 }
 
