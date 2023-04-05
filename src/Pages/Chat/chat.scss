@@ -307,7 +307,7 @@
     margin-left: auto !important;
     max-width: 65% !important;
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 #other .message-content {
@@ -363,7 +363,7 @@
 
 #other .message {
     display: flex;
-    justify-content: end !important;
+    justify-content: flex-end !important;
 }
 
 .app__chat_list-grid {
@@ -437,7 +437,7 @@
 
         .client_details {
             display: flex;
-            justify-content: start;
+            justify-content: flex-start;
             flex-direction: column;
             gap: 4px;
 
@@ -475,8 +475,6 @@
     .app__chat__container {
         padding: 10px 0 !important;
     }
-
-    .app__Live_chat {}
 
     .app__chat .app__chat_messages .app__chat_list-card .app__Live_chat {
         border-radius: 12px !important;

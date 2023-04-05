@@ -157,7 +157,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
                         <label className="fs-5  " htmlFor="DoctorPhone">{isLang === 'ar' ? 'رقـم التليفـون' : 'Phone'}</label>
                         <div className="input-group">
                           <PhoneInput
-                            country={countryCode}
+                            value={countryCode}
                             preferredCountries={['eg', 'sa', 'ae']}
                             enableSearch={true}
                             searchPlaceholder={isLang === 'ar' ? 'الرقم الكودي الدولـة..' : 'Country number...'}
@@ -213,7 +213,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
                             <div className="group-add">
                                 <label className="fs-5  " htmlFor="DoctorLicense">Doctor License</label>
                                 <div className="input-group">
-                                    <input onChange={getUserData} type="file" accept='png , jpg' className='form-control mx-auto py-2' required name="DoctorLicense" id="DoctorLicense" />
+                                    <input onChange={getUserData} type="file" accept="image/*" className='form-control mx-auto py-2' required name="DoctorLicense" id="DoctorLicense" />
                                 </div>
                             </div>
                         </div>

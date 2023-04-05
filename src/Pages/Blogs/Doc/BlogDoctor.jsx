@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import Img from "../../../assets/Img";
 import Icons from '../../../constants/Icons';
 import { apiheader, PostData } from '../../../utils/fetchData';
-import Component from '../../../constants/Component';
+// import Component from '../../../constants/Component';
 import useSkeletonTable from '../../../utils/useSkeletonTable';
 import { VendersContext } from '../../../context/Store';
 import initialTranslation from "./Translation";
@@ -165,7 +165,7 @@ export const BlogDoctor = () => {
                                 <div className='filter__group__stats row ' style={{ display: 'flex', gap: '20px', marginBottom: '25px' }}>
                                     {
                                         translate[isLang]?.FilterStatus?.map((item, index) => (
-                                            <>
+                                            <React.Fragment key={index}>
                                                 {isLoader ? <>
                                                     <label className='col active d-flex justify-content-center align-item-center m-0 p-0 '  >
                                                         <input
@@ -179,7 +179,7 @@ export const BlogDoctor = () => {
                                                         {item.text}
                                                     </label>
                                                 </> : SkeletonFilterBlogs(10, 90)}
-                                            </>
+                                            </React.Fragment>
                                         ))
                                     }
 
@@ -239,11 +239,11 @@ export const BlogDoctor = () => {
 
                                                 <div className='blog__status'>
                                                     <span style={{ height: 'fit-content !important' }} className={`
-                                                                ${item.BlogStatus == 'PENDING' && 'txt_pending'} 
-                                                                ${item.BlogStatus == 'REJECTED' && 'txt_rejected'} 
-                                                                ${item.BlogStatus == 'POSTED' && 'txt_delivered'}
-                                                                ${item.BlogStatus == 'REMOVED' && 'txt_cancel'}`} >
-                                         {
+                                                                ${item.BlogStatus === 'PENDING' && 'txt_pending'} 
+                                                                ${item.BlogStatus === 'REJECTED' && 'txt_rejected'} 
+                                                                ${item.BlogStatus === 'POSTED' && 'txt_delivered'}
+                                                                ${item.BlogStatus === 'REMOVED' && 'txt_cancel'}`} >
+                                        {
                                                             translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.value === item?.BlogStatus)
                                                                 .map((status, index) => (
                                                                     <React.Fragment key={index}>
@@ -253,7 +253,7 @@ export const BlogDoctor = () => {
                                                         }                                                    </span>
                                                     <div className='delete'>
                                                         <DropdownButton
-                                                            title={<Icons.dotes size={20} />}
+                                                            title={<Icons.dotes size={20} />}                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
                                                             id="dropdown-menu"
                                                             // id={`dropdown-${item.IDDoctorBlog}`}
                                                             onClick={() => setShowDropdown(!showDropdown)}
@@ -262,7 +262,7 @@ export const BlogDoctor = () => {
                                                             className="DropdownButton "
                                                             drop={'down-centered'}
                                                         >
-                                                             {
+                                                            {
                                                                 item.BlogStatus === 'PENDING' &&
                                                                 <>
                                                                     <Dropdown.Item  className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="POSTED">{translate[isLang].FilterStatus[3].text2}</Dropdown.Item>
@@ -315,7 +315,7 @@ export const BlogDoctor = () => {
                                             <td >
                                                 <div>
                                                     <Link to={`/blogs/doctor/details/${item?.IDDoctorBlog}`}>
-                                                        <img src={Img.view} />
+                                                        <img src={Img.view} alt='view' />
                                                     </Link>
                                                 </div>
                                             </td>

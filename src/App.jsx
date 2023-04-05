@@ -11,6 +11,8 @@ function App() {
   let { LogOut, isLang, setIsLang } = useContext(VendersContext);
 
   // get countries Bytra
+  let token = localStorage.getItem('token');
+
   const [fetchCountriesBytra, setFetchCountriesBytra] = useState([]);
   async function getCountriesBytra() {
     await axios.get(`https://bytrh.com/api/doctor/countries`)
@@ -20,11 +22,19 @@ function App() {
         }
       })
       .catch(err => {
+        console.log(err);
       })
   }
   useEffect(() => {
-    getCountriesBytra();
-  }, [])
+    if(token) {
+      let timeOut = setTimeout(() => {
+        getCountriesBytra();
+      }, 200);
+      return(() => {
+        clearTimeout(timeOut);
+      })
+    }
+  }, [token])
 
 
   function ProtectedRoutes({ children }) {
@@ -78,6 +88,7 @@ function App() {
 
         // ToDo user profile
         { path: '/profile', element: <ProtectedRoutes>  <Component.Profile /></ProtectedRoutes> },
+        { path: '/mcprofile', element: <ProtectedRoutes>  <Component.MCProfile countries={fetchCountriesBytra} /></ProtectedRoutes> },
         { path: '/contact', element: <ProtectedRoutes>  <Component.Contact /></ProtectedRoutes> },
         // ToDo Animals   
         {

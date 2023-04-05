@@ -18,6 +18,10 @@ function VenderContext({ children }) {
   function LogOut() {
     localStorage.removeItem('token')
     localStorage.removeItem("IDUser");
+    localStorage.removeItem("searchDoctors");
+    localStorage.removeItem("searchAdoption");
+    localStorage.removeItem("IDMC");
+    localStorage.removeItem("Role");
     return <Navigate to="/admin/login" replace={true} />
   }
 
