@@ -282,7 +282,11 @@ function App() {
         },
         {
           path: '/medicalcenter', children: [
-            { index: true, element: <ProtectedRoutes allowedRoles={[ '1','2']}><Component.Centers /> </ProtectedRoutes> },          ]
+            { index: true, element: <ProtectedRoutes allowedRoles={[ '1','2']}><Component.Centers /> </ProtectedRoutes> },
+          ]
+        },
+        { 
+          path: 'docs', element: <ProtectedRoutes allowedRoles={['1','2']}><Component.Docs /> </ProtectedRoutes> 
         },
         {
           path: '*', element: <Component.Error />

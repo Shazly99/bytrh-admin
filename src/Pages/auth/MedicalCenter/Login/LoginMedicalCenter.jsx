@@ -39,11 +39,11 @@ const LoginMedicalCenter = () => {
                     localStorage.setItem("token", data.Response.AccessToken);
                     localStorage.setItem("IDUser", data.Response.IDUser);
                     localStorage.setItem("Role", data.Response.IDRole);
-                    localStorage.setItem("IDMC", data.Response.IDMedicalCenter);
+                    localStorage.setItem("idmc", data.Response.IDMedicalCenter);
                     toast.success(data.ApiMsg);
                     setTimeout(() => {
                         navigate('/mcprofile');
-                    }, 1500);
+                    }, 2000);
                 } else {
                     setTimeout(() => {
                         setLoadEmail(false)

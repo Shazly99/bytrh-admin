@@ -4,7 +4,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 import initialTranslation from "./Translation";
 import Component from "../../../constants/Component";
@@ -302,9 +302,7 @@ const Centers = () => {
                           <option selected disabled hidden value={'Select Product Type'}> {translate[isLang]?.filter?.Product} </option>
                           {
                             translate[isLang]?.Filtertype?.map((Status, index) => (
-                              <>
                                 <option key={index} value={Status.value}  >{Status.text}</option>
-                              </>
                             ))
                           }
                         </Form.Select>
@@ -404,7 +402,7 @@ const Centers = () => {
                                 >
                                   {
                                     translate[isLang]?.FilterStatus?.filter?.((item) => item.value !== "All")?.map((Status, index) => (
-                                      <>
+                                      <React.Fragment key={index}>
                                         {item?.MedicalCenterStatus === Status.value ? (
                                           ""
                                         ) : (
@@ -412,7 +410,7 @@ const Centers = () => {
                                             {Status.text}
                                           </Dropdown.Item>
                                         )}
-                                      </>
+                                      </React.Fragment>
                                     ))
                                   }
                                 </DropdownButton>

@@ -87,9 +87,10 @@ const DoctorHours = () => {
                     </div>
                 </div>
                 :
-                <div className="bg-light py-5 px-3 rounded-4 shadow-sm d-flex justify-content-center align-items-center">
-                    <h3 className='mb-0' style={{fontWeight: '600'}}>{isLang === 'ar' ? 'لا توجد حجـوزات..' : 'No Consultations..'}</h3>
-                </div>
+                <Component.DataNotFound />
+                // <div className="bg-light py-5 px-3 rounded-4 shadow-sm d-flex justify-content-center align-items-center">
+                //     <h3 className='mb-0' style={{fontWeight: '600'}}>{isLang === 'ar' ? 'لا توجد حجـوزات..' : 'No Consultations..'}</h3>
+                // </div>
             }
 
         </Container >
