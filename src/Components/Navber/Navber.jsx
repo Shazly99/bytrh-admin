@@ -17,7 +17,7 @@ import './Navber.scss';
 
 
 function Navber() {
-  let { LogOut, isLang, setIsLang } = useContext(VendersContext);
+  let { LogOut, isOpen, setIsOpen, isLang, setIsLang } = useContext(VendersContext);
   const [Toggle, setToggle] = useState(false);
   // const showAnimation = {
   //   hidden: {
@@ -44,8 +44,8 @@ function Navber() {
     }
   }
 
- 
-  
+
+
 
 
   return (
@@ -54,50 +54,11 @@ function Navber() {
         <Container fluid  >
           <Navbar.Collapse  >
             <div className="app__navbar-menu">
-
-              <HiMenuAlt4 onClick={() => setToggle(!Toggle)} />
-
-              {
-                Toggle && (
-                  <motion.div className='sidebarSm' whileInView={{ x: [-300, 0] }} transition={{ duration: 1.5, ease: 'backOut' }} >
-                    <HiX onClick={() => setToggle(!Toggle)} />
-                    <ul >
-                      {
-                        routes?.filter((role) => role.Roles.includes("Admin")).map((item, index) => {
-
-
-                          // if (item.subRoutes) {
-                          //   return (
-                          //     <SidebarMenu
-                          //       key={index}
-                          //       setIsOpen={setIsOpen}
-                          //       route={item}
-                          //       // showAnimation={showAnimation}
-                          //       isOpen={isOpen}
-                          //       open={isOpen}
-                          //     />
-                          //   );
-                          // }
-                          return (
-                            <li key={index}>
-                              <Link to={item.path} onClick={() => setToggle(false)} className='d-flex' >
-                                {item.icon}
-                                {isLang === 'ar' ? item.nameAr : item.nameEn}
-                              </Link>
-                            </li>
-                          )
-                        })
-                      }
-
-
-                    </ul>
-
-                  </motion.div>
-                )
-              }
+              <HiMenuAlt4 onClick={() => setIsOpen(!isOpen)} />
             </div>
 
             <span className='chang__lang '>
+
               <DropdownButton
                 id={`dropdown-1`}
                 title={
@@ -108,24 +69,27 @@ function Navber() {
                 variant="outline-"
                 onSelect={(eventKey) => handleActionSelect(eventKey)}
                 className={`DropdownButton`}
-                style={{left: isLang === 'ar' ? '-30px' : '0px'}}
+                style={{ left: isLang === 'ar' ? '-30px' : '0px' }}
               >
                 <Dropdown.Item eventKey="ar" /* onClick={() => window.location.reload() } */>عربي</Dropdown.Item>
                 <Dropdown.Item eventKey="en"/*  onClick={() => window.location.reload()} */>English</Dropdown.Item>
               </DropdownButton>
+
             </span>
           </Navbar.Collapse>
 
           <Navbar.Toggle />
 
           <Navbar.Collapse className="navEnd justify-content-end">
+            {
+              localStorage.getItem('Role') == 1 &&
               <nav className="chat__icon">
                 <div className="dropdown" id="basic-nav-dropdown">
-                  <div className="btn dropdown-toggle border-0"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <div className="btn dropdown-toggle border-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <Icons.Chat size={22} />
                   </div>
 
-                  <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{left: isLang === 'ar' ? '0' : '-100px'}}>
+                  <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{ left: isLang === 'ar' ? '0' : '-100px' }}>
                     <li>
                       <Link to="/chat/clients" className="dropdown-item" >
                         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -146,22 +110,22 @@ function Navber() {
                   </ul>
                 </div>
               </nav>
+            }
+            <nav>
+              <div className="dropdown" id="basic-nav-dropdown2">
+                <div className="btn dropdown-toggle border-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img loading="lazy" src={Img.avatar1} alt='Img avatar1' width="40" height="40" style={{ borderRadius: '10px' }} />
+                </div>
 
-              <nav>
-                <div className="dropdown" id="basic-nav-dropdown2">
-                  <div className="btn dropdown-toggle border-0"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      <img loading="lazy" src={Img.avatar1} alt='Img avatar1' width="40" height="40" style={{ borderRadius: '10px' }} />
-                  </div>
-
-                  <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{left: isLang === 'ar' ? '0' : '-100px'}}>
-                    <li>
-                      <Link to="/profile" className="dropdown-item" >
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                          <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.profile} alt="profile" width={18} height={18} />
-                          <span>{isLang === 'ar' ? 'الملـف الشخصـي' : 'My Profile'}</span>
-                        </div>
-                      </Link>
-                    </li>
+                <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{ left: isLang === 'ar' ? '0' : '-100px' }}>
+                  <li>
+                    <Link to="/profile" className="dropdown-item" >
+                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.profile} alt="profile" width={18} height={18} />
+                        <span>{isLang === 'ar' ? 'الملـف الشخصـي' : 'My Profile'}</span>
+                      </div>
+                    </Link>
+                  </li>
 
                     {localStorage.getItem('Role') === '2' ?
                       <li>
@@ -177,20 +141,35 @@ function Navber() {
                     }
 
                     <NavDropdown.Divider />
+                  <NavDropdown.Divider />
+                  
+                  { localStorage.getItem('Role') == 1 &&
+                  <li>
+                    <Link to={'/admin/login'} onClick={LogOut} className="dropdown-item" >
+                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.logout} alt="logout" width={18} height={18} />
+                        <span>
+                          {isLang === 'ar' ? 'تسجيـل الخروج' : 'Logout'}
+                        </span>
+                      </div>
+                    </Link>
+                  </li>}
+                  
 
-                    <li>
-                      <Link to={'/admin/login'} onClick={LogOut} className="dropdown-item" >
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
-                          <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.logout} alt="logout" width={18} height={18} />
-                          <span>
-                            {isLang === 'ar' ? 'تسجيـل الخروج' : 'Logout'}
-                          </span>
-                        </div>
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
-              </nav>
+                  { localStorage.getItem('Role') == 2 &&
+                  <li>
+                    <Link to={'/medicalcenter/login'} onClick={LogOut} className="dropdown-item" >
+                      <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.logout} alt="logout" width={18} height={18} />
+                        <span>
+                          {isLang === 'ar' ? 'تسجيـل الخروج' : 'Logout'}
+                        </span>
+                      </div>
+                    </Link>
+                  </li>}
+                </ul>
+              </div>
+            </nav>
 
 
             {/* <Nav className="chat__icon">
@@ -251,6 +230,7 @@ function Navber() {
             </Nav> */}
 
           </Navbar.Collapse>
+
 
 
         </Container>

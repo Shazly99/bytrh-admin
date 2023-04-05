@@ -3,6 +3,8 @@ import { VendersContext } from '../../../context/Store';
 // import { Container } from 'react-bootstrap'
 // import Component from '../../../constants/Component'
 import './Dashboard.scss'
+import Map from './../../../GoogleMap/Map';
+import MapModal from './../../../GoogleMap/MapModal';
 function Dashboard() {
   let { isLang } = useContext(VendersContext);
   let initialTranslate = {
@@ -31,6 +33,7 @@ function Dashboard() {
 
   return (
     <>
+    {/* <MapModal/> */}
       <div className="welcome__page   bg-body  " style={{ display: 'flex ', justifyContent: 'center', alignItems: 'center' }}>
         <div className="title_bytrh shadow-lg rounded-3">
           <h3>{translate[isLang]?.hello} </h3>

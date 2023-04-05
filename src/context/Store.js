@@ -8,6 +8,7 @@ export const VendersContext = createContext([])
 function VenderContext({ children }) {
   const [isOpen, setIsOpen] = useState(true);
   const [userId, setUser] = useState('');
+  const [userLocationMap, setLoctionMap] = useState(null);
 
 
   const [isLang, setIsLang] = useState(localStorage.getItem('langChange'));
@@ -18,9 +19,11 @@ function VenderContext({ children }) {
   function LogOut() {
     localStorage.removeItem('token')
     localStorage.removeItem("IDUser");
+
     localStorage.removeItem("searchDoctors");
     localStorage.removeItem("searchAdoption");
     localStorage.removeItem("IDMC");
+ 
     localStorage.removeItem("Role");
     return <Navigate to="/admin/login" replace={true} />
   }
@@ -48,7 +51,8 @@ function VenderContext({ children }) {
 
   return (
     <>
-      <VendersContext.Provider value={{ roleAdmin,isLang, setIsLang, isOpen, setIsOpen, toggle, LogOut, userId }}>
+      <VendersContext.Provider value={{ userLocationMap,
+setLoctionMap,roleAdmin,isLang, setIsLang, isOpen, setIsOpen, toggle, LogOut, userId }}>
         {children}
       </VendersContext.Provider>
     </>

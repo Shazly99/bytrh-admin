@@ -16,12 +16,39 @@ const routes = [
     icon: <LogoSvg.Clients className="logoSvg" style={{ width: 19 }} />,
     Roles: [1]
   },
-  {
-    path: "/doctors",
+  { 
     nameAr: "الأطباء",
     nameEn: "Doctors",
     icon: <LogoSvg.Doctors className="logoSvg" style={{ width: 19 }} />,
-    Roles: [1,2]
+    Roles: [1,2],
+    subRoutes: [
+      {
+        path: "/doctors",
+        nameAr: "قائمة الأطباء ",
+        nameEn: "List",
+        icon: <Icons.Dote size={19} />,
+      },       
+      {
+        path: "/doctorfree",
+        nameAr: " الطبيب الحرة",
+        nameEn: "Free",
+        icon: <Icons.Dote size={19} />,
+      }, 
+      {
+        path: "/doctor/request",
+        nameAr: "طلبات",
+        nameEn: "Request",
+        icon: <Icons.Dote size={19} />,
+      }, 
+      
+    ],
+  },
+  {
+    path: "/medicalcenter",
+    nameAr: "مركــز طبـــي",
+    nameEn: "Medical Center",
+    icon: <LogoSvg.Visits className="logoSvg" style={{ width: 19 }} />,
+    Roles: [2]
 
   },
   {
@@ -56,37 +83,37 @@ const routes = [
         path: "/animals/categories",
         nameAr: "فئات ",
         nameEn: "Categories ",
-        icon: <Icons.dote size={19} />,
+        icon: <Icons.Dote size={19} />,
       },
       {
         path: "/animals/subcategories",
         nameAr: "الفئات الفرعية ",
         nameEn: "Sub Categories ",
-        icon: <Icons.dote size={19} />,
+        icon: <Icons.Dote size={19} />,
       },
       {
         path: "/animals/cutting",
         nameAr: "قطع   ",
         nameEn: "Cutting ",
-        icon: <Icons.dote size={19} />,
+        icon: <Icons.Dote size={19} />,
       },
       {
         path: "/animals/cuttingprice",
         nameAr: "سعر القطع",
         nameEn: "Cutting Price",
-        icon: <Icons.dote size={19} />,
+        icon: <Icons.Dote size={19} />,
       },
       {
         path: "/animals/bagging",
         nameAr: "تكييس ",
         nameEn: "Bagging ",
-        icon: <Icons.dote size={19} />,
+        icon: <Icons.Dote size={19} />,
       },
       {
         path: "/animals/baggingprice",
         nameAr: "سعر التكييس",
         nameEn: "Bagging Price",
-        icon: <Icons.dote size={19} />,
+        icon: <Icons.Dote size={19} />,
       },
 
 
@@ -104,19 +131,19 @@ const routes = [
         path: "/location/country",
         nameAr: "بلدان ",
         nameEn: "Country ",
-        icon: <Icons.dote size={19} />,
+        icon: <Icons.Dote size={19} />,
       },
       {
         path: "/location/cities",
         nameAr: "المناطق ",
         nameEn: "Areas ",
-        icon: <Icons.dote size={19} />,
+        icon: <Icons.Dote size={19} />,
       },
       {
         path: "/location/areas",
         nameAr: "مدن ",
         nameEn: "Cities ",
-        icon: <Icons.dote size={19} />,
+        icon: <Icons.Dote size={19} />,
       },
 
     ],
@@ -148,13 +175,13 @@ const routes = [
         path: "/blogs/client",
         nameAr: " عميل ",
         nameEn: " Client ",
-        icon: <Icons.dote size={19} />,
+        icon: <Icons.Dote size={19} />,
       },
       {
         path: "/blogs/doctor",
         nameAr: " طبيب ",
         nameEn: " Doctor ",
-        icon: <Icons.dote size={19} />,
+        icon: <Icons.Dote size={19} />,
       },
 
     ],

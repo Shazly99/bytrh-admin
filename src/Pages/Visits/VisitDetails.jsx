@@ -8,11 +8,11 @@ import Icons from '../../constants/Icons';
 import { VendersContext } from '../../context/Store';
 import { GetData } from '../../utils/fetchData';
 import { apiheader } from './../../utils/fetchData';
-import Map from './Map';
+import Map from '../../GoogleMap/Map';
 import initialTranslation from './Translation';
 import './visit.scss'
 const VisitDetails = () => {
- 
+
     let { isLang } = useContext(VendersContext);
     const [translate, setTranslate] = useState(initialTranslation)
     const handelTranslate = () => {
@@ -22,11 +22,14 @@ const VisitDetails = () => {
     const [visit, setvisit] = useState([]);
     const [isLoader, setIsloader] = useState(false);
 
+    const [latStart, setLatStart] = useState(null);
+    const [longStart, setlongStart] = useState(null);
+
     // get visitDetails
     const visitDetails = async () => {
         await GetData(`${process.env.REACT_APP_API_URL}/admin/visits/details/${id}`, apiheader).then((res) => {
             setvisit(res.Response);
-            console.log(res.Response);
+
             const timeoutId = setTimeout(() => {
                 setIsloader(true)
             }, 0);
@@ -146,8 +149,12 @@ const VisitDetails = () => {
                                         }
                                         {
                                             isLoader ? <div className="summary_blog">
-                                                <span className='title'>{translate[isLang]?.VisitDetails?.MedicalCenterName}</span>
-                                                <span className={`${isLang === 'ar' ? 'text-end' : 'text-start'} body ClientPhone`}>{visit?.MedicalCenterName} ({visit?.MedicalCenterPhone} ) </span>
+                                                {visit?.MedicalCenterName &&
+                                                    <>
+                                                        <span className='title'>{translate[isLang]?.VisitDetails?.MedicalCenterName}</span>
+                                                        <span className={`${isLang === 'ar' ? 'text-end' : 'text-start'} body ClientPhone`}>{visit?.MedicalCenterName} ({visit?.MedicalCenterPhone} ) </span>
+                                                    </>
+                                                }
                                             </div> : SkeletonCard()
                                         }
                                     </Col>
@@ -240,13 +247,19 @@ const VisitDetails = () => {
                         </div>
 
                     </Row>
-                    <Map
-                        DoctorLat={parseFloat(visit?.DoctorLatitude)}
-                        DoctorLong={parseFloat(visit?.DoctorLongitude)}
-                        VisitLat={parseFloat(visit?.VisitLatitude)}
-                        VisitLong={parseFloat(visit?.VisitLongitude)}
-                    />
- 
+                    <div className="map">
+
+                    </div>
+                    <div className="  p-3  mb-5   border-2" style={{ borderRadius: '5px', background: '#F9F9F9' }}>
+                        <label className='Sign__Up-header text-dark'>{translate[isLang]?.VisitDetails?.RouteVisit}</label>
+                        <Map
+                            VisitLat={visit?.VisitLatitude}
+                            VisitLong={visit?.VisitLongitude}
+                            DoctorLat={visit?.DoctorLatitude}
+                            DoctorLong={visit?.DoctorLongitude}
+                        />
+                    </div>
+
                 </Container>
             </div>
         </>

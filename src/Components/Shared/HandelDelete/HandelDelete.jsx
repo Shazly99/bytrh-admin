@@ -6,7 +6,8 @@ const HandelDelete = () => {
     <div className="expired-container">
       <Player
         className="expired-image"
-        src="https://assets6.lottiefiles.com/packages/lf20_dqnvaulk.json"
+        src={'https://assets7.lottiefiles.com/packages/lf20_jP0UkE.json'}
+        // src="https://assets6.lottiefiles.com/packages/lf20_dqnvaulk.json"
         autoplay
         loop
       />

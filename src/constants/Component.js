@@ -93,6 +93,11 @@ import VisitDetails from './../Pages/Visits/VisitDetails';
 import Register from './../Pages/auth/MedicalCenter/Register/Register';
 import LoginMedicalCenter from './../Pages/auth/MedicalCenter/Login/LoginMedicalCenter';
 import MCProfile from './../Pages/auth/MedicalCenter/MCProfile/MCProfile';
+
+import DoctorFreeList from './../Pages/MedicalCenter/DoctorFree/DoctorFreeList';
+import InvalidRole from './../Components/Shared/InvalidRole/InvalidRole';
+import Centers from './../Pages/MedicalCenter/Centers/Centers';
+import DoctorRequest from './../Pages/MedicalCenter/Request/DoctorRequest';
  
 const Component= {
     // Layout 
@@ -107,6 +112,7 @@ const Component= {
     ChartColumn,
     ChartLine,
     AddNewUser,
+    InvalidRole,
     Users,
     UsersTable,
     Profile,
@@ -210,6 +216,10 @@ const Component= {
     // Visits
     Visits,
     VisitDetails,
+    // medical center
+    Centers,
+    DoctorRequest,
+    DoctorFreeList,
     // Consult Time
     ConsultTime,
     SingleConsultTime,

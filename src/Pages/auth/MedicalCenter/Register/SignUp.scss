@@ -13,7 +13,21 @@
     margin-bottom: 25px;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
+.long__lat-header{
+    margin-top: 15px;
+    color: #292D32 !important;
+    color: var(--dsetext-color, #010101);
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: .06em;
+    line-height: 29px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin-bottom: 25px;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
+}
 .sign-in-container .app__login-left .app__login .email input {
     background: #fff !important;
     height: 36px !important;
@@ -50,5 +64,54 @@ align-items: center ;
 @media screen and (max-width: 768px) {
     .Medical_Center_Picture_Form {
         flex-direction: column-reverse;
+    }
+}
+.btn__porfile{
+    background-color: $mainColor;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 !important;
+    svg{
+        path{
+
+            overflow: hidden !important;
+            // fill: #fff;
+            stroke:#fff
+        }
+        
+        // margin-bottom: 4px !important;
+    }
+}
+
+.app__addprodects-form-en{
+    .expired-container{
+        // display:;
+        .expired-image{
+            width: 100% !important; 
+        }
+        
+    }
+}
+
+.expired-container{
+  
+    .contact{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+.Sign__Up-form {
+
+    width:80% !important;
+    @media screen and (max-width:767px) {
+        width: 100% !important;
     }
 }

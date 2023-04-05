@@ -2,6 +2,7 @@
 import { ReactComponent as Dashboard } from '../../assets/svg/dashboard.svg';
 import { ReactComponent as Clients } from '../../assets/svg/clients.svg';
 import { ReactComponent as Doctors } from '../../assets/svg/doctor2.svg';
+import { ReactComponent as FreeDoctor } from '../../assets/svg/doctor.svg';
 import { ReactComponent as Visits } from '../../assets/svg/visit.svg';
 import { ReactComponent as Users } from '../../assets/svg/user.svg';
 import { ReactComponent as Animals } from '../../assets/svg/animals.svg';
@@ -17,12 +18,15 @@ import { ReactComponent as Contact } from '../../assets/svg/call-calling.svg';
 // ===========================================================================
 import { ReactComponent as ArrowRight } from '../../assets/svg/arrow-right.svg';
 import { ReactComponent as view } from '../../assets/svg/view.svg';
-
+import { ReactComponent as AddImage } from '../../assets/svg/camera.svg';
+import { ReactComponent as CurrentLocation } from '../../assets/svg/gps.svg';
+ 
 const LogoSvg = {
     // ==============================Sidebar======================================
     Dashboard,
     Clients,
     Doctors,
+    FreeDoctor,
     Visits,
     Users,
     Animals,
@@ -37,7 +41,9 @@ const LogoSvg = {
     Contact,
     // ===========================================================================
     ArrowRight,
-    view
+    view,
+    AddImage,
+    CurrentLocation
 }
 
 export default LogoSvg;

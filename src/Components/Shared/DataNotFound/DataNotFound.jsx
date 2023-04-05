@@ -7,6 +7,7 @@ const DataNotFound = () => {
             <Player
                 className="no-result-image"
                 src="https://assets7.lottiefiles.com/packages/lf20_ttvteyvs.json"
+                
                 autoplay
                 loop
             />

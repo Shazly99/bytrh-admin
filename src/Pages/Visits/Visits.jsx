@@ -1,18 +1,18 @@
-import React from 'react';
-import { DropdownButton, Table, Dropdown, Col, Form } from "react-bootstrap";
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
+import React from 'react';
+import { Col, Dropdown, DropdownButton, Form, Table } from "react-bootstrap";
 
-import { useEffect, useState, useContext, useRef } from 'react';
-import { toast } from 'react-hot-toast';
-import useSkeletonTable from '../../utils/useSkeletonTable';
-import { apiheader, GetData, PostData } from '../../utils/fetchData';
-import { VendersContext } from '../../context/Store';
-import initialTranslation from './Translation';
-import icons from './../../constants/Icons';
 import axios from 'axios';
-import LogoSvg from '../../assets/svg/LogoSvg';
+import { useContext, useEffect, useRef, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import LogoSvg from '../../assets/svg/LogoSvg';
+import { VendersContext } from '../../context/Store';
+import { apiheader, PostData } from '../../utils/fetchData';
+import useSkeletonTable from '../../utils/useSkeletonTable';
+import icons from './../../constants/Icons';
+import initialTranslation from './Translation';
 const Visits = () => {
   let { isLang } = useContext(VendersContext);
   const [translate, setTranslate] = useState(initialTranslation)
@@ -357,7 +357,7 @@ const Visits = () => {
               SkeletonTable()
             }
           </div>
-        </div>
+        </div>  
 
       </div>
 
