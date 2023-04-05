@@ -1,0 +1,31 @@
+{
+    "Success": true,
+    "ApiMsg": "Valid Request",
+    "ApiCode": 8,
+    "Response": {
+        "IDMedicalCenter": 1,
+        "IDArea": 1,
+        "MedicalCenterName": "El-Noor",
+        "MedicalCenterAddress": "Shams El-Deen",
+        "MedicalCenterEmail": "",
+        "MedicalCenterPhone": "19997",
+        "MedicalCenterPhoneCode": "",
+        "MedicalCenterPicture": "https://bytrh.com/uploads/adoptions/16/QbwGJC6PnPKP9IolQcDsN6WB6NIiXWdkzbMr3MUi.jpg",
+        "MedicalCenterLat": 30.05977478999999874531567911617457866668701171875,
+        "MedicalCenterLong": 31.337822700000000253339749178849160671234130859375,
+        "MedicalCenterType": "CENTER",
+        "MedicalCenterStatus": "ACTIVE",
+        "IDCity": 1,
+        "IDCountry": 1,
+        "MedicalCenterDocuments": [
+            {
+                "IDMedicalCenterDocument": 1,
+                "CenterDocumentPath": "https://bytrh.com/uploads/medicalcenters/1/cUsMZ4qhwPTbKL1xCSU2ikE4VV4ZbO2ONlFKre68.jpg",
+                "CenterDocumentType": "LICENSE",
+                "CenterDocumentExpireDate": "2023-04-10 02:00:00"
+            }
+        ],
+        "AreaName": "مدينه نصر",
+        "CityName": "القاهرة"
+    }
+}
