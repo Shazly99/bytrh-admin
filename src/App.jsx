@@ -107,7 +107,7 @@ function App() {
 
         // ToDo user profile
         
-        { path: '/mcprofile', element: <ProtectedRoutes>  <Component.MCProfile countries={fetchCountriesBytra} /></ProtectedRoutes> },
+        { path: '/mcprofile', element: <ProtectedRoutes allowedRoles={['2']} >  <Component.MCProfile countries={fetchCountriesBytra} /></ProtectedRoutes> },
         { path: '/profile', element: <ProtectedRoutes allowedRoles={['1','2']}>  <Component.Profile /></ProtectedRoutes> },
         { path: '/contact', element: <ProtectedRoutes allowedRoles={['1']}>  <Component.Contact /></ProtectedRoutes> },
 

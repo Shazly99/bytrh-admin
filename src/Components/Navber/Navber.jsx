@@ -140,7 +140,6 @@ function Navber() {
                       ''
                     }
 
-                    <NavDropdown.Divider />
                   <NavDropdown.Divider />
                   
                   { localStorage.getItem('Role') == 1 &&
