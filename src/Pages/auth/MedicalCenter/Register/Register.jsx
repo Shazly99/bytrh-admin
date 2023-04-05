@@ -77,7 +77,6 @@ const Register = () => {
         await PostData(`${process.env.REACT_APP_API_URL}/admin/medicalcenter/register`, data, apiheader).then((res) => {
             setLoadEmail(false);
             if (res.data.Success === true) {
- 
 
                 localStorage.setItem("token", res.data.Response.AccessToken.accessToken);
                 localStorage.setItem("IDUser", res.data.Response.IDUser);
@@ -85,11 +84,9 @@ const Register = () => {
                 localStorage.setItem("IDMC", res.data.Response.IDMedicalCenter);
                 toast.success(res.data.ApiMsg);
 
-
                 setTimeout(() => {
-                    // navigate('/profile');
-                    navigate('/');
-                }, 2000);
+                    navigate('/mcprofile');
+                }, 1500);
             } else {
                 toast.error(res.data.ApiMsg)
             }

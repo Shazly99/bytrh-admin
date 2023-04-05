@@ -79,7 +79,6 @@ const MCProfile = ({ countries }) => {
   }, []); 
 
 
-
   const handleImageSelect = (el) => {
     setImgProfile(URL.createObjectURL(el));
   };

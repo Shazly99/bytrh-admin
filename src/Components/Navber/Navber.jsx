@@ -140,10 +140,9 @@ function Navber() {
                       ''
                     }
 
-                    <NavDropdown.Divider />
                   <NavDropdown.Divider />
                   
-                  { localStorage.getItem('Role') == 1 &&
+                  { localStorage.getItem('Role') === '1' &&
                   <li>
                     <Link to={'/admin/login'} onClick={LogOut} className="dropdown-item" >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -156,7 +155,7 @@ function Navber() {
                   </li>}
                   
 
-                  { localStorage.getItem('Role') == 2 &&
+                  { localStorage.getItem('Role') === '2' &&
                   <li>
                     <Link to={'/medicalcenter/login'} onClick={LogOut} className="dropdown-item" >
                       <div style={{ display: 'flex', alignItems: 'center' }}>

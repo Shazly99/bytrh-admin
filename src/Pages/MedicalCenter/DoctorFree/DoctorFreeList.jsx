@@ -39,7 +39,6 @@ const DoctorFreeList = () => {
       apiheader
     ).then(({ data }) => {
       setDoctorFree(data.Response.Doctors);
-      console.log(data.Response.Doctors);
       setPagesNumber(data.Response.Pages);
       const timeoutId = setTimeout(() => {
         setIsloader(true)
