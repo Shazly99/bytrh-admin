@@ -1,10 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-// import { FaBars } from 'react-icons/fa';
-// import { BsSearch } from 'react-icons/bs'; 
-// import { useContext } from 'react';
-// import { langContext } from '../context/store';
+import axios from 'axios'; 
 import '../../../Vendor/Doctor/Doctor.scss'
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
