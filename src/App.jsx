@@ -284,6 +284,7 @@ function App() {
           path: '/medicalcenter', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.Centers /> </ProtectedRoutes> },
             { path: 'profile/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.ProfileCenter /> </ProtectedRoutes> },
+            { path: 'edit/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.CenterEdit /> </ProtectedRoutes> },
 
           ]
         },

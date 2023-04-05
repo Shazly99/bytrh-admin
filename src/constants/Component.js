@@ -99,6 +99,7 @@ import InvalidRole from './../Components/Shared/InvalidRole/InvalidRole';
 import Centers from './../Pages/MedicalCenter/Centers/Centers';
 import DoctorRequest from './../Pages/MedicalCenter/Request/DoctorRequest';
 import ProfileCenter from './../Pages/MedicalCenter/Centers/ProfileCenter';
+import CenterEdit from './../Pages/MedicalCenter/Centers/CenterEdit';
  
 const Component= {
     // Layout 
@@ -222,6 +223,7 @@ const Component= {
     DoctorRequest,
     DoctorFreeList,
     ProfileCenter,
+    CenterEdit,
     // Consult Time
     ConsultTime,
     SingleConsultTime,

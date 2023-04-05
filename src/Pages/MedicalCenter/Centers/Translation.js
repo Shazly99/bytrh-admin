@@ -59,7 +59,9 @@ let initialTranslation = {
             "Status ", 
             "Create Date ",
             "Area Name",
-            'View profile'
+            'View profile',
+            'Edit',
+
          ],  
   
         filter:{

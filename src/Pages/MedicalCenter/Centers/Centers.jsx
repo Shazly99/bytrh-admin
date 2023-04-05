@@ -449,6 +449,14 @@ const Centers = () => {
                               </Link>
                             </div>
                           </td>
+
+                          <td>
+                            <div>
+                              <Link to={`/medicalcenter/edit/${item?.IDMedicalCenter}`}  >
+                                <LogoSvg.view className="logoSvg" style={{ width: 19 }} />
+                              </Link>
+                            </div>
+                          </td>
                         </tr>
                       ))}
                     </tbody>
