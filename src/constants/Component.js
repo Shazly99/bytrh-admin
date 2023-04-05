@@ -92,6 +92,8 @@ import AddConsultTime from './../Pages/ConsultTime/AddConsultTime';
 import VisitDetails from './../Pages/Visits/VisitDetails';
 import Register from './../Pages/auth/MedicalCenter/Register/Register';
 import LoginMedicalCenter from './../Pages/auth/MedicalCenter/Login/LoginMedicalCenter';
+import MCProfile from './../Pages/auth/MedicalCenter/MCProfile/MCProfile';
+
 import DoctorFreeList from './../Pages/MedicalCenter/DoctorFree/DoctorFreeList';
 import InvalidRole from './../Components/Shared/InvalidRole/InvalidRole';
 import Centers from './../Pages/MedicalCenter/Centers/Centers';
@@ -122,6 +124,7 @@ const Component= {
     Login,
     Register,
     LoginMedicalCenter,
+    MCProfile,
     // chat component
     ChatClient,
     ClientList,

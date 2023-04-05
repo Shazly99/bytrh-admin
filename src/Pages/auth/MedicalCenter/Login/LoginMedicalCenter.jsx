@@ -15,7 +15,7 @@ let validationSchemaEmail = Yup.object().shape({
     Password: Yup.string().required('Password is required').min(3, 'Password must be at least 3 characters long').max(10, 'Password must be at most 10 characters long'),
 });
 const LoginMedicalCenter = () => {
-    const [anthorWay, setAnthorWay] = useState(false)
+    // const [anthorWay, setAnthorWay] = useState(false)
     const [loademail, setLoadEmail] = useState(false); 
 
     let navigate = useNavigate();
@@ -39,8 +39,9 @@ const LoginMedicalCenter = () => {
                     localStorage.setItem("token", data.Response.AccessToken);
                     localStorage.setItem("IDUser", data.Response.IDUser);
                     localStorage.setItem("Role", data.Response.IDRole);
-
+                    localStorage.setItem("IDMC", data.Response.IDMedicalCenter);
                     toast.success(data.ApiMsg);
+                    // navigate('/');
                     navigate('/');
                 } else {
                     setTimeout(() => {

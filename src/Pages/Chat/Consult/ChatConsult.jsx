@@ -173,7 +173,7 @@ const ChatConsult = () => {
             <div className='filter__group__stats row ' style={{ display: 'flex', gap: '20px', marginBottom: '25px' }}>
               {
                 translate[isLang]?.FilterStatus?.filter?.((item) => item.value !== "All")?.map((item, index) => (
-                  <>
+                  <React.Fragment key={index}>
                     {isLoader ? <>
                       <label className='col active d-flex justify-content-center align-item-center m-0 p-0 '  >
                         <input
@@ -187,7 +187,7 @@ const ChatConsult = () => {
                         {item.text}
                       </label>
                     </> : SkeletonFilters(10, 90)}
-                  </>
+                  </React.Fragment>
                 ))
               }
 
@@ -259,8 +259,8 @@ const ChatConsult = () => {
                       <td className='text-center  d-flex '>
                         <div>
                           <span style={{ height: 'fit-content  !important' }} className={`
-                                            ${item.ConsultType == 'NORMAL' && 'txt_delivered'} 
-                                            ${item.ConsultType == 'URGENT' && 'txt_rejected'}   `} >
+                                            ${item.ConsultType === 'NORMAL' && 'txt_delivered'} 
+                                            ${item.ConsultType === 'URGENT' && 'txt_rejected'}   `} >
                             {translate[isLang].ConsultType && translate[isLang].ConsultType.map((status, index) => (
                               <React.Fragment key={index}>
                                 {item?.ConsultType === status.value && status.text}
@@ -277,15 +277,15 @@ const ChatConsult = () => {
                       <td className='text-center  d-flex '>
                         <div>
                           <span style={{ height: 'fit-content !important' }} className={`
-                                            ${item.ConsultStatus == 'PENDING' && 'txt_pending'} 
-                                            ${item.ConsultStatus == 'ONGOING' && 'txt_delivered'} 
-                                            ${item.ConsultStatus == 'ENDED' && 'txt_rejected'}
-                                            ${item.ConsultStatus == 'EXPIRED' && 'txt_delivery'}
-                                            ${item.ConsultStatus == 'CANCELLED' && 'txt_cancel'}
-                                            ${item.ConsultStatus == 'NO_RESPONSE' && 'txt_shipped'} 
-                                            ${item.ConsultStatus == 'SKIPPED' && 'txt__status'} 
-                                            ${item.ConsultStatus == 'REJECTED' && 'txt_rejected'}
-                                            ${item.ConsultStatus == 'ACCEPTED' && 'txt_delivery'}`} >
+                                            ${item.ConsultStatus === 'PENDING' && 'txt_pending'} 
+                                            ${item.ConsultStatus === 'ONGOING' && 'txt_delivered'} 
+                                            ${item.ConsultStatus === 'ENDED' && 'txt_rejected'}
+                                            ${item.ConsultStatus === 'EXPIRED' && 'txt_delivery'}
+                                            ${item.ConsultStatus === 'CANCELLED' && 'txt_cancel'}
+                                            ${item.ConsultStatus === 'NO_RESPONSE' && 'txt_shipped'} 
+                                            ${item.ConsultStatus === 'SKIPPED' && 'txt__status'} 
+                                            ${item.ConsultStatus === 'REJECTED' && 'txt_rejected'}
+                                            ${item.ConsultStatus === 'ACCEPTED' && 'txt_delivery'}`} >
                             {translate[isLang].FilterStatus && translate[isLang].FilterStatus.map((status, index) => (
                               <React.Fragment key={index}>
                                 {item?.ConsultStatus === status.value && status.text}
@@ -297,7 +297,7 @@ const ChatConsult = () => {
                       </td>
                       <td>
                         {
-                          item.ConsultStatus == 'ONGOING'
+                          item.ConsultStatus === 'ONGOING'
                             ?
                             <div>
                               <span>
@@ -305,28 +305,28 @@ const ChatConsult = () => {
                                   id={`dropdown-${item.IDConsult}`}
                                   title={translate[isLang].Actions.action}
                                   variant="outline-success"
-                                  onSelect={(eventKey) => handleActionSelect(item.IDConsult, eventKey)}
+                                  onSelect={(eventkey) => handleActionSelect(item.IDConsult, eventkey)}
                                   className="DropdownButton "
                                   drop={'down-centered'}
                                 >
-                                  <Dropdown.Item eventKey="Edite" as={Link} to={`/chat/consult/details/${item.IDConsult}`} target="_blank">  {translate[isLang].Actions.chat} </Dropdown.Item>
+                                  <Dropdown.Item eventkey="Edite" as={Link} to={`/chat/consult/details/${item.IDConsult}`} target="_blank">  {translate[isLang].Actions.chat} </Dropdown.Item>
                                   {item.ConsultStatus !== 'ENDED' &&
-                                    <Dropdown.Item eventKey="End" as={Link}> {translate[isLang].Actions.endChat} </Dropdown.Item>
+                                    <Dropdown.Item eventkey="End" as={Link}> {translate[isLang].Actions.endChat} </Dropdown.Item>
                                   }
                                 </DropdownButton>
                               </span>
                             </div>
                             :
-                            item.ConsultStatus == 'ENDED' ?
+                            item.ConsultStatus === 'ENDED' ?
                               <div>
                                 <span>
-                                  <Button variant=" outline-sucess" className="DropdownButton outline-sucess outline-sucessChat" title="Chat" eventKey="Edite" as={Link} to={`/consult/chat/${item.IDConsult}`} target="_blank">  {translate[isLang].Actions.chat} </Button>
+                                  <Button variant=" outline-sucess" className="DropdownButton outline-sucess outline-sucessChat" title="Chat" eventkey="Edite" as={Link} to={`/consult/chat/${item.IDConsult}`} target="_blank">  {translate[isLang].Actions.chat} </Button>
                                 </span>
                               </div> :
                               <div>
                                 <span>
-                                  <Button disabled variant="outline-sucessdDisabled" className=" DropdownButton outline-sucessdDisabled" title="Don't have a conversation" eventKey="Edite" as={Link} to={`/consult/chat/${item.IDConsult}`} target="_blank">
-                                    <img src={img.inView} />
+                                  <Button disabled variant="outline-sucessdDisabled" className=" DropdownButton outline-sucessdDisabled" title="Don't have a conversation" eventkey="Edite" as={Link} to={`/consult/chat/${item.IDConsult}`} target="_blank">
+                                    <img src={img.inView} alt="inview" />
                                   </Button>
                                 </span>
                               </div>
