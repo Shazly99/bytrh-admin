@@ -26,11 +26,11 @@ function App() {
       })
   }
   useEffect(() => {
-    if(token) {
+    if (token) {
       let timeOut = setTimeout(() => {
         getCountriesBytra();
       }, 200);
-      return(() => {
+      return (() => {
         clearTimeout(timeOut);
       })
     }
@@ -49,18 +49,18 @@ function App() {
   function ProtectedRoutes({ children, allowedRoles }) {
     const token = localStorage.getItem('token');
     const role = localStorage.getItem('Role');
-  
+
     if (!token) {
       return <Navigate to="/admin/login" replace={true} />
     }
-  
+
     if (allowedRoles?.includes(role)) {
       return children;
     }
-  
+
     // Default to showing an error message if the user's role is not allowed
     return (
-      <Component.InvalidRole/>
+      <Component.InvalidRole />
     );
   }
   const root = createBrowserRouter([
@@ -78,7 +78,7 @@ function App() {
         // ?client
         {
           path: '/client', children: [
-            { index: true, element: <ProtectedRoutes allowedRoles={['1' ]}>  <Component.Clients /> </ProtectedRoutes> },
+            { index: true, element: <ProtectedRoutes allowedRoles={['1']}>  <Component.Clients /> </ProtectedRoutes> },
           ]
         },
         // ! Rashed Doctor component
@@ -98,20 +98,20 @@ function App() {
         //  ! Rashed Adoption component
         {
           path: '/adoption', children: [
-            { index: true, element: <ProtectedRoutes allowedRoles={['1']}><Component.Adoption allowedRoles={['1']}/> </ProtectedRoutes> },
-            { path: 'details/:id', element: <ProtectedRoutes allowedRoles={['1']}> <Component.AdoptionDetails allowedRoles={['1']}/></ProtectedRoutes> },
-            { path: 'chat/:id', element: <ProtectedRoutes allowedRoles={['1']}> <Component.AdoptionChat allowedRoles={['1']}/></ProtectedRoutes> },
+            { index: true, element: <ProtectedRoutes allowedRoles={['1']}><Component.Adoption allowedRoles={['1']} /> </ProtectedRoutes> },
+            { path: 'details/:id', element: <ProtectedRoutes allowedRoles={['1']}> <Component.AdoptionDetails allowedRoles={['1']} /></ProtectedRoutes> },
+            { path: 'chat/:id', element: <ProtectedRoutes allowedRoles={['1']}> <Component.AdoptionChat allowedRoles={['1']} /></ProtectedRoutes> },
           ]
 
         },
 
         // ToDo user profile
-        
+
         { path: '/mcprofile', element: <ProtectedRoutes allowedRoles={['2']} >  <Component.MCProfile countries={fetchCountriesBytra} /></ProtectedRoutes> },
-        { path: '/profile', element: <ProtectedRoutes allowedRoles={['1','2']}>  <Component.Profile /></ProtectedRoutes> },
+        { path: '/profile', element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.Profile /></ProtectedRoutes> },
         { path: '/contact', element: <ProtectedRoutes allowedRoles={['1']}>  <Component.Contact /></ProtectedRoutes> },
 
-// ToDo Animals   
+        // ToDo Animals   
         {
           path: '/animals', children: [
             {
@@ -239,8 +239,8 @@ function App() {
           path: '/blogs', children: [
             {
               path: 'client', children: [
-                { index: true, element: <ProtectedRoutes allowedRoles={[ '2']}> <Component.BlogClient /> </ProtectedRoutes> },
-                { path: 'details/:id', element: <ProtectedRoutes allowedRoles={[ '2']}><Component.BlogClientDetails /></ProtectedRoutes> }
+                { index: true, element: <ProtectedRoutes allowedRoles={['2']}> <Component.BlogClient /> </ProtectedRoutes> },
+                { path: 'details/:id', element: <ProtectedRoutes allowedRoles={['2']}><Component.BlogClientDetails /></ProtectedRoutes> }
               ]
             },
             {
@@ -254,14 +254,14 @@ function App() {
         // ToDO :: consult
         {
           path: '/consult', children: [
-            { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.ChatConsult  /> </ProtectedRoutes> },
-            { path: 'chat/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.LiveConsult  /> </ProtectedRoutes> }
+            { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.ChatConsult /> </ProtectedRoutes> },
+            { path: 'chat/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.LiveConsult /> </ProtectedRoutes> }
           ]
         },
         {
           path: '/visits', children: [
-            { index: true, element: <ProtectedRoutes allowedRoles={[ '2']}><Component.Visits /> </ProtectedRoutes> },
-            { path: 'details/:id', element: <ProtectedRoutes allowedRoles={[ '2']}><Component.VisitDetails /> </ProtectedRoutes> },
+            { index: true, element: <ProtectedRoutes allowedRoles={['2']}><Component.Visits /> </ProtectedRoutes> },
+            { path: 'details/:id', element: <ProtectedRoutes allowedRoles={['2']}><Component.VisitDetails /> </ProtectedRoutes> },
           ]
         },
         {
@@ -272,17 +272,20 @@ function App() {
         },
         {
           path: '/doctorfree', children: [
-            { index: true, element: <ProtectedRoutes allowedRoles={['1','2']}><Component.DoctorFreeList /> </ProtectedRoutes> },
+            { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.DoctorFreeList /> </ProtectedRoutes> },
           ]
         },
         {
           path: '/doctor', children: [
-            { path: 'request', element: <ProtectedRoutes allowedRoles={['1','2']}><Component.DoctorRequest /> </ProtectedRoutes> },
+            { path: 'request', element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.DoctorRequest /> </ProtectedRoutes> },
           ]
         },
         {
           path: '/medicalcenter', children: [
-            { index: true, element: <ProtectedRoutes allowedRoles={[ '1','2']}><Component.Centers /> </ProtectedRoutes> },          ]
+            { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.Centers /> </ProtectedRoutes> },
+            { path: 'profile/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.ProfileCenter /> </ProtectedRoutes> },
+
+          ]
         },
         {
           path: '*', element: <Component.Error />

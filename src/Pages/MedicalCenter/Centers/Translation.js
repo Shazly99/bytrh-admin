@@ -19,7 +19,7 @@ let initialTranslation = {
             "حالة ", 
             "تاريخ الإنشاء ",
             "اسم المنطقة",
-        
+        "عرض الصفحة الشخصية"
         ], 
  
         filter:{
@@ -59,6 +59,7 @@ let initialTranslation = {
             "Status ", 
             "Create Date ",
             "Area Name",
+            'View profile'
          ],  
   
         filter:{
