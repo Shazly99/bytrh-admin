@@ -25,7 +25,7 @@ function VenderContext({ children }) {
     localStorage.removeItem("IDMC");
  
     localStorage.removeItem("Role");
-    return <Navigate to="/admin/login" replace={true} />
+    // return <Navigate to="/admin/login" replace={true} />
   }
 
   const chnageLang = () => {

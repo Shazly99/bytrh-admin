@@ -77,7 +77,7 @@ const Register = () => {
         await PostData(`${process.env.REACT_APP_API_URL}/admin/medicalcenter/register`, data, apiheader).then((res) => {
             setLoadEmail(false);
             if (res.data.Success === true) {
- 
+            
 
                 localStorage.setItem("token", res.data.Response.AccessToken.accessToken);
                 localStorage.setItem("IDUser", res.data.Response.IDUser);
