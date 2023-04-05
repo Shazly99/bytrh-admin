@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion';
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
+// import { useEffect } from 'react';
 import { Dropdown, DropdownButton, Nav, NavDropdown } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { HiMenuAlt4, HiX } from 'react-icons/hi';
-import { LinkContainer } from 'react-router-bootstrap';
+// import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import Img from '../../assets/Img';
 import Icons from '../../constants/Icons';
@@ -12,7 +13,7 @@ import { apiheader, PostData } from '../../utils/fetchData';
 import { VendersContext } from './../../context/Store';
 import routes from './../Sidebar/route';
 import './Navber.scss';
-import $ from 'jquery';
+// import $ from 'jquery';
 
 
 function Navber() {
@@ -126,7 +127,22 @@ function Navber() {
                     </Link>
                   </li>
 
+                    {localStorage.getItem('Role') === '2' ?
+                      <li>
+                        <Link to="/mcprofile" className="dropdown-item" >
+                          <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.mcprofile} alt="mc-profile" width={22} height={22} />
+                            <span>{isLang === 'ar' ? 'بيانات المركز الطبي' : 'M.C Profile'}</span>
+                          </div>
+                        </Link>
+                      </li>
+                      :
+                      ''
+                    }
+
+                    <NavDropdown.Divider />
                   <NavDropdown.Divider />
+                  
                   { localStorage.getItem('Role') == 1 &&
                   <li>
                     <Link to={'/admin/login'} onClick={LogOut} className="dropdown-item" >
@@ -138,6 +154,7 @@ function Navber() {
                       </div>
                     </Link>
                   </li>}
+                  
 
                   { localStorage.getItem('Role') == 2 &&
                   <li>

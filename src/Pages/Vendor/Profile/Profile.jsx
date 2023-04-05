@@ -18,12 +18,17 @@ function Profile() {
   }
 
   useEffect(() => {
-     userProfileGet()
-     window.scrollTo(0, 0);
-  }, [userProfile])
+    let timeOut = setTimeout(() => {
+      userProfileGet();
+      window.scrollTo(0, 0);
+    }, 200);
+    return(() => {
+      clearTimeout(timeOut)
+    })
+  }, [])
   
-  useEffect(() => { 
-  }, [userProfile])
+  // useEffect(() => { 
+  // }, [userProfile])
 
   return (
     <>

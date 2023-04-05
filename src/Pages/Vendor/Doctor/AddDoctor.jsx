@@ -195,7 +195,7 @@ function AddDoctor({ fetchCountriesBytra }) {
                     <div className="group-add">
                       <label className="fs-5 " htmlFor="DoctorPicture">{isLang === 'ar' ? 'الصورة (اختيـاري)' : 'Picture (optional)'}</label>
                       <div className="input-group">
-                        <input onChange={getUserData} type="file" accept='png , jpg' className='bg-transparent form-control mx-auto py-2' name="DoctorPicture" id="DoctorPicture" />
+                        <input onChange={getUserData} type="file" accept="image/*" className='bg-transparent form-control mx-auto py-2' name="DoctorPicture" id="DoctorPicture" />
                       </div>
                     </div>
                   </div>
@@ -231,7 +231,7 @@ function AddDoctor({ fetchCountriesBytra }) {
                     <div className="group-add">
                       <label className="fs-5 " htmlFor="DoctorLicense">{isLang === 'ar' ? 'رخصـة الطبيـب' : 'Doctor License'}</label>
                       <div className="input-group">
-                        <input onChange={getUserData} type="file" accept='png , jpg' className='bg-transparent form-control mx-auto py-2' required name="DoctorLicense" id="DoctorLicense" />
+                        <input onChange={getUserData} type="file" accept="image/*" className='bg-transparent form-control mx-auto py-2' required name="DoctorLicense" id="DoctorLicense" />
                       </div>
                     </div>
                   </div>

@@ -276,11 +276,8 @@ export default function Doctors() {
 
           {loadingDoctors ?
             <Loader /> 
-
             :
-
             <div className="total-table">
-
               {fetchDoctors?.length > 0 ?
                 <> 
                   <div className="app__Users-table  ">
@@ -327,6 +324,7 @@ export default function Doctors() {
                   </div>
                 </>
                 :
+                // <Loader />
                 <h2 className='text-center mt-fixed py-4'>
                     {isLang === 'ar' ? 'القائمـة فارغـة..' : 'The list is Empty..'}
                 </h2>

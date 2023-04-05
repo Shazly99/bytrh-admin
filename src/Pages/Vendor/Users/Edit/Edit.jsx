@@ -88,7 +88,6 @@ const Edit = () => {
         getCities(data.Response.IDCountry)
         setCountry(data.Response.UserPhoneFlag)
         setPhoneNumber(data.Response.UserPhone)
-        console.log(data);
     }
 
 
@@ -108,7 +107,6 @@ const Edit = () => {
 
     const updatePassword = async (password) => { 
         let { data } = await PostData(`https://bytrh.com/api/admin/users/edit`, password, apiheader)
-        console.log(data);
         if (data.Success === true) {
             toast.success(<strong>{translate[isLang].toast.updatePassword}</strong>, {
                 duration: 4000,

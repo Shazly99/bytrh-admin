@@ -18,7 +18,7 @@ let initialTranslation = {
         add: {
             btn: 'إضافه',
             nav1: 'مدينة', nav2: 'إضافة مدينة',
-            header: 'إضافه مدينــة جديـد',
+            header: 'إضافه مدينــة جديـدة',
             Label3: 'إسم مدينة (Ar)',
             Label2: "إسم الدوله",
             Label1: 'إسم مدينة (En)',

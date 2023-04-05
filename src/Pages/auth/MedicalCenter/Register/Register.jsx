@@ -49,7 +49,6 @@ const Register = () => {
     }
     let navigate = useNavigate();
     // TODO:: select image
-    // const [selectedImage, setSelectedImage] = useState('../../../../assets/Images/300-21.jpg');
     const [selectedImage, setSelectedImage] = useState(null);
  
     const handleImageSelect = (event) => {
@@ -78,12 +77,17 @@ const Register = () => {
         await PostData(`${process.env.REACT_APP_API_URL}/admin/medicalcenter/register`, data, apiheader).then((res) => {
             setLoadEmail(false);
             if (res.data.Success === true) {
+ 
+
                 localStorage.setItem("token", res.data.Response.AccessToken.accessToken);
                 localStorage.setItem("IDUser", res.data.Response.IDUser);
                 localStorage.setItem("Role", res.data.Response.IDRole);
+                localStorage.setItem("IDMC", res.data.Response.IDMedicalCenter);
                 toast.success(res.data.ApiMsg);
 
+
                 setTimeout(() => {
+                    // navigate('/profile');
                     navigate('/');
                 }, 2000);
             } else {
