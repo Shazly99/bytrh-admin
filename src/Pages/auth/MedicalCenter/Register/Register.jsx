@@ -88,7 +88,7 @@ const Register = () => {
 
                 setTimeout(() => {
                     // navigate('/profile');
-                    navigate('/');
+                    navigate('/mcprofile');
                 }, 2000);
             } else {
                 toast.error(res.data.ApiMsg)
