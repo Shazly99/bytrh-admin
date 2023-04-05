@@ -4,12 +4,11 @@
     "ApiCode": 8,
     "Response": {
         "IDMedicalCenter": 1,
-        
-        "MedicalCenterAddress": "Shams El-Deen",
-        "MedicalCenterPhoneCode": "",
-        "MedicalCenterType": "CENTER",
-        "MedicalCenterStatus": "ACTIVE",
-        
+        "IDArea": 1,
+        "MedicalCenterLat": 30.05977478999999874531567911617457866668701171875,
+        "MedicalCenterLong": 31.337822700000000253339749178849160671234130859375,
+        "IDCity": 1,
+        "IDCountry": 1,
         "MedicalCenterDocuments": [
             {
                 "IDMedicalCenterDocument": 1,
@@ -18,19 +17,16 @@
                 "CenterDocumentExpireDate": "2023-04-10 02:00:00"
             }
         ],
-        
-        "MedicalCenterPicture": "https://bytrh.com/uploads/adoptions/16/QbwGJC6PnPKP9IolQcDsN6WB6NIiXWdkzbMr3MUi.jpg",
-        "MedicalCenterName": "El-Noor",
-        "MedicalCenterPhone": "19997",
-        
-        
-        "IDArea": 1,
-        "IDCity": 1,
-        "IDCountry": 1,
         "AreaName": "مدينه نصر",
         "CityName": "القاهرة",
-
-        "MedicalCenterLat": 30.05977478999999874531567911617457866668701171875,
-        "MedicalCenterLong": 31.337822700000000253339749178849160671234130859375
+        
+        "MedicalCenterStatus": "ACTIVE",
+        "MedicalCenterAddress": "Sidi Bishr Park neighborhood, Cairo Street",   
+        "MedicalCenterType": "CENTER",
+        "MedicalCenterPicture": "https://bytrh.com/uploads/medicalcenters/1/WjFurxwO4XHEOS440pZviQZKQJFxjDYcVAznxHvw.jpg",
+        "MedicalCenterName": "El-Noor",
+        "MedicalCenterEmail": "center@gmail.com",
+        "MedicalCenterPhone": "+01063034637",
+        "MedicalCenterPhoneCode": "+undefined"
     }
 }

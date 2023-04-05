@@ -5,7 +5,7 @@ import {
   Marker,
   Polyline,
 } from 'react-google-maps'; 
-function Map({ VisitLat, VisitLong, DoctorLat, DoctorLong }) {
+function Map({ VisitLat, VisitLong, DoctorLat, DoctorLong,pinMarkF , pinMarkL }) {
   const [markers, setMarkers] = useState([]);
   const [startPoint, setStartPoint] = useState({ lat: DoctorLat, lng: DoctorLong });
   const [endPoint, setEndPoint] = useState({ lat: VisitLat, lng: VisitLong });
@@ -35,7 +35,7 @@ function Map({ VisitLat, VisitLong, DoctorLat, DoctorLong }) {
   
   const MapComponent = withGoogleMap(props => (
     <GoogleMap
-      defaultZoom={14}
+      defaultZoom={10}
       defaultCenter={{ lat: DoctorLat, lng: DoctorLong }}
       onClick={props.onMapClick}
     >
@@ -73,7 +73,7 @@ function Map({ VisitLat, VisitLong, DoctorLat, DoctorLong }) {
 
             }}
             label={{
-              text: index === 0 ? 'Doctor' : 'Visitor',
+              text: index === 0 ?pinMarkF : pinMarkL,
               color: index === 0 ? '#202124' : '#202124',
               fontSize: '16px',
               fontWeight: 'bolder',
@@ -82,7 +82,7 @@ function Map({ VisitLat, VisitLong, DoctorLat, DoctorLong }) {
               padding: '4px 8px',
             }}
             
-            title={index === 0 ? 'Doctor' : 'Visitor'}
+            title={index === 0 ? pinMarkF : pinMarkL}
           />
         ))}
       </MapComponent>

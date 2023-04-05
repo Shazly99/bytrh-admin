@@ -260,8 +260,8 @@ function App() {
         },
         {
           path: '/visits', children: [
-            { index: true, element: <ProtectedRoutes allowedRoles={['2']}><Component.Visits /> </ProtectedRoutes> },
-            { path: 'details/:id', element: <ProtectedRoutes allowedRoles={['2']}><Component.VisitDetails /> </ProtectedRoutes> },
+            { index: true, element: <ProtectedRoutes allowedRoles={['1','2']}><Component.Visits /> </ProtectedRoutes> },
+            { path: 'details/:id', element: <ProtectedRoutes allowedRoles={[  '1','2']}><Component.VisitDetails /> </ProtectedRoutes> },
           ]
         },
         {
@@ -282,9 +282,9 @@ function App() {
         },
         {
           path: '/medicalcenter', children: [
-            { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.Centers /> </ProtectedRoutes> },
-            { path: 'profile/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.ProfileCenter /> </ProtectedRoutes> },
-            { path: 'edit/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.CenterEdit /> </ProtectedRoutes> },
+            { index: true, element: <ProtectedRoutes allowedRoles={['1' ]}><Component.Centers /> </ProtectedRoutes> },
+            { path: 'profile/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.ProfileCenter /> </ProtectedRoutes> },
+            { path: 'edit/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.CenterEdit /> </ProtectedRoutes> },
 
           ]
         },

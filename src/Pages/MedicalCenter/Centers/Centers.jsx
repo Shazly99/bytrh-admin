@@ -2,7 +2,8 @@ import { Pagination, Skeleton } from "@mui/material";
 import Box from "@mui/material/Box";
 import axios from "axios";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
+import { Col,Dropdown, DropdownButton,NavDropdown,Form, Row, Table } from "react-bootstrap";
+
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 
@@ -441,7 +442,7 @@ const Centers = () => {
                                 item?.AreaName.slice(1).toLowerCase()}
                             </div>
                           </td>
-
+                          {/* 
                           <td>
                             <div>
                               <Link to={`/medicalcenter/profile/${item?.IDMedicalCenter}`}  >
@@ -455,6 +456,29 @@ const Centers = () => {
                               <Link to={`/medicalcenter/edit/${item?.IDMedicalCenter}`}  >
                                 <LogoSvg.view className="logoSvg" style={{ width: 19 }} />
                               </Link>
+                            </div>
+                          </td> */}
+
+                          <td>
+                            <div>
+                              <span>
+                                <DropdownButton
+                                  id={`dropdown-${item.IDArea}`}
+                                  title={translate[isLang]?.Actions.action}
+                                  variant="outline-success"
+                                  onSelect={(eventKey) => handleActionSelect(item.IDArea, eventKey)}
+                                  className="DropdownButton "
+                                  drop={'down-centered'}
+                                >
+                                  <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/medicalcenter/edit/${item?.IDMedicalCenter}`}>
+                                    {translate[isLang]?.Actions.edit}
+                                  </Dropdown.Item> 
+
+                                  <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/medicalcenter/profile/${item?.IDMedicalCenter}`}>
+                                    {translate[isLang]?.Actions.view}
+                                  </Dropdown.Item> 
+                                </DropdownButton>
+                              </span>
                             </div>
                           </td>
                         </tr>

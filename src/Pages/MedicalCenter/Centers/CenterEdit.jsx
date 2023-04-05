@@ -68,8 +68,12 @@ const CenterEdit = () => {
     }
   
     useEffect(() => {
+      let timeOut = setTimeout(() => {
         getMedicalData();
-       
+      }, 200);
+      return(() => {
+        clearTimeout(timeOut);
+      })
     }, [id]); 
   
   
@@ -230,9 +234,8 @@ const CenterEdit = () => {
                                         loading="lazy"
                                         src={imgProfile}
                                         alt={'medical-center'}
-                                        className=' rounded-circle mx-auto '
-                                        style={{height: '150px' , width: '150px'}}
-                                    />
+                                        className=' rounded-3 mx-auto w-100 '
+                                     />
                                 </div>
                             </div>
                         </div>

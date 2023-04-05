@@ -48,7 +48,7 @@ const routes = [
     nameAr: "مركــز طبـــي",
     nameEn: "Medical Center",
     icon: <LogoSvg.Visits className="logoSvg" style={{ width: 19 }} />,
-    Roles: [1,2]
+    Roles: [1]
 
   },
   {
