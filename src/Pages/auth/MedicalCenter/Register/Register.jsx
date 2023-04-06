@@ -81,10 +81,12 @@ const Register = () => {
                 localStorage.setItem("token", res.data.Response.AccessToken.accessToken);
                 localStorage.setItem("IDUser", res.data.Response.IDUser);
                 localStorage.setItem("Role", res.data.Response.IDRole);
+                localStorage.setItem("idmc", res.data.Response.IDMedicalCenter);
+
                 toast.success(res.data.ApiMsg);
 
                 setTimeout(() => {
-                    navigate('/');
+                    navigate('/mcprofile');
                 }, 2000);
             } else {
                 toast.error(res.data.ApiMsg)

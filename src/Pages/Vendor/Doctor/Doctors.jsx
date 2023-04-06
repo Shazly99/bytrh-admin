@@ -324,10 +324,10 @@ export default function Doctors() {
                   </div>
                 </>
                 :
-                // <Loader />
-                <h2 className='text-center mt-fixed py-4'>
-                    {isLang === 'ar' ? 'القائمـة فارغـة..' : 'The list is Empty..'}
-                </h2>
+                <Component.DataNotFound />
+                // <h2 className='text-center mt-fixed py-4'>
+                //     {isLang === 'ar' ? 'القائمـة فارغـة..' : 'The list is Empty..'}
+                // </h2>
               }
             </div>
           }

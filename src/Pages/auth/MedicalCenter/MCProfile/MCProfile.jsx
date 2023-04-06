@@ -15,7 +15,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 const MCProfile = ({ countries }) => {
 
 
-  let id = localStorage.getItem("IDMC");
+  let id = localStorage.getItem("idmc");
   const apiInfos = `https://bytrh.com/api/admin/medicalcenter/profile/${id}`;
 
 
@@ -39,10 +39,9 @@ const MCProfile = ({ countries }) => {
 
   async function getMedicalData() {
     setIsLoading(true);
-    let { data } = await axios.get(apiInfos , apiheader );
-    if(data.Success === true) {
-      const { MedicalCenterName , MedicalCenterAddress , MedicalCenterEmail , MedicalCenterPhone , MedicalCenterPhoneCode , IDCountry , IDCity , IDArea , MedicalCenterType , MedicalCenterLat , MedicalCenterLong , MedicalCenterPicture} = data.Response ;
-      setTimeout(() => {
+    await axios.get(apiInfos , apiheader )
+    .then(res => {
+      const { MedicalCenterName , MedicalCenterAddress , MedicalCenterEmail , MedicalCenterPhone , MedicalCenterPhoneCode , IDCountry , IDCity , IDArea , MedicalCenterType , MedicalCenterLat , MedicalCenterLong , MedicalCenterPicture} = res.data.Response ;
         setNameData(MedicalCenterName);
         setAddressData(MedicalCenterAddress);
         setEmailData(MedicalCenterEmail);
@@ -58,11 +57,10 @@ const MCProfile = ({ countries }) => {
         setLongData(MedicalCenterLong);
         setImgProfile(MedicalCenterPicture);
         setIsLoading(false);
-      }, 100);
-    }
-    else {
-      console.log(data.ApiMsg);
-    }
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
   useEffect(() => {

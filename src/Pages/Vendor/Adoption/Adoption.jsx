@@ -10,6 +10,7 @@ import Box from "@mui/material/Box";
 import $ from 'jquery'
 import { Container, Table } from 'react-bootstrap';
 import Loader from '../../../Components/Shared/Loader/Loader';
+import Component from '../../../constants/Component';
 import axios from 'axios';
 import { apiheader } from '../../../utils/fetchData';
 import { VendersContext } from '../../../context/Store';
@@ -158,9 +159,10 @@ export default function Adoption() {
                   </div>
                 </>
                 :
-                <h2 className='text-center mt-fixed py-4'>
-                    {isLang === 'ar' ? 'القائمـة فارغـة..' : 'The list is Empty..'}
-                </h2>
+                <Component.DataNotFound />
+                // <h2 className='text-center mt-fixed py-4'>
+                //     {isLang === 'ar' ? 'القائمـة فارغـة..' : 'The list is Empty..'}
+                // </h2>
               }
             </div>
           }

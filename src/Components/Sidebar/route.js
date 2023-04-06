@@ -30,7 +30,7 @@ const routes = [
       },       
       {
         path: "/doctorfree",
-        nameAr: " الطبيب الحرة",
+        nameAr: "الطبيب الحر",
         nameEn: "Free",
         icon: <Icons.Dote size={19} />,
       }, 
@@ -49,6 +49,14 @@ const routes = [
     nameEn: "Medical Center",
     icon: <LogoSvg.Visits className="logoSvg" style={{ width: 19 }} />,
     Roles: [1]
+
+  },
+  {
+    path: "/docs",
+    nameAr: "المستنـدات",
+    nameEn: "Documents",
+    icon: <Icons.Docs size={19} />,
+    Roles: [1,2]
 
   },
   {
@@ -229,7 +237,7 @@ const routes = [
     path: "/consultTime",
     nameAr: "أوقات الإستشـارة",
     nameEn: "Consult Times",
-    icon: <Icons.time size={19} />,
+    icon: <Icons.Time size={19} />,
     Roles: [1],
   },
   {

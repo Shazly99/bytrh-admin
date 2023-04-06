@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
 import { GetData ,apiheader} from '../utils/fetchData';
 
 
@@ -22,7 +22,7 @@ function VenderContext({ children }) {
 
     localStorage.removeItem("searchDoctors");
     localStorage.removeItem("searchAdoption");
-    localStorage.removeItem("IDMC");
+    // localStorage.removeItem("idmc");
  
     localStorage.removeItem("Role");
     // return <Navigate to="/admin/login" replace={true} />
