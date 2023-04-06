@@ -7,7 +7,7 @@ const useFetch = () => {
     const [countries, setCountries] = useState(null);
     const [cities, setCities] = useState(null);
     const [areas, setAreas] = useState(null);
- 
+
 
     // countries
     const getCountries = async () => {
@@ -30,9 +30,16 @@ const useFetch = () => {
 
 
     useEffect(() => {
-        getCountries()
-        getCities(1)
-        getAreas(1) 
+
+
+        let timeOut = setTimeout(() => {
+            getCountries()
+            getCities(1)
+            getAreas(1)
+        }, 200);
+        return (() => {
+            clearTimeout(timeOut);
+        })
     }, [])
 
 
@@ -41,7 +48,7 @@ const useFetch = () => {
         cities,
         areas,
         getCities,
-        getCountries, 
+        getCountries,
         getAreas
     }
 }

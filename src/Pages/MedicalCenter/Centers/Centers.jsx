@@ -2,7 +2,8 @@ import { Pagination, Skeleton } from "@mui/material";
 import Box from "@mui/material/Box";
 import axios from "axios";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
+import { Col,Dropdown, DropdownButton,NavDropdown,Form, Row, Table } from "react-bootstrap";
+
 import { toast } from "react-hot-toast";
 // import { Link } from "react-router-dom";
 
@@ -14,6 +15,7 @@ import useFetch from "../../../utils/useFetch";
 import useSkeletonTable from "../../../utils/useSkeletonTable";
 import { VendersContext } from "../../../context/Store";
 import { apiheader, PostData } from "../../../utils/fetchData";
+import LogoSvg from "../../../assets/svg/LogoSvg";
 
 const Centers = () => {
   let { isLang } = useContext(VendersContext);
@@ -343,7 +345,7 @@ const Centers = () => {
                                     loading="lazy"
                                   /> :
                                   <img src={img.defaultImg} alt={'Client tPicture'} loading='lazy' height={170} width='100%' className='w-100 rounded' />}
- 
+
                             </div>
                           </td>
                           <td>
@@ -436,6 +438,45 @@ const Centers = () => {
                             <div>
                               {item?.AreaName.charAt(0).toUpperCase() +
                                 item?.AreaName.slice(1).toLowerCase()}
+                            </div>
+                          </td>
+                          {/* 
+                          <td>
+                            <div>
+                              <Link to={`/medicalcenter/profile/${item?.IDMedicalCenter}`}  >
+                                <LogoSvg.view className="logoSvg" style={{ width: 19 }} />
+                              </Link>
+                            </div>
+                          </td>
+
+                          <td>
+                            <div>
+                              <Link to={`/medicalcenter/edit/${item?.IDMedicalCenter}`}  >
+                                <LogoSvg.view className="logoSvg" style={{ width: 19 }} />
+                              </Link>
+                            </div>
+                          </td> */}
+
+                          <td>
+                            <div>
+                              <span>
+                                <DropdownButton
+                                  id={`dropdown-${item.IDArea}`}
+                                  title={translate[isLang]?.Actions.action}
+                                  variant="outline-success"
+                                  onSelect={(eventKey) => handleActionSelect(item.IDArea, eventKey)}
+                                  className="DropdownButton "
+                                  drop={'down-centered'}
+                                >
+                                  <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/medicalcenter/edit/${item?.IDMedicalCenter}`}>
+                                    {translate[isLang]?.Actions.edit}
+                                  </Dropdown.Item> 
+
+                                  <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/medicalcenter/profile/${item?.IDMedicalCenter}`}>
+                                    {translate[isLang]?.Actions.view}
+                                  </Dropdown.Item> 
+                                </DropdownButton>
+                              </span>
                             </div>
                           </td>
                         </tr>

@@ -1,9 +1,9 @@
 import CircularProgress from '@mui/material/CircularProgress';
 import React, { useContext, useRef, useState } from 'react';
-import { Container, Col, Row, Form  } from 'react-bootstrap';
+import { Container, Col, Row, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import LogoSvg from '../../../../assets/svg/LogoSvg';
- import "./SignUp.scss";
+import "./SignUp.scss";
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css'
 import useFetch from '../../../../utils/useFetch';
@@ -18,7 +18,7 @@ import { VendersContext } from '../../../../context/Store';
 
 const Register = () => {
     const [show, setShow] = useState(false);
-    let { userLocationMap  } = useContext(VendersContext);
+    let { userLocationMap } = useContext(VendersContext);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -26,7 +26,7 @@ const Register = () => {
     const [idArea, setIdArea] = useState(null);
     const MedicalCenterEmailRef = useRef();
     const MedicalCenterNameRef = useRef();
-    const MedicalCenterAddressRef = useRef(); 
+    const MedicalCenterAddressRef = useRef();
     const passwordRef = useRef();
 
     // !Add  city and country and area  
@@ -49,8 +49,9 @@ const Register = () => {
     }
     let navigate = useNavigate();
     // TODO:: select image
+    // const [selectedImage, setSelectedImage] = useState('../../../../assets/Images/300-21.jpg');
     const [selectedImage, setSelectedImage] = useState(null);
- 
+
     const handleImageSelect = (event) => {
         setSelectedImage(event.target.files[0]);
     };
@@ -77,12 +78,13 @@ const Register = () => {
         await PostData(`${process.env.REACT_APP_API_URL}/admin/medicalcenter/register`, data, apiheader).then((res) => {
             setLoadEmail(false);
             if (res.data.Success === true) {
-            
                 localStorage.setItem("token", res.data.Response.AccessToken.accessToken);
                 localStorage.setItem("IDUser", res.data.Response.IDUser);
                 localStorage.setItem("Role", res.data.Response.IDRole);
                 localStorage.setItem("idmc", res.data.Response.IDMedicalCenter);
+
                 toast.success(res.data.ApiMsg);
+
                 setTimeout(() => {
                     navigate('/mcprofile');
                 }, 2000);
@@ -113,7 +115,7 @@ const Register = () => {
                                                             src={URL.createObjectURL(selectedImage)}
                                                             alt={selectedImage.name}
                                                             className=' rounded-circle mx-auto '
-                                                            style={{ border: '6px solid #fff', width: '190px',height:'172' }}
+                                                            style={{ border: '6px solid #fff', width: '190px', height: '172' }}
                                                         />
                                                     ) :
                                                         <div className="expired-container">
@@ -252,7 +254,7 @@ const Register = () => {
                                                     <option >Select Medical Type </option>
                                                     {
                                                         ['CENTER', 'CLINIC']?.map((Status, index) => (
-                                                            <option key={index} value={Status}  >{Status.charAt(0).toUpperCase()+Status.slice(1).toLowerCase()}</option>
+                                                            <option key={index} value={Status}  >{Status.charAt(0).toUpperCase() + Status.slice(1).toLowerCase()}</option>
                                                         ))
                                                     }
                                                 </Form.Select>
@@ -261,32 +263,6 @@ const Register = () => {
 
                                     </Row>
                                     <Row>
-
-                                        {/*           <Col xl={6} lg={6} md={6} sm={12}>
-                                            <div className="email ">
-                                                <label htmlFor="lat" >Latitude</label>
-                                                <input
-                                                    ref={letRef}
-                                                    id="lat"
-                                                    name="lat"
-                                                    type="text"
-                                                    placeholder="Latitude.."
-                                                    className={`  py-2 form-control border-0   shadow-lg`} />
-                                            </div>
-                                        </Col>
-                                        <Col xl={6} lg={6} md={6} sm={12}>
-                                            <div className="email ">
-                                                <label htmlFor="long">Longitude</label>
-                                                <input
-                                                    ref={longRef}
-                                                    id="long"
-                                                    name="long"
-                                                    type="text"
-                                                    className={`  py-2 form-control border-0   shadow-lg`}
-                                                    placeholder="Longitude.."
-                                                />
-                                            </div>
-                                        </Col> */}
 
                                         <Col xl={6} lg={6} md={6} sm={12}>
                                             <div className="email ">
@@ -320,14 +296,14 @@ const Register = () => {
                                                 <Modal.Body>
 
                                                     <MapModal />
-{
-    userLocationMap?.lat&&
-                                                    <h4 className=' Sign__Up-header text-dark mt-2 mb-2' >
-                                                        Geographic coordinate
-                                                    </h4>
-}
+                                                    {
+                                                        userLocationMap?.lat &&
+                                                        <h4 className=' Sign__Up-header text-dark mt-2 mb-2' >
+                                                            Geographic coordinate
+                                                        </h4>
+                                                    }
                                                     <span>(  {userLocationMap?.lat}</span>
-                                                    { "  -  " }
+                                                    {"  -  "}
                                                     <span>{userLocationMap?.lng} )</span>
                                                 </Modal.Body>
                                                 <Modal.Footer>
@@ -339,7 +315,7 @@ const Register = () => {
                                             </Modal>
                                         </Col>
                                     </Row>
-                                    <div  className='anther_way_toLgoin mt-3 ' style={{width:'fit-content'}} onClick={() => navigate('/medicalcenter/login')} >Do you have an account?</div>
+                                    <div className='anther_way_toLgoin mt-3 ' style={{ width: 'fit-content' }} onClick={() => navigate('/medicalcenter/login')} >Do you have an account?</div>
                                     <div className='w-100  d-flex align-items-center justify-content-center'>
                                         <button className={`  app__login-btn mt-4  mb-5`} type='submit'>
                                             {loademail ? <CircularProgress size={18} className={'customProgress'} /> :

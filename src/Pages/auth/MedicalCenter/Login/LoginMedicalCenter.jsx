@@ -42,8 +42,8 @@ const LoginMedicalCenter = () => {
                     localStorage.setItem("idmc", data.Response.IDMedicalCenter);
                     toast.success(data.ApiMsg);
                     setTimeout(() => {
-                        navigate('/mcprofile');
-                    }, 2000);
+                        navigate('/');
+                    }, 1500);
                 } else {
                     setTimeout(() => {
                         setLoadEmail(false)

@@ -1,16 +1,15 @@
 import Skeleton from '@mui/material/Skeleton';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
+import Map from '../../GoogleMap/Map';
 import Img from '../../assets/Img';
 import Component from '../../constants/Component';
-import Icons from '../../constants/Icons';
 import { VendersContext } from '../../context/Store';
 import { GetData } from '../../utils/fetchData';
 import { apiheader } from './../../utils/fetchData';
-import Map from '../../GoogleMap/Map';
 import initialTranslation from './Translation';
-import './visit.scss'
+import './visit.scss';
 const VisitDetails = () => {
 
     let { isLang } = useContext(VendersContext);
@@ -257,6 +256,8 @@ const VisitDetails = () => {
                             VisitLong={visit?.VisitLongitude}
                             DoctorLat={visit?.DoctorLatitude}
                             DoctorLong={visit?.DoctorLongitude}
+                            pinMarkF="Doctor"
+                            pinMarkL="Visitor"
                         />
                     </div>
 
