@@ -56,7 +56,7 @@ const routes = [
     nameAr: "المستنـدات",
     nameEn: "Documents",
     icon: <Icons.Docs size={19} />,
-    Roles: [1,2]
+    Roles: [2]
 
   },
   {

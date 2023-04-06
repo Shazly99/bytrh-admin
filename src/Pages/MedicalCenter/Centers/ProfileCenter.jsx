@@ -21,8 +21,8 @@ const ProfileCenter = () => {
     const [centerProfile, setcenterProfile] = useState([]);
     const [isLoader, setIsloader] = useState(false);
 
-    const [latStart, setLatStart] = useState(null);
-    const [longStart, setlongStart] = useState(null);
+    // const [latStart, setLatStart] = useState(null);
+    // const [longStart, setlongStart] = useState(null);
 
     // get centerProfileDetails
     const centerProfileDetails = async () => {
@@ -61,24 +61,24 @@ const ProfileCenter = () => {
             </div>
         )
     }
-    const SkeletonSummary = () => {
-        return (
-            <>
-                <Skeleton variant='rounded' height={9} width="40%" />
-                <Skeleton variant='rounded' height={10} width="70%" />
-            </>
-        )
-    }
-    const SkeletonDesc = () => {
-        return (
-            <div className="summary_blog d-flex flex-column gap-1 mt-3">
-                <Skeleton variant='rounded' height={30} width="40%" className='mb-2' />
-                <Skeleton variant='rounded' animation='wave' height={10} width="70%" />
-                <Skeleton variant='rounded' animation='wave' height={10} width="70%" />
-                <Skeleton variant='rounded' animation='wave' height={10} width="70%" />
-            </div>
-        )
-    }
+    // const SkeletonSummary = () => {
+    //     return (
+    //         <>
+    //             <Skeleton variant='rounded' height={9} width="40%" />
+    //             <Skeleton variant='rounded' height={10} width="70%" />
+    //         </>
+    //     )
+    // }
+    // const SkeletonDesc = () => {
+    //     return (
+    //         <div className="summary_blog d-flex flex-column gap-1 mt-3">
+    //             <Skeleton variant='rounded' height={30} width="40%" className='mb-2' />
+    //             <Skeleton variant='rounded' animation='wave' height={10} width="70%" />
+    //             <Skeleton variant='rounded' animation='wave' height={10} width="70%" />
+    //             <Skeleton variant='rounded' animation='wave' height={10} width="70%" />
+    //         </div>
+    //     )
+    // }
     const SkeletonImage = () => {
         return (
             <Skeleton variant="rounded" width={'100%'} height={170} />

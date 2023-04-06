@@ -27,11 +27,11 @@ function Map({ VisitLat, VisitLong, DoctorLat, DoctorLong,pinMarkF , pinMarkL })
   function handlePathUpdate(newPath) {
     setPath(newPath);
   }
-  const waveSymbol = {
-    path: 'M 0,-1 0,1',
-    strokeOpacity: 1,
-    scale: 4,
-  };
+  // const waveSymbol = {
+  //   path: 'M 0,-1 0,1',
+  //   strokeOpacity: 1,
+  //   scale: 4,
+  // };
   
   const MapComponent = withGoogleMap(props => (
     <GoogleMap

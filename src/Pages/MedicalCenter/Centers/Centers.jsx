@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Col,Dropdown, DropdownButton,NavDropdown,Form, Row, Table } from "react-bootstrap";
 
 import { toast } from "react-hot-toast";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import initialTranslation from "./Translation";
 import Component from "../../../constants/Component";
@@ -15,7 +15,7 @@ import useFetch from "../../../utils/useFetch";
 import useSkeletonTable from "../../../utils/useSkeletonTable";
 import { VendersContext } from "../../../context/Store";
 import { apiheader, PostData } from "../../../utils/fetchData";
-import LogoSvg from "../../../assets/svg/LogoSvg";
+// import LogoSvg from "../../../assets/svg/LogoSvg";
 
 const Centers = () => {
   let { isLang } = useContext(VendersContext);

@@ -1,24 +1,26 @@
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 import React, { useContext, useState } from 'react';
 // import { useEffect } from 'react';
-import { Dropdown, DropdownButton, Nav, NavDropdown } from 'react-bootstrap';
+import { Dropdown, DropdownButton, NavDropdown } from 'react-bootstrap';
+// import { Nav } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import { HiMenuAlt4, HiX } from 'react-icons/hi';
+import { HiMenuAlt4 } from 'react-icons/hi';
+// import { HiX } from 'react-icons/hi';
 // import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import Img from '../../assets/Img';
 import Icons from '../../constants/Icons';
 import { apiheader, PostData } from '../../utils/fetchData';
 import { VendersContext } from './../../context/Store';
-import routes from './../Sidebar/route';
+// import routes from './../Sidebar/route';
 import './Navber.scss';
 // import $ from 'jquery';
 
 
 function Navber() {
   let { LogOut, isOpen, setIsOpen, isLang, setIsLang } = useContext(VendersContext);
-  const [Toggle, setToggle] = useState(false);
+  // const [Toggle, setToggle] = useState(false);
   // const showAnimation = {
   //   hidden: {
   //     width: 0,
@@ -82,7 +84,7 @@ function Navber() {
 
           <Navbar.Collapse className="navEnd justify-content-end">
             {
-              localStorage.getItem('Role') == 1 &&
+              localStorage.getItem('Role') === '1' &&
               <nav className="chat__icon">
                 <div className="dropdown" id="basic-nav-dropdown">
                   <div className="btn dropdown-toggle border-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -129,7 +131,7 @@ function Navber() {
 
                     {localStorage.getItem('Role') === '2' ?
                       <li>
-                        <Link to="/mcprofile" className="dropdown-item" >
+                        <Link to={`/mcprofile`} className="dropdown-item" >
                           <div style={{ display: 'flex', alignItems: 'center' }}>
                             <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.mcprofile} alt="mc-profile" width={22} height={22} />
                             <span>{isLang === 'ar' ? 'بيانات المركز الطبي' : 'M.C Profile'}</span>
