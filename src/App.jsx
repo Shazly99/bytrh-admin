@@ -1,14 +1,16 @@
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import Component from './constants/Component';
 import './style/App.scss';
-import VenderContext, { VendersContext } from './context/Store';
+import VenderContext from './context/Store';
+// import { VendersContext } from './context/Store';
 import { Toaster } from 'react-hot-toast';
 import axios from 'axios';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+// import { useContext } from 'react';
 import ChatStore from './context/ChatStore';
 
 function App() {
-  let { LogOut, isLang, setIsLang } = useContext(VendersContext);
+  // let { LogOut, isLang, setIsLang } = useContext(VendersContext);
 
   // get countries Bytra
   let token = localStorage.getItem('token');
@@ -285,7 +287,15 @@ function App() {
             { index: true, element: <ProtectedRoutes allowedRoles={['1' ]}><Component.Centers /> </ProtectedRoutes> },
             { path: 'profile/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.ProfileCenter /> </ProtectedRoutes> },
             { path: 'edit/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.CenterEdit /> </ProtectedRoutes> },
+            { path: 'docs/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.CenterEdit /> </ProtectedRoutes> },
+            { path: 'docs/add/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.CenterEdit /> </ProtectedRoutes> },
 
+          ]
+        },
+        {
+          path: '/docs', children: [
+            { index: true, element: <ProtectedRoutes allowedRoles={[ '2' ]}><Component.Docs /> </ProtectedRoutes> },
+            { path: 'add', element: <ProtectedRoutes allowedRoles={[ '2' ]}><Component.AddDocs /> </ProtectedRoutes> },
           ]
         },
         {
