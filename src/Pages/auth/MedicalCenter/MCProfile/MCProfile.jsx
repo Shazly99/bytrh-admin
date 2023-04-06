@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios'; 
 import '../../../Vendor/Doctor/Doctor.scss'
 import PhoneInput from 'react-phone-input-2';
@@ -11,12 +11,11 @@ import { Button } from 'react-bootstrap/';
 import { VendersContext } from '../../../../context/Store';
 import CircularProgress from '@mui/material/CircularProgress';
 
-
 const MCProfile = ({ countries }) => {
 
 
   let id = localStorage.getItem("idmc");
-  const apiInfos = `https://bytrh.com/api/admin/medicalcenter/profile/${id}`;
+  // let { id } = useParams();
 
 
   let [nameData, setNameData] = useState('');
@@ -39,9 +38,9 @@ const MCProfile = ({ countries }) => {
 
   async function getMedicalData() {
     setIsLoading(true);
-    await axios.get(apiInfos , apiheader )
+    await axios.get(`https://bytrh.com/api/admin/medicalcenter/profile/${id}` , apiheader )
     .then(res => {
-      const { MedicalCenterName , MedicalCenterAddress , MedicalCenterEmail , MedicalCenterPhone , MedicalCenterPhoneCode , IDCountry , IDCity , IDArea , MedicalCenterType , MedicalCenterLat , MedicalCenterLong , MedicalCenterPicture} = res.data.Response ;
+      const { MedicalCenterName , MedicalCenterAddress , MedicalCenterEmail , MedicalCenterPhone , MedicalCenterPhoneCode , IDCountry , IDCity , IDArea , MedicalCenterType , MedicalCenterLat , MedicalCenterLong , MedicalCenterPicture} = res.data.Response;
         setNameData(MedicalCenterName);
         setAddressData(MedicalCenterAddress);
         setEmailData(MedicalCenterEmail);
@@ -70,7 +69,7 @@ const MCProfile = ({ countries }) => {
       return(() => {
         clearTimeout(timeOut);
       })
-  }, []); 
+  }, [id]);
 
 
   const handleImageSelect = (el) => {
@@ -231,8 +230,8 @@ const MCProfile = ({ countries }) => {
                                       loading="lazy"
                                       src={imgProfile}
                                       alt={'medical-center'}
-                                      className=' rounded-circle mx-auto '
-                                      style={{height: '150px' , width: '150px'}}
+                                      className=' rounded-circle mx-auto d-block'
+                                      style={{height: '170px' , width: '170px'}}
                                   />
                               </div>
                           </div>

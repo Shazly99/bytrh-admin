@@ -15,7 +15,7 @@ import useFetch from "../../../utils/useFetch";
 import useSkeletonTable from "../../../utils/useSkeletonTable";
 import { VendersContext } from "../../../context/Store";
 import { apiheader, PostData } from "../../../utils/fetchData";
-import LogoSvg from "../../../assets/svg/LogoSvg";
+// import LogoSvg from "../../../assets/svg/LogoSvg";
 
 const Centers = () => {
   let { isLang } = useContext(VendersContext);

@@ -21,8 +21,8 @@ const VisitDetails = () => {
     const [visit, setvisit] = useState([]);
     const [isLoader, setIsloader] = useState(false);
 
-    const [latStart, setLatStart] = useState(null);
-    const [longStart, setlongStart] = useState(null);
+    // const [latStart, setLatStart] = useState(null);
+    // const [longStart, setlongStart] = useState(null);
 
     // get visitDetails
     const visitDetails = async () => {
@@ -67,16 +67,16 @@ const VisitDetails = () => {
             </>
         )
     }
-    const SkeletonDesc = () => {
-        return (
-            <div className="summary_blog d-flex flex-column gap-1 mt-3">
-                <Skeleton variant='rounded' height={30} width="40%" className='mb-2' />
-                <Skeleton variant='rounded' animation='wave' height={10} width="70%" />
-                <Skeleton variant='rounded' animation='wave' height={10} width="70%" />
-                <Skeleton variant='rounded' animation='wave' height={10} width="70%" />
-            </div>
-        )
-    }
+    // const SkeletonDesc = () => {
+    //     return (
+    //         <div className="summary_blog d-flex flex-column gap-1 mt-3">
+    //             <Skeleton variant='rounded' height={30} width="40%" className='mb-2' />
+    //             <Skeleton variant='rounded' animation='wave' height={10} width="70%" />
+    //             <Skeleton variant='rounded' animation='wave' height={10} width="70%" />
+    //             <Skeleton variant='rounded' animation='wave' height={10} width="70%" />
+    //         </div>
+    //     )
+    // }
     const SkeletonImage = () => {
         return (
             <Skeleton variant="rounded" width={'100%'} height={170} />
@@ -129,8 +129,8 @@ const VisitDetails = () => {
                                         {
                                             isLoader ? <>
                                                 {visit?.ClientPicture ?
-                                                    <img src={Img.defaultImg} alt={'Client Picture'} loading='lazy' height={170} width='100%' className='w-100 rounded' /> :
-                                                    <img src={Img.defaultImg} alt={'Client tPicture'} loading='lazy' height={170} width='100%' className='w-100 rounded' />}
+                                                    <img src={Img.defaultImg} alt={'Client pc'} loading='lazy' height={170} width='100%' className='w-100 rounded' /> :
+                                                    <img src={Img.defaultImg} alt={'Client tpc'} loading='lazy' height={170} width='100%' className='w-100 rounded' />}
                                             </> : SkeletonImage()}
                                     </Col>
                                     <Col xl={7} lg={7} md={7} sm={7} className="store_info_animal">

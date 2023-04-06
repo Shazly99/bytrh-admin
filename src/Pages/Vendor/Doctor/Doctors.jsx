@@ -278,7 +278,7 @@ export default function Doctors() {
             <Loader /> 
             :
             <div className="total-table">
-              {fetchDoctors?.length > 0 ?
+              {Object.keys(fetchDoctors).length > 0 ?
                 <> 
                   <div className="app__Users-table  ">
                     <Table responsive={true} className='rounded-3 '>
