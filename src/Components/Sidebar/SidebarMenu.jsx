@@ -51,7 +51,7 @@ const SidebarMenu = ({isLang, route,open, showAnimation, isOpen, setIsOpen }) =>
   }, [isOpen,isLang]);
   return (
     <>
-      <div className="menu" onClick={toggleMenu} style={{[isLang === 'en' ? 'paddingRight' : 'paddingLeft']: '20px' }} >
+      <div className="menu " onClick={toggleMenu} style={{[isLang === 'en' ? 'paddingRight' : 'paddingLeft']: '20px' }} >
         <div className="menu_item">
           <span className={`link ${isMenuOpen?'link_text':''}`}>
             <div className="icon">{route.icon}</div>
@@ -93,7 +93,8 @@ const SidebarMenu = ({isLang, route,open, showAnimation, isOpen, setIsOpen }) =>
             initial="hidden"
             animate="show"
             exit="hidden"
-            className="menu_container"
+            className="menu_container "
+            // style={{marginTop:'0.5px'}}
           >
             {route.subRoutes.map((subRoute, i) => (
               <motion.div variants={menuItemAnimation} key={i} custom={i}>

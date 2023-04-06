@@ -53,7 +53,7 @@ const Sidebar = ({ children }) => {
                     initial="hidden"
                     animate="show"
                     exit="hidden"
-                    className="logo"
+                    className="logo mt-3"
                     key={1}
                   >
                     <Link to={'/'} style={{ cursor: 'pointer' }}>
@@ -61,8 +61,8 @@ const Sidebar = ({ children }) => {
                     </Link>
                   </motion.div>
                 )}
-                <div className="bars">
-                  <FaBars onClick={toggle} size={20} />
+                <div className="bars mt-1">
+                  <FaBars onClick={toggle} size={20}  />
                 </div>
               </AnimatePresence>
             </div>
