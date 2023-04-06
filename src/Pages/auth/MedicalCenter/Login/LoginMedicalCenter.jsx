@@ -42,7 +42,7 @@ const LoginMedicalCenter = () => {
                     localStorage.setItem("idmc", data.Response.IDMedicalCenter);
                     toast.success(data.ApiMsg);
                     setTimeout(() => {
-                        navigate(`/mcprofile`);
+                        navigate(`/`);
                     }, 1500);
                 } else {
                     setTimeout(() => {

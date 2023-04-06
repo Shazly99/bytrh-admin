@@ -81,7 +81,7 @@ const Docs = () => {
                                             <tr key={index}>
                                                 <td>
                                                     <div style={{width: '250px', height: '150px'}}>
-                                                        <img loading="lazy" src={item.CenterDocumentPath} className='ro rounded-3 w-100 h-100 mx-auto' style={{cursor: 'pointer'}} alt="doc-image" />
+                                                        <img loading="lazy" src={item.CenterDocumentPath} className='rounded-3 w-100 h-100 mx-auto' style={{cursor: 'pointer'}} alt="docs" />
                                                     </div>
                                                 </td>
                                                 <td >

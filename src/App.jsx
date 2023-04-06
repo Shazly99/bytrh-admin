@@ -287,8 +287,8 @@ function App() {
             { index: true, element: <ProtectedRoutes allowedRoles={['1' ]}><Component.Centers /> </ProtectedRoutes> },
             { path: 'profile/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.ProfileCenter /> </ProtectedRoutes> },
             { path: 'edit/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.CenterEdit /> </ProtectedRoutes> },
-            { path: 'docs/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.CenterEdit /> </ProtectedRoutes> },
-            { path: 'docs/add/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.CenterEdit /> </ProtectedRoutes> },
+            // { path: 'docs/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.CenterEdit /> </ProtectedRoutes> },
+            { path: 'add/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.CenterAdd /> </ProtectedRoutes> },
 
           ]
         },

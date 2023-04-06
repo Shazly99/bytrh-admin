@@ -102,6 +102,7 @@ import Docs from './../Pages/MedicalCenter/Docs/Docs';
 import AddDocs from './../Pages/MedicalCenter/Docs/AddDocs';
 import ProfileCenter from './../Pages/MedicalCenter/Centers/ProfileCenter';
 import CenterEdit from './../Pages/MedicalCenter/Centers/CenterEdit';
+import CenterAdd from './../Pages/MedicalCenter/Centers/CenterAdd';
  
 const Component= {
     // Layout 
@@ -228,6 +229,7 @@ const Component= {
     AddDocs,
     ProfileCenter,
     CenterEdit,
+    CenterAdd,
     // Consult Time
     ConsultTime,
     SingleConsultTime,
