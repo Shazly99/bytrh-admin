@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Col,Dropdown, DropdownButton,NavDropdown,Form, Row, Table } from "react-bootstrap";
 
 import { toast } from "react-hot-toast";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import initialTranslation from "./Translation";
 import Component from "../../../constants/Component";
@@ -475,6 +475,7 @@ const Centers = () => {
                                   <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/medicalcenter/profile/${item?.IDMedicalCenter}`}>
                                     {translate[isLang]?.Actions.view}
                                   </Dropdown.Item> 
+                                  
                                 </DropdownButton>
                               </span>
                             </div>
