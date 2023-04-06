@@ -1,8 +1,8 @@
 import Skeleton from '@mui/material/Skeleton';
 import React, { useContext, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
-
+import { Link, useParams } from 'react-router-dom';
+import { motion } from 'framer-motion'
 
 import { VendersContext } from '../../../context/Store';
 import initialTranslation from './Translation';
@@ -10,8 +10,11 @@ import { apiheader, GetData } from '../../../utils/fetchData';
 import Component from '../../../constants/Component';
 import Map from '../../../GoogleMap/Map';
 import img from './../../../assets/Img';
-
+import { AiFillEye } from 'react-icons/ai';
+import './center.scss'
 const ProfileCenter = () => {
+    const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
+
     let { isLang } = useContext(VendersContext);
     const [translate, setTranslate] = useState(initialTranslation)
     const handelTranslate = () => {
@@ -105,7 +108,7 @@ const ProfileCenter = () => {
                                             <img src={img.defaultImg} alt={centerProfile.defaultImg} width='100%' loading='lazy' height={170} className='w-100 rounded' />}
                                         </> : SkeletonImage()}
                                     </Col>
-                                    <Col xl={4} lg={4} md={4} sm={4} className="store_info_animal">
+                                    <Col xl={3} lg={3} md={3} sm={3} className="store_info_animal">
                                         {isLoader ? <div className="summary_blog">
                                             {centerProfile?.MedicalCenterName &&
                                                 <>
@@ -170,7 +173,7 @@ const ProfileCenter = () => {
                                                         ${centerProfile.MedicalCenterStatus === 'REJECTED' && 'txt_rejected'}
                                                         ${centerProfile.MedicalCenterStatus === 'ACCEPTED' && 'txt_delivery'} mt-2`}>
                                                         {centerProfile?.MedicalCenterStatus?.charAt(0)?.toUpperCase() + centerProfile?.MedicalCenterStatus?.slice(1).toLowerCase()}</span>
-                                                 </>
+                                                </>
                                             }
 
                                         </div> : SkeletonCard()}
@@ -179,140 +182,67 @@ const ProfileCenter = () => {
 
 
                                     </Col>
-                                </Row>
-                            </div>
-                        </Col>
-                        {/*            <Col xl={6} lg={6} md={6} sm={12} className='store_info'>
-                            <div className="store_header">
-                                {translate[isLang]?.centerProfileDetails?.doctorInfo}
-                            </div>
-                            <div className="store_info_body">
-                                <Row>
-                                    <Col xl={5} lg={5} md={5} sm={5}  >
-                                        {
-                                            isLoader ? <>
-                                                {centerProfile?.ClientPicture ?
-                                                    <img src={img.defaultImg} alt={'Client Picture'} loading='lazy' height={170} width='100%' className='w-100 rounded' /> :
-                                                    <img src={img.defaultImg} alt={'Client tPicture'} loading='lazy' height={170} width='100%' className='w-100 rounded' />}
-                                            </> : SkeletonImage()}
-                                    </Col>
-                                    <Col xl={7} lg={7} md={7} sm={7} className="store_info_animal">
-                                        {
-                                            isLoader ? <div className="summary_blog">
-                                                <span className='title'>{translate[isLang]?.centerProfileDetails?.DoctorName}</span>
-                                                <span className={`${isLang === 'ar' ? 'text-end' : 'text-start'} body ClientPhone`}>{centerProfile?.DoctorName}</span>
-                                            </div> : SkeletonCard()
-                                        }
-                                        {
-                                            isLoader ? <div className="summary_blog">
-                                                <span className='title'>{translate[isLang]?.centerProfileDetails?.DoctorPhone}</span>
-                                                <span className={`${isLang === 'ar' ? 'text-end' : 'text-start'} body ClientPhone`}>{centerProfile?.DoctorPhone}</span>
-                                            </div> : SkeletonCard()
-                                        }
-                                        {
-                                            isLoader ? <div className="summary_blog">
-                                                {centerProfile?.MedicalCenterName &&
-                                                    <>
-                                                        <span className='title'>{translate[isLang]?.centerProfileDetails?.MedicalCenterName}</span>
-                                                        <span className={`${isLang === 'ar' ? 'text-end' : 'text-start'} body ClientPhone`}>{centerProfile?.MedicalCenterName} ({centerProfile?.MedicalCenterPhone} ) </span>
-                                                    </>
-                                                }
-                                            </div> : SkeletonCard()
-                                        }
+
+                                    <Col xl={2} lg={2} md={2} sm={2} className="store_info_animal">
+                                        {isLoader ? <div className="summary_blog">
+                                            {centerProfile?.MedicalCenterAddress &&
+                                                <>
+                                                    <span className='title'> {translate[isLang]?.centerProfileDetails?.CityName}</span>
+                                                    <span className='body'>{centerProfile?.CityName}</span>
+                                                </>
+                                            }
+                                        </div> : SkeletonCard()}
+                                        {isLoader ? <div className="summary_blog">
+                                            {centerProfile?.MedicalCenterAddress &&
+                                                <>
+                                                    <span className='title'> {translate[isLang]?.centerProfileDetails?.AreaName}</span>
+                                                    <span className='body'>{centerProfile?.AreaName}</span>
+                                                </>
+                                            }
+                                        </div> : SkeletonCard()}
                                     </Col>
                                 </Row>
                             </div>
                         </Col>
-                        <div className="summary">
-                            <Row>
-                                <Col className="summary_blog">
-                                    {isLoader ? <>
-                                        <span className='title'>{centerProfile?.centerProfilePrice}</span>
-                                        <span className='body'>{translate[isLang]?.centerProfileDetails?.centerProfilePrice}</span>
-                                    </> : SkeletonSummary()}
-                                </Col>
-                                <Col className="summary_blog">
-                                    {isLoader ? <>
-                                        <span className='title'>{centerProfile?.PaymentMethod.charAt(0)?.toUpperCase() + centerProfile?.PaymentMethod.slice(1).toLowerCase()}</span>
-                                        <span className='body'>{translate[isLang]?.centerProfileDetails?.PaymentMethod}</span>
-                                    </> : SkeletonSummary()}
-                                </Col>
-                                <Col className="summary_blog">
-                                    {isLoader ? <>
-                                        <span className='title'>{centerProfile?.centerProfileType?.charAt(0)?.toUpperCase() + centerProfile?.centerProfileType?.slice(1).toLowerCase()}</span>
-                                        <span className='body'>{translate[isLang]?.centerProfileDetails?.centerProfileType}</span>
-                                    </> : SkeletonSummary()}
-                                </Col>
-                                <Col className="summary_blog">
-                                    {isLoader ? <>
-                                        <span className='title'>{centerProfile?.centerProfileDistance}</span>
-                                        <span className='body'>{translate[isLang]?.centerProfileDetails?.centerProfileDistance}</span>
-                                    </> : SkeletonSummary()}
-                                </Col>
-                                <Col className="summary_blog">
-                                    {isLoader ? <>
-                                        <span className={`  
-                                            ${centerProfile.centerProfileStatus === 'PENDING' && 'txt_pending'} 
-                                            ${centerProfile.centerProfileStatus === 'ONGOING' && 'txt_delivered'} 
-                                            ${centerProfile.centerProfileStatus === 'ENDED' && 'txt_rejected'} 
-                                            ${centerProfile.centerProfileStatus === 'CANCELLED' && 'txt_cancel'} 
-                                            ${centerProfile.centerProfileStatus === 'REJECTED' && 'txt_rejected'}
-                                            ${centerProfile.centerProfileStatus === 'ACCEPTED' && 'txt_delivery'}`}>
-                                            {centerProfile?.centerProfileStatus?.charAt(0)?.toUpperCase() + centerProfile?.centerProfileStatus?.slice(1).toLowerCase()}</span>
-                                        <span className='body'  >{translate[isLang]?.centerProfileDetails?.centerProfileStatus}</span>
-                                    </> : SkeletonSummary()}
-                                </Col>
-                            </Row>
-
-
-                            <Row className='mt-3'>
-
-
-                                <Col className="summary_blog">
-
-                                    {isLoader ? <>
-                                        <span className='title'>{centerProfile?.centerProfileServicePrice} SAR</span>
-                                        <span className='body'>{translate[isLang]?.centerProfileDetails?.centerProfileServicePrice}</span>
-                                    </> : SkeletonSummary()}
-                                </Col>
-                                <Col className="summary_blog">
-
-                                    {isLoader ? <>
-                                        <span className='title'>{centerProfile?.centerProfileTrafficPrice} </span>
-                                        <span className='body'>{translate[isLang]?.centerProfileDetails?.centerProfileTrafficPrice}</span>
-                                    </> : SkeletonSummary()}
-                                </Col>
-
-                                <Col className="summary_blog">
-
-                                    {isLoader ? <>
-                                        <span className='title'>{centerProfile?.centerProfileTotalPrice}</span>
-                                        <span className='body'>{translate[isLang]?.centerProfileDetails?.centerProfileTotalPrice}</span>
-                                    </> : SkeletonSummary()}
-                                </Col>
-                                <Col className="summary_blog">
-
-                                    {isLoader ? <>
-                                        <span className='title'>{centerProfile?.centerProfileNote}</span>
-                                        <span className='body'>{translate[isLang]?.centerProfileDetails?.centerProfileNote}</span>
-                                    </> : SkeletonSummary()}
-                                </Col>
-                                <Col className="summary_blog">
-                                    {isLoader ? <>
-                                        <span className='title text-center'>{centerProfile?.centerProfileStartTime.split(" ")[0]}{' '},{centerProfile?.centerProfileStartTime.split(" ")[1]}</span>
-                                        <span className='body'>{translate[isLang]?.centerProfileDetails?.centerProfileStartTime}</span>
-                                    </> : SkeletonSummary()}
-                                </Col>
-
-
-                            </Row>
-                        </div> */}
-
                     </Row>
-                    <div className="map">
+                    {
+                        centerProfile?.MedicalCenterDocuments?.length > 0 &&
+                        <div className="  p-3 mt-4  border-2" style={{ borderRadius: '5px', background: '#F9F9F9' }}>
+                            <label className='Sign__Up-header text-dark'>{translate[isLang]?.centerProfileDetails?.RoutecenterDoc}</label>
+                            <motion.div className="app__work-portfolio " animate={animateCard} transition={{ duration: 0.5, delayChildren: 0.5 }}>
+                                {
+                                    centerProfile?.MedicalCenterDocuments?.map((work, index) => (
+                                        <div className="app__work-item app__flex shadow-sm" key={index}>
+                                            <div className="app__work-img app__flex"  >
+                                                <img src={work?.CenterDocumentPath} alt={work.name} className='w-100' />
+                                                <motion.div className="app__work-hover app__flex" whileHover={{ opacity: [0, 1] }} transition={{ duration: 0.25, ease: 'easeInOut', staggerChildren: 0.5 }}>
+                                                    <Link to={'/medicalcenter/docs'} rel="noreferrer">
+                                                        <motion.div className="app__flex" whileInView={{ scale: [0, 1] }} whileHover={{ scale: [1, 0.90] }} transition={{ duration: 0.25 }}  >
+                                                            <AiFillEye />
+                                                        </motion.div>
+                                                    </Link>
+                                                </motion.div>
+                                            </div>
 
-                    </div>
-                    <div className="  p-3  mb-5   border-2" style={{ borderRadius: '5px', background: '#F9F9F9' }}>
+                                            <div className="app__work-content app__flex">
+                                                <h4 className="bold-text"> Expire Date </h4>
+                                                <p className="p-text text-center d-flex justify-content-center align-item-center m-0 p-0 flex-column gap-0" style={{ marginTop: 10 }}>
+                                                    <span   > {work.CenterDocumentExpireDate.split(' ')[0]}  </span>
+                                                    <span className='ClientPhone'> {work.CenterDocumentExpireDate.split(' ')[1]}
+                                                    </span>
+                                                    { }</p>
+
+                                                <div className="app__work-tag app__flex">
+                                                    <p className="p-text">{work.CenterDocumentType?.charAt(0).toUpperCase() + work.CenterDocumentType?.slice(1).toLowerCase()}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+
+                            </motion.div>
+                        </div>
+                    }
+                    <div className="  p-3 mt-4 mb-5 mt-0  border-2" style={{ borderRadius: '5px', background: '#F9F9F9' }}>
                         <label className='Sign__Up-header text-dark'>{translate[isLang]?.centerProfileDetails?.RoutecenterProfile}</label>
                         <Map
                             centerProfileLat={centerProfile?.MedicalCenterLat}
