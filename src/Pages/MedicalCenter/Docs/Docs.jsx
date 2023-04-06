@@ -4,7 +4,7 @@ import { Table } from "react-bootstrap";
 import Component from '../../../constants/Component'
 import Icons from '../../../constants/Icons'
 import { apiheader } from './../../../utils/fetchData';
-import { useEffect , useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { useState } from 'react';
 // import { Pagination } from "@mui/material";
 // import Box from "@mui/material/Box";
@@ -14,25 +14,29 @@ import useSkeletonTable from '../../../utils/useSkeletonTable';
 import { VendersContext } from "../../../context/Store";
 import docs from './docstranslate';
 import axios from 'axios';
+import { motion } from 'framer-motion';
+import { AiFillEye } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 
 const Docs = () => {
     const [docsList, setDocsList] = useState([]);
     const [isLoader, setIsloader] = useState(false);
     let { SkeletonTable, SkeletonFilters } = useSkeletonTable();
+    const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
 
     let id = localStorage.getItem('idmc');
 
     // get getDocs
     const getDocs = async () => {
-        await axios.get(`https://bytrh.com/api/admin/medicalcenter/profile/${id}` , apiheader )
-        .then(res => {
-            setDocsList(res.data.Response.MedicalCenterDocuments);
-            setIsloader(true);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        await axios.get(`https://bytrh.com/api/admin/medicalcenter/profile/${id}`, apiheader)
+            .then(res => {
+                setDocsList(res.data.Response.MedicalCenterDocuments);
+                setIsloader(true);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
 
@@ -41,7 +45,7 @@ const Docs = () => {
             window.scrollTo(0, 0);
             getDocs();
         }, 1500);
-        return(() => {
+        return (() => {
             clearTimeout(timeOut);
         })
     }, [])
@@ -53,54 +57,63 @@ const Docs = () => {
     return (
         <>
             <div className="app__Users ">
-                {isLoader ? 
+                {isLoader ?
                     <>
                         <Component.ButtonBase title={docs[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/docs/add" />
-                    </> 
+                    </>
                     :
                     <div className="mt-3 p-2">
                         {SkeletonFilters(40, 150)}
                     </div>
                 }
 
-                <div className="app__Users-table"> 
-                    {isLoader ? 
+
+                {isLoader ?
                     <>
-                        {Object.keys(docsList).length > 0 ?
-                            <Table responsive={true} className='rounded-3 '>
-                                <thead>
-                                    <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                                        {docs[isLang]?.TableHeader?.map((el , i) => (
-                                            <th key={i}>{el}</th>
-                                        ))}
-                                    </tr>
-                                </thead>
-                                <tbody className='text-center'>
-                                    {
-                                        docsList?.map((item, index) => (
-                                            <tr key={index}>
-                                                <td>
-                                                    <div style={{width: '250px', height: '150px'}}>
-                                                        <img loading="lazy" src={item.CenterDocumentPath} className='rounded-3 w-100 h-100 mx-auto' style={{cursor: 'pointer'}} alt="docs" />
+
+                        {
+                            docsList?.length > 0 ?
+                                <div className="  p-3 mt-4  border-2" style={{ borderRadius: '5px', background: '#F9F9F9' }}>
+                                    <label className='Sign__Up-header text-dark'>{docs[isLang]?.DocsLable}</label>
+                                    <motion.div className="app__work-portfolio " animate={animateCard} transition={{ duration: 0.5, delayChildren: 0.5 }}>
+                                        {
+                                            docsList?.map((work, index) => (
+                                                <div className="app__work-item app__flex shadow-sm" key={index}>
+                                                    <div className="app__work-img app__flex"  >
+                                                        <img src={work?.CenterDocumentPath} alt={work.name} className='w-100' />
+                                                        <motion.div className="app__work-hover app__flex" whileHover={{ opacity: [0, 1] }} transition={{ duration: 0.25, ease: 'easeInOut', staggerChildren: 0.5 }}>
+                                                            {/*      <Link to={'/medicalcenter/docs'} rel="noreferrer">
+                                                            <motion.div className="app__flex" whileInView={{ scale: [0, 1] }} whileHover={{ scale: [1, 0.90] }} transition={{ duration: 0.25 }}  >
+                                                                <AiFillEye />
+                                                            </motion.div>
+                                                        </Link> */}
+                                                        </motion.div>
                                                     </div>
-                                                </td>
-                                                <td >
-                                                    <div>
-                                                        {item.CenterDocumentExpireDate.slice(0,10)}
+
+                                                    <div className="app__work-content app__flex">
+                                                        <h4 className="bold-text"> Expire Date </h4>
+                                                        <p className="p-text text-center d-flex justify-content-center align-item-center m-0 p-0 flex-column gap-0" style={{ marginTop: 10 }}>
+                                                            <span   > {work.CenterDocumentExpireDate.split(' ')[0]}  </span>
+                                                            <span className='ClientPhone'> {work.CenterDocumentExpireDate.split(' ')[1]}
+                                                            </span>
+                                                            { }
+                                                        </p>
+
+                                                        <div className="app__work-tag app__flex">
+                                                            <p className="p-text">{work.CenterDocumentType?.charAt(0).toUpperCase() + work.CenterDocumentType?.slice(1).toLowerCase()}</p>
+                                                        </div>
                                                     </div>
-                                                </td>
-                                            </tr>
-                                        ))
-                                    }
-                                </tbody>
-                            </Table>
-                            :
-                            <Component.DataNotFound />
+                                                </div>
+                                            ))}
+
+                                    </motion.div>
+                                </div> :
+                                <Component.DataNotFound />
                         }
                     </> :
-                        SkeletonTable()
-                    }
-                </div>
+                    SkeletonTable()
+                }
+
             </div>
         </>
     )

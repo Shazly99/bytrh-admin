@@ -97,10 +97,10 @@ const SidebarMenu = ({isLang, route,open, showAnimation, isOpen, setIsOpen }) =>
           >
             {route.subRoutes.map((subRoute, i) => (
               <motion.div variants={menuItemAnimation} key={i} custom={i}>
-                <NavLink to={subRoute.path} className="link">
+                <NavLink to={subRoute.path} className="link" style={{[isLang === 'ar' ? 'marginRight' : 'marginLeft']: '12px'}} >
                   
                   <div className="icon">{subRoute.icon}</div>
-                  <motion.div className="link_text">{subRoute.name}
+                  <motion.div className="link_text " style={{fontSize:16}}>{subRoute.name}
                   {isLang === 'ar' ? subRoute.nameAr : subRoute.nameEn}
                   
                   </motion.div>

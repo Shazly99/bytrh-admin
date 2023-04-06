@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useContext } from 'react';
 import { FaBars } from 'react-icons/fa';
-import { NavLink, Route } from "react-router-dom";
+import { Link, NavLink, Route } from "react-router-dom";
 import Img from "../../assets/Img";
 import { VendersContext } from "../../context/Store";
 import routes from './route.js';
@@ -56,7 +56,9 @@ const Sidebar = ({ children }) => {
                     className="logo"
                     key={1}
                   >
-                    <img loading="lazy" src={Img.logo} alt='logo' className="w-100" />
+                    <Link to={'/'} style={{ cursor: 'pointer' }}>
+                      <img loading="lazy" src={Img.logo} alt='logo' className="w-100" />
+                    </Link>
                   </motion.div>
                 )}
                 <div className="bars">

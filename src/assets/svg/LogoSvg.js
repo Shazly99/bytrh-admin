@@ -20,7 +20,9 @@ import { ReactComponent as ArrowRight } from '../../assets/svg/arrow-right.svg';
 import { ReactComponent as view } from '../../assets/svg/view.svg';
 import { ReactComponent as AddImage } from '../../assets/svg/camera.svg';
 import { ReactComponent as CurrentLocation } from '../../assets/svg/gps.svg';
- 
+import { ReactComponent as DocumentUpload } from '../../assets/svg/document-upload.svg';
+import { ReactComponent as ProfileCenter } from '../../assets/svg/user-tag.svg';
+
 const LogoSvg = {
     // ==============================Sidebar======================================
     Dashboard,
@@ -43,7 +45,9 @@ const LogoSvg = {
     ArrowRight,
     view,
     AddImage,
-    CurrentLocation
+    CurrentLocation,
+    DocumentUpload,
+    ProfileCenter
 }
 
 export default LogoSvg;

@@ -1,23 +1,16 @@
-// import { motion } from 'framer-motion';
-import React, { useContext, useState } from 'react';
-// import { useEffect } from 'react';
+ import React, { useContext } from 'react';
 import { Dropdown, DropdownButton, NavDropdown } from 'react-bootstrap';
-// import { Nav } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { HiMenuAlt4 } from 'react-icons/hi';
-// import { HiX } from 'react-icons/hi';
-// import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import Img from '../../assets/Img';
-import docs from '../../assets/Images/documents.png';
+import LogoSvg from '../../assets/svg/LogoSvg';
 import Icons from '../../constants/Icons';
-import { apiheader, PostData } from '../../utils/fetchData';
+import { PostData, apiheader } from '../../utils/fetchData';
 import { VendersContext } from './../../context/Store';
-// import routes from './../Sidebar/route';
 import './Navber.scss';
-// import $ from 'jquery';
-
+ 
 
 function Navber() {
   let { LogOut, isOpen, setIsOpen, isLang, setIsLang } = useContext(VendersContext);
@@ -124,7 +117,7 @@ function Navber() {
                   <li>
                     <Link to="/profile" className="dropdown-item" >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.profile} alt="profile" width={18} height={18} />
+                        <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.profile} alt="profile" width={17} height={17} />
                         <span>{isLang === 'ar' ? 'الملـف الشخصـي' : 'My Profile'}</span>
                       </div>
                     </Link>
@@ -135,15 +128,17 @@ function Navber() {
                         <li>
                           <Link to={`/mcprofile`} className="dropdown-item" >
                             <div style={{ display: 'flex', alignItems: 'center' }}>
-                              <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.mcprofile} alt="mc-profile" width={22} height={22} />
-                              <span>{isLang === 'ar' ? 'بيانات المركز الطبي' : 'M.C Profile'}</span>
+                               <LogoSvg.ProfileCenter className={isLang === 'ar' ? 'ms-2' : 'me-2'} style={{ width: 19  }}/>
+
+                              <span>{isLang === 'ar' ? 'بيانات المركز الطبي' : 'Center Profile'}</span>
                             </div>
                           </Link>
                         </li>
                         <li>
                           <Link to={`/docs`} className="dropdown-item" >
                             <div style={{ display: 'flex', alignItems: 'center' }}>
-                              <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={docs} alt="docs" width={22} height={22} />
+                              <LogoSvg.DocumentUpload className={isLang === 'ar' ? 'ms-2' : 'me-2'} style={{ width: 18  }}/>
+
                               <span>{isLang === 'ar' ? "المستنـدات" : "Documents"}</span>
                             </div>
                           </Link>

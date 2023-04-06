@@ -11,6 +11,7 @@ let docs = {
         LabelAddExDate: 'Expire Date',
         SaveBTN: 'Save',
         CancelBTN: 'Cancel',
+        DocsLable:'Medical Center Documents'
     },
     'ar' :
     {
@@ -24,6 +25,8 @@ let docs = {
         LabelAddExDate: 'تاريـخ الإنتهـاء',
         SaveBTN: 'حفـظ',
         CancelBTN: 'رجـوع',
+        DocsLable:'وثائق المركز الطبي'
+
     }
 }
 
