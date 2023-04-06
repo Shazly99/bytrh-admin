@@ -51,14 +51,14 @@ const routes = [
     Roles: [1]
 
   },
-  {
-    path: "/docs",
-    nameAr: "المستنـدات",
-    nameEn: "Documents",
-    icon: <Icons.Docs size={19} />,
-    Roles: [2]
+  // {
+  //   path: "/docs",
+  //   nameAr: "المستنـدات",
+  //   nameEn: "Documents",
+  //   icon: <Icons.Docs size={19} />,
+  //   Roles: [2]
 
-  },
+  // },
   {
     path: "/visits",
     nameAr: "الــزيارات",

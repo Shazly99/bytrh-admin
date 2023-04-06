@@ -170,7 +170,7 @@ const ProfileCenter = () => {
                                                         ${centerProfile.MedicalCenterStatus === 'REJECTED' && 'txt_rejected'}
                                                         ${centerProfile.MedicalCenterStatus === 'ACCEPTED' && 'txt_delivery'} mt-2`}>
                                                         {centerProfile?.MedicalCenterStatus?.charAt(0)?.toUpperCase() + centerProfile?.MedicalCenterStatus?.slice(1).toLowerCase()}</span>
-                                                 </>
+                                                </>
                                             }
 
                                         </div> : SkeletonCard()}

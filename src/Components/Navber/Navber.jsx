@@ -10,6 +10,7 @@ import { HiMenuAlt4 } from 'react-icons/hi';
 // import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import Img from '../../assets/Img';
+import docs from '../../assets/Images/documents.png';
 import Icons from '../../constants/Icons';
 import { apiheader, PostData } from '../../utils/fetchData';
 import { VendersContext } from './../../context/Store';
@@ -130,14 +131,24 @@ function Navber() {
                   </li>
 
                     {localStorage.getItem('Role') === '2' ?
-                      <li>
-                        <Link to={`/mcprofile`} className="dropdown-item" >
-                          <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.mcprofile} alt="mc-profile" width={22} height={22} />
-                            <span>{isLang === 'ar' ? 'بيانات المركز الطبي' : 'M.C Profile'}</span>
-                          </div>
-                        </Link>
-                      </li>
+                      <>
+                        <li>
+                          <Link to={`/mcprofile`} className="dropdown-item" >
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                              <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.mcprofile} alt="mc-profile" width={22} height={22} />
+                              <span>{isLang === 'ar' ? 'بيانات المركز الطبي' : 'M.C Profile'}</span>
+                            </div>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link to={`/docs`} className="dropdown-item" >
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                              <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={docs} alt="docs" width={22} height={22} />
+                              <span>{isLang === 'ar' ? "المستنـدات" : "Documents"}</span>
+                            </div>
+                          </Link>
+                        </li>
+                      </>
                       :
                       ''
                     }
