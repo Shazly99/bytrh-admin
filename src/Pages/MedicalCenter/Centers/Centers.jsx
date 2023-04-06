@@ -475,10 +475,12 @@ const Centers = () => {
                                   <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/medicalcenter/profile/${item?.IDMedicalCenter}`}>
                                     {translate[isLang]?.Actions.view}
                                   </Dropdown.Item> 
+ 
 
                                   <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/medicalcenter/add/${item?.IDMedicalCenter}`}>
                                     {translate[isLang]?.Actions.add}
                                   </Dropdown.Item>
+ 
                                 </DropdownButton>
                               </span>
                             </div>
