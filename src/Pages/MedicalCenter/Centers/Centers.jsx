@@ -196,6 +196,7 @@ const Centers = () => {
   const medicalCenterTypeRef = useRef(null);
   const handelMedicalCenterType = async () => {
     let MedicalCenterType = MedicalCenterType.current.value
+    console.log(MedicalCenterType);
     if (MedicalCenterType === 'All') {
       medicalCenterList()
     } else if (MedicalCenterType === 'Select Product Type') {
@@ -247,7 +248,7 @@ const Centers = () => {
               </> : SkeletonSearch(40, "60%")}
               <div className=' app__addOrder-form '>
                 <Row className='d-flex  flex-row justify-content-between'>
-                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2' >
+                  <Col xl={3} lg={3} md={6} sm={12} className='mt-2' >
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry} ref={countryRef}>
                         <Form.Select aria-label="Default select example" >
@@ -255,7 +256,7 @@ const Centers = () => {
                           <option value={'country'} >{translate[isLang]?.filter?.allCountry}</option>
                           {
                             countries?.map((item, index) => (
-                              <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
+                              <option key={index} value={item?.IDCountry}  >{item?.CountryName.charAt(0).toUpperCase() + item?.CountryName.slice(1).toLowerCase()}</option>
                             ))
                           }
                         </Form.Select>
@@ -263,7 +264,7 @@ const Centers = () => {
                     </> : SkeletonFilter()}
                   </Col>
 
-                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
+                  <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"   >
                         <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={cityRef}>
@@ -279,7 +280,7 @@ const Centers = () => {
                     </> : SkeletonFilter()}
                   </Col>
 
-                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
+                  <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"   >
                         <Form.Select aria-label="Default select example" onClick={handelSelectArea} ref={areaRef}>
@@ -295,16 +296,16 @@ const Centers = () => {
                     </> : SkeletonFilter()}
                   </Col>
 
-                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
+                  <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
 
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"  >
                         {/* <Form.Label  >Product Type </Form.Label> */}
-                        <Form.Select aria-label="Default select example" ref={medicalCenterTypeRef} onClick={handelMedicalCenterType} >
+                        <Form.Select aria-label="Default select example" ref={medicalCenterTypeRef} onClick={()=>handelMedicalCenterType} >
                           <option selected disabled hidden value={'Select Product Type'}> {translate[isLang]?.filter?.Product} </option>
                           {
-                            translate[isLang]?.Filtertype?.map((Status, index) => (
-                                <option key={index} value={Status.value}  >{Status.text}</option>
+                            [ 'All',  'CENTER' , 'CLINIC']?.map((Status, index) => (
+                                <option key={index} value={Status}  >{Status.charAt(0).toUpperCase()+Status.slice(1).toLowerCase() }</option>
                             ))
                           }
                         </Form.Select>

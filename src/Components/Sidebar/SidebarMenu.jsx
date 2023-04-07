@@ -77,7 +77,7 @@ const SidebarMenu = ({isLang, route,open, showAnimation, isOpen, setIsOpen }) =>
             animate={
               !isMenuOpen
                 ? {
-                  rotate: -90,
+                  rotate:isLang === 'ar' ? 90 : -90,
                 }
                 : { rotate: 0 }
             }
