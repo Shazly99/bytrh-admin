@@ -52,6 +52,14 @@ const routes = [
 
   },
   {
+    path: "/medicalcenter",
+    nameAr: "مركــز طبـــي",
+    nameEn: "Medical Center",
+    icon: <LogoSvg.Visits className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1,2]
+
+  },
+  {
     nameAr: "الحيوانات ",
     nameEn: "Animals ",
     icon: <LogoSvg.Animals className="logoSvg" style={{ width: 19 }} />,
@@ -130,12 +138,7 @@ const routes = [
     Roles: [1],
 
     subRoutes: [
-      {
-        path: "/medicalcenter",
-        nameAr: "مركــز طبـــي",
-        nameEn: "Medical Center",
-        icon: <Icons.Dote size={19} />,
-      },
+  
       {
         path: "/consult",
         nameAr: "استشـارات",
