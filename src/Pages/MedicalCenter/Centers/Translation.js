@@ -57,7 +57,8 @@ let initialTranslation = {
             MCLong: '  مركز طبي طويل ',
             RoutecenterProfile:'موقع المركز الطبي',
             RoutecenterDoc:'وثائق المركز الطبي',
-            pinMarkF:'مركز طبي'
+            pinMarkF:'مركز طبي',
+            uploadDoc:'رفع المستند'
         }
     },
     "en": {
@@ -119,7 +120,9 @@ let initialTranslation = {
             MCLong: ' Medical Center Long ',
             RoutecenterProfile:'Medical Center Location',
             RoutecenterDoc:'Medical Center Documents',
-            pinMarkF:'Medical Center'
+            pinMarkF:'Medical Center',
+            uploadDoc:'   Upload document'
+
         }
     }
 }

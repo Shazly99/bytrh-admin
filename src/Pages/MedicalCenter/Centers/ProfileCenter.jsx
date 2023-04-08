@@ -214,7 +214,8 @@ const ProfileCenter = () => {
                                 <label className='Sign__Up-header text-dark'>{translate[isLang]?.centerProfileDetails?.RoutecenterDoc}</label>
                                 <Link to={`/medicalcenter/add/${centerProfile?.IDMedicalCenter}`} >
                                     <span   className='upload__doc'>
-                                       <LogoSvg.DocumentUpload/> Upload Document
+                                       <LogoSvg.DocumentUpload  />
+                                       {translate[isLang]?.centerProfileDetails?.uploadDoc}
                                     </span>
                                 </Link>
                             </div>
