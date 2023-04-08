@@ -1,7 +1,7 @@
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import React from 'react';
-import { Col, Dropdown, DropdownButton, Form, Table } from "react-bootstrap";
+import { Button, Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
 
 import axios from 'axios';
 import { useContext, useEffect, useRef, useState } from 'react';
@@ -140,6 +140,19 @@ const Visits = () => {
       })
     }
   }
+  // !Filter by start date and end date
+  let startDate = useRef();
+  let endDate = useRef();
+  const handelDate =async () => {
+    console.log(startDate.current.value);
+    console.log(endDate.current.value);
+    await axios.post(`${process.env.REACT_APP_API_URL}/admin/visits`, { IDPage: page, StartDate: startDate.current.value,EndDate:endDate.current.value }, apiheader).then((res) => {
+      if (res.status === 200 && res.request.readyState === 4) {
+        setAnimal(res.data.Response.Visits);
+        setPagesNumber(res.data.Response.Pages);
+      }
+    })
+  }
   useEffect(() => {
     window.scrollTo(0, 0);
     // visits(page)
@@ -176,6 +189,20 @@ const Visits = () => {
             </div>
           </div>
           <div className="app__addOrder-form ">
+            <Row className="mb-3">
+              <Col xl={5} lg={5} md={6} sm={12} >
+                <Form.Control type="date" ref={startDate} className="w-100" />
+              </Col>
+
+              <Col xl={5} lg={5} md={6} sm={12} >
+
+                <Form.Control type="date" ref={endDate} className="w-100" />
+              </Col>
+              <Col xl={2} lg={2} md={6} sm={12} >
+                <Button variant="outline-primary" onClick={handelDate} className="w-100">Find Date</Button>
+              </Col>
+            </Row>
+
 
             <div className='filter__group__stats row ' style={{ display: 'flex', alignItems: 'center', gap: '20px', marginBottom: '25px' }}>
               {
@@ -337,7 +364,7 @@ const Visits = () => {
                             <Link
                               to={`/visits/details/${item?.IDVisit}`}
                             >
-                             <LogoSvg.view className="logoSvg" style={{ width: 19 }} />
+                              <LogoSvg.view className="logoSvg" style={{ width: 19 }} />
                             </Link>
                           </div>
                         </td>
@@ -357,7 +384,7 @@ const Visits = () => {
               SkeletonTable()
             }
           </div>
-        </div>  
+        </div>
 
       </div>
 

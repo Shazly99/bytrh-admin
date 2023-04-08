@@ -1,22 +1,19 @@
-import { Player } from "@lottiefiles/react-lottie-player";
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import axios from 'axios';
 import _ from 'lodash';
-import moment from 'moment/moment';
-import React, {useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Button, Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
-import DateRangePicker from 'react-bootstrap-daterangepicker';
+import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import Img from '../../assets/Img';
 import Component from '../../constants/Component';
 import Icons from '../../constants/Icons';
-import { apiheader, GetData } from '../../utils/fetchData';
+import { VendersContext } from "../../context/Store";
+import { GetData, apiheader } from '../../utils/fetchData';
 import useFetch from '../../utils/useFetch';
 import useSkeletonTable from "../../utils/useSkeletonTable";
-import Modal from 'react-bootstrap/Modal';
-import { VendersContext } from "../../context/Store";
 import translateADS from './translateAds';
 
 
@@ -74,7 +71,7 @@ const AdsList = () => {
     setSelectedUserId(id);
     setModalIndexEdit(index);
   };
- 
+
   const handleDeleteUser = async (id) => {
     // Logic for deleting user with ID `selectedUserId`
     setShowDeleteModal(false);
@@ -94,42 +91,22 @@ const AdsList = () => {
 
 
   // !Filter By Start Date And End Date
-  const [dateRange, setDateRange] = useState({ startDate: new Date(), endDate: new Date() });
-  const [startDate, setStartDate] = useState(null)
-  const [endDate, setEndDate] = useState(null)
+  let startDate = useRef();
+  let endDate = useRef();
 
-  function handleSelect(range) {
-    setDateRange({ startDate: range.startDate, endDate: range.endDate });
-  }
+  const handelDate = async () => {
+    console.log(startDate.current.value);
+    console.log(endDate.current.value);
+    await axios.post(`${process.env.REACT_APP_API_URL}/admin/advertisements`, { IDPage: page, StartDate: startDate.current.value, EndDate: endDate.current.value }, apiheader).then((res) => {
+      if (res.status === 200 && res.request.readyState === 4) {
 
-  async function handleApply(event, picker) {
-    const start = picker.startDate.toDate().toLocaleDateString('en-US');
-    const end = picker.endDate.toDate().toLocaleDateString('en-US');
-    setStartDate(moment(start, 'M/D/YYYY').format('YYYY-MM-DD'))
-    setEndDate(moment(end, 'M/D/YYYY').format('YYYY-MM-DD'))
-    let date = {
-      IDPage: page,
-      StartDate: moment(start, 'M/D/YYYY').format('YYYY-MM-DD'),
-      EndDate: moment(end, 'M/D/YYYY').format('YYYY-MM-DD')
-    };
-    try {
-      await axios.post(`${process.env.REACT_APP_API_URL}/admin/advertisements`, date, apiheader).then((res) => {
-        if (res.status === 200 && res.request.readyState === 4) {
-          setAds(res.data.Response.Advertisements);
-          setPagesNumber(res.data.Response.Pages);
-          setIsLoading(false);
-        }
-      })
-    } catch (error) {
-      if (error.response && error.response.status === 429) {
-        const retryAfter = error.response.headers['retry-after'];
-        setTimeout(() => {
-          advertisements();
-        }, (retryAfter || 30) * 1000);
+
+        setAds(res.data.Response.Advertisements);
+        setPagesNumber(res.data.Response.Pages);
+        setIsLoading(false);
       }
-    }
+    })
   }
-
   // !Filter by city name 
   let { countries, cities, getCities } = useFetch()
   const countriesRef = useRef(null);
@@ -213,28 +190,28 @@ const AdsList = () => {
         <Component.ButtonBase title={translateADS[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/ads/add" />
         <div className="app__Users-table">
           <div className="search-container">
-          <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
+            <div className={`${isLang === 'ar' ? ' search__groupAr  w-100' : 'search__group w-100  '}  `}>
               <div className=' app__addOrder-form'>
                 <div className="d-flex flex-column row justify-content-between">
-                  <h5 style={{ marginBottom: '15px', color: '#4A4A4A' }} className='col'>{translateADS[isLang]?.labelFilterDate}</h5>
-                  <div className='d-flex flex-row justify-content-between'>
-                    <DateRangePicker
-                      ranges={[dateRange]}
-                      onChange={handleSelect}
-                      onApply={handleApply}
-                    >
-                      <Button variant="outline-primary">{translateADS[isLang]?.buttonSelectDate}</Button>
-                    </DateRangePicker>
-                    {startDate && <p> <strong>{translateADS[isLang]?.startDate}</strong>{startDate} </p>}
-                    {endDate && <p> <strong>{translateADS[isLang]?.endDate}</strong>{endDate} </p>}
-                  </div>
+                  <Row className="mb-3">
+                    <Col xl={5} lg={5} md={6} sm={12} >
+                      <Form.Control type="date" ref={startDate} className="w-100" />
+                    </Col>
+
+                    <Col xl={5} lg={5} md={6} sm={12} >
+
+                      <Form.Control type="date" ref={endDate} className="w-100" />
+                    </Col>
+                    <Col xl={2} lg={2} md={6} sm={12} >
+                      <Button variant="outline-primary" onClick={handelDate} className="w-100">Find Date</Button>
+                    </Col>
+                  </Row>
 
                 </div>
-                <h5 style={{ marginTop: '15px', color: '#4A4A4A' }} className='col'>{translateADS[isLang]?.textFilterInputs}</h5>
                 <Row className='d-flex flex-row justify-content-between'>
                   <Col className='w-100'>
                     <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry}>
-                      <Form.Label>{translateADS[isLang]?.labelCountry}</Form.Label>
+                       
                       <Form.Select aria-label="Default select example" >
                         <option>{translateADS[isLang]?.optionCountry}</option>
                         {
@@ -248,7 +225,7 @@ const AdsList = () => {
 
                   <Col className='w-100'>
                     <Form.Group controlId="formBasicEmail"   >
-                      <Form.Label>{translateADS[isLang]?.labelCity}</Form.Label>
+                      
                       <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={countriesRef}>
                         <option>{translateADS[isLang]?.optionCity}</option>
                         {
@@ -262,7 +239,7 @@ const AdsList = () => {
                   </Col>
                   <Col className='w-100'>
                     <Form.Group controlId="formBasicEmail"  >
-                      <Form.Label  >{translateADS[isLang]?.labelAdvertisementLocation}</Form.Label>
+                     
                       <Form.Select aria-label="Default select example" ref={adsLocation} onClick={handelAdvertisementLocation} >
                         <option>{translateADS[isLang]?.optionAdvertisementLocation}</option>
                         {
@@ -276,8 +253,7 @@ const AdsList = () => {
 
                   <Col className='w-100'>
                     <Form.Group controlId="formBasicEmail"   >
-                      <Form.Label  >{translateADS[isLang]?.labelAdvertisementService}</Form.Label>
-                      <Form.Select aria-label="Default select example" ref={adsService} onClick={handelAdvertisementService} >
+                       <Form.Select aria-label="Default select example" ref={adsService} onClick={handelAdvertisementService} >
                         <option>{translateADS[isLang]?.optionAdvertisementService}</option>
                         {
                           ['NONE', 'URGENT_CONSULT', 'CONSULT', 'DOCTOR_BLOG', 'CLIENT_BLOG', 'ADOPTION']?.map((item, index) => (
@@ -300,8 +276,8 @@ const AdsList = () => {
             <Table responsive={true} className='rounded-3 '>
               <thead>
                 <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                  {translateADS[isLang]?.TableHeader?.map((el , i) => (
-                      <th key={i}>{el}</th>
+                  {translateADS[isLang]?.TableHeader?.map((el, i) => (
+                    <th key={i}>{el}</th>
                   ))}
                 </tr>
               </thead>
@@ -317,7 +293,7 @@ const AdsList = () => {
                               loading="lazy"
                               src={item.AdvertisementImage} // use normal <img> attributes as props
                               className="w-100 rounded-2"
-                              style={{maxHeight: '200px'}}
+                              style={{ maxHeight: '200px' }}
                             /> :
 
                             <img
@@ -325,7 +301,7 @@ const AdsList = () => {
                               loading="lazy"
                               src={Img.defaultImg} // use normal <img> attributes as props
                               className="w-100 rounded-2"
-                              style={{maxHeight: '200px'}}
+                              style={{ maxHeight: '200px' }}
                             />
 
                         }
@@ -378,8 +354,8 @@ const AdsList = () => {
                                 <Modal.Header closeButton>
                                   <Modal.Title>{translateADS[isLang]?.headerModalDel}</Modal.Title>
                                 </Modal.Header>
-                                <Modal.Body> 
-                                  <Component.HandelDelete/>
+                                <Modal.Body>
+                                  <Component.HandelDelete />
                                 </Modal.Body>
                                 <Modal.Footer className='  d-flex justify-content-center'>
                                   <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => handleDeleteUser(item.IDUser)}>

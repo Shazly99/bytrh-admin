@@ -12,6 +12,7 @@ import Map from '../../../GoogleMap/Map';
 import img from './../../../assets/Img';
 import { AiFillEye } from 'react-icons/ai';
 import './center.scss'
+import LogoSvg from '../../../assets/svg/LogoSvg';
 const ProfileCenter = () => {
     const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
 
@@ -208,7 +209,15 @@ const ProfileCenter = () => {
                     {
                         centerProfile?.MedicalCenterDocuments?.length > 0 &&
                         <div className="  p-3 mt-4  border-2" style={{ borderRadius: '5px', background: '#F9F9F9' }}>
-                            <label className='Sign__Up-header text-dark'>{translate[isLang]?.centerProfileDetails?.RoutecenterDoc}</label>
+                            <div className="d-flex " style={{ justifyContent: 'space-between'}}>
+
+                                <label className='Sign__Up-header text-dark'>{translate[isLang]?.centerProfileDetails?.RoutecenterDoc}</label>
+                                <Link to={`/medicalcenter/add/${centerProfile?.IDMedicalCenter}`} >
+                                    <span   className='upload__doc'>
+                                       <LogoSvg.DocumentUpload/> Upload Document
+                                    </span>
+                                </Link>
+                            </div>
                             <motion.div className="app__work-portfolio " animate={animateCard} transition={{ duration: 0.5, delayChildren: 0.5 }}>
                                 {
                                     centerProfile?.MedicalCenterDocuments?.map((work, index) => (
@@ -216,7 +225,7 @@ const ProfileCenter = () => {
                                             <div className="app__work-img app__flex"  >
                                                 <img src={work?.CenterDocumentPath} alt={work.name} className='w-100' />
                                                 <motion.div className="app__work-hover app__flex" whileHover={{ opacity: [0, 1] }} transition={{ duration: 0.25, ease: 'easeInOut', staggerChildren: 0.5 }}>
-                                           {/*          <Link to={'/medicalcenter/docs'} rel="noreferrer">
+                                                    {/*          <Link to={'/medicalcenter/docs'} rel="noreferrer">
                                                         <motion.div className="app__flex" whileInView={{ scale: [0, 1] }} whileHover={{ scale: [1, 0.90] }} transition={{ duration: 0.25 }}  >
                                                             <AiFillEye />
                                                         </motion.div>

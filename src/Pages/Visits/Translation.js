@@ -83,7 +83,7 @@ let initialTranslation = {
             "Action",
             "View",
         ],
-        Actions: { action: "Actions", vistType: "vist Type", currency: "SAR" },
+        Actions: { action: "Actions", vistType: "visit Type", currency: "SAR" },
         toast: { endChat: "Chat has been ended" },
         filterVisitType: [
             { value: "All", text: " All visits type" },

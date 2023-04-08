@@ -7,7 +7,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'; 
 import 'react-tooltip/dist/react-tooltip.css'
 import 'jquery/dist/jquery.min.js';
-import 'bootstrap-daterangepicker/daterangepicker.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

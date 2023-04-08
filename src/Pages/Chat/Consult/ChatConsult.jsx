@@ -1,7 +1,7 @@
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useContext, useEffect, useState } from 'react';
-import { Button, Dropdown, DropdownButton, Table } from "react-bootstrap";
+import { Button, Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import img from "../../../assets/Img";
@@ -11,6 +11,7 @@ import useSkeletonTable from '../../../utils/useSkeletonTable';
 import { apiheader, GetData, PostData } from './../../../utils/fetchData';
 import Complain from './Complain';
 import initialTranslation from "./Translation";
+import { useRef } from "react";
 
 const ChatConsult = () => {
   let { isLang } = useContext(VendersContext);
@@ -117,8 +118,7 @@ const ChatConsult = () => {
     const selectedValue = event.target.value;
     setSelectedOption(selectedValue);
     // filter your content based on the selected option 
-    if (selectedValue === "ONGOING" ||
-      selectedValue === "" ||
+    if (selectedValue === "ONGOING" || 
       selectedValue === "REJECTED" ||
       selectedValue === "SKIPPED" ||
       selectedValue === "NO_RESPONSE" ||
@@ -131,7 +131,19 @@ const ChatConsult = () => {
       consultList()
     }
   };
-
+  // !Filter by start date and end date
+  let startDate = useRef();
+  let endDate = useRef();
+  const handelDate =async () => {
+    console.log(startDate.current.value);
+    console.log(endDate.current.value);
+    await PostData(`${process.env.REACT_APP_API_URL}/admin/consult`, { IDPage: page, StartDate: startDate.current.value,EndDate:endDate.current.value }, apiheader).then((res) => {
+      if (res.status === 200 && res.request.readyState === 4) {
+        setConsultList(res.data.Response.Consults);
+        setPagesNumber(res.data.Response.Pages);
+      }
+    })
+  }
   useEffect(() => {
     window.scrollTo(0, 0);
     consultList(page)
@@ -169,7 +181,19 @@ const ChatConsult = () => {
             </div>
           </div>
           <div className="app__addOrder-form ">
+          <Row className="mb-3">
+              <Col xl={5} lg={5} md={6} sm={12} >
+                <Form.Control type="date" ref={startDate} className="w-100" />
+              </Col>
 
+              <Col xl={5} lg={5} md={6} sm={12} >
+
+                <Form.Control type="date" ref={endDate} className="w-100" />
+              </Col>
+              <Col xl={2} lg={2} md={6} sm={12} >
+                <Button variant="outline-primary" onClick={handelDate} className="w-100">Find Date</Button>
+              </Col>
+            </Row>
             <div className='filter__group__stats row ' style={{ display: 'flex', gap: '20px', marginBottom: '25px' }}>
               {
                 translate[isLang]?.FilterStatus?.filter?.((item) => item.value !== "All")?.map((item, index) => (

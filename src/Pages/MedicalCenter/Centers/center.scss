@@ -1,3 +1,5 @@
+@import '../../../style/varibale';
+
 .app__flex {
     display: flex;
     justify-content: center;
@@ -112,5 +114,31 @@
         border-radius: 10px;
         background-color: #fff;
         top: -25px;
+    }
+}
+
+.upload__doc {
+    color: $mainColor;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    font-size: bold;
+    svg{
+        width:16px;
+        path{
+            stroke:$mainColor
+        } 
+
+    }
+    &:hover{
+    color: $secondColor;
+
+        svg{
+             path{
+                stroke:$secondColor
+            } 
+    
+        }
     }
 }

@@ -210,6 +210,25 @@ const Centers = () => {
       })
     }
   }
+
+    // !Filter by  Medical Center status
+  const medicalCenterstatusRef = useRef(null);
+  const handelMedicalstatus = async () => {
+    let MedicalCenterType = medicalCenterstatusRef.current.value
+    console.log(medicalCenterstatusRef.current.value);
+    if (MedicalCenterType === 'All') {
+      medicalCenterList()
+    } else if (MedicalCenterType === 'Select Product Type') {
+      return false
+    } else {
+      await axios.post(`${process.env.REACT_APP_API_URL}/admin/medicalcenter`, { IDPage: page, MedicalCenterStatus: MedicalCenterType }, apiheader).then((res) => {
+        if (res.status === 200 && res.request.readyState === 4) {
+          setmedicalCenter(res.data.Response.MedicalCenters);
+          setPagesNumber(res.data.Response.Pages);
+        }
+      })
+    }
+  }
   useEffect(() => {
     medicalCenterList(page);
     window.scrollTo(0, 0);
@@ -248,7 +267,7 @@ const Centers = () => {
               </> : SkeletonSearch(40, "60%")}
               <div className=' app__addOrder-form '>
                 <Row className='d-flex  flex-row justify-content-between'>
-                  <Col xl={3} lg={3} md={6} sm={12} className='mt-2' >
+                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2' >
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry} ref={countryRef}>
                         <Form.Select aria-label="Default select example" >
@@ -264,7 +283,7 @@ const Centers = () => {
                     </> : SkeletonFilter()}
                   </Col>
 
-                  <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
+                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"   >
                         <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={cityRef}>
@@ -280,7 +299,7 @@ const Centers = () => {
                     </> : SkeletonFilter()}
                   </Col>
 
-                  <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
+                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"   >
                         <Form.Select aria-label="Default select example" onClick={handelSelectArea} ref={areaRef}>
@@ -297,13 +316,29 @@ const Centers = () => {
                   </Col>
 
 
-                  <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
+                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"   >
                         <Form.Select aria-label="Default select example" ref={medicalCenterTypeRef} onClick={handelMedicalCenterType} >
                           <option selected disabled hidden value={'Select Product Type'}> {translate[isLang]?.filter?.Product} </option>
                           {
                             translate[isLang]?.Filtertype?.map((item, index) => (
+                              <option key={index} value={item.value}>{item?.text}</option>
+                            ))
+                          }
+                        </Form.Select>
+                      </Form.Group>
+                    </> : SkeletonFilter()}
+                  </Col>
+
+
+                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
+                    {isLoader ? <>
+                      <Form.Group controlId="formBasicEmail"   >
+                        <Form.Select aria-label="Default select example" ref={medicalCenterstatusRef} onClick={handelMedicalstatus} >
+                          <option selected disabled hidden value={'Select Product Type'}> {translate[isLang]?.filter?.status} </option>
+                          {
+                            translate[isLang]?.FilterStatus?.map((item, index) => (
                               <option key={index} value={item.value}>{item?.text}</option>
                             ))
                           }
