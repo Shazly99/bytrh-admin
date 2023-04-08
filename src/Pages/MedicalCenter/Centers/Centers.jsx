@@ -2,7 +2,7 @@ import { Pagination, Skeleton } from "@mui/material";
 import Box from "@mui/material/Box";
 import axios from "axios";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Col,Dropdown, DropdownButton,NavDropdown,Form, Row, Table } from "react-bootstrap";
+import { Col, Dropdown, DropdownButton, NavDropdown, Form, Row, Table } from "react-bootstrap";
 
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -195,8 +195,8 @@ const Centers = () => {
   // !Filter by  Medical Center Type
   const medicalCenterTypeRef = useRef(null);
   const handelMedicalCenterType = async () => {
-    let MedicalCenterType = MedicalCenterType.current.value
-    console.log(MedicalCenterType);
+    let MedicalCenterType = medicalCenterTypeRef.current.value
+    console.log(medicalCenterTypeRef.current.value);
     if (MedicalCenterType === 'All') {
       medicalCenterList()
     } else if (MedicalCenterType === 'Select Product Type') {
@@ -296,22 +296,23 @@ const Centers = () => {
                     </> : SkeletonFilter()}
                   </Col>
 
-                  <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
 
+                  <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
                     {isLoader ? <>
-                      <Form.Group controlId="formBasicEmail"  >
-                        {/* <Form.Label  >Product Type </Form.Label> */}
-                        <Form.Select aria-label="Default select example" ref={medicalCenterTypeRef} onClick={()=>handelMedicalCenterType} >
+                      <Form.Group controlId="formBasicEmail"   >
+                        <Form.Select aria-label="Default select example" ref={medicalCenterTypeRef} onClick={handelMedicalCenterType} >
                           <option selected disabled hidden value={'Select Product Type'}> {translate[isLang]?.filter?.Product} </option>
                           {
-                            [ 'All',  'CENTER' , 'CLINIC']?.map((Status, index) => (
-                                <option key={index} value={Status}  >{Status.charAt(0).toUpperCase()+Status.slice(1).toLowerCase() }</option>
+                            translate[isLang]?.Filtertype?.map((item, index) => (
+                              <option key={index} value={item.value}>{item?.text}</option>
                             ))
                           }
                         </Form.Select>
                       </Form.Group>
                     </> : SkeletonFilter()}
                   </Col>
+
+
 
                 </Row>
               </div>
@@ -471,17 +472,17 @@ const Centers = () => {
                                 >
                                   <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/medicalcenter/edit/${item?.IDMedicalCenter}`}>
                                     {translate[isLang]?.Actions.edit}
-                                  </Dropdown.Item> 
+                                  </Dropdown.Item>
 
                                   <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/medicalcenter/profile/${item?.IDMedicalCenter}`}>
                                     {translate[isLang]?.Actions.view}
-                                  </Dropdown.Item> 
- 
+                                  </Dropdown.Item>
+
 
                                   <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/medicalcenter/add/${item?.IDMedicalCenter}`}>
                                     {translate[isLang]?.Actions.add}
                                   </Dropdown.Item>
- 
+
                                 </DropdownButton>
                               </span>
                             </div>

@@ -36,7 +36,7 @@ let initialTranslation = {
             SubCategory: 'حدد الفئة الفرعية',
             allSubCategory: 'فئة الحيوانات'
         },
-        Actions: { action: "أجراءات", currency: "ريال سعودي", edit: "يحرر", view: 'عرض الصفحة الشخصية', add: "إضافة ملف" },
+        Actions: { action: "أجراءات", currency: "ريال سعودي", edit: "تعديــل ", view: 'عرض الصفحة الشخصية', add: "إضافة ملف" },
         centerProfileDetails: {
             nav1: 'مراكز طبية ',
             nav2: 'حساب تعريفي ',
