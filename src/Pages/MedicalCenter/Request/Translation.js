@@ -4,7 +4,7 @@ let initialTranslation = {
         FilterStatus: [
             { value: "All", text: "الكل" },
             { value: "PENDING", text: " قيد الانتظار  " },
-            { value: "ACTIVE", text: "   نشــط  " },
+            { value: "ACTIVE", text: "   قبول  " },
             { value: "REJECTED  ", text: "مرفوض" }, 
         ],
         Filtertype: [
@@ -41,7 +41,7 @@ let initialTranslation = {
         FilterStatus: [
             { value: "All", text: "All" },
             { value: "PENDING", text: " Pending  " },
-            { value: "ACTIVE", text: "   Active  " },
+            { value: "ACTIVE", text: "   Accept  " },
             { value: "REJECTED", text: " Rejected  " }, 
         ],
         Filtertype: [

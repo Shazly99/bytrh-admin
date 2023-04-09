@@ -171,7 +171,7 @@ const DoctorFreeList = () => {
   const handleActionSelect = async (id) => {
  
       await CitiescategoriesStatus(id).then((res) => {
-        toast.success('Delete Doctor', {
+        toast.success('Request Doctor', {
           duration: 4000,
           position: 'buttom-center',
           // icon: <Icons.UploadItem color='#3182CE' size={20} />,
@@ -367,40 +367,7 @@ const DoctorFreeList = () => {
                                       </React.Fragment>
                                     ))
                                 }
-                              </span>
-                              {/*      <div className="delete">
-                                                        <DropdownButton
-                                                            title={
-                                                                <img src={Img.dropdown} alt={'img dropdown'} />
-                                                            }
-                                                            id="dropdown-menu"
-                                                            variant="outline-success"
-                                                            onClick={() => setShowDropdown(!showDropdown)}
-                                                            onSelect={(eventKey) =>
-                                                                handleActionSelect(
-                                                                    item.IDdoctorFreeProduct,
-                                                                    eventKey
-                                                                )
-                                                            }
-                                                            className="DropdownButton "
-                                                            drop={"down-centered"}
-                                                        >
-                                                            {
-                                                                translate[isLang]?.FilterStatus?.filter?.((item) => item.value !== "All")?.map((Status, index) => (
-                                                                    <>
-                                                                        {item?.doctorFreeProductStatus === Status.value ? (
-                                                                            ""
-                                                                        ) : (
-                                                                            <Dropdown.Item eventKey={Status.value} className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"}>
-                                                                                {Status.text}
-                                                                            </Dropdown.Item>
-                                                                        )}
-                                                                    </>
-                                                                ))
-                                                            }
-
-                                                        </DropdownButton>
-                                                    </div> */}
+                              </span> 
                             </div>
                           </td>
                           <td>
@@ -422,7 +389,7 @@ const DoctorFreeList = () => {
                           <td>
                             <div>
                               <span> 
-                                  <Button variant=" outline-sucess" className="DropdownButton outline-sucess outline-sucessChat" title="Rejected Doctor" onClick={() => handleActionSelect(item.IDDoctor, 'Reject')}> Reject</Button>
+                                  <Button variant=" outline-sucess" className="DropdownButton outline-sucess outline-sucessChat" title="Rejected Doctor" onClick={() => handleActionSelect(item.IDDoctor, 'Reject')}> Request </Button>
                               </span>
                             </div>
                           </td>

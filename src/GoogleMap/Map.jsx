@@ -35,7 +35,7 @@ function Map({ VisitLat, VisitLong, DoctorLat, DoctorLong,pinMarkF , pinMarkL })
   
   const MapComponent = withGoogleMap(props => (
     <GoogleMap
-      defaultZoom={10}
+      defaultZoom={12}
       defaultCenter={{ lat: DoctorLat, lng: DoctorLong }}
       onClick={props.onMapClick}
     >

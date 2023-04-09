@@ -54,6 +54,7 @@ let initialTranslation = {
             DoctorName: '  اسم الطبيب  ',
             DoctorPhone: 'هاتف الطبيب',
             RouteVisit:'مسار طريق الزيارة',
+            currency:"ريال سعودي"
 
         }
 
@@ -113,6 +114,7 @@ let initialTranslation = {
             DoctorPhone: 'Doctor Phone',
             DoctorPhone: 'Doctor Phone',
             RouteVisit:'Route of the visit',
+            currency:"SAR"
         }
 
     }
