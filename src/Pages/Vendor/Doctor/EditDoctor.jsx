@@ -189,7 +189,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
                     </div>
                     <div className="col-md-6">
                       <Form.Group controlId="formBasicEmail" className='mt-3' >
-                        <Form.Label>Select Your City</Form.Label>
+                        <Form.Label> City</Form.Label>
 
                         <Form.Select aria-label="Default select example" ref={selectCity}>
                           {
