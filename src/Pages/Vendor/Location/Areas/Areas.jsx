@@ -226,6 +226,8 @@ const Areas = () => {
                       <option selected disabled hidden value={'Select Country'}>{translate[isLang]?.filter?.Country}  </option>
                       <option value={'country'} >{translate[isLang]?.filter?.allCountry}</option>
 
+
+
                       {
                         countries?.map((item, index) => (
                           <option key={index} value={item?.IDCountry}  > 
