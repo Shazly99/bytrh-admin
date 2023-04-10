@@ -241,8 +241,8 @@ function App() {
           path: '/blogs', children: [
             {
               path: 'client', children: [
-                { index: true, element: <ProtectedRoutes allowedRoles={['2']}> <Component.BlogClient /> </ProtectedRoutes> },
-                { path: 'details/:id', element: <ProtectedRoutes allowedRoles={['2']}><Component.BlogClientDetails /></ProtectedRoutes> }
+                { index: true, element: <ProtectedRoutes allowedRoles={['1','2']}> <Component.BlogClient /> </ProtectedRoutes> },
+                { path: 'details/:id', element: <ProtectedRoutes allowedRoles={['1','2']}><Component.BlogClientDetails /></ProtectedRoutes> }
               ]
             },
             {

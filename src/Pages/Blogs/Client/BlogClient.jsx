@@ -1,7 +1,7 @@
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
+import { Col, Dropdown, DropdownButton, Form, Row, Table, Modal, Button } from "react-bootstrap";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import Img from "../../../assets/Img";
@@ -10,6 +10,7 @@ import { VendersContext } from '../../../context/Store';
 import { apiheader, PostData } from '../../../utils/fetchData';
 import useSkeletonTable from '../../../utils/useSkeletonTable';
 import initialTranslation from "./Translation";
+import Component from "../../../constants/Component";
 
 const BlogClient = () => {
     let { isLang } = useContext(VendersContext);
@@ -48,9 +49,22 @@ const BlogClient = () => {
     const handleChange = (event, value) => {
         setPage(value);
     };
+    // ** display Reason 
+    const [modalShowReason, setModalShowReason] = React.useState(false);
+    const [modalIndexReason, setModalIndexReason] = React.useState(0);
+    const handleModalCloseReason = () => setModalShowReason(false);
+    function handleModalOpenReason(index) {
+        console.log(index);
+        setModalIndexReason(index);
+        setModalShowReason(true);
+    }
     // ToDo::change Blogs status
+    const [modalShow, setModalShow] = React.useState(false);
+    const [modalIndex, setModalIndex] = React.useState(0);
+    let reasonRef = useRef()
+
     const handleActionSelect = async (id, action) => {
-        if (action === "PENDING" || action === "REJECTED" || action === "POSTED" || action === "REMOVED") {
+        if (action === "PENDING" || action === "POSTED" || action === "REMOVED") {
             await ChangeBlogsStatus({ IDClientBlog: id, BlogStatus: action }).then((res) => {
                 toast.success(<strong>{translate[isLang]?.blogDetails?.toastUpdate}</strong>, {
                     duration: 4000,
@@ -64,7 +78,39 @@ const BlogClient = () => {
             })
             await BlogsList()
         }
-        await BlogsList()
+        else if (action === "REJECTED") {
+            handleModalOpen(id)
+
+        }
+    }
+    //!Modal 
+    function handleModalClose() {
+        setModalShow(false);
+    }
+    function handleModalOpen(index) {
+
+        setModalIndex(index);
+        setModalShow(true);
+    }
+    const reasonReject = async (id, action) => {
+        console.log(id, action);
+        await ChangeBlogsStatus({
+            IDClientBlog: id,
+            BlogStatus: action,
+            BlogRejectionReason: reasonRef.current.value,
+        }).then((res) => {
+            toast.success("Updated Successfully", {
+                duration: 4000,
+                position: "top-center",
+                icon: <Icons.UploadItem color="#3182CE" size={20} />,
+                iconTheme: {
+                    primary: "#0a0",
+                    secondary: "#fff",
+                },
+            });
+            setModalShow(false)
+        });
+        await BlogsList();
     }
     const ChangeBlogsStatus = async (blog) => {
         return await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs/status`, blog, apiheader)
@@ -144,7 +190,7 @@ const BlogClient = () => {
                     <div className="search-container">
                         {isLoader ? <>
                             <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
-                                <input type="text" placeholder={translate[isLang]?.placeholder}  name="search" value={searchBlog} onChange={handleInputChange} />
+                                <input type="text" placeholder={translate[isLang]?.placeholder} name="search" value={searchBlog} onChange={handleInputChange} />
                                 <button type="submit" onClick={handleSearchClick}>
                                     <Icons.Search color='#fff' size={25} />
                                 </button>
@@ -196,131 +242,186 @@ const BlogClient = () => {
                         </Row>
                     </div>
                     {isLoader ? <>
-                        <Table responsive={true} className='rounded-3 '>
-                            <thead>
-                                <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                                    {
-                                        translate[isLang]?.TableHeader?.map((item, index) => (
-                                            <th key={index}>{item}</th>
-                                        ))
-                                    }
-                                </tr>
-                            </thead>
-                            <tbody className='text-center'>
-                                {
-                                    blogs?.map((item, index) => (
-                                        <tr key={index}>
+                        {
+                            blogs?.length > 0 ?
+                                <Table responsive={true} className='rounded-3 '>
+                                    <thead>
+                                        <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
+                                            {
+                                                translate[isLang]?.TableHeader?.map((item, index) => (
+                                                    <th key={index}>{item}</th>
+                                                ))
+                                            }
+                                        </tr>
+                                    </thead>
+                                    <tbody className='text-center'>
+                                        {
+                                            blogs?.map((item, index) => (
+                                                <tr key={index}>
 
-                                            <td >
-                                                <div>
-                                                    {item?.ClientName}
-                                                </div>
-                                            </td>
+                                                    <td >
+                                                        <div>
+                                                            {item?.ClientName}
+                                                        </div>
+                                                    </td>
 
-                                            <td >
-                                                <div>
-                                                    {item?.BlogTitle}
-                                                </div>
-                                            </td>
-                                            <td >
-                                                <div>
-                                                    {item?.AnimalCategory}
-                                                </div>
-                                            </td>
-                                            <td >
+                                                    <td >
+                                                        <div>
+                                                            {item?.BlogTitle}
+                                                        </div>
+                                                    </td>
+                                                    <td >
+                                                        <div>
+                                                            {item?.AnimalCategory}
+                                                        </div>
+                                                    </td>
+                                                    <td >
 
-                                                <div className='blog__status'>
-                                                    <span style={{ height: 'fit-content !important' }} className={`
+                                                        <div className='blog__status d-flex flex-column justify-content-center '>
+                                                            <div className='blog__status d-flex flex-row'>
+                                                                <span style={{ height: 'fit-content !important' }} className={`
                                                                 ${item.BlogStatus == 'PENDING' && 'txt_pending'} 
                                                                 ${item.BlogStatus == 'REJECTED' && 'txt_rejected'} 
                                                                 ${item.BlogStatus == 'POSTED' && 'txt_delivered'}
                                                                 ${item.BlogStatus == 'REMOVED' && 'txt_cancel'}`} >
+                                                                    {
+                                                                        translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.value === item?.BlogStatus)
+                                                                            .map((status, index) => (
+                                                                                <React.Fragment key={index}>
+                                                                                    {item?.BlogStatus === status.value ? status.text : ''}
+                                                                                </React.Fragment>
+                                                                            ))
+                                                                    }
+                                                                </span>
+                                                                <div className="delete">
+                                                                    <DropdownButton
+                                                                        title={<Icons.dotes size={20} />}
+                                                                        id="dropdown-menu"
+                                                                        variant="outline-success"
+                                                                        onClick={() => setShowDropdown(!showDropdown)}
+                                                                        onSelect={(eventKey) => handleActionSelect(item.IDClientBlog, eventKey)}
+                                                                        className="DropdownButton "
+                                                                        drop={'down-centered'}
+                                                                    >
+                                                                        {
+                                                                            item.BlogStatus === 'PENDING' &&
+                                                                            <>
+                                                                                <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="POSTED">{translate[isLang].FilterStatus[3].text2}</Dropdown.Item>
+                                                                                <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="REJECTED">{translate[isLang].FilterStatus[2].text2}</Dropdown.Item>
+                                                                            </>
+                                                                        }
+                                                                        {
+                                                                            item.BlogStatus === 'REJECTED' &&
+                                                                            <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="POSTED">{translate[isLang].FilterStatus[3].text2}</Dropdown.Item>
+                                                                        }
+                                                                        {
+                                                                            item.BlogStatus === 'REMOVED' &&
+                                                                            <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="POSTED">{translate[isLang].FilterStatus[3].text2}</Dropdown.Item>
+                                                                        }
+                                                                        {
+                                                                            item.BlogStatus === 'POSTED' &&
+                                                                            <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="REMOVED">{translate[isLang].FilterStatus[4].text2}</Dropdown.Item>
+                                                                        }
+
+
+
+                                                                    </DropdownButton>
+
+                                                                </div>
+                                                            </div>
                                                         {
-                                                            translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.value === item?.BlogStatus)
-                                                                .map((status, index) => (
-                                                                    <React.Fragment key={index}>
-                                                                        {item?.BlogStatus === status.value ? status.text : ''}
-                                                                    </React.Fragment>
-                                                                ))
-                                                        }
-                                                    </span>
-                                                    <div className="delete">
-                                                        <DropdownButton
-                                                            title={<Icons.dotes size={20} />}
-                                                            id="dropdown-menu"
-                                                            variant="outline-success"
-                                                            onClick={() => setShowDropdown(!showDropdown)}
-                                                            onSelect={(eventKey) => handleActionSelect(item.IDClientBlog, eventKey)}
-                                                            className="DropdownButton "
-                                                            drop={'down-centered'}
-                                                        >
-                                                             {
-                                                                item.BlogStatus === 'PENDING' &&
-                                                                <>
-                                                                    <Dropdown.Item  className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="POSTED">{translate[isLang].FilterStatus[3].text2}</Dropdown.Item>
-                                                                    <Dropdown.Item  className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="REJECTED">{translate[isLang].FilterStatus[2].text2}</Dropdown.Item>
-                                                                </>
-                                                            }
-                                                            {
-                                                                item.BlogStatus === 'REJECTED' &&
-                                                                <Dropdown.Item  className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="POSTED">{translate[isLang].FilterStatus[3].text2}</Dropdown.Item>
-                                                            }
-                                                            {
-                                                                item.BlogStatus === 'REMOVED' &&
-                                                                <Dropdown.Item  className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="POSTED">{translate[isLang].FilterStatus[3].text2}</Dropdown.Item>
-                                                            }
-                                                            {
-                                                                item.BlogStatus === 'POSTED' &&
-                                                                <Dropdown.Item  className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="REMOVED">{translate[isLang].FilterStatus[4].text2}</Dropdown.Item>
-                                                            } 
+                                                         item?.BlogRejectionReason && 
+                                                        <div className="app__reason">
+                                                            <a onClick={() => handleModalOpenReason(item?.IDClientBlog)} >Reason</a>
+                                                        </div>
+                                                        } 
+                                                        </div>
+                                                    </td>
+                                                    <Modal
+                                                        show={modalShowReason && modalIndexReason === item.IDClientBlog}
+                                                        onHide={handleModalCloseReason}
+                                                        centered
+                                                        dir={isLang === 'ar' ? 'rtl' : 'ltr'}
+                                                    >
+                                                        <Modal.Header closeButton>
+                                                            <Modal.Title className='  w-100 '>  Reason</Modal.Title>
+                                                        </Modal.Header>
+                                                        <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
+                                                            <textarea className="form-control" rows="5" defaultValue={item?.BlogRejectionReason} />
 
-                                                            
+                                                        </Modal.Body>
+                                                        <Modal.Footer className="d-flex justify-content-center align-items-center">
 
-                                                        </DropdownButton>
+                                                            <Button onClick={handleModalCloseReason}    >
+                                                                Cancel
+                                                            </Button>
+                                                        </Modal.Footer>
+                                                    </Modal>
+                                                    <Modal
+                                                        show={modalShow && modalIndex === item.IDClientBlog}
+                                                        onHide={handleModalClose}
+                                                        centered
+                                                        dir={isLang === 'ar' ? 'rtl' : 'ltr'}
+                                                    >
+                                                        <Modal.Header closeButton>
+                                                            <Modal.Title className='  w-100 '> Reject Reason</Modal.Title>
+                                                        </Modal.Header>
+                                                        <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
 
-                                                    </div>
-                                                </div>
-                                            </td>
+                                                            <textarea className="form-control" rows="5" ref={reasonRef} />
 
+                                                        </Modal.Body>
+                                                        <Modal.Footer className="d-flex justify-content-center align-items-center">
 
-                                            <td >
-                                                <div>
-                                                    <span   >
-                                                        {item?.BlogVisibility.charAt(0).toUpperCase() + item?.BlogVisibility.slice(1).toLowerCase()}
-                                                    </span>
-                                                </div>
-                                            </td>
-                                            <td >
-                                                <div className='d-flex justify-content-center align-item-center m-0 p-0 flex-column gap-0' >
-                                                    <span   > {item?.BlogDate.split(' ')[0]}  </span>
-                                                    <span className='ClientPhone'> {item?.BlogDate.split(' ')[1]}  </span>
-                                                </div>
-                                            </td>
+                                                            <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => reasonReject(item.IDClientBlog, 'REJECTED')} >
+                                                                Set Reason
+                                                            </Button>
+                                                            <Button variant="outline-primary" onClick={handleModalClose}>
+                                                                Cancel
+                                                            </Button>
+                                                        </Modal.Footer>
+                                                    </Modal>
 
-                                            <td >
-                                                <div className='d-flex' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                                                    <div className=' d-flex justify-content-center align-item-center gap-3' >
-                                                        <span><Icons.like size={19} color='#3182CE' /> </span><span>{item?.BlogLikes}</span>
-                                                    </div>
-                                                    <div className=' d-flex justify-content-center align-item-center gap-3' >
-                                                        <span><Icons.comments size={19} color='#40AB45' /> </span><span>{item?.BlogComments}</span>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td >
-                                                <div>
-                                                    <Link to={`/blogs/client/details/${item?.IDClientBlog}`}>
-                                                        <img src={Img.view} />
-                                                    </Link>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))
-                                }
+                                                    <td >
+                                                        <div>
+                                                            <span   >
+                                                                {item?.BlogVisibility.charAt(0).toUpperCase() + item?.BlogVisibility.slice(1).toLowerCase()}
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                    <td >
+                                                        <div className='d-flex justify-content-center align-item-center m-0 p-0 flex-column gap-0' >
+                                                            <span   > {item?.BlogDate.split(' ')[0]}  </span>
+                                                            <span className='ClientPhone'> {item?.BlogDate.split(' ')[1]}  </span>
+                                                        </div>
+                                                    </td>
 
-                            </tbody>
+                                                    <td >
+                                                        <div className='d-flex' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+                                                            <div className=' d-flex justify-content-center align-item-center gap-3' >
+                                                                <span><Icons.like size={19} color='#3182CE' /> </span><span>{item?.BlogLikes}</span>
+                                                            </div>
+                                                            <div className=' d-flex justify-content-center align-item-center gap-3' >
+                                                                <span><Icons.comments size={19} color='#40AB45' /> </span><span>{item?.BlogComments}</span>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td >
+                                                        <div>
+                                                            <Link to={`/blogs/client/details/${item?.IDClientBlog}`}>
+                                                                <img src={Img.view} />
+                                                            </Link>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        }
 
-                        </Table>
+                                    </tbody>
+
+                                </Table> :
+                                <Component.DataNotFound />
+                        }
                     </> : SkeletonTable()}
                 </div>
 
