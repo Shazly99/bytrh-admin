@@ -1,25 +1,26 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext,useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
-// import { FaBars } from 'react-icons/fa';
-// import { BsSearch } from 'react-icons/bs'; 
-// import { useContext } from 'react';
-// import { langContext } from '../context/store';
+import axios from 'axios'; 
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import { Container } from 'react-bootstrap';
+import { Container, Form } from 'react-bootstrap';
 import Component from '../../../constants/Component';
 import { apiheader } from './../../../utils/fetchData';
 import { Button } from 'react-bootstrap/';
 import { VendersContext } from '../../../context/Store';
 import CircularProgress from '@mui/material/CircularProgress';
+import useFetch from '../../../utils/useFetch';
 
-
+ 
 
 
 const EditDoctor = ({ fetchCountriesBytra }) => {
   const { id } = useParams();
+  let { countries, cities, getCities } = useFetch()
+  const selectCity = useRef();
+
   const apiInfos = `https://bytrh.com/api/admin/doctors/edit/${id}`;
+  const [userData, setUserData] = useState({});
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -32,7 +33,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
   // const [expire, setExpire] = useState('');
 
   async function getDoctorData() {
-    await axios.get(apiInfos,  apiheader )
+    await axios.get(apiInfos, apiheader)
       .then(res => {
         if (res.status === 200 && res.request.readyState === 4) {
           setName(res.data.Response.UserName);
@@ -40,14 +41,16 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
           setPhone(res.data.Response.UserPhone);
           setCountryCode(res.data.Response.UserPhoneFlag);
           setCountry(res.data.Response.IDCountry);
-          setCity(res.data.Response.IDCity); 
-          getCitiesBytra(res.data.Response.IDCity);
-        }
+          setCity(res.data.Response.IDCity);
+          setUserData(res.data.Response);
+          getCities(res.data.Response.IDCountry)
+         }
       })
       .catch(err => {
         console.log(err);
       })
   }
+ 
   useEffect(() => {
     let timeOut = setTimeout(() => {
       getDoctorData();
@@ -57,21 +60,16 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
       clearTimeout(timeOut);
     })
   }, [])
+ 
 
 
   // get cities Bytra
-  const [fetchCitiesBytra, setFetchCitiesBytra] = useState([]);
-  async function getCitiesBytra(idcountry) {
-    await axios.get(`https://bytrh.com/api/doctor/cities/${idcountry}`)
-      .then(res => {
-        if (res.status === 200 && res.request.readyState === 4) {
-          setFetchCitiesBytra(res.data.Response.Countries);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
+
+
+
+  useEffect(() => {
+    getDoctorData();
+  }, [])
 
 
 
@@ -100,7 +98,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
         DoctorEmail: email,
         DoctorPhone: phone,
         DoctorPhoneFlag: countryCode,
-        IDCity: city,
+        IDCity: selectCity.current.value,
       },
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -131,7 +129,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
       <Container fluid>
         <div className="app__addprodects">
           {isLang === 'ar' ?
-            <Component.SubNav sub__nav={[{ name: "تعديـل", path: `/doctors/editDoctor/${id}` } , { name: "قائمـة الأطبـاء", path: '/doctors' }]} />
+            <Component.SubNav sub__nav={[{ name: "تعديـل", path: `/doctors/editDoctor/${id}` }, { name: "قائمـة الأطبـاء", path: '/doctors' }]} />
             :
             <Component.SubNav sub__nav={[{ name: "Doctors", path: '/doctors' }, { name: "Edit Doctor", path: `/doctors/editDoctor/${id}` }]} />
           }
@@ -168,7 +166,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
                             enableSearch={true}
                             searchPlaceholder={isLang === 'ar' ? 'الرقم الكودي الدولـة..' : 'Country number...'}
                             inputClass={'form-control mx-auto w-100 py-3'}
-                            inputStyle={{width:'100%'}}
+                            inputStyle={{ width: '100%' }}
                             inputProps={{
                               name: 'DoctorPhone',
                               required: true,
@@ -190,7 +188,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
                         <div className="input-group">
                           <select value={country} onChange={(e) => {
                             setCountry(e.target.value);
-                            getCitiesBytra(e.target.value);
+                            getCities(e.target.value);
                           }} className='w-100 form-control mx-auto py-2 px-2' required name="IDCountry" id="IDCountry">
                             {/* <option>choose your country</option> */}
                             {fetchCountriesBytra.map((item, i) => (
@@ -201,19 +199,18 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
                       </div>
                     </div>
                     <div className="col-md-6">
-                      <div className="group-add">
-                        <label className="fs-5  " htmlFor="IDCity">{isLang === 'ar' ? 'المدينـة' : 'City'}</label>
-                        <div className="input-group">
-                          <select value={city} onChange={(e) => {
-                            setCity(e.target.value);
-                          }} className='w-100 form-control mx-auto py-2 px-2' required name="IDCity" id="IDCity">
-                            {/* <option>choose your city</option> */}
-                            {fetchCitiesBytra && fetchCitiesBytra.map((item, i) => (
-                              <option key={i} value={item.IDCity} >{item.CityName}</option>
-                            ))}
-                          </select>
-                        </div>
-                      </div>
+                      <Form.Group controlId="formBasicEmail" className='mt-3' >
+                        <Form.Label> City</Form.Label>
+
+                        <Form.Select aria-label="Default select example" ref={selectCity}>
+                          {
+                            cities?.map((item, index) => (
+                              <option key={index} value={item?.IDCity} selected={userData?.IDCity === item?.IDCity && item?.CityName} > {item?.CityName}</option>
+                            ))
+                          }
+                        </Form.Select>
+
+                      </Form.Group>
                     </div>
                     {/* <div className="col-md-6">
                             <div className="group-add">
@@ -242,21 +239,21 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
                   </div> */}
 
                   <div className='d-flex justify-content-center align-content-center mt-4'>
-                      <div className='baseBtn'>
-                          <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                              {loadind ? <CircularProgress size={27} style={{color: '#fff'}} /> : 
-                                isLang === 'ar' ? 'حفـظ' : 'Save'
-                              }
-                          </Button>
-                      </div>
+                    <div className='baseBtn'>
+                      <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                        {loadind ? <CircularProgress size={27} style={{ color: '#fff' }} /> :
+                          isLang === 'ar' ? 'حفـظ' : 'Save'
+                        }
+                      </Button>
+                    </div>
 
-                      <div className='baseBtn'>
-                          <Link to={'/doctors'}>
-                              <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
-                              </Button>
-                          </Link>
-                      </div>
+                    <div className='baseBtn'>
+                      <Link to={'/doctors'}>
+                        <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                          {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
 
                 </form>

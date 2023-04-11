@@ -1,15 +1,16 @@
-import React, { useState,useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { useEffect } from 'react';
 import { Button, Dropdown, DropdownButton, Modal, NavDropdown, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-// import Icons from "../../../constants/Icons.js";
+import Icons from "../../../constants/Icons.js";
 import { apiheader, PostData } from '../../../utils/fetchData.js';
 import useSkeletonTable from '../../../utils/useSkeletonTable.js';
 import Component from '../../../constants/Component.js';
 import { VendersContext } from '../../../context/Store.js';
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
-function UsersTable({ usersList, userList, isLoader,toastTranslate, actionsTranslate, statusTranslate, tabelTranslate }) {
+function UsersTable({ usersList, userList, isLoader, toastTranslate, actionsTranslate, statusTranslate, tabelTranslate }) {
     let { SkeletonTable } = useSkeletonTable();
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState({});
@@ -18,9 +19,9 @@ function UsersTable({ usersList, userList, isLoader,toastTranslate, actionsTrans
     const handleActionSelect = async (id, action) => {
         if (action === "PENDING" || action === "ACTIVE" || action === "INACTIVE") {
             await userstatus({ IDUser: id, UserStatus: action }).then((res) => {
-                toast.success(<strong>{toastTranslate.update}</strong>,{
+                toast.success(<strong>{toastTranslate.update}</strong>, {
                     duration: 4000,
-                    position: 'bottom-center', 
+                    position: 'bottom-center',
                     iconTheme: {
                         primary: '#3182CE',
                         secondary: '#fff',
@@ -45,7 +46,7 @@ function UsersTable({ usersList, userList, isLoader,toastTranslate, actionsTrans
             toast.success(<strong>{toastTranslate.delete}</strong>, {
                 duration: 4000,
                 position: 'bottom-center',
-                 iconTheme: {
+                iconTheme: {
                     primary: '#E20000',
                     secondary: '#fff',
                 },
@@ -60,8 +61,22 @@ function UsersTable({ usersList, userList, isLoader,toastTranslate, actionsTrans
 
     return (
         <>
+            <ReactHTMLTableToExcel
+                table="my-table"
+                filename={'User Data'}
+                sheet="Sheet 1"
+                buttonText={
+                    <div className='d-flex gap-2 ' style={{ justifyContent: 'center', alignItems: 'center' }}>
+                        <Icons.ExcelIcon />
+                        <span>{'Export into excel'}</span>
+                    </div>
+                }
+                className='btn btn-sucess btn__excel'
+
+
+            />
             {isLoader ? <>
-                <Table responsive={true} className='rounded-3 '>
+                <Table responsive={true} id='my-table' className='rounded-3 '>
                     <thead>
                         <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
                             {
@@ -99,14 +114,14 @@ function UsersTable({ usersList, userList, isLoader,toastTranslate, actionsTrans
                                           ${item.UserStatus === 'Out For Delivery' && 'txt_delivery'}
                                           ${item.UserStatus === 'ACTIVE' && 'txt_delivered'}
                                           ${item.UserStatus === 'INACTIVE' && 'txt_rejected'}`} >
-                                                                       {
-                                statusTranslate?.filter((itemfilter) => itemfilter.value === item?.UserStatus)
-                                  .map((status, index) => (
-                                    <React.Fragment key={index}>
-                                      {item?.UserStatus === status.value ? status.text : ''}
-                                    </React.Fragment>
-                                  ))
-                              }
+                                                {
+                                                    statusTranslate?.filter((itemfilter) => itemfilter.value === item?.UserStatus)
+                                                        .map((status, index) => (
+                                                            <React.Fragment key={index}>
+                                                                {item?.UserStatus === status.value ? status.text : ''}
+                                                            </React.Fragment>
+                                                        ))
+                                                }
                                             </span>
                                         </div>
                                     </td>
@@ -127,10 +142,10 @@ function UsersTable({ usersList, userList, isLoader,toastTranslate, actionsTrans
                                                     onSelect={(eventKey) => handleActionSelect(item.IDUser, eventKey)}
                                                     className="DropdownButton "
                                                 >
-                                                    <Dropdown.Item eventKey="Edite" className={isLang ==="ar"?"dropdown-itemAr":"dropdown-itemEn" }  as={Link} to={`/user/editUser/${item.IDUser}`}>
+                                                    <Dropdown.Item eventKey="Edite" className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} as={Link} to={`/user/editUser/${item.IDUser}`}>
                                                         {actionsTranslate[1].name}
                                                     </Dropdown.Item>
-                                                    <Dropdown.Item className={isLang ==="ar"?"dropdown-itemAr":"dropdown-itemEn" }  eventKey="DELETED">{actionsTranslate[2].name}</Dropdown.Item>
+                                                    <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="DELETED">{actionsTranslate[2].name}</Dropdown.Item>
 
                                                     <Modal dir={isLang === "ar" ? "rtl" : "ltr"} show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
                                                         <Modal.Header closeButton>
@@ -151,12 +166,12 @@ function UsersTable({ usersList, userList, isLoader,toastTranslate, actionsTrans
                                                     </Modal>
                                                     <NavDropdown.Divider />
 
- 
+
                                                     {
                                                         statusTranslate?.filter?.((item) => item.value !== "All").map((status, index) => (
                                                             <React.Fragment key={index}>
                                                                 {
-                                                                    item?.UserStatus === status.value ? '' : <Dropdown.Item className={isLang ==="ar"?"dropdown-itemAr":"dropdown-itemEn" }  eventKey={status.value}>{status.text}</Dropdown.Item>
+                                                                    item?.UserStatus === status.value ? '' : <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey={status.value}>{status.text}</Dropdown.Item>
                                                                 }
                                                             </React.Fragment>
                                                         ))

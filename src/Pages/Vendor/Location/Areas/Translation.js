@@ -41,6 +41,20 @@ let initialTranslation = {
             add: 'تمت إضافة دوله جديدة بنجاح',
             edit: "تم تحديث بيانات دولة"
         },
+        filter:{
+            Country:'حدد الدولة',
+            allCountry:'بلدان',
+            city:'اختر مدينة',
+            allCity:'مدن',            
+            area:'حدد المنطقة',
+            allarea:'المناطق',
+            Product:'نوع المنتج',
+            Products:'  أنواع المنتجات الحيوانية  ',
+            status:'حدد الحالة',
+            allStatus:'كل الحالة',
+            SubCategory:'حدد الفئة الفرعية',
+            allSubCategory:'فئة الحيوانات'
+        }
 
     },
     "en": {
@@ -83,6 +97,20 @@ let initialTranslation = {
             update: "Updated Successfully",
             add: 'New country added successfully'
         },
+        filter:{
+            Country:'Select Country',
+            allCountry:'Countries',
+            city:'Select City',
+            allCity:'Cities',            
+            area:'Select Area',
+            allarea:'Areas',
+            Product:'Product Type',
+            Products:'Animals Product Type',
+            status:'Select Status',
+            allStatus:'All Status',
+            SubCategory:'Select SubCategory',
+            allSubCategory:'Animals SubCategory'
+        }
 
     }
 }

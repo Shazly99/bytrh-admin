@@ -13,6 +13,7 @@ import { apiheader, PostData } from '../../utils/fetchData';
 import useSkeletonTable from '../../utils/useSkeletonTable';
 import icons from './../../constants/Icons';
 import initialTranslation from './Translation';
+import ExcelSheet from "./ExcelSheet";
 const Visits = () => {
   let { isLang } = useContext(VendersContext);
   const [translate, setTranslate] = useState(initialTranslation)
@@ -242,6 +243,7 @@ const Visits = () => {
             </div>
           </div>
           <div className="app__Users-table">
+            <ExcelSheet/>
             {isLoader ? <>
               <Table responsive={true} className='rounded-3 '>
                 <thead>

@@ -25,6 +25,18 @@ let initialTranslation = {
             "تفاصبل الزيارة"
 
         ],
+        ExcelHeader: [
+            "اسم العميل",
+            "هاتف العميل",
+            "اسم المركز الطبي",
+            "هاتف المركز الطبي",
+            "اسم الطبيب",
+            "هاتف الطبيب", 
+            "قم بزيارة السعر الإجمالي",
+            "نوع الزيارة ",
+            "حالة ",
+            "تاريخ البدء ", 
+        ],
         Actions: { action: "الإجراءات", vistType: 'نوع الزيارة', currency: "ريال سعودي " },
         toast: { endChat: "تم إنهاء الدردشة" },
         filterVisitType: [
@@ -54,7 +66,9 @@ let initialTranslation = {
             DoctorName: '  اسم الطبيب  ',
             DoctorPhone: 'هاتف الطبيب',
             RouteVisit:'مسار طريق الزيارة',
-
+            currency:"ريال سعودي",
+            excelSheet:' تصدير إلى إكسل',
+            filename:'بيانات الزيارات'
         }
 
     },
@@ -82,6 +96,18 @@ let initialTranslation = {
             "Start Date ",
             "Action",
             "View",
+        ],
+        ExcelHeader: [
+            "Client name",
+            "Client phone",
+            "Medical Center name",
+            "Medical Center phone",
+            "Doctor name",
+            "Doctor phone", 
+            "Visit Total Price",
+            "Visit Type ",
+            "Status ",
+            "Start Date ", 
         ],
         Actions: { action: "Actions", vistType: "visit Type", currency: "SAR" },
         toast: { endChat: "Chat has been ended" },
@@ -113,6 +139,10 @@ let initialTranslation = {
             DoctorPhone: 'Doctor Phone',
             DoctorPhone: 'Doctor Phone',
             RouteVisit:'Route of the visit',
+            currency:"SAR",
+            excelSheet:'Export into excel',
+            filename:'Visits data  '
+
         }
 
     }

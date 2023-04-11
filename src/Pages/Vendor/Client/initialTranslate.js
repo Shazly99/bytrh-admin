@@ -28,6 +28,21 @@ let initialTranslate = {
             reset: "تم إعادة تعيين كلمة المرور بنجاح ",
             delete: "تم حذف المستخدم"
         },
+        excelSheet:' تصدير إلى إكسل',
+        dataExport:'بيانات العملاء',
+        currency:'ريال سعودي',
+        ExcelHeader: [
+            "اسم العميل",
+            "هاتف العميل", 
+            "البريد الإلكتروني للعميل", 
+            "تسجيل الدخول عن طريق",
+            "رصيد العميل ",
+            "نقاط العميل الحالية ", 
+            "اسم الدولة",
+            'حالة العميل',
+            '  تاريخ التسجيل'
+        ],
+
 
     },
     "en": {
@@ -38,6 +53,8 @@ let initialTranslate = {
             { value: "INACTIVE", text: " InActive  " },
             { value: "BLOCKED", text: "Blocked" },
         ],
+        currency:'SAR  ',
+
         TableHeader: [
             "User Name",
             "Country",
@@ -59,7 +76,19 @@ let initialTranslate = {
             reset: "Password reset successfully ",
             delete: "user has been deleted "
         },
-
+        excelSheet:'Export into excel',
+        dataExport:'Clients Data',
+        ExcelHeader: [
+            "Client name",
+            "Client phone", 
+            "Client email", 
+            "Login by",
+            "Client balance ",
+            "Client current points ", 
+            "Country name",
+            'Client Status',
+            'Register Date  '
+        ],
     }
 }
 

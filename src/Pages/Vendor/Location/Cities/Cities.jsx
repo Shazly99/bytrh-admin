@@ -1,7 +1,7 @@
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import React, { useContext, useEffect, useState } from 'react';
-import { Dropdown, DropdownButton,NavDropdown, Table } from "react-bootstrap";
+import React, { useContext, useEffect, useState,useRef } from 'react';
+import { Dropdown,Row,Col,Form, DropdownButton, NavDropdown, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import Component from '../../../../constants/Component';
@@ -10,11 +10,14 @@ import { VendersContext } from "../../../../context/Store";
 import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
 import useSkeletonTable from '../../../../utils/useSkeletonTable';
 import initialTranslation from "./Translation";
-
+import useFetch from "../../../../utils/useFetch";
+import axios from "axios";
+ 
 const Cities = () => {
   let { isLang } = useContext(VendersContext);
   const [translate, setTranslate] = useState(initialTranslation)
   const handelTranslate = () => setTranslate(initialTranslation)
+  let { countries, areas, cities, getCities, getAreas } = useFetch()
 
   const [Cities, setCities] = useState(null)
   const [page, setPage] = useState(1);
@@ -100,6 +103,27 @@ const Cities = () => {
       CitiescList()
     }
   };
+  const countryRef = useRef(null);
+
+  const handelSelectCountry = async (event) => {
+    const selectedCountryId = event.target.value;
+         try {
+            await axios.post(`https://bytrh.com/api/admin/location/cities`, { IDPage: page, IDCountry: selectedCountryId }, apiheader).then((res) => {
+                if (res.status === 200 && res.request.readyState === 4) {
+                    setCities(res.data.Response.Cities);
+                    setPagesNumber(res.data.Response.Pages);
+                }
+            })
+        } catch (error) {
+            if (error.response && error.response.status === 429) {
+                const retryAfter = error.response.headers['retry-after'];
+                setTimeout(() => {
+                  CitiescList();
+                }, (retryAfter || 30) * 1000);
+            }
+        }
+    
+}
   useEffect(() => {
     CitiescList(page)
     window.scrollTo(0, 0);
@@ -146,7 +170,28 @@ const Cities = () => {
                 ))
               }
             </div>
+
           </div>
+            <div className=' app__addOrder-form '>
+              <Row className='d-flex flex-row justify-content-between'>
+                <Col xl={2} lg={2} md={6} sm={12} className='mt-2' >
+                  {isLoader ? <>
+                    <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry} ref={countryRef}>
+                      <Form.Select aria-label="Default select example" >
+                        <option selected disabled hidden value={'Select Country'}>{translate[isLang]?.filter?.Country}  </option>
+
+                        {
+                          countries?.map((item, index) => (
+                            <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
+                          ))
+                        }
+                      </Form.Select>
+                    </Form.Group>
+                  </> : SkeletonFilters()}
+                </Col>
+
+              </Row>
+            </div>
           {isLoader ? <>
             <Table responsive={true} className='rounded-3 '>
               <thead>
@@ -177,14 +222,14 @@ const Cities = () => {
                       <td >
                         <div>
                           <span style={{ height: 'fit-content !important' }} className={`  ${item?.CityActive === 1 && 'txt_delivered'}  ${item?.CityActive === 0 && 'txt_rejected'} `} >
-                          {
-                                translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.CityActive === item?.CityActive)
-                                  .map((status, index) => (
-                                    <React.Fragment key={index}>
-                                      {item?.CityActive === status.CityActive ? status.text : ''}
-                                    </React.Fragment>
-                                  ))
-                              }
+                            {
+                              translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.CityActive === item?.CityActive)
+                                .map((status, index) => (
+                                  <React.Fragment key={index}>
+                                    {item?.CityActive === status.CityActive ? status.text : ''}
+                                  </React.Fragment>
+                                ))
+                            }
                           </span>
                         </div>
                       </td>
@@ -200,11 +245,11 @@ const Cities = () => {
                               className="DropdownButton "
                               drop={'down-centered'}
                             >
-                              <Dropdown.Item  className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"}eventKey="Edite" as={Link} to={`/location/cities/editcity/${item.IDCity}`}>
+                              <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/location/cities/editcity/${item.IDCity}`}>
                                 {translate[isLang]?.Actions.edit}
                               </Dropdown.Item>
                               <NavDropdown.Divider />
- 
+
                               {
                                 translate[isLang].FilterStatus?.filter?.((item) => item.value !== "All").map((status, index) => (
                                   <React.Fragment key={index}>

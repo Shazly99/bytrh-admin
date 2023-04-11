@@ -8,6 +8,7 @@ import { VendersContext } from "../../../context/Store";
 import { PostData } from '../../../utils/fetchData';
 import { apiheader } from './../../../utils/fetchData';
 import initialTranslate from './initialTranslate';
+import ExcelSheet from "./ExcelSheet";
 
 const Clients = () => {
   let { isLang } = useContext(VendersContext);
@@ -62,7 +63,7 @@ const Clients = () => {
   // filter
   const [selectedOption, setSelectedOption] = useState('All');
   const handleOptionChange = async (event) => {
-    const selectedValue = event.target.value; 
+    const selectedValue = event.target.value;
     setSelectedOption(selectedValue);
 
     // filter your content based on the selected option 
@@ -75,7 +76,7 @@ const Clients = () => {
     }
   };
   useEffect(() => {
-  }, [page, PagesNumber,selectedOption])
+  }, [page, PagesNumber, selectedOption])
 
   const SkeletonSearch = (w, h) => {
     return (
@@ -102,7 +103,7 @@ const Clients = () => {
                 translate[isLang]?.FilterStatus?.map((item, index) => (
                   <React.Fragment key={index}>
                     {isLoader ? <>
-                      <label  className='active' >
+                      <label className='active' >
                         <input
                           type="radio"
                           name="filter"
@@ -111,7 +112,7 @@ const Clients = () => {
                           onChange={handleOptionChange}
                           className="active-radio form-check-input"
                         />
-                        {item.text }
+                        {item.text}
                       </label>
                     </> : SkeletonSearch(10, 90)}
                   </React.Fragment>
@@ -119,12 +120,23 @@ const Clients = () => {
               }
             </div>
           </div>
-          <Component.ClientTable isLoading={isLoader} toastTranslate={translate[isLang]?.toast} tabelTranslate={translate[isLang]?.TableHeader}actionsTranslate={translate[isLang]?.Actions} statusTranslate={translate[isLang]?.FilterStatus} usersList={usersList} userList={userList} />
+          <ExcelSheet />
+
+          <Component.ClientTable
+            isLoading={isLoader}
+            toastTranslate={translate[isLang]?.toast}
+            tabelTranslate={translate[isLang]?.TableHeader}
+            actionsTranslate={translate[isLang]?.Actions}
+            statusTranslate={translate[isLang]?.FilterStatus}
+            usersList={usersList}
+            userList={userList}
+            currency={translate[isLang]?.currency}
+          />
         </div>
       </div>
       <div className="pagination " dir="ltr">
         <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-          <Pagination count={pageCount} page={page}  onChange={handleChange} />
+          <Pagination count={pageCount} page={page} onChange={handleChange} />
         </Box>
       </div>
 

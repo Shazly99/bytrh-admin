@@ -294,7 +294,7 @@ const Register = () => {
                                                 <Modal.Body>
 
                                                     <MapModal />
-                                                    {
+                                              {/*       {
                                                         userLocationMap?.lat &&
                                                         <h4 className=' Sign__Up-header text-dark mt-2 mb-2' >
                                                             Geographic coordinate
@@ -302,12 +302,12 @@ const Register = () => {
                                                     }
                                                     <span>(  {userLocationMap?.lat}</span>
                                                     {"  -  "}
-                                                    <span>{userLocationMap?.lng} )</span>
+                                                    <span>{userLocationMap?.lng} )</span> */}
                                                 </Modal.Body>
                                                 <Modal.Footer>
 
                                                     <Button variant="primary" onClick={handleClose}>
-                                                        Close Map
+                                                        Set Location
                                                     </Button>
                                                 </Modal.Footer>
                                             </Modal>

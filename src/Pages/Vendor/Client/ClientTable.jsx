@@ -9,7 +9,7 @@ import useSkeletonTable from '../../../utils/useSkeletonTable.js';
 import Component from '../../../constants/Component.js';
 import { VendersContext } from '../../../context/Store.js';
 import './Client.scss'
-const ClientTable = ({ usersList, userList, isLoading,actionsTranslate,toastTranslate, statusTranslate, tabelTranslate }) => {
+const ClientTable = ({ usersList, userList, isLoading,actionsTranslate,toastTranslate, currency,statusTranslate, tabelTranslate }) => {
   let { SkeletonTable } = useSkeletonTable();
   let { isLang } = useContext(VendersContext);
 
@@ -136,8 +136,9 @@ const ClientTable = ({ usersList, userList, isLoading,actionsTranslate,toastTran
                   </td>
                   <td className='text-center'>
                     <div>
-                      {item?.ClientBalance}
-                    </div>
+                    <h6 className="mb-0  pe-2 bolder">
+                        {item?.ClientBalance} {currency}
+                      </h6>                    </div>
                   </td>
                   <td className='text-center  d-flex '>
                     <div>

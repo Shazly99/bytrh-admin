@@ -150,6 +150,7 @@ export default function Adoption() {
                             cityName={item.CityName}
                             cate={item.AnimalSubCategoryName}
                             status={item.AdoptionStatus}
+                            Reason={item?.AdoptionRejectReason }
                             getTokenAdoption={getTokenAdoption}
                           />
                         ))

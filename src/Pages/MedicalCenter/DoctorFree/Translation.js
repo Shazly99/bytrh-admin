@@ -21,8 +21,7 @@ let initialTranslation = {
         ],
         store: {
             nav1: 'منتجات حيوانية', nav2: 'تفاصيل المنتج',
-            nav3: 'تفاصيل المنتج', nav4: 'تفاصيل الدردشة',
-
+            nav3: 'تفاصيل المنتج', nav4: 'تفاصيل الدردشة', 
             header1: 'معلومات المنتج',
             category: 'فئة',
             subCategory: 'تصنيف فرعي',
@@ -79,10 +78,23 @@ let initialTranslation = {
             status: 'حدد الحالة',
             allStatus: 'كل الحالة',
             SubCategory: 'حدد الفئة الفرعية',
-            allSubCategory: 'فئة الحيوانات'
-        }
+            allSubCategory: 'فئة الحيوانات',
+            currency:'ريال سعودي'
 
+        },
+        ExcelHeader: [
+            "اسم الطبيب",
+            "هاتف الطبيب", 
+            "البريد الإلكتروني للطبيب", 
+            "دولة",
+            "نوع الطبيب     ",
+            "حساب الطبيب",
+            "حالة ",
+            "تاريخ الإنشاء ", 
+        ],
 
+        excelSheet:' تصدير إلى إكسل',
+        filename:'  بيانات الأطباء الحرة',
     },
     "en": {
         placeholder: 'Search by client name or email or phone.....',
@@ -164,8 +176,22 @@ let initialTranslation = {
             status: 'Select Status',
             allStatus: 'All Status',
             SubCategory: 'Select SubCategory',
-            allSubCategory: 'Animals SubCategory'
-        }
+            allSubCategory: 'Animals SubCategory',
+            currency:'SAR',
+     
+        },
+        excelSheet:'Export into excel',
+        filename:'Doctors free data',
+        ExcelHeader: [
+            "Doctor name",
+            "Doctor phone", 
+            "Doctor Email", 
+            "Country",
+            "Doctor Type     ",
+            "Doctor Balance",
+            "Status ",
+            "Create Date ", 
+        ],
     }
 }
 

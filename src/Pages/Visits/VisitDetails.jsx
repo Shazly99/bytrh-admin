@@ -169,14 +169,40 @@ const VisitDetails = () => {
                                     </> : SkeletonSummary()}
                                 </Col>
                                 <Col className="summary_blog">
+
+                                    {isLoader ? <>
+                                        <span className='title'>{visit?.VisitServicePrice} {' '}{translate[isLang]?.VisitDetails?.currency}</span>
+                                        <span className='body'>{translate[isLang]?.VisitDetails?.VisitServicePrice}</span>
+                                    </> : SkeletonSummary()}
+                                </Col>
+                                <Col className="summary_blog">
+
+                                    {isLoader ? <>
+                                        <span className='title'>{visit?.VisitTrafficPrice} {' '}{translate[isLang]?.VisitDetails?.currency} </span>
+                                        <span className='body'>{translate[isLang]?.VisitDetails?.VisitTrafficPrice}</span>
+                                    </> : SkeletonSummary()}
+                                </Col>
+
+                                <Col className="summary_blog">
+
+                                    {isLoader ? <>
+                                        <span className='title'>{visit?.VisitTotalPrice} {' '}{translate[isLang]?.VisitDetails?.currency}</span>
+                                        <span className='body'>{translate[isLang]?.VisitDetails?.VisitTotalPrice}</span>
+                                    </> : SkeletonSummary()}
+                                </Col>
+                                <Col className="summary_blog">
                                     {isLoader ? <>
                                         <span className='title'>{visit?.PaymentMethod.charAt(0)?.toUpperCase() + visit?.PaymentMethod.slice(1).toLowerCase()}</span>
                                         <span className='body'>{translate[isLang]?.VisitDetails?.PaymentMethod}</span>
                                     </> : SkeletonSummary()}
                                 </Col>
+                            </Row>
+
+
+                            <Row className='mt-3'>
                                 <Col className="summary_blog">
                                     {isLoader ? <>
-                                        <span className='title'>{visit?.VisitType?.charAt(0)?.toUpperCase() + visit?.VisitType?.slice(1).toLowerCase()}</span>
+                                        <span className='title'>{visit?.VisitType?.charAt(0)?.toUpperCase() + visit?.VisitType?.slice(1).toLowerCase()?.replace('_'," ")}</span>
                                         <span className='body'>{translate[isLang]?.VisitDetails?.VisitType}</span>
                                     </> : SkeletonSummary()}
                                 </Col>
@@ -186,47 +212,10 @@ const VisitDetails = () => {
                                         <span className='body'>{translate[isLang]?.VisitDetails?.VisitDistance}</span>
                                     </> : SkeletonSummary()}
                                 </Col>
-                                <Col className="summary_blog">
-                                    {isLoader ? <>
-                                        <span className={`  
-                                            ${visit.VisitStatus === 'PENDING' && 'txt_pending'} 
-                                            ${visit.VisitStatus === 'ONGOING' && 'txt_delivered'} 
-                                            ${visit.VisitStatus === 'ENDED' && 'txt_rejected'} 
-                                            ${visit.VisitStatus === 'CANCELLED' && 'txt_cancel'} 
-                                            ${visit.VisitStatus === 'REJECTED' && 'txt_rejected'}
-                                            ${visit.VisitStatus === 'ACCEPTED' && 'txt_delivery'}`}>
-                                            {visit?.VisitStatus?.charAt(0)?.toUpperCase() + visit?.VisitStatus?.slice(1).toLowerCase()}</span>
-                                        <span className='body'  >{translate[isLang]?.VisitDetails?.VisitStatus}</span>
-                                    </> : SkeletonSummary()}
-                                </Col>
-                            </Row>
+            
 
 
-                            <Row className='mt-3'>
 
-
-                                <Col className="summary_blog">
-
-                                    {isLoader ? <>
-                                        <span className='title'>{visit?.VisitServicePrice} SAR</span>
-                                        <span className='body'>{translate[isLang]?.VisitDetails?.VisitServicePrice}</span>
-                                    </> : SkeletonSummary()}
-                                </Col>
-                                <Col className="summary_blog">
-
-                                    {isLoader ? <>
-                                        <span className='title'>{visit?.VisitTrafficPrice} </span>
-                                        <span className='body'>{translate[isLang]?.VisitDetails?.VisitTrafficPrice}</span>
-                                    </> : SkeletonSummary()}
-                                </Col>
-
-                                <Col className="summary_blog">
-
-                                    {isLoader ? <>
-                                        <span className='title'>{visit?.VisitTotalPrice}</span>
-                                        <span className='body'>{translate[isLang]?.VisitDetails?.VisitTotalPrice}</span>
-                                    </> : SkeletonSummary()}
-                                </Col>
                                 <Col className="summary_blog">
 
                                     {isLoader ? <>
@@ -241,7 +230,19 @@ const VisitDetails = () => {
                                     </> : SkeletonSummary()}
                                 </Col>
 
-
+                    <Col className="summary_blog">
+                                    {isLoader ? <>
+                                        <span className={`  
+                                            ${visit.VisitStatus === 'PENDING' && 'txt_pending'} 
+                                            ${visit.VisitStatus === 'ONGOING' && 'txt_delivered'} 
+                                            ${visit.VisitStatus === 'ENDED' && 'txt_rejected'} 
+                                            ${visit.VisitStatus === 'CANCELLED' && 'txt_cancel'} 
+                                            ${visit.VisitStatus === 'REJECTED' && 'txt_rejected'}
+                                            ${visit.VisitStatus === 'ACCEPTED' && 'txt_delivery'}`}>
+                                            {visit?.VisitStatus?.charAt(0)?.toUpperCase() + visit?.VisitStatus?.slice(1).toLowerCase()}</span>
+                                        <span className='body'  >{translate[isLang]?.VisitDetails?.VisitStatus}</span>
+                                    </> : SkeletonSummary()}
+                                </Col>
                             </Row>
                         </div>
 
@@ -257,7 +258,7 @@ const VisitDetails = () => {
                             DoctorLat={visit?.DoctorLatitude}
                             DoctorLong={visit?.DoctorLongitude}
                             pinMarkF="Doctor"
-                            pinMarkL="Visitor"
+                            pinMarkL="Client"
                         />
                     </div>
 
