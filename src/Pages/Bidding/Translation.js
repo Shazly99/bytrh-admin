@@ -27,6 +27,17 @@ let initialTranslation = {
             "  تاريخ الإنشاء  ",
             "تفاصبل منتج"
         ],  
+        ExcelHeader: [  
+            " اسم العميل ",
+            " هاتف العميل ",
+            "تصنيف فرعي    ",
+            "سعر",
+            " نوع المنتج  ",
+            "حالة ",
+            "تاريخ البدء ",
+            "تاريخ الانتهاء ",
+            "تاريخ الإنشاء", 
+        ],
         bidding:{
             nav1:' المزايدة على الحيوانات  ',nav2:'تفاصيل المزايدة',
             header1:'معلومات المنتج',
@@ -73,7 +84,8 @@ let initialTranslation = {
             allSubCategory:'فئة الحيوانات'
         }  ,
         Actions: { action: "الإجراءات",currency:"ريال سعودي "},
-
+        excelSheet: 'تصدير إلى ملف إكسل',
+        filename: '     بيانات المزادات ',
     },
     "en": {
         placeholder:   'Search by client name or email or phone.....', 
@@ -102,6 +114,17 @@ let initialTranslation = {
             "End  Date ",
             "Create Date ",
             "View"
+        ],
+        ExcelHeader: [ 
+            " Client name ",
+            " Client phone ",
+            "Sub Category     ",
+            "Price",
+            "Type ",
+            "Status ",
+            "Start  Date ",
+            "End  Date ",
+            "Create Date ", 
         ],  
         bidding:{
             nav1:'Animal bidding',nav2:'Bidding details',
@@ -149,7 +172,8 @@ let initialTranslation = {
             allSubCategory:'Animals SubCategory'
         },
         Actions: { action: "Actions",currency:"SAR"},
-
+        excelSheet: 'Export to excel file',
+        filename: 'Data Bidding',
     }
 }
 

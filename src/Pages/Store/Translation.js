@@ -81,9 +81,19 @@ let initialTranslation = {
             allStatus:'كل الحالة',
             SubCategory:'حدد الفئة الفرعية',
             allSubCategory:'فئة الحيوانات'
-        }
-        
-
+        },
+        excelSheet: 'تصدير إلى ملف إكسل',
+        filename: '     بيانات المتجر',
+        currency:'ريال سعودي',
+        ExcelHeader: [  
+            " اسم العميل ",
+            " هاتف العميل ",
+            "تصنيف فرعي    ",
+            "سعر",
+            "نوع المنتج ",
+            "حالة ",
+            "تاريخ الإنشاء", 
+        ],  
     },
     "en": {
         placeholder:   'Search by client name or email or phone.....', 
@@ -105,6 +115,16 @@ let initialTranslation = {
             "Status ",
             "Create Date ",
             "View"
+        ],  
+
+        ExcelHeader: [  
+            " Client name ",
+            " Client phone ",
+            "Sub Category     ",
+            "Price",
+            "Type ",
+            "Status ",
+            "Create Date ", 
         ],  
         store:{
             nav1:'Animal Products',nav2:'Product Details',
@@ -166,7 +186,11 @@ let initialTranslation = {
             allStatus:'All Status',
             SubCategory:'Select SubCategory',
             allSubCategory:'Animals SubCategory'
-        }
+        },
+        excelSheet: 'Export to excel file',
+        filename: 'Data store',
+        currency:' SAR',
+
     }
 }
 

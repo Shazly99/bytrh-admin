@@ -1,4 +1,4 @@
-import React, { useState , useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import ItemAdoption from '../Adoption/ItemAdoption';
 import { useEffect } from 'react';
 // import { Pagination } from 'antd';
@@ -14,6 +14,7 @@ import Component from '../../../constants/Component';
 import axios from 'axios';
 import { apiheader } from '../../../utils/fetchData';
 import { VendersContext } from '../../../context/Store';
+import ExcelSheet from './ExcelSheet';
 
 
 
@@ -47,7 +48,7 @@ export default function Adoption() {
       getTokenAdoption();
     }, 200);
 
-    return(() => {
+    return (() => {
       clearTimeout(timeOut);
     })
   }, [countAdoption, pagesCountAdoption, searchKeyAdoption]);
@@ -58,7 +59,7 @@ export default function Adoption() {
   }, [countAdoption]);
 
   useEffect(() => {
-    if(loadingAdoption) {
+    if (loadingAdoption) {
       $('body').addClass('d-none');
       $('body').removeClass('d-block')
     }
@@ -68,7 +69,7 @@ export default function Adoption() {
 
 
   const handleChange = (event, value) => {
-    setCountAdoption(value); 
+    setCountAdoption(value);
   };
 
   const [valueSearch, setValueSearch] = useState('')
@@ -116,14 +117,15 @@ export default function Adoption() {
           </div>
 
           {loadingAdoption ?
-            <Loader /> 
+            <Loader />
 
             :
 
             <div className="total-table">
 
               {Object.keys(fetchAdoption).length > 0 ?
-                <> 
+                <>
+                  <ExcelSheet />
                   <div className="app__Users-table  ">
                     <Table responsive={true} className='rounded-3 '>
                       <thead className="table-light bg-input">
@@ -150,7 +152,7 @@ export default function Adoption() {
                             cityName={item.CityName}
                             cate={item.AnimalSubCategoryName}
                             status={item.AdoptionStatus}
-                            Reason={item?.AdoptionRejectReason }
+                            Reason={item?.AdoptionRejectReason}
                             getTokenAdoption={getTokenAdoption}
                           />
                         ))
@@ -161,7 +163,7 @@ export default function Adoption() {
 
                   <div className="pagination mt-2">
                     <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-                      <Pagination count={pagesCountAdoption} page={countAdoption} onChange={handleChange}  />
+                      <Pagination count={pagesCountAdoption} page={countAdoption} onChange={handleChange} />
                     </Box>
                   </div>
                 </>

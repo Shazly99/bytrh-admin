@@ -68,7 +68,7 @@ let initialTranslation = {
             pinMarkF: 'مركز طبي',
             uploadDoc: 'رفع المستند'
         },
-        excelSheet: ' تصدير إلى إكسل',
+        excelSheet: ' تصدير إلى ملف إكسل',
         filename: '  بيانات المراكز الطبية    ',
     },
     "en": {
@@ -146,7 +146,7 @@ let initialTranslation = {
             uploadDoc: '   Upload document'
 
         },
-        excelSheet: 'Export into excel',
+        excelSheet: 'Export to excel file',
         filename: 'Medicals Centers data',
     }
 }

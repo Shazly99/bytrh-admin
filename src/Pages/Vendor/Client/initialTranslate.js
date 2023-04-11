@@ -28,7 +28,7 @@ let initialTranslate = {
             reset: "تم إعادة تعيين كلمة المرور بنجاح ",
             delete: "تم حذف المستخدم"
         },
-        excelSheet:' تصدير إلى إكسل',
+        excelSheet:' تصدير إلى ملف إكسل',
         dataExport:'بيانات العملاء',
         currency:'ريال سعودي',
         ExcelHeader: [
@@ -76,7 +76,7 @@ let initialTranslate = {
             reset: "Password reset successfully ",
             delete: "user has been deleted "
         },
-        excelSheet:'Export into excel',
+        excelSheet:'Export to excel file',
         dataExport:'Clients Data',
         ExcelHeader: [
             "Client name",

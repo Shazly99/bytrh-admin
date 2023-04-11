@@ -67,7 +67,7 @@ let initialTranslation = {
             DoctorPhone: 'هاتف الطبيب',
             RouteVisit:'مسار طريق الزيارة',
             currency:"ريال سعودي",
-            excelSheet:' تصدير إلى إكسل',
+            excelSheet:' تصدير إلى ملف إكسل',
             filename:'بيانات الزيارات'
         }
 
@@ -140,7 +140,7 @@ let initialTranslation = {
             DoctorPhone: 'Doctor Phone',
             RouteVisit:'Route of the visit',
             currency:"SAR",
-            excelSheet:'Export into excel',
+            excelSheet:'Export to excel file',
             filename:'Visits data  '
 
         }

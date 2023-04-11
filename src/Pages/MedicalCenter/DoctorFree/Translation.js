@@ -93,7 +93,7 @@ let initialTranslation = {
             "تاريخ الإنشاء ", 
         ],
 
-        excelSheet:' تصدير إلى إكسل',
+        excelSheet:' تصدير إلى ملف إكسل',
         filename:'  بيانات الأطباء الحرة',
     },
     "en": {
@@ -180,7 +180,7 @@ let initialTranslation = {
             currency:'SAR',
      
         },
-        excelSheet:'Export into excel',
+        excelSheet:'Export to excel file',
         filename:'Doctors free data',
         ExcelHeader: [
             "Doctor name",

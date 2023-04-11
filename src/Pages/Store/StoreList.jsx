@@ -13,6 +13,7 @@ import useFetch from "../../utils/useFetch";
 import useSkeletonTable from "../../utils/useSkeletonTable";
 import { apiheader, PostData } from "./../../utils/fetchData";
 import initialTranslation from "./Translation";
+import ExcelSheet from "./ExcelSheet";
 
 
 const StoreList = () => {
@@ -460,6 +461,7 @@ const StoreList = () => {
                             </div>
                         </div>
                     </div>
+                    <ExcelSheet/>
                     {isLoader ? <>
                         <>
                             {

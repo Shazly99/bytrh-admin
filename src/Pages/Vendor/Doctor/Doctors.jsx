@@ -12,6 +12,7 @@ import Loader from '../../../Components/Shared/Loader/Loader';
 import axios from 'axios';
 import { apiheader } from '../../../utils/fetchData';
 import { VendersContext } from '../../../context/Store';
+import ExcelSheet from './ExcelSheet';
 
 
 export default function Doctors() {
@@ -273,7 +274,7 @@ export default function Doctors() {
             </div>
           </div>
 
-
+<ExcelSheet/>
           {loadingDoctors ?
             <Loader /> 
             :

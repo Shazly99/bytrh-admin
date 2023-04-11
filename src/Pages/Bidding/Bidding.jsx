@@ -13,6 +13,7 @@ import useFetch from "../../utils/useFetch";
 import useSkeletonTable from "../../utils/useSkeletonTable";
 import { apiheader, PostData } from "./../../utils/fetchData";
 import initialTranslation from "./Translation";
+import ExcelSheet from "./ExcelSheet";
 
 const Bidding = () => {
   let { isLang } = useContext(VendersContext);
@@ -58,14 +59,14 @@ const Bidding = () => {
   const handleChange = (event, value) => {
     setPage(value);
   };
-    // ** display Reason 
-    const [modalShowReason, setModalShowReason] = React.useState(false);
-    const [modalIndexReason, setModalIndexReason] = React.useState(0);
-    const handleModalCloseReason = () => setModalShowReason(false);
-    function handleModalOpenReason(index) {
-        setModalIndexReason(index);
-        setModalShowReason(true);
-    }
+  // ** display Reason 
+  const [modalShowReason, setModalShowReason] = React.useState(false);
+  const [modalIndexReason, setModalIndexReason] = React.useState(0);
+  const handleModalCloseReason = () => setModalShowReason(false);
+  function handleModalOpenReason(index) {
+    setModalIndexReason(index);
+    setModalShowReason(true);
+  }
   // ToDo::change Blogs status
   const [modalShow, setModalShow] = React.useState(false);
   const [modalIndex, setModalIndex] = React.useState(0);
@@ -446,7 +447,7 @@ const Bidding = () => {
               </div>
             </div>
           </div>
-
+          <ExcelSheet />
           {isLoader ? <>
             <>
               {
@@ -607,7 +608,7 @@ const Bidding = () => {
                             </Modal.Header>
                             <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
 
-                               <textarea className="form-control" rows="5" ref={reasonRef}/>
+                              <textarea className="form-control" rows="5" ref={reasonRef} />
 
                             </Modal.Body>
                             <Modal.Footer className="d-flex justify-content-center align-items-center">

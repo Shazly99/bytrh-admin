@@ -12,6 +12,7 @@ import useSkeletonTable from '../../../utils/useSkeletonTable';
 import { VendersContext } from '../../../context/Store';
 import initialTranslation from "./Translation";
 import Component from '../../../constants/Component';
+import ExcelSheet from './ExcelSheet';
 
 export const BlogDoctor = () => {
     let { isLang } = useContext(VendersContext);
@@ -243,6 +244,7 @@ export const BlogDoctor = () => {
                             </Col>
                         </Row>
                     </div>
+                    <ExcelSheet/>
                     {isLoader ? <>
                         {
                             blogs?.length > 0 ?

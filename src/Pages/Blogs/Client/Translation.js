@@ -18,7 +18,18 @@ let initialTranslation = {
             "حالة المدونة",
             'تفاصيل المدونة'
         ],  
-       
+        ExcelHeader: [ ,
+            " اسم العميل ", 
+            "عنوان المدونة    ",
+            " محتوي المدونة",
+            "لايكات المدونة",
+            "تعليقات المدونة",
+            "فئة الحيوان",
+            "رؤية المدونة	 ",
+            "حالة المدونة ",
+            "تاريخ المدونة ",
+            
+        ], 
         filter:{  
             Category:' حدد فئة الحيوانات',
             allCategory:'كل فئات الحيوانات'
@@ -40,7 +51,9 @@ let initialTranslation = {
 
 
             
-        }
+        },
+        excelSheet: 'تصدير إلى ملف إكسل',
+        filename: 'بيانات مدونات  العملاء ',
 
     },
     "en": {
@@ -61,6 +74,18 @@ let initialTranslation = {
             "Blog Date ",
             "Blog Status",
             "View"
+        ],  
+        ExcelHeader: [ ,
+            " Client name ", 
+            "Blog Title     ",
+            "Blog Body",
+            "Blog Likes",
+            "Blog Comments",
+            "Animal Category",
+            "Blog Visibility	 ",
+            "Blog Status ",
+            "Blog Date ",
+            
         ],   
 
         filter:{  
@@ -82,7 +107,9 @@ let initialTranslation = {
             toast:'The Comment Has Been Deleted ',
             toastUpdate:'Updated Successfully',
             
-        }
+        },
+        excelSheet: 'Export to excel file',
+        filename: 'Clients blogs data',
     }
 }
 

@@ -18,7 +18,18 @@ let initialTranslation = {
             "حالة المدونة",
             'تفاصيل المدونة'
         ],  
-       
+        ExcelHeader: [ ,
+            " اسم الطبيب ", 
+            "عنوان المدونة    ",
+            " محتوي المدونة",
+            "لايكات المدونة",
+            "تعليقات المدونة",
+            "فئة الحيوان",
+            "رؤية المدونة	 ",
+            "حالة المدونة ",
+            "تاريخ المدونة ",
+            
+        ], 
         filter:{  
             Category:' حدد فئة الحيوانات',
             allCategory:'كل فئات الحيوانات'
@@ -40,7 +51,9 @@ let initialTranslation = {
 
 
             
-        }
+        },
+        excelSheet: 'تصدير إلى ملف إكسل',
+        filename: 'بيانات مدونات  الاطباء ',
 
     },
     "en": {
@@ -62,7 +75,18 @@ let initialTranslation = {
             "Blog Status",
             "View"
         ],   
-
+        ExcelHeader: [ ,
+            " Doctor name ", 
+            "Blog Title     ",
+            "Blog Body",
+            "Blog Likes",
+            "Blog Comments",
+            "Animal Category",
+            "Blog Visibility	 ",
+            "Blog Status ",
+            "Blog Date ",
+            
+        ],  
         filter:{  
             Category:' Select Animal Category ',
             allCategory:'All category of animals'
@@ -82,7 +106,9 @@ let initialTranslation = {
             toast:'The Comment Has Been Deleted ',
             toastUpdate:'Updated Successfully',
             
-        }
+        },
+        excelSheet: 'Export to excel file',
+        filename: 'Doctor blogs data',
     }
 }
 

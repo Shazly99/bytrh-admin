@@ -11,6 +11,7 @@ import { apiheader, PostData } from '../../../utils/fetchData';
 import useSkeletonTable from '../../../utils/useSkeletonTable';
 import initialTranslation from "./Translation";
 import Component from "../../../constants/Component";
+import ExcelSheet from "./ExcelSheet";
 
 const BlogClient = () => {
     let { isLang } = useContext(VendersContext);
@@ -241,6 +242,7 @@ const BlogClient = () => {
                             </Col>
                         </Row>
                     </div>
+                    <ExcelSheet/>
                     {isLoader ? <>
                         {
                             blogs?.length > 0 ?

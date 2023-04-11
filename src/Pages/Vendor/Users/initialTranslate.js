@@ -58,7 +58,7 @@ let initialTranslate = {
             edit: "تم تحديث بيانات المستخدم",
             updatePassword:'تم تغيير الرقم السري بنجاح'
         },
-        excelSheet: ' تصدير إلى إكسل',
+        excelSheet: ' تصدير إلى ملف إكسل',
         filename: '  بيانات المستخدمين    ',
 
     },
@@ -114,7 +114,7 @@ let initialTranslate = {
             updatePassword:' Password has been changed successfully'
 
         },
-        excelSheet: 'Export into excel',
+        excelSheet: 'Export to excel file',
         filename: 'Users data',
     }
 }
