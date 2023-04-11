@@ -62,7 +62,7 @@ const routes = [
   {
     path: "/hours",
     nameAr: "مواعيد المركز الطبي",
-    nameEn: "M.C Hours",
+    nameEn: "Center Hours",
     // icon: <LogoSvg.Visits className="logoSvg" style={{ width: 19 }} />,
     icon: <Icons.Time size={19} />,
     Roles: [2]

@@ -70,11 +70,11 @@ const MCHours = () => {
                             {fetchCenterHours?.map((el , i) => (
                                 el.MedicalCenterHourStatus === "OPEN" ?
                                 <li key={i} className={`nav-item my-1 ${Object.keys(fetchCenterHours).length > 5 ? 'mx-0' : 'mx-4'}`} role="presentation">
-                                    <button className={`nav-link text-black mx-0 ${i === 0 ? 'active' : null}`} style={{fontWeight: '600' , fontSize: '18px'}} id={`pills-${el.MedicalCenterHourDay}-tab`} data-bs-toggle="pill" data-bs-target={`#pills-${el.MedicalCenterHourDay}`} type="button" role="tab" aria-controls={`pills-${el.MedicalCenterHourDay}`} aria-selected="true" >{el.MedicalCenterHourDay[0].toUpperCase() + el.MedicalCenterHourDay.slice(1).toLowerCase()}</button>
+                                    <button className={`nav-link mx-0 ${i === 0 ? 'active' : null}`} style={{fontWeight: '600' , fontSize: '18px'}} id={`pills-${el.MedicalCenterHourDay}-tab`} data-bs-toggle="pill" data-bs-target={`#pills-${el.MedicalCenterHourDay}`} type="button" role="tab" aria-controls={`pills-${el.MedicalCenterHourDay}`} aria-selected="true" >{el.MedicalCenterHourDay[0].toUpperCase() + el.MedicalCenterHourDay.slice(1).toLowerCase()}</button>
                                 </li>
                                 :
                                 <li key={i} className={`nav-item my-1 ${Object.keys(fetchCenterHours).length > 5 ? 'mx-0' : 'mx-4'}`} role="presentation">
-                                    <button className={`nav-link text-black mx-2 bg-secondary bg-opacity-75`} style={{fontWeight: '600' , fontSize: '18px'}} id={`pills-${el.MedicalCenterHourDay}-tab`} data-bs-toggle="pill" data-bs-target={`#pills-${el.MedicalCenterHourDay}`} type="button" role="tab" aria-controls={`pills-${el.MedicalCenterHourDay}`} aria-selected="true" disabled>{el.MedicalCenterHourDay[0].toUpperCase() + el.MedicalCenterHourDay.slice(1).toLowerCase()}</button>
+                                    <button className={`nav-link mx-2 bg-secondary bg-opacity-75`} style={{fontWeight: '600' , fontSize: '18px'}} id={`pills-${el.MedicalCenterHourDay}-tab`} data-bs-toggle="pill" data-bs-target={`#pills-${el.MedicalCenterHourDay}`} type="button" role="tab" aria-controls={`pills-${el.MedicalCenterHourDay}`} aria-selected="true" disabled>{el.MedicalCenterHourDay[0].toUpperCase() + el.MedicalCenterHourDay.slice(1).toLowerCase()}</button>
                                 </li>
                             ))}
                         </ul>

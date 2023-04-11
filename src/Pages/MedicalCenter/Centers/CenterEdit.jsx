@@ -211,7 +211,7 @@ const CenterEdit = () => {
               <div className="app__addprodects">
     
                 <div className="app__addprodects__header ">
-                  <Component.BaseHeader h1={isLang === 'ar' ? 'بيانـات المركز الطبي' : 'M.C information'} />
+                  <Component.BaseHeader h1={isLang === 'ar' ? 'بيانـات المركز الطبي' : 'Center information'} />
                   <div className="app__addOrder-form">
                     <div className="app__addprodects-form">
                       <form onSubmit={updateForm}>

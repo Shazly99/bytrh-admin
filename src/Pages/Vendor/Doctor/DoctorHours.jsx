@@ -87,10 +87,10 @@ const DoctorHours = () => {
 
             <ul className={`nav nav-pills mb-3 d-flex justify-content-sm-evenly justify-content-lg-start justify-content-start align-items-center`} id="pills-tab" role="tablist">
                     <li className={`nav-item my-1 mx-4`} role="presentation">
-                        <button className={`nav-link text-black mx-0 active`} style={{fontWeight: '600' , fontSize: '18px'}} id={`pills-consult-tab`} data-bs-toggle="pill" data-bs-target={`#pills-consult`} type="button" role="tab" aria-controls={`pills-consult`} aria-selected="true">{isLang === 'ar' ? 'إستشـارات' : 'Consults'}</button>
+                        <button className={`nav-link mx-0 active`} style={{fontWeight: '600' , fontSize: '18px'}} id={`pills-consult-tab`} data-bs-toggle="pill" data-bs-target={`#pills-consult`} type="button" role="tab" aria-controls={`pills-consult`} aria-selected="true">{isLang === 'ar' ? 'إستشـارات' : 'Consults'}</button>
                     </li>
                     <li className={`nav-item my-1 mx-4`} role="presentation">
-                        <button className={`nav-link text-black mx-2`} style={{fontWeight: '600' , fontSize: '18px'}} id={`pills-visit-tab`} data-bs-toggle="pill" data-bs-target={`#pills-visit`} type="button" role="tab" aria-controls={`pills-visit`} aria-selected="true">{isLang === 'ar' ? 'زيـارات' : 'Visits'}</button>
+                        <button className={`nav-link mx-2`} style={{fontWeight: '600' , fontSize: '18px'}} id={`pills-visit-tab`} data-bs-toggle="pill" data-bs-target={`#pills-visit`} type="button" role="tab" aria-controls={`pills-visit`} aria-selected="true">{isLang === 'ar' ? 'زيـارات' : 'Visits'}</button>
                     </li>
             </ul>
 
@@ -103,11 +103,11 @@ const DoctorHours = () => {
                                     {fetchDoctorHours?.map((el , i) => (
                                         el.DoctorHourStatus === "OPEN" ?
                                         <li key={i} className={`nav-item my-1 ${Object.keys(fetchDoctorHours).length > 5 ? 'mx-0' : 'mx-4'}`} role="presentation">
-                                            <button className={`nav-link text-black mx-0 ${i === 0 ? 'active' : null}`} style={{fontWeight: '600' , fontSize: '18px'}} id={`pills-consult-${el.DoctorHourDay}-tab`} data-bs-toggle="pill" data-bs-target={`#pills-consult-${el.DoctorHourDay}`} type="button" role="tab" aria-controls={`pills-consult-${el.DoctorHourDay}`} aria-selected="true" >{el.DoctorHourDay[0].toUpperCase() + el.DoctorHourDay.slice(1).toLowerCase()}</button>
+                                            <button className={`nav-link mx-0 ${i === 0 ? 'active' : null}`} style={{fontWeight: '600' , fontSize: '18px'}} id={`pills-consult-${el.DoctorHourDay}-tab`} data-bs-toggle="pill" data-bs-target={`#pills-consult-${el.DoctorHourDay}`} type="button" role="tab" aria-controls={`pills-consult-${el.DoctorHourDay}`} aria-selected="true" >{el.DoctorHourDay[0].toUpperCase() + el.DoctorHourDay.slice(1).toLowerCase()}</button>
                                         </li>
                                         :
                                         <li key={i} className={`nav-item my-1 ${Object.keys(fetchDoctorHours).length > 5 ? 'mx-0' : 'mx-4'}`} role="presentation">
-                                            <button className={`nav-link text-black mx-2 bg-secondary bg-opacity-75`} style={{fontWeight: '600' , fontSize: '18px'}} id={`pills-consult-${el.DoctorHourDay}-tab`} data-bs-toggle="pill" data-bs-target={`#pills-consult-${el.DoctorHourDay}`} type="button" role="tab" aria-controls={`pills-consult-${el.DoctorHourDay}`} aria-selected="true" disabled>{el.DoctorHourDay[0].toUpperCase() + el.DoctorHourDay.slice(1).toLowerCase()}</button>
+                                            <button className={`nav-link mx-2 bg-secondary bg-opacity-75`} style={{fontWeight: '600' , fontSize: '18px'}} id={`pills-consult-${el.DoctorHourDay}-tab`} data-bs-toggle="pill" data-bs-target={`#pills-consult-${el.DoctorHourDay}`} type="button" role="tab" aria-controls={`pills-consult-${el.DoctorHourDay}`} aria-selected="true" disabled>{el.DoctorHourDay[0].toUpperCase() + el.DoctorHourDay.slice(1).toLowerCase()}</button>
                                         </li>
                                     ))}
                                 </ul>
@@ -140,11 +140,11 @@ const DoctorHours = () => {
                                     {fetchDoctorVisits?.map((el , i) => (
                                         el.DoctorHourStatus === "OPEN" ?
                                         <li key={i} className={`nav-item my-1 ${Object.keys(fetchDoctorVisits).length > 5 ? 'mx-0' : 'mx-4'}`} role="presentation">
-                                            <button className={`nav-link text-black mx-0 ${i === 0 ? 'active' : null}`} style={{fontWeight: '600' , fontSize: '18px'}} id={`pills-visit-${el.DoctorHourDay}-tab`} data-bs-toggle="pill" data-bs-target={`#pills-visit-${el.DoctorHourDay}`} type="button" role="tab" aria-controls={`pills-visit-${el.DoctorHourDay}`} aria-selected="true" >{el.DoctorHourDay[0].toUpperCase() + el.DoctorHourDay.slice(1).toLowerCase()}</button>
+                                            <button className={`nav-link mx-0 ${i === 0 ? 'active' : null}`} style={{fontWeight: '600' , fontSize: '18px'}} id={`pills-visit-${el.DoctorHourDay}-tab`} data-bs-toggle="pill" data-bs-target={`#pills-visit-${el.DoctorHourDay}`} type="button" role="tab" aria-controls={`pills-visit-${el.DoctorHourDay}`} aria-selected="true" >{el.DoctorHourDay[0].toUpperCase() + el.DoctorHourDay.slice(1).toLowerCase()}</button>
                                         </li>
                                         :
                                         <li key={i} className={`nav-item my-1 ${Object.keys(fetchDoctorVisits).length > 5 ? 'mx-0' : 'mx-4'}`} role="presentation">
-                                            <button className={`nav-link text-black mx-2 bg-secondary bg-opacity-75`} style={{fontWeight: '600' , fontSize: '18px'}} id={`pills-visit-${el.DoctorHourDay}-tab`} data-bs-toggle="pill" data-bs-target={`#pills-visit-${el.DoctorHourDay}`} type="button" role="tab" aria-controls={`pills-visit-${el.DoctorHourDay}`} aria-selected="true" disabled>{el.DoctorHourDay[0].toUpperCase() + el.DoctorHourDay.slice(1).toLowerCase()}</button>
+                                            <button className={`nav-link mx-2 bg-secondary bg-opacity-75`} style={{fontWeight: '600' , fontSize: '18px'}} id={`pills-visit-${el.DoctorHourDay}-tab`} data-bs-toggle="pill" data-bs-target={`#pills-visit-${el.DoctorHourDay}`} type="button" role="tab" aria-controls={`pills-visit-${el.DoctorHourDay}`} aria-selected="true" disabled>{el.DoctorHourDay[0].toUpperCase() + el.DoctorHourDay.slice(1).toLowerCase()}</button>
                                         </li>
                                     ))}
                                 </ul>
