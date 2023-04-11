@@ -25,7 +25,7 @@ export default function AdoptionDetails() {
 
   async function getAdoptionData() {
     setLoading(true);
-    await axios.get(apiAdoptionDetails,  apiheader )
+    await axios.get(apiAdoptionDetails , apiheader )
       .then(res => {
         if (res.status === 200 && res.request.readyState === 4) {
           setFetchAdoptionDts(res.data.Response);
@@ -39,7 +39,13 @@ export default function AdoptionDetails() {
       })
   }
   useEffect(() => {
-    getAdoptionData();
+    let timeOut = setTimeout(() => {
+      getAdoptionData();
+    }, 200);
+
+    return(() => {
+      clearTimeout(timeOut);
+    })
   }, [])
   
 

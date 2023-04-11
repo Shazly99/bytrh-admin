@@ -29,7 +29,13 @@ export default function DoctorCategory() {
       })
   }
   useEffect(() => {
-    getDoctorData();
+    let timeOut = setTimeout(() => {
+      getDoctorData();
+    }, 200);
+
+    return(() => {
+      clearTimeout(timeOut);
+    })
   }, [])
 
 

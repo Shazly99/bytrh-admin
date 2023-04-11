@@ -93,6 +93,8 @@ import VisitDetails from './../Pages/Visits/VisitDetails';
 import Register from './../Pages/auth/MedicalCenter/Register/Register';
 import LoginMedicalCenter from './../Pages/auth/MedicalCenter/Login/LoginMedicalCenter';
 import MCProfile from './../Pages/auth/MedicalCenter/MCProfile/MCProfile';
+import MCHours from './../Pages/auth/MedicalCenter/MCHours/MCHours';
+import AddMCHour from './../Pages/auth/MedicalCenter/MCHours/AddMCHour';
 
 import DoctorFreeList from './../Pages/MedicalCenter/DoctorFree/DoctorFreeList';
 import InvalidRole from './../Components/Shared/InvalidRole/InvalidRole';
@@ -103,6 +105,9 @@ import AddDocs from './../Pages/MedicalCenter/Docs/AddDocs';
 import ProfileCenter from './../Pages/MedicalCenter/Centers/ProfileCenter';
 import CenterEdit from './../Pages/MedicalCenter/Centers/CenterEdit';
 import CenterAdd from './../Pages/MedicalCenter/Centers/CenterAdd';
+import CenterHours from './../Pages/MedicalCenter/Centers/CenterHours';
+import CenterSingleHour from '../Pages/MedicalCenter/Centers/CenterSingleHour';
+import AddHours from '../Pages/MedicalCenter/Centers/AddHours';
  
 const Component= {
     // Layout 
@@ -130,6 +135,8 @@ const Component= {
     Register,
     LoginMedicalCenter,
     MCProfile,
+    MCHours,
+    AddMCHour,
     // chat component
     ChatClient,
     ClientList,
@@ -230,6 +237,9 @@ const Component= {
     ProfileCenter,
     CenterEdit,
     CenterAdd,
+    CenterHours,
+    CenterSingleHour,
+    AddHours,
     // Consult Time
     ConsultTime,
     SingleConsultTime,

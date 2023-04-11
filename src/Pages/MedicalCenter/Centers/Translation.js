@@ -36,7 +36,7 @@ let initialTranslation = {
             SubCategory: 'حدد الفئة الفرعية',
             allSubCategory: 'فئة الحيوانات'
         },
-        Actions: { action: "أجراءات", currency: "ريال سعودي", edit: "تعديــل ", view: 'عرض الصفحة الشخصية', add: "إضافة ملف" },
+        Actions: { action: "أجراءات", currency: "ريال سعودي", edit: "تعديــل ", view: 'عرض الصفحة الشخصية', add: "إضافة ملف" , hour: 'أوقـات العمـل' },
         centerProfileDetails: {
             nav1: 'مراكز طبية ',
             nav2: 'حساب تعريفي ',
@@ -99,7 +99,7 @@ let initialTranslation = {
             SubCategory: 'Select SubCategory',
             allSubCategory: 'Animals SubCategory'
         },
-        Actions: { action: "Actions", currency: "SAR", edit: "Edit", view: 'View Profile' , add: "Upload Docu" },
+        Actions: { action: "Actions", currency: "SAR", edit: "Edit", view: 'View Profile' , add: "Upload Docs" , hour: 'M.C Hours' },
         centerProfileDetails: {
             nav1: 'Medicals centers ',
             nav2: 'Profile ',

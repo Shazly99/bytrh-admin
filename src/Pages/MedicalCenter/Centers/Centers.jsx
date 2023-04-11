@@ -2,7 +2,7 @@ import { Pagination, Skeleton } from "@mui/material";
 import Box from "@mui/material/Box";
 import axios from "axios";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Col, Dropdown, DropdownButton, NavDropdown, Form, Row, Table } from "react-bootstrap";
+import { Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
 
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -516,6 +516,10 @@ const Centers = () => {
 
                                   <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/medicalcenter/add/${item?.IDMedicalCenter}`}>
                                     {translate[isLang]?.Actions.add}
+                                  </Dropdown.Item>
+
+                                  <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/medicalcenter/hours/${item?.IDMedicalCenter}`}>
+                                    {translate[isLang]?.Actions.hour}
                                   </Dropdown.Item>
 
                                 </DropdownButton>

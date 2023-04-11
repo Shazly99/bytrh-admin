@@ -22,7 +22,7 @@ function VenderContext({ children }) {
 
     localStorage.removeItem("searchDoctors");
     localStorage.removeItem("searchAdoption");
-    // localStorage.removeItem("idmc");
+    localStorage.removeItem("idmc");
 
     localStorage.removeItem("Role");
     // return <Navigate to="/admin/login" replace={true} />

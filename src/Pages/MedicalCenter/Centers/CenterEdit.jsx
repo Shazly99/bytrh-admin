@@ -60,7 +60,7 @@ const CenterEdit = () => {
           setLongData(MedicalCenterLong);
           setImgProfile(MedicalCenterPicture);
           setIsLoading(false);
-        }, 100);
+        }, 200);
       }
       else {
         console.log(data.ApiMsg);

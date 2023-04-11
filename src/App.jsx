@@ -41,7 +41,6 @@ function App() {
 
   // function ProtectedRoutes({ children }) {
   //   if (localStorage.getItem('token') ) {
-  //     console.log('test');
   //     return children
   //   } else {
   //     return <Navigate to="/admin/login" replace={true} />
@@ -289,6 +288,8 @@ function App() {
             { path: 'edit/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.CenterEdit /> </ProtectedRoutes> },
             // { path: 'docs/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.CenterEdit /> </ProtectedRoutes> },
             { path: 'add/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.CenterAdd /> </ProtectedRoutes> },
+            { path: 'hours/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.CenterHours /> </ProtectedRoutes> },
+            { path: 'addHours/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.AddHours /> </ProtectedRoutes> },
 
           ]
         },
@@ -296,6 +297,12 @@ function App() {
           path: '/docs', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={[ '2' ]}><Component.Docs /> </ProtectedRoutes> },
             { path: 'add', element: <ProtectedRoutes allowedRoles={[ '2' ]}><Component.AddDocs /> </ProtectedRoutes> },
+          ]
+        },
+        {
+          path: '/hours', children: [
+            { index: true, element: <ProtectedRoutes allowedRoles={[ '2' ]}><Component.MCHours /> </ProtectedRoutes> },
+            { path: 'add', element: <ProtectedRoutes allowedRoles={[ '2' ]}><Component.AddMCHour /> </ProtectedRoutes> },
           ]
         },
         {

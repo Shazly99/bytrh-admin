@@ -49,7 +49,13 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
       })
   }
   useEffect(() => {
-    getDoctorData();
+    let timeOut = setTimeout(() => {
+      getDoctorData();
+    }, 200);
+
+    return(() => {
+      clearTimeout(timeOut);
+    })
   }, [])
 
 
