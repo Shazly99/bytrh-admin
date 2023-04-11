@@ -14,6 +14,7 @@ import { apiheader, PostData } from '../../../utils/fetchData';
 
 import initialTranslation from "./Translation";
 import { VendersContext } from "../../../context/Store";
+import ExcelSheet from "./ExcelSheet";
 const DoctorFreeList = () => {
 
   let { isLang } = useContext(VendersContext);
@@ -291,6 +292,7 @@ const DoctorFreeList = () => {
               </div>
             </div>
           </div>
+          <ExcelSheet/>
           {isLoader ? <>
             <>
               {

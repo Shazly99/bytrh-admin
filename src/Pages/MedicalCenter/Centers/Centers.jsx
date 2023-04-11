@@ -15,6 +15,7 @@ import useFetch from "../../../utils/useFetch";
 import useSkeletonTable from "../../../utils/useSkeletonTable";
 import { VendersContext } from "../../../context/Store";
 import { apiheader, PostData } from "../../../utils/fetchData";
+import ExcelSheet from "./ExcelSheet";
 // import LogoSvg from "../../../assets/svg/LogoSvg";
 
 const Centers = () => {
@@ -211,7 +212,7 @@ const Centers = () => {
     }
   }
 
-    // !Filter by  Medical Center status
+  // !Filter by  Medical Center status
   const medicalCenterstatusRef = useRef(null);
   const handelMedicalstatus = async () => {
     let MedicalCenterType = medicalCenterstatusRef.current.value
@@ -353,7 +354,7 @@ const Centers = () => {
               </div>
             </div>
           </div>
-
+          <ExcelSheet />
           {isLoader ? <>
             <>
               {
