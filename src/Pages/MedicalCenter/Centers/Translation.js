@@ -120,7 +120,7 @@ let initialTranslation = {
             allSubCategory: 'Animals SubCategory'
         },
  
-        Actions: { action: "Actions", currency: "SAR", edit: "Edit", view: 'View Profile' , add: "Upload Docs" , hour: 'M.C Hours' },
+        Actions: { action: "Actions", currency: "SAR", edit: "Edit", view: 'View Profile' , add: "Upload Docs" , hour: 'Center Hours' },
  
         centerProfileDetails: {
             nav1: 'Medicals centers ',
