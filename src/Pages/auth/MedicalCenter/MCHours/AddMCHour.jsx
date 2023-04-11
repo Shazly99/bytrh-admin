@@ -171,10 +171,10 @@ function AddMCHour() {
                     <div className="mt-4">
                         <ul className="nav nav-pills mb-4" id="pills-tab" role="tablist">
                             <li className="nav-item my-0 me-2" role="presentation">
-                                <button className="nav-link text-black mx-0 active" style={{fontWeight: '600' , fontSize: '18px'}} id="pills-single-tab" data-bs-toggle="pill" data-bs-target="#pills-single" type="button" role="tab" aria-controls="pills-single" aria-selected="true">{isLang === 'ar' ? 'يوم فردي' : 'Single'}</button>
+                                <button className="nav-link mx-0 active" style={{fontWeight: '600' , fontSize: '18px'}} id="pills-single-tab" data-bs-toggle="pill" data-bs-target="#pills-single" type="button" role="tab" aria-controls="pills-single" aria-selected="true">{isLang === 'ar' ? 'يوم فردي' : 'Single'}</button>
                             </li>
                             <li className="nav-item my-0 ms-2" role="presentation">
-                                <button className="nav-link text-black mx-0" style={{fontWeight: '600' , fontSize: '18px'}} id="pills-bulk-tab" data-bs-toggle="pill" data-bs-target="#pills-bulk" type="button" role="tab" aria-controls="pills-bulk" aria-selected="false">{isLang === 'ar' ? 'مجموعة أيام بنفس الموعد' : 'Bulk'}</button>
+                                <button className="nav-link mx-0" style={{fontWeight: '600' , fontSize: '18px'}} id="pills-bulk-tab" data-bs-toggle="pill" data-bs-target="#pills-bulk" type="button" role="tab" aria-controls="pills-bulk" aria-selected="false">{isLang === 'ar' ? 'مجموعة أيام بنفس الموعد' : 'Bulk'}</button>
                             </li>
                         </ul>
                         <div className="tab-content" id="pills-tabContent">
@@ -244,7 +244,7 @@ function AddMCHour() {
                                                 </div>
 
                                                 <div className='baseBtn'>
-                                                    <Link to={`/mcs/mcHours/${id}`}>
+                                                    <Link to={`/hours`}>
                                                         <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                                             {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                                                         </Button>
@@ -287,7 +287,7 @@ function AddMCHour() {
                                                 <div className="col-md-6">
                                                     <div className="group-add">
                                                         <label className="fs-5 " htmlFor="serviceLevel">
-                                                            {isLang === 'ar' ? 'مستوي الخدمة بالدقائق ( بين الخدمات )' : 'Service Level In Minutes (Between Slots)'}
+                                                            {isLang === 'ar' ? 'الدقائق ( بين الخدمات )' : 'Minutes (Between Slots)'}
                                                         </label>
                                                         <div className="input-group">
                                                             <input type="number" className='bg-transparent form-control mx-auto py-2 w-100' name="serviceLevel" id="serviceLevel" ref={mcServiceLevel} required />
@@ -327,7 +327,7 @@ function AddMCHour() {
                                                 </div>
 
                                                 <div className='baseBtn'>
-                                                    <Link to={`/mcs/mcHours/${id}`}>
+                                                    <Link to={`/hours`}>
                                                         <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                                             {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                                                         </Button>
