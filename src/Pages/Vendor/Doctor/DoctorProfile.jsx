@@ -47,7 +47,13 @@ export default function DoctorProfile() {
       })
   }
   useEffect(() => {
-    getDoctorData();
+    let timeOut = setTimeout(() => {
+      getDoctorData();
+    }, 200);
+
+    return(() => {
+      clearTimeout(timeOut);
+    })
   }, [])
 
 

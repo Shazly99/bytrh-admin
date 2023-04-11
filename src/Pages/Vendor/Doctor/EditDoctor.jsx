@@ -50,6 +50,17 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
         console.log(err);
       })
   }
+ 
+  useEffect(() => {
+    let timeOut = setTimeout(() => {
+      getDoctorData();
+    }, 200);
+
+    return(() => {
+      clearTimeout(timeOut);
+    })
+  }, [])
+ 
 
 
   // get cities Bytra

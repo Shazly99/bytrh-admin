@@ -13,6 +13,7 @@ function AddDoctorHours() {
 
   const { id } = useParams();
 
+  const doctorHourService = useRef();
   const doctorHourStatus = useRef();
   const doctorStartHour = useRef();
   const doctorEndHour = useRef();
@@ -21,6 +22,7 @@ function AddDoctorHours() {
   const doctorServiceLevel = useRef();
   const doctorStartBulkHour = useRef();
   const doctorEndBulkHour = useRef();
+  const doctorHourBulkService = useRef();
 
 
   const daysOptions = [
@@ -34,18 +36,16 @@ function AddDoctorHours() {
   ];
 
   const [selectedValues, setSelectedValues] = useState([]);
-  const [groupDays, setGroupDays] = useState([]);
+  const [groupDays, setGroupDays] = useState();
   let daysList = [];
 
   function handleChange (selectedOptions) {
     setSelectedValues(selectedOptions);
     for (let i of selectedOptions) {
-      daysList.push(i.value)
+      daysList.push(i.value);
     }
-    setGroupDays(...daysList);
+    setGroupDays(daysList);
   };
-  
-
 
 
   const changeStatus = () => {
@@ -88,7 +88,7 @@ function AddDoctorHours() {
         {
           IDDoctor: id,
           AddType: 'SINGLE',
-          DoctorHourService: 'CONSULT',
+          DoctorHourService: doctorHourService.current.value,
           DoctorHourDay: doctorHourDay.current.value,
           DoctorHourStatus: doctorHourStatus.current.value,
           DoctorStartHour: doctorStartHour.current.value,
@@ -98,7 +98,7 @@ function AddDoctorHours() {
         {
           IDDoctor: id,
           AddType: 'SINGLE',
-          DoctorHourService: 'CONSULT',
+          DoctorHourService: doctorHourService.current.value,
           DoctorHourDay: doctorHourDay.current.value,
           DoctorHourStatus: doctorHourStatus.current.value,
         },
@@ -129,8 +129,8 @@ function AddDoctorHours() {
         data: {
           IDDoctor: id,
           AddType: 'BULK',
-          DoctorHourService: 'CONSULT',
-          'DoctorHourDay[0]': groupDays,
+          DoctorHourService: doctorHourBulkService.current.value,
+          DoctorHourDay: groupDays,
           DoctorServiceLevel: doctorServiceLevel.current.value,
           DoctorStartHour: doctorStartBulkHour.current.value,
           DoctorEndHour: doctorEndBulkHour.current.value,
@@ -171,7 +171,7 @@ function AddDoctorHours() {
             <Component.SubNav sub__nav={[{ name: isLang === 'ar' ? 'أوقـات العمـل' : 'Doctor Hours', path: `/doctors/doctorHours/${id}` }, { name: isLang === 'ar' ? 'إضـافـة موعـد' : 'Add Time', path: `/doctors/addDoctorHours/${id}` }]} />
         }
         <div className="app__addprodects__header ">
-          <Component.BaseHeader h1={isLang === 'ar' ? 'إضـافـة موعـد جديد' : 'Add new Time'} />
+          <Component.BaseHeader h1={isLang === 'ar' ? 'إضـافـة موعـد جديد' : 'Add a new Time'} />
 
           <div className="mt-4">
               <ul className="nav nav-pills mb-4" id="pills-tab" role="tablist">
@@ -192,6 +192,19 @@ function AddDoctorHours() {
 
                           <div className="col-md-6">
                             <div className="group-add">
+                              <label className="fs-5 " htmlFor="service">{isLang === 'ar' ? 'الخدمـة' : 'Service'}</label>
+                              <div className="input-group">
+                                <select className='w-100 bg-transparent mx-auto py-2 px-2' name="service" id="service" ref={doctorHourService} required>
+                                  <option>{isLang === 'ar' ? 'اختر الخدمـة' : 'choose a Service'}</option>
+                                  <option value='CONSULT' >{isLang === 'ar' ? 'إستشـارة' : 'Consult'}</option>
+                                  <option value='VISIT' >{isLang === 'ar' ? 'زيـارة' : 'Visit'}</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="col-md-6">
+                            <div className="group-add">
                               <label className="fs-5 " htmlFor="day">{isLang === 'ar' ? 'اليـوم' : 'Day'}</label>
                               <div className="input-group">
                                 <select className='w-100 bg-transparent mx-auto py-2 px-2' name="day" id="day" ref={doctorHourDay} required>
@@ -206,7 +219,7 @@ function AddDoctorHours() {
 
                           <div className="col-md-6">
                             <div className="group-add">
-                              <label className="fs-5 " htmlFor="day">{isLang === 'ar' ? 'الحالـة' : 'Status'}</label>
+                              <label className="fs-5 " htmlFor="status">{isLang === 'ar' ? 'الحالـة' : 'Status'}</label>
                               <div className="input-group">
                                 <select className='w-100 bg-transparent mx-auto py-2 px-2' name="status" id="status" onChange={changeStatus} ref={doctorHourStatus} required>
                                   <option>{isLang === 'ar' ? 'اختر الحالـة' : 'choose a Status'}</option>
@@ -267,6 +280,19 @@ function AddDoctorHours() {
                     <div className="app__addprodects-form">
                       <form onSubmit={registerAddBulkForm}>
                         <div className="row d-flex justify-content-center justify-content-md-start align-items-center g-4">
+
+                          <div className="col-md-6">
+                            <div className="group-add">
+                              <label className="fs-5 " htmlFor="serviceBulk">{isLang === 'ar' ? 'الخدمـة' : 'Service'}</label>
+                              <div className="input-group">
+                                <select className='w-100 bg-transparent mx-auto py-2 px-2' name="serviceBulk" id="serviceBulk" ref={doctorHourBulkService} required>
+                                  <option>{isLang === 'ar' ? 'اختر الخدمـة' : 'choose a Service'}</option>
+                                  <option value='CONSULT' >{isLang === 'ar' ? 'إستشـارة' : 'Consult'}</option>
+                                  <option value='VISIT' >{isLang === 'ar' ? 'زيـارة' : 'Visit'}</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
 
                           <div className="col-md-6">
                             <div className="group-add">
@@ -346,9 +372,6 @@ function AddDoctorHours() {
                 </div>
               </div>
           </div>
-
-
-
 
         </div>
       </div >

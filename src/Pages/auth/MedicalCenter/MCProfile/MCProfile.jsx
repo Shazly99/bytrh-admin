@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import axios from 'axios'; 
 import '../../../Vendor/Doctor/Doctor.scss'
 import PhoneInput from 'react-phone-input-2';
@@ -69,7 +70,7 @@ const MCProfile = ({ countries }) => {
       return(() => {
         clearTimeout(timeOut);
       })
-  }, [id]);
+  }, []);
 
 
   const handleImageSelect = (el) => {
@@ -266,7 +267,7 @@ const MCProfile = ({ countries }) => {
                           <label className="fs-5  " htmlFor="MCPhone">{isLang === 'ar' ? 'رقـم التليفـون' : 'Phone Medical Center'}</label>
                           <div className="input-group">
                             <PhoneInput
-                              value={countryCode}
+                              value={countryCode.includes('undefined') ? '+20' : countryCode}
                               preferredCountries={['eg', 'sa', 'ae']}
                               enableSearch={true}
                               searchPlaceholder={isLang === 'ar' ? 'الرقم الكودي الدولـة..' : 'Country number...'}

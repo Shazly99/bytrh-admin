@@ -78,7 +78,7 @@ export default function Doctors() {
     setCountDoctors(1);
     setTimeout(() => {
       handelSearchEvent()
-    }, 100);
+    }, 200);
   }
 
   const handelClickSearch = (e) => {

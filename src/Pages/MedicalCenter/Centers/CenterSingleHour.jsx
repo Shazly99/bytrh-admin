@@ -1,6 +1,6 @@
 import React, { useState , useContext } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
-import './Doctor.scss';
+import '../../Vendor/Doctor/Doctor.scss';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { apiheader } from '../../../utils/fetchData'; 
@@ -10,29 +10,28 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 
 
-const SingleHour = ({ DoctorTime, getDoctorHours }) => {
+const CenterSingleHour = ({ MedicalCenterTime, getCenterHours }) => {
 
 
     const [showRemove, setShowRemove] = useState(false);
     const handleCloseRemove = () => setShowRemove(false);
     const handleShowRemove = () => setShowRemove(true);
 
-    const apiRemoveHours = `https://bytrh.com/api/admin/doctors/hours/remove/`;
-
+    const apiRemoveHours = `https://bytrh.com/api/admin/medicalcenter/hours/remove/`;
     const [messageRemove, setMessageRemove] = useState('');
     const [apiCodeRemove, setApiCodeRemove] = useState();
     const [loadingRemove, setLoadingRemove] = useState(false);
 
     const handleRemoveHour = async (id) => {
         setLoadingRemove(true);
-        await axios.get(apiRemoveHours + id , apiheader)
+        await axios.get(apiRemoveHours + id, apiheader)
             .then(res => {
                 if (res.data.Success === true) {
                     setApiCodeRemove(res.data.Success)
                     setMessageRemove(res.data.ApiMsg);
                     setLoadingRemove(false);
                     setTimeout(() => {
-                        getDoctorHours()
+                        getCenterHours()
                     }, 1000);
                 }
                 else {
@@ -57,7 +56,7 @@ const SingleHour = ({ DoctorTime, getDoctorHours }) => {
         <div className="col-xl-3 col-lg-4 col-md-5 col-6">
             <div className="inf-time text-center py-4 px-3 rounded-3 shadow-sm position-relative" style={{ whiteSpace: 'nowrap', backgroundColor: '#F1F1F1', fontWeight: '600' }}>
                 <h6 className='mb-0'>
-                    {DoctorTime.DoctorStartHour.slice(0, 5)} {Number(DoctorTime.DoctorStartHour.slice(0, 2)) < 12 ? isLang === 'ar' ? 'ص' : 'AM' : isLang === 'ar' ? 'م' : 'PM'} - {DoctorTime.DoctorEndHour.slice(0, 5)} {Number(DoctorTime.DoctorEndHour.slice(0, 2)) < 12 ? isLang === 'ar' ? 'ص' : 'AM' : isLang === 'ar' ? 'م' : 'PM'}
+                    {MedicalCenterTime.MedicalCenterStartHour.slice(0, 5)} {Number(MedicalCenterTime.MedicalCenterStartHour.slice(0, 2)) < 12 ? isLang === 'ar' ? 'ص' : 'AM' : isLang === 'ar' ? 'م' : 'PM'} - {MedicalCenterTime.MedicalCenterEndHour.slice(0, 5)} {Number(MedicalCenterTime.MedicalCenterEndHour.slice(0, 2)) < 12 ? isLang === 'ar' ? 'ص' : 'AM' : isLang === 'ar' ? 'م' : 'PM'}
                 </h6>
                 <AiFillCloseCircle className={`position-absolute top-0 ${isLang === 'ar' ? 'start-0' : 'end-0'} translate-middle-y h3 color-red`} onClick={handleShowRemove} style={{ cursor: 'pointer' }} />
             </div>
@@ -79,7 +78,7 @@ const SingleHour = ({ DoctorTime, getDoctorHours }) => {
                     <div className='d-flex justify-content-center align-content-center'>
                         <div className={`baseBtn ${isLang === 'ar' ? 'ps-0 ms-2' : 'pe-0 me-2'}`}>
                             <Button onClick={() => {
-                                handleRemoveHour(DoctorTime.IDDoctorHour)
+                                handleRemoveHour(MedicalCenterTime.IDMedicalCenterHour)
                             }} variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                 {loadingRemove ? <CircularProgress size={27} style={{color: '#fff'}} />:
                                     isLang === 'ar' ? 'تأكيـد' : 'Confirm'}
@@ -99,4 +98,4 @@ const SingleHour = ({ DoctorTime, getDoctorHours }) => {
     )
 }
 
-export default SingleHour
+export default CenterSingleHour

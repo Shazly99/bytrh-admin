@@ -43,7 +43,13 @@ export default function Adoption() {
       });
   }
   useEffect(() => {
+    let timeOut = setTimeout(() => {
       getTokenAdoption();
+    }, 200);
+
+    return(() => {
+      clearTimeout(timeOut);
+    })
   }, [countAdoption, pagesCountAdoption, searchKeyAdoption]);
 
 
