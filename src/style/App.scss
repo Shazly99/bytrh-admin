@@ -400,3 +400,10 @@ td {
   border: none !important;
   padding:  8px  !important;
 }
+.app__reason{
+  a{
+    color: $mainColor !important;
+    cursor: pointer;
+    text-decoration-line:  underline !important;
+  }
+}

@@ -32,11 +32,13 @@ import { TfiCommentAlt as comments } from "react-icons/tfi";
 import { GiWalk as Visit } from "react-icons/gi";
 import { SiTimescale as Time } from "react-icons/si";
 import { CgFileDocument as Docs } from "react-icons/cg";
+import { SiMicrosoftexcel as ExcelIcon } from "react-icons/si";
  import logout from "../assets/Images/svg/logout.svg";
 import profile from "../assets/Images/Vector.svg";
 
 
 const icons ={
+    ExcelIcon,
     Visit,
     Uncheck,
     bidding,

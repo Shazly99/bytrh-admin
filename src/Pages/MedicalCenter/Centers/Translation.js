@@ -21,7 +21,15 @@ let initialTranslation = {
             "اسم المنطقة",
             'أجراءات'
         ],
-
+        ExcelHeader: [
+             " إسم المركز الطبي ",
+            " رقم هاتف المركز الطبي ",
+            "نوع ",
+            "حالة ",
+            "اسم المنطقة",
+            "تاريخ الإنشاء ",
+ 
+        ],
         filter: {
             Country: 'حدد الدولة',
             allCountry: 'بلدان',
@@ -40,7 +48,7 @@ let initialTranslation = {
         centerProfileDetails: {
             nav1: 'مراكز طبية ',
             nav2: 'حساب تعريفي ',
-            header1:'معلومات المركز الطبي',
+            header1: 'معلومات المركز الطبي',
             MCName: ' اسم المركز الطبي',
             MCPhone: '  هاتف المركز الطبي ',
             MCEmail: 'البريد الإلكتروني للمركز الطبي ',
@@ -55,11 +63,13 @@ let initialTranslation = {
             CityName: 'اسم المدينة  ',
             MCLat: 'المركز الطبى لات',
             MCLong: '  مركز طبي طويل ',
-            RoutecenterProfile:'موقع المركز الطبي',
-            RoutecenterDoc:'وثائق المركز الطبي',
-            pinMarkF:'مركز طبي',
-            uploadDoc:'رفع المستند'
-        }
+            RoutecenterProfile: 'موقع المركز الطبي',
+            RoutecenterDoc: 'وثائق المركز الطبي',
+            pinMarkF: 'مركز طبي',
+            uploadDoc: 'رفع المستند'
+        },
+        excelSheet: ' تصدير إلى إكسل',
+        filename: '  بيانات المراكز الطبية    ',
     },
     "en": {
         placeholder: 'Search by medical center name or phone.....',
@@ -85,6 +95,16 @@ let initialTranslation = {
 
         ],
 
+        ExcelHeader: [
+             " Medical center Name ",
+            " Medical center Phone ",
+            "Type ",
+            "Status ",
+            "Area Name",
+            "Create Date ",
+ 
+        ],
+
         filter: {
             Country: 'Select Country',
             allCountry: 'Countries',
@@ -99,11 +119,13 @@ let initialTranslation = {
             SubCategory: 'Select SubCategory',
             allSubCategory: 'Animals SubCategory'
         },
+ 
         Actions: { action: "Actions", currency: "SAR", edit: "Edit", view: 'View Profile' , add: "Upload Docs" , hour: 'M.C Hours' },
+ 
         centerProfileDetails: {
             nav1: 'Medicals centers ',
             nav2: 'Profile ',
-            header1:'Medical Center Info',
+            header1: 'Medical Center Info',
             MCName: ' Medical Center Name',
             MCPhone: '  Medical Center Phone ',
             MCEmail: 'Medical Center Email ',
@@ -118,12 +140,14 @@ let initialTranslation = {
             CityName: 'City Name  ',
             MCLat: 'Medical Center Lat',
             MCLong: ' Medical Center Long ',
-            RoutecenterProfile:'Medical Center Location',
-            RoutecenterDoc:'Medical Center Documents',
-            pinMarkF:'Medical Center',
-            uploadDoc:'   Upload document'
+            RoutecenterProfile: 'Medical Center Location',
+            RoutecenterDoc: 'Medical Center Documents',
+            pinMarkF: 'Medical Center',
+            uploadDoc: '   Upload document'
 
-        }
+        },
+        excelSheet: 'Export into excel',
+        filename: 'Medicals Centers data',
     }
 }
 
