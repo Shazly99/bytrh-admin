@@ -12,6 +12,7 @@ import { apiheader, GetData, PostData } from './../../../utils/fetchData';
 import Complain from './Complain';
 import initialTranslation from "./Translation";
 import { useRef } from "react";
+import ExcelSheet from "./ExcelSheet";
 
 const ChatConsult = () => {
   let { isLang } = useContext(VendersContext);
@@ -118,7 +119,7 @@ const ChatConsult = () => {
     const selectedValue = event.target.value;
     setSelectedOption(selectedValue);
     // filter your content based on the selected option 
-    if (selectedValue === "ONGOING" || 
+    if (selectedValue === "ONGOING" ||
       selectedValue === "REJECTED" ||
       selectedValue === "SKIPPED" ||
       selectedValue === "NO_RESPONSE" ||
@@ -134,10 +135,10 @@ const ChatConsult = () => {
   // !Filter by start date and end date
   let startDate = useRef();
   let endDate = useRef();
-  const handelDate =async () => {
+  const handelDate = async () => {
     console.log(startDate.current.value);
     console.log(endDate.current.value);
-    await PostData(`${process.env.REACT_APP_API_URL}/admin/consult`, { IDPage: page, StartDate: startDate.current.value,EndDate:endDate.current.value }, apiheader).then((res) => {
+    await PostData(`${process.env.REACT_APP_API_URL}/admin/consult`, { IDPage: page, StartDate: startDate.current.value, EndDate: endDate.current.value }, apiheader).then((res) => {
       if (res.status === 200 && res.request.readyState === 4) {
         setConsultList(res.data.Response.Consults);
         setPagesNumber(res.data.Response.Pages);
@@ -181,7 +182,7 @@ const ChatConsult = () => {
             </div>
           </div>
           <div className="app__addOrder-form ">
-          <Row className="mb-3">
+            <Row className="mb-3">
               <Col xl={5} lg={5} md={6} sm={12} >
                 <Form.Control type="date" ref={startDate} className="w-100" />
               </Col>
@@ -217,6 +218,7 @@ const ChatConsult = () => {
 
             </div>
           </div>
+          <ExcelSheet />
           {isLoader ? <>
             <Table responsive={true}  >
               <thead>
@@ -295,7 +297,11 @@ const ChatConsult = () => {
                       </td>
                       <td>
                         <div className='d-flex flex-column justify-content-center align-content-center' style={{ gap: '0' }}>
-                          <span className='ClientName'>{item?.ConsultAmount}</span>
+
+                          <h6 className="mb-0  pe-2 bolder">
+                            {item?.ConsultAmount} {translate[isLang]?.currency}
+                          </h6>
+
                         </div>
                       </td>
                       <td className='text-center  d-flex '>

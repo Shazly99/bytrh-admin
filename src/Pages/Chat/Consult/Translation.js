@@ -50,7 +50,23 @@ let initialTranslation = {
             userClient:'العميل :',
             userDr:'دكتور : ',
             btn:'غلق'
-        }
+        },
+        excelSheet: 'تصدير إلى ملف إكسل',
+        filename: ' البيانات الاستشارات',
+        ComplainBody:'لا يوجد شكوي ',
+        currency:'ريال سعودي  ',
+
+        ExcelHeader: [
+            "اسم العميل",
+            "هاتف العميل",
+            "اسم الطبيب  ",
+            "هاتف الطبيب ",
+            "نوع الاستشارة",
+            " مبلغ الاستشارة ",
+            "حالة الاستشارة ",
+            "شكوى العميل ",
+            "يشكو الطبيب "
+        ],
     },
     "en": {
         placeholder: {
@@ -77,6 +93,17 @@ let initialTranslation = {
             "Counseling status ",
             "Action"
         ],
+        ExcelHeader: [
+            "Client name",
+            "Client phone",
+            "Doctor name  ",
+            "Doctor phone  ",
+            "Consult Type",
+            "Consult Amount ",
+            "Counseling status ",
+            "Client Complain ",
+            "Doctor Complain "
+        ],
         Actions: { action: "Actions", chat: "Chat", endChat: ' End Chat  ' },
         toast: { endChat: "Chat has been ended" },
         consultChat: {
@@ -102,7 +129,12 @@ let initialTranslation = {
         ConsultType:[ 
             { value: "NORMAL", text: "Normal  " },
             { value: "URGENT", text: " Urgent " },
-        ]
+        ],
+        excelSheet: 'Export to excel file',
+        filename: '  Consulting data',
+        ComplainBody:'There are no complaints',
+        currency:'SAR  ',
+
 
     }
 }

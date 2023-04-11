@@ -15,6 +15,14 @@ let initialTranslate = {
             "منصب",
             "الإجراء"
         ],
+        ExcelHeader: [
+            "إسم  المستخدم",
+            " هاتف ",
+            "بريد إلكتروني",
+            "منصب",
+            "حالة المستخدم",
+            "تاريخ الانشاء"
+        ],
         Actions: [
             { name: "الإجراءات" },
             { name: "تعديل" },
@@ -50,6 +58,8 @@ let initialTranslate = {
             edit: "تم تحديث بيانات المستخدم",
             updatePassword:'تم تغيير الرقم السري بنجاح'
         },
+        excelSheet: ' تصدير إلى إكسل',
+        filename: '  بيانات المستخدمين    ',
 
     },
     "en": {
@@ -67,6 +77,14 @@ let initialTranslate = {
             "User State",
             "Role",
             "Action"
+        ],
+        ExcelHeader: [
+            "User Name",
+            "Phone  ",
+            "Email",
+            "Role",
+            "User State",
+            "Create Date"
         ],
         Actions: [
             { name: "Actions" },
@@ -95,7 +113,9 @@ let initialTranslate = {
             edit: "User data has been updated ",
             updatePassword:' Password has been changed successfully'
 
-        }
+        },
+        excelSheet: 'Export into excel',
+        filename: 'Users data',
     }
 }
 

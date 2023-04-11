@@ -1,14 +1,12 @@
-import React, { useState, useContext } from 'react';
-import { useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Dropdown, DropdownButton, Modal, NavDropdown, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-import Icons from "../../../constants/Icons.js";
-import { apiheader, PostData } from '../../../utils/fetchData.js';
-import useSkeletonTable from '../../../utils/useSkeletonTable.js';
 import Component from '../../../constants/Component.js';
 import { VendersContext } from '../../../context/Store.js';
-import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import { PostData, apiheader } from '../../../utils/fetchData.js';
+import useSkeletonTable from '../../../utils/useSkeletonTable.js';
+import ExcelSheet from './ExcelSheet.jsx';
 
 function UsersTable({ usersList, userList, isLoader, toastTranslate, actionsTranslate, statusTranslate, tabelTranslate }) {
     let { SkeletonTable } = useSkeletonTable();
@@ -61,20 +59,7 @@ function UsersTable({ usersList, userList, isLoader, toastTranslate, actionsTran
 
     return (
         <>
-            <ReactHTMLTableToExcel
-                table="my-table"
-                filename={'User Data'}
-                sheet="Sheet 1"
-                buttonText={
-                    <div className='d-flex gap-2 ' style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <Icons.ExcelIcon />
-                        <span>{'Export into excel'}</span>
-                    </div>
-                }
-                className='btn btn-sucess btn__excel'
-
-
-            />
+          <ExcelSheet/>
             {isLoader ? <>
                 <Table responsive={true} id='my-table' className='rounded-3 '>
                     <thead>
