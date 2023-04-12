@@ -17,7 +17,7 @@ function App() {
 
   const [fetchCountriesBytra, setFetchCountriesBytra] = useState([]);
   async function getCountriesBytra() {
-    await axios.get(`https://bytrh.com/api/doctor/countries`)
+    await axios.get(`https://bytrh.com/api/admin/countries`)
       .then(res => {
         if (res.status === 200 && res.request.readyState === 4) {
           setFetchCountriesBytra(res.data.Response.Countries);
