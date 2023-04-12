@@ -16,7 +16,7 @@ import useFetch from '../../../utils/useFetch';
 
 const EditDoctor = ({ fetchCountriesBytra }) => {
   const { id } = useParams();
-  let { countries, cities, getCities } = useFetch()
+  let { cities, getCities } = useFetch()
   const selectCity = useRef();
 
   const apiInfos = `https://bytrh.com/api/admin/doctors/edit/${id}`;
@@ -27,7 +27,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
   const [phone, setPhone] = useState('');
   const [countryCode, setCountryCode] = useState('');
   const [country, setCountry] = useState('');
-  const [city, setCity] = useState('');
+  // const [city, setCity] = useState('');
   // const [picture, setPicture] = useState([]);
   // const [license, setLicense] = useState([]);
   // const [expire, setExpire] = useState('');
@@ -41,10 +41,10 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
           setPhone(res.data.Response.UserPhone);
           setCountryCode(res.data.Response.UserPhoneFlag);
           setCountry(res.data.Response.IDCountry);
-          setCity(res.data.Response.IDCity);
+          // setCity(res.data.Response.IDCity);
           setUserData(res.data.Response);
           getCities(res.data.Response.IDCountry)
-         }
+        }
       })
       .catch(err => {
         console.log(err);
@@ -60,16 +60,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
       clearTimeout(timeOut);
     })
   }, [])
- 
 
-
-  // get cities Bytra
-
-
-
-  useEffect(() => {
-    getDoctorData();
-  }, [])
 
 
 
