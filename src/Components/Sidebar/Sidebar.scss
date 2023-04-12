@@ -4,8 +4,8 @@
     display: flex;
     z-index: 9999;
 
-    @media screen and (max-width:600px) {
-        // display: none;
+    @media screen and (max-width:900px) {
+        display: none;
     } 
     main {
         padding: 10px;

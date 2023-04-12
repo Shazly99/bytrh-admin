@@ -35,7 +35,7 @@ const AddNewUser = () => {
         const selectedCountryId = event.target.value;
         getCities(selectedCountryId)
     }
- 
+
 
     const onChangeHandler = (phone, country, e) => {
         setPhoneNumber(phone)
@@ -44,15 +44,27 @@ const AddNewUser = () => {
 
     const submit = e => {
         e.preventDefault()
-        addNewUser({
-            UserEmail: email.current.value,
-            UserPassword: password.current.value,
-            UserPhone: '+' + phoneNumber,
-            UserPhoneFlag: '+' + Country,
-            UserName: username.current.value,
-            IDRole: ruleRef.current.value,
-            IDCity: countriesRef.current.value
-        })
+        if (localStorage.getItem('Role') === '1') {
+            addNewUser({
+                UserEmail: email.current.value,
+                UserPassword: password.current.value,
+                UserPhone: '+' + phoneNumber,
+                UserPhoneFlag: '+' + Country,
+                UserName: username.current.value,
+                IDRole: ruleRef.current.value,
+                IDCity: countriesRef.current.value
+            })
+        } else if (localStorage.getItem('Role') === '2') {
+            addNewUser({
+                UserEmail: email.current.value,
+                UserPassword: password.current.value,
+                UserPhone: '+' + phoneNumber,
+                UserPhoneFlag: '+' + Country,
+                UserName: username.current.value,
+                IDRole: 'Medical Center',
+                IDCity: countriesRef.current.value
+            })
+        }
     }
 
     async function addNewUser(newUser) {
@@ -78,8 +90,8 @@ const AddNewUser = () => {
     }
 
     async function rolesList(newUser) {
-       let data= await GetData(`https://bytrh.com/api/admin/roles`, apiheader)
-       setRole(data.Response);
+        let data = await GetData(`https://bytrh.com/api/admin/roles`, apiheader)
+        setRole(data.Response);
     }
 
 
@@ -87,6 +99,8 @@ const AddNewUser = () => {
         handelTranslate()
 
         rolesList()
+    }, [])
+    useEffect(() => {
     }, [phoneNumber, isLang])
 
     return (
@@ -135,18 +149,21 @@ const AddNewUser = () => {
                                                     }
                                                 </Form.Select>
                                             </Form.Group>
+                                            {
+                                                localStorage.getItem('Role') === '1' &&
 
-                                            <Form.Group controlId="formBasicEmail" className='mt-3'>
-                                                <Form.Label>{translate[isLang]?.roule.name} </Form.Label>
-                                                <Form.Select aria-label="Default select example" ref={ruleRef}  >
-                                                    {/* <option>{countries[1].CountryName}</option> */}
-                                                    {
-                                                        role?.map((item, index) => (
-                                                            <option key={index} value={item?.IDRole}  >{item?.RoleName}</option>
-                                                        ))
-                                                    }
-                                                </Form.Select>
-                                            </Form.Group>
+                                                <Form.Group controlId="formBasicEmail" className='mt-3'>
+                                                    <Form.Label>{translate[isLang]?.roule.name} </Form.Label>
+                                                    <Form.Select aria-label="Default select example" ref={ruleRef}  >
+                                                        {/* <option>{countries[1].CountryName}</option> */}
+                                                        {
+                                                            role?.map((item, index) => (
+                                                                <option key={index} value={item?.IDRole}  >{item?.RoleName}</option>
+                                                            ))
+                                                        }
+                                                    </Form.Select>
+                                                </Form.Group>
+                                            }
                                         </Col>
                                         <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
                                             <Form.Group controlId="formBasicEmail"  >

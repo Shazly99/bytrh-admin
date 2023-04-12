@@ -37,7 +37,7 @@ const Edit = () => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
- 
+
     const handelSelectCountry = (event) => {
         const selectedCountryId = event.target.value;
         getCities(selectedCountryId)
@@ -48,18 +48,27 @@ const Edit = () => {
     }
     const submit = e => {
         e.preventDefault()
-        addNewUser({
-            UserEmail: email.current.value, 
-            UserPhone: phoneNumber,
-            UserPhoneFlag: Country,
-            UserName: username.current.value,
-            IDCity: selectCity.current.value,
-            IDRole: ruleRef.current.value,
-            IDUser: id
-        }).then(res => {
-
-        }).catch(err => {
-        })
+        if (localStorage.getItem('Role') === '1') {
+            addNewUser({
+                UserEmail: email.current.value,
+                UserPhone: phoneNumber,
+                UserPhoneFlag: Country,
+                UserName: username.current.value,
+                IDCity: selectCity.current.value,
+                IDRole: ruleRef.current.value,
+                IDUser: id
+            })
+        } else if (localStorage.getItem('Role') === '2') {
+            addNewUser({
+                UserEmail: email.current.value,
+                UserPhone: phoneNumber,
+                UserPhoneFlag: Country,
+                UserName: username.current.value,
+                IDCity: selectCity.current.value,
+                IDRole: 'Medical Center',
+                IDUser: id
+            })
+        }
     }
 
     async function addNewUser(editUserData) {
@@ -105,7 +114,7 @@ const Edit = () => {
     }
 
 
-    const updatePassword = async (password) => { 
+    const updatePassword = async (password) => {
         let { data } = await PostData(`https://bytrh.com/api/admin/users/edit`, password, apiheader)
         if (data.Success === true) {
             toast.success(<strong>{translate[isLang].toast.updatePassword}</strong>, {
@@ -151,26 +160,22 @@ const Edit = () => {
                                             </Form.Group>
 
 
-                                            {/* <div className="mt-2">
-                                                <Form.Label>City ID</Form.Label>
-                                                <Form.Select aria-label="Default select example">
-                                                    <option>Access City</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                </Form.Select>
-                                            </div> */}
-                                            <Form.Group controlId="formBasicEmail" className='mt-3'>
-                                                <Form.Label>{translate[isLang]?.roule.name} </Form.Label>
-                                                <Form.Select aria-label="Default select example" ref={ruleRef}  >
-                                                    {/* <option>{countries[1].CountryName}</option> */}
-                                                    {
-                                                        role?.map((item, index) => (
-                                                            <option key={index} value={item?.IDRole} selected={userData?.IDRole === item?.IDRole && item?.RoleName}  >{item?.RoleName}</option>
-                                                        ))
-                                                    }
-                                                </Form.Select>
-                                            </Form.Group>
+
+                                            {
+                                                localStorage.getItem('Role') === '1' &&
+
+                                                <Form.Group controlId="formBasicEmail" className='mt-3'>
+                                                    <Form.Label>{translate[isLang]?.roule.name} </Form.Label>
+                                                    <Form.Select aria-label="Default select example" ref={ruleRef}  >
+                                                        {/* <option>{countries[1].CountryName}</option> */}
+                                                        {
+                                                            role?.map((item, index) => (
+                                                                <option key={index} value={item?.IDRole} selected={userData?.IDRole === item?.IDRole && item?.RoleName}  >{item?.RoleName}</option>
+                                                            ))
+                                                        }
+                                                    </Form.Select>
+                                                </Form.Group>
+                                            }
 
 
 
@@ -272,7 +277,7 @@ const Edit = () => {
                                                     </Button>
                                                 </div>
 
-                                                
+
                                             </Modal.Footer>
                                         </form>
                                     </Modal>
