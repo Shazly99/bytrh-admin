@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import Component from '../constants/Component';
 import { VendersContext } from '../context/Store';
+import SidebarSM from '../Components/Sidebar/SidebarSM';
 
 function Vendor() {
   let { isOpen ,isLang} = useContext(VendersContext);
@@ -16,6 +17,7 @@ function Vendor() {
       <div className="vender overflow-hidden" dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
         <div className='d-flex'>
           <Component.Sildebar />
+          <SidebarSM/>
           <motion.div
             className='adminLayout'
             animate={{

@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 // import { Navigate } from 'react-router-dom';
-import { GetData ,apiheader} from '../utils/fetchData';
+import { GetData, apiheader } from '../utils/fetchData';
 
 
 export const VendersContext = createContext([])
@@ -38,21 +38,26 @@ function VenderContext({ children }) {
   }
   const [roleAdmin, setRole] = useState(null);
   async function rolesList(newUser) {
-    let data= await GetData(`https://bytrh.com/api/admin/roles`, apiheader)
+    let data = await GetData(`https://bytrh.com/api/admin/roles`, apiheader)
     setRole(data.Response);
   }
 
   useEffect(() => {
     setUser(localStorage.getItem("IDUser"))
     chnageLang()
-    rolesList()
+    const timeoutId = setTimeout(() => {
+      rolesList()
+    }, 200);
+    return () => clearTimeout(timeoutId);
   }, [userId, isLang])
 
 
   return (
     <>
-      <VendersContext.Provider value={{ userLocationMap,
-setLoctionMap,roleAdmin,isLang, setIsLang, isOpen, setIsOpen, toggle, LogOut, userId }}>
+      <VendersContext.Provider value={{
+        userLocationMap,
+        setLoctionMap, roleAdmin, isLang, setIsLang, isOpen, setIsOpen, toggle, LogOut, userId
+      }}>
         {children}
       </VendersContext.Provider>
     </>

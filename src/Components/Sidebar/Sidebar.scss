@@ -288,10 +288,15 @@ main {
 .react-tooltip {
     z-index: 999999999999999 !important;
 }
-
+.main-container_nav{
+    display: none;
+}
 @media screen and (max-width:900px) {
     .main-container { 
         // display: none !important;
+    }
+    .main-container_nav{
+        display: block !important;
     }
     .adminLayout{
         width: 100% !important;

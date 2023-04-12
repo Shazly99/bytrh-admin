@@ -63,8 +63,11 @@ function Users() {
   }
   useEffect(() => {
     window.scrollTo(0, 0);
-    userList(page)
     handelTranslate()
+    const timeoutId = setTimeout(() => {
+      userList(page)
+    }, 200);
+    return () => clearTimeout(timeoutId);
   }, [page])
   // to fixed problem because Pagination count need a number 
   const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;

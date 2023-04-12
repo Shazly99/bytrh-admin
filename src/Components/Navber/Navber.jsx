@@ -1,4 +1,4 @@
- import React, { useContext } from 'react';
+import React, { useContext } from 'react';
 import { Dropdown, DropdownButton, NavDropdown } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
@@ -10,7 +10,9 @@ import Icons from '../../constants/Icons';
 import { PostData, apiheader } from '../../utils/fetchData';
 import { VendersContext } from './../../context/Store';
 import './Navber.scss';
- 
+import { AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai';
+import { CiCircleRemove } from 'react-icons/ci';
+
 
 function Navber() {
   let { LogOut, isOpen, setIsOpen, isLang, setIsLang } = useContext(VendersContext);
@@ -50,7 +52,12 @@ function Navber() {
         <Container fluid  >
           <Navbar.Collapse  >
             <div className="app__navbar-menu">
-              <HiMenuAlt4 onClick={() => setIsOpen(!isOpen)} />
+              {/* { */}
+                {/* // !isOpen ? */}
+                  <HiMenuAlt4 onClick={() => setIsOpen(!isOpen)} /> 
+                   {/* <CiCircleRemove onClick={() => setIsOpen(!isOpen)} size={1} /> */}
+
+              {/* // } */}
             </div>
 
             <span className='chang__lang '>
@@ -123,57 +130,57 @@ function Navber() {
                     </Link>
                   </li>
 
-                    {localStorage.getItem('Role') === '2' ?
-                      <>
-                        <li>
-                          <Link to={`/mcprofile`} className="dropdown-item" >
-                            <div style={{ display: 'flex', alignItems: 'center' }}>
-                               <LogoSvg.ProfileCenter className={isLang === 'ar' ? 'ms-2' : 'me-2'} style={{ width: 19  }}/>
+                  {localStorage.getItem('Role') === '2' ?
+                    <>
+                      <li>
+                        <Link to={`/mcprofile`} className="dropdown-item" >
+                          <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <LogoSvg.ProfileCenter className={isLang === 'ar' ? 'ms-2' : 'me-2'} style={{ width: 19 }} />
 
-                              <span>{isLang === 'ar' ? 'بيانات المركز الطبي' : 'Center Profile'}</span>
-                            </div>
-                          </Link>
-                        </li>
-                        <li>
-                          <Link to={`/docs`} className="dropdown-item" >
-                            <div style={{ display: 'flex', alignItems: 'center' }}>
-                              <LogoSvg.DocumentUpload className={isLang === 'ar' ? 'ms-2' : 'me-2'} style={{ width: 18  }}/>
+                            <span>{isLang === 'ar' ? 'بيانات المركز الطبي' : 'Center Profile'}</span>
+                          </div>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to={`/docs`} className="dropdown-item" >
+                          <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <LogoSvg.DocumentUpload className={isLang === 'ar' ? 'ms-2' : 'me-2'} style={{ width: 18 }} />
 
-                              <span>{isLang === 'ar' ? "المستنـدات" : "Documents"}</span>
-                            </div>
-                          </Link>
-                        </li>
-                      </>
-                      :
-                      ''
-                    }
+                            <span>{isLang === 'ar' ? "المستنـدات" : "Documents"}</span>
+                          </div>
+                        </Link>
+                      </li>
+                    </>
+                    :
+                    ''
+                  }
 
                   <NavDropdown.Divider />
-                  
-                  { localStorage.getItem('Role') === '1' &&
-                  <li>
-                    <Link to={'/admin/login'} onClick={LogOut} className="dropdown-item" >
-                      <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.logout} alt="logout" width={18} height={18} />
-                        <span>
-                          {isLang === 'ar' ? 'تسجيـل الخروج' : 'Logout'}
-                        </span>
-                      </div>
-                    </Link>
-                  </li>}
-                  
 
-                  { localStorage.getItem('Role') === '2' &&
-                  <li>
-                    <Link to={'/medicalcenter/login'} onClick={LogOut} className="dropdown-item" >
-                      <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.logout} alt="logout" width={18} height={18} />
-                        <span>
-                          {isLang === 'ar' ? 'تسجيـل الخروج' : 'Logout'}
-                        </span>
-                      </div>
-                    </Link>
-                  </li>}
+                  {localStorage.getItem('Role') === '1' &&
+                    <li>
+                      <Link to={'/admin/login'} onClick={LogOut} className="dropdown-item" >
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.logout} alt="logout" width={18} height={18} />
+                          <span>
+                            {isLang === 'ar' ? 'تسجيـل الخروج' : 'Logout'}
+                          </span>
+                        </div>
+                      </Link>
+                    </li>}
+
+
+                  {localStorage.getItem('Role') === '2' &&
+                    <li>
+                      <Link to={'/medicalcenter/login'} onClick={LogOut} className="dropdown-item" >
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.logout} alt="logout" width={18} height={18} />
+                          <span>
+                            {isLang === 'ar' ? 'تسجيـل الخروج' : 'Logout'}
+                          </span>
+                        </div>
+                      </Link>
+                    </li>}
                 </ul>
               </div>
             </nav>

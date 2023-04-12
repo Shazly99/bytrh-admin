@@ -230,7 +230,7 @@ const DoctorFreeList = () => {
               </> : SkeletonSearch(40, "60%")}
               <div className=' app__addOrder-form '>
                 <Row className='d-flex flex-row justify-content-between'>
-                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2' >
+                  <Col xl={4} lg={4} md={6} sm={12} className='mt-2' >
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry} ref={countryRef}>
                         <Form.Select aria-label="Default select example" >
@@ -247,7 +247,7 @@ const DoctorFreeList = () => {
                     </> : SkeletonFilter()}
                   </Col>
 
-                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
+                  <Col xl={4} lg={4} md={6} sm={12} className='mt-2'>
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"   >
                         <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={cityRef}>
@@ -266,7 +266,7 @@ const DoctorFreeList = () => {
                     </> : SkeletonFilter()}
                   </Col>
 
-                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
+                  <Col xl={4} lg={4} md={6} sm={12} className='mt-2'>
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"   >
                         <Form.Select aria-label="Default select example" onClick={handelSelectArea} ref={areaRef}>
@@ -283,11 +283,7 @@ const DoctorFreeList = () => {
 
                       </Form.Group>
                     </> : SkeletonFilter()}
-                  </Col>
-
-
-
-
+                  </Col> 
                 </Row>
               </div>
             </div>
