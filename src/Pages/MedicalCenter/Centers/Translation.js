@@ -146,7 +146,7 @@ let initialTranslation = {
             uploadDoc: '   Upload document'
 
         },
-        excelSheet: 'Export to excel file',
+        excelSheet: 'Export to excel sheet',
         filename: 'Medicals Centers data',
     }
 }

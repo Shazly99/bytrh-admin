@@ -130,7 +130,7 @@ let initialTranslation = {
             { value: "NORMAL", text: "Normal  " },
             { value: "URGENT", text: " Urgent " },
         ],
-        excelSheet: 'Export to excel file',
+        excelSheet: 'Export to excel sheet',
         filename: '  Consulting data',
         ComplainBody:'There are no complaints',
         currency:'SAR  ',

@@ -114,7 +114,7 @@ let initialTranslate = {
             updatePassword:' Password has been changed successfully'
 
         },
-        excelSheet: 'Export to excel file',
+        excelSheet: 'Export to excel sheet',
         filename: 'Users data',
     }
 }

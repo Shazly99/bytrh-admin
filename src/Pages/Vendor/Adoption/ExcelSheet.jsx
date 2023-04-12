@@ -33,7 +33,7 @@ const ExcelSheet = () => {
                 buttonText={
                     <div className='d-flex gap-2 ' style={{ justifyContent: 'center', alignItems: 'center' }}>
                         <SiMicrosoftexcel />
-                        <span>{isLang === "ar" ? "تصدير إلى ملف إكسل" : "Export to excel file"}</span>
+                        <span>{isLang === "ar" ? "تصدير إلى ملف إكسل" : "Export to excel sheet"}</span>
                     </div>
                 }
                 className='btn btn-sucess btn__excel'

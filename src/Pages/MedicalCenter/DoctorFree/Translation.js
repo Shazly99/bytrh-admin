@@ -180,7 +180,7 @@ let initialTranslation = {
             currency:'SAR',
      
         },
-        excelSheet:'Export to excel file',
+        excelSheet:'Export to excel sheet',
         filename:'Doctors free data',
         ExcelHeader: [
             "Doctor name",

@@ -108,7 +108,7 @@ let initialTranslation = {
             toastUpdate:'Updated Successfully',
             
         },
-        excelSheet: 'Export to excel file',
+        excelSheet: 'Export to excel sheet',
         filename: 'Clients blogs data',
     }
 }

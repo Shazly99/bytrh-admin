@@ -1,20 +1,24 @@
+@import '../../style/varibale';
 
-.map{
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px; 
-    // .map-container {
-    //     width: 95%;
-    //     height: 600px ;
-    //     border-radius: 10px;
-    //   }
-  }
+.map {
 
-  .btn__excel{
-    background-color: #217345 !important;
-    border-color: #217345 !important;
-    color: #fff !important;
-    margin-bottom: 10px !important;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  // .map-container {
+  //     width: 95%;
+  //     height: 600px ;
+  //     border-radius: 10px;
+  //   }
+}
+
+.btn__excel {
+  // background-color: $mainColor !important;
+  // border-color: #217345 !important;
+  border-color: #217345 !important;
+  color: #217345 !important;
+  margin-bottom: 10px !important;
+  transition: all 0.4s !important;
+ 
+}

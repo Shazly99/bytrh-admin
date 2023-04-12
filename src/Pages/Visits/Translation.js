@@ -140,7 +140,7 @@ let initialTranslation = {
             DoctorPhone: 'Doctor Phone',
             RouteVisit:'Route of the visit',
             currency:"SAR",
-            excelSheet:'Export to excel file',
+            excelSheet:'Export to excel sheet',
             filename:'Visits data  '
 
         }

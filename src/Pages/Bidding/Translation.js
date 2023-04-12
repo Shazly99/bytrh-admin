@@ -172,7 +172,7 @@ let initialTranslation = {
             allSubCategory:'Animals SubCategory'
         },
         Actions: { action: "Actions",currency:"SAR"},
-        excelSheet: 'Export to excel file',
+        excelSheet: 'Export to excel sheet',
         filename: 'Data Bidding',
     }
 }

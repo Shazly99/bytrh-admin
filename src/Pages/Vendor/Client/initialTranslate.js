@@ -76,7 +76,7 @@ let initialTranslate = {
             reset: "Password reset successfully ",
             delete: "user has been deleted "
         },
-        excelSheet:'Export to excel file',
+        excelSheet:'Export to excel sheet',
         dataExport:'Clients Data',
         ExcelHeader: [
             "Client name",

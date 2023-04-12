@@ -187,7 +187,7 @@ let initialTranslation = {
             SubCategory:'Select SubCategory',
             allSubCategory:'Animals SubCategory'
         },
-        excelSheet: 'Export to excel file',
+        excelSheet: 'Export to excel sheet',
         filename: 'Data store',
         currency:' SAR',
 
