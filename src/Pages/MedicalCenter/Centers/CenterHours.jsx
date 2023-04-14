@@ -38,7 +38,7 @@ const CenterHours = () => {
     useEffect(() => {
         let timeOut = setTimeout(() => {
             getCenterHours();
-        }, 200);
+        }, 100);
 
         return(() => {
             clearTimeout(timeOut);

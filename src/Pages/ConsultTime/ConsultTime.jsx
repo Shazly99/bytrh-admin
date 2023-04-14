@@ -37,7 +37,7 @@ const ConsultTime = () => {
     useEffect(() => {
         const timeOut = setTimeout(() => {
             getConsultTime();
-        }, 200);
+        }, 100);
         return(() => {
             clearTimeout(timeOut);
         })

@@ -8,7 +8,7 @@ import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import $ from 'jquery'
 import { Container, Table } from 'react-bootstrap';
-import Loader from '../../../Components/Shared/Loader/Loader';
+// import Loader from '../../../Components/Shared/Loader/Loader';
 import axios from 'axios';
 import { apiheader } from '../../../utils/fetchData';
 import { VendersContext } from '../../../context/Store';
@@ -44,7 +44,7 @@ export default function Doctors() {
   useEffect(() => {
     let timeOut = setTimeout(() => {
       getTokenDoctors();
-    }, 200);
+    }, 100);
 
       return(() => {
         clearTimeout(timeOut);
@@ -53,7 +53,7 @@ export default function Doctors() {
 
 
   useEffect(() => {
-    $('html , body').animate({ scrollTop: 0 }, 200);
+    $('html , body').animate({ scrollTop: 0 }, 100);
   }, [countDoctors]);
 
   // useEffect(() => {
@@ -79,7 +79,7 @@ export default function Doctors() {
     setCountDoctors(1);
     setTimeout(() => {
       handelSearchEvent()
-    }, 200);
+    }, 100);
   }
 
   const handelClickSearch = (e) => {
@@ -168,7 +168,7 @@ export default function Doctors() {
     // useEffect(() => {
     //   let timeOut = setTimeout(() => {
     //     handelSearchEvent();
-    //   }, 200);
+    //   }, 100);
     //   return(() => {
     //     clearTimeout(timeOut);
     //   })
@@ -288,7 +288,8 @@ export default function Doctors() {
 
 <ExcelSheet/>
           {loadingDoctors ?
-            <Loader /> 
+            // <Loader />
+            <Component.DataNotFound />
             :
             <div className="total-table">
               {Object.keys(fetchDoctors).length > 0 ?

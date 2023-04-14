@@ -28,7 +28,6 @@ const ProfileCenter = () => {
     // const [latStart, setLatStart] = useState(null);
     // const [longStart, setlongStart] = useState(null);
 
-    // get centerProfileDetails
     const centerProfileDetails = async () => {
         await GetData(`${process.env.REACT_APP_API_URL}/admin/medicalcenter/profile/${id}`, apiheader).then((res) => {
             console.log(res);
@@ -49,13 +48,18 @@ const ProfileCenter = () => {
 
     };
 
+
     useEffect(() => {
-        centerProfileDetails();
-        window.scrollTo(0, 0);
-        return () => {
+        let timeOut = setTimeout(() => {
             centerProfileDetails();
+            window.scrollTo(0, 0);
+        }, 100);
+    
+        return () => {
+            clearTimeout(timeOut)
         }
-    }, [id]);
+    }, [id])
+    
 
     const SkeletonCard = () => {
         return (

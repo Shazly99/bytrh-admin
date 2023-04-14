@@ -9,7 +9,7 @@ import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import $ from 'jquery'
 import { Container, Table } from 'react-bootstrap';
-import Loader from '../../../Components/Shared/Loader/Loader';
+// import Loader from '../../../Components/Shared/Loader/Loader';
 import Component from '../../../constants/Component';
 import axios from 'axios';
 import { apiheader } from '../../../utils/fetchData';
@@ -28,6 +28,7 @@ export default function Adoption() {
   const [searchKeyAdoption, setSearchKeyAdoption] = useState(null);
   const [loadingAdoption, setLoadingAdoption] = useState(false)
   const [fetchAdoption, setFetchAdoption] = useState([])
+
   async function getTokenAdoption() {
     setLoadingAdoption(true);
     await axios.post(URL_Adoption, {
@@ -43,19 +44,20 @@ export default function Adoption() {
         console.log(error);
       });
   }
+
   useEffect(() => {
     let timeOut = setTimeout(() => {
       getTokenAdoption();
-    }, 200);
+    }, 100);
 
     return (() => {
       clearTimeout(timeOut);
     })
-  }, [countAdoption, pagesCountAdoption, searchKeyAdoption]);
+  }, [countAdoption, searchKeyAdoption, URL_Adoption]);
 
 
   useEffect(() => {
-    $('html , body').animate({ scrollTop: 0 }, 200);
+    $('html , body').animate({ scrollTop: 0 }, 100);
   }, [countAdoption]);
 
   // useEffect(() => {
@@ -117,7 +119,8 @@ export default function Adoption() {
           </div>
 
           {loadingAdoption ?
-            <Loader />
+            // <Loader />
+            <Component.DataNotFound />
 
             :
 

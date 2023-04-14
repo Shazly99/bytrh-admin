@@ -197,7 +197,6 @@ const Centers = () => {
   const medicalCenterTypeRef = useRef(null);
   const handelMedicalCenterType = async () => {
     let MedicalCenterType = medicalCenterTypeRef.current.value
-    console.log(medicalCenterTypeRef.current.value);
     if (MedicalCenterType === 'All') {
       medicalCenterList()
     } else if (MedicalCenterType === 'Select Product Type') {
@@ -216,7 +215,6 @@ const Centers = () => {
   const medicalCenterstatusRef = useRef(null);
   const handelMedicalstatus = async () => {
     let MedicalCenterType = medicalCenterstatusRef.current.value
-    console.log(medicalCenterstatusRef.current.value);
     if (MedicalCenterType === 'All') {
       medicalCenterList()
     } else if (MedicalCenterType === 'Select Product Type') {

@@ -39,9 +39,7 @@ const CenterEdit = () => {
   
     async function getMedicalData() {
       setIsLoading(true);
-       let data = await GetData(`https://bytrh.com/api/admin/medicalcenter/profile/${id}`, apiheader)
-
-      console.log(data)
+      let data = await GetData(`https://bytrh.com/api/admin/medicalcenter/profile/${id}`, apiheader)
       if(data.Success === true) {
         const { MedicalCenterName , MedicalCenterAddress , MedicalCenterEmail , MedicalCenterPhone , MedicalCenterPhoneCode , IDCountry , IDCity , IDArea , MedicalCenterType , MedicalCenterLat , MedicalCenterLong , MedicalCenterPicture} = data.Response ;
         setTimeout(() => {
@@ -60,7 +58,7 @@ const CenterEdit = () => {
           setLongData(MedicalCenterLong);
           setImgProfile(MedicalCenterPicture);
           setIsLoading(false);
-        }, 200);
+        }, 100);
       }
       else {
         console.log(data.ApiMsg);
@@ -70,7 +68,7 @@ const CenterEdit = () => {
     useEffect(() => {
       let timeOut = setTimeout(() => {
         getMedicalData();
-      }, 200);
+      }, 100);
       return(() => {
         clearTimeout(timeOut);
       })
