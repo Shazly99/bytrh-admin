@@ -98,7 +98,7 @@ export default function Doctors() {
 
       // filter your content based on the selected option 
       if (selectedValue === "ACTIVE" || selectedValue === "INACTIVE" || selectedValue === "BLOCKED" || selectedValue === "OFFLINE") {
-          setLoadingDoctors(true);
+          // setLoadingDoctors(true);
             await axios.post(URL_Doctors, {
               // IDPage: countDoctors,
               // SearchKey: searchKeyDoctors,
@@ -107,13 +107,13 @@ export default function Doctors() {
               .then(res => {
                 setFetchDoctors(res.data.Response.Doctors);
                 setPagesCountDoctors(res.data.Response.Pages);
-                setLoadingDoctors(false);
+                // setLoadingDoctors(false);
             })
               .catch((error) => {
                 console.log(error);
             });
       }  else if (selectedValue === "All") {
-        setLoadingDoctors(true);
+        // setLoadingDoctors(true);
           await axios.post(URL_Doctors, {
             IDPage: countDoctors,
             // SearchKey: searchKeyDoctors
@@ -121,7 +121,7 @@ export default function Doctors() {
           .then(res => {
             setFetchDoctors(res.data.Response.Doctors);
             setPagesCountDoctors(res.data.Response.Pages);
-            setLoadingDoctors(false);
+            // setLoadingDoctors(false);
           })
           .catch((error) => {
               console.log(error);
@@ -130,14 +130,26 @@ export default function Doctors() {
     };
 
 
-    const handelSearchEvent = () => {
+    const handelSearchEvent = async () => {
       if(searchKeyDoctors === '' && selectedOption === 'All') {
-        getTokenDoctors();
+          // setLoadingDoctors(true);
+          await axios.post(URL_Doctors, {
+            IDPage: countDoctors,
+            // SearchKey: searchKeyDoctors
+          }, apiheader)
+          .then(res => {
+            setFetchDoctors(res.data.Response.Doctors);
+            setPagesCountDoctors(res.data.Response.Pages);
+            // setLoadingDoctors(false);
+          })
+          .catch((error) => {
+              console.log(error);
+          });
       }
       else {
         // setCountDoctors(1);
-        setLoadingDoctors(true);
-        axios.post(URL_Doctors, {
+        // setLoadingDoctors(true);
+        await axios.post(URL_Doctors, {
           IDPage: 1,
           SearchKey: searchKeyDoctors !== null && searchKeyDoctors !== undefined ? searchKeyDoctors : null,
           DoctorStatus: selectedOption !== "All" ? selectedOption : null,
@@ -145,7 +157,7 @@ export default function Doctors() {
         .then(res => {
           setFetchDoctors(res.data.Response.Doctors);
           setPagesCountDoctors(res.data.Response.Pages);
-          setLoadingDoctors(false);
+          // setLoadingDoctors(false);
         })
           .catch((error) => {
             console.log(error);
