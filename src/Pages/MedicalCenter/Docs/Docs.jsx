@@ -44,7 +44,7 @@ const Docs = () => {
         let timeOut = setTimeout(() => {
             window.scrollTo(0, 0);
             getDocs();
-        }, 1500);
+        }, 200);
         return (() => {
             clearTimeout(timeOut);
         })

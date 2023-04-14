@@ -28,9 +28,12 @@ const AdoptionChat = () => {
     })
   }
   useEffect(() => {
-    getDetails()
+    let timeOut = setTimeout(() => {
+      getDetails();
+    }, 200);
+  
     return () => {
-      getDetails()
+      clearTimeout(timeOut);
     }
   }, [id])
 

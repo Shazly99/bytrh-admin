@@ -58,14 +58,14 @@ export default function Adoption() {
     $('html , body').animate({ scrollTop: 0 }, 200);
   }, [countAdoption]);
 
-  useEffect(() => {
-    if (loadingAdoption) {
-      $('body').addClass('d-none');
-      $('body').removeClass('d-block')
-    }
-    $('body').addClass('d-block');
-    $('body').removeClass('d-none')
-  }, [loadingAdoption]);
+  // useEffect(() => {
+  //   if (loadingAdoption) {
+  //     $('body').addClass('d-none');
+  //     $('body').removeClass('d-block')
+  //   }
+  //   $('body').addClass('d-block');
+  //   $('body').removeClass('d-none')
+  // }, [loadingAdoption]);
 
 
   const handleChange = (event, value) => {

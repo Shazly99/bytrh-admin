@@ -49,14 +49,14 @@ export default function AdoptionDetails() {
   }, [])
   
 
-  useEffect(() => {
-    if(loading) {
-      $('body').addClass('d-none');
-      $('body').removeClass('d-block')
-    }
-    $('body').addClass('d-block');
-    $('body').removeClass('d-none')
-  }, [loading]);
+  // useEffect(() => {
+  //   if(loading) {
+  //     $('body').addClass('d-none');
+  //     $('body').removeClass('d-block')
+  //   }
+  //   $('body').addClass('d-block');
+  //   $('body').removeClass('d-none')
+  // }, [loading]);
 
 
   let { isLang } = useContext(VendersContext);

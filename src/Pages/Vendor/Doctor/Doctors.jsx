@@ -56,16 +56,16 @@ export default function Doctors() {
     $('html , body').animate({ scrollTop: 0 }, 200);
   }, [countDoctors]);
 
-  useEffect(() => {
-    if(loadingDoctors) {
-      $('body').addClass('d-none');
-      $('body').removeClass('d-block')
-    }
-    else {
-      $('body').addClass('d-block');
-      $('body').removeClass('d-none')
-    }
-  }, [loadingDoctors]);
+  // useEffect(() => {
+  //   if(loadingDoctors) {
+  //     $('body').addClass('d-none');
+  //     $('body').removeClass('d-block')
+  //   }
+  //   else {
+  //     $('body').addClass('d-block');
+  //     $('body').removeClass('d-none')
+  //   }
+  // }, [loadingDoctors]);
 
 
   const handleChange = (value) => {

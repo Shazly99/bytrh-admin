@@ -57,14 +57,14 @@ export default function DoctorProfile() {
   }, [])
 
 
-  useEffect(() => {
-    if (loading) {
-      $('body').addClass('d-none');
-      $('body').removeClass('d-block')
-    }
-    $('body').addClass('d-block');
-    $('body').removeClass('d-none')
-  }, [loading]);
+  // useEffect(() => {
+  //   if (loading) {
+  //     $('body').addClass('d-none');
+  //     $('body').removeClass('d-block')
+  //   }
+  //   $('body').addClass('d-block');
+  //   $('body').removeClass('d-none')
+  // }, [loading]);
 
 
   const [showAdd, setShowAdd] = useState(false);
