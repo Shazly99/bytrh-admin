@@ -567,7 +567,7 @@ const StoreList = () => {
                                                                     >
                                                                         {
                                                                             translate[isLang]?.FilterStatus?.filter?.((item) => item.value !== "All")?.map((Status, index) => (
-                                                                                <>
+                                                                                <React.Fragment key={index}>
                                                                                     {item?.AnimalProductStatus === Status.value ? ("") : (
                                                                                         <>
                                                                                             <Dropdown.Item eventKey={Status.value} className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"}>
@@ -576,7 +576,7 @@ const StoreList = () => {
 
                                                                                         </>
                                                                                     )}
-                                                                                </>
+                                                                                </React.Fragment>
                                                                             ))
                                                                         }
 
