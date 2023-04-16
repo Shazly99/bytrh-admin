@@ -37,7 +37,9 @@ const LiveChatDoc = () => {
       setChatName(data.Response.DoctorName)
       const IdLastMessage = data.Response.ChatDetails[data.Response.ChatDetails.length - 1].IDChatSupportDetails;
       setIdChatSupportDetails(IdLastMessage);
-      // setIsLoading(true)
+      setTimeout(() => {
+        // setIsLoading(true)
+    }, 5000);
     } catch (error) {
       // setIsLoading(false)
       if (error.response && error.response.status === 429) {
@@ -50,7 +52,7 @@ const LiveChatDoc = () => {
     }
   };
   const chatReceive = _.debounce(async () => {
-    if (chatStatus === 'ONGOING') {
+    if (chatStatus === 'ONGOING'|| chatStatus === 'PENDING') {
        try {
 
         const { data } = await PostData(`https://bytrh.com/api/admin/chat/doctor/receive`, { IDDoctorChatSupport: id, IDChatSupportDetails: IdChatSupport }, apiheader);
@@ -98,7 +100,7 @@ const LiveChatDoc = () => {
       localStorage.setItem('chatStatus', 'PENDING')
     }
     fetchClientDetail();
-    // chatReceive()
+    chatReceive()
 
     let interval = setInterval(() => {
       chatReceive()
