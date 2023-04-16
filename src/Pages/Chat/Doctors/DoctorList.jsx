@@ -1,19 +1,17 @@
-import React, { useContext, useState } from 'react'
-import { Form, Col, Nav } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import Img from '../../../assets/Img';
-import { ChatContext } from './../../../context/ChatStore';
 import _ from 'lodash';
+import React, { useContext, useState } from 'react';
+import { Col, Form, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { apiheader, PostData } from '../../../utils/fetchData';
-
+import { PostData, apiheader } from '../../../utils/fetchData';
+import Component from './../../../constants/Component';
+import { ChatContext } from './../../../context/ChatStore';
 const DoctorList = () => {
-    const colors = [
-        { color: '#ffc700', rgba: '255, 199, 0' },
-        { color: '#f1416c', rgba: '241, 65, 108' },
-        { color: '#009ef7', rgba: '0, 158, 247' },
-        { color: '#50cd89', rgba: '80, 205, 137' },
-    ];
+    // const colors = [
+    //     { color: '#ffc700', rgba: '255, 199, 0' },
+    //     { color: '#f1416c', rgba: '241, 65, 108' },
+    //     { color: '#009ef7', rgba: '0, 158, 247' },
+    //     { color: '#50cd89', rgba: '80, 205, 137' },
+    // ];
     const [active, setActive] = useState(false);
     const [loadSearch, setloadSearch] = useState(true);
     let { setDocChatSupport, docChatSupport } = useContext(ChatContext);
@@ -29,8 +27,9 @@ const DoctorList = () => {
     };
 
     const clientlist =  _.debounce(async (doctorNAme) => {
-        let { data } = await PostData(`https://bytrh.com/api/a dmin/chat/doctor/list`, { DoctorSearchKey: doctorNAme }, apiheader)
+        let { data } = await PostData(`https://bytrh.com/api/admin/chat/doctor/list`, { DoctorSearchKey: doctorNAme }, apiheader)
         setDocChatSupport(data.Response.DoctorChatSupport)
+        console.log(data);
         setloadSearch(true)
     } ,1000)
 
@@ -58,7 +57,7 @@ const DoctorList = () => {
                                         docChatSupport?.length <= 0 ?
                                             <>
                                                 <div className="d-flex justify-content-center">
-                                                    <img loading="lazy"src={Img.searchNotFound} className="w-75" alt="" />
+                                                    <Component.Seach/>
                                                 </div>
                                             </> :
                                             <>
@@ -107,7 +106,7 @@ const DoctorList = () => {
                                     }
                                 </> :
                                 <div className="d-flex justify-content-center">
-                                    <img src={Img.search} loading="lazy"className="w-75" alt="" />
+                                    <Component.NotFound/>
                                 </div>
                         }
                     </div>

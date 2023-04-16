@@ -258,3 +258,25 @@
         visibility: hidden;
     }
 }
+
+.btn__avatar-nav{
+    font-family: Combo, cursive   !important;
+    -webkit-font-smoothing: antialiased !important;
+    background-color: $mainColor !important;
+    color: $colorLight !important;
+    font-size: 16px !important;
+}
+
+.userName__nav{ 
+    user-select: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0;
+    padding-bottom: 4px;
+    font-family: Combo, cursive   !important;
+    -webkit-font-smoothing: antialiased !important;
+    color: #343a40;
+    @media screen and (max-width:480px) {
+        display: none !important;
+    }
+}

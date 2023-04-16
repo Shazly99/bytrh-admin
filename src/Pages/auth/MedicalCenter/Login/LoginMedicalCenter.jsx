@@ -38,6 +38,7 @@ const LoginMedicalCenter = () => {
                     }, 1500);
                     localStorage.setItem("token", data.Response.AccessToken);
                     localStorage.setItem("IDUser", data.Response.IDUser);
+                    localStorage.setItem("UserName", data.Response.UserName);  
                     localStorage.setItem("Role", data.Response.IDRole);
                     localStorage.setItem("idmc", data.Response.IDMedicalCenter);
                     toast.success(data.ApiMsg);

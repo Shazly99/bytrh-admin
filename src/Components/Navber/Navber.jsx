@@ -51,13 +51,8 @@ function Navber() {
       <Navbar className='bg-light navSubMain'>
         <Container fluid  >
           <Navbar.Collapse  >
-            <div className="app__navbar-menu">
-              {/* { */}
-                {/* // !isOpen ? */}
-                  <HiMenuAlt4 onClick={() => setIsOpen(!isOpen)} /> 
-                   {/* <CiCircleRemove onClick={() => setIsOpen(!isOpen)} size={1} /> */}
-
-              {/* // } */}
+            <div className={`app__navbar-menu ${isLang === 'ar' ? 'ms-2 ' : 'me-2'}`}>
+              <HiMenuAlt4 onClick={() => setIsOpen(!isOpen)} />
             </div>
 
             <span className='chang__lang '>
@@ -92,7 +87,7 @@ function Navber() {
                     <Icons.Chat size={22} />
                   </div>
 
-                  <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{ left: isLang === 'ar' ? '0' : '-100px' }}>
+                  <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{ left: isLang === 'ar' ? '0' : '-100px', zIndex: 99999 }}>
                     <li>
                       <Link to="/chat/clients" className="dropdown-item" >
                         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -114,13 +109,19 @@ function Navber() {
                 </div>
               </nav>
             }
-            <nav>
+            <nav className='d-flex flex-row justify-content-center align-items-center'>
+              {/* {localStorage.getItem('Role') === '1'&& */}
+              <span className='userName__nav' style={{ margin: '0 10px' }} >
+                {localStorage.getItem('UserName')}
+              </span>
+              {/* // } */}
               <div className="dropdown" id="basic-nav-dropdown2">
-                <div className="btn dropdown-toggle border-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img loading="lazy" src={Img.avatar1} alt='Img avatar1' width="40" height="40" style={{ borderRadius: '10px' }} />
-                </div>
 
-                <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{ left: isLang === 'ar' ? '0' : '-100px' }}>
+                <div className="btn btn__avatar-nav dropdown-toggle border-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {localStorage.getItem('UserName')?.charAt(0)?.toUpperCase()}
+                  {/* <img loading="lazy" src={Img.avatar1} alt='Img avatar1' width="40" height="40" style={{ borderRadius: '10px' }} /> */}
+                </div>
+                <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{ left: isLang === 'ar' ? '0' : '-130px', zIndex: 99999 }}>
                   <li>
                     <Link to="/profile" className="dropdown-item" >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -183,6 +184,7 @@ function Navber() {
                     </li>}
                 </ul>
               </div>
+
             </nav>
 
 

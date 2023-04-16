@@ -1,17 +1,16 @@
+import { Player } from '@lottiefiles/react-lottie-player';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import _ from 'lodash';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { toast } from 'react-hot-toast';
 import { Outlet, useParams } from 'react-router-dom';
-import Img from '../../../assets/Img';
 import Component from '../../../constants/Component';
 import Icons from '../../../constants/Icons';
 import { ChatContext } from '../../../context/ChatStore';
 import '../chat.scss';
-import { apiheader, PostData } from './../../../utils/fetchData';
-import { toast } from 'react-hot-toast';
-import { Player } from '@lottiefiles/react-lottie-player';
+import { PostData, apiheader } from './../../../utils/fetchData';
 
 const ChatClient = () => {
   const { id } = useParams();
@@ -23,7 +22,7 @@ const ChatClient = () => {
 
   const clientlist = _.debounce(async () => {
     let { data } = await PostData(`https://bytrh.com/api/admin/chat/client/list`, {}, apiheader)
-     // setClientChatSupport(data.Response.ClientChatSupport)
+    // setClientChatSupport(data.Response.ClientChatSupport)
     setCChatSupport(data.Response.ClientChatSupport)
   }, 1000)
 
@@ -36,24 +35,25 @@ const ChatClient = () => {
       }
       , apiheader).then((res) => {
         if (res.data.Success === true) {
-           setmassSend(true)
+          setmassSend(true)
         }
       });;
 
-   }
+  }
 
 
   const handeAdminMess = () => {
     const value = inputRef.current.value;
-     // TODO: Send the value to the server
+    // TODO: Send the value to the server
     adminSendMess(value)
     setInputValue('');
     inputRef.current.value = '';
   };
 
   const [selectedFile, setSelectedFile] = useState(null);
+  // send image
   async function handleFileSelect(event) {
-     setSelectedFile();
+    setSelectedFile();
     /*  if (selectedFile !== null) { */
     let { data } = await PostData(`https://bytrh.com/api/admin/chat/client/reply`,
       {
@@ -65,7 +65,7 @@ const ChatClient = () => {
     if (data.Success === false) {
       toast.error(data.ApiMsg)
     }
-     // }
+    // }
   }
 
   useEffect(() => {
@@ -85,21 +85,18 @@ const ChatClient = () => {
                   <div className={`app__Live_chat chat-body  ${id ? '' : 'bg-dark'}`} style={{ background: 'rgb(217 217 217 / 28%)' }}>
                     {
                       id ?
-                        <>
-                          <Outlet></Outlet>
-                        </>
-                        :
+                        <Outlet></Outlet> :
                         <div className="empty_chat   w-100 h-100 d-flex justify-content-center align-items-center flex-column">
-                         <div className="expired-container">
-                                <Player
-                                  className="expired-image w-75"
-                                  // src="https://assets4.lottiefiles.com/packages/lf20_3vbOcw.json"
-                                  src="https://assets7.lottiefiles.com/packages/lf20_qwl4gi2d.json"
+                          <div className="expired-container">
+                            <Player
+                              className="expired-image w-75"
+                              // src="https://assets4.lottiefiles.com/packages/lf20_3vbOcw.json"
+                              src="https://assets7.lottiefiles.com/packages/lf20_qwl4gi2d.json"
 
-                                  autoplay
-                                  loop
-                                />
-                              </div>
+                              autoplay
+                              loop
+                            />
+                          </div>
                           <h2 className={` ${id ? '' : 'text-light'}`}>
                             Welcome, <span className='admin__color'>admin!</span>
                           </h2>
@@ -156,7 +153,7 @@ const ChatClient = () => {
               </Col >
 
             </Row >
-          </div > : <Component.Loader/>
+          </div > : <Component.Loader />
       }
     </>
   )

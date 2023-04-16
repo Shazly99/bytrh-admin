@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import ScrollToBottom from 'react-scroll-to-bottom';
 import Icons from '../../../constants/Icons';
 import { ChatContext } from '../../../context/ChatStore';
-import { apiheader, GetData } from '../../../utils/fetchData';
+import { GetData, apiheader } from '../../../utils/fetchData';
 import useLocalStorage from './../../../context/useLocalStorage';
 import { PostData } from './../../../utils/fetchData';
 

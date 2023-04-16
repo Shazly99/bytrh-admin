@@ -1,12 +1,10 @@
-import React, { useState, useContext } from 'react'
-import { Form, Col, Nav } from 'react-bootstrap';
-import Img from '../../../assets/Img';
-import { Link } from 'react-router-dom';
+import _ from 'lodash';
+import React, { useContext, useState } from 'react';
+import { Col, Form, Nav } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { ChatContext } from '../../../context/ChatStore';
 import { PostData, apiheader } from '../../../utils/fetchData';
-import _ from 'lodash';
-
+import Component from './../../../constants/Component';
 const ClientList = () => {
     const [active, setActive] = useState(false);
     const [loadSearch, setloadSearch] = useState(true);
@@ -50,7 +48,8 @@ const ClientList = () => {
                                         cChatSupport?.length <= 0 ?
                                             <>
                                                 <div className="d-flex justify-content-center">
-                                                    <img loading="lazy"src={Img.searchNotFound} className="w-75" alt="" />
+                                                <Component.Seach/>
+
                                                 </div>
                                             </> :
                                             <>
@@ -103,7 +102,7 @@ const ClientList = () => {
                                     }
                                 </> :
                                 <div className="d-flex justify-content-center">
-                                    <img loading="lazy"src={Img.search} className="w-75" alt="" />
+                                    <Component.NotFound/>
                                 </div>
                         }
                     </div>

@@ -108,6 +108,8 @@ import CenterAdd from './../Pages/MedicalCenter/Centers/CenterAdd';
 import CenterHours from './../Pages/MedicalCenter/Centers/CenterHours';
 import CenterSingleHour from '../Pages/MedicalCenter/Centers/CenterSingleHour';
 import AddHours from '../Pages/MedicalCenter/Centers/AddHours';
+import Seach from './../Components/Shared/Chat/Seach';
+import NotFound from './../Components/Shared/Chat/NotFound';
  
 const Component= {
     // Layout 
@@ -141,6 +143,8 @@ const Component= {
     ChatClient,
     ClientList,
     LiveChat,
+    Seach,
+    NotFound,
     // MedicalFields
     MedicalFields,
     AddMedicalFields,
