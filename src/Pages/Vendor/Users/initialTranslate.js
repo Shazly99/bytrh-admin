@@ -61,6 +61,20 @@ let initialTranslate = {
         excelSheet: ' تصدير إلى ملف إكسل',
         filename: '  بيانات المستخدمين    ',
 
+        filter:{
+            Country:'حدد الدولة',
+            allCountry:'بلدان',
+            city:' حدد منطقة  ',
+            allCity:'المناطق',            
+            area:'حدد مدينه',
+            allarea:'مدن',
+            Product:'نوع المنتج',
+            Products:'    حدد نوع المنتج    ',
+            status:'حدد الحالة',
+            allStatus:'كل الحالة',
+            SubCategory:'حدد الفئة الفرعية',
+            allSubCategory:'فئة الحيوانات'
+        }  ,
     },
     "en": {
         placeholder: 'Search by name or email or phone.....',
@@ -116,6 +130,20 @@ let initialTranslate = {
         },
         excelSheet: 'Export to excel sheet',
         filename: 'Users data',
+        filter:{
+            Country:'Select Country',
+            allCountry:'Countries',
+            city:'Select Area',
+            allCity:'Areas',            
+            area:'Select City',
+            allarea:'Cities',
+            Product:'Product Type',
+            Products:'Animals Product Type',
+            status:'Select Status',
+            allStatus:'All Status',
+            SubCategory:'Select SubCategory',
+            allSubCategory:'Animals SubCategory'
+        },
     }
 }
 

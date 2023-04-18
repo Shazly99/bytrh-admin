@@ -4,14 +4,11 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { HiMenuAlt4 } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
-import Img from '../../assets/Img';
 import LogoSvg from '../../assets/svg/LogoSvg';
 import Icons from '../../constants/Icons';
 import { PostData, apiheader } from '../../utils/fetchData';
 import { VendersContext } from './../../context/Store';
 import './Navber.scss';
-import { AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai';
-import { CiCircleRemove } from 'react-icons/ci';
 
 
 function Navber() {
@@ -69,8 +66,8 @@ function Navber() {
                 className={`DropdownButton`}
                 style={{ left: isLang === 'ar' ? '-30px' : '0px' }}
               >
-                <Dropdown.Item eventKey="ar" /* onClick={() => window.location.reload() } */>عربي</Dropdown.Item>
-                <Dropdown.Item eventKey="en"/*  onClick={() => window.location.reload()} */>English</Dropdown.Item>
+                <Dropdown.Item eventKey="ar"  /* onClick={() => window.location.reload()} */ >عربي</Dropdown.Item>
+                <Dropdown.Item eventKey="en"  /* onClick={() => window.location.reload()} */ >English</Dropdown.Item>
               </DropdownButton>
 
             </span>
@@ -119,13 +116,13 @@ function Navber() {
 
                 <div className="btn btn__avatar-nav dropdown-toggle border-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   {localStorage.getItem('UserName')?.charAt(0)?.toUpperCase()}
-                  {/* <img loading="lazy" src={Img.avatar1} alt='Img avatar1' width="40" height="40" style={{ borderRadius: '10px' }} /> */}
+                  {/* <img  src={Img.avatar1} alt='Img avatar1' width="40" height="40" style={{ borderRadius: '10px' }} /> */}
                 </div>
                 <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{ left: isLang === 'ar' ? '0' : '-130px', zIndex: 99999 }}>
                   <li>
                     <Link to="/profile" className="dropdown-item" >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.profile} alt="profile" width={17} height={17} />
+                        <img  className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.profile} alt="profile" width={17} height={17} />
                         <span>{isLang === 'ar' ? 'الملـف الشخصـي' : 'My Profile'}</span>
                       </div>
                     </Link>
@@ -162,7 +159,7 @@ function Navber() {
                     <li>
                       <Link to={'/admin/login'} onClick={LogOut} className="dropdown-item" >
                         <div style={{ display: 'flex', alignItems: 'center' }}>
-                          <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.logout} alt="logout" width={18} height={18} />
+                          <img  className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.logout} alt="logout" width={18} height={18} />
                           <span>
                             {isLang === 'ar' ? 'تسجيـل الخروج' : 'Logout'}
                           </span>
@@ -175,7 +172,7 @@ function Navber() {
                     <li>
                       <Link to={'/medicalcenter/login'} onClick={LogOut} className="dropdown-item" >
                         <div style={{ display: 'flex', alignItems: 'center' }}>
-                          <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.logout} alt="logout" width={18} height={18} />
+                          <img  className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.logout} alt="logout" width={18} height={18} />
                           <span>
                             {isLang === 'ar' ? 'تسجيـل الخروج' : 'Logout'}
                           </span>
@@ -215,13 +212,13 @@ function Navber() {
             </Nav> */}
 
             {/* <Nav>
-              <NavDropdown title={<img loading="lazy" src={Img.avatar1} alt='Img avatar1' width="40" height="40" style={{ borderRadius: '10px' }} />} id="basic-nav-dropdown2"  >
+              <NavDropdown title={<img  src={Img.avatar1} alt='Img avatar1' width="40" height="40" style={{ borderRadius: '10px' }} />} id="basic-nav-dropdown2"  >
                 <div style={{ maxHeight: '60vh', overflowY: 'auto' }}>
 
                   <LinkContainer to="/profile">
                     <NavDropdown.Item  >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.profile} alt="profile" width={18} height={18} />
+                        <img  className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.profile} alt="profile" width={18} height={18} />
                         <span>{isLang === 'ar' ? 'الملـف الشخصـي' : 'My Profile'}</span>
                       </div>
                     </NavDropdown.Item>
@@ -232,7 +229,7 @@ function Navber() {
                   <LinkContainer onClick={LogOut} to={'/auth/login'}>
                     <NavDropdown.Item  >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
-                        <img loading="lazy" className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.logout} alt="logout" width={18} height={18} />
+                        <img  className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.logout} alt="logout" width={18} height={18} />
                         <span>
                           {isLang === 'ar' ? 'تسجيـل الخروج' : 'Logout'}
                         </span>

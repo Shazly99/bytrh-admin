@@ -81,7 +81,10 @@
 .app__Users {
     .app__Users-table {
         padding: 0 20px !important;
+        @media screen and (max-width:650px) {
+            padding: 0 5px !important;
 
+        }
     }
 }
 
@@ -134,15 +137,14 @@ td {
 
     margin-bottom: 20px !important;
     width: 100% !important;
-
     display: flex !important;
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-
-    @media screen and (max-width:767px) {
+    gap: 10px;
+    @media screen and (max-width:850px) {
         flex-direction: column;
-        gap: 10px;
+        gap:20px;
     }
 
     .filter__group {
@@ -150,6 +152,10 @@ td {
         height: 100%;
         gap: 15px;
         width: 40%;
+        @media screen and (max-width:850px) {
+        width: 100%;
+            
+        }
         >label {
             display: flex;
             gap: 5px;
@@ -209,16 +215,22 @@ td {
 .search__group {
     width: 70% !important;
     position: relative; 
-    @media screen and (max-width:400px) {
-        width: 90% !important;
+    @media screen and (max-width:650px) {
+        width: 100% !important;
         // margin-left: -44px;
     }
 }
 .search__groupAr {
     width: 70% !important;
     position: relative; 
-    @media screen and (max-width:400px) {
-        width: 90% !important;
+    @media screen and (max-width:650px) {
+        width: 100% !important;
+        // margin-left: -44px;
+    }
+}
+.baseBtn{
+    @media screen and (max-width:650px) {
+        width: 100% !important;
         // margin-left: -44px;
     }
 }
@@ -234,7 +246,6 @@ td {
 @media screen and (max-width:500px) {
     .search-container input[type="text"]::placeholder {
         font-size: 12px !important;
-        // background-color: red !important;
     }
 
 }
@@ -257,7 +268,7 @@ td {
     cursor: pointer;
 
     @media screen and (max-width:650px) {
-        right: -51px !important;
+        right: -0px !important;
     }
  
 }
@@ -274,7 +285,7 @@ td {
     cursor: pointer;
 
     @media screen and (max-width:650px) {
-        left: -51px !important;
+        left: 0px !important;
     }
  
 }
@@ -293,6 +304,7 @@ td {
   }
   .search_and__btn{
     display: flex !important;
+    gap: 10px;
     flex-direction: row  !important;
     align-items: center;
 } 

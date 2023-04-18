@@ -26,7 +26,7 @@ const ChatConsult = () => {
   const [searchClient, setSearchClient] = useState('');
   const [searchDoctor, setSearchDoctot] = useState('');
   const [isLoader, setIsloader] = useState(false);
-  let { SkeletonTable, SkeletonFilters, SkeletonSearchsingel } = useSkeletonTable();
+  let { SkeletonTable, SkeletonFilters, SkeletonSearchsingel, SkeletonExcel } = useSkeletonTable();
 
   //**Modal Complain */
   const [modalShow, setModalShow] = React.useState(false);
@@ -218,7 +218,10 @@ const ChatConsult = () => {
 
             </div>
           </div>
-          <ExcelSheet />
+          {isLoader ? <>
+            <ExcelSheet />
+          </>
+            : SkeletonExcel(40, "100%")}
           {isLoader ? <>
             <Table responsive={true}  >
               <thead>

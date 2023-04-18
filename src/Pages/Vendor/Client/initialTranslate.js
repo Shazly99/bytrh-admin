@@ -7,6 +7,14 @@ let initialTranslate = {
             { value: "INACTIVE", text: "غير نشط" },
             { value: "BLOCKED", text: "محظور" },
         ],
+        loginBy:[
+            { value: "All", text: "جميع الحسابات" }, 
+            {value:'MANUAL',text:'يدوي'},
+            {value:'FACEBOOK',text:'فيسبوك'},
+            {value:'TWITTER',text:'تويتر'},
+            {value:'GOOGLE',text:'جوجل'},
+            {value:'APPLE',text:'أبل'},
+        ],
         TableHeader: [
             "إسم  المستخدم",
             "دولة",
@@ -42,7 +50,21 @@ let initialTranslate = {
             'حالة العميل',
             '  تاريخ التسجيل'
         ],
-
+        filter:{
+            Country:'حدد الدولة',
+            allCountry:'بلدان',
+            city:' حدد منطقة  ',
+            allCity:'المناطق',            
+            area:'حدد مدينه',
+            allarea:'مدن',
+            Product:'نوع المنتج',
+            Products:'    حدد نوع المنتج    ',
+            status:'حدد الحالة',
+            loginBy:'تسجيل الدخول بواسطة',
+            allStatus:'كل الحالة',
+            SubCategory:'حدد الفئة الفرعية',
+            allSubCategory:'فئة الحيوانات'
+        }  ,
 
     },
     "en": {
@@ -52,6 +74,14 @@ let initialTranslate = {
             { value: "ACTIVE", text: "Active" },
             { value: "INACTIVE", text: " InActive  " },
             { value: "BLOCKED", text: "Blocked" },
+        ],
+        loginBy:[
+            { value: "All", text: "All Accounts" }, 
+            {value:'MANUAL',text:'Manual'},
+            {value:'FACEBOOK',text:'Facebook'},
+            {value:'TWITTER',text:'Twitter'},
+            {value:'GOOGLE',text:'Google'},
+            {value:'APPLE',text:'Apple'},
         ],
         currency:'SAR  ',
 
@@ -89,6 +119,21 @@ let initialTranslate = {
             'Client Status',
             'Register Date  '
         ],
+        filter:{
+            Country:'Select Country',
+            allCountry:'Countries',
+            city:'Select Area',
+            allCity:'Areas',            
+            area:'Select City',
+            allarea:'Cities',
+            Product:'Product Type',
+            Products:'Animals Product Type',
+            status:'Select Status',
+            loginBy:' Login By ',
+            allStatus:'All Status',
+            SubCategory:'Select SubCategory',
+            allSubCategory:'Animals SubCategory'
+        },
     }
 }
 

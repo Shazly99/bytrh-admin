@@ -15,11 +15,13 @@ import axios from 'axios';
 import { apiheader } from '../../../utils/fetchData';
 import { VendersContext } from '../../../context/Store';
 import ExcelSheet from './ExcelSheet';
+import useSkeletonTable from '../../../utils/useSkeletonTable';
 
 
 
 export default function Adoption() {
 
+  let { SkeletonExcel } = useSkeletonTable();
 
   const URL_Adoption = `https://bytrh.com/api/admin/adoptions`;
 
@@ -128,7 +130,10 @@ export default function Adoption() {
 
               {Object.keys(fetchAdoption).length > 0 ?
                 <>
-                  <ExcelSheet />
+                  {!loadingAdoption ? <>
+                    <ExcelSheet />
+                  </>
+                    : SkeletonExcel(40, "100%")}
                   <div className="app__Users-table  ">
                     <Table responsive={true} className='rounded-3 '>
                       <thead className="table-light bg-input">

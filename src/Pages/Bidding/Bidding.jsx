@@ -16,12 +16,13 @@ import initialTranslation from "./Translation";
 import ExcelSheet from "./ExcelSheet";
 
 const Bidding = () => {
+ 
   let { isLang } = useContext(VendersContext);
   const [translate, setTranslate] = useState(initialTranslation)
   const handelTranslate = () => {
     setTranslate(initialTranslation)
   }
-  let { SkeletonTable } = useSkeletonTable();
+  let { SkeletonTable, SkeletonExcel} = useSkeletonTable();
 
   const [animal, setAnimal] = useState([]);
   const [page, setPage] = useState(1);
@@ -447,7 +448,10 @@ const Bidding = () => {
               </div>
             </div>
           </div>
-          <ExcelSheet />
+          {isLoader ? <>
+                <ExcelSheet />
+            </>
+                : SkeletonExcel(40, "100%")}
           {isLoader ? <>
             <>
               {

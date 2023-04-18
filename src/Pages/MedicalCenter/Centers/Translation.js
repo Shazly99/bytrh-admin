@@ -22,21 +22,21 @@ let initialTranslation = {
             'أجراءات'
         ],
         ExcelHeader: [
-             " إسم المركز الطبي ",
+            " إسم المركز الطبي ",
             " رقم هاتف المركز الطبي ",
             "نوع ",
             "حالة ",
             "اسم المنطقة",
             "تاريخ الإنشاء ",
- 
+
         ],
         filter: {
             Country: 'حدد الدولة',
             allCountry: 'بلدان',
-            city: 'اختر مدينة',
-            allCity: 'مدن',
-            area: 'حدد المنطقة',
-            allarea: 'المناطق',
+            city: 'حدد المنطقة',
+            allCity: 'المناطق',
+            area: 'حدد المدينة',
+            allarea: 'مدن',
             Product: 'نوع المركز الطبي  ',
             Products: '    حدد نوع المنتج    ',
             status: 'حدد الحالة',
@@ -44,7 +44,7 @@ let initialTranslation = {
             SubCategory: 'حدد الفئة الفرعية',
             allSubCategory: 'فئة الحيوانات'
         },
-        Actions: { action: "أجراءات", currency: "ريال سعودي", edit: "تعديــل ", view: 'عرض الصفحة الشخصية', add: "إضافة ملف" , hour: 'أوقـات العمـل' },
+        Actions: { action: "أجراءات", currency: "ريال سعودي", edit: "تعديــل ", view: 'عرض الصفحة الشخصية', add: "إضافة ملف", hour: 'أوقـات العمـل' },
         centerProfileDetails: {
             nav1: 'مراكز طبية ',
             nav2: 'حساب تعريفي ',
@@ -96,22 +96,22 @@ let initialTranslation = {
         ],
 
         ExcelHeader: [
-             " Medical center Name ",
+            " Medical center Name ",
             " Medical center Phone ",
             "Type ",
             "Status ",
             "Area Name",
             "Create Date ",
- 
+
         ],
 
         filter: {
             Country: 'Select Country',
             allCountry: 'Countries',
-            city: 'Select City',
-            allCity: 'Cities',
-            area: 'Select Area',
-            allarea: 'Areas',
+            city: 'Select Area',
+            allCity: 'Areas',
+            area: 'Select City',
+            allarea: 'Cities',
             Product: 'Medical Center Type',
             Products: 'Animals Product Type',
             status: 'Select Status',
@@ -119,9 +119,9 @@ let initialTranslation = {
             SubCategory: 'Select SubCategory',
             allSubCategory: 'Animals SubCategory'
         },
- 
-        Actions: { action: "Actions", currency: "SAR", edit: "Edit", view: 'View Profile' , add: "Upload Docs" , hour: 'Center Hours' },
- 
+
+        Actions: { action: "Actions", currency: "SAR", edit: "Edit", view: 'View Profile', add: "Upload Docs", hour: 'Center Hours' },
+
         centerProfileDetails: {
             nav1: 'Medicals centers ',
             nav2: 'Profile ',

@@ -13,6 +13,7 @@ function UsersTable({ usersList, userList, isLoader, toastTranslate, actionsTran
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState({});
     let { isLang } = useContext(VendersContext);
+    let { SkeletonExcel } = useSkeletonTable();
 
     const handleActionSelect = async (id, action) => {
         if (action === "PENDING" || action === "ACTIVE" || action === "INACTIVE") {
@@ -59,120 +60,130 @@ function UsersTable({ usersList, userList, isLoader, toastTranslate, actionsTran
 
     return (
         <>
-          <ExcelSheet/>
             {isLoader ? <>
-                <Table responsive={true} id='my-table' className='rounded-3 '>
-                    <thead>
-                        <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                            {
-                                tabelTranslate?.map((item, index) => (
-                                    <th key={index}>{item}</th>
-                                ))
-                            }
-                        </tr>
-                    </thead>
-                    <tbody className='text-center'>
-                        {
-                            usersList?.map((item, index) => (
-                                <tr key={index}>
+                <ExcelSheet />
+            </>
+                : SkeletonExcel(40, "100%")}
+            {isLoader ? <>
+                <>
+                    {
+                        usersList?.length > 0 ?
+                            <Table responsive={true} id='my-table' className='rounded-3 '>
+                                <thead>
+                                    <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
+                                        {
+                                            tabelTranslate?.map((item, index) => (
+                                                <th key={index}>{item}</th>
+                                            ))
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody className='text-center'>
+                                    {
+                                        usersList?.map((item, index) => (
+                                            <tr key={index}>
 
-                                    <td >
-                                        <div>
-                                            {item?.UserName}
-                                        </div>
-                                    </td>
-                                    <td >
-                                        <div>
-                                            {item?.UserEmail}
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className='color-red ClientPhone'>
-                                            {item?.UserPhone}
-                                        </div>
-                                    </td>
-                                    <td className='text-center  d-flex '>
-                                        <div>
-                                            <span style={{ height: 'fit-content !important' }} className={`
+                                                <td >
+                                                    <div>
+                                                        {item?.UserName}
+                                                    </div>
+                                                </td>
+                                                <td >
+                                                    <div>
+                                                        {item?.UserEmail}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div className='color-red ClientPhone'>
+                                                        {item?.UserPhone}
+                                                    </div>
+                                                </td>
+                                                <td className='text-center  d-flex '>
+                                                    <div>
+                                                        <span style={{ height: 'fit-content !important' }} className={`
                                           ${item.UserStatus === 'PENDING' && 'txt_pending'} 
                                           ${item.UserStatus === 'Shipped' && 'txt_shipped'}
                                           ${item.UserStatus === 'Out For Delivery' && 'txt_delivery'}
                                           ${item.UserStatus === 'ACTIVE' && 'txt_delivered'}
                                           ${item.UserStatus === 'INACTIVE' && 'txt_rejected'}`} >
-                                                {
-                                                    statusTranslate?.filter((itemfilter) => itemfilter.value === item?.UserStatus)
-                                                        .map((status, index) => (
-                                                            <React.Fragment key={index}>
-                                                                {item?.UserStatus === status.value ? status.text : ''}
-                                                            </React.Fragment>
-                                                        ))
-                                                }
-                                            </span>
-                                        </div>
-                                    </td>
-                                    <td className='text-center'>
-                                        <div>
-                                            {item?.RoleName}
-                                        </div>
-                                    </td>
+                                                            {
+                                                                statusTranslate?.filter((itemfilter) => itemfilter.value === item?.UserStatus)
+                                                                    .map((status, index) => (
+                                                                        <React.Fragment key={index}>
+                                                                            {item?.UserStatus === status.value ? status.text : ''}
+                                                                        </React.Fragment>
+                                                                    ))
+                                                            }
+                                                        </span>
+                                                    </div>
+                                                </td>
+                                                <td className='text-center'>
+                                                    <div>
+                                                        {item?.RoleName}
+                                                    </div>
+                                                </td>
 
-                                    <td>
-                                        <div>
+                                                <td>
+                                                    <div>
 
-                                            <span>
-                                                <DropdownButton
-                                                    id={`dropdown-${item.IDUser}`}
-                                                    title={actionsTranslate[0].name}
-                                                    variant="outline-success"
-                                                    onSelect={(eventKey) => handleActionSelect(item.IDUser, eventKey)}
-                                                    className="DropdownButton "
-                                                >
-                                                    <Dropdown.Item eventKey="Edite" className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} as={Link} to={`/user/editUser/${item.IDUser}`}>
-                                                        {actionsTranslate[1].name}
-                                                    </Dropdown.Item>
-                                                    <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="DELETED">{actionsTranslate[2].name}</Dropdown.Item>
+                                                        <span>
+                                                            <DropdownButton
+                                                                id={`dropdown-${item.IDUser}`}
+                                                                title={actionsTranslate[0].name}
+                                                                variant="outline-success"
+                                                                onSelect={(eventKey) => handleActionSelect(item.IDUser, eventKey)}
+                                                                className="DropdownButton "
+                                                            >
+                                                                <Dropdown.Item eventKey="Edite" className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} as={Link} to={`/user/editUser/${item.IDUser}`}>
+                                                                    {actionsTranslate[1].name}
+                                                                </Dropdown.Item>
+                                                                <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="DELETED">{actionsTranslate[2].name}</Dropdown.Item>
 
-                                                    <Modal dir={isLang === "ar" ? "rtl" : "ltr"} show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
-                                                        <Modal.Header closeButton>
-                                                            <Modal.Title>{actionsTranslate[2].titleModel} {' '}   {item?.UserName}  </Modal.Title>
-                                                        </Modal.Header>
-                                                        <Modal.Body>
-                                                            <Component.HandelDelete />
-                                                        </Modal.Body>
-                                                        <Modal.Footer className='  d-flex justify-content-center'>
-                                                            <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => handleDeleteUser(item.IDUser)}>
-                                                                {actionsTranslate[2].btn1}
-                                                            </Button>
-                                                            <Button variant="outline-primary" onClick={() => setShowDeleteModal(false)}>
-                                                                {actionsTranslate[2].btn2}
+                                                                <Modal dir={isLang === "ar" ? "rtl" : "ltr"} show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
+                                                                    <Modal.Header closeButton>
+                                                                        <Modal.Title>{actionsTranslate[2].titleModel} {' '}   {item?.UserName}  </Modal.Title>
+                                                                    </Modal.Header>
+                                                                    <Modal.Body>
+                                                                        <Component.HandelDelete />
+                                                                    </Modal.Body>
+                                                                    <Modal.Footer className='  d-flex justify-content-center'>
+                                                                        <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => handleDeleteUser(item.IDUser)}>
+                                                                            {actionsTranslate[2].btn1}
+                                                                        </Button>
+                                                                        <Button variant="outline-primary" onClick={() => setShowDeleteModal(false)}>
+                                                                            {actionsTranslate[2].btn2}
 
-                                                            </Button>
-                                                        </Modal.Footer>
-                                                    </Modal>
-                                                    <NavDropdown.Divider />
+                                                                        </Button>
+                                                                    </Modal.Footer>
+                                                                </Modal>
+                                                                <NavDropdown.Divider />
 
 
-                                                    {
-                                                        statusTranslate?.filter?.((item) => item.value !== "All").map((status, index) => (
-                                                            <React.Fragment key={index}>
                                                                 {
-                                                                    item?.UserStatus === status.value ? '' : <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey={status.value}>{status.text}</Dropdown.Item>
+                                                                    statusTranslate?.filter?.((item) => item.value !== "All").map((status, index) => (
+                                                                        <React.Fragment key={index}>
+                                                                            {
+                                                                                item?.UserStatus === status.value ? '' : <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey={status.value}>{status.text}</Dropdown.Item>
+                                                                            }
+                                                                        </React.Fragment>
+                                                                    ))
                                                                 }
-                                                            </React.Fragment>
-                                                        ))
-                                                    }
-                                                </DropdownButton>
-                                            </span>
-                                        </div>
-                                    </td>
+                                                            </DropdownButton>
+                                                        </span>
+                                                    </div>
+                                                </td>
 
-                                </tr>
-                            ))
-                        }
+                                            </tr>
+                                        ))
+                                    }
 
-                    </tbody>
+                                </tbody>
 
-                </Table>
+                            </Table>
+                            :
+                            <Component.DataNotFound />
+                    }
+                </>
             </> : SkeletonTable()}
         </>
     )

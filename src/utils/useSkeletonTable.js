@@ -135,6 +135,13 @@ const useSkeletonTable = () => {
             </div>
         )
     }
+    const SkeletonExcel = (w, h) => {
+        return (
+            <div className='d-flex gap-2 mb-2'>
+                <Skeleton variant='rounded' animation='wave' height={w} width={200} /> 
+            </div>
+        )
+    }
     const SkeletonSearchsingel = (w, h) => {
         return (
             <div className='d-flex gap-2'>
@@ -164,7 +171,8 @@ const useSkeletonTable = () => {
         SkeletonFilters,
         SkeletonSearchsingel,
         SkeletonTableImg,
-        SkeletonFilterBlogs
+        SkeletonFilterBlogs,
+        SkeletonExcel
     }
 }
 

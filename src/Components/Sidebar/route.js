@@ -141,7 +141,7 @@ const routes = [
     ],
   },
   {
-    nameAr: "المدونات ",
+    nameAr: "حالة طبية ",
     nameEn: "Medical ",
     icon: <LogoSvg.Visits className="logoSvg" style={{ width: 19 }} />,
     Roles: [1],
@@ -233,7 +233,7 @@ const routes = [
 
   },
   {
-    nameAr: "المدونات ",
+    nameAr: "الاعدادات العامة ",
     nameEn: "General settings ",
     icon: <LogoSvg.Settings className="logoSvg" style={{ width: 19 }} />,
     Roles: [1],

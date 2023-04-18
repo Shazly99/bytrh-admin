@@ -24,7 +24,7 @@ const Centers = () => {
   const handelTranslate = () => {
     setTranslate(initialTranslation)
   }
-  let { SkeletonTable } = useSkeletonTable();
+  let { SkeletonTable ,SkeletonExcel} = useSkeletonTable();
 
   const [medicalCenter, setmedicalCenter] = useState([]);
   const [page, setPage] = useState(1);
@@ -352,7 +352,10 @@ const Centers = () => {
               </div>
             </div>
           </div>
-          <ExcelSheet />
+          {isLoader ? <>
+                <ExcelSheet />
+            </>
+                : SkeletonExcel(40, "100%")}
           {isLoader ? <>
             <>
               {
