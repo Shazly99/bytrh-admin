@@ -170,23 +170,23 @@ const DoctorFreeList = () => {
   }, [page, isLoader]);
   useEffect(() => { }, [page, PagesNumber]);
   const handleActionSelect = async (id) => {
- 
-      await CitiescategoriesStatus(id).then((res) => {
-        toast.success('Request Doctor', {
-          duration: 4000,
-          position: 'buttom-center',
-          // icon: <Icons.UploadItem color='#3182CE' size={20} />,
-          iconTheme: {
-            primary: '#3182CE',
-            secondary: '#fff',
-          },
-        });
-      })
-      await DoctorsFree()
-  
+
+    await CitiescategoriesStatus(id).then((res) => {
+      toast.success('Request Doctor', {
+        duration: 4000,
+        position: 'buttom-center',
+        // icon: <Icons.UploadItem color='#3182CE' size={20} />,
+        iconTheme: {
+          primary: '#3182CE',
+          secondary: '#fff',
+        },
+      });
+    })
+    await DoctorsFree()
+
   };
   const CitiescategoriesStatus = async (id) => {
-    return await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/free/request`,{IDDoctor:id}, apiheader)
+    return await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/free/request`, { IDDoctor: id }, apiheader)
   }
   const SkeletonSearch = (w, h) => {
     return (
@@ -283,12 +283,12 @@ const DoctorFreeList = () => {
 
                       </Form.Group>
                     </> : SkeletonFilter()}
-                  </Col> 
+                  </Col>
                 </Row>
               </div>
             </div>
           </div>
-          <ExcelSheet/>
+          <ExcelSheet />
           {isLoader ? <>
             <>
               {
@@ -365,7 +365,7 @@ const DoctorFreeList = () => {
                                       </React.Fragment>
                                     ))
                                 }
-                              </span> 
+                              </span>
                             </div>
                           </td>
                           <td>
@@ -386,8 +386,8 @@ const DoctorFreeList = () => {
 
                           <td>
                             <div>
-                              <span> 
-                                  <Button variant=" outline-sucess" className="DropdownButton outline-sucess outline-sucessChat" title="Rejected Doctor" onClick={() => handleActionSelect(item.IDDoctor, 'Reject')}> Request </Button>
+                              <span>
+                                <Button variant=" outline-sucess" className="DropdownButton outline-sucess outline-sucessChat" title="Rejected Doctor" onClick={() => handleActionSelect(item.IDDoctor, 'Reject')}> Request </Button>
                               </span>
                             </div>
                           </td>
@@ -406,19 +406,22 @@ const DoctorFreeList = () => {
         </div>
       </div>
       <div className="pagination " dir="ltr">
-        <Box
-          sx={{
-            margin: "auto",
-            width: "fit-content",
-            alignItems: "center",
-          }}
-        >
-          <Pagination
-            count={pageCount}
-            page={page}
-            onChange={handleChange}
-          />
-        </Box>
+        {
+          pageCount &&
+          <Box
+            sx={{
+              margin: "auto",
+              width: "fit-content",
+              alignItems: "center",
+            }}
+          >
+            <Pagination
+              count={pageCount}
+              page={page}
+              onChange={handleChange}
+            />
+          </Box>
+        }
       </div>
     </>
   )

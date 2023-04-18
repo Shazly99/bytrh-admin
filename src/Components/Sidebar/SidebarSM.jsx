@@ -56,7 +56,7 @@ const SidebarSM = ({ children }) => {
                     className="logo mt-3"
                     key={1}
                   >
-                    <Link to={'/'} style={{ cursor: 'pointer' }}>
+                    <Link to={'/'}  onClick={()=>setIsOpen(!isOpen)} style={{ cursor: 'pointer' }}>
                       <img loading="lazy" src={Img.logo} alt='logo' className="w-100" />
                     </Link>
                   </motion.div>
@@ -77,6 +77,7 @@ const SidebarSM = ({ children }) => {
                         isOpen={isOpen}
                         open={isOpen}
                         isLang={isLang}
+                        onClick={()=>setIsOpen(!isOpen)}
                       />
                     );
                   }
@@ -91,7 +92,7 @@ const SidebarSM = ({ children }) => {
                         }
                       }}
                     >
-                      <NavLink to={root.path} key={i} className="link " >
+                      <NavLink to={root.path} onClick={()=>setIsOpen(!isOpen)} key={i} className="link " >
                         <div className="icon" id={root.name} data-tooltip-content={isLang === 'ar' ? root.nameAr : root.nameEn}>
                           {root.icon}
                         </div>

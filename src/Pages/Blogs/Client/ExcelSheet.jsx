@@ -19,8 +19,7 @@ const ExcelSheet = () => {
         await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs `, { Action: 'Export' }, apiheader).then(({ data }) => {
             setExportData(data.Response.ClientBlogs)
         }).catch((error) => {
-            console.log(error);
-        })
+         })
     }
 
     useEffect(() => {

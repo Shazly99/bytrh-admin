@@ -25,8 +25,7 @@ export default function DoctorCategory() {
         }
       })
       .catch(err => {
-        console.log(err);
-      })
+       })
   }
   useEffect(() => {
     let timeOut = setTimeout(() => {
@@ -115,7 +114,7 @@ export default function DoctorCategory() {
 
             {message.length > 0 ? <p id="alertSave" className={`alert ${apiCode === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 mb-0 mt-3 w-50 text-center mx-auto`}>{message}</p> : ''}
 
-            <div className="submitAdd-buttons mt-4 d-flex justify-content-center align-items-center">
+            <div className="submitAdd-buttons mt-4 d-flex justify-content-center align-items-center gap-3">
  
               <Component.ButtonBase title={isLang === 'ar' ? 'حفــظ' : 'Save'} bg={"primary"}  onclick={() => {
                 getDoctorData();

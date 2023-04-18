@@ -94,9 +94,7 @@ const AdsList = () => {
   let startDate = useRef();
   let endDate = useRef();
 
-  const handelDate = async () => {
-    console.log(startDate.current.value);
-    console.log(endDate.current.value);
+  const handelDate = async () => { 
     await axios.post(`${process.env.REACT_APP_API_URL}/admin/advertisements`, { IDPage: page, StartDate: startDate.current.value, EndDate: endDate.current.value }, apiheader).then((res) => {
       if (res.status === 200 && res.request.readyState === 4) {
 
@@ -187,29 +185,32 @@ const AdsList = () => {
 
     <>
       <div className="app__Users ">
-        <Component.ButtonBase title={translateADS[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/ads/add" />
         <div className="app__Users-table">
+        <Component.ButtonBase title={translateADS[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/ads/add" />
           <div className="search-container">
             <div className={`${isLang === 'ar' ? ' search__groupAr  w-100' : 'search__group w-100  '}  `}>
               <div className=' app__addOrder-form'>
                 <div className="d-flex flex-column row justify-content-between">
                   <Row className="mb-3">
                     <Col xl={5} lg={5} md={6} sm={12} >
-                      <Form.Control type="date" ref={startDate} className="w-100" />
+                      <Form.Control type="date" ref={startDate} className="w-100 mt-2" />
                     </Col>
 
-                    <Col xl={5} lg={5} md={6} sm={12} >
-
-                      <Form.Control type="date" ref={endDate} className="w-100" />
+                    <Col xl={5} lg={5} md={6} sm={12} > 
+                      <Form.Control type="date" ref={endDate} className="w-100 mt-2" />
                     </Col>
+
                     <Col xl={2} lg={2} md={6} sm={12} >
-                      <Button variant="outline-primary" onClick={handelDate} className="w-100">Find Date</Button>
+                      <Button variant="outline-primary" onClick={handelDate} className="w-100 mt-2">Find Date</Button>
                     </Col>
                   </Row>
 
                 </div>
-                <Row className='d-flex flex-row justify-content-between'>
-                  <Col className='w-100'>
+                <div className="d-flex flex-column row justify-content-between">
+
+                <Row className="mb-3" >
+
+                  <Col xl={3} lg={3} md={6} sm={12} className='  mt-2'>
                     <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry}>
                        
                       <Form.Select aria-label="Default select example" >
@@ -221,9 +222,8 @@ const AdsList = () => {
                         }
                       </Form.Select>
                     </Form.Group>
-                  </Col>
-
-                  <Col className='w-100'>
+                  </Col> 
+                  <Col xl={3} lg={3} md={6} sm={12}className='  mt-2'>
                     <Form.Group controlId="formBasicEmail"   >
                       
                       <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={countriesRef}>
@@ -237,7 +237,7 @@ const AdsList = () => {
 
                     </Form.Group>
                   </Col>
-                  <Col className='w-100'>
+                  <Col xl={3} lg={3} md={6} sm={12}className='  mt-2'>
                     <Form.Group controlId="formBasicEmail"  >
                      
                       <Form.Select aria-label="Default select example" ref={adsLocation} onClick={handelAdvertisementLocation} >
@@ -249,9 +249,8 @@ const AdsList = () => {
                         }
                       </Form.Select>
                     </Form.Group>
-                  </Col>
-
-                  <Col className='w-100'>
+                  </Col> 
+                  <Col xl={3} lg={3} md={6} sm={12}className='  mt-2'>
                     <Form.Group controlId="formBasicEmail"   >
                        <Form.Select aria-label="Default select example" ref={adsService} onClick={handelAdvertisementService} >
                         <option>{translateADS[isLang]?.optionAdvertisementService}</option>
@@ -267,12 +266,16 @@ const AdsList = () => {
                   </Col>
 
                 </Row>
+                </div>
 
               </div>
             </div>
           </div>
 
           {isLoader ? <>
+            <>
+                {
+                  ads?.length > 0 ?
             <Table responsive={true} className='rounded-3 '>
               <thead>
                 <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
@@ -292,17 +295,18 @@ const AdsList = () => {
                             <img
                               loading="lazy"
                               src={item.AdvertisementImage} // use normal <img> attributes as props
-                              className="w-100 rounded-2"
-                              style={{ maxHeight: '200px' }}
+                              className=" rounded-2"
+                               width={'250px'}
+                              height={'150px'}
                             /> :
 
                             <img
 
                               loading="lazy"
                               src={Img.defaultImg} // use normal <img> attributes as props
-                              className="w-100 rounded-2"
-                              style={{ maxHeight: '200px' }}
-                            />
+                              className=" rounded-2"
+                              width={'250px'}
+                              height={'150px'}                            />
 
                         }
                         {/* <img src={item.AdvertisementImage} alt='example' className='w-100 rounded-2' /> */}
@@ -376,15 +380,22 @@ const AdsList = () => {
               </tbody>
 
             </Table>
+            :
+                    <Component.DataNotFound />
+                }
+              </>
           </> : SkeletonTableImg()}
 
         </div>
 
       </div>
       <div className="pagination ">
+      {
+          pageCount &&
         <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
           <Pagination count={pageCount} page={page} onChange={handleChange} />
         </Box>
+        }
       </div>
     </>
 

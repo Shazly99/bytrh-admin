@@ -13,8 +13,7 @@ const ExcelSheet = () => {
     const Adoption = async () => {
         await PostData(`${process.env.REACT_APP_API_URL}/admin/adoptions`, { Action: 'Export' }, apiheader).then(({ data }) => {
             setExportData(data.Response.Adoptions)
-        }).catch((error) => {
-            console.log(error);
+        }).catch((error) => { 
         })
     }
 

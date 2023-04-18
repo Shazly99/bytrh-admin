@@ -25,8 +25,7 @@ export default function DoctorFields() {
         }
       })
       .catch(err => {
-        console.log(err);
-      })
+       })
   }
   useEffect(() => {
     let timeOut = setTimeout(() => {

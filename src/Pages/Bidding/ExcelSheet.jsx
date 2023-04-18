@@ -18,8 +18,7 @@ const ExcelSheet = () => {
         await PostData(`${process.env.REACT_APP_API_URL}/admin/animalproducts `, { Action: 'Export', AnimalProductService: 'BIDDING' }, apiheader).then(({ data }) => {
             setExportData(data.Response.AnimalProducts)
         }).catch((error) => {
-            console.log(error);
-        })
+         })
     }
 
     useEffect(() => {

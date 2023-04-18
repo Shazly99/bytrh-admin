@@ -1,4 +1,4 @@
- import { Pagination } from "@mui/material";
+import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { Button, Modal, Table } from "react-bootstrap";
@@ -133,19 +133,19 @@ const CuttingPricing = () => {
   return (
     <>
       <div className="app__Users ">
-        {isLoader ? <>
-          <Component.ButtonBase
-            title={translateCuttingPrice[isLang]?.addBTN}
-            bg={"primary"}
-            icon={<Icons.Add size={21} color={"#ffffffb4"} />}
-            path="/animals/cuttingprice/addcuttingprice"
-          />
-        </> :
-          <div className="mt-3 p-2">
-            {SkeletonFilters(40, 150)}
-          </div>
-        }
         <div className="app__Users-table">
+          {isLoader ? <>
+            <Component.ButtonBase
+              title={translateCuttingPrice[isLang]?.addBTN}
+              bg={"primary"}
+              icon={<Icons.Add size={21} color={"#ffffffb4"} />}
+              path="/animals/cuttingprice/addcuttingprice"
+            />
+          </> :
+            <div className="mt-3 p-2">
+              {SkeletonFilters(40, 150)}
+            </div>
+          }
 
           {isLoader ? <>
             <Table responsive={true} className="rounded-3 ">
@@ -154,8 +154,8 @@ const CuttingPricing = () => {
                   className="text-center  "
                   style={{ background: "#F9F9F9" }}
                 >
-                  {translateCuttingPrice[isLang]?.TableHeader?.map((el , i) => (
-                      <th key={i}>{el}</th>
+                  {translateCuttingPrice[isLang]?.TableHeader?.map((el, i) => (
+                    <th key={i}>{el}</th>
                   ))}
                 </tr>
               </thead>
@@ -192,7 +192,7 @@ const CuttingPricing = () => {
                             <Button variant="outline-primary" onClick={handleModalCloseEdit}>
                               {translateCuttingPrice[isLang]?.CancelBTN}
                             </Button>
-                            <Button   onClick={() => handleChangePrice(item.IDAnimalSubCategory, item.IDCutting)}>
+                            <Button onClick={() => handleChangePrice(item.IDAnimalSubCategory, item.IDCutting)}>
                               {translateCuttingPrice[isLang]?.ModalSetPrice}
                             </Button>
                           </Modal.Footer>
@@ -219,15 +219,15 @@ const CuttingPricing = () => {
                             dir={isLang === 'ar' ? 'rtl' : 'ltr'}
                           >
                             <Modal.Header closeButton>
-                            <Modal.Title className='  w-100 '>{translateCuttingPrice[isLang]?.ModalHeaderDel}</Modal.Title>
+                              <Modal.Title className='  w-100 '>{translateCuttingPrice[isLang]?.ModalHeaderDel}</Modal.Title>
                             </Modal.Header>
                             <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
-                                <Component.HandelDelete/>
-                                <input className="form-control" defaultValue={item.SubCategoryCuttingPrice} disabled />
+                              <Component.HandelDelete />
+                              <input className="form-control" defaultValue={item.SubCategoryCuttingPrice} disabled />
                             </Modal.Body>
                             <Modal.Footer className="d-flex justify-content-center align-items-center">
 
-                              <Button variant="danger"style={{border:'#dc3545'}}  onClick={() => handleActionSelect(item.IDSubCategoryCutting)}>
+                              <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => handleActionSelect(item.IDSubCategoryCutting)}>
                                 {translateCuttingPrice[isLang]?.ModalDelPrice}
                               </Button>
                               <Button variant="outline-primary" onClick={handleModalClose}>
@@ -248,19 +248,22 @@ const CuttingPricing = () => {
         </div>
       </div>
       <div className="pagination ">
-        <Box
-          sx={{
-            margin: "auto",
-            width: "fit-content",
-            alignItems: "center",
-          }}
-        >
-          <Pagination
-            count={pageCount}
-            page={page}
-            onChange={handleChange}
-          />
-        </Box>
+        {
+          pageCount &&
+          <Box
+            sx={{
+              margin: "auto",
+              width: "fit-content",
+              alignItems: "center",
+            }}
+          >
+            <Pagination
+              count={pageCount}
+              page={page}
+              onChange={handleChange}
+            />
+          </Box>
+        }
       </div>
     </>
   );

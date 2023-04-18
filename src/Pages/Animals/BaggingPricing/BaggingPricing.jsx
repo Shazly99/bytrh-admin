@@ -1,4 +1,4 @@
- 
+
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useEffect, useState, useRef, useContext } from "react";
@@ -138,19 +138,19 @@ const BaggingPricing = () => {
 
       <div className="app__Users ">
 
-        {isLoader ? <>
-          <Component.ButtonBase
-            title={translateBaggingPrice[isLang]?.addBTN}
-            bg={"primary"}
-            icon={<Icons.Add size={21} color={"#ffffffb4"} />}
-            path="/animals/baggingprice/addbaggingprice"
-          />
-        </> :
-          <div className="mt-3 p-2">
-            {SkeletonFilters(40, 150)}
-          </div>
-        }
         <div className="app__Users-table">
+          {isLoader ? <>
+            <Component.ButtonBase
+              title={translateBaggingPrice[isLang]?.addBTN}
+              bg={"primary"}
+              icon={<Icons.Add size={21} color={"#ffffffb4"} />}
+              path="/animals/baggingprice/addbaggingprice"
+            />
+          </> :
+            <div className="mt-3 p-2">
+              {SkeletonFilters(40, 150)}
+            </div>
+          }
           {isLoader ? <>
             <Table responsive={true} className="rounded-3 ">
               <thead>
@@ -158,8 +158,8 @@ const BaggingPricing = () => {
                   className="text-center  "
                   style={{ background: "#F9F9F9" }}
                 >
-                  {translateBaggingPrice[isLang]?.TableHeader?.map((el , i) => (
-                      <th key={i}>{el}</th>
+                  {translateBaggingPrice[isLang]?.TableHeader?.map((el, i) => (
+                    <th key={i}>{el}</th>
                   ))}
                 </tr>
               </thead>
@@ -196,7 +196,7 @@ const BaggingPricing = () => {
                             <Button variant="outline-primary" onClick={handleModalCloseEdit}>
                               {translateBaggingPrice[isLang]?.CancelBTN}
                             </Button>
-                            <Button   onClick={() => handleChangePrice(item.IDAnimalSubCategory, item.IDBagging)}>
+                            <Button onClick={() => handleChangePrice(item.IDAnimalSubCategory, item.IDBagging)}>
                               {translateBaggingPrice[isLang]?.ModalSetPrice}
                             </Button>
                           </Modal.Footer>
@@ -226,13 +226,13 @@ const BaggingPricing = () => {
                               <Modal.Title className='  w-100 '>{translateBaggingPrice[isLang]?.ModalHeaderDel}</Modal.Title>
                             </Modal.Header>
                             <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
-                            <Component.HandelDelete/>
+                              <Component.HandelDelete />
 
                               <input className="form-control" defaultValue={item.SubCategoryBaggingPrice} disabled />
                             </Modal.Body>
                             <Modal.Footer className="d-flex justify-content-center align-items-center">
 
-                              <Button variant="danger" style={{border:'#dc3545'}} onClick={() => handleActionSelect(item.IDSubCategoryCutting)}>
+                              <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => handleActionSelect(item.IDSubCategoryCutting)}>
                                 {translateBaggingPrice[isLang]?.ModalDelPrice}
                               </Button>
                               <Button variant="outline-primary" onClick={handleModalClose}>
@@ -253,19 +253,22 @@ const BaggingPricing = () => {
         </div>
       </div>
       <div className="pagination ">
-        <Box
-          sx={{
-            margin: "auto",
-            width: "fit-content",
-            alignItems: "center",
-          }}
-        >
-          <Pagination
-            count={pageCount}
-            page={page}
-            onChange={handleChange}
-          />
-        </Box>
+        {
+          pageCount &&
+          <Box
+            sx={{
+              margin: "auto",
+              width: "fit-content",
+              alignItems: "center",
+            }}
+          >
+            <Pagination
+              count={pageCount}
+              page={page}
+              onChange={handleChange}
+            />
+          </Box>
+        }
       </div>
 
     </>

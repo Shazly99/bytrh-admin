@@ -287,6 +287,15 @@ td {
   justify-content: center;
   align-items: center;
 }
+.react-tel-input .form-control{
+  padding-left: 55px;
+}
+.react-tel-input .selected-flag { 
+  padding: 0px !important; 
+  width: 45px !important;
+  border-radius: 5px 0 0 5px;
+}
+ 
 
 .input-group input#DoctorPhone2 {
   padding-right: 45px !important;

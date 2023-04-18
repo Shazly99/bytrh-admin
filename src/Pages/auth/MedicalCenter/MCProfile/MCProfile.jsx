@@ -59,8 +59,7 @@ const MCProfile = ({ countries }) => {
         setIsLoading(false);
     })
     .catch(err => {
-      console.log(err);
-    })
+     })
   }
 
   useEffect(() => {
@@ -88,8 +87,7 @@ const MCProfile = ({ countries }) => {
         }
       })
       .catch(err => {
-        console.log(err);
-      })
+       })
   }
 
 
@@ -103,8 +101,7 @@ const MCProfile = ({ countries }) => {
         }
       })
       .catch(err => {
-        console.log(err);
-      })
+       })
   }
 
 

@@ -32,7 +32,15 @@ let initialTranslation = {
         ], 
         filter:{  
             Category:' حدد فئة الحيوانات',
-            allCategory:'كل فئات الحيوانات'
+            allCategory:'كل فئات الحيوانات',
+            Country:'حدد الدولة',
+            allCountry:'بلدان',
+            city:' حدد منطقة  ',
+            allCity:'المناطق',            
+            area:'حدد مدينه',
+            allarea:'مدن',
+            status:'حدد الحالة',
+            allStatus:'كل الحالة',
         },
         blogDetails:{
             nav1:'المدونات',nav2:'تفاصيل المدونة', 
@@ -90,7 +98,15 @@ let initialTranslation = {
 
         filter:{  
             Category:' Select Animal Category ',
-            allCategory:'All category of animals'
+            allCategory:'All category of animals',
+            Country:'Select Country',
+            allCountry:'Countries',
+            city:'Select Area',
+            allCity:'Areas',            
+            area:'Select City',
+            allarea:'Cities',
+            status:'Select Status',
+            allStatus:'All Status',
         },
         blogDetails:{
             nav1:'Blogs',nav2:'Blog Details', 

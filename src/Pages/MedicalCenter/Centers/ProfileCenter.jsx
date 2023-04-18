@@ -30,8 +30,7 @@ const ProfileCenter = () => {
 
     const centerProfileDetails = async () => {
         await GetData(`${process.env.REACT_APP_API_URL}/admin/medicalcenter/profile/${id}`, apiheader).then((res) => {
-            console.log(res);
-            setcenterProfile(res.Response);
+             setcenterProfile(res.Response);
 
             const timeoutId = setTimeout(() => {
                 setIsloader(true)

@@ -84,7 +84,7 @@ function Navber() {
                     <Icons.Chat size={22} />
                   </div>
 
-                  <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{ left: isLang === 'ar' ? '0' : '-100px', zIndex: 99999 }}>
+                  <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{ left: isLang === 'ar' ? '0' : '-100px', zIndex: 99999 ,top:'47px'}}>
                     <li>
                       <Link to="/chat/clients" className="dropdown-item" >
                         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -118,7 +118,8 @@ function Navber() {
                   {localStorage.getItem('UserName')?.charAt(0)?.toUpperCase()}
                   {/* <img  src={Img.avatar1} alt='Img avatar1' width="40" height="40" style={{ borderRadius: '10px' }} /> */}
                 </div>
-                <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{ left: isLang === 'ar' ? '0' : '-130px', zIndex: 99999 }}>
+                <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{ left: isLang === 'ar' ? '0' : '-120px', zIndex: 99999,top:'47px' }}>
+                  {/* <h1>Ahmed Elshazly</h1> */}
                   <li>
                     <Link to="/profile" className="dropdown-item" >
                       <div style={{ display: 'flex', alignItems: 'center' }}>

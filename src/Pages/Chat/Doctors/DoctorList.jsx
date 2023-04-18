@@ -29,8 +29,7 @@ const DoctorList = () => {
     const clientlist =  _.debounce(async (doctorNAme) => {
         let { data } = await PostData(`https://bytrh.com/api/admin/chat/doctor/list`, { DoctorSearchKey: doctorNAme }, apiheader)
         setDocChatSupport(data.Response.DoctorChatSupport)
-        console.log(data);
-        setloadSearch(true)
+         setloadSearch(true)
     } ,1000)
 
     return (

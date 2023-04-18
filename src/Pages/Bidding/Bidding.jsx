@@ -16,13 +16,13 @@ import initialTranslation from "./Translation";
 import ExcelSheet from "./ExcelSheet";
 
 const Bidding = () => {
- 
+
   let { isLang } = useContext(VendersContext);
   const [translate, setTranslate] = useState(initialTranslation)
   const handelTranslate = () => {
     setTranslate(initialTranslation)
   }
-  let { SkeletonTable, SkeletonExcel} = useSkeletonTable();
+  let { SkeletonTable, SkeletonExcel } = useSkeletonTable();
 
   const [animal, setAnimal] = useState([]);
   const [page, setPage] = useState(1);
@@ -96,7 +96,6 @@ const Bidding = () => {
       });
       await store();
     } else if (action === "REJECTED") {
-      console.log(id);
       handleModalOpen(id)
 
     }
@@ -109,7 +108,6 @@ const Bidding = () => {
     );
   };
   const reasonReject = async (id, action) => {
-    console.log(id, action);
     await ChangeStoreStatus({
       IDAnimalProduct: id,
       AnimalProductStatus: action,
@@ -449,9 +447,9 @@ const Bidding = () => {
             </div>
           </div>
           {isLoader ? <>
-                <ExcelSheet />
-            </>
-                : SkeletonExcel(40, "100%")}
+            <ExcelSheet />
+          </>
+            : SkeletonExcel(40, "100%")}
           {isLoader ? <>
             <>
               {
@@ -470,12 +468,14 @@ const Bidding = () => {
                       {animal?.map((item, index) => (
                         <tr key={index}>
                           <td>
-                            <div style={{ maxWidth: "170px" }}>
+                            <div  >
                               <img
                                 src={item?.AnimalProductImage}
-                                className="w-100 rounded-3"
+                                className=" rounded-3"
                                 alt={item?.AnimalProductTypeName}
                                 loading="lazy"
+                                width={'250px'}
+                                height={'150px'}
                               />
                             </div>
                           </td>
@@ -690,19 +690,22 @@ const Bidding = () => {
         </div>
       </div>
       <div className="pagination ">
-        <Box
-          sx={{
-            margin: "auto",
-            width: "fit-content",
-            alignItems: "center",
-          }}
-        >
-          <Pagination
-            count={pageCount}
-            page={page}
-            onChange={handleChange}
-          />
-        </Box>
+        {
+          pageCount &&
+          <Box
+            sx={{
+              margin: "auto",
+              width: "fit-content",
+              alignItems: "center",
+            }}
+          >
+            <Pagination
+              count={pageCount}
+              page={page}
+              onChange={handleChange}
+            />
+          </Box>
+        }
       </div>
     </>
 

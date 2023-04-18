@@ -24,7 +24,7 @@ const Centers = () => {
   const handelTranslate = () => {
     setTranslate(initialTranslation)
   }
-  let { SkeletonTable ,SkeletonExcel} = useSkeletonTable();
+  let { SkeletonTable, SkeletonExcel } = useSkeletonTable();
 
   const [medicalCenter, setmedicalCenter] = useState([]);
   const [page, setPage] = useState(1);
@@ -353,9 +353,9 @@ const Centers = () => {
             </div>
           </div>
           {isLoader ? <>
-                <ExcelSheet />
-            </>
-                : SkeletonExcel(40, "100%")}
+            <ExcelSheet />
+          </>
+            : SkeletonExcel(40, "100%")}
           {isLoader ? <>
             <>
               {
@@ -374,16 +374,21 @@ const Centers = () => {
                       {medicalCenter?.map((item, index) => (
                         <tr key={index}>
                           <td>
-                            <div style={{ maxWidth: "170px" }}>
+                            <div  >
                               {
                                 item?.MedicalCenterPicture ?
                                   <img
                                     src={item?.MedicalCenterPicture}
-                                    className="w-100 rounded-3"
+                                    className=" rounded-3"
                                     alt={item?.medicalCenterProductTypeName}
                                     loading="lazy"
+                                    width={'250px'}
+                                    height={'150px'}
                                   /> :
-                                  <img src={img.defaultImg} alt={'Client tPicture'} loading='lazy' height={170} width='100%' className='w-100 rounded' />}
+                                  <img src={img.defaultImg} alt={'Client tPicture'} loading='lazy' className=' rounded'
+                                    width={'250px'}
+                                    height={'150px'}
+                                  />}
 
                             </div>
                           </td>
@@ -539,19 +544,22 @@ const Centers = () => {
         </div>
       </div>
       <div className="pagination ">
-        <Box
-          sx={{
-            margin: "auto",
-            width: "fit-content",
-            alignItems: "center",
-          }}
-        >
-          <Pagination
-            count={pageCount}
-            page={page}
-            onChange={handleChange}
-          />
-        </Box>
+        {
+          pageCount &&
+          <Box
+            sx={{
+              margin: "auto",
+              width: "fit-content",
+              alignItems: "center",
+            }}
+          >
+            <Pagination
+              count={pageCount}
+              page={page}
+              onChange={handleChange}
+            />
+          </Box>
+        }
       </div>
     </>
   )

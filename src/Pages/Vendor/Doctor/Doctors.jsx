@@ -32,23 +32,22 @@ export default function Doctors() {
       IDPage: countDoctors,
       // SearchKey: searchKeyDoctors
     }, apiheader)
-    .then(res => {
-      setFetchDoctors(res.data.Response.Doctors);
-      setPagesCountDoctors(res.data.Response.Pages);
-      setLoadingDoctors(false);
-    })
-    .catch((error) => {
-        console.log(error);
-    });
+      .then(res => {
+        setFetchDoctors(res.data.Response.Doctors);
+        setPagesCountDoctors(res.data.Response.Pages);
+        setLoadingDoctors(false);
+      })
+      .catch((error) => {
+      });
   }
   useEffect(() => {
     let timeOut = setTimeout(() => {
       getTokenDoctors();
     }, 100);
 
-      return(() => {
-        clearTimeout(timeOut);
-      })
+    return (() => {
+      clearTimeout(timeOut);
+    })
   }, [countDoctors]);
 
 
@@ -69,7 +68,7 @@ export default function Doctors() {
 
 
   const handleChange = (value) => {
-    setCountDoctors(value); 
+    setCountDoctors(value);
   };
 
   // const [valueSearch, setValueSearch] = useState('')
@@ -89,94 +88,90 @@ export default function Doctors() {
   }
 
 
-    // filter
-    const [selectedOption, setSelectedOption] = useState('All');
+  // filter
+  const [selectedOption, setSelectedOption] = useState('All');
 
-    const handleOptionChange = async (e) => {
-      const selectedValue = e.target.value;
-      setSelectedOption(selectedValue);
+  const handleOptionChange = async (e) => {
+    const selectedValue = e.target.value;
+    setSelectedOption(selectedValue);
 
-      // filter your content based on the selected option 
-      if (selectedValue === "ACTIVE" || selectedValue === "INACTIVE" || selectedValue === "BLOCKED" || selectedValue === "OFFLINE") {
-          // setLoadingDoctors(true);
-            await axios.post(URL_Doctors, {
-              // IDPage: countDoctors,
-              // SearchKey: searchKeyDoctors,
-              DoctorStatus: selectedValue,
-            }, apiheader)
-              .then(res => {
-                setFetchDoctors(res.data.Response.Doctors);
-                setPagesCountDoctors(res.data.Response.Pages);
-                // setLoadingDoctors(false);
-            })
-              .catch((error) => {
-                console.log(error);
-            });
-      }  else if (selectedValue === "All") {
-        // setLoadingDoctors(true);
-          await axios.post(URL_Doctors, {
-            IDPage: countDoctors,
-            // SearchKey: searchKeyDoctors
-          }, apiheader)
-          .then(res => {
-            setFetchDoctors(res.data.Response.Doctors);
-            setPagesCountDoctors(res.data.Response.Pages);
-            // setLoadingDoctors(false);
-          })
-          .catch((error) => {
-              console.log(error);
-          });
-      }
-    };
-
-
-    const handelSearchEvent = async () => {
-      if(searchKeyDoctors === '' && selectedOption === 'All') {
-          // setLoadingDoctors(true);
-          await axios.post(URL_Doctors, {
-            IDPage: countDoctors,
-            // SearchKey: searchKeyDoctors
-          }, apiheader)
-          .then(res => {
-            setFetchDoctors(res.data.Response.Doctors);
-            setPagesCountDoctors(res.data.Response.Pages);
-            // setLoadingDoctors(false);
-          })
-          .catch((error) => {
-              console.log(error);
-          });
-      }
-      else {
-        // setCountDoctors(1);
-        // setLoadingDoctors(true);
-        await axios.post(URL_Doctors, {
-          IDPage: 1,
-          SearchKey: searchKeyDoctors !== null && searchKeyDoctors !== undefined ? searchKeyDoctors : null,
-          DoctorStatus: selectedOption !== "All" ? selectedOption : null,
-        }, apiheader)
+    // filter your content based on the selected option 
+    if (selectedValue === "ACTIVE" || selectedValue === "INACTIVE" || selectedValue === "BLOCKED" || selectedValue === "OFFLINE") {
+      // setLoadingDoctors(true);
+      await axios.post(URL_Doctors, {
+        // IDPage: countDoctors,
+        // SearchKey: searchKeyDoctors,
+        DoctorStatus: selectedValue,
+      }, apiheader)
         .then(res => {
           setFetchDoctors(res.data.Response.Doctors);
           setPagesCountDoctors(res.data.Response.Pages);
           // setLoadingDoctors(false);
         })
-          .catch((error) => {
-            console.log(error);
+        .catch((error) => {
         });
-      }
+    } else if (selectedValue === "All") {
+      // setLoadingDoctors(true);
+      await axios.post(URL_Doctors, {
+        IDPage: countDoctors,
+        // SearchKey: searchKeyDoctors
+      }, apiheader)
+        .then(res => {
+          setFetchDoctors(res.data.Response.Doctors);
+          setPagesCountDoctors(res.data.Response.Pages);
+          // setLoadingDoctors(false);
+        })
+        .catch((error) => {
+        });
     }
-
-    // useEffect(() => {
-    //   let timeOut = setTimeout(() => {
-    //     handelSearchEvent();
-    //   }, 100);
-    //   return(() => {
-    //     clearTimeout(timeOut);
-    //   })
-    // }, [searchKeyDoctors , selectedOption]);
+  };
 
 
+  const handelSearchEvent = async () => {
+    if (searchKeyDoctors === '' && selectedOption === 'All') {
+      // setLoadingDoctors(true);
+      await axios.post(URL_Doctors, {
+        IDPage: countDoctors,
+        // SearchKey: searchKeyDoctors
+      }, apiheader)
+        .then(res => {
+          setFetchDoctors(res.data.Response.Doctors);
+          setPagesCountDoctors(res.data.Response.Pages);
+          // setLoadingDoctors(false);
+        })
+        .catch((error) => {
+        });
+    }
+    else {
+      // setCountDoctors(1);
+      // setLoadingDoctors(true);
+      await axios.post(URL_Doctors, {
+        IDPage: 1,
+        SearchKey: searchKeyDoctors !== null && searchKeyDoctors !== undefined ? searchKeyDoctors : null,
+        DoctorStatus: selectedOption !== "All" ? selectedOption : null,
+      }, apiheader)
+        .then(res => {
+          setFetchDoctors(res.data.Response.Doctors);
+          setPagesCountDoctors(res.data.Response.Pages);
+          // setLoadingDoctors(false);
+        })
+        .catch((error) => {
+        });
+    }
+  }
 
-    let { isLang } = useContext(VendersContext);
+  // useEffect(() => {
+  //   let timeOut = setTimeout(() => {
+  //     handelSearchEvent();
+  //   }, 100);
+  //   return(() => {
+  //     clearTimeout(timeOut);
+  //   })
+  // }, [searchKeyDoctors , selectedOption]);
+
+
+
+  let { isLang } = useContext(VendersContext);
 
 
 
@@ -193,7 +188,7 @@ export default function Doctors() {
 
           <div className="search-container">
             <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}`}>
-            {/* <div className='search__group'> */}
+              {/* <div className='search__group'> */}
               <input
                 value={localStorage.getItem('searchDoctors') ? localStorage.getItem('searchDoctors') : ''}
                 onChange={(e) => {
@@ -202,11 +197,11 @@ export default function Doctors() {
                   setSearchKeyDoctors(e.target.value);
                 }}
                 onKeyDown={handelClickSearch}
-                type="text" placeholder={isLang === 'ar' ? 'البحث بالإسم أو رقم التليفون..' : 'Search by name or phone..'} name="search" 
+                type="text" placeholder={isLang === 'ar' ? 'البحث بالإسم أو رقم التليفون..' : 'Search by name or phone..'} name="search"
               />
               <button type="submit" onClick={() => {
                 // localStorage.removeItem('searchDoctors');
-                localStorage.setItem('searchDoctors' , searchKeyDoctors);
+                localStorage.setItem('searchDoctors', searchKeyDoctors);
               }}>
                 <Icons.Search onClick={handelSearch} color='#fff' size={25} />
               </button>
@@ -220,7 +215,7 @@ export default function Doctors() {
                       type="radio"
                       name="filter"
                       value="All"
-                      checked 
+                      checked
                       onChange={handleOptionChange}
                       className={`inactive-radio form-check-input `}
                     /> :
@@ -228,9 +223,9 @@ export default function Doctors() {
                       type="radio"
                       name="filter"
                       value="All"
-                      checked ={selectedOption === "All"}
+                      checked={selectedOption === "All"}
                       onChange={handleOptionChange}
-                      className={`inactive-radio form-check-input `} 
+                      className={`inactive-radio form-check-input `}
                     />
                 }
                 {isLang === 'ar' ? 'الكـل' : 'All'}
@@ -248,7 +243,7 @@ export default function Doctors() {
                 {isLang === 'ar' ? 'نشط' : 'Active'}
               </label>
 
-              <label style={{whiteSpace: 'nowrap'}}>
+              <label style={{ whiteSpace: 'nowrap' }}>
                 <input
                   type="radio"
                   name="filter"
@@ -268,7 +263,7 @@ export default function Doctors() {
                   checked={selectedOption === "BLOCKED"}
                   onChange={handleOptionChange}
                   className="inactive-radio form-check-input"
-                /> 
+                />
                 {isLang === 'ar' ? 'محظور' : 'Blocked'}
               </label>
 
@@ -280,20 +275,20 @@ export default function Doctors() {
                   checked={selectedOption === "OFFLINE"}
                   onChange={handleOptionChange}
                   className="inactive-radio form-check-input"
-                /> 
+                />
                 {isLang === 'ar' ? 'مغلق' : 'Offline'}
               </label>
             </div>
           </div>
 
-<ExcelSheet/>
+          <ExcelSheet />
           {loadingDoctors ?
             // <Loader />
             <Component.DataNotFound />
             :
             <div className="total-table">
               {Object.keys(fetchDoctors).length > 0 ?
-                <> 
+                <>
                   <div className="app__Users-table  ">
                     <Table responsive={true} className='rounded-3 '>
                       <thead className="table-light bg-input">
@@ -332,9 +327,12 @@ export default function Doctors() {
                   </div>
 
                   <div className="pagination mt-2">
-                    <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-                      <Pagination count={pagesCountDoctors} page={countDoctors} onChange={() => handleChange(countDoctors)}  />
-                    </Box>
+                    {
+                      pagesCountDoctors &&
+                      <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
+                        <Pagination count={pagesCountDoctors} page={countDoctors} onChange={() => handleChange(countDoctors)} />
+                      </Box>
+                    }
                   </div>
                 </>
                 :

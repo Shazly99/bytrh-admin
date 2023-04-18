@@ -34,8 +34,7 @@ export default function AdoptionDetails() {
           setLoading(false);
         }
       })
-      .catch(err => {
-        console.log(err);
+      .catch(err => { 
       })
   }
   useEffect(() => {

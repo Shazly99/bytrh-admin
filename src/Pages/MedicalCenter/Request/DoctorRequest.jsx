@@ -217,7 +217,7 @@ const DoctorRequest = () => {
                                     ))
                                 }
                               </span>
-                         {/*<div className="delete">
+                              {/*<div className="delete">
                               <DropdownButton
                                 title={
                                   <img src={img.dropdown} alt="Img.dropdown" />
@@ -259,23 +259,23 @@ const DoctorRequest = () => {
                                   item?.RequestUser === "CENTER" ?
                                     <Button variant=" outline-sucess" className="DropdownButton outline-sucess outline-sucessChat" title="Rejected Doctor" onClick={() => handleActionSelect(item.IDMedicalCenterDoctor, 'REJECTED')}> Reject</Button> :
                                     <DropdownButton
-                                    id={`dropdown-${item.IDVisit}`}
-                                    title={translate[isLang]?.Actions.action}
-                                    variant="outline-success"
-                                    onSelect={(eventKey) => handleActionSelect(item.IDMedicalCenterDoctor, eventKey)}
-                                    className="DropdownButton "
-                                    drop={'down-centered'}
-                                  >
-    
-    
-                                    {
-                                      translate[isLang].FilterStatus?.filter?.((item) => item.value !== "All").map((status, index) => (
-                                        <React.Fragment key={index}>
-                                          {item?.MedicalCenterDoctorStatus === status.value ? '' : <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey={status.value}>{status.text}</Dropdown.Item>}
-                                        </React.Fragment>
-                                      ))
-                                    }
-                                  </DropdownButton>
+                                      id={`dropdown-${item.IDVisit}`}
+                                      title={translate[isLang]?.Actions.action}
+                                      variant="outline-success"
+                                      onSelect={(eventKey) => handleActionSelect(item.IDMedicalCenterDoctor, eventKey)}
+                                      className="DropdownButton "
+                                      drop={'down-centered'}
+                                    >
+
+
+                                      {
+                                        translate[isLang].FilterStatus?.filter?.((item) => item.value !== "All").map((status, index) => (
+                                          <React.Fragment key={index}>
+                                            {item?.MedicalCenterDoctorStatus === status.value ? '' : <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey={status.value}>{status.text}</Dropdown.Item>}
+                                          </React.Fragment>
+                                        ))
+                                      }
+                                    </DropdownButton>
                                 }
                               </span>
                             </div>
@@ -291,19 +291,22 @@ const DoctorRequest = () => {
         </div>
       </div>
       <div className="pagination ">
-        <Box
-          sx={{
-            margin: "auto",
-            width: "fit-content",
-            alignItems: "center",
-          }}
-        >
-          <Pagination
-            count={pageCount}
-            page={page}
-            onChange={handleChange}
-          />
-        </Box>
+        {
+          pageCount &&
+          <Box
+            sx={{
+              margin: "auto",
+              width: "fit-content",
+              alignItems: "center",
+            }}
+          >
+            <Pagination
+              count={pageCount}
+              page={page}
+              onChange={handleChange}
+            />
+          </Box>
+        }
       </div>
     </>
   )

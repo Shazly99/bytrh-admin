@@ -23,8 +23,7 @@ function AddDoctor({ fetchCountriesBytra }) {
         }
       })
       .catch(err => {
-        console.log(err);
-      })
+       })
   }
 
   // let navigate = useNavigate();
@@ -271,7 +270,7 @@ function AddDoctor({ fetchCountriesBytra }) {
                   <Component.ButtonBase title={"Cancel"} bg={"primary"} path="/doctors " />
                   </div> */}
 
-                  <div className='d-flex justify-content-center align-content-center mt-4'>
+                  <div className='d-flex justify-content-center align-content-center gap-3 mt-4'>
                       <div className='baseBtn'>
                           <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
                               {loadind ? <CircularProgress size={27} style={{color: '#fff'}} />: 

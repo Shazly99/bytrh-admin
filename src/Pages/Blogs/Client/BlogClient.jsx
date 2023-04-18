@@ -1,4 +1,4 @@
-import { Pagination } from "@mui/material";
+import { Pagination, Skeleton } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Col, Dropdown, DropdownButton, Form, Row, Table, Modal, Button } from "react-bootstrap";
@@ -12,6 +12,8 @@ import useSkeletonTable from '../../../utils/useSkeletonTable';
 import initialTranslation from "./Translation";
 import Component from "../../../constants/Component";
 import ExcelSheet from "./ExcelSheet";
+import axios from "axios";
+import useFetch from "../../../utils/useFetch";
 
 const BlogClient = () => {
     let { isLang } = useContext(VendersContext);
@@ -55,7 +57,6 @@ const BlogClient = () => {
     const [modalIndexReason, setModalIndexReason] = React.useState(0);
     const handleModalCloseReason = () => setModalShowReason(false);
     function handleModalOpenReason(index) {
-        console.log(index);
         setModalIndexReason(index);
         setModalShowReason(true);
     }
@@ -94,7 +95,6 @@ const BlogClient = () => {
         setModalShow(true);
     }
     const reasonReject = async (id, action) => {
-        console.log(id, action);
         await ChangeBlogsStatus({
             IDClientBlog: id,
             BlogStatus: action,
@@ -135,18 +135,18 @@ const BlogClient = () => {
 
     }
     // ToDo::Filter radio btn Blogs status
-    const handleOptionChange = async (event) => {
-        const selectedValue = event.target.value;
-        setSelectedOption(selectedValue);
-        if (selectedValue === "PENDING" || selectedValue === "REJECTED" || selectedValue === "POSTED" || selectedValue === "REMOVED") {
-            let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs`, { IDPage: page, BlogStatus: selectedValue }, apiheader)
-            setBlogs(data.Response.ClientBlogs)
-            setPagesNumber(data.Response.Pages);
+    // const handleOptionChange = async (event) => {
+    //     const selectedValue = event.target.value;
+    //     setSelectedOption(selectedValue);
+    //     if (selectedValue === "PENDING" || selectedValue === "REJECTED" || selectedValue === "POSTED" || selectedValue === "REMOVED") {
+    //         let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs`, { IDPage: page, BlogStatus: selectedValue }, apiheader)
+    //         setBlogs(data.Response.ClientBlogs)
+    //         setPagesNumber(data.Response.Pages);
 
-        } else if (selectedValue === "All") {
-            BlogsList()
-        }
-    };
+    //     } else if (selectedValue === "All") {
+    //         BlogsList()
+    //     }
+    // };
     // ToDo::Filter by ID Animal Category
     const [animal, setAnimal] = useState(null)
 
@@ -169,7 +169,102 @@ const BlogClient = () => {
 
         }
     }
-
+    // !Filter by city and country and area  
+    let { countries, areas, cities, getCities, getAreas } = useFetch()
+    const cityRef = useRef(null);
+    const countryRef = useRef(null);
+    const areaRef = useRef(null);
+    const handelSelectCountry = async (event) => {
+        const selectedCountryId = event.target.value;
+        if (selectedCountryId === 'country') {
+            BlogsList(page)
+        } else if (selectedCountryId === 'Select Country') {
+            return false
+        } else {
+            getCities(selectedCountryId)
+            try {
+                await axios.post(`${process.env.REACT_APP_API_URL}/admin/clients/blogs`, { IDPage: page, IDCountry: selectedCountryId }, apiheader).then((res) => {
+                    if (res.status === 200 && res.request.readyState === 4) {
+                        setBlogs(res.data.Response.ClientBlogs)
+                        setPagesNumber(res.data.Response.Pages);
+                    }
+                })
+            } catch (error) {
+                if (error.response && error.response.status === 429) {
+                    const retryAfter = error.response.headers['retry-after'];
+                    setTimeout(() => {
+                        BlogsList();
+                    }, (retryAfter || 30) * 1000);
+                }
+            }
+        }
+    }
+    const handelSelectCity = async () => {
+        let city = cityRef.current.value
+        if (city === 'cities') {
+            BlogsList(page)
+        } else if (city === 'Select city') {
+            return false
+        } else {
+            getAreas(city)
+            try {
+                await axios.post(`${process.env.REACT_APP_API_URL}/admin/clients/blogs`, { IDPage: page, IDCity: city }, apiheader).then((res) => {
+                    if (res.status === 200 && res.request.readyState === 4) {
+                        setBlogs(res.data.Response.ClientBlogs)
+                        setPagesNumber(res.data.Response.Pages);
+                    }
+                })
+            } catch (error) {
+                if (error.response && error.response.status === 429) {
+                    const retryAfter = error.response.headers['retry-after'];
+                    setTimeout(() => {
+                        BlogsList(page);
+                    }, (retryAfter || 30) * 1000);
+                }
+            }
+        }
+    }
+    const handelSelectArea = async () => {
+        let city = areaRef.current.value
+        if (city === 'Areas') {
+            BlogsList(page)
+        } else if (city === 'Select Area') {
+            return false
+        } else {
+            try {
+                await axios.post(`${process.env.REACT_APP_API_URL}/admin/clients/blogs`, { IDPage: page, IDArea: city }, apiheader).then((res) => {
+                    if (res.status === 200 && res.request.readyState === 4) {
+                        setBlogs(res.data.Response.ClientBlogs)
+                        setPagesNumber(res.data.Response.Pages);
+                    }
+                })
+            } catch (error) {
+                if (error.response && error.response.status === 429) {
+                    const retryAfter = error.response.headers['retry-after'];
+                    setTimeout(() => {
+                        BlogsList(page);
+                    }, (retryAfter || 30) * 1000);
+                }
+            }
+        }
+    }
+    // ToDo::Filter dropdown Blogs status 
+    const statusRef = useRef(null);
+    const handelBlogsStatus = async () => {
+        let BlogsStatus = statusRef.current.value
+        if (BlogsStatus === 'All') {
+            BlogsList(page)
+        } else if (BlogsStatus === 'Select Status') {
+            return false
+        } else {
+            await axios.post(`${process.env.REACT_APP_API_URL}/admin/clients/blogs`, { IDPage: page, BlogStatus: BlogsStatus }, apiheader).then((res) => {
+                if (res.status === 200 && res.request.readyState === 4) {
+                    setBlogs(res.data.Response.ClientBlogs)
+                    setPagesNumber(res.data.Response.Pages);
+                }
+            })
+        }
+    }
     useEffect(() => {
         BlogsList(page)
         animalcategories()
@@ -183,7 +278,14 @@ const BlogClient = () => {
     }, [page])
     useEffect(() => {
     }, [page, PagesNumber])
-
+    const SkeletonFilter = () => {
+        return (
+            <div className="d-flex flex-column  gap-2 mt-2">
+                <Skeleton variant='rounded' animation='wave' height={15} width={'60%'} />
+                <Skeleton variant='rounded' animation='wave' height={26} width={'100%'} />
+            </div>
+        )
+    }
     return (
         <>
             <div className="app__Users ">
@@ -199,8 +301,8 @@ const BlogClient = () => {
                         </> : SkeletonSearchsingel(40, "100%")}
                     </div>
                     <div className="app__addOrder-form  overflow-hidden">
-                        <Row>
-                            <Col xl={6} lg={6} md={6} sm={12} xs={12} >
+                        {/* <Row> */}
+                        {/*       <Col xl={6} lg={6} md={6} sm={12} xs={12} >
                                 <div className='filter__group__stats row ' style={{ display: 'flex', gap: '20px', marginBottom: '25px' }}>
                                     {
                                         translate[isLang]?.FilterStatus?.map((item, index) => (
@@ -217,14 +319,94 @@ const BlogClient = () => {
                                                         />
                                                         {item.text}
                                                     </label>
-                                                </> : SkeletonFilterBlogs(10, 90)}
+                                                </> :
+                                                    <label className='col active d-flex justify-content-center align-item-center m-0 p-0 '>
+
+                                                        {SkeletonFilterBlogs(10, 90)}
+                                                    </label>
+                                                }
+
                                             </React.Fragment>
                                         ))
                                     }
 
                                 </div>
+                            </Col> */}
+                        {/*  </Row> */}
+
+                        <Row className='d-flex  flex-row justify-content-between'>
+                            <Col xl={4} lg={4} md={6} sm={12} className='mt-2' >
+                                {isLoader ? <>
+                                    <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry} ref={countryRef}>
+                                        <Form.Select aria-label="Default select example" >
+                                            <option selected disabled hidden value={'Select Country'}>{translate[isLang]?.filter?.Country}  </option>
+                                            <option value={'country'} >{translate[isLang]?.filter?.allCountry}</option>
+                                            {
+                                                countries?.map((item, index) => (
+                                                    <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
+                                                ))
+                                            }
+                                        </Form.Select>
+                                    </Form.Group>
+                                </> : SkeletonFilter()}
                             </Col>
-                            <Col xl={6} lg={6} md={6} sm={12} xs={12} className='Filter_by_Animal' >
+
+                            <Col xl={4} lg={4} md={6} sm={12} className='mt-2'>
+                                {isLoader ? <>
+                                    <Form.Group controlId="formBasicEmail"   >
+                                        <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={cityRef}>
+                                            <option selected disabled hidden value={'Select city'}> {translate[isLang]?.filter?.city}  </option>
+                                            <option value={'cities'} >{translate[isLang]?.filter?.allCity}</option>
+                                            {
+                                                cities?.map((item, index) => (
+                                                    <option key={index} value={item?.IDCity}>{item?.CityName}</option>
+                                                ))
+                                            }
+                                        </Form.Select>
+                                    </Form.Group>
+                                </> : SkeletonFilter()}
+                            </Col>
+
+                            <Col xl={4} lg={4} md={6} sm={12} className='mt-2'>
+                                {isLoader ? <>
+                                    <Form.Group controlId="formBasicEmail"   >
+                                        <Form.Select aria-label="Default select example" onClick={handelSelectArea} ref={areaRef}>
+                                            <option selected disabled hidden value={'Select Area'}>  {translate[isLang]?.filter?.area}  </option>
+                                            <option value={'Areas'} > {translate[isLang]?.filter?.allarea} </option>
+                                            {
+                                                areas?.map((item, index) => (
+                                                    <option key={index} value={item?.IDArea}>{item?.AreaName}</option>
+                                                ))
+                                            }
+                                        </Form.Select>
+                                    </Form.Group>
+                                </> : SkeletonFilter()}
+                            </Col>
+
+
+                        </Row>
+
+
+
+                        <Row className="mt-2">
+                            <Col xl={6} lg={6} md={6} sm={12} className='mt-2'>
+
+                                {isLoader ? <>
+                                    <Form.Group controlId="formBasicEmail"  >
+                                        <Form.Select aria-label="Default select example" ref={statusRef} onClick={handelBlogsStatus} >
+                                            <option selected disabled hidden value={'Select Status'}> {translate[isLang]?.filter?.status}</option>
+                                            {
+                                                translate[isLang]?.FilterStatus?.map((Status, index) => (
+                                                    <>
+                                                        <option key={index} value={Status.value}  >{Status.text}</option>
+                                                    </>
+                                                ))
+                                            }
+                                        </Form.Select>
+                                    </Form.Group>
+                                </> : SkeletonFilter()}
+                            </Col>
+                            <Col xl={6} lg={6} md={6} sm={12} xs={12} className='mt-2' >
                                 {isLoader ? <>
                                     <Form.Select aria-label="Default select example" ref={animalRef} onClick={handelSelectAnimalCategory}>
                                         <option selected disabled hidden value={'Select Category'}> {translate[isLang]?.filter?.Category}</option>
@@ -242,7 +424,7 @@ const BlogClient = () => {
                             </Col>
                         </Row>
                     </div>
-                    <ExcelSheet/>
+                    <ExcelSheet />
                     {isLoader ? <>
                         {
                             blogs?.length > 0 ?
@@ -331,12 +513,12 @@ const BlogClient = () => {
 
                                                                 </div>
                                                             </div>
-                                                        {
-                                                         item?.BlogRejectionReason && 
-                                                        <div className="app__reason">
-                                                            <a onClick={() => handleModalOpenReason(item?.IDClientBlog)} >Reason</a>
-                                                        </div>
-                                                        } 
+                                                            {
+                                                                item?.BlogRejectionReason &&
+                                                                <div className="app__reason">
+                                                                    <a onClick={() => handleModalOpenReason(item?.IDClientBlog)} >Reason</a>
+                                                                </div>
+                                                            }
                                                         </div>
                                                     </td>
                                                     <Modal
@@ -429,9 +611,12 @@ const BlogClient = () => {
 
             </div>
             <div className="pagination " dir="ltr">
-                <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-                    <Pagination count={pageCount} page={page} onChange={handleChange} />
-                </Box>
+                {
+                    pageCount &&
+                    <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
+                        <Pagination count={pageCount} page={page} onChange={handleChange} />
+                    </Box>
+                }
             </div>
         </>
 

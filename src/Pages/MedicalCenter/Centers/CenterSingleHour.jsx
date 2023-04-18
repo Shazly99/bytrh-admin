@@ -41,8 +41,7 @@ const CenterSingleHour = ({ MedicalCenterTime, getCenterHours }) => {
                 }
             })
             .catch(err => {
-                console.log(err);
-            })
+             })
     }
 
 

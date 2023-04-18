@@ -61,8 +61,7 @@ const CenterEdit = () => {
         }, 100);
       }
       else {
-        console.log(data.ApiMsg);
-      }
+       }
     }
   
     useEffect(() => {
@@ -91,8 +90,7 @@ const CenterEdit = () => {
           }
         })
         .catch(err => {
-          console.log(err);
-        })
+         })
     }
   
   
@@ -105,8 +103,7 @@ const CenterEdit = () => {
             setFetchAreasBytra(res.data.Response);
           }
         })
-        .catch(err => {
-          console.log(err);
+        .catch(err => { 
         })
     }
   

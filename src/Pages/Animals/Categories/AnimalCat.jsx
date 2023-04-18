@@ -10,7 +10,7 @@ import { VendersContext } from "../../../context/Store";
 import useSkeletonTable from '../../../utils/useSkeletonTable';
 import { apiheader, GetData, PostData } from './../../../utils/fetchData';
 import translateCategories from './translateCategories';
-import './initialTranslate' 
+import './initialTranslate'
 
 
 
@@ -134,7 +134,7 @@ const AnimalCat = () => {
               {isLoader ? <>
                 <Component.ButtonBase title={translateCategories[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/categories/addAnimal" />
                 <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
-                  <input   type="text" placeholder={translateCategories[isLang]?.placeholder} name="search" value={searchValue} onChange={handleInputChange} />
+                  <input type="text" placeholder={translateCategories[isLang]?.placeholder} name="search" value={searchValue} onChange={handleInputChange} />
                   <button type="submit" onClick={handleSearchClick}>
                     <Icons.Search color='#fff' size={25} />
                   </button>
@@ -182,7 +182,7 @@ const AnimalCat = () => {
                 </label>
               </> : SkeletonFilters(10, 90)}
               {isLoader ? <>
-                <label style={{whiteSpace: 'nowrap'}}>
+                <label style={{ whiteSpace: 'nowrap' }}>
                   <input
                     type="radio"
                     name="filter"
@@ -200,8 +200,8 @@ const AnimalCat = () => {
             <Table responsive={true} className='rounded-3 '>
               <thead>
                 <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                  {translateCategories[isLang]?.TableHeader?.map((el , i) => (
-                      <th key={i}>{el}</th>
+                  {translateCategories[isLang]?.TableHeader?.map((el, i) => (
+                    <th key={i}>{el}</th>
                   ))}
                 </tr>
               </thead>
@@ -210,8 +210,11 @@ const AnimalCat = () => {
                   animal?.map((item, index) => (
                     <tr key={index}>
                       <td >
-                        <div style={{ maxWidth: '170px' }}>
-                          <img src={item?.AnimalCategoryImage} className='w-100 rounded-3' alt={item?.AnimalCategoryName} loading="lazy" />
+                        <div >
+                          <img src={item?.AnimalCategoryImage} className=' rounded-3'
+                            alt={item?.AnimalCategoryName} loading="lazy"
+                            width={'250px'}
+                            height={'150px'} />
                         </div>
                       </td>
 
@@ -224,10 +227,10 @@ const AnimalCat = () => {
                       <td >
                         <div>
                           <span style={{ height: 'fit-content !important' }} className={`  ${item?.AnimalCategoryActive === 1 && 'txt_delivered'}  ${item?.AnimalCategoryActive === 0 && 'txt_rejected'} `} >
-                            {item?.AnimalCategoryActive === 1 ? 
-                                isLang === 'ar' ? 'نشــط' : 'Active'
-                              : 
-                                isLang === 'ar' ? 'غير نشـط' : 'InActive'
+                            {item?.AnimalCategoryActive === 1 ?
+                              isLang === 'ar' ? 'نشــط' : 'Active'
+                              :
+                              isLang === 'ar' ? 'غير نشـط' : 'InActive'
                             }
                           </span>
                         </div>
@@ -249,7 +252,7 @@ const AnimalCat = () => {
                                 {isLang === 'ar' ? 'تعديـل' : 'Edit'}
                               </Dropdown.Item>
 
-                              <div className="w-100 bg-dark opacity-25" style={{height: '1px'}}></div>
+                              <div className="w-100 bg-dark opacity-25" style={{ height: '1px' }}></div>
 
                               {
                                 item?.AnimalCategoryActive === 1 ? '' : item?.AnimalCategoryActive === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">
@@ -277,9 +280,12 @@ const AnimalCat = () => {
 
       </div>
       <div className="pagination ">
-        <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-          <Pagination count={pageCount} page={page} onChange={handleChange} />
-        </Box>
+        {
+          pageCount &&
+          <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
+            <Pagination count={pageCount} page={page} onChange={handleChange} />
+          </Box>
+        }
       </div>
     </>
   )

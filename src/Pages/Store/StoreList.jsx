@@ -97,7 +97,6 @@ const StoreList = () => {
             });
             await store();
         } else if (action === "REJECTED") {
-            console.log(id);
             handleModalOpen(id)
 
         }
@@ -110,7 +109,6 @@ const StoreList = () => {
         );
     };
     const reasonReject = async (id, action) => {
-        console.log(id, action);
         await ChangeStoreStatus({
             IDAnimalProduct: id,
             AnimalProductStatus: action,
@@ -461,7 +459,7 @@ const StoreList = () => {
                             </div>
                         </div>
                     </div>
-                    <ExcelSheet/>
+                    <ExcelSheet />
                     {isLoader ? <>
                         <>
                             {
@@ -482,14 +480,14 @@ const StoreList = () => {
                                             {animal?.map((item, index) => (
                                                 <tr key={index}>
                                                     <td>
-                                                        <div style={{ maxWidth: "170px" }}>
+                                                        <div  >
                                                             <img
                                                                 src={item?.AnimalProductImage}
-                                                                className="w-100 rounded-3"
+                                                                className=" rounded-3"
                                                                 alt={item?.AnimalProductTypeName}
                                                                 loading="lazy"
-                                                                width={250}
-                                                                height={150}
+                                                                width={'250px'}
+                                                                height={'150px'}
                                                             />
                                                         </div>
                                                     </td>
@@ -612,7 +610,7 @@ const StoreList = () => {
                                                             </Button>
                                                         </Modal.Footer>
                                                     </Modal>
-                                                    
+
                                                     <Modal
                                                         show={modalShow && modalIndex === item.IDAnimalProduct}
                                                         onHide={handleModalClose}
@@ -676,19 +674,22 @@ const StoreList = () => {
                 </div>
             </div>
             <div className="pagination " dir="ltr">
-                <Box
-                    sx={{
-                        margin: "auto",
-                        width: "fit-content",
-                        alignItems: "center",
-                    }}
-                >
-                    <Pagination
-                        count={pageCount}
-                        page={page}
-                        onChange={handleChange}
-                    />
-                </Box>
+                {
+                    pageCount &&
+                    <Box
+                        sx={{
+                            margin: "auto",
+                            width: "fit-content",
+                            alignItems: "center",
+                        }}
+                    >
+                        <Pagination
+                            count={pageCount}
+                            page={page}
+                            onChange={handleChange}
+                        />
+                    </Box>
+                }
             </div>
         </>
 

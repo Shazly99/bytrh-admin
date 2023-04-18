@@ -8,8 +8,7 @@ const StoreChat = ({ chat, isLoader, translate }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-        console.log(chat);
-    }, [isLoader])
+     }, [isLoader])
     const SkeletonHeader = () => {
         return (
             <div className="product_description mb-3">

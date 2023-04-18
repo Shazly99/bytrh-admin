@@ -68,6 +68,7 @@ const Bagging = () => {
     <>
 
       <div className="app__Users ">
+        <div className="app__Users-table">
         {isLoader ? <>
           <Component.ButtonBase title={translateBagging[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/bagging/addbagging" />
         </> :
@@ -75,7 +76,6 @@ const Bagging = () => {
             {SkeletonFilters(40, 150)}
           </div>
         }
-        <div className="app__Users-table">
           {isLoader ? <>
             <Table responsive={true} className='rounded-3 '>
               <thead>

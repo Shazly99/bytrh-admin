@@ -14,6 +14,7 @@ import useSkeletonTable from '../../utils/useSkeletonTable';
 import icons from './../../constants/Icons';
 import initialTranslation from './Translation';
 import ExcelSheet from "./ExcelSheet";
+import Component from "../../constants/Component";
 const Visits = () => {
   let { isLang } = useContext(VendersContext);
   const [translate, setTranslate] = useState(initialTranslation)
@@ -52,8 +53,7 @@ const Visits = () => {
 
 
   const handleActionSelect = async (id, action) => {
-    console.log(action);
-    console.log(id);
+
     if (action === "PENDING" || action === "ACCEPTED" || action === "CANCELLED" || action === "REJECTED" || action === "ONGOING" || action === "ENDED") {
       await visitsStatus({ IDVisit: id, VisitStatus: action }).then((res) => {
         toast.success('Updated Successfully', {
@@ -144,10 +144,8 @@ const Visits = () => {
   // !Filter by start date and end date
   let startDate = useRef();
   let endDate = useRef();
-  const handelDate =async () => {
-    console.log(startDate.current.value);
-    console.log(endDate.current.value);
-    await axios.post(`${process.env.REACT_APP_API_URL}/admin/visits`, { IDPage: page, StartDate: startDate.current.value,EndDate:endDate.current.value }, apiheader).then((res) => {
+  const handelDate = async () => {
+    await axios.post(`${process.env.REACT_APP_API_URL}/admin/visits`, { IDPage: page, StartDate: startDate.current.value, EndDate: endDate.current.value }, apiheader).then((res) => {
       if (res.status === 200 && res.request.readyState === 4) {
         setAnimal(res.data.Response.Visits);
         setPagesNumber(res.data.Response.Pages);
@@ -192,15 +190,15 @@ const Visits = () => {
           <div className="app__addOrder-form ">
             <Row className="mb-3">
               <Col xl={5} lg={5} md={6} sm={12} >
-                <Form.Control type="date" ref={startDate} className="w-100" />
+                <Form.Control type="date" ref={startDate} className="w-100 mt-2" />
               </Col>
 
               <Col xl={5} lg={5} md={6} sm={12} >
-
-                <Form.Control type="date" ref={endDate} className="w-100" />
+                <Form.Control type="date" ref={endDate} className="w-100 mt-2" />
               </Col>
+
               <Col xl={2} lg={2} md={6} sm={12} >
-                <Button variant="outline-primary" onClick={handelDate} className="w-100">Find Date</Button>
+                <Button variant="outline-primary" onClick={handelDate} className="w-100 mt-2">Find Date</Button>
               </Col>
             </Row>
 
@@ -243,62 +241,65 @@ const Visits = () => {
             </div>
           </div>
           <div className="app__Users-table">
-            <ExcelSheet/>
+            <ExcelSheet />
             {isLoader ? <>
-              <Table responsive={true} className='rounded-3 '>
-                <thead>
-                  <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                    {
-                      translate[isLang]?.TableHeader?.map((item, index) => (
-                        <th key={index}>{item}</th>
-                      ))
-                    }
-                  </tr>
-                </thead>
-                <tbody className='text-center'>
-                  {
-                    animal?.map((item, index) => (
-                      <tr key={index}>
-                        <td >
-                          <div className='d-flex flex-column justify-content-center align-content-center' style={{ gap: '0' }}>
-                            <span className='ClientName'>{item?.ClientName}</span>
-                            <span className='ClientPhone'>{item?.ClientPhone}</span>
-                          </div>
-                        </td>
+              <>
+                {
+                  animal?.length > 0 ?
+                    <Table responsive={true} className='rounded-3 '>
+                      <thead>
+                        <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
+                          {
+                            translate[isLang]?.TableHeader?.map((item, index) => (
+                              <th key={index}>{item}</th>
+                            ))
+                          }
+                        </tr>
+                      </thead>
+                      <tbody className='text-center'>
+                        {
+                          animal?.map((item, index) => (
+                            <tr key={index}>
+                              <td >
+                                <div className='d-flex flex-column justify-content-center align-content-center' style={{ gap: '0' }}>
+                                  <span className='ClientName'>{item?.ClientName}</span>
+                                  <span className='ClientPhone'>{item?.ClientPhone}</span>
+                                </div>
+                              </td>
 
-                        <td >
-                          <div className='d-flex flex-column justify-content-center align-content-center' style={{ gap: '0' }}>
-                            <span className='ClientName'>{item?.MedicalCenterName}</span>
-                            <span className='ClientPhone'>{item?.MedicalCenterPhone}</span>
-                          </div>
-                        </td>
+                              <td >
+                                <div className='d-flex flex-column justify-content-center align-content-center' style={{ gap: '0' }}>
+                                  <span className='ClientName'>{item?.MedicalCenterName}</span>
+                                  <span className='ClientPhone'>{item?.MedicalCenterPhone}</span>
+                                </div>
+                              </td>
 
-                        <td >
-                          <div className='d-flex flex-column justify-content-center align-content-center' style={{ gap: '0' }}>
-                            <span className='ClientName'>{item?.DoctorName}</span>
-                            <span className='ClientPhone'>{item?.DoctorPhone}</span>
-                          </div>
-                        </td>
+                              <td >
+                                <div className='d-flex flex-column justify-content-center align-content-center' style={{ gap: '0' }}>
+                                  <span className='ClientName'>{item?.DoctorName}</span>
+                                  <span className='ClientPhone'>{item?.DoctorPhone}</span>
+                                </div>
+                              </td>
 
-                        <td >
-                          <div>
-                            <h6 className="mb-0  pe-2 color-red">
-                              {item?.VisitTotalPrice} {translate[isLang]?.Actions.currency}
-                            </h6>
-                          </div>
-                        </td>
+                              <td >
+                                <div>
+                                  <h6 className="mb-0  pe-2 color-red">
+                                    {item?.VisitTotalPrice} {translate[isLang]?.Actions.currency}
+                                  </h6>
+                                </div>
+                              </td>
 
-                        <td >
-                          <div>
-                            <span style={{ height: 'fit-content !important' }}  >
-                              {item?.VisitType.charAt(0).toUpperCase() + item?.VisitType.slice(1).toLowerCase()}
-                            </span>
-                          </div>
-                        </td>
+                              <td >
+                                <div>
+                                  <span style={{ height: 'fit-content !important' }}  >
+                                    {item?.VisitType.charAt(0).toUpperCase() + item?.VisitType.slice(1).toLowerCase()}
+                                  </span>
+                                </div>
+                              </td>
 
-                        <td className='text-center  d-flex '>
-                          <div>
-                            <span style={{ height: 'fit-content !important' }} className={`
+                              <td className='text-center  d-flex '>
+                                <div>
+                                  <span style={{ height: 'fit-content !important' }} className={`
                                             ${item.VisitStatus === 'PENDING' && 'txt_pending'} 
                                             ${item.VisitStatus === 'ONGOING' && 'txt_delivered'} 
                                             ${item.VisitStatus === 'ENDED' && 'txt_rejected'}
@@ -310,77 +311,84 @@ const Visits = () => {
                                             ${item.VisitStatus === 'ACCEPTED' && 'txt_delivery'}`} >
 
 
-                              {
-                                translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.value === item?.VisitStatus)
-                                  .map((status, index) => (
-                                    <React.Fragment key={index}>
-                                      {item?.VisitStatus === status.value ? status.text : ''}
-                                    </React.Fragment>
-                                  ))
-                              }
-                            </span>
-                          </div>
-                        </td>
-                        <td>
-                          <div
-                            className="d-flex flex-column justify-content-center align-content-center"
-                            style={{ gap: "0" }}
-                          >
-                            <span className="ClientName">
-                              {" "}
-                              {item?.VisitStartTime.split(" ")[0]}{" "}
-                            </span>
-                            <span className="ClientPhone">
-                              {" "}
-                              {item?.VisitStartTime.split(" ")[1]}
-                            </span>
-                          </div>
-                        </td>
-                        <td>
-                          <div>
-                            <span>
-                              <DropdownButton
-                                id={`dropdown-${item.IDVisit}`}
-                                title={translate[isLang]?.Actions.action}
-                                variant="outline-success"
-                                onSelect={(eventKey) => handleActionSelect(item.IDVisit, eventKey)}
-                                className="DropdownButton "
-                                drop={'down-centered'}
-                              >
+                                    {
+                                      translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.value === item?.VisitStatus)
+                                        .map((status, index) => (
+                                          <React.Fragment key={index}>
+                                            {item?.VisitStatus === status.value ? status.text : ''}
+                                          </React.Fragment>
+                                        ))
+                                    }
+                                  </span>
+                                </div>
+                              </td>
+                              <td>
+                                <div
+                                  className="d-flex flex-column justify-content-center align-content-center"
+                                  style={{ gap: "0" }}
+                                >
+                                  <span className="ClientName">
+                                    {" "}
+                                    {item?.VisitStartTime.split(" ")[0]}{" "}
+                                  </span>
+                                  <span className="ClientPhone">
+                                    {" "}
+                                    {item?.VisitStartTime.split(" ")[1]}
+                                  </span>
+                                </div>
+                              </td>
+                              <td>
+                                <div>
+                                  <span>
+                                    <DropdownButton
+                                      id={`dropdown-${item.IDVisit}`}
+                                      title={translate[isLang]?.Actions.action}
+                                      variant="outline-success"
+                                      onSelect={(eventKey) => handleActionSelect(item.IDVisit, eventKey)}
+                                      className="DropdownButton "
+                                      drop={'down-centered'}
+                                    >
 
 
-                                {
-                                  translate[isLang].FilterStatus?.filter?.((item) => item.value !== "All").map((status, index) => (
-                                    <React.Fragment key={index}>
-                                      {item?.VisitStatus === status.value ? '' : <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey={status.value}>{status.text}</Dropdown.Item>}
-                                    </React.Fragment>
-                                  ))
-                                }
-                              </DropdownButton>
-                            </span>
-                          </div>
-                        </td>
+                                      {
+                                        translate[isLang].FilterStatus?.filter?.((item) => item.value !== "All").map((status, index) => (
+                                          <React.Fragment key={index}>
+                                            {item?.VisitStatus === status.value ? '' : <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey={status.value}>{status.text}</Dropdown.Item>}
+                                          </React.Fragment>
+                                        ))
+                                      }
+                                    </DropdownButton>
+                                  </span>
+                                </div>
+                              </td>
 
-                        <td>
-                          <div>
-                            <Link
-                              to={`/visits/details/${item?.IDVisit}`}
-                            >
-                              <LogoSvg.view className="logoSvg" style={{ width: 19 }} />
-                            </Link>
-                          </div>
-                        </td>
-                      </tr>
-                    ))
-                  }
+                              <td>
+                                <div>
+                                  <Link
+                                    to={`/visits/details/${item?.IDVisit}`}
+                                  >
+                                    <LogoSvg.view className="logoSvg" style={{ width: 19 }} />
+                                  </Link>
+                                </div>
+                              </td>
+                            </tr>
+                          ))
+                        }
 
-                </tbody>
+                      </tbody>
 
-              </Table>
+                    </Table>
+                    :
+                    <Component.DataNotFound />
+                }
+              </>
               <div className="pagination " dir="ltr">
-                <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-                  <Pagination count={pageCount} page={page} onChange={handleChange} />
-                </Box>
+                {
+                  pageCount &&
+                  <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
+                    <Pagination count={pageCount} page={page} onChange={handleChange} />
+                  </Box>
+                }
               </div>
             </> :
               SkeletonTable()

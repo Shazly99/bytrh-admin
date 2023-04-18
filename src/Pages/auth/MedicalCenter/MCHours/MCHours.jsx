@@ -29,8 +29,7 @@ const MCHours = () => {
                 }
             })
             .catch(err => {
-                console.log(err);
-            })
+             })
     }
 
 

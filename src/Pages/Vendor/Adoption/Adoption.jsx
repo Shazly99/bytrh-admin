@@ -43,7 +43,6 @@ export default function Adoption() {
         setLoadingAdoption(false);
       })
       .catch((error) => {
-        console.log(error);
       });
   }
 
@@ -170,9 +169,12 @@ export default function Adoption() {
                   </div>
 
                   <div className="pagination mt-2">
-                    <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-                      <Pagination count={pagesCountAdoption} page={countAdoption} onChange={handleChange} />
-                    </Box>
+                    {
+                      pagesCountAdoption &&
+                      <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
+                        <Pagination count={pagesCountAdoption} page={countAdoption} onChange={handleChange} />
+                      </Box>
+                    }
                   </div>
                 </>
                 :

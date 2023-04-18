@@ -35,25 +35,25 @@ const menuItemAnimation = {
   }),
 };
 
-const SidebarMenu = ({isLang, route,open, showAnimation, isOpen, setIsOpen }) => {
+const SidebarMenu = ({ isLang, route, open, onClick, showAnimation, isOpen, setIsOpen }) => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
     setIsOpen(true);
-    
+
   };
 
   useEffect(() => {
     if (!isOpen) {
       setIsMenuOpen(false);
     }
-  }, [isOpen,isLang]);
+  }, [isOpen, isLang]);
   return (
     <>
-      <div className="menu " onClick={toggleMenu} style={{[isLang === 'en' ? 'paddingRight' : 'paddingLeft']: '20px' }} >
+      <div className="menu " onClick={toggleMenu} style={{ [isLang === 'en' ? 'paddingRight' : 'paddingLeft']: '20px' }} >
         <div className="menu_item">
-          <span className={`link ${isMenuOpen?'link_text':''}`}>
+          <span className={`link ${isMenuOpen ? 'link_text' : ''}`}>
             <div className="icon">{route.icon}</div>
             <AnimatePresence>
               {isOpen && (
@@ -63,7 +63,7 @@ const SidebarMenu = ({isLang, route,open, showAnimation, isOpen, setIsOpen }) =>
                   animate="show"
                   exit="hidden"
                   className="link_text"
-                > 
+                >
                   {isLang === 'ar' ? route.nameAr : route.nameEn}
 
                 </motion.div>
@@ -77,7 +77,7 @@ const SidebarMenu = ({isLang, route,open, showAnimation, isOpen, setIsOpen }) =>
             animate={
               !isMenuOpen
                 ? {
-                  rotate:isLang === 'ar' ? 90 : -90,
+                  rotate: isLang === 'ar' ? 90 : -90,
                 }
                 : { rotate: 0 }
             }
@@ -94,16 +94,16 @@ const SidebarMenu = ({isLang, route,open, showAnimation, isOpen, setIsOpen }) =>
             animate="show"
             exit="hidden"
             className="menu_container "
-            // style={{marginTop:'0.5px'}}
+          // style={{marginTop:'0.5px'}}
           >
             {route.subRoutes.map((subRoute, i) => (
               <motion.div variants={menuItemAnimation} key={i} custom={i}>
-                <NavLink to={subRoute.path} className="link" style={{[isLang === 'ar' ? 'marginRight' : 'marginLeft']: '12px'}} >
-                  
+                <NavLink to={subRoute.path} onClick={onClick} className="link" style={{ [isLang === 'ar' ? 'marginRight' : 'marginLeft']: '12px' }} >
+
                   <div className="icon">{subRoute.icon}</div>
-                  <motion.div className="link_text " style={{fontSize:16}}>{subRoute.name}
-                  {isLang === 'ar' ? subRoute.nameAr : subRoute.nameEn}
-                  
+                  <motion.div className="link_text " style={{ fontSize: 16 }}>{subRoute.name}
+                    {isLang === 'ar' ? subRoute.nameAr : subRoute.nameEn}
+
                   </motion.div>
                 </NavLink>
               </motion.div>

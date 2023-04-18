@@ -45,8 +45,7 @@ export default function ItemAdoption({ Reason,id, clientName, petName, petStrain
         setModalShow(true);
     }
     const reasonReject = async (id, action) => {
-        console.log(id, action);
-        await userstatus({
+         await userstatus({
             IDAdoption: id,
             AdoptionStatus: action,
             AdoptionRejectReason: reasonRef.current.value,

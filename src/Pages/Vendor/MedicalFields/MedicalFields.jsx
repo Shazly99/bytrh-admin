@@ -242,9 +242,12 @@ const MedicalFields = () => {
 
             </div>
             <div className="pagination ">
+            {
+          pageCount &&
               <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
                 <Pagination count={pageCount} page={page} onChange={handleChange} />
               </Box>
+        }
             </div>
           </> : <Component.Loader />
       }

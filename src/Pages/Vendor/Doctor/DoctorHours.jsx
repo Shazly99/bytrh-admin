@@ -34,8 +34,7 @@ const DoctorHours = () => {
                 }
             })
             .catch(err => {
-                console.log(err);
-            })
+             })
     }
 
     async function getDoctorVisits() {
@@ -51,8 +50,7 @@ const DoctorHours = () => {
                 }
             })
             .catch(err => {
-                console.log(err);
-            })
+             })
     }
 
     useEffect(() => {

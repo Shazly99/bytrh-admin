@@ -21,7 +21,7 @@ function AddConsultTime() {
   const timeRef = useRef();
 
 
-  async function registerAddForm(e) {
+  async function registerAddForm(e) { 
     e.preventDefault();
     setLoadind(true);
     let { data } = await axios({
@@ -83,7 +83,7 @@ function AddConsultTime() {
 
                 {message.length > 0 ? <p id="alertSave" className={`alert ${apiCode === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 mb-0 mt-3 w-50 text-center mx-auto`}>{message}</p> : ''}
 
-                  <div className='d-flex justify-content-center align-content-center mt-4'>
+                  <div className='d-flex justify-content-center align-content-center gap-3 mt-4'>
                       <div className='baseBtn'>
                           <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
                               {loadind ? <CircularProgress size={27} style={{color: '#fff'}} />: 

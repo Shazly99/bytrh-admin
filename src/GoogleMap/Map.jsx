@@ -13,16 +13,14 @@ function Map({ VisitLat, VisitLong, DoctorLat, DoctorLong,pinMarkF , pinMarkL })
  
   useEffect(() => {
     setMarkers([startPoint, endPoint]);
-    console.log(startPoint);
-  }, [startPoint, endPoint]);
+   }, [startPoint, endPoint]);
   useEffect(() => {
     setStartPoint({ lat: DoctorLat, lng: DoctorLong })
     setEndPoint({ lat: VisitLat, lng: VisitLong })
   }, [DoctorLat, DoctorLong, VisitLat, VisitLong]); 
 
   function handleMarkerClick(marker) {
-    console.log(marker);
-  }
+   }
 
   function handlePathUpdate(newPath) {
     setPath(newPath);

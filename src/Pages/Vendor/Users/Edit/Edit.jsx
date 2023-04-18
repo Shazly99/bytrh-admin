@@ -107,10 +107,7 @@ const Edit = () => {
             UserPassword: password.current.value,
             IDUser: id
         })
-        console.log({
-            UserPassword: password.current.value,
-            IDUser: id
-        });
+         
     }
 
 

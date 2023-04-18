@@ -42,8 +42,7 @@ export default function DoctorProfile() {
           setLoading(false);
         }
       })
-      .catch(err => {
-        console.log(err);
+      .catch(err => { 
       })
   }
   useEffect(() => {

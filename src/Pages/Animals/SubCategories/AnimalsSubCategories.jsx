@@ -179,11 +179,11 @@ const AnimalsSubCategories = () => {
                                         className="active-radio form-check-input"
 
                                     />
-                                        {isLang === 'ar' ? 'نشــط' : 'Active'}
+                                    {isLang === 'ar' ? 'نشــط' : 'Active'}
                                 </label>
                             </> : SkeletonFilters(10, 90)}
                             {isLoader ? <>
-                                <label style={{whiteSpace: 'nowrap'}}>
+                                <label style={{ whiteSpace: 'nowrap' }}>
                                     <input
                                         type="radio"
                                         name="filter"
@@ -193,7 +193,7 @@ const AnimalsSubCategories = () => {
                                         className="inactive-radio form-check-input"
 
                                     />
-                                        {isLang === 'ar' ? 'غير نشـط' : 'InActive'}
+                                    {isLang === 'ar' ? 'غير نشـط' : 'InActive'}
                                 </label>
                             </> : SkeletonFilters(10, 90)}
 
@@ -203,7 +203,7 @@ const AnimalsSubCategories = () => {
                         <Table responsive={true} className='rounded-3 '>
                             <thead>
                                 <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                                    {translateSubCategories[isLang]?.TableHeader?.map((el , i) => (
+                                    {translateSubCategories[isLang]?.TableHeader?.map((el, i) => (
                                         <th key={i}>{el}</th>
                                     ))}
                                 </tr>
@@ -213,8 +213,14 @@ const AnimalsSubCategories = () => {
                                     animal?.map((item, index) => (
                                         <tr key={index}>
                                             <td >
-                                                <div style={{ maxWidth: '170px' }}>
-                                                    <img src={item?.AnimalSubCategoryImage} className='w-100 rounded-3' alt={item?.AnimalCategoryName} loading="lazy" />
+                                                <div  >
+                                                    <img
+                                                        src={item?.AnimalSubCategoryImage}
+                                                        className=' rounded-3'
+                                                        alt={item?.AnimalCategoryName}
+                                                        loading="lazy"
+                                                        width={'250px'}
+                                                        height={'150px'} />
                                                 </div>
                                             </td>
 
@@ -233,9 +239,9 @@ const AnimalsSubCategories = () => {
                                             <td >
                                                 <div>
                                                     <span style={{ height: 'fit-content !important' }} className={`  ${item?.AnimalSubCategorActive === 1 && 'txt_delivered'}  ${item?.AnimalSubCategorActive === 0 && 'txt_rejected'} `} >
-                                                        {item?.AnimalSubCategorActive === 1 ? 
+                                                        {item?.AnimalSubCategorActive === 1 ?
                                                             isLang === 'ar' ? 'نشــط' : 'Active'
-                                                            : 
+                                                            :
                                                             isLang === 'ar' ? 'غير نشـط' : 'InActive'
                                                         }
                                                     </span>
@@ -258,7 +264,7 @@ const AnimalsSubCategories = () => {
                                                                 {isLang === 'ar' ? 'تعديـل' : 'Edit'}
                                                             </Dropdown.Item>
 
-                                                            <div className="w-100 bg-dark opacity-25" style={{height: '1px'}}></div>
+                                                            <div className="w-100 bg-dark opacity-25" style={{ height: '1px' }}></div>
 
                                                             {
                                                                 item?.AnimalSubCategorActive === 1 ? '' : item?.AnimalSubCategorActive === "ACTIVE" ? '' : <Dropdown.Item eventKey="ACTIVE">
@@ -286,9 +292,12 @@ const AnimalsSubCategories = () => {
 
             </div>
             <div className="pagination ">
-                <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-                    <Pagination count={pageCount} page={page} onChange={handleChange} />
-                </Box>
+                {
+                    pageCount &&
+                    <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
+                        <Pagination count={pageCount} page={page} onChange={handleChange} />
+                    </Box>
+                }
             </div>
         </>
     )
