@@ -2,19 +2,17 @@ import { Pagination, Skeleton } from "@mui/material";
 import Box from "@mui/material/Box";
 import axios from "axios";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Button, Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
+import { Button, Col, Form, Row, Table } from "react-bootstrap";
 import { toast } from "react-hot-toast";
-import { Link } from "react-router-dom";
-import Img from "../../../assets/Img";
 import Component from "../../../constants/Component";
 import Icons from "../../../constants/Icons";
+import { PostData, apiheader } from '../../../utils/fetchData';
 import useFetch from "../../../utils/useFetch";
-import useSkeletonTable from "../../../utils/useSkeletonTable";
-import { apiheader, PostData } from '../../../utils/fetchData';
-
-import initialTranslation from "./Translation";
+import useSkeletonTable from "../../../utils/useSkeletonTable"; 
 import { VendersContext } from "../../../context/Store";
 import ExcelSheet from "./ExcelSheet";
+import initialTranslation from "./Translation";
+
 const DoctorFreeList = () => {
 
   let { isLang } = useContext(VendersContext);
@@ -27,8 +25,7 @@ const DoctorFreeList = () => {
   const [doctorFree, setDoctorFree] = useState([]);
   const [page, setPage] = useState(1);
   const [PagesNumber, setPagesNumber] = useState("");
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [isLoader, setIsloader] = useState(false);
+   const [isLoader, setIsloader] = useState(false);
   // **pagination
   const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
 
@@ -164,10 +161,15 @@ const DoctorFreeList = () => {
 
 
   useEffect(() => {
-    DoctorsFree(page);
-    window.scrollTo(0, 0);
-    handelTranslate()
-  }, [page, isLoader]);
+    let timeOut = setTimeout(() => {
+      DoctorsFree(page);
+      window.scrollTo(0, 0);
+      handelTranslate()
+    }, 100);
+    return (() => {
+      clearTimeout(timeOut);
+    })
+  }, [page, isLoader ,isLang]);
   useEffect(() => { }, [page, PagesNumber]);
   const handleActionSelect = async (id) => {
 

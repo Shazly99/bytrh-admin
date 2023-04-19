@@ -16,6 +16,7 @@ import ExcelSheet from './ExcelSheet';
 
 
 export default function Doctors() {
+  let {   isLang  } = useContext(VendersContext);
 
 
   const URL_Doctors = `https://bytrh.com/api/admin/doctors`;
@@ -48,7 +49,7 @@ export default function Doctors() {
     return (() => {
       clearTimeout(timeOut);
     })
-  }, [countDoctors]);
+  }, [countDoctors,isLang]);
 
 
   useEffect(() => {
@@ -171,7 +172,6 @@ export default function Doctors() {
 
 
 
-  let { isLang } = useContext(VendersContext);
 
 
 
@@ -326,7 +326,7 @@ export default function Doctors() {
                     </Table>
                   </div>
 
-                  <div className="pagination mt-2">
+                  <div className="pagination mt-2" dir="ltr">
                     {
                       pagesCountDoctors &&
                       <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>

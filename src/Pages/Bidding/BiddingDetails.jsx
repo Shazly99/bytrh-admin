@@ -44,7 +44,7 @@ const BiddingDetails = () => {
     return () => {
       store();
     }
-  }, [id]);
+  }, [id,isLang ]);
 
   const SkeletonCard = () => {
     return (
@@ -187,7 +187,7 @@ const BiddingDetails = () => {
 
                   {isLoader ? <>
                     <span className='title'>{animal?.AllowPhone === 1 ? <Icons.Check color='#40AB45' size={18} /> : <Icons.Uncheck color='#E20000' size={18} />}</span>
-                    <span className='body'>  {translate[isLang]?.bidding?.phone}</span>
+                    <span className={`body ${isLang ==="en"?'text-left':'text-right'} `} dir='ltr'>  {translate[isLang]?.bidding?.phone}</span>
                   </> : SkeletonSummary()}
                 </Col>
                 <Col className="summary_blog">

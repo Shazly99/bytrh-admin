@@ -232,7 +232,7 @@ const Centers = () => {
     medicalCenterList(page);
     window.scrollTo(0, 0);
     handelTranslate()
-  }, [page, isLoader]);
+  }, [page, isLoader,isLang]);
   useEffect(() => { }, [page, PagesNumber]);
   const SkeletonSearch = (w, h) => {
     return (
@@ -543,7 +543,7 @@ const Centers = () => {
           </> : SkeletonTable()}
         </div>
       </div>
-      <div className="pagination ">
+      <div className="pagination " dir="ltr">
         {
           pageCount &&
           <Box

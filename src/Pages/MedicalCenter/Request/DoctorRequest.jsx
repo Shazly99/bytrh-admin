@@ -109,10 +109,15 @@ const DoctorRequest = () => {
   //   }
   // }
   useEffect(() => {
-    doctorRequest(page);
-    window.scrollTo(0, 0);
-    handelTranslate()
-  }, [page, isLoader]);
+    let timeOut = setTimeout(() => {
+      doctorRequest(page);
+      window.scrollTo(0, 0);
+      handelTranslate()
+    }, 100);
+    return (() => {
+      clearTimeout(timeOut);
+    })
+  }, [page, isLoader, isLang]);
   useEffect(() => { }, [page, PagesNumber]);
   // const SkeletonSearch = (w, h) => {
   //   return (
@@ -290,7 +295,7 @@ const DoctorRequest = () => {
           </> : SkeletonTable()}
         </div>
       </div>
-      <div className="pagination ">
+      <div className="pagination " dir="ltr">
         {
           pageCount &&
           <Box

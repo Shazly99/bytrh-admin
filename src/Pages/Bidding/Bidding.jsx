@@ -301,7 +301,7 @@ const Bidding = () => {
     animalSubCategoryGet()
     window.scrollTo(0, 0);
     handelTranslate()
-  }, [page, isLoader]);
+  }, [page, isLoader,isLang ]);
   useEffect(() => { }, [page, PagesNumber]);
   const SkeletonSearch = (w, h) => {
     return (
@@ -474,8 +474,8 @@ const Bidding = () => {
                                 className=" rounded-3"
                                 alt={item?.AnimalProductTypeName}
                                 loading="lazy"
-                                width={'250px'}
-                                height={'150px'}
+                                width={'150px'}
+                                height={'100px'}
                               />
                             </div>
                           </td>
@@ -689,7 +689,7 @@ const Bidding = () => {
           </> : SkeletonTable()}
         </div>
       </div>
-      <div className="pagination ">
+      <div className="pagination " dir="ltr">
         {
           pageCount &&
           <Box

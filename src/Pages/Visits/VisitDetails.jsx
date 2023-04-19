@@ -49,7 +49,7 @@ const VisitDetails = () => {
         return () => {
             visitDetails();
         }
-    }, [id]);
+    }, [id,isLang]);
 
     const SkeletonCard = () => {
         return (

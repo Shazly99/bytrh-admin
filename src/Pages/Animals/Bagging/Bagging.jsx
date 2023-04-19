@@ -12,6 +12,7 @@ import translateBagging from './translateBagging';
 
 
 const Bagging = () => {
+  let { isLang } = useContext(VendersContext);
   const [animal, setAnimal] = useState(null)
   const [isLoader, setIsloader] = useState(false);
   let { SkeletonTable, SkeletonFilters } = useSkeletonTable();
@@ -56,12 +57,12 @@ const Bagging = () => {
   useEffect(() => {
     baggings()
     window.scrollTo(0, 0);
-  }, [])
+  }, [ isLang])
   // useEffect(() => {
   // }, [page, PagesNumber])
 
 
-  let { isLang } = useContext(VendersContext);
+ 
 
 
   return (

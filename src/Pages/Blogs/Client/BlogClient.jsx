@@ -275,7 +275,7 @@ const BlogClient = () => {
             animalcategories()
 
         }
-    }, [page])
+    }, [page,isLang])
     useEffect(() => {
     }, [page, PagesNumber])
     const SkeletonFilter = () => {

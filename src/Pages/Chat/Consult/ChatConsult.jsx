@@ -148,7 +148,7 @@ const ChatConsult = () => {
     window.scrollTo(0, 0);
     consultList(page)
     handelTranslate()
-  }, [page])
+  }, [page,isLang])
 
   useEffect(() => {
   }, [page, PagesNumber])

@@ -277,7 +277,7 @@ export const BlogDoctor = () => {
             animalcategories()
 
         }
-    }, [])
+    }, [ isLang])
     useEffect(() => {
     }, [page, PagesNumber])
     const SkeletonFilter = () => {
@@ -605,7 +605,7 @@ export const BlogDoctor = () => {
                 </div>
 
             </div>
-            <div className="pagination ">
+            <div className="pagination " dir="ltr">
                 {
                     pageCount &&
                     <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>

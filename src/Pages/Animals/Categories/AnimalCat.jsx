@@ -120,7 +120,7 @@ const AnimalCat = () => {
   useEffect(() => {
     animalcategories(page)
     window.scrollTo(0, 0);
-  }, [page])
+  }, [page,isLang])
   useEffect(() => {
   }, [page, PagesNumber])
 
@@ -279,7 +279,7 @@ const AnimalCat = () => {
         </div>
 
       </div>
-      <div className="pagination ">
+      <div className="pagination "  dir="ltr">
         {
           pageCount &&
           <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>

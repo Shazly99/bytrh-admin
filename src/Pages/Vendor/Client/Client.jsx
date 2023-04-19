@@ -45,7 +45,7 @@ const Clients = () => {
     userList(page)
     window.scrollTo(0, 0);
     handelTranslate()
-  }, [page])
+  }, [page,isLang])
 
   // to fixed problem because Pagination count need a number 
   const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;

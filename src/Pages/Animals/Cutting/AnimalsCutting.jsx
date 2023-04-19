@@ -16,6 +16,8 @@ import translateCutting from './translateCutting';
 
 
 const AnimalsCutting = () => {
+  let { isLang } = useContext(VendersContext);
+
   const [animal, setAnimal] = useState(null)
   const [isLoader, setIsloader] = useState(false);
   let { SkeletonTable, SkeletonFilters } = useSkeletonTable();
@@ -76,10 +78,9 @@ const AnimalsCutting = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     cuttings()
-  }, [])
+  }, [isLang])
 
 
-  let { isLang } = useContext(VendersContext);
 
 
   return (

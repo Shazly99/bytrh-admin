@@ -102,7 +102,7 @@ const Country = () => {
         CountrycList(page)
         window.scrollTo(0, 0);
         handelTranslate()
-    }, [page])
+    }, [page,isLang])
     useEffect(() => {
     }, [page, PagesNumber])
     return (

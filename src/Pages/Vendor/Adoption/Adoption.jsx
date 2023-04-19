@@ -20,7 +20,7 @@ import useSkeletonTable from '../../../utils/useSkeletonTable';
 
 
 export default function Adoption() {
-
+  let { isLang } = useContext(VendersContext);
   let { SkeletonExcel } = useSkeletonTable();
 
   const URL_Adoption = `https://bytrh.com/api/admin/adoptions`;
@@ -54,7 +54,7 @@ export default function Adoption() {
     return (() => {
       clearTimeout(timeOut);
     })
-  }, [countAdoption, searchKeyAdoption, URL_Adoption]);
+  }, [countAdoption, searchKeyAdoption, URL_Adoption,isLang]);
 
 
   useEffect(() => {
@@ -90,7 +90,7 @@ export default function Adoption() {
 
 
 
-  let { isLang } = useContext(VendersContext);
+  
 
 
 
@@ -168,7 +168,7 @@ export default function Adoption() {
                     </Table>
                   </div>
 
-                  <div className="pagination mt-2">
+                  <div className="pagination mt-2" dir="ltr">
                     {
                       pagesCountAdoption &&
                       <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>

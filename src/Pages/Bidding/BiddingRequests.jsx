@@ -1,8 +1,6 @@
 import { Skeleton } from '@mui/material';
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import { Table } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import Icons from '../../constants/Icons';
 
 const BiddingRequests = ({ translate, Request, isLoader, currency }) => {
     useEffect(() => {

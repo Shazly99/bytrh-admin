@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { apiheader, GetData } from './fetchData';
+import { VendersContext } from '../context/Store';
+import { useContext } from 'react';
 
 
 const useFetch = () => {
+    let { isLang } = useContext(VendersContext);
 
     const [countries, setCountries] = useState(null);
     const [cities, setCities] = useState(null);
@@ -40,7 +43,7 @@ const useFetch = () => {
         return (() => {
             clearTimeout(timeOut);
         })
-    }, [])
+    }, [isLang])
 
 
     return {

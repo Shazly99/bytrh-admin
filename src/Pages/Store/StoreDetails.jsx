@@ -49,7 +49,7 @@ const StoreDetails = () => {
     return () => {
       store();
     }
-  }, [id]);
+  }, [id,isLang]);
 
   const SkeletonCard = () => {
     return (
@@ -146,7 +146,7 @@ const StoreDetails = () => {
                     {
                       isLoader ? <div className="summary_blog">
                         <span className='title'>{translate[isLang]?.store?.phone}</span>
-                        <span className='body'>{animal?.ClientPhone}</span>
+                        <span className={`body ${isLang ==="en"?'text-left':'text-right'} `} dir='ltr' >{animal?.ClientPhone}</span>
                       </div> : SkeletonCard()
                     }
                     {

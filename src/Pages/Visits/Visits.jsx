@@ -160,7 +160,7 @@ const Visits = () => {
     // window.scrollTo(0, 0);
     visits(page)
     handelTranslate()
-  }, [])
+  }, [isLang])
   return (
     <>
 

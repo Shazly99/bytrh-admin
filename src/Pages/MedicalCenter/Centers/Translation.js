@@ -112,7 +112,7 @@ let initialTranslation = {
             allCity: 'Areas',
             area: 'Select City',
             allarea: 'Cities',
-            Product: 'Medical Center Type',
+            Product: ' Center Type',
             Products: 'Animals Product Type',
             status: 'Select Status',
             allStatus: 'All Status',

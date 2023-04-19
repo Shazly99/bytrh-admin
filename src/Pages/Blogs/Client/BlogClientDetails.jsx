@@ -74,7 +74,7 @@ const BlogClientDetails = () => {
     BlogList()
     window.scrollTo(0, 0);
     handelTranslate()
-  }, [id])
+  }, [id,isLang])
 
   return (
 

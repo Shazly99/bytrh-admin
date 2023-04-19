@@ -12,12 +12,13 @@ import translateCuttingPrice from './cuttingPrice';
 
 
 const CuttingPricing = () => {
+  let { isLang } = useContext(VendersContext);
   const [animal, setAnimal] = useState(null);
   const [page, setPage] = useState(1);
   const [PagesNumber, setPagesNumber] = useState("");
   const [isLoader, setIsloader] = useState(false);
   let { SkeletonTable, SkeletonFilters } = useSkeletonTable();
-
+  
   let changePrice = useRef()
   // Modal Table Delete
   const [modalShow, setModalShow] = React.useState(false);
@@ -122,12 +123,11 @@ const CuttingPricing = () => {
   useEffect(() => {
     baggings(page);
     window.scrollTo(0, 0);
-  }, [page]);
+  }, [page,isLang]);
   useEffect(() => { }, [page, PagesNumber]);
 
 
 
-  let { isLang } = useContext(VendersContext);
 
 
   return (
@@ -247,7 +247,7 @@ const CuttingPricing = () => {
           }
         </div>
       </div>
-      <div className="pagination ">
+      <div className="pagination " dir="ltr">
         {
           pageCount &&
           <Box

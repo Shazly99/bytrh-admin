@@ -300,7 +300,7 @@ const StoreList = () => {
         animalSubCategoryGet()
         window.scrollTo(0, 0);
         handelTranslate()
-    }, [page, isLoader]);
+    }, [page, isLoader,isLang]);
     useEffect(() => { }, [page, PagesNumber]);
     const SkeletonSearch = (w, h) => {
         return (

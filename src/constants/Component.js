@@ -59,7 +59,7 @@ import Adoption from '../Pages/Vendor/Adoption/Adoption';
 import AdoptionDetails from '../Pages/Vendor/Adoption/AdoptionDetails';
 import Loader from './../Components/Shared/Loader/Loader';
 import AdoptionChat from '../Pages/Vendor/Adoption/AdoptionChat';
-import Contact from './../Pages/Contact/Contact';
+
 import AnimalCat from './../Pages/Animals/Categories/AnimalCat';
 import AddAnimalCat from './../Pages/Animals/Categories/AddAnimalCat';
 import EditAnimalCat from './../Pages/Animals/Categories/EditAnimalCat';
@@ -110,6 +110,7 @@ import CenterSingleHour from '../Pages/MedicalCenter/Centers/CenterSingleHour';
 import AddHours from '../Pages/MedicalCenter/Centers/AddHours';
 import Seach from './../Components/Shared/Chat/Seach';
 import NotFound from './../Components/Shared/Chat/NotFound';
+import Contact from '../Pages/Settings/Contact/Contact';
  
 const Component= {
     // Layout 

@@ -13,6 +13,7 @@ import translateBaggingPrice from './baggingPrice';
 
 
 const BaggingPricing = () => {
+  let { isLang } = useContext(VendersContext);
   const [animal, setAnimal] = useState(null);
   const [page, setPage] = useState(1);
   const [PagesNumber, setPagesNumber] = useState("");
@@ -126,11 +127,10 @@ const BaggingPricing = () => {
   useEffect(() => {
     baggings(page);
     window.scrollTo(0, 0);
-  }, [page]);
+  }, [page,isLang]);
   useEffect(() => { }, [page, PagesNumber]);
 
 
-  let { isLang } = useContext(VendersContext);
 
 
   return (
@@ -252,7 +252,7 @@ const BaggingPricing = () => {
           }
         </div>
       </div>
-      <div className="pagination ">
+      <div className="pagination "  dir="ltr">
         {
           pageCount &&
           <Box

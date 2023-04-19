@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Button, Modal, Table } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
-import Icons from '../../constants/Icons';
-import { GetData, PostData } from '../../utils/fetchData';
-import useSkeletonTable from '../../utils/useSkeletonTable';
-import initialTranslation from '../Settings/Translation';
-import { VendersContext } from './../../context/Store';
-import { apiheader } from './../../utils/fetchData';
+import Icons from '../../../constants/Icons';
+
+import { GetData, PostData } from '../../../utils/fetchData';
+import useSkeletonTable from '../../../utils/useSkeletonTable';
+import initialTranslation from '../../Settings/Translation';
+import { VendersContext } from './../../../context/Store';
+import { apiheader } from './../../../utils/fetchData';
  
 const Contact = () => {
   let { isLang } = useContext(VendersContext);
@@ -66,7 +67,7 @@ const Contact = () => {
     generalData();
     window.scrollTo(0, 0);
     handelTranslate()
-  }, []);
+  }, [isLang]);
 
   return (
     <>

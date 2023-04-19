@@ -163,7 +163,7 @@ const Areas = () => {
     AreascList(page)
     window.scrollTo(0, 0);
     handelTranslate()
-  }, [page])
+  }, [page,isLang])
   useEffect(() => {
   }, [page, PagesNumber])
   const SkeletonFilter = () => {

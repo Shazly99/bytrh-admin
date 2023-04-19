@@ -68,7 +68,7 @@ function GeneralSettings() {
     generalData();
     window.scrollTo(0, 0);
     handelTranslate()
-  }, []);
+  }, [ isLang  ]);
 
   return (
     <>
