@@ -22,7 +22,7 @@ let initialTranslation = {
             Label3: 'إسم مدينة (Ar)',
             Label2: "إسم الدوله",
             Label1: 'إسم مدينة (En)',
-            Label4: 'إسم المدينة ',
+            Label4: 'إسم المنطقة ',
             save: "حفظ", cancel: 'رجــوع'
         },
 
@@ -30,9 +30,9 @@ let initialTranslation = {
             nav1: 'المستخدمين', nav2: 'تعديل المستخدم',
             header: 'تعديل بيانات  المدينـة ', 
             Label3: 'إسم مدينة (Ar)',
-            Label2: 'المنطقة الزمنية',
+            Label2: "إسم الدوله",
             Label1: 'إسم مدينة (En)',
-            Label4: 'الرقم الدولي   ',
+            Label4: 'إسم المنطقة ',
              save: "حفظ", cancel: 'رجــوع'
         },
 
@@ -44,10 +44,10 @@ let initialTranslation = {
         filter:{
             Country:'حدد الدولة',
             allCountry:'بلدان',
-            city:'اختر مدينة',
-            allCity:'مدن',            
-            area:'حدد المنطقة',
-            allarea:'المناطق',
+            area:'اختر مدينة',
+            allarea:'مدن',            
+            city:'حدد المنطقة',
+            allCity:'المناطق',
             Product:'نوع المنتج',
             Products:'  أنواع المنتجات الحيوانية  ',
             status:'حدد الحالة',
@@ -80,7 +80,7 @@ let initialTranslation = {
             Label1: 'Name (En)',
              Label2: 'Country',  
              Label3: 'Name (Ar)   ', 
-             Label4: 'City ',
+             Label4: 'Area ',
             save: "Save", cancel: 'Cancel'
         },
         edit: {
@@ -89,7 +89,7 @@ let initialTranslation = {
             Label1: 'Name (En)',
             Label2: 'Country',  
             Label3: 'Name (Ar)   ', 
-            Label4: 'City ',
+            Label4: 'Area ',
             save: "Save", cancel: 'Cancel'
         },
         toast: {
@@ -100,10 +100,10 @@ let initialTranslation = {
         filter:{
             Country:'Select Country',
             allCountry:'Countries',
-            city:'Select City',
-            allCity:'Cities',            
-            area:'Select Area',
-            allarea:'Areas',
+            area:'Select City',
+            allarea:'Cities',            
+            city:'Select Area',
+            allCity:'Areas',
             Product:'Product Type',
             Products:'Animals Product Type',
             status:'Select Status',

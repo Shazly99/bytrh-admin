@@ -107,7 +107,6 @@ const Areas = () => {
   let { countries, areas, cities, getCities, getAreas } = useFetch()
   const cityRef = useRef(null);
   const countryRef = useRef(null);
-  const areaRef = useRef(null);
   const handelSelectCountry = async (event) => {
     const selectedCountryId = event.target.value;
     if (selectedCountryId === 'country') {
