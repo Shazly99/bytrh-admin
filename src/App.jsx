@@ -377,9 +377,9 @@ function App() {
       <ChatStore>
         <VenderContext>
           <div>
-            <Suspense fallback={<Component.Loader/>}>
+            {/* <Suspense fallback={<Component.Loader/>}> */}
                <RouterProvider router={root} />
-            </Suspense>
+            {/* </Suspense> */}
           </div>
         </VenderContext>
       </ChatStore>
