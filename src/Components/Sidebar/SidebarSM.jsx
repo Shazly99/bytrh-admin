@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { Link, NavLink, Route } from "react-router-dom";
 import Img from "../../assets/Img";
@@ -9,7 +9,7 @@ import './Sidebar.scss';
 import SidebarMenu from './SidebarMenu';
 
 const SidebarSM = ({ children }) => {
-  let { isLang, isOpen, toggle, roleAdmin, setIsOpen } = useContext(VendersContext);
+  let { isLang, isOpen,   setIsOpen } = useContext(VendersContext);
 
 
   const showAnimation = {
@@ -27,6 +27,24 @@ const SidebarSM = ({ children }) => {
       },
     },
   };
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 900) {
+        setIsOpen(false); 
+      }else{
+        setIsOpen(true);
+      }
+    };
+  
+    handleResize();
+  
+    window.addEventListener("resize", handleResize);
+  
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  
 
   return (
     <>
@@ -57,7 +75,7 @@ const SidebarSM = ({ children }) => {
                     key={1}
                   >
                     <Link to={'/'}  onClick={()=>setIsOpen(!isOpen)} style={{ cursor: 'pointer' }}>
-                      <img loading="lazy" src={Img.logo} alt='logo' className="w-100" />
+                      <img loading="lazy" src={Img.logo} alt='logo' width={129} height={78} />
                     </Link>
                   </motion.div>
                 )}

@@ -5,7 +5,7 @@ import VenderContext from './context/Store';
 // import { VendersContext } from './context/Store';
 import { Toaster } from 'react-hot-toast';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 // import { useContext } from 'react';
 import ChatStore from './context/ChatStore';
 
@@ -24,7 +24,7 @@ function App() {
         }
       })
       .catch(err => {
-       })
+      })
   }
   useEffect(() => {
     if (token) {
@@ -239,8 +239,8 @@ function App() {
           path: '/blogs', children: [
             {
               path: 'client', children: [
-                { index: true, element: <ProtectedRoutes allowedRoles={['1','2']}> <Component.BlogClient /> </ProtectedRoutes> },
-                { path: 'details/:id', element: <ProtectedRoutes allowedRoles={['1','2']}><Component.BlogClientDetails /></ProtectedRoutes> }
+                { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.BlogClient /> </ProtectedRoutes> },
+                { path: 'details/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.BlogClientDetails /></ProtectedRoutes> }
               ]
             },
             {
@@ -260,8 +260,8 @@ function App() {
         },
         {
           path: '/visits', children: [
-            { index: true, element: <ProtectedRoutes allowedRoles={['1','2']}><Component.Visits /> </ProtectedRoutes> },
-            { path: 'details/:id', element: <ProtectedRoutes allowedRoles={[  '1','2']}><Component.VisitDetails /> </ProtectedRoutes> },
+            { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.Visits /> </ProtectedRoutes> },
+            { path: 'details/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.VisitDetails /> </ProtectedRoutes> },
           ]
         },
         {
@@ -282,26 +282,26 @@ function App() {
         },
         {
           path: '/medicalcenter', children: [
-            { index: true, element: <ProtectedRoutes allowedRoles={['1' ]}><Component.Centers /> </ProtectedRoutes> },
-            { path: 'profile/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.ProfileCenter /> </ProtectedRoutes> },
-            { path: 'edit/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.CenterEdit /> </ProtectedRoutes> },
+            { index: true, element: <ProtectedRoutes allowedRoles={['1']}><Component.Centers /> </ProtectedRoutes> },
+            { path: 'profile/:id', element: <ProtectedRoutes allowedRoles={['1']}><Component.ProfileCenter /> </ProtectedRoutes> },
+            { path: 'edit/:id', element: <ProtectedRoutes allowedRoles={['1']}><Component.CenterEdit /> </ProtectedRoutes> },
             // { path: 'docs/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.CenterEdit /> </ProtectedRoutes> },
-            { path: 'add/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.CenterAdd /> </ProtectedRoutes> },
-            { path: 'hours/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.CenterHours /> </ProtectedRoutes> },
-            { path: 'addHours/:id', element: <ProtectedRoutes allowedRoles={['1' ]}><Component.AddHours /> </ProtectedRoutes> },
+            { path: 'add/:id', element: <ProtectedRoutes allowedRoles={['1']}><Component.CenterAdd /> </ProtectedRoutes> },
+            { path: 'hours/:id', element: <ProtectedRoutes allowedRoles={['1']}><Component.CenterHours /> </ProtectedRoutes> },
+            { path: 'addHours/:id', element: <ProtectedRoutes allowedRoles={['1']}><Component.AddHours /> </ProtectedRoutes> },
 
           ]
         },
         {
           path: '/docs', children: [
-            { index: true, element: <ProtectedRoutes allowedRoles={[ '2' ]}><Component.Docs /> </ProtectedRoutes> },
-            { path: 'add', element: <ProtectedRoutes allowedRoles={[ '2' ]}><Component.AddDocs /> </ProtectedRoutes> },
+            { index: true, element: <ProtectedRoutes allowedRoles={['2']}><Component.Docs /> </ProtectedRoutes> },
+            { path: 'add', element: <ProtectedRoutes allowedRoles={['2']}><Component.AddDocs /> </ProtectedRoutes> },
           ]
         },
         {
           path: '/hours', children: [
-            { index: true, element: <ProtectedRoutes allowedRoles={[ '2' ]}><Component.MCHours /> </ProtectedRoutes> },
-            { path: 'add', element: <ProtectedRoutes allowedRoles={[ '2' ]}><Component.AddMCHour /> </ProtectedRoutes> },
+            { index: true, element: <ProtectedRoutes allowedRoles={['2']}><Component.MCHours /> </ProtectedRoutes> },
+            { path: 'add', element: <ProtectedRoutes allowedRoles={['2']}><Component.AddMCHour /> </ProtectedRoutes> },
           ]
         },
         {
@@ -376,7 +376,11 @@ function App() {
       />
       <ChatStore>
         <VenderContext>
-          <RouterProvider router={root} />
+          <div>
+            <Suspense fallback={<Component.Loader/>}>
+               <RouterProvider router={root} />
+            </Suspense>
+          </div>
         </VenderContext>
       </ChatStore>
 

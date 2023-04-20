@@ -7,9 +7,10 @@ import { VendersContext } from "../../context/Store";
 import routes from './route.js';
 import './Sidebar.scss';
 import SidebarMenu from './SidebarMenu';
+import { useEffect } from "react";
 
 const Sidebar = ({ children }) => {
-  let { isLang, isOpen, toggle, roleAdmin, setIsOpen } = useContext(VendersContext);
+  let { isLang, isOpen, toggle, setIsOpen } = useContext(VendersContext);
 
 
   const showAnimation = {
@@ -27,7 +28,7 @@ const Sidebar = ({ children }) => {
       },
     },
   };
-
+ 
   return (
     <>
       <div className="main-container " dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
