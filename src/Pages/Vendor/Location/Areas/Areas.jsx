@@ -160,9 +160,13 @@ const Areas = () => {
 
 
   useEffect(() => {
-    AreascList(page)
-    window.scrollTo(0, 0);
-    handelTranslate()
+    const timeoutId = setTimeout(() => {
+      AreascList(page)
+      window.scrollTo(0, 0);
+      handelTranslate()
+    }, 200);
+    return () => clearTimeout(timeoutId);
+
   }, [page,isLang])
   useEffect(() => {
   }, [page, PagesNumber])

@@ -76,8 +76,12 @@ const AnimalsCutting = () => {
   }
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-    cuttings()
+    const timeoutId = setTimeout(() => {
+      window.scrollTo(0, 0);
+      cuttings()
+    }, 200);
+    return () => clearTimeout(timeoutId);
+
   }, [isLang])
 
 

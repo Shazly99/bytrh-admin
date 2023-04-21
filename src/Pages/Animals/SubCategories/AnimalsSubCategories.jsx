@@ -118,8 +118,12 @@ const AnimalsSubCategories = () => {
     };
 
     useEffect(() => {
-        AnimalSubCategories(page)
-        window.scrollTo(0, 0);
+        const timeoutId = setTimeout(() => {
+            AnimalSubCategories(page)
+            window.scrollTo(0, 0);
+        }, 200);
+        return () => clearTimeout(timeoutId);
+    
     }, [page,isLang])
     useEffect(() => {
     }, [page, PagesNumber])

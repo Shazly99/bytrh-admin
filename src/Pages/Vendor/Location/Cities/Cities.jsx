@@ -131,8 +131,12 @@ const Cities = () => {
 
   }
   useEffect(() => {
-    CitiescList(page)
-    window.scrollTo(0, 0);
+    const timeoutId = setTimeout(() => {
+      CitiescList(page)
+      window.scrollTo(0, 0);
+    }, 200);
+    return () => clearTimeout(timeoutId);
+
   }, [page,isLang])
   useEffect(() => {
     handelTranslate()

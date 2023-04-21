@@ -37,8 +37,8 @@ const useFetch = () => {
 
         let timeOut = setTimeout(() => {
             getCountries()
-            getCities(1)
-            getAreas(1)
+            /* getCities()
+            getAreas() */
         }, 200);
         return (() => {
             clearTimeout(timeOut);

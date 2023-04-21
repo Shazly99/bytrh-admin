@@ -269,14 +269,14 @@ export const BlogDoctor = () => {
         }
     }
     useEffect(() => {
-        BlogsList()
-        animalcategories()
         window.scrollTo(0, 0);
-        return () => {
+ 
+        const timeoutId = setTimeout(() => {
             BlogsList()
             animalcategories()
-
-        }
+        }, 200);
+        return () => clearTimeout(timeoutId);
+    
     }, [ isLang])
     useEffect(() => {
     }, [page, PagesNumber])

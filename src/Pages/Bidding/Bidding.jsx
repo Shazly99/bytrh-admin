@@ -297,10 +297,14 @@ const Bidding = () => {
   }
 
   useEffect(() => {
-    store(page);
-    animalSubCategoryGet()
     window.scrollTo(0, 0);
     handelTranslate()
+    const timeoutId = setTimeout(() => {
+      store(page);
+      animalSubCategoryGet()
+    }, 200);
+    return () => clearTimeout(timeoutId);
+
   }, [page, isLoader,isLang ]);
   useEffect(() => { }, [page, PagesNumber]);
   const SkeletonSearch = (w, h) => {

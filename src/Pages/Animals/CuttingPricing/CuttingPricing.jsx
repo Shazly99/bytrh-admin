@@ -121,8 +121,12 @@ const CuttingPricing = () => {
 
 
   useEffect(() => {
-    baggings(page);
-    window.scrollTo(0, 0);
+    const timeoutId = setTimeout(() => {
+      baggings(page);
+      window.scrollTo(0, 0);
+    }, 200);
+    return () => clearTimeout(timeoutId);
+
   }, [page,isLang]);
   useEffect(() => { }, [page, PagesNumber]);
 

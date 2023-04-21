@@ -99,9 +99,13 @@ const Country = () => {
     };
 
     useEffect(() => {
-        CountrycList(page)
-        window.scrollTo(0, 0);
-        handelTranslate()
+        const timeoutId = setTimeout(() => {
+            CountrycList(page)
+            window.scrollTo(0, 0);
+            handelTranslate()
+        }, 200);
+        return () => clearTimeout(timeoutId);
+    
     }, [page,isLang])
     useEffect(() => {
     }, [page, PagesNumber])

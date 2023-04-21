@@ -158,8 +158,12 @@ const Visits = () => {
   }, [page, PagesNumber])
   useEffect(() => {
     // window.scrollTo(0, 0);
-    visits(page)
-    handelTranslate()
+    const timeoutId = setTimeout(() => {
+      visits(page)
+      handelTranslate()
+    }, 200);
+    return () => clearTimeout(timeoutId);
+
   }, [isLang])
   return (
     <>

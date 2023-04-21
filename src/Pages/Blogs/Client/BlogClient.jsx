@@ -266,15 +266,15 @@ const BlogClient = () => {
         }
     }
     useEffect(() => {
-        BlogsList(page)
-        animalcategories()
         window.scrollTo(0, 0);
         handelTranslate()
-        return () => {
-            BlogsList()
+        
+        const timeoutId = setTimeout(() => {
+            BlogsList(page)
             animalcategories()
-
-        }
+        }, 100);
+        return () => clearTimeout(timeoutId);
+    
     }, [page,isLang])
     useEffect(() => {
     }, [page, PagesNumber])

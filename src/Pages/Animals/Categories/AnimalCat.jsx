@@ -118,8 +118,12 @@ const AnimalCat = () => {
   };
 
   useEffect(() => {
-    animalcategories(page)
-    window.scrollTo(0, 0);
+    const timeoutId = setTimeout(() => {
+      animalcategories(page)
+      window.scrollTo(0, 0);
+    }, 200);
+    return () => clearTimeout(timeoutId);
+
   }, [page,isLang])
   useEffect(() => {
   }, [page, PagesNumber])

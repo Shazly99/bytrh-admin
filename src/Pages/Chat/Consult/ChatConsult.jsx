@@ -146,8 +146,12 @@ const ChatConsult = () => {
   }
   useEffect(() => {
     window.scrollTo(0, 0);
-    consultList(page)
-    handelTranslate()
+    const timeoutId = setTimeout(() => {
+      consultList(page)
+      handelTranslate()
+    }, 200);
+    return () => clearTimeout(timeoutId);
+
   }, [page,isLang])
 
   useEffect(() => {

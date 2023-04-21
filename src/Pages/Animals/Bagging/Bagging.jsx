@@ -55,8 +55,12 @@ const Bagging = () => {
   }
 
   useEffect(() => {
-    baggings()
-    window.scrollTo(0, 0);
+    const timeoutId = setTimeout(() => {
+      baggings()
+      window.scrollTo(0, 0);
+    }, 200);
+    return () => clearTimeout(timeoutId);
+
   }, [ isLang])
   // useEffect(() => {
   // }, [page, PagesNumber])

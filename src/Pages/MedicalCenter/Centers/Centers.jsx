@@ -229,9 +229,13 @@ const Centers = () => {
     }
   }
   useEffect(() => {
-    medicalCenterList(page);
-    window.scrollTo(0, 0);
-    handelTranslate()
+    const timeoutId = setTimeout(() => {
+      medicalCenterList(page);
+      window.scrollTo(0, 0);
+      handelTranslate()
+    }, 100);
+    return () => clearTimeout(timeoutId);
+
   }, [page, isLoader,isLang]);
   useEffect(() => { }, [page, PagesNumber]);
   const SkeletonSearch = (w, h) => {
