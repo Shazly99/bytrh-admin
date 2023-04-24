@@ -8,7 +8,15 @@ const routes = [
   //   nameAr: "لوحة القيادة",
   //   icon: <LogoSvg.Dashboard className="logoSvg" style={{ width: 19 }} />,
   //   Roles: [1, 2]
-  // },
+  // }, 
+   {
+    path: "/user",
+    nameAr: "المستخدمين",
+    nameEn: "Users",
+    icon: <LogoSvg.Users className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1, 2]
+
+  },
   {
     path: "/client",
     nameEn: "Clients",
@@ -43,14 +51,7 @@ const routes = [
 
     ],
   }, 
-  {
-    path: "/user",
-    nameAr: "المستخدمين",
-    nameEn: "Users",
-    icon: <LogoSvg.Users className="logoSvg" style={{ width: 19 }} />,
-    Roles: [1, 2]
 
-  },
   {
     path: "/medicalcenter",
     nameAr: "مركــز طبـــي",
