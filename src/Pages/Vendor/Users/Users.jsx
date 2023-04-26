@@ -107,29 +107,16 @@ function Users() {
   //     userList()
   //   }
   // };
-  // !Filter by   Users Status
-  const statusRef = useRef(null);
-  const handelanimalProductStatus = async () => {
-    let animalProductStatus = statusRef.current.value
-    if (animalProductStatus === 'All') {
-      userList(page)
-    } else if (animalProductStatus === 'Select Status') {
-      return false
-    } else {
-      await axios.post(`${process.env.REACT_APP_API_URL}/admin/users`, { IDPage: page, UserStatus: animalProductStatus }, apiheader).then((res) => {
-        if (res.status === 200 && res.request.readyState === 4) {
-          setuserList(res.data.Response.Users)
-          setPagesNumber(res.data.Response.Pages);
-        }
-      })
-    }
-  }
+
   // !Filter by city and country and area  
   let { countries, areas, cities, getCities, getAreas } = useFetch()
   const cityRef = useRef(null);
   const countryRef = useRef(null);
   const areaRef = useRef(null);
   const handelSelectCountry = async (event) => {
+    cityRef.current.value = 'Select city';
+    areaRef.current.value = 'Select Area';
+    statusRef.current.value = 'Select Status';
     const selectedCountryId = event.target.value;
     if (selectedCountryId === 'country') {
       userList(page)
@@ -155,6 +142,8 @@ function Users() {
     }
   }
   const handelSelectCity = async () => {
+    areaRef.current.value = 'Select Area';
+    statusRef.current.value = 'Select Status';
     let city = cityRef.current.value
     if (city === 'cities') {
       userList(page)
@@ -181,6 +170,7 @@ function Users() {
   }
   const handelSelectArea = async () => {
     let city = areaRef.current.value
+    statusRef.current.value = 'Select Status';
     if (city === 'Areas') {
       userList(page)
     } else if (city === 'Select Area') {
@@ -203,6 +193,27 @@ function Users() {
       }
     }
   }
+    // !Filter by   Users Status
+    const statusRef = useRef(null);
+    const handelanimalProductStatus = async () => {
+      cityRef.current.value = 'Select city';
+      areaRef.current.value = 'Select Area';
+      countryRef.current.value = 'Select Country';
+      
+      let animalProductStatus = statusRef.current.value
+      if (animalProductStatus === 'All') {
+        userList(page)
+      } else if (animalProductStatus === 'Select Status') {
+        return false
+      } else {
+        await axios.post(`${process.env.REACT_APP_API_URL}/admin/users`, { IDPage: page, UserStatus: animalProductStatus }, apiheader).then((res) => {
+          if (res.status === 200 && res.request.readyState === 4) {
+            setuserList(res.data.Response.Users)
+            setPagesNumber(res.data.Response.Pages);
+          }
+        })
+      }
+    }
   useEffect(() => {
   }, [page, PagesNumber])
   const SkeletonFilter = () => {
@@ -257,8 +268,8 @@ function Users() {
             <Row className='d-flex  flex-row justify-content-between'>
               <Col xl={3} lg={3} md={6} sm={12} className='mt-2' >
                 {isLoader ? <>
-                  <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry} ref={countryRef}>
-                    <Form.Select aria-label="Default select example" >
+                  <Form.Group controlId="formBasicEmail" >
+                    <Form.Select size="sm"  aria-label="Default select example" onChange={handelSelectCountry} ref={countryRef}>
                       <option selected disabled hidden value={'Select Country'}>{translate[isLang]?.filter?.Country}  </option>
                       <option value={'country'} >{translate[isLang]?.filter?.allCountry}</option>
                       {
@@ -274,7 +285,7 @@ function Users() {
               <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
                 {isLoader ? <>
                   <Form.Group controlId="formBasicEmail"   >
-                    <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={cityRef}>
+                    <Form.Select size="sm"aria-label="Default select example" onChange={handelSelectCity} ref={cityRef}>
                       <option selected disabled hidden value={'Select city'}> {translate[isLang]?.filter?.city}  </option>
                       <option value={'cities'} >{translate[isLang]?.filter?.allCity}</option>
                       {
@@ -290,7 +301,7 @@ function Users() {
               <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
                 {isLoader ? <>
                   <Form.Group controlId="formBasicEmail"   >
-                    <Form.Select aria-label="Default select example" onClick={handelSelectArea} ref={areaRef}>
+                    <Form.Select size="sm"aria-label="Default select example" onChange={handelSelectArea} ref={areaRef}>
                       <option selected disabled hidden value={'Select Area'}>  {translate[isLang]?.filter?.area}  </option>
                       <option value={'Areas'} > {translate[isLang]?.filter?.allarea} </option>
                       {
@@ -308,10 +319,8 @@ function Users() {
                 {isLoader ? <>
                   <Form.Group controlId="formBasicEmail"  >
                     {/* <Form.Label  >  Product Status </Form.Label> */}
-                    <Form.Select aria-label="Default select example" ref={statusRef} onClick={handelanimalProductStatus} >
-                      <option selected disabled hidden value={'Select Status'}> {translate[isLang]?.filter?.status}</option>
-
-
+                    <Form.Select size="sm" aria-label="Default select example" ref={statusRef} onChange={handelanimalProductStatus} >
+                      <option selected disabled hidden value={'Select Status'}> {translate[isLang]?.filter?.status}</option> 
                       {
                         translate[isLang]?.FilterStatus?.map((Status, index) => (
                           <>

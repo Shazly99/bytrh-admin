@@ -86,18 +86,25 @@ const Clients = () => {
   const cityRef = useRef(null);
   const countryRef = useRef(null);
   const areaRef = useRef(null);
+
   const handelSelectCountry = async (event) => {
+    cityRef.current.value = 'Select city';
+    areaRef.current.value = 'Select Area';
+    loginByRef.current.value = 'Select Status';
+    // your logic here
     const selectedCountryId = event.target.value;
     if (selectedCountryId === 'country') {
       userList(page)
     } else if (selectedCountryId === 'Select Country') {
       return false
     } else {
+      // Reset the city and area dropdown to its default value
       getCities(selectedCountryId)
       try {
         await axios.post(`${process.env.REACT_APP_API_URL}/admin/clients`, { IDPage: page, IDCountry: selectedCountryId }, apiheader).then((res) => {
           if (res.status === 200 && res.request.readyState === 4) {
             setuserList(res.data.Response.Clients)
+            console.log(res.data.Response.Clients);
             setPagesNumber(res.data.Response.Pages);
           }
         })
@@ -109,12 +116,17 @@ const Clients = () => {
           }, (retryAfter || 30) * 1000);
         }
       }
+
     }
+
   }
   const handelSelectCity = async () => {
+    areaRef.current.value = 'Select Area';
+    loginByRef.current.value = 'Select Status';
     let city = cityRef.current.value
     if (city === 'cities') {
       userList(page)
+
     } else if (city === 'Select city') {
       return false
     } else {
@@ -124,6 +136,7 @@ const Clients = () => {
           if (res.status === 200 && res.request.readyState === 4) {
             setuserList(res.data.Response.Clients)
             setPagesNumber(res.data.Response.Pages);
+
           }
         })
       } catch (error) {
@@ -135,9 +148,11 @@ const Clients = () => {
         }
       }
     }
+
   }
   const handelSelectArea = async () => {
     let city = areaRef.current.value
+    loginByRef.current.value = 'Select Status';
     if (city === 'Areas') {
       userList(page)
     } else if (city === 'Select Area') {
@@ -159,11 +174,17 @@ const Clients = () => {
         }
       }
     }
+
   }
 
   // !Filter by   Client login by  
   const loginByRef = useRef(null);
   const handelloginBy = async () => {
+    cityRef.current.value = 'Select city';
+    areaRef.current.value = 'Select Area';
+    countryRef.current.value = 'Select Country';
+    
+    
     let clientLoginBy = loginByRef.current.value
     if (clientLoginBy === 'All') {
       userList(page)
@@ -180,6 +201,7 @@ const Clients = () => {
   }
   useEffect(() => {
   }, [page, PagesNumber, selectedOption])
+
 
   const SkeletonSearch = (w, h) => {
     return (
@@ -236,12 +258,12 @@ const Clients = () => {
               <Col xl={3} lg={3} md={6} sm={12} className='mt-2' >
                 {isLoader ? <>
                   <Form.Group controlId="formBasicEmail" >
-                    <Form.Select aria-label="Default select example" onClick={handelSelectCountry} ref={countryRef}>
-                      <option selected disabled hidden value={'Select Country'}>{translate[isLang]?.filter?.Country}  </option>
-                      <option value={'country'} >{translate[isLang]?.filter?.allCountry}</option>
+                    <Form.Select size="sm" aria-label="Default select example" onChange={handelSelectCountry} ref={countryRef} >
+                      <option selected disabled hidden value={'Select Country'} >{translate[isLang]?.filter?.Country}  </option>
+                      <option value={'country'}  >{translate[isLang]?.filter?.allCountry}</option>
                       {
                         countries?.map((item, index) => (
-                          <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
+                          <option key={index} value={item?.IDCountry}   >{item?.CountryName}</option>
                         ))
                       }
                     </Form.Select>
@@ -252,7 +274,7 @@ const Clients = () => {
               <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
                 {isLoader ? <>
                   <Form.Group controlId="formBasicEmail"   >
-                    <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={cityRef}>
+                    <Form.Select size="sm" aria-label="Default select example" onChange={handelSelectCity} ref={cityRef}>
                       <option selected disabled hidden value={'Select city'}> {translate[isLang]?.filter?.city}  </option>
                       <option value={'cities'} >{translate[isLang]?.filter?.allCity}</option>
                       {
@@ -268,7 +290,7 @@ const Clients = () => {
               <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
                 {isLoader ? <>
                   <Form.Group controlId="formBasicEmail"   >
-                    <Form.Select aria-label="Default select example" onClick={handelSelectArea} ref={areaRef}>
+                    <Form.Select size="sm" aria-label="Default select example" onChange={handelSelectArea} ref={areaRef}>
                       <option selected disabled hidden value={'Select Area'}>  {translate[isLang]?.filter?.area}  </option>
                       <option value={'Areas'} > {translate[isLang]?.filter?.allarea} </option>
                       {
@@ -286,7 +308,7 @@ const Clients = () => {
                 {isLoader ? <>
                   <Form.Group controlId="formBasicEmail"  >
                     {/* <Form.Label  >  Product Status </Form.Label> */}
-                    <Form.Select aria-label="Default select example" ref={loginByRef} onClick={handelloginBy} >
+                    <Form.Select size="sm" aria-label="Default select example" ref={loginByRef} onChange={handelloginBy} >
                       <option selected disabled hidden value={'Select Status'}> {translate[isLang]?.filter?.loginBy}</option>
 
                       {
