@@ -30,7 +30,8 @@ const ConsultTime = () => {
             }
         })
         .catch(err => {
-         })
+            console.log(err);
+        })
     }
     
     useEffect(() => {

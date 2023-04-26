@@ -90,7 +90,8 @@ const CenterEdit = () => {
           }
         })
         .catch(err => {
-         })
+            console.log(err);
+        })
     }
   
   
