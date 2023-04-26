@@ -451,7 +451,7 @@ const Bidding = () => {
             </div>
           </div>
           {isLoader ? <>
-            <ExcelSheet />
+            <ExcelSheet  animal={animal}/>
           </>
             : SkeletonExcel(40, "100%")}
           {isLoader ? <>

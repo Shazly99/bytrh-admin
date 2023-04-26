@@ -53,7 +53,7 @@ const Visits = () => {
 
 
   const handleActionSelect = async (id, action) => {
-
+ 
     if (action === "PENDING" || action === "ACCEPTED" || action === "CANCELLED" || action === "REJECTED" || action === "ONGOING" || action === "ENDED") {
       await visitsStatus({ IDVisit: id, VisitStatus: action }).then((res) => {
         toast.success('Updated Successfully', {
@@ -114,6 +114,7 @@ const Visits = () => {
     if (selectedValue === "ONGOING" ||
       selectedValue === "REJECTED" ||
       selectedValue === "SKIPPED" ||
+      selectedValue === "ACCEPTED" ||
       selectedValue === "NO_RESPONSE" ||
       selectedValue === "EXPIRED" ||
       selectedValue === "ENDED" || selectedValue === "PENDING" || selectedValue === "CANCELLED") {
@@ -245,7 +246,7 @@ const Visits = () => {
             </div>
           </div>
           <div className="app__Users-table">
-            <ExcelSheet />
+            <ExcelSheet animal={animal}/>
             {isLoader ? <>
               <>
                 {

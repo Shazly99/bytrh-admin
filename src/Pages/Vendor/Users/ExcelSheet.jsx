@@ -1,32 +1,31 @@
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState ,useEffect} from 'react';
 import { Table } from "react-bootstrap";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import { SiMicrosoftexcel } from 'react-icons/si';
 import { VendersContext } from '../../../context/Store';
-import { PostData, apiheader } from '../../../utils/fetchData';
 import initialTranslate from './initialTranslate';
 
 
-const ExcelSheet = () => {
+const ExcelSheet = ({usersList}) => {
     let { isLang } = useContext(VendersContext);
 
-    const [exportData, setExportData] = useState(null)
+    // const [exportData, setExportData] = useState(null)
     const [translate, setTranslate] = useState(initialTranslate)
     const handelTranslate = () => setTranslate(initialTranslate)
-    const userList = async () => {
-        await PostData(`${process.env.REACT_APP_API_URL}/admin/users `, { Action: 'Export' }, apiheader).then(({ data }) => {
-            setExportData(data.Response.Users)
-        }).catch((error) => {
-         })
-    }
+    // const userList = async () => {
+    //     await PostData(`${process.env.REACT_APP_API_URL}/admin/users `, { Action: 'Export' }, apiheader).then(({ data }) => {
+    //         setExportData(data.Response.Users)
+    //     }).catch((error) => {
+    //      })
+    // }
 
     useEffect(() => {
         handelTranslate()
-        const timeoutId = setTimeout(() => {
-            userList()
-        }, 1000);
-        return () => clearTimeout(timeoutId);
+        // const timeoutId = setTimeout(() => {
+        //     userList()
+        // }, 1000);
+        // return () => clearTimeout(timeoutId);
     }, [])
     return (
         <>
@@ -41,8 +40,6 @@ const ExcelSheet = () => {
                     </div>
                 }
                 className='btn btn-sucess btn__excel'
-
-
             />
             <Table responsive={true} bordered id='my-table' className='rounded-3 d-none '>
                 <thead>
@@ -56,7 +53,7 @@ const ExcelSheet = () => {
                 </thead>
                 <tbody className='text-center'>
                     {
-                        exportData?.map((item, index) => (
+                        usersList?.map((item, index) => (
                             <tr key={index}>
 
                                 <td >

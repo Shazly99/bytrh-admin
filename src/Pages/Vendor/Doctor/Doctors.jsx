@@ -281,7 +281,7 @@ export default function Doctors() {
             </div>
           </div>
 
-          <ExcelSheet />
+          <ExcelSheet fetchDoctors={fetchDoctors} />
           {loadingDoctors ?
             // <Loader />
             <Component.DataNotFound />

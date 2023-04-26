@@ -61,7 +61,7 @@ function UsersTable({ usersList, userList, isLoader, toastTranslate, actionsTran
     return (
         <>
             {isLoader ? <>
-                <ExcelSheet />
+                <ExcelSheet usersList={usersList}/>
             </>
                 : SkeletonExcel(40, "100%")}
             {isLoader ? <>

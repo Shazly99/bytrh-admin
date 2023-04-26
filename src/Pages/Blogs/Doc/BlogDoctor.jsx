@@ -421,7 +421,7 @@ export const BlogDoctor = () => {
                             </Col>
                         </Row>
                     </div>
-                    <ExcelSheet />
+                    <ExcelSheet blogs={blogs}/>
                     {isLoader ? <>
                         {
                             blogs?.length > 0 ?

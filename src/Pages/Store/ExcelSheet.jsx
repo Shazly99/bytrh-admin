@@ -8,25 +8,25 @@ import { PostData, apiheader } from '../../utils/fetchData';
 import { VendersContext } from '../../context/Store';
 
 
-const ExcelSheet = () => {
+const ExcelSheet = ({animal}) => {
     let { isLang } = useContext(VendersContext);
 
     const [exportData, setExportData] = useState(null)
     const [translate, setTranslate] = useState(initialTranslation)
     const handelTranslate = () => setTranslate(initialTranslation)
-    const store = async () => {
-        await PostData(`${process.env.REACT_APP_API_URL}/admin/animalproducts `, { Action: 'Export' }, apiheader).then(({ data }) => {
-            setExportData(data.Response.AnimalProducts)
-        }).catch((error) => {
-         })
-    }
+    // const store = async () => {
+    //     await PostData(`${process.env.REACT_APP_API_URL}/admin/animalproducts `, { Action: 'Export' }, apiheader).then(({ data }) => {
+    //         setExportData(data.Response.AnimalProducts)
+    //     }).catch((error) => {
+    //      })
+    // }
 
     useEffect(() => {
         handelTranslate()
-        const timeoutId = setTimeout(() => {
-            store()
-        }, 1000);
-        return () => clearTimeout(timeoutId);
+        // const timeoutId = setTimeout(() => {
+        //     store()
+        // }, 1000);
+        // return () => clearTimeout(timeoutId);
     }, [])
     return (
         <>
@@ -56,7 +56,7 @@ const ExcelSheet = () => {
                 </thead>
                 <tbody className='text-center'>
                     {
-                        exportData?.map((item, index) => (
+                        animal?.map((item, index) => (
                             <tr key={index}>
 
                                 <td >

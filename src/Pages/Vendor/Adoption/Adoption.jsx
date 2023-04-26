@@ -130,7 +130,7 @@ export default function Adoption() {
               {Object.keys(fetchAdoption).length > 0 ?
                 <>
                   {!loadingAdoption ? <>
-                    <ExcelSheet />
+                    <ExcelSheet fetchAdoption={fetchAdoption} />
                   </>
                     : SkeletonExcel(40, "100%")}
                   <div className="app__Users-table  ">

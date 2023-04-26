@@ -45,7 +45,7 @@ const Clients = () => {
     userList(page)
     window.scrollTo(0, 0);
     handelTranslate()
-  }, [page,isLang])
+  }, [page, isLang])
 
   // to fixed problem because Pagination count need a number 
   const pageCount = Number.isInteger(PagesNumber) ? parseInt(PagesNumber) : 0;
@@ -161,23 +161,23 @@ const Clients = () => {
     }
   }
 
-    // !Filter by   Client login by  
-    const loginByRef = useRef(null);
-    const handelloginBy = async () => {
-      let clientLoginBy = loginByRef.current.value
-      if (clientLoginBy === 'All') {
-        userList(page)
-      } else if (clientLoginBy === 'Select Status') {
-        return false
-      } else {
-        await axios.post(`${process.env.REACT_APP_API_URL}/admin/clients`, { IDPage: page, LoginBy: clientLoginBy }, apiheader).then((res) => {
-          if (res.status === 200 && res.request.readyState === 4) {
-             setuserList(res.data.Response.Clients) 
-            setPagesNumber(res.data.Response.Pages);
-          }
-        })
-      }
+  // !Filter by   Client login by  
+  const loginByRef = useRef(null);
+  const handelloginBy = async () => {
+    let clientLoginBy = loginByRef.current.value
+    if (clientLoginBy === 'All') {
+      userList(page)
+    } else if (clientLoginBy === 'Select Status') {
+      return false
+    } else {
+      await axios.post(`${process.env.REACT_APP_API_URL}/admin/clients`, { IDPage: page, LoginBy: clientLoginBy }, apiheader).then((res) => {
+        if (res.status === 200 && res.request.readyState === 4) {
+          setuserList(res.data.Response.Clients)
+          setPagesNumber(res.data.Response.Pages);
+        }
+      })
     }
+  }
   useEffect(() => {
   }, [page, PagesNumber, selectedOption])
 
@@ -284,10 +284,10 @@ const Clients = () => {
               <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
 
                 {isLoader ? <>
-                  <Form.Group controlId="formBasicEmail"  > 
+                  <Form.Group controlId="formBasicEmail"  >
                     {/* <Form.Label  >  Product Status </Form.Label> */}
                     <Form.Select aria-label="Default select example" ref={loginByRef} onClick={handelloginBy} >
-                      <option selected disabled hidden value={'Select Status'}> {translate[isLang]?.filter?.loginBy}</option> 
+                      <option selected disabled hidden value={'Select Status'}> {translate[isLang]?.filter?.loginBy}</option>
 
                       {
                         translate[isLang]?.loginBy?.map((Status, index) => (
@@ -304,7 +304,7 @@ const Clients = () => {
             </Row>
           </div>
           {isLoader ? <>
-            <ExcelSheet />
+            <ExcelSheet usersList={usersList} />
           </>
             : SkeletonExcel(40, "100%")}
 
@@ -321,11 +321,11 @@ const Clients = () => {
         </div>
       </div>
       <div className="pagination " dir="ltr">
-      {
+        {
           pageCount &&
-        <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-          <Pagination count={pageCount} page={page} onChange={handleChange} />
-        </Box>
+          <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
+            <Pagination count={pageCount} page={page} onChange={handleChange} />
+          </Box>
         }
       </div>
 

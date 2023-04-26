@@ -1,32 +1,30 @@
 
+import React, { useContext, useState,useEffect } from 'react';
+import { Table } from "react-bootstrap";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
-import initialTranslate from './initialTranslate';
-import { Button, Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
-import { useContext, useEffect,   useState } from 'react';
- import React from 'react';
 import { SiMicrosoftexcel } from 'react-icons/si';
-import { PostData,apiheader } from '../../../utils/fetchData';
 import { VendersContext } from '../../../context/Store';
- 
-const ExcelSheet = () => {
+import initialTranslate from './initialTranslate';
+
+const ExcelSheet = ({usersList}) => {
     let { isLang } = useContext(VendersContext);
 
-    const [exportData, setExportData] = useState(null)
+    // const [exportData, setExportData] = useState(null)
     const [translate, setTranslate] = useState(initialTranslate)
     const handelTranslate = () => setTranslate(initialTranslate)
-    const clients = async () => {
-        await PostData(`${process.env.REACT_APP_API_URL}/admin/clients`, { Action: 'Export' }, apiheader).then(({ data }) => {
-            setExportData(data.Response.Clients)
-         }).catch((error) => {
-         })
-    }
+    // const clients = async () => {
+    //     await PostData(`${process.env.REACT_APP_API_URL}/admin/clients`, { Action: 'Export' }, apiheader).then(({ data }) => {
+    //         setExportData(data.Response.Clients)
+    //     }).catch((error) => {
+    //     })
+    // }
 
     useEffect(() => {
         handelTranslate()
-        const timeoutId = setTimeout(() => {
-            clients()
-        }, 1000);
-        return () => clearTimeout(timeoutId);
+        // const timeoutId = setTimeout(() => {
+        //     clients()
+        // }, 1000);
+        // return () => clearTimeout(timeoutId);
     }, [])
     return (
         <>
@@ -35,50 +33,50 @@ const ExcelSheet = () => {
                 filename={translate[isLang]?.dataExport}
                 sheet="Sheet 1"
                 buttonText={
-                    <div className='d-flex gap-2 ' style={{justifyContent:'center',alignItems:'center'}}>
-                        <SiMicrosoftexcel/>
+                    <div className='d-flex gap-2 ' style={{ justifyContent: 'center', alignItems: 'center' }}>
+                        <SiMicrosoftexcel />
                         <span>{translate[isLang]?.excelSheet}</span>
                     </div>
                 }
                 className='btn btn-sucess btn__excel'
-                 
-                
+
+
             />
             <Table responsive={true} bordered id='my-table' className='rounded-3  d-none'>
                 <thead>
                     <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
                         {
                             translate[isLang]?.ExcelHeader?.map((item, index) => (
-                                <th key={index} style={{width:'180px',height:'50px'}}>{item}</th>
+                                <th key={index} style={{ width: '180px', height: '50px' }}>{item}</th>
                             ))
                         }
                     </tr>
                 </thead>
-                  <tbody className='text-center'>
+                <tbody className='text-center'>
                     {
-                        exportData?.map((item, index) => (
+                        usersList?.map((item, index) => (
                             <tr key={index}>
                                 <td >
                                     <div className="text-center w-100">
                                         <span className='ClientName'>{item?.ClientName}</span>
-                                     </div>
+                                    </div>
                                 </td>
                                 <td  >
                                     <div className="text-center w-100">
-                                         <span className='ClientPhone' style={{width:'200px',textAlign:'left'}}>{item?.ClientPhone}</span>
+                                        <span className='ClientPhone' style={{ width: '200px', textAlign: 'left' }}>{item?.ClientPhone}</span>
                                     </div>
-                                </td>  
-                                <td style={{width:'300px'}}>
+                                </td>
+                                <td style={{ width: '300px' }}>
                                     <div className="text-center w-100" >
                                         <span className='ClientName'>{item?.ClientEmail}</span>
-                                     </div>
+                                    </div>
                                 </td>
                                 <td >
                                     <div className="text-center w-100">
                                         <span className='ClientName'>{item?.LoginBy.split(' ')
-                          .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                          .join(' ')}</span>
-                                     </div>
+                                            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                                            .join(' ')}</span>
+                                    </div>
                                 </td>
                                 <td >
                                     <div>
@@ -90,20 +88,20 @@ const ExcelSheet = () => {
                                 <td >
                                     <div>
                                         <h6 className="mb-0  pe-2 bolder">
-                                            {item?.ClientCurrentPoints} 
+                                            {item?.ClientCurrentPoints}
                                         </h6>
                                     </div>
                                 </td>
 
-                               
+
                                 <td >
                                     <div className="text-center w-100">
                                         <span className='ClientName'>{item?.CountryName}</span>
-                                     </div>
+                                    </div>
                                 </td>
                                 <td className='text-center  d-flex '>
                                     <div>
-                                        <span style={{ height: 'fit-content !important' }} >  
+                                        <span style={{ height: 'fit-content !important' }} >
                                             {
                                                 translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.value === item?.ClientStatus)
                                                     .map((status, index) => (
@@ -130,13 +128,13 @@ const ExcelSheet = () => {
                                         </span>
                                     </div>
                                 </td>
-                            
- 
+
+
                             </tr>
                         ))
                     }
 
-                </tbody>  
+                </tbody>
 
             </Table>
         </>

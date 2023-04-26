@@ -463,7 +463,7 @@ const StoreList = () => {
                             </div>
                         </div>
                     </div>
-                    <ExcelSheet />
+                    <ExcelSheet animal={animal}/>
                     {isLoader ? <>
                         <>
                             {

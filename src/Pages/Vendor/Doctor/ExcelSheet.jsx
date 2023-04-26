@@ -1,28 +1,27 @@
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Table } from "react-bootstrap";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import { SiMicrosoftexcel } from 'react-icons/si';
 import { VendersContext } from '../../../context/Store';
-import { PostData, apiheader } from '../../../utils/fetchData';
 
-const ExcelSheet = () => {
+const ExcelSheet = ({fetchDoctors}) => {
     let { isLang } = useContext(VendersContext);
-    const [exportData, setExportData] = useState(null)
+    // const [exportData, setExportData] = useState(null)
 
-    const doctors = async () => {
-        await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors`, { Action: 'Export' }, apiheader).then(({ data }) => {
-            setExportData(data.Response.Doctors)
-        }).catch((error) => {
-         })
-    }
+    // const doctors = async () => {
+    //     await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors`, { Action: 'Export' }, apiheader).then(({ data }) => {
+    //         setExportData(data.Response.Doctors)
+    //     }).catch((error) => {
+    //      })
+    // }
 
-    useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            doctors()
-        }, 1000);
-        return () => clearTimeout(timeoutId);
-    }, [])
+    // useEffect(() => {
+    //     const timeoutId = setTimeout(() => {
+    //         doctors()
+    //     }, 1000);
+    //     return () => clearTimeout(timeoutId);
+    // }, [])
     return (
         <>
             <ReactHTMLTableToExcel
@@ -54,7 +53,7 @@ const ExcelSheet = () => {
                 </thead>
                 <tbody className='text-center'>
                     {
-                        exportData?.map((item, index) => (
+                        fetchDoctors?.map((item, index) => (
                             <tr key={index}>
                                 <td >
                                     <div className="text-center w-100">

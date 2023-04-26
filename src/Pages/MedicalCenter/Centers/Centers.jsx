@@ -357,7 +357,7 @@ const Centers = () => {
             </div>
           </div>
           {isLoader ? <>
-            <ExcelSheet />
+            <ExcelSheet medicalCenter={medicalCenter} />
           </>
             : SkeletonExcel(40, "100%")}
           {isLoader ? <>

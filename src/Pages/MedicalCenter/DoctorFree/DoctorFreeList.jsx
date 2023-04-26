@@ -290,7 +290,7 @@ const DoctorFreeList = () => {
               </div>
             </div>
           </div>
-          <ExcelSheet />
+          <ExcelSheet doctorFree={doctorFree} />
           {isLoader ? <>
             <>
               {

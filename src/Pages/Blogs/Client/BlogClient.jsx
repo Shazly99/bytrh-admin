@@ -424,7 +424,7 @@ const BlogClient = () => {
                             </Col>
                         </Row>
                     </div>
-                    <ExcelSheet />
+                    <ExcelSheet  blogs={blogs}/>
                     {isLoader ? <>
                         {
                             blogs?.length > 0 ?

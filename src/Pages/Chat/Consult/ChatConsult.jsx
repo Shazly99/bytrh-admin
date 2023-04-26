@@ -222,7 +222,7 @@ const ChatConsult = () => {
             </div>
           </div>
           {isLoader ? <>
-            <ExcelSheet />
+            <ExcelSheet consult={consult} />
           </>
             : SkeletonExcel(40, "100%")}
 

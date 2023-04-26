@@ -8,7 +8,7 @@ import { SiMicrosoftexcel } from 'react-icons/si';
 import { VendersContext } from '../../../context/Store';
 import { PostData, apiheader } from '../../../utils/fetchData';
 
-const ExcelSheet = () => {
+const ExcelSheet = ({doctorFree}) => {
     let { isLang } = useContext(VendersContext);
 
     const [exportData, setExportData] = useState(null)
@@ -56,7 +56,7 @@ const ExcelSheet = () => {
                 </thead>
                 <tbody className='text-center'>
                     {
-                        exportData?.map((item, index) => (
+                        doctorFree?.map((item, index) => (
                             <tr key={index}> 
 
                                 <td >

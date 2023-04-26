@@ -4,29 +4,28 @@ import { Table } from "react-bootstrap";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import { SiMicrosoftexcel } from 'react-icons/si';
 import { VendersContext } from '../../../context/Store';
-import { PostData, apiheader } from '../../../utils/fetchData';
 import initialTranslation from './Translation';
  
 
-const ExcelSheet = () => {
+const ExcelSheet = ({medicalCenter}) => {
     let { isLang } = useContext(VendersContext);
 
-    const [exportData, setExportData] = useState(null)
+    // const [exportData, setExportData] = useState(null)
     const [translate, setTranslate] = useState(initialTranslation)
     const handelTranslate = () => setTranslate(initialTranslation)
-    const medicalCenterList = async () => {
-        await PostData(`${process.env.REACT_APP_API_URL}/admin/medicalcenter `, { Action: 'Export' }, apiheader).then(({ data }) => {
-            setExportData(data.Response.MedicalCenters)
-        }).catch((error) => {
-         })
-    }
+    // const medicalCenterList = async () => {
+    //     await PostData(`${process.env.REACT_APP_API_URL}/admin/medicalcenter `, { Action: 'Export' }, apiheader).then(({ data }) => {
+    //         setExportData(data.Response.MedicalCenters)
+    //     }).catch((error) => {
+    //      })
+    // }
 
     useEffect(() => {
         handelTranslate()
-        const timeoutId = setTimeout(() => {
-            medicalCenterList()
-        }, 1000);
-        return () => clearTimeout(timeoutId);
+        // const timeoutId = setTimeout(() => {
+        //     medicalCenterList()
+        // }, 1000);
+        // return () => clearTimeout(timeoutId);
     }, [])
     return (
         <>
@@ -56,7 +55,7 @@ const ExcelSheet = () => {
                 </thead>
                 <tbody className='text-center'>
                     {
-                        exportData?.map((item, index) => (
+                        medicalCenter?.map((item, index) => (
                             <tr key={index}>
  
                                 <td >

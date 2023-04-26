@@ -6,22 +6,22 @@ import { SiMicrosoftexcel } from 'react-icons/si';
 import { VendersContext } from '../../../context/Store';
 import { PostData, apiheader } from '../../../utils/fetchData';
 
-const ExcelSheet = () => {
+const ExcelSheet = ({fetchAdoption}) => {
     let { isLang } = useContext(VendersContext);
-    const [exportData, setExportData] = useState(null)
+    // const [exportData, setExportData] = useState(null)
 
-    const Adoption = async () => {
-        await PostData(`${process.env.REACT_APP_API_URL}/admin/adoptions`, { Action: 'Export' }, apiheader).then(({ data }) => {
-            setExportData(data.Response.Adoptions)
-        }).catch((error) => { 
-        })
-    }
+    // const Adoption = async () => {
+    //     await PostData(`${process.env.REACT_APP_API_URL}/admin/adoptions`, { Action: 'Export' }, apiheader).then(({ data }) => {
+    //         setExportData(data.Response.Adoptions)
+    //     }).catch((error) => { 
+    //     })
+    // }
 
     useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            Adoption()
-        }, 1000);
-        return () => clearTimeout(timeoutId);
+        // const timeoutId = setTimeout(() => {
+        //     Adoption()
+        // }, 1000);
+        // return () => clearTimeout(timeoutId);
     }, [])
     return (
         <>
@@ -52,7 +52,7 @@ const ExcelSheet = () => {
                 </thead>
                 <tbody className='text-center'>
                     {
-                        exportData?.map((item, index) => (
+                        fetchAdoption?.map((item, index) => (
                             <tr key={index}>
                                 <td >
                                     <div className="text-center w-100">
