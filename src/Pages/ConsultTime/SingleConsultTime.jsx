@@ -43,7 +43,8 @@ const SingleConsultTime = ({ item , getConsultTime }) => {
             }
         })
         .catch(err => {
-         })
+            console.log(err);
+        })
     }
 
 
