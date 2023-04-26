@@ -108,9 +108,9 @@ function Navber() {
             }
             <nav className='d-flex flex-row justify-content-center align-items-center'>
               {/* {localStorage.getItem('Role') === '1'&& */}
-              <span className='userName__nav' style={{ margin: '0 10px' }} >
+      {/*         <span className='userName__nav' style={{ margin: '0 10px' }} >
                 {localStorage.getItem('UserName')}
-              </span>
+              </span> */}
               {/* // } */}
               <div className="dropdown" id="basic-nav-dropdown2">
 

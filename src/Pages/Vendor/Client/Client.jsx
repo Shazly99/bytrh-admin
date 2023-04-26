@@ -235,8 +235,8 @@ const Clients = () => {
             <Row className='d-flex  flex-row justify-content-between'>
               <Col xl={3} lg={3} md={6} sm={12} className='mt-2' >
                 {isLoader ? <>
-                  <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry} ref={countryRef}>
-                    <Form.Select aria-label="Default select example" >
+                  <Form.Group controlId="formBasicEmail" >
+                    <Form.Select aria-label="Default select example" onClick={handelSelectCountry} ref={countryRef}>
                       <option selected disabled hidden value={'Select Country'}>{translate[isLang]?.filter?.Country}  </option>
                       <option value={'country'} >{translate[isLang]?.filter?.allCountry}</option>
                       {

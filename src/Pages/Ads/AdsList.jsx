@@ -1,4 +1,4 @@
-import { Pagination } from "@mui/material";
+import { Pagination, Skeleton } from "@mui/material";
 import Box from "@mui/material/Box";
 import axios from 'axios';
 import _ from 'lodash';
@@ -93,31 +93,57 @@ const AdsList = () => {
   // !Filter By Start Date And End Date
   let startDate = useRef();
   let endDate = useRef();
-
   const handelDate = async () => { 
     await axios.post(`${process.env.REACT_APP_API_URL}/admin/advertisements`, { IDPage: page, StartDate: startDate.current.value, EndDate: endDate.current.value }, apiheader).then((res) => {
       if (res.status === 200 && res.request.readyState === 4) {
-
-
         setAds(res.data.Response.Advertisements);
         setPagesNumber(res.data.Response.Pages);
         setIsLoading(false);
       }
     })
   }
-  // !Filter by city name 
-  let { countries, cities, getCities } = useFetch()
-  const countriesRef = useRef(null);
-  const handelSelectCountry = (event) => {
+
+ 
+  // !Filter by city and country and area  
+  let { countries, areas, cities, getCities, getAreas } = useFetch()
+  const cityRef = useRef(null);
+  const countryRef = useRef(null);
+  const areaRef = useRef(null);
+  const handelSelectCountry = async (event) => {
     const selectedCountryId = event.target.value;
-    getCities(selectedCountryId)
+    if (selectedCountryId === 'country') {
+      advertisements(page)
+    } else if (selectedCountryId === 'Select Country') {
+      return false
+    } else {
+      getCities(selectedCountryId)
+      try {
+        await axios.post(`${process.env.REACT_APP_API_URL}/admin/advertisements`, { IDPage: page, IDCountry: selectedCountryId }, apiheader).then((res) => {
+          if (res.status === 200 && res.request.readyState === 4) {
+            setAds(res.data.Response.Advertisements);
+            setPagesNumber(res.data.Response.Pages);
+            setIsLoading(false);
+          }
+        })
+ 
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = error.response.headers['retry-after'];
+          setTimeout(() => {
+            advertisements();
+          }, (retryAfter || 30) * 1000);
+        }
+      }
+    }
   }
   const handelSelectCity = async () => {
-    let city = countriesRef.current.value
+    let city = cityRef.current.value
     if (city === 'cities') {
-      advertisements()
+      advertisements(page)
+    } else if (city === 'Select city') {
+      return false
     } else {
-
+      getAreas(city)
       try {
         await axios.post(`${process.env.REACT_APP_API_URL}/admin/advertisements`, { IDPage: page, IDCity: city }, apiheader).then((res) => {
           if (res.status === 200 && res.request.readyState === 4) {
@@ -130,7 +156,32 @@ const AdsList = () => {
         if (error.response && error.response.status === 429) {
           const retryAfter = error.response.headers['retry-after'];
           setTimeout(() => {
-            advertisements();
+            advertisements(page);
+          }, (retryAfter || 30) * 1000);
+        }
+      }
+    }
+  }
+  const handelSelectArea = async () => {
+    let city = areaRef.current.value
+    if (city === 'Areas') {
+      advertisements(page)
+    } else if (city === 'Select Area') {
+      return false
+    } else {
+      try {
+        await axios.post(`${process.env.REACT_APP_API_URL}/admin/advertisements`, { IDPage: page, IDArea: city }, apiheader).then((res) => {
+          if (res.status === 200 && res.request.readyState === 4) {
+            setAds(res.data.Response.Advertisements);
+            setPagesNumber(res.data.Response.Pages);
+            setIsLoading(false);
+          }
+        })
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = error.response.headers['retry-after'];
+          setTimeout(() => {
+            advertisements(page);
           }, (retryAfter || 30) * 1000);
         }
       }
@@ -139,7 +190,6 @@ const AdsList = () => {
 
   // !Filter by Advertisement Service 
   const adsService = useRef(null);
-
   const handelAdvertisementService = async () => {
     let adsSer = adsService.current.value
     if (adsSer === 'ads') {
@@ -157,7 +207,6 @@ const AdsList = () => {
 
   // !Filter by Advertisement Location 
   const adsLocation = useRef(null);
-
   const handelAdvertisementLocation = async () => {
     let ads = adsLocation.current.value
     if (ads === 'ads') {
@@ -179,7 +228,14 @@ const AdsList = () => {
   }, [page,isLang]);
 
 
-
+  const SkeletonFilter = () => {
+    return (
+      <div className="d-flex flex-column  gap-2 mt-2">
+        <Skeleton variant='rounded' animation='wave' height={15} width={'60%'} />
+        <Skeleton variant='rounded' animation='wave' height={26} width={'100%'} />
+      </div>
+    )
+  }
 
   return (
 
@@ -210,33 +266,53 @@ const AdsList = () => {
 
                 <Row className="mb-3" >
 
-                  <Col xl={3} lg={3} md={6} sm={12} className='  mt-2'>
-                    <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry}>
-                       
-                      <Form.Select aria-label="Default select example" >
-                        <option>{translateADS[isLang]?.optionCountry}</option>
-                        {
-                          countries?.map((item, index) => (
-                            <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
-                          ))
-                        }
-                      </Form.Select>
-                    </Form.Group>
-                  </Col> 
-                  <Col xl={3} lg={3} md={6} sm={12}className='  mt-2'>
-                    <Form.Group controlId="formBasicEmail"   >
-                      
-                      <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={countriesRef}>
-                        <option>{translateADS[isLang]?.optionCity}</option>
-                        {
-                          cities?.map((item, index) => (
-                            <option key={index} value={item?.IDCity}>{item?.CityName}</option>
-                          ))
-                        }
-                      </Form.Select>
+                <Col xl={3} lg={3} md={6} sm={12} className='mt-2' >
+                {isLoader ? <>
+                  <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry} ref={countryRef}>
+                    <Form.Select aria-label="Default select example" >
+                      <option selected disabled hidden value={'Select Country'}>{translateADS[isLang]?.filter?.Country}  </option>
+                      <option value={'country'} >{translateADS[isLang]?.filter?.allCountry}</option>
+                      {
+                        countries?.map((item, index) => (
+                          <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
+                        ))
+                      }
+                    </Form.Select>
+                  </Form.Group>
+                </> : SkeletonFilter()}
+              </Col>
 
-                    </Form.Group>
-                  </Col>
+              <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
+                {isLoader ? <>
+                  <Form.Group controlId="formBasicEmail"   >
+                    <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={cityRef}>
+                      <option selected disabled hidden value={'Select city'}> {translateADS[isLang]?.filter?.city}  </option>
+                      <option value={'cities'} >{translateADS[isLang]?.filter?.allCity}</option>
+                      {
+                        cities?.map((item, index) => (
+                          <option key={index} value={item?.IDCity}>{item?.CityName}</option>
+                        ))
+                      }
+                    </Form.Select>
+                  </Form.Group>
+                </> : SkeletonFilter()}
+              </Col>
+
+              <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
+                {isLoader ? <>
+                  <Form.Group controlId="formBasicEmail"   >
+                    <Form.Select aria-label="Default select example" onClick={handelSelectArea} ref={areaRef}>
+                      <option selected disabled hidden value={'Select Area'}>  {translateADS[isLang]?.filter?.area}  </option>
+                      <option value={'Areas'} > {translateADS[isLang]?.filter?.allarea} </option>
+                      {
+                        areas?.map((item, index) => (
+                          <option key={index} value={item?.IDArea}>{item?.AreaName}</option>
+                        ))
+                      }
+                    </Form.Select>
+                  </Form.Group>
+                </> : SkeletonFilter()}
+              </Col>
                   <Col xl={3} lg={3} md={6} sm={12}className='  mt-2'>
                     <Form.Group controlId="formBasicEmail"  >
                      

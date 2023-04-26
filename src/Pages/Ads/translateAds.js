@@ -39,6 +39,20 @@ let translateADS = {
         SaveBTN: 'Save',
         CancelBTN: 'Cancel',
         LabelEditPage: 'Edit the Ads',
+        filter:{
+            Country:'Select Country',
+            allCountry:'Countries',
+            city:'Select Area',
+            allCity:'Areas',            
+            area:'Select City',
+            allarea:'Cities',
+            status:'Select Status',
+            allStatus:'All Status',
+            Product:'Product Type',
+            Products:'Animals Product Type',
+            SubCategory:'Select SubCategory',
+            allSubCategory:'Animals SubCategory'
+        },
     },
     'ar' :
     {
@@ -80,6 +94,21 @@ let translateADS = {
         SaveBTN: 'حفـظ',
         CancelBTN: 'رجـوع',
         LabelEditPage: 'تعديــل الإعـلان',
+        
+        filter:{
+            Country:'حدد الدولة',
+            allCountry:'بلدان',
+            city:' حدد منطقة  ',
+            allCity:'المناطق',            
+            area:'حدد مدينه',
+            allarea:'مدن',
+            status:'حدد الحالة',
+            allStatus:'كل الحالة',
+            Product:'نوع المنتج',
+            Products:'    حدد نوع المنتج    ',
+            SubCategory:'حدد الفئة الفرعية',
+            allSubCategory:'فئة الحيوانات'
+        }  ,
     }
 }
 
