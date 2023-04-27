@@ -93,7 +93,7 @@ const AdsList = () => {
   // !Filter By Start Date And End Date
   let startDate = useRef();
   let endDate = useRef();
-  const handelDate = async () => { 
+  const handelDate = async () => {
     await axios.post(`${process.env.REACT_APP_API_URL}/admin/advertisements`, { IDPage: page, StartDate: startDate.current.value, EndDate: endDate.current.value }, apiheader).then((res) => {
       if (res.status === 200 && res.request.readyState === 4) {
         setAds(res.data.Response.Advertisements);
@@ -103,7 +103,7 @@ const AdsList = () => {
     })
   }
 
- 
+
   // !Filter by city and country and area  
   let { countries, areas, cities, getCities, getAreas } = useFetch()
   const cityRef = useRef(null);
@@ -125,7 +125,7 @@ const AdsList = () => {
             setIsLoading(false);
           }
         })
- 
+
       } catch (error) {
         if (error.response && error.response.status === 429) {
           const retryAfter = error.response.headers['retry-after'];
@@ -225,7 +225,7 @@ const AdsList = () => {
   useEffect(() => {
     advertisements();
     window.scrollTo(0, 0);
-  }, [page,isLang]);
+  }, [page, isLang]);
 
 
   const SkeletonFilter = () => {
@@ -242,106 +242,106 @@ const AdsList = () => {
     <>
       <div className="app__Users ">
         <div className="app__Users-table">
-        <Component.ButtonBase title={translateADS[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/ads/add" />
+          <Component.ButtonBase title={translateADS[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/ads/add" />
           <div className="search-container">
             <div className={`${isLang === 'ar' ? ' search__groupAr  w-100' : 'search__group w-100  '}  `}>
               <div className=' app__addOrder-form'>
                 <div className="d-flex flex-column row justify-content-between">
                   <Row className="mb-3">
                     <Col xl={5} lg={5} md={6} sm={12} >
-                      <Form.Control type="date" ref={startDate} className="w-100 mt-2" />
+                      <Form.Control size="sm" type="date" ref={startDate} className="w-100 mt-2" />
                     </Col>
 
-                    <Col xl={5} lg={5} md={6} sm={12} > 
-                      <Form.Control type="date" ref={endDate} className="w-100 mt-2" />
+                    <Col xl={5} lg={5} md={6} sm={12} >
+                      <Form.Control size="sm" type="date" ref={endDate} className="w-100 mt-2" />
                     </Col>
 
                     <Col xl={2} lg={2} md={6} sm={12} >
-                      <Button variant="outline-primary" onClick={handelDate} className="w-100 mt-2">Find Date</Button>
+                      <Button size="sm" variant="outline-primary" onClick={handelDate} className="w-100 mt-2">Find Date</Button>
                     </Col>
                   </Row>
 
                 </div>
                 <div className="d-flex flex-column row justify-content-between">
 
-                <Row className="mb-3" >
+                  <Row className="mb-3 d-flex justify-content-between" >
 
-                <Col xl={3} lg={3} md={6} sm={12} className='mt-2' >
-                {isLoader ? <>
-                  <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry} ref={countryRef}>
-                    <Form.Select aria-label="Default select example" >
-                      <option selected disabled hidden value={'Select Country'}>{translateADS[isLang]?.filter?.Country}  </option>
-                      <option value={'country'} >{translateADS[isLang]?.filter?.allCountry}</option>
-                      {
-                        countries?.map((item, index) => (
-                          <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
-                        ))
-                      }
-                    </Form.Select>
-                  </Form.Group>
-                </> : SkeletonFilter()}
-              </Col>
+                    <Col xl={2} lg={2} md={6} sm={12} className='mt-2' >
+                      {isLoader ? <>
+                        <Form.Group controlId="formBasicEmail" >
+                          <Form.Select aria-label="Default select example"size="sm" onChange={handelSelectCountry} ref={countryRef} >
+                            <option selected disabled hidden value={'Select Country'}>{translateADS[isLang]?.filter?.Country}  </option>
+                            <option value={'country'} >{translateADS[isLang]?.filter?.allCountry}</option>
+                            {
+                              countries?.map((item, index) => (
+                                <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
+                              ))
+                            }
+                          </Form.Select>
+                        </Form.Group>
+                      </> : SkeletonFilter()}
+                    </Col>
 
-              <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
-                {isLoader ? <>
-                  <Form.Group controlId="formBasicEmail"   >
-                    <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={cityRef}>
-                      <option selected disabled hidden value={'Select city'}> {translateADS[isLang]?.filter?.city}  </option>
-                      <option value={'cities'} >{translateADS[isLang]?.filter?.allCity}</option>
-                      {
-                        cities?.map((item, index) => (
-                          <option key={index} value={item?.IDCity}>{item?.CityName}</option>
-                        ))
-                      }
-                    </Form.Select>
-                  </Form.Group>
-                </> : SkeletonFilter()}
-              </Col>
+                    <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
+                      {isLoader ? <>
+                        <Form.Group controlId="formBasicEmail"   >
+                          <Form.Select aria-label="Default select example" size="sm" onChange={handelSelectCity} ref={cityRef}>
+                            <option selected disabled hidden value={'Select city'}> {translateADS[isLang]?.filter?.city}  </option>
+                            <option value={'cities'} >{translateADS[isLang]?.filter?.allCity}</option>
+                            {
+                              cities?.map((item, index) => (
+                                <option key={index} value={item?.IDCity}>{item?.CityName}</option>
+                              ))
+                            }
+                          </Form.Select>
+                        </Form.Group>
+                      </> : SkeletonFilter()}
+                    </Col>
 
-              <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
-                {isLoader ? <>
-                  <Form.Group controlId="formBasicEmail"   >
-                    <Form.Select aria-label="Default select example" onClick={handelSelectArea} ref={areaRef}>
-                      <option selected disabled hidden value={'Select Area'}>  {translateADS[isLang]?.filter?.area}  </option>
-                      <option value={'Areas'} > {translateADS[isLang]?.filter?.allarea} </option>
-                      {
-                        areas?.map((item, index) => (
-                          <option key={index} value={item?.IDArea}>{item?.AreaName}</option>
-                        ))
-                      }
-                    </Form.Select>
-                  </Form.Group>
-                </> : SkeletonFilter()}
-              </Col>
-                  <Col xl={3} lg={3} md={6} sm={12}className='  mt-2'>
-                    <Form.Group controlId="formBasicEmail"  >
-                     
-                      <Form.Select aria-label="Default select example" ref={adsLocation} onClick={handelAdvertisementLocation} >
-                        <option>{translateADS[isLang]?.optionAdvertisementLocation}</option>
-                        {
-                          ['HOME', 'PAGES', 'INNER_PAGES']?.map((item, index) => (
-                            <option key={index} value={item}  >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase().replace('_', " ")}</option>
-                          ))
-                        }
-                      </Form.Select>
-                    </Form.Group>
-                  </Col> 
-                  <Col xl={3} lg={3} md={6} sm={12}className='  mt-2'>
-                    <Form.Group controlId="formBasicEmail"   >
-                       <Form.Select aria-label="Default select example" ref={adsService} onClick={handelAdvertisementService} >
-                        <option>{translateADS[isLang]?.optionAdvertisementService}</option>
-                        {
-                          ['NONE', 'URGENT_CONSULT', 'CONSULT', 'DOCTOR_BLOG', 'CLIENT_BLOG', 'ADOPTION']?.map((item, index) => (
-                            <option key={index} value={item}>{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase().replace('_', " ")}</option>
-                          ))
-                        }
-                        {/* <option value="0">InActive</option> */}
-                      </Form.Select>
+                    <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
+                      {isLoader ? <>
+                        <Form.Group controlId="formBasicEmail"   >
+                          <Form.Select aria-label="Default select example" size="sm" onChange={handelSelectArea} ref={areaRef}>
+                            <option selected disabled hidden value={'Select Area'}>  {translateADS[isLang]?.filter?.area}  </option>
+                            <option value={'Areas'} > {translateADS[isLang]?.filter?.allarea} </option>
+                            {
+                              areas?.map((item, index) => (
+                                <option key={index} value={item?.IDArea}>{item?.AreaName}</option>
+                              ))
+                            }
+                          </Form.Select>
+                        </Form.Group>
+                      </> : SkeletonFilter()}
+                    </Col>
+                    <Col xl={2} lg={2} md={6} sm={12} className='  mt-2'>
+                      <Form.Group controlId="formBasicEmail"  >
 
-                    </Form.Group>
-                  </Col>
+                        <Form.Select aria-label="Default select example" ref={adsLocation} size="sm" onChange={handelAdvertisementLocation} >
+                          <option>{translateADS[isLang]?.optionAdvertisementLocation}</option>
+                          {
+                            ['HOME', 'PAGES', 'INNER_PAGES']?.map((item, index) => (
+                              <option key={index} value={item}  >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase().replace('_', " ")}</option>
+                            ))
+                          }
+                        </Form.Select>
+                      </Form.Group>
+                    </Col>
+                    <Col xl={2} lg={2} md={6} sm={12} className='  mt-2'>
+                      <Form.Group controlId="formBasicEmail"   >
+                        <Form.Select aria-label="Default select example" ref={adsService} size="sm" onChange={handelAdvertisementService} >
+                          <option>{translateADS[isLang]?.optionAdvertisementService}</option>
+                          {
+                            ['NONE', 'URGENT_CONSULT', 'CONSULT', 'DOCTOR_BLOG', 'CLIENT_BLOG', 'ADOPTION']?.map((item, index) => (
+                              <option key={index} value={item}>{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase().replace('_', " ")}</option>
+                            ))
+                          }
+                          {/* <option value="0">InActive</option> */}
+                        </Form.Select>
 
-                </Row>
+                      </Form.Group>
+                    </Col>
+
+                  </Row>
                 </div>
 
               </div>
@@ -350,127 +350,127 @@ const AdsList = () => {
 
           {isLoader ? <>
             <>
-                {
-                  ads?.length > 0 ?
-            <Table responsive={true} className='rounded-3 '>
-              <thead>
-                <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
-                  {translateADS[isLang]?.TableHeader?.map((el, i) => (
-                    <th key={i}>{el}</th>
-                  ))}
-                </tr>
-              </thead>
+              {
+                ads?.length > 0 ?
+                  <Table responsive={true} className='rounded-3 '>
+                    <thead>
+                      <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
+                        {translateADS[isLang]?.TableHeader?.map((el, i) => (
+                          <th key={i}>{el}</th>
+                        ))}
+                      </tr>
+                    </thead>
 
-              <tbody className='text-center'>
-                {
-                  ads?.map((item, index) => (
-                    <tr key={index}>
-                      <td className='img'>
-                        {
-                          item?.AdvertisementImage ?
-                            <img
-                              loading="lazy"
-                              src={item.AdvertisementImage} // use normal <img> attributes as props
-                              className=" rounded-2"
-                               width={'250px'}
-                              height={'150px'}
-                            /> :
+                    <tbody className='text-center'>
+                      {
+                        ads?.map((item, index) => (
+                          <tr key={index}>
+                            <td className='img'>
+                              {
+                                item?.AdvertisementImage ?
+                                  <img
+                                    loading="lazy"
+                                    src={item.AdvertisementImage} // use normal <img> attributes as props
+                                    className=" rounded-2"
+                                    width={'250px'}
+                                    height={'150px'}
+                                  /> :
 
-                            <img
+                                  <img
 
-                              loading="lazy"
-                              src={Img.defaultImg} // use normal <img> attributes as props
-                              className=" rounded-2"
-                              width={'250px'}
-                              height={'150px'}                            />
+                                    loading="lazy"
+                                    src={Img.defaultImg} // use normal <img> attributes as props
+                                    className=" rounded-2"
+                                    width={'250px'}
+                                    height={'150px'} />
 
-                        }
-                        {/* <img src={item.AdvertisementImage} alt='example' className='w-100 rounded-2' /> */}
-                      </td>
-                      <td >
-                        <div>
-                          {item?.AdvertisementService.charAt(0).toUpperCase() + item?.AdvertisementService.slice(1).toLowerCase()}
-                        </div>
-                      </td>
-                      <td >
-                        <div>
-                          {item?.AdvertisementStartDate?.split(" ")[0]}
-                        </div>
-                      </td>
-                      <td >
-                        <div>
-                          {item?.AdvertisementEndDate?.split(" ")[0]}
-                        </div>
-                      </td>
-                      <td >
-                        <div>
-                          {item?.AdvertisementLocation.charAt(0).toUpperCase() + item?.AdvertisementLocation.slice(1).toLowerCase()}
-                        </div>
-                      </td>
-
-
-
-                      <td>
-                        <div>
-                          <span>
-                            <DropdownButton
-                              id={`dropdown-${item.IDAdvertisement}`}
-                              title={translateADS[isLang]?.ActionsLabel}
-                              variant="outline-success"
-                              onSelect={(eventKey) => handleActionSelect(item.IDAdvertisement, index)}
-                              className="DropdownButton "
-                              drop={'down-centered'}
-                            >
-                              <Dropdown.Item eventKey="Edite" as={Link} to={`/ads/edit/${item.IDAdvertisement}`}>
-                                {isLang === 'ar' ? 'تعديــل' : 'Edit'}
-                              </Dropdown.Item>
-
-                              <Dropdown.Item eventKey="DELETE"   >
-                                {isLang === 'ar' ? 'حـذف' : 'Delete'}
-                              </Dropdown.Item>
+                              }
+                              {/* <img src={item.AdvertisementImage} alt='example' className='w-100 rounded-2' /> */}
+                            </td>
+                            <td >
+                              <div>
+                                {item?.AdvertisementService.charAt(0).toUpperCase() + item?.AdvertisementService.slice(1).toLowerCase()}
+                              </div>
+                            </td>
+                            <td >
+                              <div>
+                                {item?.AdvertisementStartDate?.split(" ")[0]}
+                              </div>
+                            </td>
+                            <td >
+                              <div>
+                                {item?.AdvertisementEndDate?.split(" ")[0]}
+                              </div>
+                            </td>
+                            <td >
+                              <div>
+                                {item?.AdvertisementLocation.charAt(0).toUpperCase() + item?.AdvertisementLocation.slice(1).toLowerCase()}
+                              </div>
+                            </td>
 
 
-                              <Modal show={showDeleteModal && modalIndexEdit === index} onHide={() => setShowDeleteModal(false)} centered dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
-                                <Modal.Header closeButton>
-                                  <Modal.Title>{translateADS[isLang]?.headerModalDel}</Modal.Title>
-                                </Modal.Header>
-                                <Modal.Body>
-                                  <Component.HandelDelete />
-                                </Modal.Body>
-                                <Modal.Footer className='  d-flex justify-content-center'>
-                                  <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => handleDeleteUser(item.IDUser)}>
-                                    {translateADS[isLang]?.btnModalDel}                                  </Button>
-                                  <Button variant="outline-primary" onClick={() => setShowDeleteModal(false)}>
-                                    {translateADS[isLang]?.CancelBTN}
-                                  </Button>
-                                </Modal.Footer>
-                              </Modal>
-                            </DropdownButton>
-                          </span>
-                        </div>
-                      </td>
-                    </tr>
-                  ))
-                }
 
-              </tbody>
+                            <td>
+                              <div>
+                                <span>
+                                  <DropdownButton
+                                    id={`dropdown-${item.IDAdvertisement}`}
+                                    title={translateADS[isLang]?.ActionsLabel}
+                                    variant="outline-success"
+                                    onSelect={(eventKey) => handleActionSelect(item.IDAdvertisement, index)}
+                                    className="DropdownButton "
+                                    drop={'down-centered'}
+                                  >
+                                    <Dropdown.Item eventKey="Edite" as={Link} to={`/ads/edit/${item.IDAdvertisement}`}>
+                                      {isLang === 'ar' ? 'تعديــل' : 'Edit'}
+                                    </Dropdown.Item>
 
-            </Table>
-            :
-                    <Component.DataNotFound />
-                }
-              </>
+                                    <Dropdown.Item eventKey="DELETE"   >
+                                      {isLang === 'ar' ? 'حـذف' : 'Delete'}
+                                    </Dropdown.Item>
+
+
+                                    <Modal show={showDeleteModal && modalIndexEdit === index} onHide={() => setShowDeleteModal(false)} centered dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
+                                      <Modal.Header closeButton>
+                                        <Modal.Title>{translateADS[isLang]?.headerModalDel}</Modal.Title>
+                                      </Modal.Header>
+                                      <Modal.Body>
+                                        <Component.HandelDelete />
+                                      </Modal.Body>
+                                      <Modal.Footer className='  d-flex justify-content-center'>
+                                        <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => handleDeleteUser(item.IDUser)}>
+                                          {translateADS[isLang]?.btnModalDel}                                  </Button>
+                                        <Button variant="outline-primary" onClick={() => setShowDeleteModal(false)}>
+                                          {translateADS[isLang]?.CancelBTN}
+                                        </Button>
+                                      </Modal.Footer>
+                                    </Modal>
+                                  </DropdownButton>
+                                </span>
+                              </div>
+                            </td>
+                          </tr>
+                        ))
+                      }
+
+                    </tbody>
+
+                  </Table>
+                  :
+                  <Component.DataNotFound />
+              }
+            </>
           </> : SkeletonTableImg()}
 
         </div>
 
       </div>
-      <div className="pagination "  dir="ltr">
-      {
+      <div className="pagination " dir="ltr">
+        {
           pageCount &&
-        <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-          <Pagination count={pageCount} page={page} onChange={handleChange} />
-        </Box>
+          <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
+            <Pagination count={pageCount} page={page} onChange={handleChange} />
+          </Box>
         }
       </div>
     </>

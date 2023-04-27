@@ -195,15 +195,15 @@ const Visits = () => {
           <div className="app__addOrder-form ">
             <Row className="mb-3">
               <Col xl={5} lg={5} md={6} sm={12} >
-                <Form.Control type="date" ref={startDate} className="w-100 mt-2" />
+                <Form.Control size="sm" type="date" ref={startDate} className="w-100 mt-2" />
               </Col>
 
               <Col xl={5} lg={5} md={6} sm={12} >
-                <Form.Control type="date" ref={endDate} className="w-100 mt-2" />
+                <Form.Control size="sm" type="date" ref={endDate} className="w-100 mt-2" />
               </Col>
 
               <Col xl={2} lg={2} md={6} sm={12} >
-                <Button variant="outline-primary" onClick={handelDate} className="w-100 mt-2">Find Date</Button>
+                <Button variant="outline-primary" size="sm" onClick={handelDate} className="w-100 mt-2">Find Date</Button>
               </Col>
             </Row>
 
@@ -232,7 +232,7 @@ const Visits = () => {
                 {isLoader ? <>
                   <Form.Group controlId="formBasicEmail"  >
                     {/* <Form.Label  >Product Type </Form.Label> */}
-                    <Form.Select aria-label="Default select example" ref={visitTypeRef} onClick={handelVisitType} >
+                    <Form.Select aria-label="Default select example" ref={visitTypeRef}   size="sm" onChange={handelVisitType} >
                       <option selected disabled hidden value={'Visit Type'} > {translate[isLang]?.Actions.vistType}</option>
                       {
                         translate[isLang]?.filterVisitType?.map((item, index) => (

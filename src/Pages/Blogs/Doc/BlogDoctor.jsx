@@ -22,7 +22,6 @@ export const BlogDoctor = () => {
     const handelTranslate = () => {
         setTranslate(initialTranslation)
     }
-    const animalRef = useRef();
 
     const [blogs, setBlogs] = useState(null)
     const [PagesNumber, setPagesNumber] = useState('')
@@ -133,33 +132,19 @@ export const BlogDoctor = () => {
         setPagesNumber(data.Response.Pages);
 
     }
-    // ToDo::Filter radio btn Blogs status
-    const handleOptionChange = async (event) => {
-        const selectedValue = event.target.value;
-        setSelectedOption(selectedValue);
-        if (selectedValue === "PENDING" || selectedValue === "REJECTED" || selectedValue === "POSTED" || selectedValue === "REMOVED") {
-            let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs`, { IDPage: page, BlogStatus: selectedValue }, apiheader)
-            setBlogs(data.Response.DoctorBlogs)
-            setPagesNumber(data.Response.Pages);
 
-        } else if (selectedValue === "All") {
-            BlogsList()
-        }
-    };
     // ToDo::Filter by ID Animal Category
     const [animal, setAnimal] = useState(null)
-
-    const animalcategories = async () => {
-        let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/animalcategories`, { IDPage: page }, apiheader)
-        setAnimal(data.Response.AnimalCategories)
-        setPagesNumber(data.Response.Pages);
-
-    }
+    const animalRef = useRef();
 
     const handelSelectAnimalCategory = async (event) => {
+        cityRef.current.value = 'Select city';
+        areaRef.current.value = 'Select Area';
+        countryRef.current.value = 'Select Country';
+        statusRef.current.value = 'Select Status';
+        // animalRef.current.value = 'Select Category'; 
 
-
-        const selectedCountryId = event.target.value;
+        const selectedCountryId = animalRef.current.value;        
         if (selectedCountryId === "All") {
             BlogsList()
         } else if (selectedCountryId === 'Select Category') {
@@ -172,13 +157,23 @@ export const BlogDoctor = () => {
 
         }
     }
+    const animalcategories = async () => {
+        let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/animalcategories`, { IDPage: page }, apiheader)
+        setAnimal(data.Response.AnimalCategories)
+        setPagesNumber(data.Response.Pages); 
+    }
     // !Filter by city and country and area  
     let { countries, areas, cities, getCities, getAreas } = useFetch()
     const cityRef = useRef(null);
     const countryRef = useRef(null);
     const areaRef = useRef(null);
     const handelSelectCountry = async (event) => {
-        const selectedCountryId = event.target.value;
+        cityRef.current.value = 'Select city';
+        areaRef.current.value = 'Select Area';
+        statusRef.current.value = 'Select Status';
+        animalRef.current.value = 'Select Category';
+
+        const selectedCountryId =countryRef.current.value;
         if (selectedCountryId === 'country') {
             BlogsList(page)
         } else if (selectedCountryId === 'Select Country') {
@@ -203,6 +198,9 @@ export const BlogDoctor = () => {
         }
     }
     const handelSelectCity = async () => {
+        areaRef.current.value = 'Select Area';
+        statusRef.current.value = 'Select Status';
+        animalRef.current.value = 'Select Category';
         let city = cityRef.current.value
         if (city === 'cities') {
             BlogsList(page)
@@ -228,6 +226,9 @@ export const BlogDoctor = () => {
         }
     }
     const handelSelectArea = async () => {
+        statusRef.current.value = 'Select Status';
+        animalRef.current.value = 'Select Category';
+
         let city = areaRef.current.value
         if (city === 'Areas') {
             BlogsList(page)
@@ -254,7 +255,12 @@ export const BlogDoctor = () => {
     // ToDo::Filter dropdown Blogs status 
     const statusRef = useRef(null);
     const handelBlogsStatus = async () => {
-        let BlogsStatus = statusRef.current.value
+        cityRef.current.value = 'Select city';
+        areaRef.current.value = 'Select Area';
+        countryRef.current.value = 'Select Country'; 
+        animalRef.current.value = 'Select Category';
+
+        let BlogsStatus = statusRef.current.value        
         if (BlogsStatus === 'All') {
             BlogsList(page)
         } else if (BlogsStatus === 'Select Status') {
@@ -269,15 +275,13 @@ export const BlogDoctor = () => {
         }
     }
     useEffect(() => {
-        window.scrollTo(0, 0);
- 
+        window.scrollTo(0, 0); 
         const timeoutId = setTimeout(() => {
             BlogsList()
             animalcategories()
         }, 200);
-        return () => clearTimeout(timeoutId);
-    
-    }, [ isLang])
+        return () => clearTimeout(timeoutId); 
+    }, [isLang])
     useEffect(() => {
     }, [page, PagesNumber])
     const SkeletonFilter = () => {
@@ -332,10 +336,10 @@ export const BlogDoctor = () => {
                         </Row> */}
 
                         <Row className='d-flex  flex-row justify-content-between'>
-                            <Col xl={4} lg={4} md={6} sm={12} className='mt-2' >
+                            <Col xl={2} lg={2} md={6} sm={12} className='mt-2' >
                                 {isLoader ? <>
-                                    <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry} ref={countryRef}>
-                                        <Form.Select aria-label="Default select example" >
+                                    <Form.Group controlId="formBasicEmail" >
+                                        <Form.Select aria-label="Default select example"size="sm" onChange={handelSelectCountry} ref={countryRef} >
                                             <option selected disabled hidden value={'Select Country'}>{translate[isLang]?.filter?.Country}  </option>
                                             <option value={'country'} >{translate[isLang]?.filter?.allCountry}</option>
                                             {
@@ -348,10 +352,10 @@ export const BlogDoctor = () => {
                                 </> : SkeletonFilter()}
                             </Col>
 
-                            <Col xl={4} lg={4} md={6} sm={12} className='mt-2'>
+                            <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
                                 {isLoader ? <>
                                     <Form.Group controlId="formBasicEmail"   >
-                                        <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={cityRef}>
+                                        <Form.Select aria-label="Default select example" size="sm" onChange={handelSelectCity} ref={cityRef}>
                                             <option selected disabled hidden value={'Select city'}> {translate[isLang]?.filter?.city}  </option>
                                             <option value={'cities'} >{translate[isLang]?.filter?.allCity}</option>
                                             {
@@ -364,10 +368,10 @@ export const BlogDoctor = () => {
                                 </> : SkeletonFilter()}
                             </Col>
 
-                            <Col xl={4} lg={4} md={6} sm={12} className='mt-2'>
+                            <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
                                 {isLoader ? <>
                                     <Form.Group controlId="formBasicEmail"   >
-                                        <Form.Select aria-label="Default select example" onClick={handelSelectArea} ref={areaRef}>
+                                        <Form.Select aria-label="Default select example" size="sm" onChange={handelSelectArea} ref={areaRef}>
                                             <option selected disabled hidden value={'Select Area'}>  {translate[isLang]?.filter?.area}  </option>
                                             <option value={'Areas'} > {translate[isLang]?.filter?.allarea} </option>
                                             {
@@ -381,16 +385,11 @@ export const BlogDoctor = () => {
                             </Col>
 
 
-                        </Row>
-
-
-
-                        <Row className="mt-2">
-                            <Col xl={6} lg={6} md={6} sm={12} className='mt-2'>
+                            <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
 
                                 {isLoader ? <>
                                     <Form.Group controlId="formBasicEmail"  >
-                                        <Form.Select aria-label="Default select example" ref={statusRef} onClick={handelBlogsStatus} >
+                                        <Form.Select aria-label="Default select example" ref={statusRef} size="sm" onChange={handelBlogsStatus} >
                                             <option selected disabled hidden value={'Select Status'}> {translate[isLang]?.filter?.status}</option>
                                             {
                                                 translate[isLang]?.FilterStatus?.map((Status, index) => (
@@ -403,9 +402,9 @@ export const BlogDoctor = () => {
                                     </Form.Group>
                                 </> : SkeletonFilter()}
                             </Col>
-                            <Col xl={6} lg={6} md={6} sm={12} xs={12} className='mt-2' >
+                            <Col xl={2} lg={2} md={6} sm={12} xs={12} className='mt-2' >
                                 {isLoader ? <>
-                                    <Form.Select aria-label="Default select example" ref={animalRef} onClick={handelSelectAnimalCategory}>
+                                    <Form.Select aria-label="Default select example" ref={animalRef} size="sm" onChange={handelSelectAnimalCategory}>
                                         <option selected disabled hidden value={'Select Category'}> {translate[isLang]?.filter?.Category}</option>
                                         <option value={'All'}  >{translate[isLang]?.filter?.allCategory}  </option>
                                         {
@@ -415,13 +414,13 @@ export const BlogDoctor = () => {
                                         }
                                         {/* <option value="0">InActive</option> */}
                                     </Form.Select>
-                                </> : SkeletonFilterBlogs()}
+                                </> : SkeletonFilter()}
 
 
                             </Col>
-                        </Row>
+                        </Row> 
                     </div>
-                    <ExcelSheet blogs={blogs}/>
+                    <ExcelSheet blogs={blogs} />
                     {isLoader ? <>
                         {
                             blogs?.length > 0 ?

@@ -97,8 +97,8 @@ let initialTranslation = {
         ],   
 
         filter:{  
-            Category:' Select Animal Category ',
-            allCategory:'All category of animals',
+            Category:' Select  Category ',
+            allCategory:'All category',
             Country:'Select Country',
             allCountry:'Countries',
             city:'Select Area',

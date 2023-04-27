@@ -168,31 +168,31 @@ function Users() {
       }
     }
   }
-  const handelSelectArea = async () => {
-    let city = areaRef.current.value
-    statusRef.current.value = 'Select Status';
-    if (city === 'Areas') {
-      userList(page)
-    } else if (city === 'Select Area') {
-      return false
-    } else {
-      try {
-        await axios.post(`${process.env.REACT_APP_API_URL}/admin/users`, { IDPage: page, IDArea: city }, apiheader).then((res) => {
-          if (res.status === 200 && res.request.readyState === 4) {
-            setuserList(res.data.Response.Users)
-            setPagesNumber(res.data.Response.Pages);
-          }
-        })
-      } catch (error) {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = error.response.headers['retry-after'];
-          setTimeout(() => {
-            userList(page);
-          }, (retryAfter || 30) * 1000);
-        }
-      }
-    }
-  }
+  // const handelSelectArea = async () => {
+  //   let city = areaRef.current.value
+  //   statusRef.current.value = 'Select Status';
+  //   if (city === 'Areas') {
+  //     userList(page)
+  //   } else if (city === 'Select Area') {
+  //     return false
+  //   } else {
+  //     try {
+  //       await axios.post(`${process.env.REACT_APP_API_URL}/admin/users`, { IDPage: page, IDArea: city }, apiheader).then((res) => {
+  //         if (res.status === 200 && res.request.readyState === 4) {
+  //           setuserList(res.data.Response.Users)
+  //           setPagesNumber(res.data.Response.Pages);
+  //         }
+  //       })
+  //     } catch (error) {
+  //       if (error.response && error.response.status === 429) {
+  //         const retryAfter = error.response.headers['retry-after'];
+  //         setTimeout(() => {
+  //           userList(page);
+  //         }, (retryAfter || 30) * 1000);
+  //       }
+  //     }
+  //   }
+  // }
     // !Filter by   Users Status
     const statusRef = useRef(null);
     const handelanimalProductStatus = async () => {
@@ -266,7 +266,7 @@ function Users() {
           </div>
           <div className=' app__addOrder-form '>
             <Row className='d-flex  flex-row justify-content-between'>
-              <Col xl={3} lg={3} md={6} sm={12} className='mt-2' >
+              <Col xl={4} lg={4} md={6} sm={12} className='mt-2' >
                 {isLoader ? <>
                   <Form.Group controlId="formBasicEmail" >
                     <Form.Select size="sm"  aria-label="Default select example" onChange={handelSelectCountry} ref={countryRef}>
@@ -282,7 +282,7 @@ function Users() {
                 </> : SkeletonFilter()}
               </Col>
 
-              <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
+              <Col xl={4} lg={4} md={6} sm={12} className='mt-2'>
                 {isLoader ? <>
                   <Form.Group controlId="formBasicEmail"   >
                     <Form.Select size="sm"aria-label="Default select example" onChange={handelSelectCity} ref={cityRef}>
@@ -298,7 +298,7 @@ function Users() {
                 </> : SkeletonFilter()}
               </Col>
 
-              <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
+              {/* <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
                 {isLoader ? <>
                   <Form.Group controlId="formBasicEmail"   >
                     <Form.Select size="sm"aria-label="Default select example" onChange={handelSelectArea} ref={areaRef}>
@@ -312,9 +312,9 @@ function Users() {
                     </Form.Select>
                   </Form.Group>
                 </> : SkeletonFilter()}
-              </Col>
+              </Col> */}
 
-              <Col xl={3} lg={3} md={6} sm={12} className='mt-2'>
+              <Col xl={4} lg={4} md={6} sm={12} className='mt-2'>
 
                 {isLoader ? <>
                   <Form.Group controlId="formBasicEmail"  >

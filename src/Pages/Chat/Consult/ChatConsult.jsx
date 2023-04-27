@@ -187,15 +187,15 @@ const ChatConsult = () => {
           <div className="app__addOrder-form ">
             <Row className="mb-3">
               <Col xl={5} lg={5} md={6} sm={12} >
-                <Form.Control type="date" ref={startDate} className="w-100 mt-2" />
+                <Form.Control  size="sm" type="date" ref={startDate} className="w-100 mt-2" />
               </Col>
 
               <Col xl={5} lg={5} md={6} sm={12} >
-                <Form.Control type="date" ref={endDate} className="w-100 mt-2" />
+                <Form.Control size="sm"  type="date" ref={endDate} className="w-100 mt-2" />
               </Col>
 
               <Col xl={2} lg={2} md={6} sm={12} >
-                <Button variant="outline-primary" onClick={handelDate} className="w-100 mt-2">Find Date</Button>
+                <Button  size="sm" variant="outline-primary" onClick={handelDate} className="w-100 mt-2">Find Date</Button>
               </Col>
             </Row>
             <div className='filter__group__stats row ' style={{ display: 'flex', gap: '20px', marginBottom: '25px' }}>

@@ -120,6 +120,10 @@ const Centers = () => {
   const countryRef = useRef(null);
   const areaRef = useRef(null);
   const handelSelectCountry = async (event) => {
+    cityRef.current.value = 'Select city';
+    areaRef.current.value = 'Select Area';
+    medicalCenterstatusRef.current.value = 'Select Status';
+
     const selectedCountryId = event.target.value;
     if (selectedCountryId === 'country') {
       medicalCenterList()
@@ -145,6 +149,9 @@ const Centers = () => {
     }
   }
   const handelSelectCity = async () => {
+    areaRef.current.value = 'Select Area';
+    medicalCenterstatusRef.current.value = 'Select Status';
+
     let city = cityRef.current.value
     if (city === 'cities') {
       medicalCenterList()
@@ -169,7 +176,9 @@ const Centers = () => {
       }
     }
   }
-  const handelSelectArea = async () => {
+  const handelSelectArea = async () => { 
+    medicalCenterstatusRef.current.value = 'Select Status'; 
+    medicalCenterTypeRef.current.value = 'Select Product Type';
     let city = areaRef.current.value
     if (city === 'Areas') {
       medicalCenterList()
@@ -196,6 +205,11 @@ const Centers = () => {
   // !Filter by  Medical Center Type
   const medicalCenterTypeRef = useRef(null);
   const handelMedicalCenterType = async () => {
+    medicalCenterstatusRef.current.value = 'Select Status';
+    cityRef.current.value = 'Select city';
+    areaRef.current.value = 'Select Area';
+    countryRef.current.value = 'Select Country';
+
     let MedicalCenterType = medicalCenterTypeRef.current.value
     if (MedicalCenterType === 'All') {
       medicalCenterList()
@@ -213,11 +227,15 @@ const Centers = () => {
 
   // !Filter by  Medical Center status
   const medicalCenterstatusRef = useRef(null);
-  const handelMedicalstatus = async () => {
+  const handelMedicalstatus = async () => { 
+    medicalCenterTypeRef.current.value = 'Select Product Type';
+    cityRef.current.value = 'Select city';
+    areaRef.current.value = 'Select Area';
+    countryRef.current.value = 'Select Country';
     let MedicalCenterType = medicalCenterstatusRef.current.value
     if (MedicalCenterType === 'All') {
       medicalCenterList()
-    } else if (MedicalCenterType === 'Select Product Type') {
+    } else if (MedicalCenterType === 'Select Status') {
       return false
     } else {
       await axios.post(`${process.env.REACT_APP_API_URL}/admin/medicalcenter`, { IDPage: page, MedicalCenterStatus: MedicalCenterType }, apiheader).then((res) => {
@@ -272,8 +290,8 @@ const Centers = () => {
                 <Row className='d-flex  flex-row justify-content-between'>
                   <Col xl={2} lg={2} md={6} sm={12} className='mt-2' >
                     {isLoader ? <>
-                      <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry} ref={countryRef}>
-                        <Form.Select aria-label="Default select example" >
+                      <Form.Group controlId="formBasicEmail" >
+                        <Form.Select aria-label="Default select example" size="sm"onChange={handelSelectCountry} ref={countryRef}>
                           <option selected disabled hidden value={'Select Country'}>{translate[isLang]?.filter?.Country}  </option>
                           <option value={'country'} >{translate[isLang]?.filter?.allCountry}</option>
                           {
@@ -289,7 +307,7 @@ const Centers = () => {
                   <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"   >
-                        <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={cityRef}>
+                        <Form.Select aria-label="Default select example" size="sm"onChange={handelSelectCity} ref={cityRef}>
                           <option selected disabled hidden value={'Select city'}> {translate[isLang]?.filter?.city}  </option>
                           <option value={'cities'} >{translate[isLang]?.filter?.allCity}</option>
                           {
@@ -305,7 +323,7 @@ const Centers = () => {
                   <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"   >
-                        <Form.Select aria-label="Default select example" onClick={handelSelectArea} ref={areaRef}>
+                        <Form.Select aria-label="Default select example" size="sm"onChange={handelSelectArea} ref={areaRef}>
                           <option selected disabled hidden value={'Select Area'}>  {translate[isLang]?.filter?.area}  </option>
                           <option value={'Areas'} > {translate[isLang]?.filter?.allarea} </option>
                           {
@@ -322,7 +340,7 @@ const Centers = () => {
                   <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"   >
-                        <Form.Select aria-label="Default select example" ref={medicalCenterTypeRef} onClick={handelMedicalCenterType} >
+                        <Form.Select aria-label="Default select example" ref={medicalCenterTypeRef} size="sm"onChange={handelMedicalCenterType} >
                           <option selected disabled hidden value={'Select Product Type'}> {translate[isLang]?.filter?.Product} </option>
                           {
                             translate[isLang]?.Filtertype?.map((item, index) => (
@@ -338,8 +356,8 @@ const Centers = () => {
                   <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"   >
-                        <Form.Select aria-label="Default select example" ref={medicalCenterstatusRef} onClick={handelMedicalstatus} >
-                          <option selected disabled hidden value={'Select Product Type'}> {translate[isLang]?.filter?.status} </option>
+                        <Form.Select aria-label="Default select example" ref={medicalCenterstatusRef} size="sm"onChange={handelMedicalstatus} >
+                          <option selected disabled hidden value={'Select Status'}> {translate[isLang]?.filter?.status} </option>
                           {
                             translate[isLang]?.FilterStatus?.map((item, index) => (
                               <option key={index} value={item.value}>{item?.text}</option>

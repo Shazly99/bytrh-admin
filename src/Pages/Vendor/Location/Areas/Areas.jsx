@@ -109,6 +109,8 @@ const Areas = () => {
   const countryRef = useRef(null);
   const handelSelectCountry = async (event) => {
     const selectedCountryId = event.target.value;
+    cityRef.current.value = 'Select Area';
+
     if (selectedCountryId === 'country') {
       AreascList()
     } else if (selectedCountryId === 'Select Country') {
@@ -136,7 +138,7 @@ const Areas = () => {
     let city = cityRef.current.value
     if (city === 'cities') {
       AreascList()
-    } else if (city === 'Select city') {
+    } else if (city === 'Select Area') {
       return true
     } else {
       getAreas(city)
@@ -224,8 +226,8 @@ const Areas = () => {
             <Row className='d-flex flex-row justify-content-between'>
               <Col xl={6} lg={6} md={6} sm={12} className='mt-2' >
                 {isLoader ? <>
-                  <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry} ref={countryRef}>
-                    <Form.Select aria-label="Default select example" >
+                  <Form.Group controlId="formBasicEmail"  >
+                    <Form.Select aria-label="Default select example" size="sm" onChange={handelSelectCountry} ref={countryRef}>
                       <option selected disabled hidden value={'Select Country'}>{translate[isLang]?.filter?.Country}  </option>
                       <option value={'country'} >{translate[isLang]?.filter?.allCountry}</option>
 
@@ -246,8 +248,8 @@ const Areas = () => {
               <Col xl={6} lg={6} md={6} sm={12} className='mt-2'>
                 {isLoader ? <>
                   <Form.Group controlId="formBasicEmail"   >
-                    <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={cityRef}>
-                      <option selected disabled hidden value={'Select city'}> {translate[isLang]?.filter?.city}  </option>
+                    <Form.Select aria-label="Default select example"  size="sm" onChange={handelSelectCity} ref={cityRef}>
+                      <option selected disabled hidden value={'Select Area'}> {translate[isLang]?.filter?.city}  </option>
 
                       <option value={'cities'} >{translate[isLang]?.filter?.allCity}</option>
 

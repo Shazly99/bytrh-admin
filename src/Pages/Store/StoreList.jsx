@@ -159,6 +159,13 @@ const StoreList = () => {
     const countryRef = useRef(null);
     const areaRef = useRef(null);
     const handelSelectCountry = async (event) => {
+        // Reset filters
+        cityRef.current.value = 'Select city';
+        areaRef.current.value = 'Select Area';
+        statusRef.current.value = 'Select Status';
+        animalProductTypeRef.current.value = 'Product Type';
+        animalSubCategoryRef.current.value = 'Select SubCategory';
+        
         const selectedCountryId = event.target.value;
         if (selectedCountryId === 'country') {
             store()
@@ -184,6 +191,13 @@ const StoreList = () => {
         }
     }
     const handelSelectCity = async () => {
+        // Reset filters
+        // cityRef.current.value = 'Select city';
+        areaRef.current.value = 'Select Area'; 
+        statusRef.current.value = 'Select Status';
+        animalProductTypeRef.current.value = 'Product Type';
+        animalSubCategoryRef.current.value = 'Select SubCategory';
+
         let city = cityRef.current.value
         if (city === 'cities') {
             store()
@@ -209,6 +223,11 @@ const StoreList = () => {
         }
     }
     const handelSelectArea = async () => {
+        // Reset filters 
+        statusRef.current.value = 'Select Status';
+        animalProductTypeRef.current.value = 'Product Type';
+        animalSubCategoryRef.current.value = 'Select SubCategory';
+
         let city = areaRef.current.value
         if (city === 'Areas') {
             store()
@@ -234,12 +253,18 @@ const StoreList = () => {
     }
 
     // !Filter by  AnimalProductType
-    const animalProductType = useRef(null);
+    const animalProductTypeRef = useRef(null);
     const handelAdvertisement = async () => {
-        let AnimalProductType = animalProductType.current.value
+        cityRef.current.value = 'Select city';
+        areaRef.current.value = 'Select Area';
+        countryRef.current.value = 'Select Country';
+        statusRef.current.value = 'Select Status';
+        animalSubCategoryRef.current.value = 'Select SubCategory';
+        
+        let AnimalProductType = animalProductTypeRef.current.value
         if (AnimalProductType === 'All') {
             store()
-        } else if (AnimalProductType === 'Select Product Type') {
+        } else if (AnimalProductType === ' Product Type') {
             return false
         } else {
             await axios.post(`${process.env.REACT_APP_API_URL}/admin/animalproducts`, { IDPage: page, AnimalProductType: AnimalProductType }, apiheader).then((res) => {
@@ -262,7 +287,16 @@ const StoreList = () => {
         })
     }
     const handelanimalSubCategory = async () => {
+        // Reset filters
+        cityRef.current.value = 'Select city';
+        areaRef.current.value = 'Select Area';
+        countryRef.current.value = 'Select Country';
+        statusRef.current.value = 'Select Status';
+        animalProductTypeRef.current.value = 'Product Type';
+ 
+
         let AnimalProductType = animalSubCategoryRef.current.value
+
         if (AnimalProductType === 'All') {
             store()
         } else if (AnimalProductType === 'Select SubCategory') {
@@ -280,6 +314,13 @@ const StoreList = () => {
     // !Filter by    Animal Product Status
     const statusRef = useRef(null);
     const handelanimalProductStatus = async () => {
+        cityRef.current.value = 'Select city';
+        areaRef.current.value = 'Select Area';
+        countryRef.current.value = 'Select Country';
+        animalProductTypeRef.current.value = 'Product Type';
+        animalSubCategoryRef.current.value = 'Select SubCategory';
+
+
         let animalProductStatus = statusRef.current.value
         if (animalProductStatus === 'All') {
             store()
@@ -303,8 +344,8 @@ const StoreList = () => {
             animalSubCategoryGet()
         }, 100);
         return () => clearTimeout(timeoutId);
-    
-    }, [page, isLoader,isLang]);
+
+    }, [page, isLoader, isLang]);
     useEffect(() => { }, [page, PagesNumber]);
     const SkeletonSearch = (w, h) => {
         return (
@@ -350,8 +391,8 @@ const StoreList = () => {
                                 <Row className='d-flex flex-row justify-content-between'>
                                     <Col xl={2} lg={2} md={6} sm={12} className='mt-2' >
                                         {isLoader ? <>
-                                            <Form.Group controlId="formBasicEmail" onClick={handelSelectCountry} ref={countryRef}>
-                                                <Form.Select aria-label="Default select example" >
+                                            <Form.Group controlId="formBasicEmail" >
+                                                <Form.Select aria-label="Default select example" size="sm" onChange={handelSelectCountry} ref={countryRef}>
                                                     <option selected disabled hidden value={'Select Country'}>{translate[isLang]?.filter?.Country}  </option>
                                                     <option value={'country'} >{translate[isLang]?.filter?.allCountry}</option>
 
@@ -368,7 +409,7 @@ const StoreList = () => {
                                     <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
                                         {isLoader ? <>
                                             <Form.Group controlId="formBasicEmail"   >
-                                                <Form.Select aria-label="Default select example" onClick={handelSelectCity} ref={cityRef}>
+                                                <Form.Select aria-label="Default select example" size="sm" onChange={handelSelectCity} ref={cityRef}>
                                                     <option selected disabled hidden value={'Select city'}> {translate[isLang]?.filter?.city}  </option>
 
                                                     <option value={'cities'} >{translate[isLang]?.filter?.allCity}</option>
@@ -387,7 +428,7 @@ const StoreList = () => {
                                     <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
                                         {isLoader ? <>
                                             <Form.Group controlId="formBasicEmail"   >
-                                                <Form.Select aria-label="Default select example" onClick={handelSelectArea} ref={areaRef}>
+                                                <Form.Select aria-label="Default select example" size="sm" onChange={handelSelectArea} ref={areaRef}>
                                                     <option selected disabled hidden value={'Select Area'}>  {translate[isLang]?.filter?.area}  </option>
 
                                                     <option value={'Areas'} > {translate[isLang]?.filter?.allarea} </option>
@@ -402,14 +443,27 @@ const StoreList = () => {
                                             </Form.Group>
                                         </> : SkeletonFilter()}
                                     </Col>
-
+                                    <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
+                                        {isLoader ? <>
+                                            <Form.Group controlId="formBasicEmail"  >
+                                                <Form.Select aria-label="Default select example" ref={animalSubCategoryRef} size="sm" onChange={handelanimalSubCategory} >
+                                                    <option selected disabled hidden value={'Select SubCategory'}> {translate[isLang]?.filter?.SubCategory}</option>
+                                                    <option value={'All'}  >{translate[isLang]?.filter?.allSubCategory}  </option>
+                                                    {
+                                                        animalSubCategory?.map((item, index) => (
+                                                            <option key={index} value={item.IDAnimalSubCategory}  >{item?.AnimalSubCategoryName}</option>
+                                                        ))
+                                                    }
+                                                </Form.Select>
+                                            </Form.Group>
+                                        </> : SkeletonFilter()}
+                                    </Col>
                                     <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
 
                                         {isLoader ? <>
                                             <Form.Group controlId="formBasicEmail"  >
-                                                {/* <Form.Label  >Product Type </Form.Label> */}
-                                                <Form.Select aria-label="Default select example" ref={animalProductType} onClick={handelAdvertisement} >
-                                                    <option selected disabled hidden value={'Select Product Type'}> {translate[isLang]?.filter?.Product} </option>
+                                                <Form.Select aria-label="Default select example" ref={animalProductTypeRef} size="sm" onChange={handelAdvertisement} >
+                                                    <option selected disabled hidden value={'Product Type'}> {translate[isLang]?.filter?.Product} </option>
 
                                                     <option value={'All'}  > {translate[isLang]?.filter?.Products} </option>
                                                     {
@@ -427,7 +481,7 @@ const StoreList = () => {
                                         {isLoader ? <>
                                             <Form.Group controlId="formBasicEmail"  >
                                                 {/* <Form.Label  >  Product Status </Form.Label> */}
-                                                <Form.Select aria-label="Default select example" ref={statusRef} onClick={handelanimalProductStatus} >
+                                                <Form.Select aria-label="Default select example" ref={statusRef} size="sm" onChange={handelanimalProductStatus} >
                                                     <option selected disabled hidden value={'Select Status'}> {translate[isLang]?.filter?.status}</option>
 
                                                     <option value={'All'}  > {translate[isLang]?.filter?.allStatus} </option>
@@ -441,29 +495,13 @@ const StoreList = () => {
                                         </> : SkeletonFilter()}
                                     </Col>
 
-                                    <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
-                                        {isLoader ? <>
-                                            <Form.Group controlId="formBasicEmail"  >
 
-                                                {/* <Form.Label  >  SubCategory </Form.Label> */}
-                                                <Form.Select aria-label="Default select example" ref={animalSubCategoryRef} onClick={handelanimalSubCategory} >
-                                                    <option selected disabled hidden value={'Select SubCategory'}> {translate[isLang]?.filter?.SubCategory}</option>
-                                                    <option value={'All'}  >{translate[isLang]?.filter?.allSubCategory}  </option>
-                                                    {
-                                                        animalSubCategory?.map((item, index) => (
-                                                            <option key={index} value={item.IDAnimalSubCategory}  >{item?.AnimalSubCategoryName}</option>
-                                                        ))
-                                                    }
-                                                </Form.Select>
-                                            </Form.Group>
-                                        </> : SkeletonFilter()}
-                                    </Col>
 
                                 </Row>
                             </div>
                         </div>
                     </div>
-                    <ExcelSheet animal={animal}/>
+                    <ExcelSheet animal={animal} />
                     {isLoader ? <>
                         <>
                             {
