@@ -15,12 +15,14 @@ const EditAds = () => {
   let navigate = useNavigate();
 
   // let { countries, cities, getCities } = useContext(VendersContext);
-  let { countries, cities, getCities } = useFetch()
+  let { countries, cities,areas, getCities,getAreas } = useFetch()
 
   //TODO:: start date end date use ref   
   const startDateRef = useRef(null);
   const endDateRef = useRef(null);
   const selectCity = useRef();
+  const countryRef = useRef();
+  
   const doctorRef = useRef(null);
   const AdsService = useRef(null);
   const AdsLocation = useRef(null);
@@ -31,6 +33,7 @@ const EditAds = () => {
     blogDoc: null,
     adoption: null
   });
+  const [displayLink, setdisplayLink] = useState(false);
 
   const handelSelectService = async (event) => {
     const service = event.target.value;
@@ -41,6 +44,8 @@ const EditAds = () => {
         blogDoc: null,
         adoption: null
       });
+      setdisplayLink(false)
+
     } else if (service === 'URGENT_CONSULT' || service === 'CONSULT') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/ajax`, {}, apiheader);
       setData({
@@ -49,6 +54,8 @@ const EditAds = () => {
         blogDoc: null,
         adoption: null
       });
+      setdisplayLink(true)
+
     } else if (service === 'CLIENT_BLOG') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs/ajax`, {}, apiheader);
       setData({
@@ -57,6 +64,8 @@ const EditAds = () => {
         blogDoc: null,
         adoption: null
       });
+      setdisplayLink(true)
+
     } else if (service === 'DOCTOR_BLOG') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs/ajax`, {}, apiheader);
       setData({
@@ -65,6 +74,8 @@ const EditAds = () => {
         blogDoc: data.Response,
         adoption: null
       });
+      setdisplayLink(true)
+
     } else if (service === 'ADOPTION') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/adoptions/ajax`, {}, apiheader);
       setData({
@@ -73,6 +84,8 @@ const EditAds = () => {
         blogDoc: null,
         adoption: data.Response
       });
+      setdisplayLink(true)
+
     }
   }
   const [editPage, setAdsDetail] = useState(null)
@@ -85,12 +98,16 @@ const EditAds = () => {
   };
   // TODO:: end image
   const handelSelectCountry = (event) => {
-    const selectedCountryId = event.target.value;
+    const selectedCountryId = countryRef.current.value;
     getCities(selectedCountryId)
   }
   const adsDetail = async () => {
     let data = await GetData(`${process.env.REACT_APP_API_URL}/admin/advertisements/edit/page/${id}`, apiheader)
+    console.log(data.Response);
     setAdsDetail(data.Response);
+    getCities(data.Response.IDCountry)
+    getAreas(data.Response.IDCity)
+
   }
   const submit = e => {
     e.preventDefault()
@@ -129,6 +146,7 @@ const EditAds = () => {
 
   useEffect(() => {
     adsDetail()
+    handelSelectCountry()
     window.scrollTo(0, 0);
   }, [id])
 
@@ -146,7 +164,7 @@ const EditAds = () => {
       <Container fluid>
         <div className="app__addprodects">
           {isLang === 'ar' ?
-            <Component.SubNav sub__nav={[{ name: "تعديـل الإعـلان", path: `/ads/edit/${id}` } , { name: "قائمـة الإعلانــات", path: '/ads' }]} />
+            <Component.SubNav sub__nav={[{ name: "تعديـل الإعـلان", path: `/ads/edit/${id}` }, { name: "قائمـة الإعلانــات", path: '/ads' }]} />
             :
             <Component.SubNav sub__nav={[{ name: "Ads", path: '/ads' }, { name: "Edit Ads ", path: `/ads/edit/${id}` }]} />
           }
@@ -175,14 +193,14 @@ const EditAds = () => {
 
                           {selectedImage ? (
                             <img
-                            loading="lazy"
+                              loading="lazy"
                               src={URL.createObjectURL(selectedImage)}
                               alt={selectedImage.name}
                               className='rounded-3 w-100'
                             />
                           ) :
                             <img
-                            loading="lazy"
+                              loading="lazy"
                               src={editPage?.AdvertisementImage}
                               className='rounded-3 w-100'
                             />
@@ -197,7 +215,7 @@ const EditAds = () => {
 
                       <Form.Group controlId="formBasicEmail" className='mt-3'>
                         <Form.Label>{translateADS[isLang]?.labelCountryInput}</Form.Label>
-                        <Form.Select aria-label="Default select example" onClick={handelSelectCountry}>
+                        <Form.Select aria-label="Default select example" onClick={handelSelectCountry} ref={countryRef}>
                           {
                             countries?.map((item, index) => (
                               <option key={index} value={item?.IDCountry} selected={editPage?.IDCountry === item?.IDCountry && item?.CountryName}  >{item?.CountryName}  </option>
@@ -218,8 +236,8 @@ const EditAds = () => {
                         <Form.Label>{translateADS[isLang]?.labelAdsServiceInput}</Form.Label>
                         <Form.Select aria-label="Default select example" ref={AdsService} onClick={handelSelectService}>
                           {
-                            ['NONE', 'URGENT_CONSULT', 'CONSULT', 'CLIENT_BLOG', 'DOCTOR_BLOG', 'ADOPTION']?.map((item, index) => (
-                              <option key={index} value={item} selected={editPage?.AdvertisementService === item && item}  >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase()}</option>
+                            translateADS[isLang]?.adsService?.map((item, index) => (
+                              <option key={index} value={item.value} selected={editPage?.AdvertisementService === item && item}  >{item.text}</option>
                             ))
                           }
                         </Form.Select>
@@ -229,8 +247,8 @@ const EditAds = () => {
                         <Form.Label>{translateADS[isLang]?.labelAdsLocationInput}</Form.Label>
                         <Form.Select aria-label="Default select example" ref={AdsLocation} >
                           {
-                            ['HOME', 'PAGES', 'INNER_PAGES']?.map((item, index) => (
-                              <option key={index} value={item} selected={editPage?.AdvertisementLocation === item && item} >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase()}</option>
+                           translateADS[isLang]?.adsLocation?.map((item, index) => (
+                              <option key={index}  value={item.value}  selected={editPage?.AdvertisementLocation === item && item} >{item.text}</option>
                             ))
                           }
                         </Form.Select>

@@ -269,7 +269,7 @@ const AdsList = () => {
                     <Col xl={2} lg={2} md={6} sm={12} className='mt-2' >
                       {isLoader ? <>
                         <Form.Group controlId="formBasicEmail" >
-                          <Form.Select aria-label="Default select example"size="sm" onChange={handelSelectCountry} ref={countryRef} >
+                          <Form.Select aria-label="Default select example" size="sm" onChange={handelSelectCountry} ref={countryRef} >
                             <option selected disabled hidden value={'Select Country'}>{translateADS[isLang]?.filter?.Country}  </option>
                             <option value={'country'} >{translateADS[isLang]?.filter?.allCountry}</option>
                             {
@@ -319,8 +319,8 @@ const AdsList = () => {
                         <Form.Select aria-label="Default select example" ref={adsLocation} size="sm" onChange={handelAdvertisementLocation} >
                           <option>{translateADS[isLang]?.optionAdvertisementLocation}</option>
                           {
-                            ['HOME', 'PAGES', 'INNER_PAGES']?.map((item, index) => (
-                              <option key={index} value={item}  >{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase().replace('_', " ")}</option>
+                            translateADS[isLang]?.adsLocation?.map((item, index) => (
+                              <option key={index} value={item.value}  >{item.text}</option>
                             ))
                           }
                         </Form.Select>
@@ -331,8 +331,8 @@ const AdsList = () => {
                         <Form.Select aria-label="Default select example" ref={adsService} size="sm" onChange={handelAdvertisementService} >
                           <option>{translateADS[isLang]?.optionAdvertisementService}</option>
                           {
-                            ['NONE', 'URGENT_CONSULT', 'CONSULT', 'DOCTOR_BLOG', 'CLIENT_BLOG', 'ADOPTION']?.map((item, index) => (
-                              <option key={index} value={item}>{item.charAt(0).toUpperCase() + item.slice(1).toLowerCase().replace('_', " ")}</option>
+                            translateADS[isLang]?.adsService?.map((item, index) => (
+                              <option key={index} value={item.value}>{item.text}</option>
                             ))
                           }
                           {/* <option value="0">InActive</option> */}
@@ -389,22 +389,25 @@ const AdsList = () => {
                             </td>
                             <td >
                               <div>
-                                {item?.AdvertisementService.charAt(0).toUpperCase() + item?.AdvertisementService.slice(1).toLowerCase()}
+                                {item?.AdvertisementService.charAt(0).toUpperCase() + item?.AdvertisementService.slice(1).toLowerCase().replace('_', " ")}
+
+                              </div>
+                            </td>
+                            <td > 
+                              <div className="d-flex flex-column justify-content-center align-content-center" style={{ gap: "0" }}  >
+                                <span className="ClientName">  {" "}    {item?.AdvertisementStartDate.split(" ")[0]}{" "}   </span>
+                                <span className="ClientPhone">  {" "} {item?.AdvertisementStartDate.split(" ")[1]}  </span>
+                              </div>
+                            </td>
+                            <td > 
+                              <div className="d-flex flex-column justify-content-center align-content-center" style={{ gap: "0" }}  >
+                                <span className="ClientName">  {" "}    {item?.AdvertisementEndDate.split(" ")[0]}{" "}   </span>
+                                <span className="ClientPhone">  {" "} {item?.AdvertisementEndDate.split(" ")[1]}  </span>
                               </div>
                             </td>
                             <td >
                               <div>
-                                {item?.AdvertisementStartDate?.split(" ")[0]}
-                              </div>
-                            </td>
-                            <td >
-                              <div>
-                                {item?.AdvertisementEndDate?.split(" ")[0]}
-                              </div>
-                            </td>
-                            <td >
-                              <div>
-                                {item?.AdvertisementLocation.charAt(0).toUpperCase() + item?.AdvertisementLocation.slice(1).toLowerCase()}
+                                {item?.AdvertisementLocation.charAt(0).toUpperCase() + item?.AdvertisementLocation.slice(1).toLowerCase().replace('_', " ")}
                               </div>
                             </td>
 

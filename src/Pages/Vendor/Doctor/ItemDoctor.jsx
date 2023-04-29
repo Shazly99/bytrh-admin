@@ -1,10 +1,10 @@
-import React, { useRef, useState , useContext } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 // import { FiEdit3 } from 'react-icons/fi';
 // import { AiOutlineDelete } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import { DropdownButton, Dropdown, Modal, Form, Button } from 'react-bootstrap';
 // import { useEffect } from 'react';
-import { apiheader, PostData } from '../../../utils/fetchData'; 
+import { apiheader, PostData } from '../../../utils/fetchData';
 import Component from '../../../constants/Component';
 import { VendersContext } from '../../../context/Store';
 
@@ -145,8 +145,9 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                 ${status === 'NOT_VERIFIED' && 'txt_shipped'}
                                 ${status === 'BLOCKED' && 'txt_blocked'}
                                 ${status === 'ACTIVE' && 'txt_delivered'}
-                                ${status === 'OFFLINE' || status === 'INACTIVE'  && 'txt_rejected'}`} >
-                            {isLang === 'en' && status && status[0].toUpperCase()}{isLang === 'en' && status && status.slice(1).toLowerCase()}
+                                ${status === 'OFFLINE' && 'txt_rejected'}
+                                ${status === 'OFFLINE' || status === 'INACTIVE' && 'txt_rejected'}`} >
+                            {isLang === 'en' && status && status[0].toUpperCase()}{isLang === 'en' && status && status.slice(1).toLowerCase().replace('_', ' ')}
                             {isLang === 'ar' && status === 'ACTIVE' ? 'نشــط' : ''}
                             {isLang === 'ar' && status === 'PENDING' ? 'قيـد الإنتظـار' : ''}
                             {isLang === 'ar' && status === 'BLOCKED' ? 'محظــور' : ''}
@@ -157,8 +158,20 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                     </div>
                 </td>
                 <td>
-                    <div>{create}</div>
-                </td>
+                    <div
+                        className="d-flex flex-column justify-content-center align-content-center"
+                        style={{ gap: "0" }}
+                    >
+                        <span className="ClientName">
+                            {" "}
+                            {create.split(" ")[0]}{" "}
+                        </span>
+                        <span className="ClientPhone">
+                            {" "}
+                            {create.split(" ")[1]}
+                        </span>
+                    </div>
+                 </td>
                 <td>
                     <div>
                         <span>
@@ -184,7 +197,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                 <Dropdown.Item eventKey="balance" onClick={handleShowModal}>
                                     {isLang === 'ar' ? 'ضبـط التوازن' : 'Set Balance'}
                                 </Dropdown.Item>
-                                <div className="w-100 bg-dark opacity-25" style={{height: '1px'}}></div>
+                                <div className="w-100 bg-dark opacity-25" style={{ height: '1px' }}></div>
                                 <Modal show={showModal} onHide={handleCloseModal} centered dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
                                     <Modal.Header closeButton>
                                         <Modal.Title>
@@ -204,22 +217,22 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                     </Modal.Footer>
                                 </Modal>
                                 {
-                                    status === "ACTIVE" ? '' : 
-                                    <Dropdown.Item eventKey="ACTIVE">
-                                        {isLang === 'ar' ? 'نشـط' : 'Active'}
-                                    </Dropdown.Item>
+                                    status === "ACTIVE" ? '' :
+                                        <Dropdown.Item eventKey="ACTIVE">
+                                            {isLang === 'ar' ? 'نشـط' : 'Active'}
+                                        </Dropdown.Item>
                                 }
                                 {
-                                    status === "OFFLINE" ? '' : 
-                                    <Dropdown.Item eventKey="OFFLINE">
-                                        {isLang === 'ar' ? 'مغلـق' : 'Offline'}
-                                    </Dropdown.Item>
+                                    status === "OFFLINE" ? '' :
+                                        <Dropdown.Item eventKey="OFFLINE">
+                                            {isLang === 'ar' ? 'مغلـق' : 'Offline'}
+                                        </Dropdown.Item>
                                 }
                                 {
-                                    status === "BLOCKED" ? '' : 
-                                    <Dropdown.Item eventKey="BLOCKED">
-                                        {isLang === 'ar' ? 'محظـور' : 'Blocked'}
-                                    </Dropdown.Item>
+                                    status === "BLOCKED" ? '' :
+                                        <Dropdown.Item eventKey="BLOCKED">
+                                            {isLang === 'ar' ? 'محظـور' : 'Blocked'}
+                                        </Dropdown.Item>
                                 }
                                 <Dropdown.Item eventKey="DELETED">
                                     {isLang === 'ar' ? 'حـذف' : 'Deleted'}

@@ -115,7 +115,7 @@ function Users() {
   const areaRef = useRef(null);
   const handelSelectCountry = async (event) => {
     cityRef.current.value = 'Select city';
-    areaRef.current.value = 'Select Area';
+    // areaRef.current.value = 'Select Area';
     statusRef.current.value = 'Select Status';
     const selectedCountryId = event.target.value;
     if (selectedCountryId === 'country') {
@@ -142,7 +142,7 @@ function Users() {
     }
   }
   const handelSelectCity = async () => {
-    areaRef.current.value = 'Select Area';
+    // areaRef.current.value = 'Select Area';
     statusRef.current.value = 'Select Status';
     let city = cityRef.current.value
     if (city === 'cities') {
@@ -197,7 +197,7 @@ function Users() {
     const statusRef = useRef(null);
     const handelanimalProductStatus = async () => {
       cityRef.current.value = 'Select city';
-      areaRef.current.value = 'Select Area';
+      // areaRef.current.value = 'Select Area';
       countryRef.current.value = 'Select Country';
       
       let animalProductStatus = statusRef.current.value

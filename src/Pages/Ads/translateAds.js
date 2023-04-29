@@ -1,5 +1,5 @@
 let translateADS = {
-    'en' :
+    'en':
     {
         addBTN: 'Add',
         labelFilterDate: 'Filter by Start Date and End Date',
@@ -10,7 +10,9 @@ let translateADS = {
         labelCountry: 'Country',
         optionCountry: 'choose a country',
         labelCity: 'City',
-        optionCity: 'choose a city',
+        labelArea: 'Area',
+        optionCity: 'Choose a city',
+        optionArea: 'Choose a area',
         labelAdvertisementLocation: 'Location',
         optionAdvertisementLocation: 'choose a location',
         labelAdvertisementService: 'Service',
@@ -33,28 +35,41 @@ let translateADS = {
         labelAdsLocationInput: 'Ads Location',
         labelStartInput: 'Start Date',
         labelEndInput: 'End Date',
-        labelLinkInput: 'ID Link',
+        labelLinkInput: '  Link',
         optionAdvertisementLink: 'choose a link',
         LabelAddPage: 'Add new Ads',
         SaveBTN: 'Save',
         CancelBTN: 'Cancel',
         LabelEditPage: 'Edit the Ads',
-        filter:{
-            Country:'Select Country',
-            allCountry:'Countries',
-            city:'Select Area',
-            allCity:'Areas',            
-            area:'Select City',
-            allarea:'Cities',
-            status:'Select Status',
-            allStatus:'All Status',
-            Product:'Product Type',
-            Products:'Animals Product Type',
-            SubCategory:'Select SubCategory',
-            allSubCategory:'Animals SubCategory'
+        filter: {
+            Country: 'Select Country',
+            allCountry: 'Countries',
+            city: 'Select Area',
+            allCity: 'Areas',
+            area: 'Select City',
+            allarea: 'Cities',
+            status: 'Select Status',
+            allStatus: 'All Status',
+            Product: 'Product Type',
+            Products: 'Animals Product Type',
+            SubCategory: 'Select SubCategory',
+            allSubCategory: 'Animals SubCategory'
         },
+        adsLocation: [
+            { value: 'HOME', text: 'Home' },
+            // { value: 'PAGES', text: 'Pages' },
+            { value: 'INNER_PAGES', text: 'Inner Pages' },
+        ],
+        adsService: [
+            { value: 'NONE', text: 'None' },
+            { value: 'URGENT_CONSULT', text: 'Urgent consult' },
+            { value: 'CONSULT', text: ' Consult  ' },
+            // { value: 'CLIENT_BLOG', text: 'Client blog' },
+            { value: 'DOCTOR_BLOG', text: 'Doctor blog' },
+            { value: 'ADOPTION', text: 'Adoption' },
+        ],
     },
-    'ar' :
+    'ar':
     {
         addBTN: 'إضافـة',
         labelFilterDate: 'البحث بواسطـة تاريـخ البـدء و تاريخ الإنتهاء',
@@ -84,6 +99,8 @@ let translateADS = {
         labelImageInput: 'صـورة الإعـلان',
         labelCountryInput: 'البلـد',
         labelCityInput: 'المدينـة',
+        labelArea: 'المنطقة',
+        optionArea: 'اختــار المنطقة',
         labelAdsServiceInput: 'خدمـة الإعـلان',
         labelAdsLocationInput: 'موقـع الإعـلان',
         labelStartInput: 'تاريـخ البـدء',
@@ -94,21 +111,35 @@ let translateADS = {
         SaveBTN: 'حفـظ',
         CancelBTN: 'رجـوع',
         LabelEditPage: 'تعديــل الإعـلان',
-        
-        filter:{
-            Country:'حدد الدولة',
-            allCountry:'بلدان',
-            city:' حدد منطقة  ',
-            allCity:'المناطق',            
-            area:'حدد مدينه',
-            allarea:'مدن',
-            status:'حدد الحالة',
-            allStatus:'كل الحالة',
-            Product:'نوع المنتج',
-            Products:'    حدد نوع المنتج    ',
-            SubCategory:'حدد الفئة الفرعية',
-            allSubCategory:'فئة الحيوانات'
-        }  ,
+
+        filter: {
+            Country: 'حدد الدولة',
+            allCountry: 'بلدان',
+            city: ' حدد منطقة  ',
+            allCity: 'المناطق',
+            area: 'حدد مدينه',
+            allarea: 'مدن',
+            status: 'حدد الحالة',
+            allStatus: 'كل الحالة',
+            Product: 'نوع المنتج',
+            Products: '    حدد نوع المنتج    ',
+            SubCategory: 'حدد الفئة الفرعية',
+            allSubCategory: 'فئة الحيوانات'
+        },
+
+        adsLocation: [
+            { value: 'HOME', text: 'الصفحة الرئيسية' },
+            // { value: 'PAGES', text: 'الصفحات' },
+            { value: 'INNER_PAGES', text: 'الصفحات الداخلية' },
+        ],
+        adsService: [
+            { value: 'NONE', text: 'لا شيء' },
+            { value: 'URGENT_CONSULT', text: 'استشارة عاجلة' },
+            { value: 'CONSULT', text: ' استشر  ' },
+            // { value: 'CLIENT_BLOG', text: 'مدونة العميل' },
+            { value: 'DOCTOR_BLOG', text: 'مدونة الطبيب' },
+            { value: 'ADOPTION', text: 'تبني' },
+        ],
     }
 }
 
