@@ -59,7 +59,8 @@ const MCProfile = ({ countries }) => {
         setIsLoading(false);
     })
     .catch(err => {
-     })
+      console.log(err);
+    })
   }
 
   useEffect(() => {
@@ -80,28 +81,30 @@ const MCProfile = ({ countries }) => {
   // get cities Bytra
   const [fetchCitiesBytra, setFetchCitiesBytra] = useState([]);
   async function getCitiesBytra(el) {
-    await axios.get(`https://bytrh.com/api/doctor/cities/${el}`)
+    await axios.get(`https://bytrh.com/api/admin/cities/${el}`)
       .then(res => {
         if (res.status === 200 && res.request.readyState === 4) {
           setFetchCitiesBytra(res.data.Response.Countries);
         }
       })
       .catch(err => {
-       })
+        console.log(err);
+      })
   }
 
 
   // get areas Bytra
   const [fetchAreasBytra, setFetchAreasBytra] = useState([]);
   async function getAreasBytra(el) {
-    await axios.get(`https://bytrh.com/api/doctor/areas/${el}`)
+    await axios.get(`https://bytrh.com/api/admin/areas/${el}`)
       .then(res => {
         if (res.status === 200 && res.request.readyState === 4) {
           setFetchAreasBytra(res.data.Response);
         }
       })
       .catch(err => {
-       })
+        console.log(err);
+      })
   }
 
 

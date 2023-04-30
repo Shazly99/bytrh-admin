@@ -24,6 +24,7 @@ function App() {
         }
       })
       .catch(err => {
+        console.log(err);
       })
   }
   useEffect(() => {
