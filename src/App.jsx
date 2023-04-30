@@ -12,32 +12,6 @@ import ChatStore from './context/ChatStore';
 function App() {
   // let { LogOut, isLang, setIsLang } = useContext(VendersContext);
 
-  // get countries Bytra
-  let token = localStorage.getItem('token');
-
-  const [fetchCountriesBytra, setFetchCountriesBytra] = useState([]);
-  async function getCountriesBytra() {
-    await axios.get(`https://bytrh.com/api/admin/countries`)
-      .then(res => {
-        if (res.status === 200 && res.request.readyState === 4) {
-          setFetchCountriesBytra(res.data.Response.Countries);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }
-  useEffect(() => {
-    if (token) {
-      let timeOut = setTimeout(() => {
-        getCountriesBytra();
-      }, 200);
-      return (() => {
-        clearTimeout(timeOut);
-      })
-    }
-  }, [token])
-
 
   // function ProtectedRoutes({ children }) {
   //   if (localStorage.getItem('token') ) {
@@ -108,7 +82,7 @@ function App() {
 
         // ToDo user profile
 
-        { path: '/mcprofile', element: <ProtectedRoutes allowedRoles={['2']} >  <Component.MCProfile countries={fetchCountriesBytra} /></ProtectedRoutes> },
+        { path: '/mcprofile', element: <ProtectedRoutes allowedRoles={['2']} >  <Component.MCProfile /></ProtectedRoutes> },
         { path: '/profile', element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.Profile /></ProtectedRoutes> },
         { path: '/contact', element: <ProtectedRoutes allowedRoles={['1']}>  <Component.Contact /></ProtectedRoutes> },
 
