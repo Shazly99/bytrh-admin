@@ -85,8 +85,8 @@ function App() {
         {
           path: '/doctors', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.Doctors /> </ProtectedRoutes> },
-            { path: 'addDoctor', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.AddDoctor fetchCountriesBytra={fetchCountriesBytra} /></ProtectedRoutes> },
-            { path: 'editDoctor/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.EditDoctor fetchCountriesBytra={fetchCountriesBytra} /></ProtectedRoutes> },
+            { path: 'addDoctor', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.AddDoctor  /></ProtectedRoutes> },
+            { path: 'editDoctor/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.EditDoctor  /></ProtectedRoutes> },
             { path: 'doctorfields/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.DoctorFields /></ProtectedRoutes> },
             { path: 'doctorCategory/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.DoctorCategory /></ProtectedRoutes> },
             { path: 'doctorProfile/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.DoctorProfile /></ProtectedRoutes> },

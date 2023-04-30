@@ -121,6 +121,7 @@ const EditAds = () => {
         blogDoc:data.Response,
         adoption: null
       });
+
     }else if (data.Response.AdvertisementService === 'ADOPTION') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/adoptions/ajax`, {}, apiheader);
       setData({
@@ -129,6 +130,7 @@ const EditAds = () => {
         blogDoc: null,
         adoption: data.Response
       }); 
+
     } else if (data.Response.AdvertisementService === 'URGENT_CONSULT' || data.Response.AdvertisementService === 'CONSULT') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/ajax`, {}, apiheader);
       setData({
@@ -136,8 +138,7 @@ const EditAds = () => {
         blog: null,
         blogDoc: null,
         adoption: null
-      });
-      setdisplayLink(true)
+      }); 
 
     } else if (data.Response.AdvertisementService === 'CLIENT_BLOG') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs/ajax`, {}, apiheader);
@@ -146,8 +147,7 @@ const EditAds = () => {
         blog: data.Response,
         blogDoc: null,
         adoption: null
-      });
-      setdisplayLink(true)
+      }); 
 
     }
   }

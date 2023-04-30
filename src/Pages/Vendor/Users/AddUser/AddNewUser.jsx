@@ -173,12 +173,13 @@ const AddNewUser = () => {
                                                         country='sa'
                                                         // onlyCountries={['eg', 'sa']} 
                                                         preferredCountries={['eg', 'sa', "ae"]}
+                                                        searchPlaceholder={isLang === 'ar' ? 'الرقم الكودي الدولـة..' : 'Country number...'}
+
                                                         value={phoneNumber}
                                                         onChange={onChangeHandler}
                                                         enableSearch={true}
                                                         inputClass={'w-100'}
                                                         inputStyle={{ width: '300px' }}
-                                                        searchPlaceholder="Country number..."
                                                         inputExtraProps={{
                                                             autoFocus: true,
 

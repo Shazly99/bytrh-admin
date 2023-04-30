@@ -14,10 +14,12 @@ import useFetch from '../../../utils/useFetch';
  
 
 
-const EditDoctor = ({ fetchCountriesBytra }) => {
+const EditDoctor = ( ) => {
+  let { isLang } = useContext(VendersContext);
   const { id } = useParams();
-  let { cities, getCities } = useFetch()
+  let {countries, areas,cities, getCities ,getAreas} = useFetch()
   const selectCity = useRef();
+  const areaRef = useRef(null);
 
   const apiInfos = `https://bytrh.com/api/admin/doctors/edit/${id}`;
   const [userData, setUserData] = useState({});
@@ -26,7 +28,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [countryCode, setCountryCode] = useState('');
-  const [country, setCountry] = useState('');
+  const [country, setCountry] = useState(''); 
   // const [city, setCity] = useState('');
   // const [picture, setPicture] = useState([]);
   // const [license, setLicense] = useState([]);
@@ -36,6 +38,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
     await axios.get(apiInfos, apiheader)
       .then(res => {
         if (res.status === 200 && res.request.readyState === 4) {
+          console.log(res.data.Response);
           setName(res.data.Response.UserName);
           setEmail(res.data.Response.UserEmail);
           setPhone(res.data.Response.UserPhone);
@@ -44,6 +47,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
           // setCity(res.data.Response.IDCity);
           setUserData(res.data.Response);
           getCities(res.data.Response.IDCountry)
+          getAreas(res.data.Response.IDCity)
         }
       })
       .catch(err => {
@@ -58,7 +62,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
     return(() => {
       clearTimeout(timeOut);
     })
-  }, [])
+  }, [isLang])
 
 
 
@@ -89,6 +93,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
         DoctorPhone: phone,
         DoctorPhoneFlag: countryCode,
         IDCity: selectCity.current.value,
+        IDArea: areaRef.current.value,
       },
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -110,7 +115,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
   }
 
 
-  let { isLang } = useContext(VendersContext);
+  
 
 
 
@@ -148,9 +153,10 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
                     </div>
                     <div className="col-md-6">
                       <div className="group-add">
-                        <label className="fs-5  " htmlFor="DoctorPhone">{isLang === 'ar' ? 'رقـم التليفـون' : 'Phone'}</label>
-                        <div className="input-group">
+                        <label className="fs-5  " htmlFor="DoctorPhone">{isLang === 'ar' ? 'رقـم الهاتــف' : 'Phone'}</label>
+                        <div className="input-group"dir='ltr'>
                           <PhoneInput
+
                             value={countryCode}
                             preferredCountries={['eg', 'sa', 'ae']}
                             enableSearch={true}
@@ -181,7 +187,7 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
                             getCities(e.target.value);
                           }} className='w-100 form-control mx-auto py-2 px-2' required name="IDCountry" id="IDCountry">
                             {/* <option>choose your country</option> */}
-                            {fetchCountriesBytra.map((item, i) => (
+                            {countries?.map((item, i) => (
                               <option key={i} value={item.IDCountry} >{item.CountryName}</option>
                             ))}
                           </select>
@@ -190,13 +196,28 @@ const EditDoctor = ({ fetchCountriesBytra }) => {
                     </div>
                     <div className="col-md-6">
                       <Form.Group controlId="formBasicEmail" className='mt-3' >
-                        <Form.Label> City</Form.Label>
+                        <Form.Label>{isLang === 'ar' ? 'المنطقة' : 'Area'} </Form.Label>
 
                         <Form.Select aria-label="Default select example" ref={selectCity}>
                           {
                             cities?.map((item, index) => (
                               <option key={index} value={item?.IDCity} selected={userData?.IDCity === item?.IDCity && item?.CityName} > {item?.CityName}</option>
                             ))
+                          }
+                        </Form.Select>
+
+                      </Form.Group>
+                    </div>
+                    <div className="col-md-6">
+                      <Form.Group controlId="formBasicEmail" className='mt-3' >
+                         <Form.Label>{isLang === 'ar' ? 'المدينــة' : 'City'} </Form.Label>
+
+                        <Form.Select aria-label="Default select example" ref={areaRef}>
+                          {
+                            areas?.map((item, index) => (
+                              <option key={index} value={item?.IDArea} selected={userData?.IDArea === item?.IDArea && item?.AreaName}>{item?.AreaName}</option>
+
+                             ))
                           }
                         </Form.Select>
 
