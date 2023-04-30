@@ -55,7 +55,7 @@ const AddAds = () => {
     adoption: null
   });
   const [displayLink, setdisplayLink] = useState(false);
-  
+
   const handelSelectService = async (event) => {
     const service = event.target.value;
     if (service === 'NONE') {
@@ -194,6 +194,7 @@ const AddAds = () => {
 
                 <Row>
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
+
                     <Form.Group controlId="formBasicEmail" >
                       <Form.Label>{translateADS[isLang]?.labelCountryInput}</Form.Label>
                       <Form.Select aria-label="Default select example" onChange={handelSelectCountry}>
@@ -208,7 +209,6 @@ const AddAds = () => {
 
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
                       <Form.Label>{translateADS[isLang]?.labelCityInput}</Form.Label>
-
                       <Form.Select aria-label="Default select example" ref={areaRef}>
                         <option >{translateADS[isLang]?.optionCity}</option>
                         {
@@ -216,7 +216,6 @@ const AddAds = () => {
                             <option key={index} value={item?.IDArea}>{item?.AreaName}</option>
                           ))
                         }
-                        {/* <option value="0">InActive</option> */}
                       </Form.Select>
 
                     </Form.Group>
@@ -227,6 +226,7 @@ const AddAds = () => {
                         <FormControl type="date" ref={startDateRef} />
                       </InputGroup>
                     </Form.Group>
+
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
                       <Form.Label>{translateADS[isLang]?.labelAdsServiceInput}</Form.Label>
                       <Form.Select aria-label="Default select example" ref={AdsService} onChange={handelSelectService}>
@@ -239,14 +239,13 @@ const AddAds = () => {
                       </Form.Select>
                     </Form.Group>
 
-
                   </Col>
 
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
                     <Form.Group controlId="formBasicEmail"  >
                       <Form.Label>{translateADS[isLang]?.labelArea}</Form.Label>
 
-                      <Form.Select aria-label="Default select example" onChange={handelSelectArea}  ref={cityRef}>
+                      <Form.Select aria-label="Default select example" onChange={handelSelectArea} ref={cityRef}>
                         <option >{translateADS[isLang]?.optionArea}</option>
                         {
                           cities?.map((item, index) => (

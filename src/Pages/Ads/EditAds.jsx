@@ -12,17 +12,19 @@ import translateADS from './translateAds';
 
 const EditAds = () => {
   let { id } = useParams()
+  let { isLang } = useContext(VendersContext);
   let navigate = useNavigate();
 
   // let { countries, cities, getCities } = useContext(VendersContext);
-  let { countries, cities,areas, getCities,getAreas } = useFetch()
+  let { countries, cities, areas, getCities, getAreas } = useFetch()
 
   //TODO:: start date end date use ref   
   const startDateRef = useRef(null);
   const endDateRef = useRef(null);
   const selectCity = useRef();
   const countryRef = useRef();
-  
+  const areaRef = useRef(null);
+
   const doctorRef = useRef(null);
   const AdsService = useRef(null);
   const AdsLocation = useRef(null);
@@ -34,10 +36,12 @@ const EditAds = () => {
     adoption: null
   });
   const [displayLink, setdisplayLink] = useState(false);
+  const [SelectService, setSelectService] = useState(null);
 
   const handelSelectService = async (event) => {
     const service = event.target.value;
     if (service === 'NONE') {
+      setSelectService(service)
       setData({
         doctor: null,
         blog: null,
@@ -107,20 +111,71 @@ const EditAds = () => {
     setAdsDetail(data.Response);
     getCities(data.Response.IDCountry)
     getAreas(data.Response.IDCity)
+    if (data.Response.AdvertisementService !== "NONE")  setdisplayLink(true)
+    
+    if (data.Response.AdvertisementService === 'DOCTOR_BLOG') {
+      const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs/ajax`, {}, apiheader);
+      setData({
+        doctor: null,
+        blog: null,
+        blogDoc:data.Response,
+        adoption: null
+      });
+    }else if (data.Response.AdvertisementService === 'ADOPTION') {
+      const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/adoptions/ajax`, {}, apiheader);
+      setData({
+        doctor: null,
+        blog: null,
+        blogDoc: null,
+        adoption: data.Response
+      }); 
+    } else if (data.Response.AdvertisementService === 'URGENT_CONSULT' || data.Response.AdvertisementService === 'CONSULT') {
+      const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/ajax`, {}, apiheader);
+      setData({
+        doctor: data.Response,
+        blog: null,
+        blogDoc: null,
+        adoption: null
+      });
+      setdisplayLink(true)
 
+    } else if (data.Response.AdvertisementService === 'CLIENT_BLOG') {
+      const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs/ajax`, {}, apiheader);
+      setData({
+        doctor: null,
+        blog: data.Response,
+        blogDoc: null,
+        adoption: null
+      });
+      setdisplayLink(true)
+
+    }
   }
   const submit = e => {
     e.preventDefault()
-    adsedit({
-      IDCity: selectCity.current.value,
-      AdvertisementStartDate: startDateRef.current.value,
-      AdvertisementEndDate: endDateRef.current.value,
-      AdvertisementService: AdsService.current.value,
-      AdvertisementLocation: AdsLocation.current.value,
-      IDLink: doctorRef.current.value,
-      AdvertisementImage: selectedImage,
-      IDAdvertisement: id
-    })
+    if (SelectService === 'NONE') {
+      adsedit({
+        IDCity: selectCity.current.value,
+        AdvertisementStartDate: startDateRef.current.value,
+        AdvertisementEndDate: endDateRef.current.value,
+        AdvertisementService: AdsService.current.value,
+        AdvertisementLocation: AdsLocation.current.value,
+        // IDLink: doctorRef.current.value,
+        AdvertisementImage: selectedImage,
+        IDAdvertisement: id
+      })
+    } else {
+      adsedit({
+        IDCity: selectCity.current.value,
+        AdvertisementStartDate: startDateRef.current.value,
+        AdvertisementEndDate: endDateRef.current.value,
+        AdvertisementService: AdsService.current.value,
+        AdvertisementLocation: AdsLocation.current.value,
+        IDLink: doctorRef.current.value,
+        AdvertisementImage: selectedImage,
+        IDAdvertisement: id
+      })
+    }
   }
   const adsedit = async (editAds) => {
     let data = await PostData(`${process.env.REACT_APP_API_URL}/admin/advertisements/edit`, editAds, apiheader).then((res) => {
@@ -128,10 +183,10 @@ const EditAds = () => {
       if (res.data.Success === true) {
         toast.success('Ads data has been modified', {
           duration: 4000,
-          position: 'top-center',
-          icon: <Icons.upload color='#40AB45' size={25} />,
+          position: 'bottom-center',
+          /*  icon: <Icons.upload color='#40AB45' size={25} />, */
           iconTheme: {
-            primary: '#0a0',
+            primary: '#40AB45',
             secondary: '#fff',
           },
         });
@@ -146,19 +201,8 @@ const EditAds = () => {
 
   useEffect(() => {
     adsDetail()
-    handelSelectCountry()
     window.scrollTo(0, 0);
   }, [id])
-
-
-
-
-  let { isLang } = useContext(VendersContext);
-
-
-
-
-
   return (
     <>
       <Container fluid>
@@ -212,7 +256,6 @@ const EditAds = () => {
                   <Row>
                     <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
-
                       <Form.Group controlId="formBasicEmail" className='mt-3'>
                         <Form.Label>{translateADS[isLang]?.labelCountryInput}</Form.Label>
                         <Form.Select aria-label="Default select example" onClick={handelSelectCountry} ref={countryRef}>
@@ -224,6 +267,19 @@ const EditAds = () => {
                         </Form.Select>
                       </Form.Group>
 
+                      <Form.Group controlId="formBasicEmail" className='mt-3'>
+                        <Form.Label>{translateADS[isLang]?.labelCityInput}</Form.Label>
+                        <Form.Select aria-label="Default select example" ref={areaRef}>
+                          <option >{translateADS[isLang]?.optionCity}</option>
+                          {
+                            areas?.map((item, index) => (
+                              <option key={index} value={item?.IDArea} selected={editPage?.IDArea === item?.IDArea && item?.AreaName}>{item?.AreaName}</option>
+                            ))
+                          }
+                        </Form.Select>
+
+                      </Form.Group>
+
                       <Form.Group controlId="formBasicStartDate" className='mt-3'>
                         <Form.Label>{translateADS[isLang]?.labelStartInput}</Form.Label>
                         <InputGroup>
@@ -231,32 +287,24 @@ const EditAds = () => {
                         </InputGroup>
                       </Form.Group>
 
-
                       <Form.Group controlId="formBasicEmail" className='mt-3'>
                         <Form.Label>{translateADS[isLang]?.labelAdsServiceInput}</Form.Label>
                         <Form.Select aria-label="Default select example" ref={AdsService} onClick={handelSelectService}>
                           {
                             translateADS[isLang]?.adsService?.map((item, index) => (
-                              <option key={index} value={item.value} selected={editPage?.AdvertisementService === item && item}  >{item.text}</option>
+                              <option key={index} value={item.value} selected={editPage?.AdvertisementService === item.value && item.text}  >{item.text}</option>
                             ))
                           }
                         </Form.Select>
                       </Form.Group>
 
-                      <Form.Group controlId="formBasicEmail" className='mt-3'>
-                        <Form.Label>{translateADS[isLang]?.labelAdsLocationInput}</Form.Label>
-                        <Form.Select aria-label="Default select example" ref={AdsLocation} >
-                          {
-                           translateADS[isLang]?.adsLocation?.map((item, index) => (
-                              <option key={index}  value={item.value}  selected={editPage?.AdvertisementLocation === item && item} >{item.text}</option>
-                            ))
-                          }
-                        </Form.Select>
-                      </Form.Group>
+
+
                     </Col>
+
                     <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
                       <Form.Group controlId="formBasicEmail" className='mt-3' >
-                        <Form.Label>{translateADS[isLang]?.labelCityInput}</Form.Label>
+                        <Form.Label>{translateADS[isLang]?.labelArea}</Form.Label>
                         <Form.Select aria-label="Default select example" ref={selectCity}>
                           {
                             cities?.map((item, index) => (
@@ -266,30 +314,37 @@ const EditAds = () => {
                         </Form.Select>
 
                       </Form.Group>
-
+                      <Form.Group controlId="formBasicEmail" className='mt-3'>
+                        <Form.Label>{translateADS[isLang]?.labelAdsLocationInput}</Form.Label>
+                        <Form.Select aria-label="Default select example" ref={AdsLocation} >
+                          {
+                            translateADS[isLang]?.adsLocation?.map((item, index) => (
+                              <option key={index} value={item.value} selected={editPage?.AdvertisementLocation === item && item} >{item.text}</option>
+                            ))
+                          }
+                        </Form.Select>
+                      </Form.Group>
                       <Form.Group controlId="formBasicStartDate" className='mt-3'>
                         <Form.Label>{translateADS[isLang]?.labelEndInput}</Form.Label>
                         <InputGroup>
                           <FormControl type="date" ref={endDateRef} defaultValue={editPage?.AdvertisementEndDate?.split(" ")[0]} />
                         </InputGroup>
                       </Form.Group>
+                      {
+                        displayLink &&
+                        <Form.Group controlId="formBasicEmail" className='mt-3'>
+                          <Form.Label>{translateADS[isLang]?.labelLinkInput}</Form.Label>
+                          <Form.Select aria-label="Default select example" ref={doctorRef} >
+                            {data.doctor?.map((item, index) => (<option key={index} value={item.IDDoctor} selected={editPage?.IDLink === item.IDDoctor && item.DoctorName} defaultValue={item.DoctorName}>{'  '}{item.DoctorName}</option>))}
+                            {data.blog?.map((item, index) => (<option key={index} value={item.IDClientBlog} selected={editPage?.IDLink === item.IDClientBlog && item.ClientName} defaultValue={item.ClientName}> {item.BlogTitle}{' (  '}{item.ClientName}{' )  '}</option>))}
+                            {data.blogDoc?.map((item, index) => (<option key={index} value={item.IDDoctorBlog} selected={editPage?.IDLink === item.IDDoctorBlog && item.DoctorName} defaultValue={item.ClientName}>{item.BlogTitle}{' (   '} {item.DoctorName}{' ) '} </option>))}
+                            {data.adoption?.map((item, index) => (<option key={index} value={item.IDAdoption} selected={editPage?.IDLink === item.IDAdoption && item.PetName} defaultValue={item.PetName}> {item.PetStrain}{'/   '} {item.PetName}{' (  '} {item.ClientName}{' )  '}</option>))}
+                          </Form.Select>
+                        </Form.Group>
+                      }
 
-                      <Form.Group controlId="formBasicEmail" className='mt-3'>
-                        <Form.Label>{translateADS[isLang]?.labelLinkInput}</Form.Label>
-                        <Form.Select aria-label="Default select example" ref={doctorRef} >
-                          {/* {
-                            doctor?.map((item, index) => (
-                              <option key={index} value={item.IDDoctor} selected={editPage?.IDLink === item.IDDoctor && item.DoctorName} defaultValue={item.DoctorName} >{item.DoctorName}</option>
-                            ))
-                          } */}
-                          {/* <option >{translateADS[isLang]?.optionAdvertisementLink}</option> */}
-                          {data.doctor?.map((item, index) => (<option key={index} value={item.IDDoctor} selected={editPage?.IDLink === item.IDDoctor && item.DoctorName} defaultValue={item.DoctorName}>{'  '}{item.DoctorName}</option>))}
-                          {data.blog?.map((item, index) => (<option key={index} value={item.IDClientBlog} selected={editPage?.IDLink === item.IDClientBlog && item.ClientName} defaultValue={item.ClientName}> {item.BlogTitle}{' (  '}{item.ClientName}{' )  '}</option>))}
-                          {data.blogDoc?.map((item, index) => (<option key={index} value={item.IDDoctorBlog} selected={editPage?.IDLink === item.IDDoctorBlog && item.DoctorName} defaultValue={item.ClientName}>{item.BlogTitle}{' (   '} {item.DoctorName}{' ) '} </option>))}
-                          {data.adoption?.map((item, index) => (<option key={index} value={item.IDAdoption} selected={editPage?.IDLink === item.IDAdoption && item.PetName} defaultValue={item.PetName}> {item.PetStrain}{'/   '} {item.PetName}{' (  '} {item.ClientName}{' )  '}</option>))}
-                        </Form.Select>
-                      </Form.Group>
                     </Col>
+
                     <div className='d-flex justify-content-center align-content-center my-5'>
 
                       <div className='baseBtn1'>
