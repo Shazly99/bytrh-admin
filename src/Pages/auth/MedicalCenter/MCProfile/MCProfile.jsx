@@ -12,7 +12,7 @@ import { Button } from 'react-bootstrap/';
 import { VendersContext } from '../../../../context/Store';
 import CircularProgress from '@mui/material/CircularProgress';
 
-const MCProfile = ({ countries }) => {
+const MCProfile = () => {
 
 
   let id = localStorage.getItem("idmc");
@@ -35,6 +35,21 @@ const MCProfile = ({ countries }) => {
   let [isLoading, setIsLoading] = useState(false);
 
   // let [fetchData, setFetchData] = useState([]);
+
+
+      // get countries Bytra
+      const [fetchCountriesBytra, setFetchCountriesBytra] = useState([]);
+      async function getCountriesBytra() {
+        await axios.get(`https://bytrh.com/api/admin/countries`)
+          .then(res => {
+            if (res.status === 200 && res.request.readyState === 4) {
+              setFetchCountriesBytra(res.data.Response.Countries);
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          })
+      }
 
 
   async function getMedicalData() {
@@ -65,6 +80,7 @@ const MCProfile = ({ countries }) => {
 
   useEffect(() => {
       let timeOut = setTimeout(() => {
+        getCountriesBytra();
         getMedicalData();
       }, 200);
       return(() => {
@@ -300,10 +316,10 @@ const MCProfile = ({ countries }) => {
                               }} 
                               className='w-100 form-control mx-auto py-2 px-2' required name="IDCountry" id="IDCountry"
                             >
-                              {countries && countries.filter((el => el?.IDCountry === countryData)).map((item, i) => (
+                              {fetchCountriesBytra && fetchCountriesBytra.filter((el => el?.IDCountry === countryData)).map((item, i) => (
                                 <option key={i} value={item?.IDCountry} >{item?.CountryName}</option>
                               ))}
-                              {countries && countries.filter((el => el?.IDCountry !== countryData)).map((item, i) => (
+                              {fetchCountriesBytra && fetchCountriesBytra.filter((el => el?.IDCountry !== countryData)).map((item, i) => (
                                 <option key={i} value={item?.IDCountry} >{item?.CountryName}</option>
                               ))}
                             </select>
