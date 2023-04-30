@@ -6,7 +6,7 @@ import { BiMessageRoundedAdd } from 'react-icons/bi';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { apiheader } from '../../../utils/fetchData';
-import $ from 'jquery'
+// import $ from 'jquery'
 import Loader from '../../../Components/Shared/Loader/Loader';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal'; 
