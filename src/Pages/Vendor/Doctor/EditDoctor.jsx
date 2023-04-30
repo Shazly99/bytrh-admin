@@ -51,7 +51,8 @@ const EditDoctor = ( ) => {
         }
       })
       .catch(err => {
-       })
+        console.log(err);
+      })
   }
  
   useEffect(() => {
