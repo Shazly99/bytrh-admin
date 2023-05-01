@@ -202,9 +202,9 @@ td {
 
 .dropdown-item.active,
 .dropdown-item:active {
-  color: $secondColor;
-  text-decoration: none;
-  background-color: #f1f1f1b2 !important;
+  color: $colorLight !important;
+  text-decoration: none !important;
+  background-color: $mainColor !important;
 }
 
 // .dropdown-itemAr{

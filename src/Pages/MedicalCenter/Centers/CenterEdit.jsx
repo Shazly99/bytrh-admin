@@ -400,7 +400,7 @@ const CenterEdit = () => {
                         {message.length > 0 ? <p id="alertSave" className={`alert ${apiCode === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 mb-0 mt-3 w-50 text-center mx-auto`}>{message}</p> : ''}
     
                         <div className='d-flex justify-content-center align-content-center mt-4'>
-                            <div className='baseBtn'>
+                            <div className='baseBtn1'>
                                 <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                     {loadind ? <CircularProgress size={27} style={{color: '#fff'}} /> : 
                                       isLang === 'ar' ? 'حفـظ' : 'Save'
@@ -408,7 +408,7 @@ const CenterEdit = () => {
                                 </Button>
                             </div>
     
-                            <div className='baseBtn'>
+                            <div className='baseBtn w-auto'>
                                 <Link to={'/medicalcenter'}>
                                     <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                       {isLang === 'ar' ? 'رجـوع' : 'Cancel'}

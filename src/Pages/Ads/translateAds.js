@@ -63,10 +63,12 @@ let translateADS = {
         adsService: [
             { value: 'NONE', text: 'None' },
             { value: 'URGENT_CONSULT', text: 'Urgent consult' },
-            { value: 'CONSULT', text: ' Consult  ' },
+            { value: 'CONSULT', text: 'Normal Consult  ' },
             // { value: 'CLIENT_BLOG', text: 'Client blog' },
             { value: 'DOCTOR_BLOG', text: 'Doctor blog' },
             { value: 'ADOPTION', text: 'Adoption' },
+            { value: 'BIDDING', text: 'Bidding' },
+            { value: 'SALE', text: 'Sale' },
         ],
     },
     'ar':
@@ -135,10 +137,12 @@ let translateADS = {
         adsService: [
             { value: 'NONE', text: 'لا شيء' },
             { value: 'URGENT_CONSULT', text: 'استشارة عاجلة' },
-            { value: 'CONSULT', text: ' استشر  ' },
+            { value: 'CONSULT', text: ' استشارة عادية  ' },
             // { value: 'CLIENT_BLOG', text: 'مدونة العميل' },
             { value: 'DOCTOR_BLOG', text: 'مدونة الطبيب' },
             { value: 'ADOPTION', text: 'تبني' },
+            { value: 'BIDDING', text: 'مـزادات' },
+            { value: 'SALE', text: 'متجر' },
         ],
     }
 }

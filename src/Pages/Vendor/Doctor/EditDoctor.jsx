@@ -251,7 +251,7 @@ const EditDoctor = ( ) => {
                   </div> */}
 
                   <div className='d-flex justify-content-center align-content-center gap-3 mt-4'>
-                    <div className='baseBtn'>
+                    <div className='baseBtn1'>
                       <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
                         {loadind ? <CircularProgress size={27} style={{ color: '#fff' }} /> :
                           isLang === 'ar' ? 'حفـظ' : 'Save'
@@ -259,7 +259,7 @@ const EditDoctor = ( ) => {
                       </Button>
                     </div>
 
-                    <div className='baseBtn'>
+                    <div className='baseBtn w-auto'>
                       <Link to={'/doctors'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                           {isLang === 'ar' ? 'رجـوع' : 'Cancel'}

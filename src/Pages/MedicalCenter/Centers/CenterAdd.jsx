@@ -101,7 +101,7 @@ const CenterAdd = () => {
                                     </Button>
                                 </div>
 
-                                <div className='baseBtn'>
+                                <div className='baseBtn w-auto'>
                                     <Link to={'/medicalcenter'}>
                                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                             {docs[isLang]?.CancelBTN}

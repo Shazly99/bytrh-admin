@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from 'react'
 import Component from '../../constants/Component'
-import { Container, Row, Col, Button, InputGroup, FormControl } from 'react-bootstrap';
+import { Container, Row, Col, Button, InputGroup, FormControl, Dropdown } from 'react-bootstrap';
 import { VendersContext } from './../../context/Store';
 import { Form } from 'react-bootstrap';
 import { PostData, apiheader } from './../../utils/fetchData';
@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import useFetch from './../../utils/useFetch';
 import { Link } from 'react-router-dom';
 import translateADS from './translateAds';
+import { useEffect } from 'react';
 
 const AddAds = () => {
   let { isLang } = useContext(VendersContext);
@@ -52,64 +53,112 @@ const AddAds = () => {
     doctor: null,
     blog: null,
     blogDoc: null,
-    adoption: null
+    adoption: null,
+    sale: null,
+    bidding: null
   });
   const [displayLink, setdisplayLink] = useState(false);
+  const [displayLink1, setdisplayLink1] = useState(false);
 
   const handelSelectService = async (event) => {
-    const service = event.target.value;
-    if (service === 'NONE') {
-      setData({
-        doctor: null,
-        blog: null,
-        blogDoc: null,
-        adoption: null
-      });
-      setdisplayLink(false)
-    } else if (service === 'URGENT_CONSULT' || service === 'CONSULT') {
-      const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/ajax`, {}, apiheader);
-      setData({
-        doctor: data.Response,
-        blog: null,
-        blogDoc: null,
-        adoption: null
-      });
-      setdisplayLink(true)
-    } else if (service === 'CLIENT_BLOG') {
-      const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs/ajax`, {}, apiheader);
-      setData({
-        doctor: null,
-        blog: data.Response,
-        blogDoc: null,
-        adoption: null
-      });
-      setdisplayLink(true)
-
-    } else if (service === 'DOCTOR_BLOG') {
-      const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs/ajax`, {}, apiheader);
-      setData({
-        doctor: null,
-        blog: null,
-        blogDoc: data.Response,
-        adoption: null
-      });
-      setdisplayLink(true)
-
-    } else if (service === 'ADOPTION') {
-      const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/adoptions/ajax`, {}, apiheader);
-      setData({
-        doctor: null,
-        blog: null,
-        blogDoc: null,
-        adoption: data.Response
-      });
-      setdisplayLink(true)
-
+    if (event && event.target) {
+      const service = event.target.value;
+      // rest of the function code...
+      if (service === 'NONE') {
+        setData({
+          doctor: null,
+          blog: null,
+          blogDoc: null,
+          adoption: null,
+          animalproducts: null
+        });
+        setdisplayLink(false)
+        setdisplayLink1(false)
+  
+      } else if (service === 'URGENT_CONSULT' || service === 'CONSULT') {
+        const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/ajax`, {}, apiheader);
+        setData({
+          doctor: data.Response,
+          blog: null,
+          blogDoc: null,
+          adoption: null,
+          animalproducts: null
+  
+        });
+        setdisplayLink1(true)
+        setdisplayLink(false)
+      } else if (service === 'CLIENT_BLOG') {
+        const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs/ajax`, {}, apiheader);
+        setData({
+          doctor: null,
+          blog: data.Response,
+          blogDoc: null,
+          adoption: null,
+          animalproducts: null
+  
+        });
+        setdisplayLink(true)
+        setdisplayLink1(false)
+  
+      } else if (service === 'DOCTOR_BLOG') {
+        const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs/ajax`, {}, apiheader);
+        setData({
+          doctor: null,
+          blog: null,
+          blogDoc: data.Response,
+          adoption: null
+        });
+        setdisplayLink(true)
+        setdisplayLink1(false)
+  
+      } else if (service === 'ADOPTION') {
+        const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/adoptions/ajax`, {}, apiheader);
+        setData({
+          doctor: null,
+          blog: null,
+          blogDoc: null,
+          adoption: data.Response,
+          animalproducts: null
+  
+        });
+        setdisplayLink(true)
+        setdisplayLink1(false)
+  
+      } else if (service === 'SALE' || service === 'BIDDING') {
+        const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/animalproducts/ajax`, { AnimalProductService: service }, apiheader);
+        setData({
+          doctor: null,
+          blog: null,
+          blogDoc: null,
+          adoption: null,
+          animalproducts: data.Response
+  
+        });
+        setdisplayLink(true)
+        setdisplayLink1(false)
+  
+      }
     }
   }
+  useEffect(() => {
+    handelSelectService()
+    return () => {
+      handelSelectService()
+    }
+  }, [isLang])
+  const [selectedItem, setSelectedItem] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const handleSelect = (eventKey, event) => {
+    const selectedItem = data?.doctor?.find((item) => Number(item.IDDoctor) === Number(eventKey));
+    setSelectedItem(selectedItem.DoctorName);
+    doctorRef.current.value = selectedItem.IDDoctor
+  };
+  const filteredItems = data?.doctor?.filter((item) => item.DoctorName.toLowerCase().includes(searchTerm.toLowerCase()));
+
+
 
   const submit = e => {
-    e.preventDefault()
+    e.preventDefault() 
     addNewAds({
       IDCity: cityRef.current.value,
       IDArea: areaRef.current.value,
@@ -127,7 +176,7 @@ const AddAds = () => {
       if (res.data.Success === true) {
         toast.success('New ads added successfully!', {
           duration: 4000,
-          position: 'top-center',
+          position: 'bottom-center',
           icon: <Icons.Added color='#40AB45' size={25} />,
           iconTheme: {
             primary: '#0a0',
@@ -142,9 +191,6 @@ const AddAds = () => {
       }
     });
   }
-
-
-
 
 
 
@@ -163,7 +209,7 @@ const AddAds = () => {
             <div className="app__addprodects-form">
               <form onSubmit={submit}>
                 <Row>
-                  <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
+                  <Col xl={6} lg={6} md={6} sm={12} className="mt-3">
                     <Form.Group>
                       <Form.Label>{translateADS[isLang]?.labelImageInput}</Form.Label>
                       <FormControl
@@ -176,7 +222,7 @@ const AddAds = () => {
                       />
                     </Form.Group>
                   </Col>
-                  <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en d-flex justify-content-center">
+                  <Col xl={6} lg={6} md={6} sm={12} className="mt-3 d-flex justify-content-center">
                     <Form.Group>
                       <div className="mt-3  " style={{ width: "200px " }}>
                         {selectedImage && (
@@ -193,8 +239,7 @@ const AddAds = () => {
                 </Row>
 
                 <Row>
-                  <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
-
+                  <Col xl={6} lg={6} md={6} sm={12} className="mt-3">
                     <Form.Group controlId="formBasicEmail" >
                       <Form.Label>{translateADS[isLang]?.labelCountryInput}</Form.Label>
                       <Form.Select aria-label="Default select example" onChange={handelSelectCountry}>
@@ -206,42 +251,8 @@ const AddAds = () => {
                         }
                       </Form.Select>
                     </Form.Group>
-
-                    <Form.Group controlId="formBasicEmail" className='mt-3'>
-                      <Form.Label>{translateADS[isLang]?.labelCityInput}</Form.Label>
-                      <Form.Select aria-label="Default select example" ref={areaRef}>
-                        <option >{translateADS[isLang]?.optionCity}</option>
-                        {
-                          areas?.map((item, index) => (
-                            <option key={index} value={item?.IDArea}>{item?.AreaName}</option>
-                          ))
-                        }
-                      </Form.Select>
-
-                    </Form.Group>
-
-                    <Form.Group controlId="formBasicStartDate" className='mt-3'>
-                      <Form.Label>{translateADS[isLang]?.labelStartInput}</Form.Label>
-                      <InputGroup>
-                        <FormControl type="date" ref={startDateRef} />
-                      </InputGroup>
-                    </Form.Group>
-
-                    <Form.Group controlId="formBasicEmail" className='mt-3'>
-                      <Form.Label>{translateADS[isLang]?.labelAdsServiceInput}</Form.Label>
-                      <Form.Select aria-label="Default select example" ref={AdsService} onChange={handelSelectService}>
-                        <option >{translateADS[isLang]?.optionAdvertisementService}</option>
-                        {
-                          translateADS[isLang]?.adsService?.map((item, index) => (
-                            <option key={index} value={item.value}   >{item.text}</option>
-                          ))
-                        }
-                      </Form.Select>
-                    </Form.Group>
-
-                  </Col>
-
-                  <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
+                  </Col>                
+                   <Col xl={6} lg={6} md={6} sm={12} className="mt-3">
                     <Form.Group controlId="formBasicEmail"  >
                       <Form.Label>{translateADS[isLang]?.labelArea}</Form.Label>
 
@@ -256,8 +267,23 @@ const AddAds = () => {
                       </Form.Select>
 
                     </Form.Group>
+                  </Col>
+                  <Col xl={6} lg={6} md={6} sm={12} className="mt-3">
+                    <Form.Group controlId="formBasicEmail" >
+                      <Form.Label>{translateADS[isLang]?.labelCityInput}</Form.Label>
+                      <Form.Select aria-label="Default select example" ref={areaRef}>
+                        <option >{translateADS[isLang]?.optionCity}</option>
+                        {
+                          areas?.map((item, index) => (
+                            <option key={index} value={item?.IDArea}>{item?.AreaName}</option>
+                          ))
+                        }
+                      </Form.Select>
 
-                    <Form.Group controlId="formBasicEmail" className='mt-3'>
+                    </Form.Group>
+                  </Col>               
+                    <Col xl={6} lg={6} md={6} sm={12} className="mt-3">
+                    <Form.Group controlId="formBasicEmail" >
                       <Form.Label>{translateADS[isLang]?.labelAdsLocationInput}</Form.Label>
                       <Form.Select aria-label="Default select example" ref={AdsLocation} >
                         <option >{translateADS[isLang]?.optionAdvertisementLocation}</option>
@@ -268,29 +294,99 @@ const AddAds = () => {
                         }
                       </Form.Select>
                     </Form.Group>
-
-
-                    <Form.Group controlId="formBasicEndDate" className='mt-3'>
+                  </Col>
+                  <Col xl={6} lg={6} md={6} sm={12} className="mt-3">
+                    <Form.Group controlId="formBasicStartDate" >
+                      <Form.Label>{translateADS[isLang]?.labelStartInput}</Form.Label>
+                      <InputGroup>
+                        <FormControl type="date" ref={startDateRef} />
+                      </InputGroup>
+                    </Form.Group>
+                  </Col>                  
+                  <Col xl={6} lg={6} md={6} sm={12} className="mt-3">
+                    <Form.Group controlId="formBasicEndDate" >
                       <Form.Label>{translateADS[isLang]?.labelEndInput}</Form.Label>
                       <InputGroup>
                         <FormControl type="date" ref={endDateRef} />
                       </InputGroup>
                     </Form.Group>
+                  </Col>
+                  <Col xl={6} lg={6} md={6} sm={12} className="mt-3">
+                    <Form.Group controlId="formBasicEmail" >
+                      <Form.Label>{translateADS[isLang]?.labelAdsServiceInput}</Form.Label>
+                      <Form.Select aria-label="Default select example" ref={AdsService} onChange={handelSelectService}>
+                        <option >{translateADS[isLang]?.optionAdvertisementService}</option>
+                        {
+                          translateADS[isLang]?.adsService?.map((item, index) => (
+                            <option key={index} value={item.value}   >{item.text}</option>
+                          ))
+                        }
+                      </Form.Select>
+                    </Form.Group>
+                  </Col>
 
+
+ 
+ 
+
+                  <Col xl={6} lg={6} md={6} sm={12} className="mt-3">
                     {
                       displayLink &&
-                      <Form.Group controlId="formBasicEmail" className='mt-3'>
+                      <Form.Group controlId="formBasicEmail" >
                         <Form.Label>{translateADS[isLang]?.labelLinkInput}</Form.Label>
                         <Form.Select aria-label="Default select example" ref={doctorRef} >
-                          <option >{translateADS[isLang]?.optionAdvertisementLink}</option>
-                          {data.doctor?.map((item, index) => (<option key={index} value={item.IDDoctor}>{'  '}{item.DoctorName}</option>))}
+                          {/* <option >{translateADS[isLang]?.optionAdvertisementLink}</option> */}
+                          {/* {data.doctor?.map((item, index) => (<option key={index} value={item.IDDoctor}>{'  '}{item.DoctorName}</option>))} */}
                           {data.blog?.map((item, index) => (<option key={index} value={item.IDClientBlog}> {item.BlogTitle}{' (  '}{item.ClientName}{' )  '}</option>))}
                           {data.blogDoc?.map((item, index) => (<option key={index} value={item.IDDoctorBlog}>{item.BlogTitle}{' (   '} {item.DoctorName}{' ) '} </option>))}
                           {data.adoption?.map((item, index) => (<option key={index} value={item.IDAdoption}> {item.PetStrain}{'/   '} {item.PetName}{' (  '} {item.ClientName}{' )  '}</option>))}
+                          {data.animalproducts?.map((item, index) => (<option key={index} value={item.IDAnimalProduct}> {item.AnimalSubCategoryName} {' (  '} {item.ClientName}{' )  '}</option>))}
                         </Form.Select>
                       </Form.Group>
                     }
+                
+              
+                    {
+                      displayLink1 &&
+                      <Form.Group controlId="formBasicEmail" >
+                        <Form.Label>{translateADS[isLang]?.labelLinkInput}</Form.Label>
+
+                        <Dropdown onSelect={handleSelect} >
+                          <Dropdown.Toggle
+                            id="my-dropdown"
+                            as={FormControl}
+                            defaultValue={selectedItem}
+                            type="text"
+                            placeholder="Select an item"
+                          />
+
+                          <Dropdown.Menu style={{ width: '100%', maxHeight: '200px', overflowY: 'auto' }}>
+                            <FormControl
+                              id="my-dropdown"
+                              autoFocus
+                              className="filter__dropdown mx-3 my-2   "
+                              placeholder="Type to filter..."
+                              onChange={(e) => setSearchTerm(e.target.value)}
+                              value={searchTerm}
+
+                            />
+                            {filteredItems?.map((item) => (
+                              <Dropdown.Item
+                                ref={doctorRef}
+                                active={selectedItem === item.DoctorName}
+                                key={item.IDDoctor}
+                                eventKey={item.IDDoctor}>
+                                {item.DoctorName}
+                              </Dropdown.Item>
+                            ))}
+                          </Dropdown.Menu>
+                        </Dropdown>
+                      </Form.Group>
+                    }
                   </Col>
+
+
+
 
                   <div className='d-flex justify-content-center align-content-center my-5'>
 
@@ -300,7 +396,7 @@ const AddAds = () => {
                       </Button>
                     </div>
 
-                    <div className='baseBtn'>
+                    <div className='baseBtn w-auto'>
                       <Link to={'/ads'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                           {translateADS[isLang]?.CancelBTN}

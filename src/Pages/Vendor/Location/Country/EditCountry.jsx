@@ -112,7 +112,7 @@ const EditCountry = () => {
                       </Button>
                     </div>
 
-                    <div className='baseBtn'>
+                    <div className='baseBtn w-auto'>
                       <Link to={'/location/country'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                         {translate[isLang].edit.cancel}

@@ -127,7 +127,7 @@ const AddCities = () => {
                       </Button>
                     </div>
 
-                    <div className='baseBtn'>
+                    <div className='baseBtn w-auto'>
                       <Link to={'/location/cities'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                         {translate[isLang].add.cancel}

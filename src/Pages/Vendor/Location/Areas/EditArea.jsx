@@ -134,7 +134,7 @@ const EditArea = () => {
                       </Button>
                     </div>
 
-                    <div className='baseBtn'>
+                    <div className='baseBtn w-auto'>
                       <Link to={'/location/areas'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                         {translate[isLang].edit.cancel}                     

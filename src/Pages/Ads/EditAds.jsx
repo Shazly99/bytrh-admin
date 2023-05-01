@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useRef, useContext } from 'react'
-import { Container, Row, Col, Button, InputGroup, Form, FormControl } from 'react-bootstrap';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Button, Col, Container, Form, FormControl, InputGroup, Row } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Component from '../../constants/Component';
-import Icons from '../../constants/Icons';
 import { VendersContext } from '../../context/Store';
-import { apiheader, GetData, PostData } from '../../utils/fetchData';
+import { GetData, PostData, apiheader } from '../../utils/fetchData';
 import useFetch from './../../utils/useFetch';
 import translateADS from './translateAds';
 
@@ -33,7 +32,9 @@ const EditAds = () => {
     doctor: null,
     blog: null,
     blogDoc: null,
-    adoption: null
+    adoption: null,
+    animalproducts: null
+
   });
   const [displayLink, setdisplayLink] = useState(false);
   const [SelectService, setSelectService] = useState(null);
@@ -46,7 +47,9 @@ const EditAds = () => {
         doctor: null,
         blog: null,
         blogDoc: null,
-        adoption: null
+        adoption: null,
+        animalproducts: null
+
       });
       setdisplayLink(false)
 
@@ -56,7 +59,9 @@ const EditAds = () => {
         doctor: data.Response,
         blog: null,
         blogDoc: null,
-        adoption: null
+        adoption: null,
+        animalproducts: null
+
       });
       setdisplayLink(true)
 
@@ -66,7 +71,9 @@ const EditAds = () => {
         doctor: null,
         blog: data.Response,
         blogDoc: null,
-        adoption: null
+        adoption: null,
+        animalproducts: null
+
       });
       setdisplayLink(true)
 
@@ -76,7 +83,9 @@ const EditAds = () => {
         doctor: null,
         blog: null,
         blogDoc: data.Response,
-        adoption: null
+        adoption: null,
+        animalproducts: null
+
       });
       setdisplayLink(true)
 
@@ -86,10 +95,23 @@ const EditAds = () => {
         doctor: null,
         blog: null,
         blogDoc: null,
-        adoption: data.Response
+        adoption: data.Response,
+        animalproducts: null
+
       });
       setdisplayLink(true)
 
+    } else if (service === 'SALE' || service === 'BIDDING') {
+      const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/animalproducts/ajax`, { AnimalProductService: service }, apiheader);
+      setData({
+        doctor: null,
+        blog: null,
+        blogDoc: null,
+        adoption: null,
+        animalproducts: data.Response
+
+      });
+      setdisplayLink(true)
     }
   }
   const [editPage, setAdsDetail] = useState(null)
@@ -111,25 +133,29 @@ const EditAds = () => {
     setAdsDetail(data.Response);
     getCities(data.Response.IDCountry)
     getAreas(data.Response.IDCity)
-    if (data.Response.AdvertisementService !== "NONE")  setdisplayLink(true)
-    
+    if (data.Response.AdvertisementService !== "NONE") setdisplayLink(true)
+
     if (data.Response.AdvertisementService === 'DOCTOR_BLOG') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs/ajax`, {}, apiheader);
       setData({
         doctor: null,
         blog: null,
-        blogDoc:data.Response,
-        adoption: null
+        blogDoc: data.Response,
+        adoption: null,
+        animalproducts: null
+
       });
 
-    }else if (data.Response.AdvertisementService === 'ADOPTION') {
+    } else if (data.Response.AdvertisementService === 'ADOPTION') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/adoptions/ajax`, {}, apiheader);
       setData({
         doctor: null,
         blog: null,
         blogDoc: null,
-        adoption: data.Response
-      }); 
+        adoption: data.Response,
+        animalproducts: null
+
+      });
 
     } else if (data.Response.AdvertisementService === 'URGENT_CONSULT' || data.Response.AdvertisementService === 'CONSULT') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/ajax`, {}, apiheader);
@@ -137,8 +163,10 @@ const EditAds = () => {
         doctor: data.Response,
         blog: null,
         blogDoc: null,
-        adoption: null
-      }); 
+        adoption: null,
+        animalproducts: null
+
+      });
 
     } else if (data.Response.AdvertisementService === 'CLIENT_BLOG') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs/ajax`, {}, apiheader);
@@ -146,9 +174,22 @@ const EditAds = () => {
         doctor: null,
         blog: data.Response,
         blogDoc: null,
-        adoption: null
-      }); 
+        adoption: null,
+        animalproducts: null
 
+      });
+
+    } else if (data.Response.AdvertisementService === 'SALE' || data.Response.AdvertisementService === 'BIDDING') {
+      const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/animalproducts/ajax`, { AnimalProductService: data.Response.AdvertisementService }, apiheader);
+      setData({
+        doctor: null,
+        blog: null,
+        blogDoc: null,
+        adoption: null,
+        animalproducts: data.Response
+
+      });
+      setdisplayLink(true)
     }
   }
   const submit = e => {
@@ -198,6 +239,7 @@ const EditAds = () => {
       }
     });
   }
+ 
 
   useEffect(() => {
     adsDetail()
@@ -339,6 +381,7 @@ const EditAds = () => {
                             {data.blog?.map((item, index) => (<option key={index} value={item.IDClientBlog} selected={editPage?.IDLink === item.IDClientBlog && item.ClientName} defaultValue={item.ClientName}> {item.BlogTitle}{' (  '}{item.ClientName}{' )  '}</option>))}
                             {data.blogDoc?.map((item, index) => (<option key={index} value={item.IDDoctorBlog} selected={editPage?.IDLink === item.IDDoctorBlog && item.DoctorName} defaultValue={item.ClientName}>{item.BlogTitle}{' (   '} {item.DoctorName}{' ) '} </option>))}
                             {data.adoption?.map((item, index) => (<option key={index} value={item.IDAdoption} selected={editPage?.IDLink === item.IDAdoption && item.PetName} defaultValue={item.PetName}> {item.PetStrain}{'/   '} {item.PetName}{' (  '} {item.ClientName}{' )  '}</option>))}
+                            {data.animalproducts?.map((item, index) => (<option key={index} value={item.IDAnimalProduct} selected={editPage?.IDLink === item.IDAnimalProduct && item.AnimalSubCategoryName} defaultValue={item.AnimalSubCategoryName}> {item.AnimalSubCategoryName} {' (  '} {item.ClientName}{' )  '}</option>))}
                           </Form.Select>
                         </Form.Group>
                       }
@@ -353,7 +396,7 @@ const EditAds = () => {
                         </Button>
                       </div>
 
-                      <div className='baseBtn'>
+                      <div className='baseBtn w-auto'>
                         <Link to={'/ads'}>
                           <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                             {translateADS[isLang]?.CancelBTN}

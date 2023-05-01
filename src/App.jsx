@@ -1,13 +1,9 @@
+import { Toaster } from 'react-hot-toast';
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 import Component from './constants/Component';
-import './style/App.scss';
-import VenderContext from './context/Store';
-// import { VendersContext } from './context/Store';
-import { Toaster } from 'react-hot-toast';
-import axios from 'axios';
-import { Suspense, useEffect, useState } from 'react';
-// import { useContext } from 'react';
 import ChatStore from './context/ChatStore';
+import VenderContext from './context/Store';
+import './style/App.scss';
 
 function App() {
   // let { LogOut, isLang, setIsLang } = useContext(VendersContext);

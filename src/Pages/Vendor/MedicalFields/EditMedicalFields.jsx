@@ -93,7 +93,7 @@ const EditMedicalFields = () => {
                       </Button>
                     </div>
 
-                    <div className='baseBtn'>
+                    <div className='baseBtn w-auto'>
                       <Link to={'/medicalfields'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                         Cancel

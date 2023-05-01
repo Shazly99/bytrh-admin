@@ -116,13 +116,13 @@ const AddAnimalCat = () => {
                                     </Col>
                                     <div className='d-flex justify-content-center align-content-center my-5'>
 
-                                        <div className='baseBtn'>
+                                        <div className='baseBtn1  '>
                                             <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                                 {translateCategories[isLang]?.SaveBTN}
                                             </Button>
                                         </div>
 
-                                        <div className='baseBtn'>
+                                        <div className='baseBtn w-auto'>
                                             <Link to={'/animals/categories'}>
                                                 <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                                     {translateCategories[isLang]?.CancelBTN}

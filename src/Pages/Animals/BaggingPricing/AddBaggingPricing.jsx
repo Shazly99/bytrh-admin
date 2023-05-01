@@ -131,13 +131,13 @@ const AddBaggingPricing = () => {
                   </Col>
                   <div className='d-flex justify-content-center align-content-center my-5'>
 
-                    <div className='baseBtn'>
+                    <div className='baseBtn w-auto'>
                       <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
                         {translateBaggingPrice[isLang]?.SaveBTN}
                       </Button>
                     </div>
 
-                    <div className='baseBtn'>
+                    <div className='baseBtn w-auto'>
                       <Link to={'/animals/baggingprice'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                           {translateBaggingPrice[isLang]?.CancelBTN}

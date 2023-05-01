@@ -242,22 +242,34 @@ const AdsList = () => {
     <>
       <div className="app__Users ">
         <div className="app__Users-table">
-          <Component.ButtonBase title={translateADS[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/ads/add" />
+          {isLoader ? <>
+            <Component.ButtonBase title={translateADS[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/ads/add" />
+          </> : <Skeleton variant='rounded' animation='pulse' height={50} width={150} />
+          }
           <div className="search-container">
             <div className={`${isLang === 'ar' ? ' search__groupAr  w-100' : 'search__group w-100  '}  `}>
               <div className=' app__addOrder-form'>
                 <div className="d-flex flex-column row justify-content-between">
                   <Row className="mb-3">
                     <Col xl={5} lg={5} md={6} sm={12} >
-                      <Form.Control size="sm" type="date" ref={startDate} className="w-100 mt-2" />
+                      {isLoader ? <>
+                        <Form.Control size="sm" type="date" ref={startDate} className="w-100 mt-2" />
+                      </> : <Skeleton variant='rounded' animation='wave' height={26} width={'100%'} />
+                      }
                     </Col>
 
                     <Col xl={5} lg={5} md={6} sm={12} >
-                      <Form.Control size="sm" type="date" ref={endDate} className="w-100 mt-2" />
+                      {isLoader ? <>
+                        <Form.Control size="sm" type="date" ref={endDate} className="w-100 mt-2" />
+                      </> : <Skeleton variant='rounded' animation='wave' height={26} width={'100%'} />
+                      }
                     </Col>
 
                     <Col xl={2} lg={2} md={6} sm={12} >
-                      <Button size="sm" variant="outline-primary" onClick={handelDate} className="w-100 mt-2">Find Date</Button>
+                      {isLoader ? <>
+                        <Button size="sm" variant="outline-primary" onClick={handelDate} className="w-100 mt-2">Find Date</Button>
+                      </> : <Skeleton variant='rounded' animation='wave' height={26} width={'100%'} />
+                      }
                     </Col>
                   </Row>
 
@@ -314,31 +326,35 @@ const AdsList = () => {
                       </> : SkeletonFilter()}
                     </Col>
                     <Col xl={2} lg={2} md={6} sm={12} className='  mt-2'>
-                      <Form.Group controlId="formBasicEmail"  >
+                      {isLoader ? <>
+                        <Form.Group controlId="formBasicEmail"  >
 
-                        <Form.Select aria-label="Default select example" ref={adsLocation} size="sm" onChange={handelAdvertisementLocation} >
-                          <option>{translateADS[isLang]?.optionAdvertisementLocation}</option>
-                          {
-                            translateADS[isLang]?.adsLocation?.map((item, index) => (
-                              <option key={index} value={item.value}  >{item.text}</option>
-                            ))
-                          }
-                        </Form.Select>
-                      </Form.Group>
+                          <Form.Select aria-label="Default select example" ref={adsLocation} size="sm" onChange={handelAdvertisementLocation} >
+                            <option>{translateADS[isLang]?.optionAdvertisementLocation}</option>
+                            {
+                              translateADS[isLang]?.adsLocation?.map((item, index) => (
+                                <option key={index} value={item.value}  >{item.text}</option>
+                              ))
+                            }
+                          </Form.Select>
+                        </Form.Group>
+                      </> : SkeletonFilter()}
                     </Col>
                     <Col xl={2} lg={2} md={6} sm={12} className='  mt-2'>
-                      <Form.Group controlId="formBasicEmail"   >
-                        <Form.Select aria-label="Default select example" ref={adsService} size="sm" onChange={handelAdvertisementService} >
-                          <option>{translateADS[isLang]?.optionAdvertisementService}</option>
-                          {
-                            translateADS[isLang]?.adsService?.map((item, index) => (
-                              <option key={index} value={item.value}>{item.text}</option>
-                            ))
-                          }
-                          {/* <option value="0">InActive</option> */}
-                        </Form.Select>
+                      {isLoader ? <>
+                        <Form.Group controlId="formBasicEmail"   >
+                          <Form.Select aria-label="Default select example" ref={adsService} size="sm" onChange={handelAdvertisementService} >
+                            <option>{translateADS[isLang]?.optionAdvertisementService}</option>
+                            {
+                              translateADS[isLang]?.adsService?.map((item, index) => (
+                                <option key={index} value={item.value}>{item.text}</option>
+                              ))
+                            }
+                            {/* <option value="0">InActive</option> */}
+                          </Form.Select>
 
-                      </Form.Group>
+                        </Form.Group>
+                      </> : SkeletonFilter()}
                     </Col>
 
                   </Row>
@@ -393,13 +409,13 @@ const AdsList = () => {
 
                               </div>
                             </td>
-                            <td > 
+                            <td >
                               <div className="d-flex flex-column justify-content-center align-content-center" style={{ gap: "0" }}  >
                                 <span className="ClientName">  {" "}    {item?.AdvertisementStartDate.split(" ")[0]}{" "}   </span>
                                 <span className="ClientPhone">  {" "} {item?.AdvertisementStartDate.split(" ")[1]}  </span>
                               </div>
                             </td>
-                            <td > 
+                            <td >
                               <div className="d-flex flex-column justify-content-center align-content-center" style={{ gap: "0" }}  >
                                 <span className="ClientName">  {" "}    {item?.AdvertisementEndDate.split(" ")[0]}{" "}   </span>
                                 <span className="ClientPhone">  {" "} {item?.AdvertisementEndDate.split(" ")[1]}  </span>

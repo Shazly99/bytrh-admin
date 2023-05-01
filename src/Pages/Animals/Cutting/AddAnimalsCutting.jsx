@@ -86,7 +86,7 @@ const AddAnimalsCutting = () => {
                                     </Button>
                                 </div>
 
-                                <div className='baseBtn'>
+                                <div className='baseBtn w-auto'>
                                     <Link to={'/animals/cutting'}>
                                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                           {translateCutting[isLang]?.CancelBTN}

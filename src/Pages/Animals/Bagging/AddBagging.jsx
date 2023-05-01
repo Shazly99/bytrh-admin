@@ -88,7 +88,7 @@ const AddBagging = () => {
                       </Button>
                     </div>
 
-                    <div className='baseBtn'>
+                    <div className='baseBtn w-auto'>
                       <Link to={'/animals/bagging'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                           {translateBagging[isLang]?.CancelBTN}
