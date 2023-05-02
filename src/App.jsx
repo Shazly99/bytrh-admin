@@ -56,8 +56,8 @@ function App() {
         {
           path: '/doctors', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.Doctors /> </ProtectedRoutes> },
-            { path: 'addDoctor', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.AddDoctor  /></ProtectedRoutes> },
-            { path: 'editDoctor/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.EditDoctor  /></ProtectedRoutes> },
+            { path: 'addDoctor', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.AddDoctor /></ProtectedRoutes> },
+            { path: 'editDoctor/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.EditDoctor /></ProtectedRoutes> },
             { path: 'doctorfields/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.DoctorFields /></ProtectedRoutes> },
             { path: 'doctorCategory/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.DoctorCategory /></ProtectedRoutes> },
             { path: 'doctorProfile/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.DoctorProfile /></ProtectedRoutes> },
@@ -331,14 +331,14 @@ function App() {
             fontFamily: ' Arial, Helvetica, sans-serif',
             textTransform: 'capitalize',
             zIndex: '9999',
-            /*      background: '#000',
-                 color: '#fff', */
+            background: '#000',
+            color: '#fff',
             borderRadius: '10px',
             boxShadow: '10px 10px 10px rgba(188, 188, 188, 0.16)',
 
 
-            background: '#fff',
-            color: '#000',
+            // background: '#fff',
+            // color: '#000',
           },
         }}
         containerStyle={{
@@ -349,7 +349,7 @@ function App() {
         <VenderContext>
           <div>
             {/* <Suspense fallback={<Component.Loader/>}> */}
-               <RouterProvider router={root} />
+            <RouterProvider router={root} />
             {/* </Suspense> */}
           </div>
         </VenderContext>

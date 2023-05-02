@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Button, Col, Container, Form, FormControl, InputGroup, Row } from 'react-bootstrap';
+import { Button, Col, Container, Form, FormControl, InputGroup, Row, Dropdown } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Component from '../../constants/Component';
@@ -37,7 +37,19 @@ const EditAds = () => {
 
   });
   const [displayLink, setdisplayLink] = useState(false);
+  const [displayLink1, setdisplayLink1] = useState(false);
   const [SelectService, setSelectService] = useState(null);
+  const [selectedItem, setSelectedItem] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const handleSelect = (eventKey) => {
+    setdisplayLink(false)
+    setdisplayLink1(true)
+    const selectedItem = data?.doctor?.find((item) => Number(item.IDDoctor) === Number(eventKey));
+    console.log(selectedItem);
+    setSelectedItem(selectedItem.DoctorName);
+    doctorRef.current.value = selectedItem.IDDoctor
+  };
+  const filteredItems = data?.doctor?.filter((item) => item.DoctorName.toLowerCase().includes(searchTerm.toLowerCase()));
 
   const handelSelectService = async (event) => {
     const service = event.target.value;
@@ -52,6 +64,7 @@ const EditAds = () => {
 
       });
       setdisplayLink(false)
+      setdisplayLink1(false)
 
     } else if (service === 'URGENT_CONSULT' || service === 'CONSULT') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/ajax`, {}, apiheader);
@@ -63,7 +76,8 @@ const EditAds = () => {
         animalproducts: null
 
       });
-      setdisplayLink(true)
+      setdisplayLink(false)
+      setdisplayLink1(true)
 
     } else if (service === 'CLIENT_BLOG') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs/ajax`, {}, apiheader);
@@ -76,6 +90,7 @@ const EditAds = () => {
 
       });
       setdisplayLink(true)
+      setdisplayLink1(false)
 
     } else if (service === 'DOCTOR_BLOG') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs/ajax`, {}, apiheader);
@@ -88,6 +103,7 @@ const EditAds = () => {
 
       });
       setdisplayLink(true)
+      setdisplayLink1(false)
 
     } else if (service === 'ADOPTION') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/adoptions/ajax`, {}, apiheader);
@@ -100,6 +116,7 @@ const EditAds = () => {
 
       });
       setdisplayLink(true)
+      setdisplayLink1(false)
 
     } else if (service === 'SALE' || service === 'BIDDING') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/animalproducts/ajax`, { AnimalProductService: service }, apiheader);
@@ -123,19 +140,40 @@ const EditAds = () => {
     setSelectedImage(event.target.files[0]);
   };
   // TODO:: end image
+  // Select Country
   const handelSelectCountry = (event) => {
-    const selectedCountryId = countryRef.current.value;
+    const selectedCountryId = event.target.value;
     getCities(selectedCountryId)
   }
+
+  // Select Area
+  const handelSelectArea = (event) => {
+    const selectedCountryId = event.target.value;
+    getAreas(selectedCountryId)
+  }
+  const [advertisementService, setAdvertisementService] = useState(null);
   const adsDetail = async () => {
     let data = await GetData(`${process.env.REACT_APP_API_URL}/admin/advertisements/edit/page/${id}`, apiheader)
-    console.log(data.Response);
     setAdsDetail(data.Response);
     getCities(data.Response.IDCountry)
     getAreas(data.Response.IDCity)
-    if (data.Response.AdvertisementService !== "NONE") setdisplayLink(true)
+    setAdvertisementService(data.Response.AdvertisementService);
+    const AdvertisementService = data.Response.AdvertisementService
+    const IDLink = data.Response.IDLink
 
-    if (data.Response.AdvertisementService === 'DOCTOR_BLOG') {
+    if (AdvertisementService === 'NONE') {
+      setSelectService(data.Response.AdvertisementService)
+      setData({
+        doctor: null,
+        blog: null,
+        blogDoc: null,
+        adoption: null,
+        animalproducts: null
+      });
+      setdisplayLink(false)
+      setdisplayLink1(false)
+    }
+    if (AdvertisementService === 'DOCTOR_BLOG') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs/ajax`, {}, apiheader);
       setData({
         doctor: null,
@@ -145,8 +183,9 @@ const EditAds = () => {
         animalproducts: null
 
       });
-
-    } else if (data.Response.AdvertisementService === 'ADOPTION') {
+      setdisplayLink(true)
+      setdisplayLink1(false)
+    } else if (AdvertisementService === 'ADOPTION') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/adoptions/ajax`, {}, apiheader);
       setData({
         doctor: null,
@@ -154,21 +193,26 @@ const EditAds = () => {
         blogDoc: null,
         adoption: data.Response,
         animalproducts: null
-
       });
-
-    } else if (data.Response.AdvertisementService === 'URGENT_CONSULT' || data.Response.AdvertisementService === 'CONSULT') {
+      setdisplayLink(true)
+      setdisplayLink1(false)
+    } else if (AdvertisementService === 'URGENT_CONSULT' || AdvertisementService === 'CONSULT') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/ajax`, {}, apiheader);
+      handleSelect(IDLink);
       setData({
         doctor: data.Response,
         blog: null,
         blogDoc: null,
         adoption: null,
         animalproducts: null
-
       });
-
-    } else if (data.Response.AdvertisementService === 'CLIENT_BLOG') {
+      // add event listener for select event
+      // const myElement = document.getElementById('myElement');
+      // myElement.addEventListener('select', () => {
+      // });
+      setdisplayLink(false)
+      setdisplayLink1(true)
+    } else if (AdvertisementService === 'CLIENT_BLOG') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/blogs/ajax`, {}, apiheader);
       setData({
         doctor: null,
@@ -178,8 +222,9 @@ const EditAds = () => {
         animalproducts: null
 
       });
-
-    } else if (data.Response.AdvertisementService === 'SALE' || data.Response.AdvertisementService === 'BIDDING') {
+      setdisplayLink(true)
+      setdisplayLink1(false)
+    } else if (AdvertisementService === 'SALE' || AdvertisementService === 'BIDDING') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/animalproducts/ajax`, { AnimalProductService: data.Response.AdvertisementService }, apiheader);
       setData({
         doctor: null,
@@ -190,6 +235,7 @@ const EditAds = () => {
 
       });
       setdisplayLink(true)
+      setdisplayLink1(false)
     }
   }
   const submit = e => {
@@ -197,9 +243,10 @@ const EditAds = () => {
     if (SelectService === 'NONE') {
       adsedit({
         IDCity: selectCity.current.value,
+        IDArea: areaRef.current.value,
         AdvertisementStartDate: startDateRef.current.value,
         AdvertisementEndDate: endDateRef.current.value,
-        AdvertisementService: AdsService.current.value,
+        AdvertisementService: 'NONE',
         AdvertisementLocation: AdsLocation.current.value,
         // IDLink: doctorRef.current.value,
         AdvertisementImage: selectedImage,
@@ -208,6 +255,7 @@ const EditAds = () => {
     } else {
       adsedit({
         IDCity: selectCity.current.value,
+        IDArea: areaRef.current.value,
         AdvertisementStartDate: startDateRef.current.value,
         AdvertisementEndDate: endDateRef.current.value,
         AdvertisementService: AdsService.current.value,
@@ -239,7 +287,7 @@ const EditAds = () => {
       }
     });
   }
- 
+
 
   useEffect(() => {
     adsDetail()
@@ -298,7 +346,7 @@ const EditAds = () => {
                   <Row>
                     <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
-                      <Form.Group controlId="formBasicEmail" className='mt-3'>
+                      <Form.Group className='mt-3'>
                         <Form.Label>{translateADS[isLang]?.labelCountryInput}</Form.Label>
                         <Form.Select aria-label="Default select example" onClick={handelSelectCountry} ref={countryRef}>
                           {
@@ -309,7 +357,7 @@ const EditAds = () => {
                         </Form.Select>
                       </Form.Group>
 
-                      <Form.Group controlId="formBasicEmail" className='mt-3'>
+                      <Form.Group className='mt-3'>
                         <Form.Label>{translateADS[isLang]?.labelCityInput}</Form.Label>
                         <Form.Select aria-label="Default select example" ref={areaRef}>
                           <option >{translateADS[isLang]?.optionCity}</option>
@@ -329,7 +377,7 @@ const EditAds = () => {
                         </InputGroup>
                       </Form.Group>
 
-                      <Form.Group controlId="formBasicEmail" className='mt-3'>
+                      <Form.Group className='mt-3'>
                         <Form.Label>{translateADS[isLang]?.labelAdsServiceInput}</Form.Label>
                         <Form.Select aria-label="Default select example" ref={AdsService} onClick={handelSelectService}>
                           {
@@ -345,9 +393,9 @@ const EditAds = () => {
                     </Col>
 
                     <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
-                      <Form.Group controlId="formBasicEmail" className='mt-3' >
+                      <Form.Group className='mt-3' >
                         <Form.Label>{translateADS[isLang]?.labelArea}</Form.Label>
-                        <Form.Select aria-label="Default select example" ref={selectCity}>
+                        <Form.Select aria-label="Default select example" onChange={handelSelectArea} ref={selectCity}>
                           {
                             cities?.map((item, index) => (
                               <option key={index} value={item?.IDCity} selected={editPage?.IDCity === item?.IDCity && item?.CityName} > {item?.CityName}</option>
@@ -356,7 +404,7 @@ const EditAds = () => {
                         </Form.Select>
 
                       </Form.Group>
-                      <Form.Group controlId="formBasicEmail" className='mt-3'>
+                      <Form.Group className='mt-3'>
                         <Form.Label>{translateADS[isLang]?.labelAdsLocationInput}</Form.Label>
                         <Form.Select aria-label="Default select example" ref={AdsLocation} >
                           {
@@ -374,7 +422,7 @@ const EditAds = () => {
                       </Form.Group>
                       {
                         displayLink &&
-                        <Form.Group controlId="formBasicEmail" className='mt-3'>
+                        <Form.Group className='mt-3'>
                           <Form.Label>{translateADS[isLang]?.labelLinkInput}</Form.Label>
                           <Form.Select aria-label="Default select example" ref={doctorRef} >
                             {data.doctor?.map((item, index) => (<option key={index} value={item.IDDoctor} selected={editPage?.IDLink === item.IDDoctor && item.DoctorName} defaultValue={item.DoctorName}>{'  '}{item.DoctorName}</option>))}
@@ -385,7 +433,43 @@ const EditAds = () => {
                           </Form.Select>
                         </Form.Group>
                       }
+                      {
+                        displayLink1 &&
+                        <Form.Group className='mt-3' >
+                          <Form.Label>{translateADS[isLang]?.labelLinkInput}</Form.Label>
 
+                          <Dropdown onSelect={handleSelect} id='myElement' >
+                            <Dropdown.Toggle
+                              id="my-dropdown"
+                              as={FormControl}
+                              defaultValue={selectedItem}
+                              type="text"
+                              placeholder="Select an item"
+                            />
+
+                            <Dropdown.Menu style={{ width: '100%', maxHeight: '200px', overflowY: 'auto' }}>
+                              <FormControl
+                                id="my-dropdown"
+                                autoFocus
+                                className="filter__dropdown mx-3 my-2   "
+                                placeholder="Type to filter..."
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                value={searchTerm}
+
+                              />
+                              {filteredItems?.map((item) => (
+                                <Dropdown.Item
+                                  ref={doctorRef}
+                                  active={selectedItem === item.DoctorName}
+                                  key={item.IDDoctor}
+                                  eventKey={item.IDDoctor}>
+                                  {item.DoctorName}
+                                </Dropdown.Item>
+                              ))}
+                            </Dropdown.Menu>
+                          </Dropdown>
+                        </Form.Group>
+                      }
                     </Col>
 
                     <div className='d-flex justify-content-center align-content-center my-5'>
