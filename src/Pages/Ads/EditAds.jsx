@@ -41,15 +41,7 @@ const EditAds = () => {
   const [SelectService, setSelectService] = useState(null);
   const [selectedItem, setSelectedItem] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-  const handleSelect = (eventKey) => {
-    setdisplayLink(false)
-    setdisplayLink1(true)
-    const selectedItem = data?.doctor?.find((item) => Number(item.IDDoctor) === Number(eventKey));
-    console.log(selectedItem);
-    setSelectedItem(selectedItem.DoctorName);
-    doctorRef.current.value = selectedItem.IDDoctor
-  };
-  const filteredItems = data?.doctor?.filter((item) => item.DoctorName.toLowerCase().includes(searchTerm.toLowerCase()));
+
 
   const handelSelectService = async (event) => {
     const service = event.target.value;
@@ -151,13 +143,13 @@ const EditAds = () => {
     const selectedCountryId = event.target.value;
     getAreas(selectedCountryId)
   }
-  const [advertisementService, setAdvertisementService] = useState(null);
+ 
   const adsDetail = async () => {
     let data = await GetData(`${process.env.REACT_APP_API_URL}/admin/advertisements/edit/page/${id}`, apiheader)
     setAdsDetail(data.Response);
     getCities(data.Response.IDCountry)
     getAreas(data.Response.IDCity)
-    setAdvertisementService(data.Response.AdvertisementService);
+ 
     const AdvertisementService = data.Response.AdvertisementService
     const IDLink = data.Response.IDLink
 
@@ -173,7 +165,7 @@ const EditAds = () => {
       setdisplayLink(false)
       setdisplayLink1(false)
     }
-    if (AdvertisementService === 'DOCTOR_BLOG') {
+   else if (AdvertisementService === 'DOCTOR_BLOG') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs/ajax`, {}, apiheader);
       setData({
         doctor: null,
@@ -238,15 +230,29 @@ const EditAds = () => {
       setdisplayLink1(false)
     }
   }
+  const filteredItems = data?.doctor?.filter((item) => item.DoctorName.toLowerCase().includes(searchTerm.toLowerCase()));
+  const handleSelect = (eventKey) => {
+    setdisplayLink(false)
+    setdisplayLink1(true)
+    if (typeof(eventKey) !== undefined) {
+      console.log(eventKey);
+      const selectedItem = data?.doctor?.find((item) => Number(item.IDDoctor) === Number(eventKey));
+      console.log(selectedItem);
+      if (selectedItem) {
+        setSelectedItem(selectedItem.DoctorName);
+        doctorRef.current.value = selectedItem.IDDoctor;
+      }
+    }
+  };
   const submit = e => {
     e.preventDefault()
-    if (SelectService === 'NONE') {
+   if (AdsService.current.value === 'NONE') {
       adsedit({
         IDCity: selectCity.current.value,
         IDArea: areaRef.current.value,
         AdvertisementStartDate: startDateRef.current.value,
         AdvertisementEndDate: endDateRef.current.value,
-        AdvertisementService: 'NONE',
+        AdvertisementService: SelectService,
         AdvertisementLocation: AdsLocation.current.value,
         // IDLink: doctorRef.current.value,
         AdvertisementImage: selectedImage,
@@ -264,7 +270,8 @@ const EditAds = () => {
         AdvertisementImage: selectedImage,
         IDAdvertisement: id
       })
-    }
+    }  
+     
   }
   const adsedit = async (editAds) => {
     let data = await PostData(`${process.env.REACT_APP_API_URL}/admin/advertisements/edit`, editAds, apiheader).then((res) => {
@@ -293,6 +300,8 @@ const EditAds = () => {
     adsDetail()
     window.scrollTo(0, 0);
   }, [id])
+
+
   return (
     <>
       <Container fluid>
