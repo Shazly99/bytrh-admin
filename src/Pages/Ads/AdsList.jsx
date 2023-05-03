@@ -110,7 +110,14 @@ const AdsList = () => {
   const countryRef = useRef(null);
   const areaRef = useRef(null);
   const handelSelectCountry = async (event) => {
+    // countryRef.current.value = 'Select Country';
+    cityRef.current.value = 'Select city';
+    areaRef.current.value = 'Select Area';
+    adsService.current.value = 'choose a service';
+    adsLocation.current.value = 'choose a location';
+
     const selectedCountryId = event.target.value;
+
     if (selectedCountryId === 'country') {
       advertisements(page)
     } else if (selectedCountryId === 'Select Country') {
@@ -137,6 +144,12 @@ const AdsList = () => {
     }
   }
   const handelSelectCity = async () => {
+    // countryRef.current.value = 'Select Country';
+    // cityRef.current.value = 'Select city';
+    areaRef.current.value = 'Select Area';
+    adsService.current.value = 'choose a service';
+    adsLocation.current.value = 'choose a location';
+
     let city = cityRef.current.value
     if (city === 'cities') {
       advertisements(page)
@@ -163,6 +176,12 @@ const AdsList = () => {
     }
   }
   const handelSelectArea = async () => {
+    // countryRef.current.value = 'Select Country';
+    // cityRef.current.value = 'Select city';
+    // areaRef.current.value = 'Select Area';
+    adsService.current.value = 'choose a service';
+    adsLocation.current.value = 'choose a location';
+
     let city = areaRef.current.value
     if (city === 'Areas') {
       advertisements(page)
@@ -191,6 +210,11 @@ const AdsList = () => {
   // !Filter by Advertisement Service 
   const adsService = useRef(null);
   const handelAdvertisementService = async () => {
+    countryRef.current.value = 'Select Country';
+    cityRef.current.value = 'Select city';
+    areaRef.current.value = 'Select Area';
+    // adsService.current.value = 'choose a service';
+    adsLocation.current.value = 'choose a location';
     let adsSer = adsService.current.value
     if (adsSer === 'ads') {
       advertisements()
@@ -208,6 +232,11 @@ const AdsList = () => {
   // !Filter by Advertisement Location 
   const adsLocation = useRef(null);
   const handelAdvertisementLocation = async () => {
+    countryRef.current.value = 'Select Country';
+    cityRef.current.value = 'Select city';
+    areaRef.current.value = 'Select Area';
+    adsService.current.value = 'choose a service';
+    // adsLocation.current.value = 'choose a location';
     let ads = adsLocation.current.value
     if (ads === 'ads') {
       advertisements()
