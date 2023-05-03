@@ -18,7 +18,7 @@ let initialTranslation = {
         ],
         ConsultType:[ 
             { value: "NORMAL", text: "عادية  " },
-            { value: "URGENT", text: " خطيرة " },
+            { value: "URGENT", text: " عاجلة " },
         ],
 
         TableHeader: [
