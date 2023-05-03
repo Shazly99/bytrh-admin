@@ -296,7 +296,7 @@ const AdsList = () => {
 
                     <Col xl={2} lg={2} md={6} sm={12} >
                       {isLoader ? <>
-                        <Button size="sm" variant="outline-primary" onClick={handelDate} className="w-100 mt-2">Find Date</Button>
+                        <Button size="sm" variant="outline-primary" onClick={handelDate} className="w-100 mt-2">{isLang === 'en' ? 'Search by date':'ابحث بالتاريخ'}</Button>
                       </> : <Skeleton variant='rounded' animation='wave' height={26} width={'100%'} />
                       }
                     </Col>

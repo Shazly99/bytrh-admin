@@ -203,7 +203,7 @@ const Visits = () => {
               </Col>
 
               <Col xl={2} lg={2} md={6} sm={12} >
-                <Button variant="outline-primary" size="sm" onClick={handelDate} className="w-100 mt-2">Find Date</Button>
+                <Button variant="outline-primary" size="sm" onClick={handelDate} className="w-100 mt-2">{isLang === 'en' ? 'Search by date':'ابحث بالتاريخ'}</Button>
               </Col>
             </Row>
 

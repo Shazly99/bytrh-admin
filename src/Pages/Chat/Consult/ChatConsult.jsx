@@ -195,7 +195,7 @@ const ChatConsult = () => {
               </Col>
 
               <Col xl={2} lg={2} md={6} sm={12} >
-                <Button  size="sm" variant="outline-primary" onClick={handelDate} className="w-100 mt-2">Find Date</Button>
+                <Button  size="sm" variant="outline-primary" onClick={handelDate} className="w-100 mt-2">{isLang === 'en' ? 'Search by date':'ابحث بالتاريخ'}</Button>
               </Col>
             </Row>
             <div className='filter__group__stats row ' style={{ display: 'flex', gap: '20px', marginBottom: '25px' }}>
