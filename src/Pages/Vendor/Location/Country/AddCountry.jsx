@@ -115,7 +115,7 @@ const AddCountry = () => {
                     </div>
 
                     <div className='baseBtn w-auto'>
-                      <Link to={'/location/cities'}>
+                      <Link to={'/location/country'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                           {translate[isLang].add.cancel}
 
