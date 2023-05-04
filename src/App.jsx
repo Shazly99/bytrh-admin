@@ -342,10 +342,8 @@ function App() {
             // color: '#fff',
             borderRadius: '10px',
             boxShadow: '10px 10px 10px rgba(188, 188, 188, 0.16)',
-
-
-              background: '#fff',
-              color: '#000',
+            background: '#fff',
+            color: '#000',
           },
         }}
         containerStyle={{
@@ -354,11 +352,7 @@ function App() {
       />
       <ChatStore>
         <VenderContext>
-          <div>
-            {/* <Suspense fallback={<Component.Loader/>}> */}
-            <RouterProvider router={root} />
-            {/* </Suspense> */}
-          </div>
+          <RouterProvider router={root} />
         </VenderContext>
       </ChatStore>
 
