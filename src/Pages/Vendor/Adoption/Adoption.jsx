@@ -42,7 +42,8 @@ export default function Adoption() {
         setPagesCountAdoption(res.data.Response.Pages);
         setLoadingAdoption(false);
       })
-      .catch((error) => {
+      .catch((err) => {
+        console.log(err);
       });
   }
 

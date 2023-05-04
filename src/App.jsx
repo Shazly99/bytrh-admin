@@ -236,6 +236,13 @@ function App() {
           ]
         },
         {
+          path: '/services', children: [
+            { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.Services /> </ProtectedRoutes> },
+            { path: 'add', element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.AddService /> </ProtectedRoutes> },
+            { path: 'edit/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.EditService /> </ProtectedRoutes> },
+          ]
+        },
+        {
           path: '/consultTime', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1']}><Component.ConsultTime /> </ProtectedRoutes> },
             { path: 'add', element: <ProtectedRoutes allowedRoles={['1']}><Component.AddConsultTime /> </ProtectedRoutes> }

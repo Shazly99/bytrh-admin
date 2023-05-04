@@ -161,6 +161,14 @@ const routes = [
         nameAr: "الــزيارات",
         nameEn: "Visits",
         icon: <Icons.Dote size={19} />,
+        Roles: [1, 2],
+      },
+      {
+        path: "/services",
+        nameAr: "الخدمــات",
+        nameEn: "Services",
+        icon: <Icons.Dote size={19} />,
+        Roles: [1, 2],
       },
 
     ],
@@ -267,15 +275,20 @@ const routes = [
     nameEn: "Visits",
     icon: <LogoSvg.Visits className="logoSvg" style={{ width: 19 }} />,
     Roles: [2]
-
   },
   {
     path: "/consult",
     nameAr: "استشـارات",
     nameEn: "Consults",
     icon: <LogoSvg.Consults className="logoSvg" style={{ width: 19 }} />,
-    Roles: [ 2],
-
+    Roles: [2],
+  },
+  {
+    path: "/services",
+    nameAr: "الخدمــات",
+    nameEn: "Services",
+    icon: <LogoSvg.Adoption className="logoSvg" style={{ width: 19 }} />,
+    Roles: [2],
   },
 ];
 

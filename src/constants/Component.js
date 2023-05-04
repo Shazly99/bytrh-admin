@@ -111,6 +111,11 @@ import AddHours from '../Pages/MedicalCenter/Centers/AddHours';
 import Seach from './../Components/Shared/Chat/Seach';
 import NotFound from './../Components/Shared/Chat/NotFound';
 import Contact from '../Pages/Settings/Contact/Contact';
+
+import Services from './../Pages/Services/Services';
+import AddService from './../Pages/Services/AddService';
+import EditService from './../Pages/Services/EditService';
+
  
 const Component= {
     // Layout 
@@ -249,6 +254,10 @@ const Component= {
     ConsultTime,
     SingleConsultTime,
     AddConsultTime,
+    // Consult Time
+    Services,
+    AddService,
+    EditService
 }
 
 export default Component
