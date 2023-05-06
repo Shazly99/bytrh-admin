@@ -3,8 +3,6 @@ import Box from "@mui/material/Box";
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Dropdown, DropdownButton, Row, Table } from "react-bootstrap";
 import { toast } from "react-hot-toast";
-
-import img from "../../../assets/Img";
 import Component from "../../../constants/Component";
 import Icons from "../../../constants/Icons";
 import { VendersContext } from "../../../context/Store";

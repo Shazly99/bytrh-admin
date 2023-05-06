@@ -5,18 +5,8 @@ import ChatStore from './context/ChatStore';
 import VenderContext from './context/Store';
 import './style/App.scss';
 
-function App() {
-  // let { LogOut, isLang, setIsLang } = useContext(VendersContext);
-
-
-  // function ProtectedRoutes({ children }) {
-  //   if (localStorage.getItem('token') ) {
-  //     return children
-  //   } else {
-  //     return <Navigate to="/admin/login" replace={true} />
-  //   }
-  // }
-
+function App() { 
+  
   function ProtectedRoutes({ children, allowedRoles }) {
     const token = localStorage.getItem('token');
     const role = localStorage.getItem('Role');

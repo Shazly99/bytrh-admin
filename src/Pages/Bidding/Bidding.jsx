@@ -11,9 +11,9 @@ import Icons from "../../constants/Icons";
 import { VendersContext } from "../../context/Store";
 import useFetch from "../../utils/useFetch";
 import useSkeletonTable from "../../utils/useSkeletonTable";
-import { apiheader, PostData } from "./../../utils/fetchData";
-import initialTranslation from "./Translation";
+import { PostData, apiheader } from "./../../utils/fetchData";
 import ExcelSheet from "./ExcelSheet";
+import initialTranslation from "./Translation";
 
 const Bidding = () => {
 

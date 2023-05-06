@@ -1,18 +1,15 @@
-import React, { useEffect, useState, useContext } from 'react';
-// import doctor from '../../../assets/Images/doctor/doctor.png';
-// import license from '../../../assets/Images/doctor/license.png';
-import { FiEdit3 } from 'react-icons/fi';
-import { BiMessageRoundedAdd } from 'react-icons/bi';
-import { Link, useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react'; 
 import axios from 'axios';
-import { apiheader } from '../../../utils/fetchData';
-// import $ from 'jquery'
-import Loader from '../../../Components/Shared/Loader/Loader';
+import { BiMessageRoundedAdd } from 'react-icons/bi';
+import { FiEdit3 } from 'react-icons/fi';
+import { Link, useParams } from 'react-router-dom';
+import { apiheader } from '../../../utils/fetchData'; 
+import CircularProgress from '@mui/material/CircularProgress';
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal'; 
+import Modal from 'react-bootstrap/Modal';
+import Loader from '../../../Components/Shared/Loader/Loader';
 import Component from '../../../constants/Component';
 import { VendersContext } from '../../../context/Store';
-import CircularProgress from '@mui/material/CircularProgress';
 
 
 

@@ -1,12 +1,12 @@
-import React, { useState , useContext } from 'react';
-import { AiFillCloseCircle } from 'react-icons/ai';
-import '../../Vendor/Doctor/Doctor.scss';
-import { Modal, Button } from 'react-bootstrap';
+import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
-import { apiheader } from '../../../utils/fetchData'; 
+import React, { useContext, useState } from 'react';
+import { Button, Modal } from 'react-bootstrap';
+import { AiFillCloseCircle } from 'react-icons/ai';
 import Component from '../../../constants/Component';
 import { VendersContext } from '../../../context/Store';
-import CircularProgress from '@mui/material/CircularProgress';
+import { apiheader } from '../../../utils/fetchData';
+import '../../Vendor/Doctor/Doctor.scss';
 
 
 

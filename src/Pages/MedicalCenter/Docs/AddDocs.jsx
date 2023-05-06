@@ -1,13 +1,13 @@
-import React, { useRef, useContext, useState } from 'react';
-import Component from '../../../constants/Component'
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
-import { apiheader, PostData } from '../../../utils/fetchData';
-import Icons from '../../../constants/Icons';
-import { Col, Container, Row, Form, Button } from 'react-bootstrap';
-import { VendersContext } from "../../../context/Store";
-import docs from './docstranslate';
 import CircularProgress from '@mui/material/CircularProgress';
+import React, { useContext, useRef, useState } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { toast } from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
+import Component from '../../../constants/Component';
+import Icons from '../../../constants/Icons';
+import { VendersContext } from "../../../context/Store";
+import { PostData, apiheader } from '../../../utils/fetchData';
+import docs from './docstranslate';
 
 
 const AddDocs = () => {

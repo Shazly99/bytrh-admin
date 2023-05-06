@@ -1,17 +1,15 @@
 
+import React, { useContext, useEffect, useState } from 'react';
+import { Table } from "react-bootstrap";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
-import initialTranslation from './Translation';
-import { Button, Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
-import { useContext, useEffect,   useState } from 'react';
-import { PostData, apiheader } from '../../utils/fetchData';
-import { VendersContext } from '../../context/Store';
-import React from 'react';
 import { SiMicrosoftexcel } from 'react-icons/si';
+import { VendersContext } from '../../context/Store';
+import initialTranslation from './Translation';
 
 const ExcelSheet = ({animal}) => {
     let { isLang } = useContext(VendersContext);
 
-    const [exportData, setExportData] = useState(null)
+    // const [exportData, setExportData] = useState(null)
     const [translate, setTranslate] = useState(initialTranslation)
     const handelTranslate = () => setTranslate(initialTranslation)
     // const visits = async () => {

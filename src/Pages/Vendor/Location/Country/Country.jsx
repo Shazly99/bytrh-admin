@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
 import { VendersContext } from "../../../../context/Store";
-import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
+import { GetData, PostData, apiheader } from '../../../../utils/fetchData';
 import useSkeletonTable from "../../../../utils/useSkeletonTable";
 import initialTranslation from "./Translation";
 
@@ -22,7 +22,7 @@ const Country = () => {
     const [PagesNumber, setPagesNumber] = useState('')
     const [searchValue, setSearchValue] = useState('');
     const [isLoader, setIsloader] = useState(false);
-    let { SkeletonTable, SkeletonSearch, SkeletonFilters } = useSkeletonTable();
+    let { SkeletonTable, SkeletonSearch } = useSkeletonTable();
     const CountrycList = async (page) => {
         await PostData(`${process.env.REACT_APP_API_URL}/admin/location/countries`, { IDPage: page }, apiheader).then(({ data }) => {
             setCountry(data.Response.Countries)

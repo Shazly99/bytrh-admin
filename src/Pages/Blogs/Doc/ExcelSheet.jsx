@@ -4,8 +4,6 @@ import { Table } from "react-bootstrap";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import { SiMicrosoftexcel } from 'react-icons/si';
 import initialTranslation from "./Translation";
- 
-import { PostData,apiheader } from '../../../utils/fetchData';
 import { VendersContext } from '../../../context/Store';
  
   

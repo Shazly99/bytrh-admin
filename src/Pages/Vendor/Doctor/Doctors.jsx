@@ -1,18 +1,16 @@
-import React, { useContext, useState } from 'react';
-import ItemDoctor from './ItemDoctor';
-import { useEffect } from 'react';
-import Component from '../../../constants/Component';
-import Icons from '../../../constants/Icons';
-import './Doctor.scss'
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import $ from 'jquery'
-import { Container, Table } from 'react-bootstrap';
-// import Loader from '../../../Components/Shared/Loader/Loader';
 import axios from 'axios';
-import { apiheader } from '../../../utils/fetchData';
+import $ from 'jquery';
+import React, { useContext, useEffect, useState } from 'react';
+import { Container, Table } from 'react-bootstrap';
+import Component from '../../../constants/Component';
+import Icons from '../../../constants/Icons';
 import { VendersContext } from '../../../context/Store';
+import { apiheader } from '../../../utils/fetchData';
+import './Doctor.scss';
 import ExcelSheet from './ExcelSheet';
+import ItemDoctor from './ItemDoctor';
 
 
 export default function Doctors() {

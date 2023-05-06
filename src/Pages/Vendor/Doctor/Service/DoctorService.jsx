@@ -1,16 +1,16 @@
 
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import React, { useEffect, useState, useRef, useContext } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Button, Modal, Table } from "react-bootstrap";
 import { toast } from "react-hot-toast";
-import translateBaggingPrice from './baggingPrice';
+import { useParams } from "react-router-dom";
 import Component from "../../../../constants/Component";
 import Icons from "../../../../constants/Icons";
-import useSkeletonTable from "../../../../utils/useSkeletonTable";
 import { VendersContext } from "../../../../context/Store";
-import { useParams } from "react-router-dom";
-import { apiheader, GetData, PostData } from "../../../../utils/fetchData";
+import { GetData, PostData, apiheader } from "../../../../utils/fetchData";
+import useSkeletonTable from "../../../../utils/useSkeletonTable";
+import translateBaggingPrice from './baggingPrice';
 
 
 
@@ -18,7 +18,7 @@ const DoctorService = () => {
     let { id } = useParams()
 
     let { isLang } = useContext(VendersContext);
-    const [docService, setDocService] = useState(null);
+    const [docService, setDocService] = useState([]);
     const [editdocService, setEditDocService] = useState({});
     const [page, setPage] = useState(1);
     const [PagesNumber, setPagesNumber] = useState("");
@@ -43,8 +43,8 @@ const DoctorService = () => {
     function handleModalCloseEdit() {
         setModalShowEdit(false);
     }
-    function handleModalOpenEdit(index,IDDoctorService) {
-        getDeatailsdoctorService(IDDoctorService).then((res)=>{
+    function handleModalOpenEdit(index, IDDoctorService) {
+        getDeatailsdoctorService(IDDoctorService).then((res) => {
             setEditDocService(res.Response)
         })
         setModalIndexEdit(index);
@@ -136,11 +136,19 @@ const DoctorService = () => {
         return await GetData(`${process.env.REACT_APP_API_URL}/admin/doctors/services/edit/page/${IDService}`, apiheader);
     };
 
+    // Gets
+    const [DoctorServiceajax, setDoctorService] = useState([])
+    //  !Get IDDoctorService 
+    const GetDoctorsServices = async () => {
+        const data = await GetData(`${process.env.REACT_APP_API_URL}/admin/services/ajax`, apiheader);
+        setDoctorService(data.Response)
+    }
     // search and filter
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
             doctorService(page);
+            GetDoctorsServices()
             window.scrollTo(0, 0);
         }, 200);
         return () => clearTimeout(timeoutId);
@@ -159,120 +167,135 @@ const DoctorService = () => {
                     { name: translateBaggingPrice[isLang]?.nav[1].navList2, path: `/doctors/Service/list/${id}` }
                 ]} />
                 <div className="app__Users-table ">
-                    {isLoader ? <>
-                        <Component.ButtonBase
-                            title={translateBaggingPrice[isLang]?.addBTN}
-                            bg={"primary"}
-                            icon={<Icons.Add size={21} color={"#ffffffb4"} />}
-                            path={`/doctors/Service/add/${id}`}
-                        />
-                    </> :
-                        <div className="mt-3 p-2">
-                            {SkeletonFilters(40, 150)}
-                        </div>
+                    {
+                        docService.length !== DoctorServiceajax.length &&
+                        <>
+
+                            {isLoader ? <>
+                                <Component.ButtonBase
+                                    title={translateBaggingPrice[isLang]?.addBTN}
+                                    bg={"primary"}
+                                    icon={<Icons.Add size={21} color={"#ffffffb4"} />}
+                                    path={`/doctors/Service/add/${id}`}
+                                />
+                            </> :
+                                <div className="mt-3 p-2">
+                                    {SkeletonFilters(40, 150)}
+                                </div>
+                            }
+                        </>
                     }
+
                     {isLoader ? <>
-                        <Table responsive={true} className="rounded-3 ">
-                            <thead>
-                                <tr
-                                    className="text-center  "
-                                    style={{ background: "#F9F9F9" }}
-                                >
-                                    {translateBaggingPrice[isLang]?.TableHeader?.map((el, i) => (
-                                        <th key={i}>{el}</th>
-                                    ))}
-                                </tr>
-                            </thead>
-                            <tbody className="text-center">
-                                {docService?.map((item, index) => (
-                                    <tr key={index}>
-                                        <td>
-                                            <div>{item?.ServiceName}</div>
-                                        </td>
-                                        <td>
-                                            <div className="d-flex gap-1">
-                                                <h6 className={`mb-0 ${isLang === 'ar' ? 'ps-2' : 'pe-2'} color-red`}>{item?.DoctorServicePrice}{' '}{isLang === 'ar' ? 'ريال سعودي' : 'SAR'}</h6>
-                                                <Icons.edit
-                                                    onClick={() => handleModalOpenEdit(index,item.IDDoctorService )}
-                                                />
-                                                <Modal
-                                                    show={modalShowEdit && modalIndexEdit === index}
-                                                    onHide={handleModalCloseEdit}
-                                                    centered
-                                                    dir={isLang === 'ar' ? 'rtl' : 'ltr'}
-                                                >
-                                                    <Modal.Header closeButton>
-                                                        <Modal.Title className='w-100 text-center'>{translateBaggingPrice[isLang]?.ModalHeader}</Modal.Title>
-                                                    </Modal.Header>
-                                                    <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
-                                                        <input className="form-control" defaultValue={item.DoctorServicePrice} ref={changePrice} />
-                                                    </Modal.Body>
-                                                    <Modal.Footer className="d-flex justify-content-center align-items-center">
 
-                                                        <Button variant="outline-primary" onClick={handleModalCloseEdit}>
-                                                            {translateBaggingPrice[isLang]?.CancelBTN}
-                                                        </Button>
-                                                        <Button onClick={() => handleChangePrice(editdocService?.IDService)}>
-                                                            {translateBaggingPrice[isLang]?.ModalSetPrice}
-                                                        </Button>
-                                                    </Modal.Footer>
-                                                </Modal>
+                        <>
+                            {
+                                docService?.length > 0 ?
+                                    <Table responsive={true} className="rounded-3 ">
+                                        <thead>
+                                            <tr
+                                                className="text-center  "
+                                                style={{ background: "#F9F9F9" }}
+                                            >
+                                                {translateBaggingPrice[isLang]?.TableHeader?.map((el, i) => (
+                                                    <th key={i}>{el}</th>
+                                                ))}
+                                            </tr>
+                                        </thead>
+                                        <tbody className="text-center">
+                                            {docService?.map((item, index) => (
+                                                <tr key={index}>
+                                                    <td>
+                                                        <div>{item?.ServiceName}</div>
+                                                    </td>
+                                                    <td>
+                                                        <div className="d-flex gap-1">
+                                                            <h6 className={`mb-0 ${isLang === 'ar' ? 'ps-2' : 'pe-2'} color-red`}>{item?.DoctorServicePrice}{' '}{isLang === 'ar' ? 'ريال سعودي' : 'SAR'}</h6>
+                                                            <Icons.edit
+                                                                onClick={() => handleModalOpenEdit(index, item.IDDoctorService)}
+                                                            />
+                                                            <Modal
+                                                                show={modalShowEdit && modalIndexEdit === index}
+                                                                onHide={handleModalCloseEdit}
+                                                                centered
+                                                                dir={isLang === 'ar' ? 'rtl' : 'ltr'}
+                                                            >
+                                                                <Modal.Header closeButton>
+                                                                    <Modal.Title className='w-100 text-center'>{translateBaggingPrice[isLang]?.ModalHeader}</Modal.Title>
+                                                                </Modal.Header>
+                                                                <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
+                                                                    <input className="form-control" defaultValue={item.DoctorServicePrice} ref={changePrice} />
+                                                                </Modal.Body>
+                                                                <Modal.Footer className="d-flex justify-content-center align-items-center">
+
+                                                                    <Button variant="outline-primary" onClick={handleModalCloseEdit}>
+                                                                        {translateBaggingPrice[isLang]?.CancelBTN}
+                                                                    </Button>
+                                                                    <Button onClick={() => handleChangePrice(editdocService?.IDService)}>
+                                                                        {translateBaggingPrice[isLang]?.ModalSetPrice}
+                                                                    </Button>
+                                                                </Modal.Footer>
+                                                            </Modal>
 
 
-                                            </div>
-                                        </td>
-                                        <td >
-                                            <div>
-                                                <span style={{ height: 'fit-content !important' }} className={`  ${item?.DoctorServiceActivated === 1 && 'txt_delivered'}  ${item?.DoctorServiceActivated === 0 && 'txt_rejected'} `} >
-                                                    {item?.DoctorServiceActivated === 1 ?
-                                                        isLang === 'ar' ? 'نشــط' : 'Active'
-                                                        :
-                                                        isLang === 'ar' ? 'غير نشـط' : 'InActive'
-                                                    }
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
-                                                <span>
-                                                    <Button
-                                                        variant=" outline-sucess"
-                                                        onClick={() => handleModalOpen(index)}
-                                                        className="DropdownButton outline-sucess"
-                                                    >
-                                                        {isLang === 'ar' ? 'حـذف' : 'Detete'}
-                                                    </Button>
-                                                    <Modal
-                                                        show={modalShow && modalIndex === index}
-                                                        onHide={handleModalClose}
-                                                        centered
-                                                        dir={isLang === 'ar' ? 'rtl' : 'ltr'}
-                                                    >
-                                                        <Modal.Header closeButton>
-                                                            <Modal.Title className='  w-100 '>{translateBaggingPrice[isLang]?.ModalHeaderDel}</Modal.Title>
-                                                        </Modal.Header>
-                                                        <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
-                                                            <Component.HandelDelete />
+                                                        </div>
+                                                    </td>
+                                                    <td >
+                                                        <div>
+                                                            <span style={{ height: 'fit-content !important' }} className={`  ${item?.DoctorServiceActivated === 1 && 'txt_delivered'}  ${item?.DoctorServiceActivated === 0 && 'txt_rejected'} `} >
+                                                                {item?.DoctorServiceActivated === 1 ?
+                                                                    isLang === 'ar' ? 'نشــط' : 'Active'
+                                                                    :
+                                                                    isLang === 'ar' ? 'غير نشـط' : 'InActive'
+                                                                }
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div>
+                                                            <span>
+                                                                <Button
+                                                                    variant=" outline-sucess"
+                                                                    onClick={() => handleModalOpen(index)}
+                                                                    className="DropdownButton outline-sucess"
+                                                                >
+                                                                    {isLang === 'ar' ? 'حـذف' : 'Detete'}
+                                                                </Button>
+                                                                <Modal
+                                                                    show={modalShow && modalIndex === index}
+                                                                    onHide={handleModalClose}
+                                                                    centered
+                                                                    dir={isLang === 'ar' ? 'rtl' : 'ltr'}
+                                                                >
+                                                                    <Modal.Header closeButton>
+                                                                        <Modal.Title className='  w-100 '>{translateBaggingPrice[isLang]?.ModalHeaderDel}</Modal.Title>
+                                                                    </Modal.Header>
+                                                                    <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
+                                                                        <Component.HandelDelete />
 
-                                                            <input className="form-control" defaultValue={item.DoctorServicesPrice} disabled />
-                                                        </Modal.Body>
-                                                        <Modal.Footer className="d-flex justify-content-center align-items-center">
+                                                                        <input className="form-control" defaultValue={item.DoctorServicesPrice} disabled />
+                                                                    </Modal.Body>
+                                                                    <Modal.Footer className="d-flex justify-content-center align-items-center">
 
-                                                            <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => handleActionSelect(item.IDDoctorService)}>
-                                                                {translateBaggingPrice[isLang]?.ModalDelPrice}
-                                                            </Button>
-                                                            <Button variant="outline-primary" onClick={handleModalClose}>
-                                                                {translateBaggingPrice[isLang]?.CancelBTN}
-                                                            </Button>
-                                                        </Modal.Footer>
-                                                    </Modal>
-                                                </span>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </Table>
+                                                                        <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => handleActionSelect(item.IDDoctorService)}>
+                                                                            {translateBaggingPrice[isLang]?.ModalDelPrice}
+                                                                        </Button>
+                                                                        <Button variant="outline-primary" onClick={handleModalClose}>
+                                                                            {translateBaggingPrice[isLang]?.CancelBTN}
+                                                                        </Button>
+                                                                    </Modal.Footer>
+                                                                </Modal>
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </Table>
+                                    :
+                                    <Component.DataNotFound />
+                            }
+                        </>
                     </> :
                         SkeletonTable()
                     }

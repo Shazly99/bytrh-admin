@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Dropdown, DropdownButton, NavDropdown, Table } from "react-bootstrap";
-import { useEffect, useState, useContext } from 'react';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import Component from '../../../constants/Component';
 import Icons from '../../../constants/Icons';
-import useSkeletonTable from '../../../utils/useSkeletonTable';
-import { apiheader, GetData, PostData } from './../../../utils/fetchData';
 import { VendersContext } from "../../../context/Store";
+import useSkeletonTable from '../../../utils/useSkeletonTable';
+import { GetData, PostData, apiheader } from './../../../utils/fetchData';
 import translateBagging from './translateBagging';
 
 

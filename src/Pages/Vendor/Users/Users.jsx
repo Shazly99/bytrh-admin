@@ -1,18 +1,18 @@
 import { Pagination, Skeleton } from "@mui/material";
 import Box from "@mui/material/Box";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import axios from "axios";
 import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Col, Form, Row, } from "react-bootstrap";
 import Component from '../../../constants/Component';
 import Icons from "../../../constants/Icons.js";
+import { VendersContext } from "../../../context/Store";
 import { PostData } from '../../../utils/fetchData';
+import useFetch from "../../../utils/useFetch";
 import useSkeletonTable from '../../../utils/useSkeletonTable';
 import { apiheader } from './../../../utils/fetchData';
 import './Users.scss';
 import initialTranslate from './initialTranslate';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import useFetch from "../../../utils/useFetch";
-import axios from "axios";
-import { Row, Col, Form, } from "react-bootstrap";
-import { VendersContext } from "../../../context/Store";
 
 const theme = createTheme({
   components: {
@@ -109,10 +109,9 @@ function Users() {
   // };
 
   // !Filter by city and country and area  
-  let { countries, areas, cities, getCities, getAreas } = useFetch()
+  let { countries,  cities, getCities, getAreas } = useFetch()
   const cityRef = useRef(null);
-  const countryRef = useRef(null);
-  const areaRef = useRef(null);
+  const countryRef = useRef(null); 
   const handelSelectCountry = async (event) => {
     cityRef.current.value = 'Select city';
     // areaRef.current.value = 'Select Area';

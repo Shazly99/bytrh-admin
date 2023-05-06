@@ -1,16 +1,16 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import axios from 'axios'; 
-import '../../Vendor/Doctor/Doctor.scss'
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import { Container } from 'react-bootstrap';
+import { Link, useParams } from 'react-router-dom';
+import '../../Vendor/Doctor/Doctor.scss';
  
- import { Button } from 'react-bootstrap/';
  import CircularProgress from '@mui/material/CircularProgress';
+import { Button } from 'react-bootstrap/';
 import Component from '../../../constants/Component';
-import { GetData, apiheader } from '../../../utils/fetchData';
 import { VendersContext } from '../../../context/Store';
+import { GetData, apiheader } from '../../../utils/fetchData';
 import useFetch from '../../../utils/useFetch';
  
 const CenterEdit = () => {

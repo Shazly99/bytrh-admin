@@ -1,11 +1,11 @@
-import React, { useContext,useEffect,useState, useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
 import { VendersContext } from '../../../../context/Store';
-import { apiheader, PostData } from '../../../../utils/fetchData';
+import { PostData, apiheader } from '../../../../utils/fetchData';
 import useFetch from './../../../../utils/useFetch';
 import initialTranslation from "./Translation";
 
@@ -20,8 +20,7 @@ const AddCities = () => {
   const CityNameEn = useRef();
   const CityNameAr = useRef();
   const CityCode = useRef();
-  const selectRef = useRef();
-  const countriesRef = useRef();
+   const countriesRef = useRef();
 
   const submit = e => {
     e.preventDefault()

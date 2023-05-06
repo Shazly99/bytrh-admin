@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import Img from '../../../assets/Img';
 import Component from '../../../constants/Component';
 import { VendersContext } from '../../../context/Store';
-import { apiheader, GetData } from '../../../utils/fetchData';
+import { GetData, apiheader } from '../../../utils/fetchData';
 import '../blog.scss';
 import initialTranslation from './Translation';
 

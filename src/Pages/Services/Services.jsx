@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Component from '../../constants/Component';
 import Icons from '../../constants/Icons';
 import { VendersContext } from "../../context/Store";
-import { apiheader, GetData, PostData } from '../../utils/fetchData';
+import { GetData, PostData, apiheader } from '../../utils/fetchData';
 import useSkeletonTable from "../../utils/useSkeletonTable";
 import initialTranslation from "./Translation";
 

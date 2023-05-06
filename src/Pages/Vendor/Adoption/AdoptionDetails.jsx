@@ -1,14 +1,13 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { Container } from 'react-bootstrap';
-import { Link, useParams } from 'react-router-dom';
-import Component from '../../../constants/Component';
-import './Adoption.scss';
-import $ from 'jquery';
 import axios from 'axios';
-import { apiheader } from '../../../utils/fetchData';
-import Loader from '../../../Components/Shared/Loader/Loader';
+import React, { useContext, useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
 import { BsEyeFill } from 'react-icons/bs';
+import { Link, useParams } from 'react-router-dom';
+import Loader from '../../../Components/Shared/Loader/Loader';
+import Component from '../../../constants/Component';
 import { VendersContext } from '../../../context/Store';
+import { apiheader } from '../../../utils/fetchData';
+import './Adoption.scss';
 
 
 export default function AdoptionDetails() {

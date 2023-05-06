@@ -1,17 +1,17 @@
 import { Pagination, Skeleton } from "@mui/material";
 import Box from "@mui/material/Box";
-import React, { useContext, useEffect, useState, useRef } from 'react';
-import { Dropdown, DropdownButton, NavDropdown, Col, Form, Row, Table } from "react-bootstrap";
+import axios from "axios";
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Col, Dropdown, DropdownButton, Form, NavDropdown, Row, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
-import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
+import { VendersContext } from "../../../../context/Store";
+import { GetData, PostData, apiheader } from '../../../../utils/fetchData';
+import useFetch from "../../../../utils/useFetch";
 import useSkeletonTable from '../../../../utils/useSkeletonTable';
 import initialTranslation from "./Translation";
-import useFetch from "../../../../utils/useFetch";
-import axios from "axios";
-import { VendersContext } from "../../../../context/Store";
 const Areas = () => {
   let { isLang } = useContext(VendersContext);
   const [translate, setTranslate] = useState(initialTranslation)
@@ -23,7 +23,7 @@ const Areas = () => {
   const [PagesNumber, setPagesNumber] = useState('')
   const [searchValue, setSearchValue] = useState('');
   const [isLoader, setIsloader] = useState(false);
-  let { SkeletonTable, SkeletonSearch, SkeletonFilters } = useSkeletonTable();
+  let { SkeletonTable, SkeletonSearch } = useSkeletonTable();
 
 
   const AreascList = async (page) => {
@@ -104,7 +104,7 @@ const Areas = () => {
   };
 
   // !Filter by city and country and area  
-  let { countries, areas, cities, getCities, getAreas } = useFetch()
+  let { countries,   cities, getCities, getAreas } = useFetch()
   const cityRef = useRef(null);
   const countryRef = useRef(null);
   const handelSelectCountry = async (event) => {

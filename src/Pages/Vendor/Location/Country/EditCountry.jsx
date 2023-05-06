@@ -1,13 +1,12 @@
-import React, { useEffect, useRef,useContext, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
-import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
-import { Col, Container, Row, Form, Button } from 'react-bootstrap';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
-import { Link } from 'react-router-dom';
-import initialTranslation from "./Translation";
 import { VendersContext } from '../../../../context/Store';
+import { GetData, PostData, apiheader } from '../../../../utils/fetchData';
+import initialTranslation from "./Translation";
 
 const EditCountry = () => {
   let { isLang } = useContext(VendersContext);

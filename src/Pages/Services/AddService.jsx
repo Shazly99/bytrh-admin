@@ -1,12 +1,12 @@
-import React, { useRef,useContext,useEffect ,useState} from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
-import { apiheader, PostData } from '../../utils/fetchData';
-import { Col, Container, Row, Form, Button } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 import Component from '../../constants/Component';
 import Icons from '../../constants/Icons';
-import initialTranslation from "./Translation";
 import { VendersContext } from '../../context/Store';
+import { PostData, apiheader } from '../../utils/fetchData';
+import initialTranslation from "./Translation";
 
 
 const AddService = () => {

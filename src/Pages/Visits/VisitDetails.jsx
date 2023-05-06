@@ -46,6 +46,7 @@ const VisitDetails = () => {
     useEffect(() => {
         visitDetails();
         window.scrollTo(0, 0);
+        handelTranslate()
         return () => {
             visitDetails();
         }

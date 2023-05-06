@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState ,useContext} from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
-import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
+import { GetData, PostData, apiheader } from '../../../../utils/fetchData';
+import { VendersContext } from './../../../../context/Store';
 import useFetch from './../../../../utils/useFetch';
 import initialTranslation from "./Translation";
-import { VendersContext } from './../../../../context/Store';
 
 
 const EditCities = () => {

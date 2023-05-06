@@ -1,19 +1,19 @@
+import { Player } from '@lottiefiles/react-lottie-player';
 import CircularProgress from '@mui/material/CircularProgress';
 import React, { useContext, useRef, useState } from 'react';
-import { Container, Col, Row, Form } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import LogoSvg from '../../../../assets/svg/LogoSvg';
-import "./SignUp.scss";
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css'
-import useFetch from '../../../../utils/useFetch';
-import { toast } from 'react-hot-toast';
-import { apiheader, PostData } from '../../../../utils/fetchData';
+import { Col, Container, Form, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { Player } from '@lottiefiles/react-lottie-player';
+import { toast } from 'react-hot-toast';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import { useNavigate } from 'react-router-dom';
 import MapModal from '../../../../GoogleMap/MapModal';
+import LogoSvg from '../../../../assets/svg/LogoSvg';
 import { VendersContext } from '../../../../context/Store';
+import { PostData, apiheader } from '../../../../utils/fetchData';
+import useFetch from '../../../../utils/useFetch';
+import "./SignUp.scss";
 
 
 const Register = () => {

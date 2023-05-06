@@ -1,16 +1,15 @@
-import React, { useState, useContext, useEffect } from 'react';
-import $ from 'jquery';
-import { Link } from 'react-router-dom';
+import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
+import $ from 'jquery';
+import React, { useContext, useRef, useState } from 'react';
+import { Button, Container } from 'react-bootstrap';
+import { BsEyeFill } from 'react-icons/bs';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-import { Button, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import Component from '../../../constants/Component';
 import { VendersContext } from '../../../context/Store';
-import CircularProgress from '@mui/material/CircularProgress';
-import { BsEyeFill } from 'react-icons/bs';
 import useFetch from '../../../utils/useFetch';
-import { useRef } from 'react';
 // import { apiheader } from './../../../utils/fetchData';
 
 

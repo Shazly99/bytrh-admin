@@ -1,5 +1,5 @@
 import Skeleton from '@mui/material/Skeleton';
-import React, { useEffect, useState,useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import Img from '../../assets/Img';

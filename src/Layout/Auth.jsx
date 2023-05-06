@@ -1,9 +1,9 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
 import { Outlet } from 'react-router-dom';
 import { VendersContext } from '../context/Store';
 
 const Auth = () => {
-    let { isOpen,isLang } = useContext(VendersContext);
+    let { isLang } = useContext(VendersContext);
 
     return (
         <>

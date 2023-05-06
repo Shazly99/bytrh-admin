@@ -1,18 +1,16 @@
-import { Container, Modal } from 'react-bootstrap'
-import Component from '../../../../constants/Component'
-import React, { useContext, useRef } from 'react';
-import { useState, useEffect } from "react";
-import { Button, Col, Row } from 'react-bootstrap';
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Button, Col, Container, Modal, Row } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
-import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
-import { useParams, Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-hot-toast';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
+import { VendersContext } from '../../../../context/Store';
+import { GetData, PostData, apiheader } from '../../../../utils/fetchData';
 import useFetch from '../../../../utils/useFetch';
 import initialTranslate from './../initialTranslate';
-import { VendersContext } from '../../../../context/Store';
 
 const Edit = () => {
     let { isLang } = useContext(VendersContext);

@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import Component from '../../../constants/Component';
+import React, { useContext, useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
-import { apiheader } from './../../../utils/fetchData';
+import { useParams } from 'react-router-dom';
 import Loader from '../../../Components/Shared/Loader/Loader';
+import Component from '../../../constants/Component';
 import { VendersContext } from '../../../context/Store';
+import { apiheader } from './../../../utils/fetchData';
 
 
 export default function DoctorFields() { 

@@ -1,16 +1,16 @@
-import React, { useRef, useContext, useState, useEffect } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
+import Form from 'react-bootstrap/Form';
+import { toast } from 'react-hot-toast';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import { Link, useNavigate } from 'react-router-dom';
 import Component from '../../../../constants/Component';
 import Icons from '../../../../constants/Icons';
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
-import Form from 'react-bootstrap/Form';
-import { apiheader, GetData, PostData } from '../../../../utils/fetchData';
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
-import useFetch from '../../../../utils/useFetch';
 import { VendersContext } from '../../../../context/Store';
+import { GetData, PostData, apiheader } from '../../../../utils/fetchData';
+import useFetch from '../../../../utils/useFetch';
 import initialTranslate from '../initialTranslate';
 
 const AddNewUser = () => {

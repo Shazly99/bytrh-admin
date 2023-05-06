@@ -2,19 +2,19 @@ import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
 import React from 'react';
 import { Button, Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap";
-
 import axios from 'axios';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import LogoSvg from '../../assets/svg/LogoSvg';
+import Component from "../../constants/Component";
 import { VendersContext } from '../../context/Store';
-import { apiheader, PostData } from '../../utils/fetchData';
+import { PostData, apiheader } from '../../utils/fetchData';
 import useSkeletonTable from '../../utils/useSkeletonTable';
 import icons from './../../constants/Icons';
-import initialTranslation from './Translation';
 import ExcelSheet from "./ExcelSheet";
-import Component from "../../constants/Component";
+import initialTranslation from './Translation';
+
 const Visits = () => {
   let { isLang } = useContext(VendersContext);
   const [translate, setTranslate] = useState(initialTranslation)

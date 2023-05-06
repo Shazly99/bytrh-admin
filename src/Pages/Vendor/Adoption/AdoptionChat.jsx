@@ -1,13 +1,12 @@
-import React, { useEffect, useRef, useState, useContext } from 'react'
-import { Row, Col, Container } from 'react-bootstrap';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import ScrollToBottom from 'react-scroll-to-bottom';
-// import Img from '../../../assets/Img';
+import { Player } from '@lottiefiles/react-lottie-player';
 import Component from '../../../constants/Component';
+import { VendersContext } from '../../../context/Store';
 import { GetData } from '../../../utils/fetchData';
 import { apiheader } from './../../../utils/fetchData';
-import { Player } from '@lottiefiles/react-lottie-player';
-import { VendersContext } from '../../../context/Store';
 
 
 const AdoptionChat = () => {

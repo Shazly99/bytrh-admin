@@ -1,12 +1,12 @@
 import axios from 'axios';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import Component from '../../../constants/Component';
 import Icons from '../../../constants/Icons';
+import { VendersContext } from '../../../context/Store';
 import { apiheader } from '../../../utils/fetchData';
 import './Doctor.scss';
-import { VendersContext } from '../../../context/Store';
 // import $ from 'jquery';
 // import { AiFillCloseCircle } from 'react-icons/ai';
 

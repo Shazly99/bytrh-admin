@@ -7,15 +7,15 @@ import { Col, Dropdown, DropdownButton, Form, Row, Table } from "react-bootstrap
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 
-import initialTranslation from "./Translation";
+import img from "../../../assets/Img";
 import Component from "../../../constants/Component";
 import Icons from "../../../constants/Icons";
-import img from "../../../assets/Img";
-import useFetch from "../../../utils/useFetch";
-import useSkeletonTable from "../../../utils/useSkeletonTable";
 import { VendersContext } from "../../../context/Store";
 import { apiheader, PostData } from "../../../utils/fetchData";
+import useFetch from "../../../utils/useFetch";
+import useSkeletonTable from "../../../utils/useSkeletonTable";
 import ExcelSheet from "./ExcelSheet";
+import initialTranslation from "./Translation";
 // import LogoSvg from "../../../assets/svg/LogoSvg";
 
 const Centers = () => {

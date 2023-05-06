@@ -1,12 +1,10 @@
-import React, { useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
-import { apiheader, GetData, PostData } from '../../../utils/fetchData';
-import { Col, Container, Row, Form, Button } from 'react-bootstrap';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Component from '../../../constants/Component';
 import Icons from '../../../constants/Icons';
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { GetData, PostData, apiheader } from '../../../utils/fetchData';
 
 const EditMedicalFields = () => {
   let { id } = useParams()

@@ -1,14 +1,14 @@
-import React, { useRef, useContext, useState } from 'react';
-import Component from '../../../constants/Component'
-import { Link , useParams } from 'react-router-dom';
+import React, { useContext, useRef, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import Component from '../../../constants/Component';
 // import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-hot-toast';
-import { apiheader, PostData } from '../../../utils/fetchData';
-import Icons from '../../../constants/Icons';
-import { Col, Container, Row, Form, Button } from 'react-bootstrap';
-import { VendersContext } from "../../../context/Store";
-import docs from '../Docs/docstranslate';
 import CircularProgress from '@mui/material/CircularProgress';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { toast } from 'react-hot-toast';
+import Icons from '../../../constants/Icons';
+import { VendersContext } from "../../../context/Store";
+import { apiheader, PostData } from '../../../utils/fetchData';
+import docs from '../Docs/docstranslate';
 
 
 const CenterAdd = () => {

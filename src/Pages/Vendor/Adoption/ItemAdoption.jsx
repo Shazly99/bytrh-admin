@@ -1,11 +1,9 @@
 import React, { useContext, useRef } from 'react';
-// import { FiEdit3 } from 'react-icons/fi';
-// import { AiOutlineDelete } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
-import { DropdownButton, Dropdown, Modal, Button } from 'react-bootstrap';
-import { apiheader, PostData } from '../../../utils/fetchData';
-import { VendersContext } from '../../../context/Store';
+import { Button, Dropdown, DropdownButton, Modal } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { VendersContext } from '../../../context/Store';
+import { PostData, apiheader } from '../../../utils/fetchData';
 
 
 export default function ItemAdoption({ Reason,id, clientName, petName, petStrain, petPicture, cityName, cate, status, getTokenAdoption }) {

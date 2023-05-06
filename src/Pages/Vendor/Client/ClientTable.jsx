@@ -1,14 +1,13 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Dropdown, DropdownButton, Form, NavDropdown, Table } from "react-bootstrap";
-import { toast } from 'react-hot-toast';
-import Icons from "../../../constants/Icons.js";
-import { apiheader, GetData, PostData } from '../../../utils/fetchData.js';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import useSkeletonTable from '../../../utils/useSkeletonTable.js';
+import { toast } from 'react-hot-toast';
 import Component from '../../../constants/Component.js';
 import { VendersContext } from '../../../context/Store.js';
-import './Client.scss'
+import { GetData, PostData, apiheader } from '../../../utils/fetchData.js';
+import useSkeletonTable from '../../../utils/useSkeletonTable.js';
+import './Client.scss';
 const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTranslate, currency, statusTranslate, tabelTranslate }) => {
   let { SkeletonTable } = useSkeletonTable();
   let { isLang } = useContext(VendersContext);

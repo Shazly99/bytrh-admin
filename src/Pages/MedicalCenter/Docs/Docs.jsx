@@ -1,22 +1,18 @@
-import React from 'react'
-import { Table } from "react-bootstrap";
+import React from 'react';
 
-import Component from '../../../constants/Component'
-import Icons from '../../../constants/Icons'
+import { useContext, useEffect, useState } from 'react';
+import Component from '../../../constants/Component';
+import Icons from '../../../constants/Icons';
 import { apiheader } from './../../../utils/fetchData';
-import { useEffect, useContext } from 'react';
-import { useState } from 'react';
 // import { Pagination } from "@mui/material";
 // import Box from "@mui/material/Box";
 // import { Link } from 'react-router-dom';
 // import { toast } from 'react-hot-toast';
-import useSkeletonTable from '../../../utils/useSkeletonTable';
-import { VendersContext } from "../../../context/Store";
-import docs from './docstranslate';
 import axios from 'axios';
 import { motion } from 'framer-motion';
-import { AiFillEye } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { VendersContext } from "../../../context/Store";
+import useSkeletonTable from '../../../utils/useSkeletonTable';
+import docs from './docstranslate';
 
 
 const Docs = () => {

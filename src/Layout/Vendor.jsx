@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 import React, { useContext, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
+import SidebarSM from '../Components/Sidebar/SidebarSM';
 import Component from '../constants/Component';
 import { VendersContext } from '../context/Store';
-import SidebarSM from '../Components/Sidebar/SidebarSM';
 
 function Vendor() {
   let { isOpen ,isLang} = useContext(VendersContext);

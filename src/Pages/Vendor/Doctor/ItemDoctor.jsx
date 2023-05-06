@@ -1,12 +1,9 @@
-import React, { useRef, useState, useContext } from 'react';
-// import { FiEdit3 } from 'react-icons/fi';
-// import { AiOutlineDelete } from 'react-icons/ai';
+import React, { useContext, useRef, useState } from 'react';
+import { Button, Dropdown, DropdownButton, Form, Modal } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { DropdownButton, Dropdown, Modal, Form, Button } from 'react-bootstrap';
-// import { useEffect } from 'react';
-import { apiheader, PostData } from '../../../utils/fetchData';
 import Component from '../../../constants/Component';
 import { VendersContext } from '../../../context/Store';
+import { PostData, apiheader } from '../../../utils/fetchData';
 
 
 export default function ItemDoctor({ nameDoc, email, phone, country, type, balance, create, status, item, id, getTokenDoctors }) {

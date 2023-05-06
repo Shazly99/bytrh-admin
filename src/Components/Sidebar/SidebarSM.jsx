@@ -1,12 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useContext, useEffect } from 'react';
-import { FaBars } from 'react-icons/fa';
-import { Link, NavLink, Route } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Img from "../../assets/Img";
 import { VendersContext } from "../../context/Store";
-import routes from './route.js';
 import './Sidebar.scss';
 import SidebarMenu from './SidebarMenu';
+import routes from './route.js';
 
 const SidebarSM = ({ children }) => {
   let { isLang, isOpen,   setIsOpen } = useContext(VendersContext);

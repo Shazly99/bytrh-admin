@@ -1,18 +1,17 @@
 import Skeleton from '@mui/material/Skeleton';
+import { motion } from 'framer-motion';
 import React, { useContext, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
-import { motion } from 'framer-motion'
 
-import { VendersContext } from '../../../context/Store';
-import initialTranslation from './Translation';
-import { apiheader, GetData } from '../../../utils/fetchData';
-import Component from '../../../constants/Component';
-import Map from '../../../GoogleMap/Map';
-import img from './../../../assets/Img';
-import { AiFillEye } from 'react-icons/ai';
-import './center.scss'
 import LogoSvg from '../../../assets/svg/LogoSvg';
+import Component from '../../../constants/Component';
+import { VendersContext } from '../../../context/Store';
+import Map from '../../../GoogleMap/Map';
+import { apiheader, GetData } from '../../../utils/fetchData';
+import img from './../../../assets/Img';
+import './center.scss';
+import initialTranslation from './Translation';
 const ProfileCenter = () => {
     const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
 

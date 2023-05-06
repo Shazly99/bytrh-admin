@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState, useContext } from 'react';
-import Component from '../../../constants/Component'
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useRef, useState } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { toast } from 'react-hot-toast';
-import { apiheader, PostData } from '../../../utils/fetchData';
+import { Link, useNavigate } from 'react-router-dom';
+import Component from '../../../constants/Component';
 import Icons from '../../../constants/Icons';
-import { Col, Container, Row, Form, Button } from 'react-bootstrap';
 import { VendersContext } from "../../../context/Store";
+import { PostData, apiheader } from '../../../utils/fetchData';
 import translateBaggingPrice from './baggingPrice';
 
 

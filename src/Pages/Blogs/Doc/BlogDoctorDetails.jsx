@@ -1,4 +1,4 @@
- import React, { useEffect, useState,useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Col, Container, Dropdown, DropdownButton, Row } from 'react-bootstrap';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-hot-toast';
@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import Img from '../../../assets/Img';
 import Component from '../../../constants/Component';
 import { VendersContext } from '../../../context/Store';
-import { apiheader, GetData } from '../../../utils/fetchData';
+import { GetData, apiheader } from '../../../utils/fetchData';
 import '../blog.scss';
 import initialTranslation from './Translation';
 
@@ -14,7 +14,7 @@ const BlogDoctorDetails = () => {
   let { isLang } = useContext(VendersContext);
   const [translate, setTranslate] = useState(initialTranslation)
   const handelTranslate = () => {
-      setTranslate(initialTranslation)
+    setTranslate(initialTranslation)
   }
   let { id } = useParams()
   const [lgShow, setLgShow] = useState(false);
@@ -85,14 +85,14 @@ const BlogDoctorDetails = () => {
           <div className='app__blog'>
             <Container fluid>
               <div className="app__addprodects">
-                <Component.SubNav sub__nav={[{ name: translate[isLang]?.blogDetails?.nav1, path: '/blogs/doctor' }, { name:translate[isLang]?.blogDetails?.nav2, path: `/blogs/doctor/details/${id}` }]} />
+                <Component.SubNav sub__nav={[{ name: translate[isLang]?.blogDetails?.nav1, path: '/blogs/doctor' }, { name: translate[isLang]?.blogDetails?.nav2, path: `/blogs/doctor/details/${id}` }]} />
                 {DoctorBlogGallery?.length > 0 &&
                   <>
                     <div className="app__addprodects__header ">
                       <Component.BaseHeader h2={translate[isLang]?.blogDetails?.galleryTitle} />
                       <a onClick={() => setLgShow(true)} className='blog__popup'>{translate[isLang]?.blogDetails?.galleryBtn}  </a>
                       <Modal
-                      dir={isLang === "ar"?'rtl':'ltr'}
+                        dir={isLang === "ar" ? 'rtl' : 'ltr'}
 
                         size="xl"
                         show={lgShow}
@@ -102,7 +102,7 @@ const BlogDoctorDetails = () => {
                       >
                         <Modal.Header closeButton>
                           <Modal.Title id="example-custom-modal-styling-title">
-                          {translate[isLang]?.blogDetails?.galleryTitle}
+                            {translate[isLang]?.blogDetails?.galleryTitle}
 
                           </Modal.Title>
                         </Modal.Header>
@@ -220,7 +220,7 @@ const BlogDoctorDetails = () => {
                                 <div className="header__comment">
                                   <div className='info'>
                                     <span>{item?.Name}</span>
-                                    <span className='Comment__User'>({item?.CommentUser.charAt(0).toUpperCase() + item?.CommentUser.slice(1).toLowerCase() })</span>
+                                    <span className='Comment__User'>({item?.CommentUser.charAt(0).toUpperCase() + item?.CommentUser.slice(1).toLowerCase()})</span>
 
                                   </div>
 
@@ -230,33 +230,33 @@ const BlogDoctorDetails = () => {
                                     </div>
                                     <div className="delete">
                                       <DropdownButton
-                                        title={<img src={Img.dropdown}  />}
+                                        title={<img src={Img.dropdown} />}
                                         id="dropdown-menu"
                                         onClick={() => setShowDropdown(!showDropdown)}
                                       >
                                         <Dropdown.Item onClick={() => handleModalOpenEdit(index)}>{translate[isLang]?.blogDetails?.deleteBtn}</Dropdown.Item>
                                         <Modal
-                                        dir={isLang ==="ar"?'rtl':'ltr'}
+                                          dir={isLang === "ar" ? 'rtl' : 'ltr'}
 
                                           show={modalShowEdit && modalIndexEdit === index}
                                           onHide={handleModalCloseEdit}
                                           centered
                                         >
                                           <Modal.Header closeButton>
-                                          <Modal.Title className='  w-100 '>{translate[isLang]?.blogDetails?.deleteTitle}</Modal.Title>
+                                            <Modal.Title className='  w-100 '>{translate[isLang]?.blogDetails?.deleteTitle}</Modal.Title>
                                           </Modal.Header>
                                           <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
-                                          <Component.HandelDelete/>
+                                            <Component.HandelDelete />
 
                                           </Modal.Body>
                                           <Modal.Footer className="d-flex justify-content-center align-items-center">
 
                                             <Button variant="outline-primary" onClick={handleModalCloseEdit}>
-                                            {translate[isLang]?.blogDetails?.cancel}
+                                              {translate[isLang]?.blogDetails?.cancel}
 
                                             </Button>
                                             <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => handleDelete(item.IDDoctorBlogComment)}>
-                                            {translate[isLang]?.blogDetails?.deleteBtn}
+                                              {translate[isLang]?.blogDetails?.deleteBtn}
 
                                             </Button>
                                           </Modal.Footer>

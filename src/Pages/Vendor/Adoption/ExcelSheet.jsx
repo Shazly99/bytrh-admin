@@ -1,10 +1,9 @@
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Table } from "react-bootstrap";
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import { SiMicrosoftexcel } from 'react-icons/si';
 import { VendersContext } from '../../../context/Store';
-import { PostData, apiheader } from '../../../utils/fetchData';
 
 const ExcelSheet = ({fetchAdoption}) => {
     let { isLang } = useContext(VendersContext);
