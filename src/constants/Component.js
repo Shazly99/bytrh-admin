@@ -115,6 +115,8 @@ import Contact from '../Pages/Settings/Contact/Contact';
 import Services from './../Pages/Services/Services';
 import AddService from './../Pages/Services/AddService';
 import EditService from './../Pages/Services/EditService';
+import DoctorService from '../Pages/Vendor/Doctor/Service/DoctorService';
+import AddDoctorService from './../Pages/Vendor/Doctor/Service/AddDoctorService';
 
  
 const Component= {
@@ -257,7 +259,11 @@ const Component= {
     // Consult Time
     Services,
     AddService,
-    EditService
+    EditService,
+    
+    // DoctorService
+    DoctorService,
+    AddDoctorService
 }
 
 export default Component

@@ -185,6 +185,9 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                 <Dropdown.Item as={Link} to={`/doctors/editDoctor/${id}`}>
                                     {isLang === 'ar' ? 'تعديـل' : 'Edit'}
                                 </Dropdown.Item>
+                                <Dropdown.Item as={Link} to={`/doctors/Service/list/${id}`}>
+                                    {isLang === 'ar' ? 'خدمــات الدكتور' : 'Doctor Service'}
+                                </Dropdown.Item>
                                 {/* <Dropdown.Item as={Link} to={`/doctors/doctorFields/${id}`}>
                                     {isLang === 'ar' ? 'المجالات الطبيـة' : 'Medical Fields'}
                                 </Dropdown.Item> */}

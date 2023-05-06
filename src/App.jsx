@@ -63,9 +63,20 @@ function App() {
             { path: 'doctorProfile/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.DoctorProfile /></ProtectedRoutes> },
             { path: 'doctorHours/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.DoctorHours /></ProtectedRoutes> },
             { path: 'addDoctorHours/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.AddDoctorHours /></ProtectedRoutes> },
+            {
+              path: 'Service', children: [
+                {  path: 'list/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.DoctorService /> </ProtectedRoutes>, },
+                { path: 'add/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.AddDoctorService /> </ProtectedRoutes> },
+              ]
+            },
           ]
         },
-
+        {
+          path: '/doctor', children: [
+            { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.DoctorService /> </ProtectedRoutes>, },
+            { path: 'addbaggingprice', element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.AddDoctorService /> </ProtectedRoutes> },
+          ]
+        },
         //  ! Rashed Adoption component
         {
           path: '/adoption', children: [
