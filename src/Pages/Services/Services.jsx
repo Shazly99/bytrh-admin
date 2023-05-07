@@ -120,7 +120,7 @@ const Services = () => {
                                                                 className="DropdownButton "
                                                                 drop={'down-centered'}
                                                             >
-                                                                <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/dashboard/services/edit/${item.IDService}`}>
+                                                                <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/services/edit/${item.IDService}`}>
                                                                     {translate[isLang]?.Actions.edit}
                                                                 </Dropdown.Item>
                                                                 <NavDropdown.Divider />

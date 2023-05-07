@@ -184,7 +184,7 @@ const CenterEdit = () => {
       if (data.Success === true) {
         setApiCode(data.Success);
         setTimeout(() => {
-          // navigate('/dashboard/doctors');
+          // navigate('/doctors');
           // window.history.go(-1);
           setApiCode(null);
           setMessage('');
@@ -409,7 +409,7 @@ const CenterEdit = () => {
                             </div>
     
                             <div className='baseBtn w-auto'>
-                                <Link to={'/dashboard/medicalcenter'}>
+                                <Link to={'/medicalcenter'}>
                                     <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                       {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                                     </Button>

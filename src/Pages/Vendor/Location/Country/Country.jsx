@@ -208,7 +208,7 @@ const Country = () => {
                                                             className="DropdownButton "
                                                             drop={'down-centered'}
                                                         >
-                                                            <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/dashboard/location/country/editcountry/${item.IDCountry}`}>
+                                                            <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/location/country/editcountry/${item.IDCountry}`}>
                                                                 {translate[isLang]?.Actions.edit}
                                                             </Dropdown.Item>
                                                             <NavDropdown.Divider />

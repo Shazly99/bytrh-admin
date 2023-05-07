@@ -47,7 +47,7 @@ const CenterAdd = () => {
           },
         });
         setTimeout(() => {
-        //   navigate('/dashboard/docs');
+        //   navigate('/docs');
           window.history.go(-1);
         }, 2000);
       } else {
@@ -102,7 +102,7 @@ const CenterAdd = () => {
                                 </div>
 
                                 <div className='baseBtn w-auto'>
-                                    <Link to={'/dashboard/medicalcenter'}>
+                                    <Link to={'/medicalcenter'}>
                                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                             {docs[isLang]?.CancelBTN}
                                         </Button>

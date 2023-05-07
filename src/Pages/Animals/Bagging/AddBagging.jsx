@@ -36,7 +36,7 @@ const AddBagging = () => {
           },
         });
         setTimeout(() => {
-          navigate('/dashboard/animals/bagging');
+          navigate('/animals/bagging');
         }, 2000);
       } else {
         toast.error(res.data.ApiMsg)
@@ -89,7 +89,7 @@ const AddBagging = () => {
                     </div>
 
                     <div className='baseBtn w-auto'>
-                      <Link to={'/dashboard/animals/bagging'}>
+                      <Link to={'/animals/bagging'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                           {translateBagging[isLang]?.CancelBTN}
                         </Button>

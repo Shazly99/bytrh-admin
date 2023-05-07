@@ -7,7 +7,7 @@ const ButtonBase = ({ title, bg, icon, path, onclick }) => {
     return (
         <div className='baseBtn'>
             <Button  type='submit' variant={bg} onClick={onclick} className='d-flex align-items-center justify-content-center'>
-                <Link to={`${path ? `/dashboard${path}` : ''}`} className='text-light d-flex align-items-center justify-content-center gap-1' >
+                <Link to={`${path ? path  : ''}`} className='text-light d-flex align-items-center justify-content-center gap-1' >
                     {icon}
                     {title}
                 </Link>

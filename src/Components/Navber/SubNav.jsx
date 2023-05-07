@@ -14,7 +14,7 @@ const SubNav = ({ sub__nav }) => {
                     {
                         sub__nav.map((nav, index) => (
                             <React.Fragment key={index} >
-                                <LinkContainer to={`/dashboard${nav.path}`} >
+                                <LinkContainer to={nav.path} >
                                     <Nav.Link eventKey={index} className='nav-link '  >{nav.name}</Nav.Link>
                                 </LinkContainer>
                                 {

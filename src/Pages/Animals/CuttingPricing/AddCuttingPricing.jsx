@@ -53,7 +53,7 @@ const AddCuttingPricing = () => {
           },
         });
         setTimeout(() => {
-          navigate('/dashboard/animals/cuttingprice');
+          navigate('/animals/cuttingprice');
         }, 2000);
       } else {
         toast.error(res.data.ApiMsg)
@@ -140,7 +140,7 @@ const AddCuttingPricing = () => {
                     </div>
 
                     <div className='baseBtn w-auto'>
-                      <Link to={'/dashboard/animals/categories'}>
+                      <Link to={'/animals/categories'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                           {translateCuttingPrice[isLang]?.CancelBTN}
                         </Button>

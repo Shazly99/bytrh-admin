@@ -586,7 +586,7 @@ export const BlogDoctor = () => {
                                                     </td>
                                                     <td >
                                                         <div>
-                                                            <Link to={`/dashboard/blogs/doctor/details/${item?.IDDoctorBlog}`}>
+                                                            <Link to={`/blogs/doctor/details/${item?.IDDoctorBlog}`}>
                                                                 <img src={Img.view} alt='view' />
                                                             </Link>
                                                         </div>

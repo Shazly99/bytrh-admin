@@ -264,7 +264,7 @@ const AnimalsSubCategories = () => {
                                                             className="DropdownButton "
                                                             drop={'down-centered'}
                                                         >
-                                                            <Dropdown.Item eventKey="Edite" as={Link} to={`/dashboard/animals/subcategories/editsubcategories/${item.IDAnimalSubCategory}`}>
+                                                            <Dropdown.Item eventKey="Edite" as={Link} to={`/animals/subcategories/editsubcategories/${item.IDAnimalSubCategory}`}>
                                                                 {isLang === 'ar' ? 'تعديـل' : 'Edit'}
                                                             </Dropdown.Item>
 

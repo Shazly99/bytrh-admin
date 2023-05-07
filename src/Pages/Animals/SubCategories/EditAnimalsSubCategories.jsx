@@ -76,7 +76,7 @@ const EditAnimalsSubCategories = () => {
           },
         });
         setTimeout(() => {
-          navigate('/dashboard/animals/subcategories');
+          navigate('/animals/subcategories');
         }, 2000);
       } else {
         toast.error(res.data.ApiMsg)
@@ -216,7 +216,7 @@ const EditAnimalsSubCategories = () => {
                     </div>
 
                     <div className='baseBtn w-auto'>
-                      <Link to={'/dashboard/animals/subcategories'}>
+                      <Link to={'/animals/subcategories'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                           {translateSubCategories[isLang]?.CancelBTN}
                         </Button>

@@ -469,7 +469,7 @@ const AdsList = () => {
                                     className="DropdownButton "
                                     drop={'down-centered'}
                                   >
-                                    <Dropdown.Item eventKey="Edite" as={Link} to={`/dashboard/ads/edit/${item.IDAdvertisement}`}>
+                                    <Dropdown.Item eventKey="Edite" as={Link} to={`/ads/edit/${item.IDAdvertisement}`}>
                                       {isLang === 'ar' ? 'تعديــل' : 'Edit'}
                                     </Dropdown.Item>
 

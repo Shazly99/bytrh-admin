@@ -25,17 +25,13 @@ function App() {
     );
   }
   const root = createBrowserRouter([
+ 
     {
-      path: '/', element: <Component.BytrhWebsite />, children: [
-        { index:true, element: <Component.Home /> },
-      ]
-    },
-    {
-      path: '/dashboard', element: <Component.Vendor />, children: [
+      path: '', element: <Component.Vendor />, children: [
         { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.Dashboard /></ProtectedRoutes> },
         // ?User 
         {
-          path: '/dashboard/user', children: [
+          path: '/user', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.Users /> </ProtectedRoutes> },
             { path: 'addUser', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.AddNewUser /></ProtectedRoutes> },
             { path: 'editUser/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.Edit /> </ProtectedRoutes> },
@@ -43,13 +39,13 @@ function App() {
         },
         // ?client
         {
-          path: '/dashboard/client', children: [
+          path: '/client', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1']}>  <Component.Clients /> </ProtectedRoutes> },
           ]
         },
         // ! Rashed Doctor component
         {
-          path: '/dashboard/doctors', children: [
+          path: '/doctors', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.Doctors /> </ProtectedRoutes> },
             { path: 'addDoctor', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.AddDoctor /></ProtectedRoutes> },
             { path: 'editDoctor/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.EditDoctor /></ProtectedRoutes> },
@@ -67,14 +63,14 @@ function App() {
           ]
         },
         {
-          path: '/dashboard/doctor', children: [
+          path: '/doctor', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.DoctorService /> </ProtectedRoutes>, },
             { path: 'addbaggingprice', element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.AddDoctorService /> </ProtectedRoutes> },
           ]
         },
         //  ! Rashed Adoption component
         {
-          path: '/dashboard/adoption', children: [
+          path: '/adoption', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1']}><Component.Adoption allowedRoles={['1']} /> </ProtectedRoutes> },
             { path: 'details/:id', element: <ProtectedRoutes allowedRoles={['1']}> <Component.AdoptionDetails allowedRoles={['1']} /></ProtectedRoutes> },
             { path: 'chat/:id', element: <ProtectedRoutes allowedRoles={['1']}> <Component.AdoptionChat allowedRoles={['1']} /></ProtectedRoutes> },
@@ -84,13 +80,13 @@ function App() {
 
         // ToDo user profile
 
-        { path: '/dashboard/mcprofile', element: <ProtectedRoutes allowedRoles={['2']} >  <Component.MCProfile /></ProtectedRoutes> },
-        { path: '/dashboard/profile', element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.Profile /></ProtectedRoutes> },
-        { path: '/dashboard/contact', element: <ProtectedRoutes allowedRoles={['1']}>  <Component.Contact /></ProtectedRoutes> },
+        { path: '/mcprofile', element: <ProtectedRoutes allowedRoles={['2']} >  <Component.MCProfile /></ProtectedRoutes> },
+        { path: '/profile', element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.Profile /></ProtectedRoutes> },
+        { path: '/contact', element: <ProtectedRoutes allowedRoles={['1']}>  <Component.Contact /></ProtectedRoutes> },
 
         // ToDo Animals   
         {
-          path: '/dashboard/animals', children: [
+          path: '/animals', children: [
             {
               path: 'categories', children: [
                 { index: true, element: <ProtectedRoutes allowedRoles={['1']}> <Component.AnimalCat /></ProtectedRoutes> },
@@ -136,7 +132,7 @@ function App() {
           ]
         },
         {
-          path: '/dashboard/store', children: [
+          path: '/store', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1']}>  <Component.StoreList /></ProtectedRoutes> },
             {
               path: 'details/:id', children: [
@@ -147,7 +143,7 @@ function App() {
           ]
         },
         {
-          path: '/dashboard/bidding', children: [
+          path: '/bidding', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1']}>  <Component.Bidding /></ProtectedRoutes> },
             {
               path: 'details/:id', children: [
@@ -159,7 +155,7 @@ function App() {
         },
         // ** :: Locations
         {
-          path: '/dashboard/location', children: [
+          path: '/location', children: [
             {
               path: 'country', children: [
                 { index: true, element: <ProtectedRoutes allowedRoles={['1']}> <Component.Country /></ProtectedRoutes> },
@@ -185,7 +181,7 @@ function App() {
         },
         // ToDo :: settings
         {
-          path: '/dashboard/settings', children: [
+          path: '/settings', children: [
             {
               path: 'general', children: [
                 { index: true, element: <ProtectedRoutes allowedRoles={['1']}> <Component.GeneralSettings /></ProtectedRoutes> },
@@ -195,7 +191,7 @@ function App() {
         },
         // ToDo :: Medical Fields
         {
-          path: '/dashboard/medicalfields', children: [
+          path: '/medicalfields', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1']}><Component.MedicalFields /> </ProtectedRoutes> },
             { path: 'add', element: <ProtectedRoutes allowedRoles={['1']}> <Component.AddMedicalFields /></ProtectedRoutes> },
             { path: 'edit/:id', element: <ProtectedRoutes allowedRoles={['1']}> <Component.EditMedicalFields /></ProtectedRoutes> },
@@ -204,7 +200,7 @@ function App() {
         },
         // ToDo :: Ads
         {
-          path: '/dashboard/ads', children: [
+          path: '/ads', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1']}><Component.AdsList /> </ProtectedRoutes> },
             { path: 'add', element: <ProtectedRoutes allowedRoles={['1']}> <Component.AddAds /></ProtectedRoutes> },
             { path: 'edit/:id', element: <ProtectedRoutes allowedRoles={['1']}> <Component.EditAds /></ProtectedRoutes> },
@@ -213,7 +209,7 @@ function App() {
         },
         // ToDO :: Blogs
         {
-          path: '/dashboard/blogs', children: [
+          path: '/blogs', children: [
             {
               path: 'client', children: [
                 { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.BlogClient /> </ProtectedRoutes> },
@@ -230,42 +226,42 @@ function App() {
         },
         // ToDO :: consult
         {
-          path: '/dashboard/consult', children: [
+          path: '/consult', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.ChatConsult /> </ProtectedRoutes> },
             { path: 'chat/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.LiveConsult /> </ProtectedRoutes> }
           ]
         },
         {
-          path: '/dashboard/visits', children: [
+          path: '/visits', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.Visits /> </ProtectedRoutes> },
             { path: 'details/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.VisitDetails /> </ProtectedRoutes> },
           ]
         },
         {
-          path: '/dashboard/services', children: [
+          path: '/services', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.Services /> </ProtectedRoutes> },
             { path: 'add', element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.AddService /> </ProtectedRoutes> },
             { path: 'edit/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.EditService /> </ProtectedRoutes> },
           ]
         },
         {
-          path: '/dashboard/consultTime', children: [
+          path: '/consultTime', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1']}><Component.ConsultTime /> </ProtectedRoutes> },
             { path: 'add', element: <ProtectedRoutes allowedRoles={['1']}><Component.AddConsultTime /> </ProtectedRoutes> }
           ]
         },
         {
-          path: '/dashboard/doctorfree', children: [
+          path: '/doctorfree', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.DoctorFreeList /> </ProtectedRoutes> },
           ]
         },
         {
-          path: '/dashboard/doctor', children: [
+          path: '/doctor', children: [
             { path: 'request', element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.DoctorRequest /> </ProtectedRoutes> },
           ]
         },
         {
-          path: '/dashboard/medicalcenter', children: [
+          path: '/medicalcenter', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['1']}><Component.Centers /> </ProtectedRoutes> },
             { path: 'profile/:id', element: <ProtectedRoutes allowedRoles={['1']}><Component.ProfileCenter /> </ProtectedRoutes> },
             { path: 'edit/:id', element: <ProtectedRoutes allowedRoles={['1']}><Component.CenterEdit /> </ProtectedRoutes> },
@@ -277,13 +273,13 @@ function App() {
           ]
         },
         {
-          path: '/dashboard/docs', children: [
+          path: '/docs', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['2']}><Component.Docs /> </ProtectedRoutes> },
             { path: 'add', element: <ProtectedRoutes allowedRoles={['2']}><Component.AddDocs /> </ProtectedRoutes> },
           ]
         },
         {
-          path: '/dashboard/hours', children: [
+          path: '/hours', children: [
             { index: true, element: <ProtectedRoutes allowedRoles={['2']}><Component.MCHours /> </ProtectedRoutes> },
             { path: 'add', element: <ProtectedRoutes allowedRoles={['2']}><Component.AddMCHour /> </ProtectedRoutes> },
           ]

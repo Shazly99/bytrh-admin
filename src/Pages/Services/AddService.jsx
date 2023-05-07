@@ -41,7 +41,7 @@ const AddService = () => {
           },
         });
         setTimeout(() => {
-          navigate('/dashboard/services');
+          navigate('/services');
         }, 2000);
       } else {
         toast.error(res.data.ApiMsg)
@@ -94,7 +94,7 @@ const AddService = () => {
                     </div>
 
                     <div className='baseBtn w-auto'>
-                      <Link to={'/dashboard/services'}>
+                      <Link to={'/services'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                           {translate[isLang].add.cancel}
 

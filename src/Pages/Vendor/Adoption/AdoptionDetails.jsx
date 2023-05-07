@@ -183,7 +183,7 @@ export default function AdoptionDetails() {
             <h5 className='mb-3'>{isLang === 'ar' ? 'المحادثــات' : 'Chats'}</h5>
             <div className={`mb-2 row ${Object.keys(fetchChats).length == 1 ? '' : Object.keys(fetchChats).length > 1 ? 'gx-sm-4' : ''} gx-0 gy-4 d-flex justify-content-sm-start justify-content-center align-items-center`}>
                 {fetchChats.map((el , i) => (
-                    <Link key={i} to={`../dashboard/chat/${el.IDAdoptionChat}`} className="col-lg-3 col-md-4 col-sm-6 text-black">
+                    <Link key={i} to={`../chat/${el.IDAdoptionChat}`} className="col-lg-3 col-md-4 col-sm-6 text-black">
                         <div className="rounded-3 shadow bg-black color-red position-relative adDetails">
                           <div className="d-flex justify-content-center align-items-center flex-column py-5 px-3">
                             <h5 className='mb-2'>{el.ClientName}</h5>

@@ -108,7 +108,7 @@ const EditDoctor = ( ) => {
     if (data.Success === true) {
       setApiCode(data.Success);
       setTimeout(() => {
-        // navigate('/dashboard/doctors');
+        // navigate('/doctors');
         window.history.go(-1);
       }, 1500);
     }
@@ -260,7 +260,7 @@ const EditDoctor = ( ) => {
                     </div>
 
                     <div className='baseBtn w-auto'>
-                      <Link to={'/dashboard/doctors'}>
+                      <Link to={'/doctors'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                           {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                         </Button>

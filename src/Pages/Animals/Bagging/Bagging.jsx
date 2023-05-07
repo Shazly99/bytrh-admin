@@ -125,7 +125,7 @@ const Bagging = () => {
                               className="DropdownButton "
                               drop={'down-centered'}
                             >
-                              <Dropdown.Item eventKey="Edite" as={Link} to={`/dashboard/animals/bagging/editbagging/${item.IDBagging}`}>
+                              <Dropdown.Item eventKey="Edite" as={Link} to={`/animals/bagging/editbagging/${item.IDBagging}`}>
                                 {isLang === 'ar' ? 'تعديـل' : 'Edit'}
                               </Dropdown.Item>
                               <NavDropdown.Divider />

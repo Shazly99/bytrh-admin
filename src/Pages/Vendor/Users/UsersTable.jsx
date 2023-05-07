@@ -134,7 +134,7 @@ function UsersTable({ usersList, userList, isLoader, toastTranslate, actionsTran
                                                                 onSelect={(eventKey) => handleActionSelect(item.IDUser, eventKey)}
                                                                 className="DropdownButton "
                                                             >
-                                                                <Dropdown.Item eventKey="Edite" className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} as={Link} to={`/dashboard/user/editUser/${item.IDUser}`}>
+                                                                <Dropdown.Item eventKey="Edite" className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} as={Link} to={`/user/editUser/${item.IDUser}`}>
                                                                     {actionsTranslate[1].name}
                                                                 </Dropdown.Item>
                                                                 <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="DELETED">{actionsTranslate[2].name}</Dropdown.Item>

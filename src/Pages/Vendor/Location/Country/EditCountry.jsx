@@ -47,7 +47,7 @@ const EditCountry = () => {
           },
         });
         setTimeout(() => {
-          navigate('/dashboard/location/Country');
+          navigate('/location/Country');
         }, 2000);
       } else {
         toast.error(res.data.ApiMsg)
@@ -112,7 +112,7 @@ const EditCountry = () => {
                     </div>
 
                     <div className='baseBtn w-auto'>
-                      <Link to={'/dashboard/location/country'}>
+                      <Link to={'/location/country'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                         {translate[isLang].edit.cancel}
 

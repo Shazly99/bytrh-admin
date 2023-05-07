@@ -114,8 +114,7 @@ import AddService from './../Pages/Services/AddService';
 import EditService from './../Pages/Services/EditService';
 import Services from './../Pages/Services/Services';
 import AddDoctorService from './../Pages/Vendor/Doctor/Service/AddDoctorService';
-import BytrhWebsite from './../Layout/BytrhWebsite';
-import Home from './../Website/Page/Home';
+
  
 
  
@@ -126,8 +125,6 @@ const Component= {
     Chat,
     Loader,
     Contact, 
-    BytrhWebsite,
-    Home,
     // Vendor Components User 1
     Dashboard,  
     AddNewUser,

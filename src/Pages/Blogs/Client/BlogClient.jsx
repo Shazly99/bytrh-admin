@@ -614,7 +614,7 @@ const BlogClient = () => {
                                                     </td>
                                                     <td >
                                                         <div>
-                                                            <Link to={`/dashboard/blogs/client/details/${item?.IDClientBlog}`}>
+                                                            <Link to={`/blogs/client/details/${item?.IDClientBlog}`}>
                                                                 <img src={Img.view} />
                                                             </Link>
                                                         </div>

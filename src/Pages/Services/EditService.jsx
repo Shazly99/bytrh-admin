@@ -44,7 +44,7 @@ const EditService = () => {
           },
         });
         setTimeout(() => {
-          navigate('/dashboard/services');
+          navigate('/services');
         }, 2000);
       } else {
         toast.error(res.data.ApiMsg)
@@ -103,7 +103,7 @@ const EditService = () => {
                       </div>
 
                       <div className='baseBtn w-auto'>
-                        <Link to={'/dashboard/services'}>
+                        <Link to={'/services'}>
                           <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                           {translate[isLang].edit.cancel}
 

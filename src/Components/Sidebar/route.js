@@ -3,14 +3,14 @@ import LogoSvg from "../../assets/svg/LogoSvg";
 
 const routes = [
   // {
-  //   path: "/dashboard",
+  //   path: "",
   //   nameEn: "Dashboard",
   //   nameAr: "لوحة القيادة",
   //   icon: <LogoSvg.Dashboard className="logoSvg" style={{ width: 19 }} />,
   //   Roles: [1, 2]
   // }, 
    {
-    path: "/dashboard/user",
+    path: "/user",
     nameAr: "المستخدمين",
     nameEn: "Users",
     icon: <LogoSvg.Users className="logoSvg" style={{ width: 19 }} />,
@@ -18,7 +18,7 @@ const routes = [
 
   },
   {
-    path: "/dashboard/client",
+    path: "/client",
     nameEn: "Clients",
     nameAr: "عملاء ",
     icon: <LogoSvg.Clients className="logoSvg" style={{ width: 19 }} />,
@@ -31,19 +31,19 @@ const routes = [
     Roles: [1, 2],
     subRoutes: [
       {
-        path: "/dashboard/doctors",
+        path: "/doctors",
         nameAr: "قائمة الأطباء ",
         nameEn: "List",
         icon: <Icons.Dote size={19} />,
       },
       {
-        path: "/dashboard/doctorfree",
+        path: "/doctorfree",
         nameAr: "الطبيب الحر",
         nameEn: "Free",
         icon: <Icons.Dote size={19} />,
       },
       {
-        path: "/dashboard/doctor/request",
+        path: "/doctor/request",
         nameAr: "طلبات",
         nameEn: "Request",
         icon: <Icons.Dote size={19} />,
@@ -53,7 +53,7 @@ const routes = [
   }, 
 
   {
-    path: "/dashboard/medicalcenter",
+    path: "/medicalcenter",
     nameAr: "مركــز طبـــي",
     nameEn: "Medical Center",
     icon: <LogoSvg.Visits className="logoSvg" style={{ width: 19 }} />,
@@ -61,7 +61,7 @@ const routes = [
 
   },
   {
-    path: "/dashboard/hours",
+    path: "/hours",
     nameAr: "مواعيد المركز الطبي",
     nameEn: "Center Hours",
     // icon: <LogoSvg.Visits className="logoSvg" style={{ width: 19 }} />,
@@ -76,37 +76,37 @@ const routes = [
     Roles: [1],
     subRoutes: [
       {
-        path: "/dashboard/animals/categories",
+        path: "/animals/categories",
         nameAr: "فئات ",
         nameEn: "Categories ",
         icon: <Icons.Dote size={19} />,
       },
       {
-        path: "/dashboard/animals/subcategories",
+        path: "/animals/subcategories",
         nameAr: "الفئات الفرعية ",
         nameEn: "Sub Categories ",
         icon: <Icons.Dote size={19} />,
       },
       {
-        path: "/dashboard/animals/cutting",
+        path: "/animals/cutting",
         nameAr: "قطع   ",
         nameEn: "Cutting ",
         icon: <Icons.Dote size={19} />,
       },
       {
-        path: "/dashboard/animals/cuttingprice",
+        path: "/animals/cuttingprice",
         nameAr: "سعر القطع",
         nameEn: "Cutting Price",
         icon: <Icons.Dote size={19} />,
       },
       {
-        path: "/dashboard/animals/bagging",
+        path: "/animals/bagging",
         nameAr: "تكييس ",
         nameEn: "Bagging ",
         icon: <Icons.Dote size={19} />,
       },
       {
-        path: "/dashboard/animals/baggingprice",
+        path: "/animals/baggingprice",
         nameAr: "سعر التكييس",
         nameEn: "Bagging Price",
         icon: <Icons.Dote size={19} />,
@@ -121,19 +121,19 @@ const routes = [
     Roles: [1],
     subRoutes: [
       {
-        path: "/dashboard/location/country",
+        path: "/location/country",
         nameAr: "بلدان ",
         nameEn: "Country ",
         icon: <Icons.Dote size={19} />,
       },
       {
-        path: "/dashboard/location/cities",
+        path: "/location/cities",
         nameAr: "المناطق ",
         nameEn: "Areas ",
         icon: <Icons.Dote size={19} />,
       },
       {
-        path: "/dashboard/location/areas",
+        path: "/location/areas",
         nameAr: "مدن ",
         nameEn: "Cities ",
         icon: <Icons.Dote size={19} />,
@@ -150,21 +150,21 @@ const routes = [
     subRoutes: [
   
       {
-        path: "/dashboard/consult",
+        path: "/consult",
         nameAr: "استشـارات",
         nameEn: "Consults",
         icon: <Icons.Dote size={19} />,
         Roles: [1, 2],
       },
       {
-        path: "/dashboard/visits",
+        path: "/visits",
         nameAr: "الــزيارات",
         nameEn: "Visits",
         icon: <Icons.Dote size={19} />,
         Roles: [1, 2],
       },
       {
-        path: "/dashboard/services",
+        path: "/services",
         nameAr: "الخدمــات",
         nameEn: "Services",
         icon: <Icons.Dote size={19} />,
@@ -181,13 +181,13 @@ const routes = [
 
     subRoutes: [
       {
-        path: "/dashboard/store",
+        path: "/store",
         nameAr: "متجر",
         nameEn: "Store",
         icon: <Icons.Dote size={19} />,
       },
       {
-        path: "/dashboard/bidding",
+        path: "/bidding",
         nameAr: "مـزادات",
         nameEn: "Bidding",
         icon: <Icons.Dote size={19} />,
@@ -196,7 +196,7 @@ const routes = [
     ],
   },
   {
-    path: "/dashboard/ads",
+    path: "/ads",
     nameAr: "إعلانـات",
     nameEn: "Ads",
     icon: <LogoSvg.Ads className="logoSvg" style={{ width: 19 }} />,
@@ -211,13 +211,13 @@ const routes = [
 
     subRoutes: [
       {
-        path: "/dashboard/blogs/client",
+        path: "/blogs/client",
         nameAr: " عميل ",
         nameEn: " Client ",
         icon: <Icons.Dote size={19} />,
       },
       {
-        path: "/dashboard/blogs/doctor",
+        path: "/blogs/doctor",
         nameAr: " طبيب ",
         nameEn: " Doctor ",
         icon: <Icons.Dote size={19} />,
@@ -226,7 +226,7 @@ const routes = [
     ],
   },
   {
-    path: "/dashboard/blogs/doctor",
+    path: "/blogs/doctor",
     nameAr: "المدونات ",
     nameEn: "Doctor Blogs ",
     icon: <LogoSvg.Blogs className="logoSvg" style={{ width: 19 }} />,
@@ -234,7 +234,7 @@ const routes = [
 
   },
   {
-    path: "/dashboard/adoption",
+    path: "/adoption",
     nameAr: "تبــني",
     nameEn: "Adoption",
     icon: <LogoSvg.Adoption className="logoSvg" style={{ width: 19 }} />,
@@ -249,19 +249,19 @@ const routes = [
 
     subRoutes: [
       {
-        path: "/dashboard/settings/general",
+        path: "/settings/general",
         nameAr: "إعدادات",
         nameEn: "Settings",
         icon: <Icons.Dote size={19} />,
       },
       {
-        path: "/dashboard/consultTime",
+        path: "/consultTime",
         nameAr: "أوقات الإستشـارة",
         nameEn: "Consult Times",
         icon: <Icons.Dote size={19} />,
       },
       {
-        path: "/dashboard/contact",
+        path: "/contact",
         nameAr: "اتصال",
         nameEn: "Contact",
         icon: <Icons.Dote size={19} />,
@@ -270,21 +270,21 @@ const routes = [
     ],
   },
   {
-    path: "/dashboard/visits",
+    path: "/visits",
     nameAr: "الــزيارات",
     nameEn: "Visits",
     icon: <LogoSvg.Visits className="logoSvg" style={{ width: 19 }} />,
     Roles: [2]
   },
   {
-    path: "/dashboard/consult",
+    path: "/consult",
     nameAr: "استشـارات",
     nameEn: "Consults",
     icon: <LogoSvg.Consults className="logoSvg" style={{ width: 19 }} />,
     Roles: [2],
   },
   {
-    path: "/dashboard/services",
+    path: "/services",
     nameAr: "الخدمــات",
     nameEn: "Services",
     icon: <LogoSvg.Adoption className="logoSvg" style={{ width: 19 }} />,

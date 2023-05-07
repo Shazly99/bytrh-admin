@@ -51,7 +51,7 @@ const AddAreas = () => {
           },
         });
         setTimeout(() => {
-          navigate('/dashboard/location/areas');
+          navigate('/location/areas');
         }, 2000);
       } else {
         toast.error(res.data.ApiMsg)
@@ -127,7 +127,7 @@ const AddAreas = () => {
                       </Button>
                     </div> 
                     <div className='baseBtn w-auto'>
-                      <Link to={'/dashboard/location/areas'}>
+                      <Link to={'/location/areas'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                         {translate[isLang].add.cancel}
 

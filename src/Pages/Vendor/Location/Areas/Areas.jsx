@@ -325,7 +325,7 @@ const Areas = () => {
                               className="DropdownButton "
                               drop={'down-centered'}
                             >
-                              <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/dashboard/location/areas/editareas/${item.IDArea}`}>
+                              <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/location/areas/editareas/${item.IDArea}`}>
                                 {translate[isLang]?.Actions.edit}
                               </Dropdown.Item>
 

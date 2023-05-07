@@ -73,7 +73,7 @@ const SidebarSM = ({ children }) => {
                     className="logo mt-3"
                     key={1}
                   >
-                    <Link to={'/dashboard'}  onClick={()=>setIsOpen(!isOpen)} style={{ cursor: 'pointer' }}>
+                    <Link to={'/'}  onClick={()=>setIsOpen(!isOpen)} style={{ cursor: 'pointer' }}>
                       <img loading="lazy" src={Img.logo} alt='logo' width={129} height={78} />
                     </Link>
                   </motion.div>

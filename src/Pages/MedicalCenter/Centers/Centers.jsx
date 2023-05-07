@@ -534,20 +534,20 @@ const Centers = () => {
                                   className="DropdownButton "
                                   drop={'down-centered'}
                                 >
-                                  <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/dashboard/medicalcenter/edit/${item?.IDMedicalCenter}`}>
+                                  <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/medicalcenter/edit/${item?.IDMedicalCenter}`}>
                                     {translate[isLang]?.Actions.edit}
                                   </Dropdown.Item>
 
-                                  <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/dashboard/medicalcenter/profile/${item?.IDMedicalCenter}`}>
+                                  <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/medicalcenter/profile/${item?.IDMedicalCenter}`}>
                                     {translate[isLang]?.Actions.view}
                                   </Dropdown.Item>
 
 
-                                  <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/dashboard/medicalcenter/add/${item?.IDMedicalCenter}`}>
+                                  <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/medicalcenter/add/${item?.IDMedicalCenter}`}>
                                     {translate[isLang]?.Actions.add}
                                   </Dropdown.Item>
 
-                                  <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/dashboard/medicalcenter/hours/${item?.IDMedicalCenter}`}>
+                                  <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="Edite" as={Link} to={`/medicalcenter/hours/${item?.IDMedicalCenter}`}>
                                     {translate[isLang]?.Actions.hour}
                                   </Dropdown.Item>
 

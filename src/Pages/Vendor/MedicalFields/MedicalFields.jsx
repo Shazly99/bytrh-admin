@@ -218,7 +218,7 @@ const MedicalFields = () => {
                                   className="DropdownButton "
                                   drop={'down-centered'}
                                 >
-                                  <Dropdown.Item eventKey="Edite" as={Link} to={`/dashboard/medicalfields/edit/${item.IDMedicalField}`}>
+                                  <Dropdown.Item eventKey="Edite" as={Link} to={`/medicalfields/edit/${item.IDMedicalField}`}>
                                     Edit
                                   </Dropdown.Item>
                                   {

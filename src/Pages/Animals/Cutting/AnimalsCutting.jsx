@@ -146,7 +146,7 @@ const AnimalsCutting = () => {
                                 className="DropdownButton "
                                 drop={'down-centered'}
                               >
-                                <Dropdown.Item eventKey="Edite" as={Link} to={`/dashboard/animals/cutting/editcutting/${item.IDCutting}`}>
+                                <Dropdown.Item eventKey="Edite" as={Link} to={`/animals/cutting/editcutting/${item.IDCutting}`}>
                                   {isLang === 'ar' ? 'تعديـل' : 'Edit'}
                                 </Dropdown.Item>
 

@@ -244,7 +244,7 @@ function AddMCHour() {
                                                 </div>
 
                                                 <div className='baseBtn'>
-                                                    <Link to={`/dashboard/hours`}>
+                                                    <Link to={`/hours`}>
                                                         <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                                             {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                                                         </Button>
@@ -327,7 +327,7 @@ function AddMCHour() {
                                                 </div>
 
                                                 <div className='baseBtn'>
-                                                    <Link to={`/dashboard/hours`}>
+                                                    <Link to={`/hours`}>
                                                         <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                                             {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                                                         </Button>
