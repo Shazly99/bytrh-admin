@@ -115,7 +115,7 @@ const AddDoctorService = () => {
                       </div>
 
                       <div className='baseBtn w-auto'>
-                        <Link to={`/doctors/Service/list/${id}`}>
+                        <Link to={`/dashboard/doctors/Service/list/${id}`}>
                           <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                             {translateBaggingPrice[isLang]?.CancelBTN}
                           </Button>

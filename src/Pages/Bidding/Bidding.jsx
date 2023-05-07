@@ -717,7 +717,7 @@ const Bidding = () => {
                           <td>
                             <div>
                               <Link
-                                to={`/bidding/details/${item?.IDAnimalProduct}`}
+                                to={`/dashboard/bidding/details/${item?.IDAnimalProduct}`}
                               >
                                 <img src={Img.view} alt='img view' />
                               </Link>

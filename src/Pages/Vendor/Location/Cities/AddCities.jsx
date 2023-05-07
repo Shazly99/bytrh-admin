@@ -47,7 +47,7 @@ const AddCities = () => {
           },
         });
         setTimeout(() => {
-          navigate('/location/cities');
+          navigate('/dashboard/location/cities');
         }, 2000);
       } else {
         toast.error(res.data.ApiMsg)
@@ -127,7 +127,7 @@ const AddCities = () => {
                     </div>
 
                     <div className='baseBtn w-auto'>
-                      <Link to={'/location/cities'}>
+                      <Link to={'/dashboard/location/cities'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                         {translate[isLang].add.cancel}
 

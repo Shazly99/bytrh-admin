@@ -179,19 +179,19 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                 onSelect={(eventKey) => handleActionSelect(id, eventKey)}
                                 className="DropdownButton "
                             >
-                                <Dropdown.Item as={Link} to={`/doctors/editDoctor/${id}`}>
+                                <Dropdown.Item as={Link} to={`/dashboard/doctors/editDoctor/${id}`}>
                                     {isLang === 'ar' ? 'تعديـل' : 'Edit'}
                                 </Dropdown.Item>
-                                <Dropdown.Item as={Link} to={`/doctors/Service/list/${id}`}>
+                                <Dropdown.Item as={Link} to={`/dashboard/doctors/Service/list/${id}`}>
                                     {isLang === 'ar' ? 'خدمــات الدكتور' : 'Doctor Service'}
                                 </Dropdown.Item>
-                                {/* <Dropdown.Item as={Link} to={`/doctors/doctorFields/${id}`}>
+                                {/* <Dropdown.Item as={Link} to={`/dashboard/doctors/doctorFields/${id}`}>
                                     {isLang === 'ar' ? 'المجالات الطبيـة' : 'Medical Fields'}
                                 </Dropdown.Item> */}
-                                <Dropdown.Item as={Link} to={`/doctors/doctorCategory/${id}`}>
+                                <Dropdown.Item as={Link} to={`/dashboard/doctors/doctorCategory/${id}`}>
                                     {isLang === 'ar' ? 'التخصـص' : 'Specialization'}
                                 </Dropdown.Item>
-                                <Dropdown.Item as={Link} to={`/doctors/doctorHours/${id}`}>
+                                <Dropdown.Item as={Link} to={`/dashboard/doctors/doctorHours/${id}`}>
                                     {isLang === 'ar' ? 'أوقـات العمـل' : 'Doctor Hours'}
                                 </Dropdown.Item>
                                 <Dropdown.Item eventKey="balance" onClick={handleShowModal}>

@@ -214,7 +214,7 @@ const ProfileCenter = () => {
                             <div className="d-flex " style={{ justifyContent: 'space-between'}}>
 
                                 <label className='Sign__Up-header text-dark'>{translate[isLang]?.centerProfileDetails?.RoutecenterDoc}</label>
-                                <Link to={`/medicalcenter/add/${centerProfile?.IDMedicalCenter}`} >
+                                <Link to={`/dashboard/medicalcenter/add/${centerProfile?.IDMedicalCenter}`} >
                                     <span   className='upload__doc'>
                                        <LogoSvg.DocumentUpload  />
                                        {translate[isLang]?.centerProfileDetails?.uploadDoc}

@@ -81,7 +81,7 @@ const AddNewUser = () => {
                     },
                 });
                 setTimeout(() => {
-                    navigate('/user');
+                    navigate('/dashboard/user');
                 }, 2000);
             } else {
                 toast.error(res.data.ApiMsg)
@@ -216,7 +216,7 @@ const AddNewUser = () => {
                                             </div>
 
                                             <div className='baseBtn w-auto'>
-                                                <Link to={'/user'}>
+                                                <Link to={'/dashboard/user'}>
                                                     <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                                         {translate[isLang]?.add[3]?.cancel}
                                                     </Button>

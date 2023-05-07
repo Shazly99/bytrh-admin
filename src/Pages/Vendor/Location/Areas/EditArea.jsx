@@ -54,7 +54,7 @@ const EditArea = () => {
           },
         });
         setTimeout(() => {
-          navigate('/location/areas');
+          navigate('/dashboard/location/areas');
         }, 2000);
       } else {
         toast.error(res.data.ApiMsg)
@@ -135,7 +135,7 @@ const EditArea = () => {
                     </div>
 
                     <div className='baseBtn w-auto'>
-                      <Link to={'/location/areas'}>
+                      <Link to={'/dashboard/location/areas'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                         {translate[isLang].edit.cancel}                     
                          </Button>

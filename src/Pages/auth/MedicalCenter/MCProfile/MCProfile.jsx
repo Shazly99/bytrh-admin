@@ -198,7 +198,7 @@ const MCProfile = () => {
     if (data.Success === true) {
       setApiCode(data.Success);
       setTimeout(() => {
-        // navigate('/doctors');
+        // navigate('/dashboard/doctors');
         // window.history.go(-1);
         setApiCode(null);
         setMessage('');
@@ -424,7 +424,7 @@ const MCProfile = () => {
                         </div>
 
                         <div className='baseBtn'>
-                            <Link to={'/'}>
+                            <Link to={'/dashboard'}>
                                 <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                   {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                                 </Button>

@@ -350,7 +350,7 @@ const ChatConsult = () => {
                                         className="DropdownButton "
                                         drop={'down-centered'}
                                       >
-                                        <Dropdown.Item eventkey="Edite" as={Link} to={`/chat/consult/details/${item.IDConsult}`} target="_blank">  {translate[isLang].Actions.chat} </Dropdown.Item>
+                                        <Dropdown.Item eventkey="Edite" as={Link} to={`/dashboard/chat/consult/details/${item.IDConsult}`} target="_blank">  {translate[isLang].Actions.chat} </Dropdown.Item>
                                         {item.ConsultStatus !== 'ENDED' &&
                                           <Dropdown.Item eventkey="End" as={Link}> {translate[isLang].Actions.endChat} </Dropdown.Item>
                                         }
@@ -361,12 +361,12 @@ const ChatConsult = () => {
                                   item.ConsultStatus === 'ENDED' ?
                                     <div>
                                       <span>
-                                        <Button variant=" outline-sucess" className="DropdownButton outline-sucess outline-sucessChat" title="Chat" eventkey="Edite" as={Link} to={`/consult/chat/${item.IDConsult}`} target="_blank">  {translate[isLang].Actions.chat} </Button>
+                                        <Button variant=" outline-sucess" className="DropdownButton outline-sucess outline-sucessChat" title="Chat" eventkey="Edite" as={Link} to={`/dashboard/consult/chat/${item.IDConsult}`} target="_blank">  {translate[isLang].Actions.chat} </Button>
                                       </span>
                                     </div> :
                                     <div>
                                       <span>
-                                        <Button disabled variant="outline-sucessdDisabled" className=" DropdownButton outline-sucessdDisabled" title="Don't have a conversation" eventkey="Edite" as={Link} to={`/consult/chat/${item.IDConsult}`} target="_blank">
+                                        <Button disabled variant="outline-sucessdDisabled" className=" DropdownButton outline-sucessdDisabled" title="Don't have a conversation" eventkey="Edite" as={Link} to={`/dashboard/consult/chat/${item.IDConsult}`} target="_blank">
                                           <img src={img.inView} alt="inview" />
                                         </Button>
                                       </span>

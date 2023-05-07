@@ -287,7 +287,7 @@ const EditAds = () => {
           },
         });
         setTimeout(() => {
-          navigate('/ads');
+          navigate('/dashboard/ads');
         }, 2000);
       } else {
         toast.error(res.data.ApiMsg)
@@ -490,7 +490,7 @@ const EditAds = () => {
                       </div>
 
                       <div className='baseBtn w-auto'>
-                        <Link to={'/ads'}>
+                        <Link to={'/dashboard/ads'}>
                           <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                             {translateADS[isLang]?.CancelBTN}
                           </Button>

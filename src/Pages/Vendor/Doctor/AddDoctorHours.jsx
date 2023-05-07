@@ -262,7 +262,7 @@ function AddDoctorHours() {
                               </div>
 
                               <div className='baseBtn'>
-                                  <Link to={`/doctors/doctorHours/${id}`}>
+                                  <Link to={`/dashboard/doctors/doctorHours/${id}`}>
                                       <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                           {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                                       </Button>
@@ -358,7 +358,7 @@ function AddDoctorHours() {
                               </div>
 
                               <div className='baseBtn'>
-                                  <Link to={`/doctors/doctorHours/${id}`}>
+                                  <Link to={`/dashboard/doctors/doctorHours/${id}`}>
                                       <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                           {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                                       </Button>

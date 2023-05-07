@@ -82,7 +82,7 @@ const Edit = () => {
                 },
             });
             setTimeout(() => {
-                navigate('/user');
+                navigate('/dashboard/user');
             }, 2000);
         } else {
             toast.error(data.ApiMsg)
@@ -240,7 +240,7 @@ const Edit = () => {
                                             </div>
 
                                             <div className='baseBtn w-auto'>
-                                                <Link to={'/user'}>
+                                                <Link to={'/dashboard/user'}>
                                                     <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                                         {translate[isLang]?.edit[2]?.cancel}
 

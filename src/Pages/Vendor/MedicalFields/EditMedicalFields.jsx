@@ -40,7 +40,7 @@ const EditMedicalFields = () => {
           },
         });
         setTimeout(() => {
-          navigate('/medicalfields');
+          navigate('/dashboard/medicalfields');
         }, 2000);
       } else {
         toast.error(res.data.ApiMsg)
@@ -92,7 +92,7 @@ const EditMedicalFields = () => {
                     </div>
 
                     <div className='baseBtn w-auto'>
-                      <Link to={'/medicalfields'}>
+                      <Link to={'/dashboard/medicalfields'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                         Cancel
                         </Button>

@@ -121,7 +121,7 @@ function Navber() {
                 <ul className={`dropdown-menu ${isLang === 'ar' ? 'text-start' : 'text-end'}`} style={{ left: isLang === 'ar' ? '0' : '-120px', zIndex: 99999,top:'47px' }}>
                   {/* <h1>Ahmed Elshazly</h1> */}
                   <li>
-                    <Link to="/profile" className="dropdown-item" >
+                    <Link to="/dashboard/profile" className="dropdown-item" >
                       <div style={{ display: 'flex', alignItems: 'center' }}>
                         <img  className={isLang === 'ar' ? 'ms-2' : 'me-2'} src={Icons.profile} alt="profile" width={17} height={17} />
                         <span>{isLang === 'ar' ? 'الملـف الشخصـي' : 'My Profile'}</span>
@@ -132,7 +132,7 @@ function Navber() {
                   {localStorage.getItem('Role') === '2' ?
                     <>
                       <li>
-                        <Link to={`/mcprofile`} className="dropdown-item" >
+                        <Link to={`/dashboard/mcprofile`} className="dropdown-item" >
                           <div style={{ display: 'flex', alignItems: 'center' }}>
                             <LogoSvg.ProfileCenter className={isLang === 'ar' ? 'ms-2' : 'me-2'} style={{ width: 19 }} />
 
@@ -141,7 +141,7 @@ function Navber() {
                         </Link>
                       </li>
                       <li>
-                        <Link to={`/docs`} className="dropdown-item" >
+                        <Link to={`/dashboard/docs`} className="dropdown-item" >
                           <div style={{ display: 'flex', alignItems: 'center' }}>
                             <LogoSvg.DocumentUpload className={isLang === 'ar' ? 'ms-2' : 'me-2'} style={{ width: 18 }} />
 

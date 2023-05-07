@@ -42,7 +42,7 @@ function AddConsultTime() {
     if (data.Success === true) {
     setApiCode(data.Success);
     setTimeout(() => {
-    //   navigate('/doctors');
+    //   navigate('/dashboard/doctors');
         window.history.go(-1);
     }, 1500);
 
@@ -93,7 +93,7 @@ function AddConsultTime() {
                       </div>
 
                       <div className='baseBtn w-auto'>
-                          <Link to={'/consultTime'}>
+                          <Link to={'/dashboard/consultTime'}>
                               <Button  variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                   {translateConsultTimes[isLang]?.cancelBTN}
                               </Button>

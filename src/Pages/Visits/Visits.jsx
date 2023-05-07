@@ -370,7 +370,7 @@ const Visits = () => {
                               <td>
                                 <div>
                                   <Link
-                                    to={`/visits/details/${item?.IDVisit}`}
+                                    to={`/dashboard/visits/details/${item?.IDVisit}`}
                                   >
                                     <LogoSvg.view className="logoSvg" style={{ width: 19 }} />
                                   </Link>

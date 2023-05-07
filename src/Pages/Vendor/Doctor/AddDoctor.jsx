@@ -305,7 +305,7 @@ function AddDoctor({ fetchCountriesBytra }) {
                   </div>
 
                   <div className='baseBtn w-auto'>
-                    <Link to={'/doctors'}>
+                    <Link to={'/dashboard/doctors'}>
                       <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                         {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                       </Button>

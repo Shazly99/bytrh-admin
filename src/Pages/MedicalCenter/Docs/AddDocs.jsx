@@ -41,7 +41,7 @@ const AddDocs = () => {
           },
         });
         setTimeout(() => {
-          navigate('/docs');
+          navigate('/dashboard/docs');
         }, 2000);
       } else {
         toast.error(res.data.ApiMsg)
@@ -95,7 +95,7 @@ const AddDocs = () => {
                                 </div>
 
                                 <div className='baseBtn w-auto'>
-                                    <Link to={'/docs'}>
+                                    <Link to={'/dashboard/docs'}>
                                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                             {docs[isLang]?.CancelBTN}
                                         </Button>

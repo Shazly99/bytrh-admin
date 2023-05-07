@@ -35,7 +35,7 @@ const AddAnimalsCutting = () => {
           },
         });
         setTimeout(() => {
-          navigate('/animals/cutting');
+          navigate('/dashboard/animals/cutting');
         }, 2000);
       } else {
         toast.error(res.data.ApiMsg)
@@ -87,7 +87,7 @@ const AddAnimalsCutting = () => {
                                 </div>
 
                                 <div className='baseBtn w-auto'>
-                                    <Link to={'/animals/cutting'}>
+                                    <Link to={'/dashboard/animals/cutting'}>
                                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                           {translateCutting[isLang]?.CancelBTN}
                                         </Button>

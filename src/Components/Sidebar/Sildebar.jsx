@@ -56,7 +56,7 @@ const Sidebar = ({ children }) => {
                     className="logo mt-3"
                     key={1}
                   >
-                    <Link to={'/'} style={{ cursor: 'pointer' }}>
+                    <Link to={'/dashboard'} style={{ cursor: 'pointer' }}>
                       <img loading="lazy" src={Img.logo} alt='logo' width={129} height={78} />
                     </Link>
                   </motion.div>

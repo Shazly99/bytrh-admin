@@ -695,7 +695,7 @@ const StoreList = () => {
                                                     <td>
                                                         <div>
                                                             <Link
-                                                                to={`/store/details/${item?.IDAnimalProduct}`}
+                                                                to={`/dashboard/store/details/${item?.IDAnimalProduct}`}
                                                             >
                                                                 <img src={Img.view} alt='img view' />
                                                             </Link>

@@ -247,7 +247,7 @@ export default function DoctorProfile() {
 
                       {/* <small className='my-0 text-decoration-underline color-red' style={{fontWeight: '500' , cursor: 'pointer'}}>Change Password</small> */}
 
-                      <Link to={`../editDoctor/${id}`} className={`personal-info-edit position-absolute top-0 ${isLang === 'ar' ? 'start-0' : 'end-0'} color-red`} style={{ cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                      <Link to={`../dashboard/editDoctor/${id}`} className={`personal-info-edit position-absolute top-0 ${isLang === 'ar' ? 'start-0' : 'end-0'} color-red`} style={{ cursor: 'pointer', whiteSpace: 'nowrap' }}>
                         <FiEdit3 className='me-1' />
                         <small className='my-0' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'تعديـل' : 'Edit'}</small>
                       </Link>
@@ -515,7 +515,7 @@ export default function DoctorProfile() {
                         <h6 key={i} className='mb-2 color-red'>{field.MedicalFieldName}</h6>
                       ))}
 
-                      <Link to={`../doctorfields/${id}`} className="personal-info-edit position-absolute top-0 color-red" style={{ cursor: 'pointer', whiteSpace: 'nowrap', right: isLang === 'ar' ? 'auto' : '10px' , left: isLang === 'ar' ? '10px' : 'auto' }}>
+                      <Link to={`../dashboard/doctorfields/${id}`} className="personal-info-edit position-absolute top-0 color-red" style={{ cursor: 'pointer', whiteSpace: 'nowrap', right: isLang === 'ar' ? 'auto' : '10px' , left: isLang === 'ar' ? '10px' : 'auto' }}>
                         <FiEdit3 className={isLang === 'ar' ? 'ms-1' : 'me-1'} />
                         <small className='my-0' style={{ fontWeight: '500' }}>
                           {isLang === 'ar' ? 'تعديـل' : 'Edit'}
@@ -533,7 +533,7 @@ export default function DoctorProfile() {
                         <h6 key={i} className='mb-2 color-red'>{cate.AnimalCategoryName}</h6>
                       ))}
 
-                      <Link to={`../doctorCategory/${id}`} className="personal-info-edit position-absolute top-0 color-red" style={{ cursor: 'pointer', whiteSpace: 'nowrap', right: isLang === 'ar' ? 'auto' : '10px' , left: isLang === 'ar' ? '10px' : 'auto' }}>
+                      <Link to={`../dashboard/doctorCategory/${id}`} className="personal-info-edit position-absolute top-0 color-red" style={{ cursor: 'pointer', whiteSpace: 'nowrap', right: isLang === 'ar' ? 'auto' : '10px' , left: isLang === 'ar' ? '10px' : 'auto' }}>
                         <FiEdit3 className={isLang === 'ar' ? 'ms-1' : 'me-1'} />
                         <small className='my-0' style={{ fontWeight: '500' }}>
                           {isLang === 'ar' ? 'تعديـل' : 'Edit'}
