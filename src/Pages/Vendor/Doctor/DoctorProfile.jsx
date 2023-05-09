@@ -1,15 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react'; 
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { BiMessageRoundedAdd } from 'react-icons/bi';
 import { FiEdit3 } from 'react-icons/fi';
 import { Link, useParams } from 'react-router-dom';
-import { apiheader } from '../../../utils/fetchData'; 
+import { apiheader } from '../../../utils/fetchData';
 import CircularProgress from '@mui/material/CircularProgress';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Loader from '../../../Components/Shared/Loader/Loader';
-import Component from '../../../constants/Component';
 import { VendersContext } from '../../../context/Store';
+import Component from './../../../constants/Component';
+import DoctorDocuments from './DoctorDocuments';
 
 
 
@@ -23,6 +24,7 @@ export default function DoctorProfile() {
   const [fetchDoctorMedicalFields, setFetchDoctorMedicalFields] = useState([]);
   const [fetchDoctorAnimalCategories, setFetchDoctorAnimalCategories] = useState([]);
   const [fetchDoctorPricing, setFetchDoctorPricing] = useState([]);
+  const [DoctorDocument, setDoctorDocuments] = useState([]);
 
   const [loading, setLoading] = useState(false);
 
@@ -31,6 +33,7 @@ export default function DoctorProfile() {
     await axios.get(apiDoctoProfile, apiheader)
       .then(res => {
         if (res.status === 200 && res.request.readyState === 4) {
+          setDoctorDocuments(res.data.Response.DoctorDocuments);
           setFetchDoctor(res.data.Response);
           setFetchDoctorLicense(res.data.Response.DoctorLicense);
           setFetchDoctorPricing(res.data.Response.DoctorPricing);
@@ -39,7 +42,7 @@ export default function DoctorProfile() {
           setLoading(false);
         }
       })
-      .catch(err => { 
+      .catch(err => {
       })
   }
   useEffect(() => {
@@ -47,7 +50,7 @@ export default function DoctorProfile() {
       getDoctorData();
     }, 200);
 
-    return(() => {
+    return (() => {
       clearTimeout(timeOut);
     })
   }, [])
@@ -183,11 +186,12 @@ export default function DoctorProfile() {
         'Authorization': 'Bearer ' + localStorage.getItem('token'),
       },
     });
-
+    console.log(data);
     setMessageRemove(data.ApiMsg);
     setLoadingRemove(false);
 
     if (data.Success === true) {
+
       setApiCodeRemove(data.Success);
       setTimeout(() => {
         setMessageRemove('');
@@ -218,9 +222,12 @@ export default function DoctorProfile() {
         <div className="container-fluid py-2">
 
           {isLang === 'ar' ?
-              <Component.SubNav sub__nav={[{ name: 'صفحـة الطبيـب الشخصيـة', path: `/doctors/doctorProfile/${id}`} , { name: 'قائمـة الأطبـاء', path: `/doctors` }]} />
-              :
-              <Component.SubNav sub__nav={[{ name: 'Doctors', path: `/doctors` }, { name: 'Doctor Profile', path: `/doctors/doctorProfile/${id}` }]} />
+            <Component.SubNav sub__nav={[
+              { name: 'قائمـة الأطبـاء', path: `/doctors` },
+              { name: 'صفحـة الطبيـب الشخصيـة', path: `/doctors/doctorProfile/${id}` }
+            ]} />
+            :
+            <Component.SubNav sub__nav={[{ name: 'Doctor Profile', path: `/doctors/doctorProfile/${id}` }, { name: 'Doctors', path: `/doctors` }]} />
           }
 
           <div className="row gx-lg-4 gx-0 gy-lg-0 gy-4 d-flex justify-content-lg-start justify-content-center mt-2 mb-4">
@@ -230,7 +237,7 @@ export default function DoctorProfile() {
                 <div className="row gx-md-3 gx-2 gy-0 d-flex align-items-center">
                   <div className="col-4">
                     <div className="img-doc">
-                      <img src={fetchDoctor.DoctorPicture} className='img-fluid d-block rounded-3 w-100' style={{objectFit: 'fill'}} loading='lazy' alt="doctor" />
+                      <img src={fetchDoctor.DoctorPicture} className='img-fluid d-block rounded-3 w-100' style={{ objectFit: 'fill' }} loading='lazy' alt="doctor" />
                     </div>
                   </div>
                   <div className="col-8">
@@ -261,7 +268,7 @@ export default function DoctorProfile() {
             <div className="col-lg-5">
               <div className="license bg-light shadow-sm rounded-3 p-2 h-100">
                 <h6 className='mb-2 fw-bold'>
-                  
+
                   {isLang === 'ar' ? 'الرخصـة المهنيـة' : 'Profissional License'}
                 </h6>
                 <img src={fetchDoctorLicense.DoctorDocumentPath} className='img-fluid d-block rounded-3' loading='lazy' alt="license" />
@@ -273,6 +280,7 @@ export default function DoctorProfile() {
                 </div>
               </div>
             </div>
+
 
           </div>
 
@@ -325,7 +333,7 @@ export default function DoctorProfile() {
                                 <div className='d-flex justify-content-center align-content-center mt-4'>
                                   <div className={`baseBtn ${isLang === 'ar' ? 'ps-0 ms-2' : 'pe-0 me-2'}`}>
                                     <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                      {loadingEdit ? <CircularProgress size={27} style={{color: '#fff'}} /> : 
+                                      {loadingEdit ? <CircularProgress size={27} style={{ color: '#fff' }} /> :
                                         isLang === 'ar' ? 'حفـظ' : 'Save'}
                                     </Button>
                                   </div>
@@ -350,15 +358,15 @@ export default function DoctorProfile() {
                               </Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                                  <Component.HandelDelete/>
+                              <Component.HandelDelete />
                             </Modal.Body>
                             {messageRemove.length > 0 ? <p id="alertRemove" className={`alert ${apiCodeRemove === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 my-2 w-50 text-center mx-auto`}>{messageRemove}</p> : ''}
                             <Modal.Footer className='d-flex justify-content-center align-items-center'>
 
                               <div className='d-flex justify-content-center align-content-center'>
-                              <div className={`baseBtn ${isLang === 'ar' ? 'ps-0 ms-2' : 'pe-0 me-2'}`}>
+                                <div className={`baseBtn ${isLang === 'ar' ? 'ps-0 ms-2' : 'pe-0 me-2'}`}>
                                   <Button onClick={removeConfirm} variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                    {loadingRemove ? <CircularProgress size={27} style={{color: '#fff'}} /> : 
+                                    {loadingRemove ? <CircularProgress size={27} style={{ color: '#fff' }} /> :
                                       isLang === 'ar' ? 'تأكيـد' : 'Confirm'}
                                   </Button>
                                 </div>
@@ -433,7 +441,7 @@ export default function DoctorProfile() {
                               <div className='d-flex justify-content-center align-content-center mt-4'>
                                 <div className={`baseBtn ${isLang === 'ar' ? 'ps-0 ms-2' : 'pe-0 me-2'}`}>
                                   <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
-                                    {loadingAdd ? <CircularProgress size={27} style={{color: '#fff'}} /> : 
+                                    {loadingAdd ? <CircularProgress size={27} style={{ color: '#fff' }} /> :
                                       isLang === 'ar' ? 'حفـظ' : 'Save'}
                                   </Button>
                                 </div>
@@ -454,7 +462,7 @@ export default function DoctorProfile() {
 
 
                       <div className="price position-relative">
-                        <h6 className='mb-3'>{`${price.DoctorPricingService[0].toUpperCase() + price.DoctorPricingService.slice(1).toLowerCase()}`.replace('_' , ' ')}</h6>
+                        <h6 className='mb-3'>{`${price.DoctorPricingService[0].toUpperCase() + price.DoctorPricingService.slice(1).toLowerCase()}`.replace('_', ' ')}</h6>
                         <div className="service-level d-flex justify-content-between mb-2">
                           <h6 className='mb-1'>{isLang === 'ar' ? 'مستـوي الخدمـة' : 'Service Level'} <span className='text-black-50' style={{ fontSize: '12px' }}>({isLang === 'ar' ? 'تبدأ من' : 'start from'})</span> :</h6>
                           <h6 className={`mb-0 fw-bold ${isLang === 'ar' ? 'ps-2' : 'pe-2'} color-red`}>{price.DoctorServiceLevel} {isLang === 'ar' ? 'ريـال' : 'SAR'}</h6>
@@ -477,14 +485,14 @@ export default function DoctorProfile() {
                             setIDDoctorPricing(price.IDDoctorPricing);
                             setAmountEdit(price.DoctorPricing);
                             setDoctorServiceLevelEdit(price.DoctorServiceLevel);
-                          }} style={{ cursor: 'pointer', whiteSpace: 'nowrap', right: isLang === 'ar' ? 'auto' : '10px' , left: isLang === 'ar' ? '10px' : 'auto' }}>
+                          }} style={{ cursor: 'pointer', whiteSpace: 'nowrap', right: isLang === 'ar' ? 'auto' : '10px', left: isLang === 'ar' ? '10px' : 'auto' }}>
                             <FiEdit3 className={isLang === 'ar' ? 'ms-1' : 'me-1'} />
                             <small className='my-0' style={{ fontWeight: '500' }}>
                               {isLang === 'ar' ? 'تعديـل' : 'Edit'}
                             </small>
                           </div>
                           :
-                          <div className="personal-info-edit position-absolute top-0 color-red" onClick={handleShowAdd} style={{ cursor: 'pointer', whiteSpace: 'nowrap', right: isLang === 'ar' ? 'auto' : '10px' , left: isLang === 'ar' ? '10px' : 'auto' }}>
+                          <div className="personal-info-edit position-absolute top-0 color-red" onClick={handleShowAdd} style={{ cursor: 'pointer', whiteSpace: 'nowrap', right: isLang === 'ar' ? 'auto' : '10px', left: isLang === 'ar' ? '10px' : 'auto' }}>
                             <BiMessageRoundedAdd className={isLang === 'ar' ? 'ms-1' : 'me-1'} />
                             <small className='my-0' style={{ fontWeight: '500' }}>
                               {isLang === 'ar' ? 'إضـافـة' : 'Add'}
@@ -515,7 +523,7 @@ export default function DoctorProfile() {
                         <h6 key={i} className='mb-2 color-red'>{field.MedicalFieldName}</h6>
                       ))}
 
-                      <Link to={`../doctorfields/${id}`} className="personal-info-edit position-absolute top-0 color-red" style={{ cursor: 'pointer', whiteSpace: 'nowrap', right: isLang === 'ar' ? 'auto' : '10px' , left: isLang === 'ar' ? '10px' : 'auto' }}>
+                      <Link to={`../doctorfields/${id}`} className="personal-info-edit position-absolute top-0 color-red" style={{ cursor: 'pointer', whiteSpace: 'nowrap', right: isLang === 'ar' ? 'auto' : '10px', left: isLang === 'ar' ? '10px' : 'auto' }}>
                         <FiEdit3 className={isLang === 'ar' ? 'ms-1' : 'me-1'} />
                         <small className='my-0' style={{ fontWeight: '500' }}>
                           {isLang === 'ar' ? 'تعديـل' : 'Edit'}
@@ -533,7 +541,7 @@ export default function DoctorProfile() {
                         <h6 key={i} className='mb-2 color-red'>{cate.AnimalCategoryName}</h6>
                       ))}
 
-                      <Link to={`../doctorCategory/${id}`} className="personal-info-edit position-absolute top-0 color-red" style={{ cursor: 'pointer', whiteSpace: 'nowrap', right: isLang === 'ar' ? 'auto' : '10px' , left: isLang === 'ar' ? '10px' : 'auto' }}>
+                      <Link to={`../doctorCategory/${id}`} className="personal-info-edit position-absolute top-0 color-red" style={{ cursor: 'pointer', whiteSpace: 'nowrap', right: isLang === 'ar' ? 'auto' : '10px', left: isLang === 'ar' ? '10px' : 'auto' }}>
                         <FiEdit3 className={isLang === 'ar' ? 'ms-1' : 'me-1'} />
                         <small className='my-0' style={{ fontWeight: '500' }}>
                           {isLang === 'ar' ? 'تعديـل' : 'Edit'}
@@ -544,7 +552,9 @@ export default function DoctorProfile() {
                 </div>
               </div>
             </div>
-
+            <div className="pe-2 ">
+              <Component.DoctorDocuments DoctorDocument={DoctorDocument} />
+            </div>
           </div>
         </div>
         :

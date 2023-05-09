@@ -114,6 +114,7 @@ import AddService from './../Pages/Services/AddService';
 import EditService from './../Pages/Services/EditService';
 import Services from './../Pages/Services/Services';
 import AddDoctorService from './../Pages/Vendor/Doctor/Service/AddDoctorService';
+import DoctorDocuments from './../Pages/Vendor/Doctor/DoctorDocuments';
 
  
 
@@ -170,7 +171,7 @@ const Component= {
     DoctorHours,
     SingleHour,
     AddDoctorHours,
-
+    DoctorDocuments,
     //AnimalCat
     AnimalCat,
     AddAnimalCat,
