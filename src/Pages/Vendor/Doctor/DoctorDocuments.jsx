@@ -19,10 +19,10 @@ function DoctorDocuments({ DoctorDocument }) {
                     <div className="d-flex " style={{ justifyContent: 'space-between' }}>
                         <label className='Sign__Up-header text-dark'> {isLang === 'ar' ? '  وثيقة الطبيب' : 'Doctor Document'}  </label>
                         <Link to={`/doctorDocument/add/`} >
-                            <span className='upload__doc'>
+                 {/*            <span className='upload__doc'>
                                 <LogoSvg.DocumentUpload />
                                 {isLang === 'ar' ? '   إضــافة وثيقة للدكتور'  : 'Add Document'}
-                            </span>
+                            </span> */}
                         </Link>
                     </div>
                     <div className="d-flex justify-content-between align-items-center">
@@ -35,7 +35,7 @@ function DoctorDocuments({ DoctorDocument }) {
                                         <div className="app__work-img app__flex"  >
                                             <img src={item?.DoctorDocumentPath} alt={item.name} className='w-100' />
                                             <motion.div className="app__work-hover app__flex" whileHover={{ opacity: [0, 1] }} transition={{ duration: 0.25, ease: 'easeInOut', staggerChildren: 0.5 }}>
-                                                <Link to={'/medicalcenter/docs'} rel="noreferrer">
+                                                <Link to={`/doctors/DoctorDocument/${item.IDDoctor}/${item.IDDoctorDocument}`} rel="noreferrer">
                                                     <motion.div className="app__flex" whileInView={{ scale: [0, 1] }} whileHover={{ scale: [1, 0.90] }} transition={{ duration: 0.25 }}  >
                                                         <BiMessageSquareEdit />
                                                     </motion.div>

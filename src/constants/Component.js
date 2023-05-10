@@ -115,6 +115,9 @@ import EditService from './../Pages/Services/EditService';
 import Services from './../Pages/Services/Services';
 import AddDoctorService from './../Pages/Vendor/Doctor/Service/AddDoctorService';
 import DoctorDocuments from './../Pages/Vendor/Doctor/DoctorDocuments';
+import EditDoctorDocuments from './../Pages/Vendor/Doctor/EditDoctorDocuments';
+import ChartLine from './../Pages/Vendor/Dashboard/ChartLine';
+import ChartColumn from './../Pages/Vendor/Dashboard/ChartColumn';
 
  
 
@@ -128,6 +131,8 @@ const Component= {
     Contact, 
     // Vendor Components User 1
     Dashboard,  
+    ChartLine,
+    ChartColumn,
     AddNewUser,
     InvalidRole,
     Users,
@@ -172,6 +177,7 @@ const Component= {
     SingleHour,
     AddDoctorHours,
     DoctorDocuments,
+    EditDoctorDocuments,
     //AnimalCat
     AnimalCat,
     AddAnimalCat,

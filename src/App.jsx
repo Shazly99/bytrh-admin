@@ -60,6 +60,9 @@ function App() {
                 { path: 'add/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.AddDoctorService /> </ProtectedRoutes> },
               ]
             },
+
+            { path: 'DoctorDocument/:idDoc/:idDocument', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.EditDoctorDocuments /></ProtectedRoutes> },
+
           ]
         },
         {

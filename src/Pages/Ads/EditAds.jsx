@@ -12,7 +12,7 @@ import translateADS from './translateAds';
 const EditAds = () => {
   let { id } = useParams()
   let { isLang } = useContext(VendersContext);
-  let navigate = useNavigate();
+  let navigate = useNavigate(); 
 
   // let { countries, cities, getCities } = useContext(VendersContext);
   let { countries, cities, areas, getCities, getAreas } = useFetch()
