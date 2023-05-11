@@ -1,21 +1,5 @@
 @import '../../../style/varibale';
 
-.welcome__page {
-    max-height: calc( 100vh - 90px);
-    height: 100vh;
-    .title_bytrh {
-        padding: 40px 60px;
-
-
-        @media screen and (max-width:767px) {
-            padding: 20px 40px;
-
-            h3 {
-                font-size: 16px !important;
-            }
-        }
-    }
-}
 
 .app__dashboard {
     .app__dashboard_summary {
@@ -44,7 +28,7 @@
                 font-weight: 500;
                 font-size: 31px;
                 line-height: 46px;
-                color: $mainColor;
+                color: $secondColor;
             }
         }
     }
@@ -70,24 +54,24 @@
         }
 
         h2 {
-            font-family: $fontBase !important;
+            font-family: $fontBase !important;  
             font-style: normal;
             font-weight: 400;
             font-size: 20.52px;
-            line-height: 31px;
-            color: $mainColor;
+            line-height: 31px;  
+            color: $mainColor; 
         }
     }
 
-    .app__dashboard_today-order {}
+    // .app__dashboard_today-order {}
 }
 
 .apexcharts-bar-series.apexcharts-plot-series .apexcharts-series:nth-child(2) path {
-    clip-path: inset(0% 0% -11% 0% round 16px);
+    // clip-path: inset(0% 0% -11% 0% round 16px);
 }
 
 .apexcharts-legend-marker {
     width: 10px !important;
     height: 10px !important;
-    border-radius: 50% !important;
+    // border-radius: 50% !important;
 }

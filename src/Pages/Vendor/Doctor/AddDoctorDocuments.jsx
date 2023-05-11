@@ -6,26 +6,18 @@ import { useContext } from 'react';
 import { useRef } from 'react';
 import { Container, Row, Col, Form, FormControl, Button } from 'react-bootstrap';
 import Component from '../../../constants/Component';
-import { toast } from 'react-hot-toast'; 
+import { toast } from 'react-hot-toast';
 
 
-const EditDoctorDocuments = () => {
-    let { idDoc, idDocument } = useParams();
+const AddDoctorDocuments = () => {
+    let { id } = useParams();
+
     let { isLang } = useContext(VendersContext);
     const selectDate = useRef(null);
-    const [selectedDate, setSelectedDate] = useState('');
+    const documentType = useRef(null);
 
     let navigate = useNavigate();
 
-    const [editPage, setEditPage] = useState(null)
-
-    const EditPage = async () => {
-        let data = await GetData(`${process.env.REACT_APP_API_URL}/admin/doctors/documents/edit/page/${idDocument}`, apiheader)
-        console.log(data.Response);
-        setEditPage(data.Response);
-        setSelectedDate(data?.Response?.DoctorDocumentExpireDate?.split(" ")[0])
-        console.log();
-    }
     // TODO:: select image
     const [selectedImage, setSelectedImage] = useState(null);
     const fileInputRef = useRef(null);
@@ -36,18 +28,18 @@ const EditDoctorDocuments = () => {
 
     const submit = e => {
         e.preventDefault()
-        
-        documentsEdit({
-            IDDoctor: idDoc,
-            IDDoctorDocument: idDocument,
+
+        documentAdd({
+            IDDoctor: id,
+            DoctorDocumentType:  documentType.current.value,
             DoctorDocument: selectedImage,
             DoctorDocumentExpireDate: selectDate.current.value
         })
 
     }
 
-    const documentsEdit = async (editAds) => {
-        let data = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/documents/edit`, editAds, apiheader).then((res) => {
+    const documentAdd = async (addDocument) => {
+        let data = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/documents/add`, addDocument, apiheader).then((res) => {
 
             if (res.data.Success === true) {
                 toast.success(' Dr Documents has been modified', {
@@ -60,33 +52,26 @@ const EditDoctorDocuments = () => {
                     },
                 });
                 setTimeout(() => {
-                    navigate(`/doctors/doctorProfile/${idDoc}`);
+                    navigate(`/doctors/doctorProfile/${id}`);
                 }, 2000);
             } else {
                 toast.error(res.data.ApiMsg)
             }
         });
     }
-    useEffect(() => {
-
-        EditPage()
-        return () => {
-
-        }
-    }, [])
 
     return (
         <>
             <Container fluid>
                 <div className="app__addprodects">
-                    { isLang === 'en' ?
-                        <Component.SubNav sub__nav={[{ name: "Doctor Profile", path: `/doctors/doctorProfile/${idDoc}` }, { name: "Edit doctor document ", path: `/doctors/document/edit/${idDoc}/${idDocument}` }]} />
+                    {isLang === 'en' ?
+                        <Component.SubNav sub__nav={[{ name: "Doctor Profile", path: `/doctors/doctorProfile/${id}` }, { name: "Add doctor document ", path: `/doctors/document/add/${id}` }]} />
                         :
-                        <Component.SubNav sub__nav={[{ name: "الملف الشخصي للطبيب", path: `/doctors/doctorProfile/${idDoc}` }, { name: "تحرير وثيقة الطبيب ", path: `/doctors/document/edit/${idDoc}/${idDocument}` }]} />
+                        <Component.SubNav sub__nav={[{ name: "الملف الشخصي للطبيب", path: `/doctors/doctorProfile/${id}` }, { name: "إضافة وثيقة الطبيب ", path: `/doctors/document/add/${id}` }]} />
                     }
                     <div className="app__addprodects__header ">
 
-                        <Component.BaseHeader h1={isLang === 'ar' ? 'تحرير وثيقة الطبيب' : 'Edit doctor document'} />
+                        <Component.BaseHeader h1={isLang === 'ar' ? 'إضافة وثيقة الطبيب' : 'Add doctor document'} />
                         <div className="app__addOrder-form">
                             <div className="app__addprodects-form">
                                 <form onSubmit={submit}>
@@ -110,27 +95,38 @@ const EditDoctorDocuments = () => {
                                                     id="custom-file"
                                                     type="date"
                                                     ref={selectDate}
-                                                    value={selectedDate}
-                                                /> 
+                                                />
+                                            </Form.Group>
+
+
+                                            <Form.Group controlId="formBasicEmail" >
+                                                <Form.Label>{isLang == "ar" ? 'نوع وثيقة الطبيب' : 'Doctor document type'}</Form.Label>
+                                                <Form.Select aria-label="Default select example" ref={documentType} >
+                                                    {/* <option >{translateADS[isLang]?.optionAdvertisementLocation}</option> */}
+                                                    {
+                                                        [
+                                                            { value: 'GRADUATION', textEn: 'Graduation', textAr: 'تخرُّج' },
+                                                            { value: 'LICENSE', textEn: 'License  ', textAr: 'رخصة' },
+                                                            { value: 'NATIONAL_ID', textEn: 'National id', textAr: 'الهوية الوطنية' },
+                                                        ]?.map((item, index) => (
+                                                            <option key={index} value={item.value}   >{isLang == "ar" ? item.textAr : item.textEn}</option>
+                                                        ))
+                                                    }
+                                                </Form.Select>
                                             </Form.Group>
                                         </Col>
                                         <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en d-flex justify-content-center">
                                             <Form.Group>
                                                 <div className="mt-3  " style={{ width: "200px " }}>
 
-                                                    {selectedImage ? (
+                                                    {selectedImage && (
                                                         <img
                                                             loading="lazy"
                                                             src={URL.createObjectURL(selectedImage)}
                                                             alt={selectedImage.name}
                                                             className='rounded-3 w-100'
                                                         />
-                                                    ) :
-                                                        <img
-                                                            loading="lazy"
-                                                            src={editPage?.DoctorDocumentPath}
-                                                            className='rounded-3 w-100'
-                                                        />
+                                                    )
                                                     }
                                                 </div>
                                             </Form.Group>
@@ -147,7 +143,7 @@ const EditDoctorDocuments = () => {
                                         </div>
 
                                         <div className='baseBtn w-auto'>
-                                            <Link to={`/doctors/doctorProfile/${idDoc}`}>
+                                            <Link to={`/doctors/doctorProfile/${id}`}>
                                                 <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                                                     {isLang == "en" ? 'Cancel' : 'رجـوع'}
                                                 </Button>
@@ -165,4 +161,4 @@ const EditDoctorDocuments = () => {
     )
 }
 
-export default EditDoctorDocuments
+export default AddDoctorDocuments

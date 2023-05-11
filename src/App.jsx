@@ -5,8 +5,8 @@ import ChatStore from './context/ChatStore';
 import VenderContext from './context/Store';
 import './style/App.scss';
 
-function App() { 
-  
+function App() {
+
   function ProtectedRoutes({ children, allowedRoles }) {
     const token = localStorage.getItem('token');
     const role = localStorage.getItem('Role');
@@ -25,7 +25,7 @@ function App() {
     );
   }
   const root = createBrowserRouter([
- 
+
     {
       path: '', element: <Component.Vendor />, children: [
         { index: true, element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.Dashboard /></ProtectedRoutes> },
@@ -56,13 +56,18 @@ function App() {
             { path: 'addDoctorHours/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.AddDoctorHours /></ProtectedRoutes> },
             {
               path: 'Service', children: [
-                {  path: 'list/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.DoctorService /> </ProtectedRoutes>, },
+                { path: 'list/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.DoctorService /> </ProtectedRoutes>, },
                 { path: 'add/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.AddDoctorService /> </ProtectedRoutes> },
               ]
             },
+            {
+              path: 'document', children: [
+                { path: 'add/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.AddDoctorDocuments /> </ProtectedRoutes>, },
+                { path: 'edit/:idDoc/:idDocument', element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.EditDoctorDocuments /> </ProtectedRoutes> },
+              ]
+            },
 
-            { path: 'DoctorDocument/:idDoc/:idDocument', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.EditDoctorDocuments /></ProtectedRoutes> },
-
+ 
           ]
         },
         {
@@ -291,7 +296,7 @@ function App() {
           path: '*', element: <Component.Error />
         }
       ],
-    }, 
+    },
     {
       path: '/chat', element: <Component.Chat />, children: [
         { index: true, element: <ProtectedRoutes allowedRoles={['1']}>  <Component.ChatClient /></ProtectedRoutes> },
@@ -315,7 +320,7 @@ function App() {
           path: '*', element: <Component.Error />
         }
       ],
-    }, 
+    },
     {
       path: '/admin/', element: <Component.Auth />, children: [
         { path: 'login', element: <Component.Login /> },

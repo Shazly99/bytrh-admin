@@ -1,16 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import { BiMessageRoundedAdd } from 'react-icons/bi';
 import { FiEdit3 } from 'react-icons/fi';
 import { Link, useParams } from 'react-router-dom';
-import { apiheader } from '../../../utils/fetchData';
-import CircularProgress from '@mui/material/CircularProgress';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 import Loader from '../../../Components/Shared/Loader/Loader';
 import { VendersContext } from '../../../context/Store';
+import { apiheader } from '../../../utils/fetchData';
 import Component from './../../../constants/Component';
-import DoctorDocuments from './DoctorDocuments';
 
 
 
@@ -553,7 +552,7 @@ export default function DoctorProfile() {
               </div>
             </div>
             <div className="pe-2 ">
-              <Component.DoctorDocuments DoctorDocument={DoctorDocument} />
+              <Component.DoctorDocuments DoctorDocument={DoctorDocument} id={id} />
             </div>
           </div>
         </div>

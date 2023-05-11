@@ -118,6 +118,8 @@ import DoctorDocuments from './../Pages/Vendor/Doctor/DoctorDocuments';
 import EditDoctorDocuments from './../Pages/Vendor/Doctor/EditDoctorDocuments';
 import ChartLine from './../Pages/Vendor/Dashboard/ChartLine';
 import ChartColumn from './../Pages/Vendor/Dashboard/ChartColumn';
+import Summary from './../Pages/Vendor/Dashboard/Summary';
+import AddDoctorDocuments from './../Pages/Vendor/Doctor/AddDoctorDocuments';
 
  
 
@@ -133,6 +135,7 @@ const Component= {
     Dashboard,  
     ChartLine,
     ChartColumn,
+    Summary,
     AddNewUser,
     InvalidRole,
     Users,
@@ -178,6 +181,7 @@ const Component= {
     AddDoctorHours,
     DoctorDocuments,
     EditDoctorDocuments,
+    AddDoctorDocuments,
     //AnimalCat
     AnimalCat,
     AddAnimalCat,
