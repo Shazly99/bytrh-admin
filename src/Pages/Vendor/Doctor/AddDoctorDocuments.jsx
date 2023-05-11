@@ -42,7 +42,7 @@ const AddDoctorDocuments = () => {
         let data = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/documents/add`, addDocument, apiheader).then((res) => {
 
             if (res.data.Success === true) {
-                toast.success(' Dr Documents has been modified', {
+                toast.success(' Dr Documents has been added', {
                     duration: 4000,
                     position: 'bottom-center',
                     /*  icon: <Icons.upload color='#40AB45' size={25} />, */

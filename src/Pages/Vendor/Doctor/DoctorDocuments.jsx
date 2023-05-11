@@ -22,7 +22,7 @@ function DoctorDocuments({ DoctorDocument, id }) {
                             </span>
                         </Link>
                     </div>
-                    <div className="d-flex justify-content-between align-items-center">
+                    <div className="d-flex flex-wrap justify-content-between align-items-center">
 
                         {
                             DoctorDocument.map((item, index) => (
