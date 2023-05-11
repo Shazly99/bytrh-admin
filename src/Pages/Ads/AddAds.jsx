@@ -19,6 +19,7 @@ const AddAds = () => {
   const AdsService = useRef(null);
   const AdsLocation = useRef(null);
   const areaRef = useRef(null);
+  const animalCategoryRef = useRef();
 
   //TODO:: start date end date use ref   
   const startDateRef = useRef(null);
@@ -71,7 +72,7 @@ const AddAds = () => {
         });
         setdisplayLink(false)
         setdisplayLink1(false)
-  
+
       } else if (service === 'URGENT_CONSULT' || service === 'CONSULT') {
         const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/ajax`, {}, apiheader);
         setData({
@@ -80,7 +81,7 @@ const AddAds = () => {
           blogDoc: null,
           adoption: null,
           animalproducts: null
-  
+
         });
         setdisplayLink1(true)
         setdisplayLink(false)
@@ -92,11 +93,11 @@ const AddAds = () => {
           blogDoc: null,
           adoption: null,
           animalproducts: null
-  
+
         });
         setdisplayLink(true)
         setdisplayLink1(false)
-  
+
       } else if (service === 'DOCTOR_BLOG') {
         const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs/ajax`, {}, apiheader);
         setData({
@@ -107,7 +108,7 @@ const AddAds = () => {
         });
         setdisplayLink(true)
         setdisplayLink1(false)
-  
+
       } else if (service === 'ADOPTION') {
         const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/adoptions/ajax`, {}, apiheader);
         setData({
@@ -116,11 +117,11 @@ const AddAds = () => {
           blogDoc: null,
           adoption: data.Response,
           animalproducts: null
-  
+
         });
         setdisplayLink(true)
         setdisplayLink1(false)
-  
+
       } else if (service === 'SALE' || service === 'BIDDING') {
         const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/animalproducts/ajax`, { AnimalProductService: service }, apiheader);
         setData({
@@ -129,19 +130,28 @@ const AddAds = () => {
           blogDoc: null,
           adoption: null,
           animalproducts: data.Response
-  
+
         });
         setdisplayLink(true)
         setdisplayLink1(false)
-  
+
       }
     }
   }
+  const [animalCategory, setAnimalCategory] = useState(null)
+  //  !Get IDAnimalCategory 
+  const IDAnimalCategory = async () => {
+    const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/animalcategories/ajax`, {}, apiheader);
+    setAnimalCategory(data.Response)
+  }
   useEffect(() => {
+    IDAnimalCategory()
     handelSelectService()
+    window.scrollTo(0, 0);
     return () => {
+      IDAnimalCategory()
       handelSelectService()
-    }
+    };
   }, [isLang])
   const [selectedItem, setSelectedItem] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
@@ -155,7 +165,7 @@ const AddAds = () => {
 
 
   const submit = e => {
-    e.preventDefault() 
+    e.preventDefault()
     addNewAds({
       IDCity: cityRef.current.value,
       IDArea: areaRef.current.value,
@@ -164,6 +174,7 @@ const AddAds = () => {
       AdvertisementService: AdsService.current.value,
       AdvertisementLocation: AdsLocation.current.value,
       IDLink: doctorRef.current.value,
+      IDAnimalCategory: animalCategoryRef.current.value,
       AdvertisementImage: selectedImage
     });
   }
@@ -248,8 +259,8 @@ const AddAds = () => {
                         }
                       </Form.Select>
                     </Form.Group>
-                  </Col>                
-                   <Col xl={6} lg={6} md={6} sm={12} className="mt-3">
+                  </Col>
+                  <Col xl={6} lg={6} md={6} sm={12} className="mt-3">
                     <Form.Group controlId="formBasicEmail"  >
                       <Form.Label>{translateADS[isLang]?.labelArea}</Form.Label>
 
@@ -278,8 +289,8 @@ const AddAds = () => {
                       </Form.Select>
 
                     </Form.Group>
-                  </Col>               
-                    <Col xl={6} lg={6} md={6} sm={12} className="mt-3">
+                  </Col>
+                  <Col xl={6} lg={6} md={6} sm={12} className="mt-3">
                     <Form.Group controlId="formBasicEmail" >
                       <Form.Label>{translateADS[isLang]?.labelAdsLocationInput}</Form.Label>
                       <Form.Select aria-label="Default select example" ref={AdsLocation} >
@@ -299,7 +310,7 @@ const AddAds = () => {
                         <FormControl type="date" ref={startDateRef} />
                       </InputGroup>
                     </Form.Group>
-                  </Col>                  
+                  </Col>
                   <Col xl={6} lg={6} md={6} sm={12} className="mt-3">
                     <Form.Group controlId="formBasicEndDate" >
                       <Form.Label>{translateADS[isLang]?.labelEndInput}</Form.Label>
@@ -322,10 +333,6 @@ const AddAds = () => {
                     </Form.Group>
                   </Col>
 
-
- 
- 
-
                   <Col xl={6} lg={6} md={6} sm={12} className="mt-3">
                     {
                       displayLink &&
@@ -341,8 +348,8 @@ const AddAds = () => {
                         </Form.Select>
                       </Form.Group>
                     }
-                
-              
+
+
                     {
                       displayLink1 &&
                       <Form.Group controlId="formBasicEmail" >
@@ -382,6 +389,18 @@ const AddAds = () => {
                     }
                   </Col>
 
+                  <Col xl={6} lg={6} md={6} sm={12} className="mt-3">
+                    <Form.Label>{translateADS[isLang]?.AnimalCategories}</Form.Label>
+
+                    <Form.Select aria-label="Default select example" ref={animalCategoryRef}>
+                      <option>{translateADS[isLang]?.optionCate}</option>
+                      {
+                        animalCategory?.map((item, index) => (
+                          <option key={index} value={item?.IDAnimalCategory}>{item?.AnimalCategoryName}</option>
+                        ))
+                      }
+                    </Form.Select>
+                  </Col>
 
 
 

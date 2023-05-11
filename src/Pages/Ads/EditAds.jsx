@@ -12,7 +12,7 @@ import translateADS from './translateAds';
 const EditAds = () => {
   let { id } = useParams()
   let { isLang } = useContext(VendersContext);
-  let navigate = useNavigate(); 
+  let navigate = useNavigate();
 
   // let { countries, cities, getCities } = useContext(VendersContext);
   let { countries, cities, areas, getCities, getAreas } = useFetch()
@@ -23,7 +23,7 @@ const EditAds = () => {
   const selectCity = useRef();
   const countryRef = useRef();
   const areaRef = useRef(null);
-
+  const animalCategoryRef = useRef();
   const doctorRef = useRef(null);
   const AdsService = useRef(null);
   const AdsLocation = useRef(null);
@@ -143,13 +143,13 @@ const EditAds = () => {
     const selectedCountryId = event.target.value;
     getAreas(selectedCountryId)
   }
- 
+
   const adsDetail = async () => {
     let data = await GetData(`${process.env.REACT_APP_API_URL}/admin/advertisements/edit/page/${id}`, apiheader)
     setAdsDetail(data.Response);
     getCities(data.Response.IDCountry)
     getAreas(data.Response.IDCity)
- 
+
     const AdvertisementService = data.Response.AdvertisementService
     const IDLink = data.Response.IDLink
 
@@ -165,7 +165,7 @@ const EditAds = () => {
       setdisplayLink(false)
       setdisplayLink1(false)
     }
-   else if (AdvertisementService === 'DOCTOR_BLOG') {
+    else if (AdvertisementService === 'DOCTOR_BLOG') {
       const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/blogs/ajax`, {}, apiheader);
       setData({
         doctor: null,
@@ -234,7 +234,7 @@ const EditAds = () => {
   const handleSelect = (eventKey) => {
     setdisplayLink(false)
     setdisplayLink1(true)
-    if (typeof(eventKey) !== undefined) {
+    if (typeof (eventKey) !== undefined) {
       console.log(eventKey);
       const selectedItem = data?.doctor?.find((item) => Number(item.IDDoctor) === Number(eventKey));
       console.log(selectedItem);
@@ -246,7 +246,7 @@ const EditAds = () => {
   };
   const submit = e => {
     e.preventDefault()
-   if (AdsService.current.value === 'NONE') {
+    if (AdsService.current.value === 'NONE') {
       adsedit({
         IDCity: selectCity.current.value,
         IDArea: areaRef.current.value,
@@ -256,6 +256,7 @@ const EditAds = () => {
         AdvertisementLocation: AdsLocation.current.value,
         // IDLink: doctorRef.current.value,
         AdvertisementImage: selectedImage,
+        IDAnimalCategory: animalCategoryRef.current.value,
         IDAdvertisement: id
       })
     } else {
@@ -268,10 +269,11 @@ const EditAds = () => {
         AdvertisementLocation: AdsLocation.current.value,
         IDLink: doctorRef.current.value,
         AdvertisementImage: selectedImage,
+        IDAnimalCategory: animalCategoryRef.current.value,
         IDAdvertisement: id
       })
-    }  
-     
+    }
+
   }
   const adsedit = async (editAds) => {
     let data = await PostData(`${process.env.REACT_APP_API_URL}/admin/advertisements/edit`, editAds, apiheader).then((res) => {
@@ -295,9 +297,16 @@ const EditAds = () => {
     });
   }
 
-
+  // Gets
+  const [animalCategory, setAnimalCategory] = useState(null);
+  //  !Get IDAnimalCategory 
+  const IDAnimalCategoryGet = async () => {
+    const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/animalcategories/ajax`, {}, apiheader);
+    setAnimalCategory(data.Response)
+  }
   useEffect(() => {
     adsDetail()
+    IDAnimalCategoryGet()
     window.scrollTo(0, 0);
   }, [id])
 
@@ -481,6 +490,21 @@ const EditAds = () => {
                       }
                     </Col>
 
+                    <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
+                      <Form.Group controlId="formBasicEmail" className='mt-3'>
+                        <Form.Label>{translateADS[isLang]?.AnimalCategories}</Form.Label>
+
+                        <Form.Select aria-label="Default select example" ref={animalCategoryRef}>
+                          <option>{translateADS[isLang]?.optionCate}</option>
+                          {
+                            animalCategory?.map((item, index) => (
+                              <option key={index} value={item?.IDAnimalCategory} selected={editPage?.IDAnimalCategory === item?.IDAnimalCategory && item?.AnimalCategoryName}>{item?.AnimalCategoryName}</option>
+                            ))
+                          }
+                        </Form.Select>
+
+                      </Form.Group>
+                    </Col>
                     <div className='d-flex justify-content-center align-content-center my-5'>
 
                       <div className='baseBtn1'>

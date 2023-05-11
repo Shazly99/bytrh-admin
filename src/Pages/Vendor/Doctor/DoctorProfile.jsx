@@ -55,16 +55,6 @@ export default function DoctorProfile() {
   }, [])
 
 
-  // useEffect(() => {
-  //   if (loading) {
-  //     $('body').addClass('d-none');
-  //     $('body').removeClass('d-block')
-  //   }
-  //   $('body').addClass('d-block');
-  //   $('body').removeClass('d-none')
-  // }, [loading]);
-
-
   const [showAdd, setShowAdd] = useState(false);
   const handleCloseAdd = () => setShowAdd(false);
   const handleShowAdd = () => setShowAdd(true);
@@ -226,7 +216,10 @@ export default function DoctorProfile() {
               { name: 'صفحـة الطبيـب الشخصيـة', path: `/doctors/doctorProfile/${id}` }
             ]} />
             :
-            <Component.SubNav sub__nav={[{ name: 'Doctor Profile', path: `/doctors/doctorProfile/${id}` }, { name: 'Doctors', path: `/doctors` }]} />
+            <Component.SubNav sub__nav={[
+              { name: 'Doctors', path: `/doctors` },
+              { name: 'Doctor Profile', path: `/doctors/doctorProfile/${id}` }
+            ]} />
           }
 
           <div className="row gx-lg-4 gx-0 gy-lg-0 gy-4 d-flex justify-content-lg-start justify-content-center mt-2 mb-4">
@@ -253,7 +246,7 @@ export default function DoctorProfile() {
 
                       {/* <small className='my-0 text-decoration-underline color-red' style={{fontWeight: '500' , cursor: 'pointer'}}>Change Password</small> */}
 
-                      <Link to={`../editDoctor/${id}`} className={`personal-info-edit position-absolute top-0 ${isLang === 'ar' ? 'start-0' : 'end-0'} color-red`} style={{ cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                      <Link to={`../editDoctor/${id}`} className={`personal-info-edit position-absolute top-0 ${isLang === 'ar' ? 'start-0' : 'end-0'} secondColor`} style={{ cursor: 'pointer', whiteSpace: 'nowrap' }}>
                         <FiEdit3 className='me-1' />
                         <small className='my-0' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'تعديـل' : 'Edit'}</small>
                       </Link>
@@ -264,7 +257,7 @@ export default function DoctorProfile() {
               </div>
             </div>
 
-            <div className="col-lg-5">
+            {/* <div className="col-lg-5">
               <div className="license bg-light shadow-sm rounded-3 p-2 h-100">
                 <h6 className='mb-2 fw-bold'>
 
@@ -278,16 +271,16 @@ export default function DoctorProfile() {
                   <h6 className='my-0 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctorLicense.DoctorDocumentExpireDate}</h6>
                 </div>
               </div>
-            </div>
+            </div> */}
 
 
           </div>
 
           <div className="row gx-xl-4 gx-0 gy-xl-0 gy-4 d-flex justify-content-xl-start justify-content-center">
 
-            <div className="col-xl-7">
+            <div className="col-xl-8">
               <div className="doc-info bg-light shadow-sm rounded-3 p-2 h-100">
-                <h6 className='mb-sm-3 mb-4 fw-bold'>
+                <h6 className='mb-sm-3 mb-4 fw-bold color-red'>
                   {isLang === 'ar' ? 'أسعـار الخدمـات' : 'Services Prices'}
                 </h6>
                 <div className="row gx-sm-4 gx-0 gy-4 d-flex justify-content-sm-start justify-content-center">
@@ -479,7 +472,7 @@ export default function DoctorProfile() {
                         </button> : ''}
 
                         {price.IDDoctorPricing ?
-                          <div className="personal-info-edit position-absolute top-0 color-red" onClick={() => {
+                          <div className="personal-info-edit position-absolute top-0 secondColor" onClick={() => {
                             handleShowEdit();
                             setIDDoctorPricing(price.IDDoctorPricing);
                             setAmountEdit(price.DoctorPricing);
@@ -491,7 +484,7 @@ export default function DoctorProfile() {
                             </small>
                           </div>
                           :
-                          <div className="personal-info-edit position-absolute top-0 color-red" onClick={handleShowAdd} style={{ cursor: 'pointer', whiteSpace: 'nowrap', right: isLang === 'ar' ? 'auto' : '10px', left: isLang === 'ar' ? '10px' : 'auto' }}>
+                          <div className="personal-info-edit position-absolute top-0 secondColor" onClick={handleShowAdd} style={{ cursor: 'pointer', whiteSpace: 'nowrap', right: isLang === 'ar' ? 'auto' : '10px', left: isLang === 'ar' ? '10px' : 'auto' }}>
                             <BiMessageRoundedAdd className={isLang === 'ar' ? 'ms-1' : 'me-1'} />
                             <small className='my-0' style={{ fontWeight: '500' }}>
                               {isLang === 'ar' ? 'إضـافـة' : 'Add'}
@@ -508,11 +501,11 @@ export default function DoctorProfile() {
               </div>
             </div>
 
-            <div className="col-xl-5">
+            <div className="col-xl-4">
               <div className="doc-info bg-light shadow-sm rounded-3 p-2 h-100">
-                <h6 className='mb-sm-3 mb-4 fw-bold'>{isLang === 'ar' ? 'التخصصـات الطبيـة' : 'Medical Specialties'}</h6>
+                <h6 className='mb-sm-3 mb-4 fw-bold color-red'>{isLang === 'ar' ? 'التخصصـات الطبيـة' : 'Medical Specialties'}</h6>
                 <div className="row gx-sm-4 gx-0 gy-sm-0 gy-4 d-flex justify-content-sm-start justify-content-center">
-                  <div className="col-sm-6">
+                  {/* <div className="col-sm-6">
                     <div className="price position-relative">
                       <h6 className='mb-3'>
                         {isLang === 'ar' ? 'المجالات الطبيـة' : 'Medical Fields'}
@@ -522,17 +515,17 @@ export default function DoctorProfile() {
                         <h6 key={i} className='mb-2 color-red'>{field.MedicalFieldName}</h6>
                       ))}
 
-                      <Link to={`../doctorfields/${id}`} className="personal-info-edit position-absolute top-0 color-red" style={{ cursor: 'pointer', whiteSpace: 'nowrap', right: isLang === 'ar' ? 'auto' : '10px', left: isLang === 'ar' ? '10px' : 'auto' }}>
+                      <Link to={`../doctorfields/${id}`} className="personal-info-edit position-absolute top-0  secondColor" style={{ cursor: 'pointer', whiteSpace: 'nowrap', right: isLang === 'ar' ? 'auto' : '10px', left: isLang === 'ar' ? '10px' : 'auto' }}>
                         <FiEdit3 className={isLang === 'ar' ? 'ms-1' : 'me-1'} />
                         <small className='my-0' style={{ fontWeight: '500' }}>
                           {isLang === 'ar' ? 'تعديـل' : 'Edit'}
                         </small>
                       </Link>
                     </div>
-                  </div>
-                  <div className="col-sm-6">
+                  </div> */}
+                  <div className="col-12">
                     <div className="price position-relative">
-                      <h6 className='mb-3'>
+                      <h6 className='mb-3 '>
                         {isLang === 'ar' ? 'الأقسـام' : 'Categories'}
                       </h6>
 
@@ -540,7 +533,7 @@ export default function DoctorProfile() {
                         <h6 key={i} className='mb-2 color-red'>{cate.AnimalCategoryName}</h6>
                       ))}
 
-                      <Link to={`../doctorCategory/${id}`} className="personal-info-edit position-absolute top-0 color-red" style={{ cursor: 'pointer', whiteSpace: 'nowrap', right: isLang === 'ar' ? 'auto' : '10px', left: isLang === 'ar' ? '10px' : 'auto' }}>
+                      <Link to={`../doctorCategory/${id}`} className="personal-info-edit position-absolute top-0 secondColor" style={{ cursor: 'pointer', whiteSpace: 'nowrap', right: isLang === 'ar' ? 'auto' : '10px', left: isLang === 'ar' ? '10px' : 'auto' }}>
                         <FiEdit3 className={isLang === 'ar' ? 'ms-1' : 'me-1'} />
                         <small className='my-0' style={{ fontWeight: '500' }}>
                           {isLang === 'ar' ? 'تعديـل' : 'Edit'}

@@ -17,6 +17,8 @@ let translateADS = {
         optionAdvertisementLocation: 'choose a location',
         labelAdvertisementService: 'Service',
         optionAdvertisementService: 'choose a service',
+        optionCate: 'choose a category',
+
         TableHeader: [
             "Image",
             "Service",
@@ -41,6 +43,7 @@ let translateADS = {
         SaveBTN: 'Save',
         CancelBTN: 'Cancel',
         LabelEditPage: 'Edit the Ads',
+        AnimalCategories:'Animal Categories',
         filter: {
             Country: 'Select Country',
             allCountry: 'Countries',
@@ -87,6 +90,8 @@ let translateADS = {
         optionAdvertisementLocation: 'اختـر الموقـع',
         labelAdvertisementService: 'خدمـة الإعـلان',
         optionAdvertisementService: 'اختـر الخدمـة',
+        optionCate: 'إخــر فئة من الحيوانات',
+        AnimalCategories:'فئات الحيوانات',
         TableHeader: [
             "الصـورة",
             "الخدمـة",
