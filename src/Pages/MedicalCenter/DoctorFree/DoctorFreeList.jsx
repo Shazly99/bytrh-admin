@@ -204,14 +204,13 @@ const DoctorFreeList = () => {
       </div>
     )
   }
-  const SkeletonTables = (w) => {
-    return (
-      <div className="d-flex justify-content-center">
-        <Skeleton variant='rounded' animation='wave' height={15} width={w} />
-      </div>
-
-    )
-  }
+  // const SkeletonTables = (w) => {
+  //   return (
+  //     <div className="d-flex justify-content-center">
+  //       <Skeleton variant='rounded' animation='wave' height={15} width={w} />
+  //     </div>
+  //   )
+  // }
 
   return (
     <>
