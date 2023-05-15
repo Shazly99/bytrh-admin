@@ -120,6 +120,7 @@ import ChartLine from './../Pages/Vendor/Dashboard/ChartLine';
 import ChartColumn from './../Pages/Vendor/Dashboard/ChartColumn';
 import Summary from './../Pages/Vendor/Dashboard/Summary';
 import AddDoctorDocuments from './../Pages/Vendor/Doctor/AddDoctorDocuments';
+import ChartCircle from './../Pages/Vendor/Dashboard/ChartCircle';
 
  
 
@@ -135,6 +136,7 @@ const Component= {
     Dashboard,  
     ChartLine,
     ChartColumn,
+    ChartCircle,    
     Summary,
     AddNewUser,
     InvalidRole,

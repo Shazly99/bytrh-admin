@@ -1,29 +1,27 @@
-import React, { useState } from 'react'
-import ReactApexChart from 'react-apexcharts'
+import React from 'react'
+import ReactApexChart from 'react-apexcharts' 
 
-const ChartColumn = () => { 
+const ChartColumn = ({ isLang, urgent, home, center }) => {
+ 
 
+    // Data
     let series = [{
-        name: 'Visited',
-        data: [ 23, 20, 8 ,40,30]
-    }, {
-        name: 'Not Visited',
-        data: [ 55, 41, 67 ,52,22]
+        name:'visits',
+        data: [15, 20, 50]
     }
     ]
     let options = {
         chart: {
             type: 'bar',
-            height: 350,
             stacked: true,
             toolbar: {
-                show: false
+                show: true
             },
             zoom: {
-                enabled: false
+                enabled: true
             }
         },
-        colors: ['#8054A1', '#66b9b1'],
+        colors: ['#66b9b1'],
         responsive: [{
             breakpoint: 480,
             options: {
@@ -36,8 +34,8 @@ const ChartColumn = () => {
         }],
         plotOptions: {
             bar: {
-                horizontal: true,
-                borderRadius: 0,
+                horizontal: false,
+                borderRadius: 15,
                 dataLabels: {
                     total: {
                         enabled: true,
@@ -50,14 +48,13 @@ const ChartColumn = () => {
             },
         },
         xaxis: {
-            type: 'datetime',
+            type: 'type',
             categories: [
-                // '01/01/2022 GMT', '01/02/2022 GMT','01/03/2022 GMT','01/04/2022 GMT', '01/5/2022 GMT', 
-              
+                ' urgent', '  center ', ' home'
             ],
         },
         legend: {
-            position: 'right',
+            position: `${isLang === 'en' ? 'right' : 'left'}`,
             offsetY: 40
         },
         fill: {
@@ -65,12 +62,11 @@ const ChartColumn = () => {
         }
     }
 
-
     return (
         <>
-            <div id="chart">
-                <h2>Yearly Visits</h2>
-                <ReactApexChart options={options} series={series} type="bar" height={250} />
+            <div id="chart" >
+                <h2>Visits (urgent - center - home)    </h2>
+                <ReactApexChart  options={options} series={series} type="bar" height={450} />
             </div>
         </>
     )
