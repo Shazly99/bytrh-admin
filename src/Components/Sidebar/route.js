@@ -2,13 +2,13 @@ import Icons from "../../constants/Icons";
 import LogoSvg from "../../assets/svg/LogoSvg";
 
 const routes = [
-  // {
-  //   path: "",
-  //   nameEn: "Dashboard",
-  //   nameAr: "لوحة القيادة",
-  //   icon: <LogoSvg.Dashboard className="logoSvg" style={{ width: 19 }} />,
-  //   Roles: [1, 2]
-  // }, 
+  {
+    path: "",
+    nameEn: "Dashboard",
+    nameAr: "لوحة القيادة",
+    icon: <LogoSvg.Dashboard className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1]
+  }, 
    {
     path: "/user",
     nameAr: "المستخدمين",
