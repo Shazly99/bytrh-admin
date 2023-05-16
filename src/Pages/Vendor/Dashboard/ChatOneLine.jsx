@@ -2,7 +2,7 @@ import React from 'react'
 import Chart from 'react-apexcharts';
 
 
-const ChatOneLine = ({ doctor, client, label1, label2 ,title}) => {
+const ChatOneLine = ({ doctor, client, label1, label2, title }) => {
     const chartData = {
         series: [doctor, client],
         options: {

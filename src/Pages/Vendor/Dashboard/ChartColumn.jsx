@@ -7,7 +7,7 @@ const ChartColumn = ({ isLang, color, urgent, home, center, label1, label2, labe
     // Data
     let series = [{
         name: 'visits',
-        data: [10,5,50]
+        data: [urgent, home, center]
     }
     ]
     let options = {

@@ -19,7 +19,7 @@ const CircleChart = ({ client, doctor, label1, label2, title, typeChart }) => {
             labels: [`${label1}  `, `${label2}`],
             colors: ['#8054A1', '#62B9B3'],
             dataLabels: {
-                enabled: false 
+                enabled: false
             },
             responsive: [
                 {
