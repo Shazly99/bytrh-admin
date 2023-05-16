@@ -1,13 +1,13 @@
 import React from 'react'
-import ReactApexChart from 'react-apexcharts' 
+import ReactApexChart from 'react-apexcharts'
 
-const ChartColumn = ({ isLang, urgent, home, center }) => {
- 
+const ChartColumn = ({ isLang, color, urgent, home, center, label1, label2, label3, title }) => {
+
 
     // Data
     let series = [{
-        name:'visits',
-        data: [15, 20, 50]
+        name: 'visits',
+        data: [urgent, home, center]
     }
     ]
     let options = {
@@ -21,7 +21,7 @@ const ChartColumn = ({ isLang, urgent, home, center }) => {
                 enabled: true
             }
         },
-        colors: ['#66b9b1'],
+        colors: [color],
         responsive: [{
             breakpoint: 480,
             options: {
@@ -50,7 +50,7 @@ const ChartColumn = ({ isLang, urgent, home, center }) => {
         xaxis: {
             type: 'type',
             categories: [
-                ' urgent', '  center ', ' home'
+                label1, label2, label3
             ],
         },
         legend: {
@@ -65,8 +65,8 @@ const ChartColumn = ({ isLang, urgent, home, center }) => {
     return (
         <>
             <div id="chart" >
-                <h2>Visits (urgent - center - home)    </h2>
-                <ReactApexChart  options={options} series={series} type="bar" height={450} />
+                <h2>{title}</h2>
+                <ReactApexChart options={options} series={series} type="area" height={450} />
             </div>
         </>
     )

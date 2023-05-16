@@ -18,6 +18,17 @@ let initialTranslate = {
             label5:' استشارة عاجلة',
             label6:'استشارات اجلة ',
             titleConsulting:'إحصائية استشارية',
+        },
+        Column:{
+            label1:'عاجله',
+            label2:'بالمركز ',
+            label3:'منزلية',
+            titleVisits:'زيارات',
+            label4:'تبني  ',
+            label5:'يبيع',
+            label6:'مزايدة',
+            titleAnimal:'حيوانات',
+
         }
     },
     "en": {
@@ -35,11 +46,21 @@ let initialTranslate = {
             titleUser:'Registered users',
             label3:'  clients',
             label4:'  doctors',
-            titleActive:'Active users',
-
+            titleActive:'Active users', 
             label5:' Urgent consulting',
             label6:'Later consulting ',
             titleConsulting:'Consulting statistic',
+        },
+        Column:{
+            label1:'Urgent',
+            label2:'Center',
+            label3:'Home',
+            titleVisits:'Visits',
+            label4:'Adopted ',
+            label5:'Selling',
+            label6:'Bidding',
+            titleAnimal:'Animals',
+
         }
     }
 }

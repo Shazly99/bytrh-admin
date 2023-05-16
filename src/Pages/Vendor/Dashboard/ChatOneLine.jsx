@@ -2,12 +2,12 @@ import React from 'react'
 import Chart from 'react-apexcharts';
 
 
-const CircleChart = ({ client, doctor, label1, label2, title, typeChart }) => {
+const ChatOneLine = ({  doctor  }) => {
     const chartData = {
-        series: [client, doctor],
+        series: [  doctor,10],
         options: {
             chart: {
-                type: { typeChart },
+                type: 'donut',
                 stacked: true,
                 toolbar: {
                     show: true
@@ -16,9 +16,8 @@ const CircleChart = ({ client, doctor, label1, label2, title, typeChart }) => {
                     enabled: true
                 }
             },
-            labels: [`${label1}`, `${label2}`],
-            colors: ['#8054A1', '#62B9B3'],
-
+            labels: ['Online doctors'],
+            colors: ['#8054A1', '#F7F9FB'], 
             responsive: [
                 {
                     breakpoint: 480,
@@ -37,10 +36,11 @@ const CircleChart = ({ client, doctor, label1, label2, title, typeChart }) => {
 
     return (
         <div id="chart" >
-            <h2 className='ps-3'> {title}</h2>
-            <Chart options={chartData.options} series={chartData.series} type={typeChart} width={300} />
+            <h2 className='ps-3'> Online doctors</h2>
+            <Chart options={chartData.options} series={chartData.series} type={'donut'} width={300} />
         </div>
     );
 };
 
-export default CircleChart;
+export default ChatOneLine;
+

@@ -121,6 +121,7 @@ import ChartColumn from './../Pages/Vendor/Dashboard/ChartColumn';
 import Summary from './../Pages/Vendor/Dashboard/Summary';
 import AddDoctorDocuments from './../Pages/Vendor/Doctor/AddDoctorDocuments';
 import ChartCircle from './../Pages/Vendor/Dashboard/ChartCircle';
+import ChatOneLine from './../Pages/Vendor/Dashboard/ChatOneLine';
 
  
 
@@ -136,6 +137,7 @@ const Component= {
     Dashboard,  
     ChartLine,
     ChartColumn,
+    ChatOneLine,
     ChartCircle,    
     Summary,
     AddNewUser,
