@@ -54,11 +54,27 @@ function Dashboard() {
               IncomeMoney={dashbordData?.IncomeAmount}
               doctorsIncomeMoney={dashbordData?.DoctorsIncomeAmount}
               totalProfit={dashbordData?.TotalProfit}
+              WalletAmount={dashbordData?.WalletAmount}
             />
           </div>
 
           <Row>
             <Col xl={8} lg={8} md={12} sm={12}>
+
+              <div className="app__dashboard_chart"  >
+                <Container >
+                  <Component.ChartColumn2
+                    isLang={isLang}
+                    Consults={dashbordData?.Consults}
+                    UrgentConsults={dashbordData?.UrgentConsults}
+                    color={'#8054A1'}
+                    label1={translate[isLang]?.Column?.label7}
+                    label2={translate[isLang]?.Column?.label8}
+                    title={translate[isLang]?.Column?.titleConsulting}
+                  />
+                </Container>
+              </div>
+
               <div className="app__dashboard_chart"  >
                 <Container >
                   <Component.ChartColumn
@@ -95,7 +111,8 @@ function Dashboard() {
               <div className="app__dashboard_chart"  >
                 <Component.ChartCircle
                   isLang={isLang}
-                  typeChart='donut'
+                  // typeChart='donut'
+                  typeChart='pie'
                   client={dashbordData?.RegisteredClients}
                   doctor={dashbordData?.RegisteredDoctors}
                   label1={translate[isLang]?.Circle?.label1}
@@ -107,9 +124,21 @@ function Dashboard() {
               <div className="app__dashboard_chart"  >
                 <Component.ChartCircle
                   isLang={isLang}
-                  client={dashbordData?.ActiveClients}
+                  client={dashbordData?.RegisteredClients}
+                  doctor={dashbordData?.ActiveClients}
+                  typeChart='donut'
+                  label1={translate[isLang]?.Circle?.label9}
+                  label2={translate[isLang]?.Circle?.label10}
+                  title={translate[isLang]?.Circle?.titleActive2}
+                />
+              </div>
+
+              <div className="app__dashboard_chart"  >
+                <Component.ChartCircle
+                  isLang={isLang}
+                  client={dashbordData?.RegisteredDoctors}
                   doctor={dashbordData?.ActiveDoctors}
-                  typeChart='pie'
+                  typeChart='donut'
                   label1={translate[isLang]?.Circle?.label3}
                   label2={translate[isLang]?.Circle?.label4}
                   title={translate[isLang]?.Circle?.titleActive}
@@ -117,23 +146,11 @@ function Dashboard() {
               </div>
 
               <div className="app__dashboard_chart"  >
-                <Component.ChartCircle
-                  isLang={isLang}
-                  typeChart='donut'
-                  client={dashbordData?.RegisteredClients}
-                  doctor={dashbordData?.RegisteredDoctors}
-                  label1={translate[isLang]?.Circle?.label1}
-                  label2={translate[isLang]?.Circle?.label2}
-                  title={translate[isLang]?.Circle?.titleUser}
-                />
-              </div>
-
-              <div className="app__dashboard_chart"  >
                 <Component.ChatOneLine
                   isLang={isLang}
-                  doctor={dashbordData?.OnlineDoctors}
-                  client={dashbordData?.ActiveDoctors}
-                  typeChart='pie'
+                  activeDr={dashbordData?.ActiveDoctors}
+                  onlineDr={dashbordData?.OnlineDoctors}
+                  typeChart='donut'
                   label1={translate[isLang]?.Circle?.label7}
                   label2={translate[isLang]?.Circle?.label8}
                   title={translate[isLang]?.Circle?.titleDoctors}

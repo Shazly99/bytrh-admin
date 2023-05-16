@@ -2,19 +2,19 @@ import React from 'react'
 import Chart from 'react-apexcharts';
 
 
-const ChatOneLine = ({ doctor, client, label1, label2, title }) => {
+const ChatOneLine = ({ onlineDr, activeDr, label1, label2, title,typeChart }) => {
     const chartData = {
-        series: [doctor, client],
+        series: [activeDr, onlineDr],
         options: {
             chart: {
-                type: 'donut',
-                stacked: true,
-                toolbar: {
-                    show: true
-                },
-                zoom: {
-                    enabled: true
-                }
+                type: {typeChart},
+                // stacked: true,
+                // toolbar: {
+                //     show: true
+                // },
+                // zoom: {
+                //     enabled: true
+                // }
             },
             labels: [label1, label2],
             colors: ['#8054A1', '#66b9b1'],
@@ -40,7 +40,7 @@ const ChatOneLine = ({ doctor, client, label1, label2, title }) => {
     return (
         <div id="chart" >
             <h2 className='ps-3'> {title}</h2>
-            <Chart options={chartData.options} series={chartData.series} type={'pie'} width={300} />
+            <Chart options={chartData.options} series={chartData.series} type={typeChart} width={300} />
         </div>
     );
 };

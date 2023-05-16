@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactApexChart from 'react-apexcharts'
 
-const ChartColumn = ({ isLang, color, urgent, home, center, label1, label2, label3, title }) => {
+const ChartColumn2 = ({ isLang, color, Consults, UrgentConsults,   label1, label2,  title }) => {
 
 
     // Data
     let series = [{
         name: 'visits',
-        data: [urgent, home, center]
+        data: [Consults, UrgentConsults]
     }
     ]
     let options = {
@@ -35,8 +35,7 @@ const ChartColumn = ({ isLang, color, urgent, home, center, label1, label2, labe
         plotOptions: {
             bar: {
               horizontal: false, 
-              borderRadius: 8, // قيمة التدوير لحافة العمود العلوية
-        
+              borderRadius: 10, 
              
               dataLabels: {
                 total: {
@@ -48,50 +47,25 @@ const ChartColumn = ({ isLang, color, urgent, home, center, label1, label2, labe
                 },
               },
               // Custom column styles
-              columnWidth: '60px', // Adjust the width of the columns
-              colors: {
-                // Apply different colors to each column
+              columnWidth: '80px', // Adjust the width of the columns
+              colors: { 
                 ranges: [
                   {
                     from: 0,
-                    to: 10,
-                    
-                    // color: '#FF0000', // Red color for the first column
+                    to: 10, 
                   },
                   {
                     from: 10,
-                    to: 20,
-                    // color: '#00FF00', // Green color for the second column
-                  },
-                  {
-                    from: 20,
-                    to: 30,
-                    // color: '#0000FF', // Blue color for the third column
-                  },
+                    to: 20, 
+                  }, 
                 ],
               },
             },
-          },
-        
-        // plotOptions: {
-        //     bar: {
-        //         horizontal: false,
-        //         borderRadiusTop:10,
-        //         dataLabels: {
-        //             total: {
-        //                 enabled: true,
-        //                 style: {
-        //                     fontSize: '13px',
-        //                     fontWeight: 900,
-        //                 }
-        //             }
-        //         }
-        //     },
-        // },
+          }, 
         xaxis: {
             type: 'type',
             categories: [
-                label1, label2, label3
+                label1, label2 
             ],
         },
         legend: {
@@ -113,4 +87,4 @@ const ChartColumn = ({ isLang, color, urgent, home, center, label1, label2, labe
     )
 }
 
-export default ChartColumn
+export default ChartColumn2

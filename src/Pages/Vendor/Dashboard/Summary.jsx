@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import initialTranslate from './initialTranslate'
 
-const Summary = ({ IncomeMoney, doctorsIncomeMoney, totalProfit, isLang }) => {
+const Summary = ({ IncomeMoney, doctorsIncomeMoney, totalProfit, isLang, WalletAmount }) => {
 
     const [translate, setTranslate] = useState(initialTranslate)
     const handelTranslate = () => {
@@ -11,7 +11,7 @@ const Summary = ({ IncomeMoney, doctorsIncomeMoney, totalProfit, isLang }) => {
     useEffect(() => {
         handelTranslate()
     }, [isLang])
-    
+
     return (
         <>
             <Row>
@@ -22,22 +22,29 @@ const Summary = ({ IncomeMoney, doctorsIncomeMoney, totalProfit, isLang }) => {
                         <span>89 Sale </span>
                     </div>
                 </Col> */}
-                <Col xl={4} lg={4} md={6} sm={12}>
+                <Col xl={3} lg={3} md={6} sm={12}>
                     <div className="app__summary mt-4">
                         <h5> {translate[isLang]?.Summary?.IncomeMoney} </h5>
                         <span>{IncomeMoney} {' '} {translate[isLang]?.currency}</span>
                     </div>
                 </Col>
-                <Col xl={4} lg={4} md={6} sm={12}>
+                <Col xl={3} lg={3} md={6} sm={12}>
                     <div className="app__summary mt-4">
                         <h5> {translate[isLang]?.Summary?.doctorsIncomeMoney} </h5>
                         <span>{doctorsIncomeMoney}{' '} {translate[isLang]?.currency} </span>
                     </div>
                 </Col>
-                <Col xl={4} lg={4} md={6} sm={12}>
+                <Col xl={3} lg={3} md={6} sm={12}>
                     <div className="app__summary mt-4">
                         <h5>{translate[isLang]?.Summary?.totalProfit} </h5>
                         <span>{totalProfit} {' '} {translate[isLang]?.currency} </span>
+                    </div>
+                </Col>
+
+                <Col xl={3} lg={3} md={6} sm={12}>
+                    <div className="app__summary mt-4">
+                        <h5>{translate[isLang]?.Summary?.WalletAmount} </h5>
+                        <span>{WalletAmount} {' '} {translate[isLang]?.currency} </span>
                     </div>
                 </Col>
             </Row>

@@ -3,27 +3,16 @@
     "ApiMsg": "Valid Request",
     "ApiCode": 8,
     "Response": {
-        "RegisteredClients": 15,
+        "RegisteredClients1": 20,
+        "RegisteredDoctors2": 20,
+
+        "RegisteredClients": 20,
+        "ActiveClients": 18,
+
         "RegisteredDoctors": 20,
-        "Consults": 0,
-        "UrgentConsults": 0,
+        "ActiveDoctors.": 8 , 
 
-        "OnlineDoctors": 8,
-        "ActiveClients": 15,
-        "ActiveDoctors": 8,
-        "AdoptedAnimals": 0,
-        "SellingAnimals": 0,
-        "BiddingAnimals": 0,
-
-
-
-        "IncomeAmount": 0,
-        "DoctorsIncomeAmount": 0,
-        "TotalProfit": 0,
-
-
-        "HomeVisits": 0,
-        "UrgentHomeVisits": 0,
-        "Visits": 0
+        "ActiveDoctors": 8 ,
+        "OnlineDoctors": 8
     }
 }

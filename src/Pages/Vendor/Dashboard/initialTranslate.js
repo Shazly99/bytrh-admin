@@ -4,7 +4,8 @@ let initialTranslate = {
         Summary: {
             IncomeMoney:'أموال الدخل',
             doctorsIncomeMoney:'دخل الأطباء من المال',
-            totalProfit:'اجمالي الربح'
+            totalProfit:'اجمالي الربح',
+            WalletAmount:'مبلغ المحفظة'
         },
         Circle: {
             label1:'العملاء',
@@ -13,9 +14,6 @@ let initialTranslate = {
             label3:'العملاء النشطين',
             label4:'الأطباء النشطون',
             titleActive:'المستخدمين النشطين', 
-            label5:' استشارة عاجلة',
-            label6:'استشارات اجلة ',
-            titleConsulting:'إحصائية استشارية',
             label7:'استشارات اجلة ',
             label7:'الأطباء متصلون ',
             label8:'الأطباء النشطون ',
@@ -31,6 +29,9 @@ let initialTranslate = {
             label6:'مزايدة',
             titleAnimal:'حيوانات',
 
+            label7:' استشارة عاجلة',
+            label8:'استشارات اجلة ',
+            titleConsulting:'إحصائية استشارية',
         }
     },
     "en": {
@@ -38,23 +39,24 @@ let initialTranslate = {
 
         Summary: {
             IncomeMoney:'Income money',
-            doctorsIncomeMoney:'Doctors income money',
-            totalProfit:'Total Profit'
+            doctorsIncomeMoney:'Dr. income money',
+            totalProfit:'Total Profit',
+            WalletAmount:'Wallet amount'
         },
 
         Circle: {
-            label1:'Clients',
-            label2:'Doctors', 
+            label1:'Registered Clients',
+            label2:'Registered Doctors', 
             titleUser:'Registered users',
-            label3:'  clients',
-            label4:'  doctors',
-            titleActive:'Active users', 
-            label5:' Urgent consulting',
-            label6:'Later consulting ',
-            titleConsulting:'Consulting statistic',
+            label3:'  Registered Doctors',
+            label4:'  Active Doctors',
+            titleActive:'Active Doctors', 
             label7:'Online doctors ',
             label8:'Active doctors ',
-            titleDoctors:'Online doctors',
+            titleDoctors:'Active doctors', 
+            label9:'  Registered Clients',
+            label10:'  Active Clients',
+            titleActive2:'Active Clients', 
 
         },
         Column:{
@@ -66,6 +68,10 @@ let initialTranslate = {
             label5:'Selling',
             label6:'Bidding',
             titleAnimal:'Animals',
+
+            label7:' Urgent consulting',
+            label8:'Later consulting ',
+            titleConsulting:'Consulting statistic',
 
         }
     }

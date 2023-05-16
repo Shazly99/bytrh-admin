@@ -82,7 +82,7 @@
 }
 
 .apexcharts-bar-series.apexcharts-plot-series .apexcharts-series:nth-child(2) path {
-    clip-path: inset(0% 0% -11% 0% round 16px);
+    clip-path: inset(0% 0% -11% 0% round 16px) !important;
 }
 
 .apexcharts-legend-marker {
