@@ -12,12 +12,14 @@ let initialTranslate = {
             titleUser:'الأعضاء المسجلين', 
             label3:'العملاء النشطين',
             label4:'الأطباء النشطون',
-            titleActive:'المستخدمين النشطين',
-
-            
+            titleActive:'المستخدمين النشطين', 
             label5:' استشارة عاجلة',
             label6:'استشارات اجلة ',
             titleConsulting:'إحصائية استشارية',
+            label7:'استشارات اجلة ',
+            label7:'الأطباء متصلون ',
+            label8:'الأطباء النشطون ',
+            titleDoctors:'الأطباء متصلون',
         },
         Column:{
             label1:'عاجله',
@@ -50,6 +52,10 @@ let initialTranslate = {
             label5:' Urgent consulting',
             label6:'Later consulting ',
             titleConsulting:'Consulting statistic',
+            label7:'Online doctors ',
+            label8:'Active doctors ',
+            titleDoctors:'Online doctors',
+
         },
         Column:{
             label1:'Urgent',

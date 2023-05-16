@@ -132,8 +132,11 @@ function Dashboard() {
                 <Component.ChatOneLine
                   isLang={isLang}
                   doctor={dashbordData?.OnlineDoctors}
+                  client={dashbordData?.ActiveDoctors}
                   typeChart='pie'
-
+                  label1={translate[isLang]?.Circle?.label7}
+                  label2={translate[isLang]?.Circle?.label8}
+                  title={translate[isLang]?.Circle?.titleDoctors}
                 />
               </div>
               {/* 

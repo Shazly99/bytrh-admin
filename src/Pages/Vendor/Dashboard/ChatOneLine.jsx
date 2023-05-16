@@ -2,9 +2,9 @@ import React from 'react'
 import Chart from 'react-apexcharts';
 
 
-const ChatOneLine = ({  doctor  }) => {
+const ChatOneLine = ({ doctor, client, label1, label2 ,title}) => {
     const chartData = {
-        series: [  doctor,10],
+        series: [doctor, client],
         options: {
             chart: {
                 type: 'donut',
@@ -16,11 +16,11 @@ const ChatOneLine = ({  doctor  }) => {
                     enabled: true
                 }
             },
-            labels: ['Online doctors'],
-            colors: ['#8054A1', '#F7F9FB'], 
-            dataLabels: {
-                enabled: false 
-            },
+            labels: [label1, label2],
+            colors: ['#8054A1', '#66b9b1'],
+            // dataLabels: {
+            //     enabled: false
+            // },
             responsive: [
                 {
                     breakpoint: 480,
@@ -39,8 +39,8 @@ const ChatOneLine = ({  doctor  }) => {
 
     return (
         <div id="chart" >
-            <h2 className='ps-3'> Online doctors</h2>
-            <Chart options={chartData.options} series={chartData.series} type={'donut'} width={300} />
+            <h2 className='ps-3'> {title}</h2>
+            <Chart options={chartData.options} series={chartData.series} type={'pie'} width={300} />
         </div>
     );
 };
