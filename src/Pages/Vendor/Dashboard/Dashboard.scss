@@ -1,7 +1,9 @@
 @import '../../../style/varibale';
+
 .welcome__page {
-    max-height: calc( 100vh - 90px);
+    max-height: calc(100vh - 90px);
     height: 100vh;
+
     .title_bytrh {
         padding: 40px 60px;
 
@@ -18,7 +20,8 @@
 
 .app__dashboard {
     .app__dashboard_summary {
-        margin-top: 16px !important;
+        // margin-top: 16px !important;
+        margin-top: 0px !important;
 
         .app__summary {
             background-color: $colorDark;
@@ -69,12 +72,23 @@
         }
 
         h2 {
-            font-family: $fontBase !important;  
+            margin-right: 16px !important;
+
+            font-family: $fontBase !important;
             font-style: normal;
             font-weight: 400;
             font-size: 20.52px;
-            line-height: 31px;  
-            color: $mainColor; 
+            line-height: 31px;
+            color: $mainColor;
+            font-size: 1.2rem;
+            font-style: normal;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            line-height: 29px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
         }
     }
 
@@ -89,4 +103,39 @@
     width: 10px !important;
     height: 10px !important;
     // border-radius: 50% !important;
+}
+
+#chart {
+    .leftSummary {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-left: 10px !important;
+        margin-right: 10px !important;
+
+        .chartSummry {
+            padding: 10px 16px;
+            background-color: #fff;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            .title {
+                color: var(--dsetext-color, #010101);
+                font-size: 1rem;
+                font-style: normal;
+                font-weight: 700;
+                font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+            }
+
+            .number {
+                color: $secondColor;
+                font-size: 1rem;
+                font-style: normal;
+                font-weight: 700;
+                font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+            }
+        }
+    }
 }

@@ -5,6 +5,10 @@ import './Dashboard.scss'
 import { VendersContext } from '../../../context/Store';
 import { PostData, apiheader } from '../../../utils/fetchData';
 import initialTranslate from './initialTranslate';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import ButtonGroup from '@mui/material/ButtonGroup';
+
 
 function Dashboard() {
   let { isLang } = useContext(VendersContext);
@@ -17,9 +21,10 @@ function Dashboard() {
   }, [isLang])
 
   const [dashbordData, setDashborddata] = useState(null);
+  const [type, setFilterType] = useState('TODAY');
   const [isLoader, setIsloader] = useState(false);
 
-  const HomePage = async (type) => {
+  const HomePage = async () => {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/home`, { FilterType: type }, apiheader).then(({ data }) => {
       setDashborddata(data.Response);
       const timeoutId = setTimeout(() => {
@@ -29,13 +34,18 @@ function Dashboard() {
     });
 
   }
-
+  const buttons = [
+    <Button key="one" onClick={()=>setFilterType('TODAY')} >{translate[isLang]?.filter?.btnToday}</Button>,
+    <Button key="two" onClick={()=>setFilterType('WEEK')}>{translate[isLang]?.filter?.btnWeek}</Button>,
+    <Button key="three" onClick={()=>setFilterType('MONTH')}>{translate[isLang]?.filter?.btnMonth}</Button>,
+    <Button key="fore"onClick={()=>setFilterType('YEAR')}>{translate[isLang]?.filter?.btnYear}</Button>,
+  ];
 
 
   useEffect(() => {
     HomePage()
     handelTranslate()
-  }, [isLang])
+  }, [isLang,type])
 
 
 
@@ -48,6 +58,22 @@ function Dashboard() {
       </div> */}
       <Container fluid>
         <div className="app__dashboard">
+          <Box 
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'right', 
+              direction:'ltr',
+              marginTop:'10px',
+              '& > *': {
+                m: 1,
+              },
+            }}
+          > 
+            <ButtonGroup color="secondary"  aria-label="  secondary button group">
+              {buttons}
+            </ButtonGroup> 
+          </Box>
           <div className="app__dashboard_summary">
             <Component.Summary
               isLang={isLang}
@@ -107,12 +133,10 @@ function Dashboard() {
                 </Container>
               </div>
             </Col>
-            <Col xl={4} lg={4} md={6} sm={6}>
-              <div className="app__dashboard_chart"  >
+            <Col xl={4} lg={4} md={12} sm={12}>
+              <div className="app__dashboard_chart w-100"    >
                 <Component.ChartCircle
                   isLang={isLang}
-                  // typeChart='donut'
-                  typeChart='pie'
                   client={dashbordData?.RegisteredClients}
                   doctor={dashbordData?.RegisteredDoctors}
                   label1={translate[isLang]?.Circle?.label1}
@@ -121,52 +145,37 @@ function Dashboard() {
                 />
               </div>
 
-              <div className="app__dashboard_chart"  >
+              <div className="app__dashboard_chart w-100"  >
                 <Component.ChartCircle
                   isLang={isLang}
-                  client={dashbordData?.RegisteredClients}
-                  doctor={dashbordData?.ActiveClients}
-                  typeChart='donut'
-                  label1={translate[isLang]?.Circle?.label9}
-                  label2={translate[isLang]?.Circle?.label10}
-                  title={translate[isLang]?.Circle?.titleActive2}
-                />
-              </div>
-
-              <div className="app__dashboard_chart"  >
-                <Component.ChartCircle
-                  isLang={isLang}
-                  client={dashbordData?.RegisteredDoctors}
+                  client={dashbordData?.ActiveClients}
                   doctor={dashbordData?.ActiveDoctors}
-                  typeChart='donut'
-                  label1={translate[isLang]?.Circle?.label3}
-                  label2={translate[isLang]?.Circle?.label4}
+                  label1={translate[isLang]?.Circle?.label1}
+                  label2={translate[isLang]?.Circle?.label2}
                   title={translate[isLang]?.Circle?.titleActive}
                 />
               </div>
 
-              <div className="app__dashboard_chart"  >
+              <div className="app__dashboard_chart w-100"  >
+                <Component.ChartCircle
+                  isLang={isLang}
+                  doctor={dashbordData?.ActiveDoctors}
+                  label2={translate[isLang]?.Circle?.label2}
+                  title={translate[isLang]?.Circle?.titleOnline}
+                />
+              </div>
+
+              {/* <div className="app__dashboard_chart"  >
                 <Component.ChatOneLine
                   isLang={isLang}
                   activeDr={dashbordData?.ActiveDoctors}
                   onlineDr={dashbordData?.OnlineDoctors}
                   typeChart='donut'
-                  label1={translate[isLang]?.Circle?.label7}
-                  label2={translate[isLang]?.Circle?.label8}
+                  label1={translate[isLang]?.Circle?.label1}
+                  label2={translate[isLang]?.Circle?.label2}
                   title={translate[isLang]?.Circle?.titleDoctors}
                 />
-              </div>
-              {/* 
-              <div className="app__dashboard_chart"  >
-                <Component.ChartCircle
-                  isLang={isLang} 
-                  doctor={dashbordData?.OnlineDoctors}
-                  typeChart='pie'
-                  label1={translate[isLang]?.Circle?.label5} 
-                  title={translate[isLang]?.Circle?.titleConsulting}
-                />
-              </div> 
-              */}
+              </div>  */}
 
 
             </Col>
