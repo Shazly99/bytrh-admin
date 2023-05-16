@@ -18,6 +18,9 @@ const ChatOneLine = ({  doctor  }) => {
             },
             labels: ['Online doctors'],
             colors: ['#8054A1', '#F7F9FB'], 
+            dataLabels: {
+                enabled: false 
+            },
             responsive: [
                 {
                     breakpoint: 480,
