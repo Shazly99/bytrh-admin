@@ -33,6 +33,9 @@ let initialTranslate = {
             btnWeek:'أسبـــوع',
             btnMonth:'شهـــر',
             btnYear:'سنـــة',
+            btnDate:'تــاريخ',
+            modelDateFilter:'تصفية حسب التاريخ'
+
         }
     },
     "en": {
@@ -40,7 +43,7 @@ let initialTranslate = {
 
         Summary: {
             IncomeMoney: 'Income Money',
-            doctorsIncomeMoney: 'Dr. Income Money',
+            doctorsIncomeMoney: 'Doctors Income  ',
             totalProfit: 'Total Profit',
             WalletAmount: 'Wallets Amount'
         },
@@ -71,6 +74,8 @@ let initialTranslate = {
             btnWeek:'Week',
             btnMonth:'Month',
             btnYear:'Year',
+            btnDate:'Date',
+            modelDateFilter:'Filter by date'
         }
     }
 }

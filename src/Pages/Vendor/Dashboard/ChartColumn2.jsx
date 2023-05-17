@@ -6,7 +6,7 @@ const ChartColumn2 = ({ isLang, color, Consults, UrgentConsults,   label1, label
 
     // Data
     let series = [{
-        name: 'visits',
+        name: `${title}`,
         data: [Consults, UrgentConsults]
     }
     ]

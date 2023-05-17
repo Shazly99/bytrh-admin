@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { Container, Row, Col, Modal, Form } from 'react-bootstrap'
 import Component from '../../../constants/Component'
 import './Dashboard.scss'
 import { VendersContext } from '../../../context/Store';
@@ -20,9 +20,21 @@ function Dashboard() {
   const [dashbordData, setDashborddata] = useState(null);
   const [type, setFilterType] = useState('TODAY');
   const [isLoader, setIsloader] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+
+  const buttons = [
+    <Button variant={`${type === 'TODAY' ? 'contained' : 'outlined'}`} size='large' key="one" onClick={() => setFilterType('TODAY')} >{translate[isLang]?.filter?.btnToday}</Button>,
+    <Button variant={`${type === 'WEEK' ? 'contained' : 'outlined'}`} size='large' key="two" onClick={() => setFilterType('WEEK')}>{translate[isLang]?.filter?.btnWeek}</Button>,
+    <Button variant={`${type === 'MONTH' ? 'contained' : 'outlined'}`} size='large' key="three" onClick={() => setFilterType('MONTH')}>{translate[isLang]?.filter?.btnMonth}</Button>,
+    <Button variant={`${type === 'YEAR' ? 'contained' : 'outlined'}`} size='large' key="fore" onClick={() => setFilterType('YEAR')}>{translate[isLang]?.filter?.btnYear}</Button>,
+    <Button variant={`${type === 'DATE' ? 'contained' : 'outlined'}`} size='large' key="five" onClick={() => handleShow()}>{translate[isLang]?.filter?.btnDate}</Button>,
+  ];
 
   const HomePage = async () => {
-    await PostData(`${process.env.REACT_APP_API_URL}/admin/home`, { FilterType: type }, apiheader).then(({ data }) => {
+    await PostData(`${process.env.REACT_APP_API_URL}/admin/home`, { FilterType: type  }, apiheader).then(({ data }) => {
       setDashborddata(data.Response);
       const timeoutId = setTimeout(() => {
         setIsloader(true)
@@ -31,50 +43,69 @@ function Dashboard() {
     });
 
   }
-  const buttons = [
-    <Button key="one" onClick={()=>setFilterType('TODAY')} >{translate[isLang]?.filter?.btnToday}</Button>,
-    <Button key="two" onClick={()=>setFilterType('WEEK')}>{translate[isLang]?.filter?.btnWeek}</Button>,
-    <Button key="three" onClick={()=>setFilterType('MONTH')}>{translate[isLang]?.filter?.btnMonth}</Button>,
-    <Button key="fore"onClick={()=>setFilterType('YEAR')}>{translate[isLang]?.filter?.btnYear}</Button>,
-  ];
+  // !Filter by start date and end date
+  let startDate = useRef();
+  let endDate = useRef();
+  const filterByDate = async(e) => { 
+    handleClose()
+    setFilterType('DATE') 
+    if (type==='DATE') {      
+      await PostData(`${process.env.REACT_APP_API_URL}/admin/home`, { FilterType: type, StartDate: startDate.current.value, EndDate: endDate.current.value }, apiheader).then(({ data }) => {
+        setDashborddata(data.Response);
+        const timeoutId = setTimeout(() => {
+          setIsloader(true)
+        }, 0);
+        return () => clearTimeout(timeoutId);
+      });
+    }
+  } 
 
 
   useEffect(() => {
     let timeOut = setTimeout(() => {
-      HomePage();
+      if(type !== 'DATE'){
+        HomePage();
+      }
       handelTranslate()
     }, 100);
-    return(() => {
+    return (() => {
       clearTimeout(timeOut);
     })
-  }, [isLang,type])
+  }, [isLang, type])
+
+
+  useEffect(() => {
+    let timeOut = setTimeout(() => {
+      if (type ==='DATE') {
+        filterByDate(); 
+      }
+    }, 100);
+    return (() => {
+      clearTimeout(timeOut);
+    })
+  }, [isLang,  startDate,endDate,type])
 
 
 
   return (
     <>
-      {/* <div className="welcome__page   bg-body  " style={{ display: 'flex ', justifyContent: 'center', alignItems: 'center' }}>
-        <div className="title_bytrh shadow-lg rounded-3">
-          <h3>{translate[isLang]?.hello} </h3>
-        </div>
-      </div> */}
       <Container fluid>
         <div className="app__dashboard">
-          <Box 
+          <Box
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              alignItems: 'right', 
-              direction:'ltr',
-              marginTop:'10px',
+              alignItems: 'right',
+              direction: 'ltr',
+              marginTop: '10px',
               '& > *': {
                 m: 1,
               },
             }}
-          > 
-            <ButtonGroup color="secondary"  aria-label="  secondary button group">
+          >
+            <ButtonGroup color="secondary" className='d-flex gap-3  ' aria-label="  secondary button group">
               {buttons}
-            </ButtonGroup> 
+            </ButtonGroup>
           </Box>
           <div className="app__dashboard_summary">
             <Component.Summary
@@ -186,6 +217,34 @@ function Dashboard() {
 
         </div>
       </Container>
+
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header closeButton className=' d-flex justify-content-center align-items-center'>
+          <Modal.Title className=' w-100 text-center home__labelTitle' >{translate[isLang]?.filter?.modelDateFilter}  </Modal.Title>
+        </Modal.Header>
+        <form onSubmit={filterByDate}>
+          <Modal.Body>
+            <div className="d-flex flex-column gap-3">
+              <Form.Group controlId="formBasicEmail"  >
+                <Form.Label className='home__labelDate'>Start Date</Form.Label>
+                <Form.Control size="sm" type="date"  ref={startDate} />
+              </Form.Group>
+              <Form.Group controlId="formBasicEmail"  >
+                <Form.Label className='home__labelDate'>End Date</Form.Label>
+                <Form.Control size="sm" type="date" ref={endDate} />
+              </Form.Group>
+            </div>
+
+          </Modal.Body>
+          <Modal.Footer className='d-flex justify-content-center align-items-center  p-0 m-0 '>
+            <div className='p-3'>
+              <Button variant='outlined' color='secondary' onClick={() => filterByDate()}>{translate[isLang]?.filter?.btnDate}</Button>,
+            </div>
+
+
+          </Modal.Footer>
+        </form>
+      </Modal >
     </>
   )
 }
