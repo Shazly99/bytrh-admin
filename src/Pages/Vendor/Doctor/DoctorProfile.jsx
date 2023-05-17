@@ -42,6 +42,7 @@ export default function DoctorProfile() {
         }
       })
       .catch(err => {
+        console.log(err);
       })
   }
   useEffect(() => {
@@ -224,7 +225,7 @@ export default function DoctorProfile() {
 
           <div className="row gx-lg-4 gx-0 gy-lg-0 gy-4 d-flex justify-content-lg-start justify-content-center mt-2 mb-4">
 
-            <div className="col-lg-7">
+            <div className="col-lg-9">
               <div className="doc-info bg-light shadow-sm rounded-3 p-2 h-100">
                 <div className="row gx-md-3 gx-2 gy-0 d-flex align-items-center">
                   <div className="col-4">
@@ -235,16 +236,28 @@ export default function DoctorProfile() {
                   <div className="col-8">
                     <div className="personal-info position-relative">
 
-                      <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'الإسـم' : 'Name'}:</small>
-                      <h6 className='mb-2 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorName}</h6>
-
+                      <div className="row d-flex align-items-center">
+                          <div className="col-6">
+                            <div className='group'>
+                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'الإسـم' : 'Name'}:</small>
+                              <h6 className='mb-2 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorName}</h6>
+                            </div>
+                          </div>
+                          {/* <div className="col-6">
+                            <div className='group'>
+                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'الإسـم' : 'Name'}:</small>
+                              <h6 className='mb-2 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorName}</h6>
+                            </div>
+                          </div> */}
+                      </div>
+                      
                       <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'رقـم التليفـون' : 'Mobile Number'}:</small>
                       <h6 className='mb-2 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorPhone}</h6>
 
                       <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'البريد الإلكتروني' : 'Email'}:</small>
                       <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorEmail}</h6>
 
-                      {/* <small className='my-0 text-decoration-underline color-red' style={{fontWeight: '500' , cursor: 'pointer'}}>Change Password</small> */}
+                      <Link to={`../editDoctor/${id}`} className='my-0 text-decoration-underline secondColor' style={{fontWeight: '500' , cursor: 'pointer'}}>{isLang === 'ar' ? 'تغيير كلمة السر' : 'Change Password'}</Link>
 
                       <Link to={`../editDoctor/${id}`} className={`personal-info-edit position-absolute top-0 ${isLang === 'ar' ? 'start-0' : 'end-0'} secondColor`} style={{ cursor: 'pointer', whiteSpace: 'nowrap' }}>
                         <FiEdit3 className='me-1' />
@@ -272,7 +285,6 @@ export default function DoctorProfile() {
                 </div>
               </div>
             </div> */}
-
 
           </div>
 

@@ -29,16 +29,15 @@ const EditDoctor = ( ) => {
   const [phone, setPhone] = useState('');
   const [countryCode, setCountryCode] = useState('');
   const [country, setCountry] = useState(''); 
-  // const [city, setCity] = useState('');
-  // const [picture, setPicture] = useState([]);
-  // const [license, setLicense] = useState([]);
-  // const [expire, setExpire] = useState('');
+
+  let [photoSend, setPhotoSend] = useState([]);
+  let [imgProfile, setImgProfile] = useState('');
 
   async function getDoctorData() {
     await axios.get(apiInfos, apiheader)
       .then(res => {
         if (res.status === 200 && res.request.readyState === 4) {
-          console.log(res.data.Response);
+          setImgProfile(res.data.Response.DoctorPicture)
           setName(res.data.Response.UserName);
           setEmail(res.data.Response.UserEmail);
           setPhone(res.data.Response.UserPhone);
@@ -82,12 +81,19 @@ const EditDoctor = ( ) => {
 
     e.preventDefault();
     setLoadind(true);
-    // if(confirm === user.DoctorPassword) {
-    let { data } = await axios({
-      method: 'post',
-      url: `https://bytrh.com/api/admin/doctors/edit`,
-      // data: {...user , DoctorPhoneFlag , DoctorPhone},
-      data: {
+    
+    let obj1 = {
+        IDDoctor: id,
+        DoctorPicture: photoSend,
+        DoctorName: name,
+        DoctorEmail: email,
+        DoctorPhone: phone,
+        DoctorPhoneFlag: countryCode,
+        IDCity: selectCity.current.value,
+        IDArea: areaRef.current.value,
+    };
+
+    let obj2 = {
         IDDoctor: id,
         DoctorName: name,
         DoctorEmail: email,
@@ -95,7 +101,12 @@ const EditDoctor = ( ) => {
         DoctorPhoneFlag: countryCode,
         IDCity: selectCity.current.value,
         IDArea: areaRef.current.value,
-      },
+    };
+
+    let { data } = await axios({
+      method: 'post',
+      url: `https://bytrh.com/api/admin/doctors/edit`,
+      data: photoSend.length === 0 ? obj2 : obj1,
       headers: {
         'Content-Type': 'multipart/form-data',
         'Authorization': 'Bearer ' + localStorage.getItem('token'),
@@ -115,9 +126,59 @@ const EditDoctor = ( ) => {
 
   }
 
+  const pass = useRef();
 
-  
+  const confirm = useRef();
 
+  const [messagePass, setMessagePass] = useState('');
+
+  const [loadindPass, setLoadindPass] = useState(false);
+
+  const [apiCodePass, setApiCodePass] = useState(null);
+
+
+  async function updatePassword(e) {
+
+    e.preventDefault();
+    setLoadindPass(true);
+    if(confirm.current.value === pass.current.value) {
+      let { data } = await axios({
+        method: 'post',
+        url: `https://bytrh.com/api/admin/doctors/edit`,
+        data: {
+          IDDoctor: id,
+          DoctorPassword: pass.current.value,
+        },
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
+        },
+      });
+
+      setMessagePass(data.ApiMsg);
+      setLoadindPass(false);
+
+      if (data.Success === true) {
+        setApiCodePass(data.Success);
+        setTimeout(() => {
+          // navigate('/doctors');
+          window.history.go(-1);
+        }, 1500);
+      }
+    }
+
+    else {
+      setMessagePass('password does not match..');
+      setLoadindPass(false);
+    }
+
+  }
+
+
+
+  const handleImageSelect = (el) => {
+    setImgProfile(URL.createObjectURL(el));
+  };
 
 
   return (
@@ -135,6 +196,31 @@ const EditDoctor = ( ) => {
               <div className="app__addprodects-form">
                 <form onSubmit={updateForm}>
                   <div className="row d-flex justify-content-center justify-content-md-start align-items-center g-4">
+
+                      <div className="row d-flex flex-column-reverse flex-md-row justify-content-center justify-content-md-start align-items-center g-4">
+                          <div className="col-md-6">
+                            <div className="group-add">
+                              <label className="fs-5  " htmlFor="doctorImage">{isLang === 'ar' ? 'صـورة الطبيب' : "Doctor's Image"}</label>
+                              <div className="input-group">
+                                <input type="file" accept='image/*' onChange={(e) => {
+                                  handleImageSelect(e.target.files[0])
+                                  setPhotoSend(e.target.files[0])
+                                }} className='form-control mx-auto py-2' name="doctorImage" id="doctorImage" />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="col-md-6">
+                              <div className="mt-3 mx-auto" style={{ width: "200px " }}>
+                                  <img
+                                      loading="lazy"
+                                      src={imgProfile}
+                                      alt={`${name} ${isLang === 'ar' ? 'صورة' : 'picture'}`}
+                                      className=' rounded-3 mx-auto w-100 '
+                                    />
+                              </div>
+                          </div>
+                      </div>
 
                     <div className="col-md-6">
                       <div className="group-add">
@@ -196,7 +282,7 @@ const EditDoctor = ( ) => {
                       </div>
                     </div>
                     <div className="col-md-6">
-                      <Form.Group controlId="formBasicEmail" className='mt-3' >
+                      <Form.Group controlId="formBasicArea" className='mt-3' >
                         <Form.Label>{isLang === 'ar' ? 'المنطقة' : 'Area'} </Form.Label>
 
                         <Form.Select aria-label="Default select example" ref={selectCity}>
@@ -210,7 +296,7 @@ const EditDoctor = ( ) => {
                       </Form.Group>
                     </div>
                     <div className="col-md-6">
-                      <Form.Group controlId="formBasicEmail" className='mt-3' >
+                      <Form.Group controlId="formBasicCity" className='mt-3' >
                          <Form.Label>{isLang === 'ar' ? 'المدينــة' : 'City'} </Form.Label>
 
                         <Form.Select aria-label="Default select example" ref={areaRef}>
@@ -265,6 +351,48 @@ const EditDoctor = ( ) => {
                           {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                         </Button>
                       </Link>
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div className="app__addprodects__header">
+            <Component.BaseHeader h1={isLang === 'ar' ? 'تعديـل كلمة السـر' : 'Edit the password'} />
+            <div className="app__addOrder-form">
+              <div className="app__addprodects-form">
+                <form onSubmit={updatePassword}>
+                  <div className="row d-flex justify-content-center justify-content-md-start align-items-center g-4">
+
+                    <div className="col-md-6">
+                      <div className="group-add">
+                        <label className="fs-5" htmlFor="DoctorPass">{isLang === 'ar' ? 'كلمة الســر الجديدة' : 'New Password'}</label>
+                        <div className="input-group">
+                          <input type="password" ref={pass} className='form-control mx-auto py-2' required name="DoctorPass" id="DoctorPass" />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-md-6">
+                      <div className="group-add">
+                        <label className="fs-5" htmlFor="ConfirmPass">{isLang === 'ar' ? 'تأكيد كلمة الســر' : 'Confirm the password'}</label>
+                        <div className="input-group">
+                          <input type="password" ref={confirm} className='form-control mx-auto py-2' required name="ConfirmPass" id="ConfirmPass" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {messagePass.length > 0 ? <p id="alertSave" className={`alert ${apiCodePass === true ? 'alert-success' : 'alert-danger'} fs-6 py-2 mb-0 mt-3 w-50 text-center mx-auto`}>{messagePass}</p> : ''}
+
+                  <div className='d-flex justify-content-center align-content-center mt-4'>
+                    <div className='baseBtn1'>
+                      <Button type='submit' variant={'primary'} className='d-flex align-items-center justify-content-center'>
+                        {loadindPass ? <CircularProgress size={27} style={{ color: '#fff' }} /> :
+                          isLang === 'ar' ? 'حفــظ' : 'Save'
+                        }
+                      </Button>
                     </div>
                   </div>
 

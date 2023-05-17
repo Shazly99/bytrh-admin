@@ -16,9 +16,6 @@ function Dashboard() {
   const handelTranslate = () => {
     setTranslate(initialTranslate)
   }
-  useEffect(() => {
-    handelTranslate()
-  }, [isLang])
 
   const [dashbordData, setDashborddata] = useState(null);
   const [type, setFilterType] = useState('TODAY');
@@ -43,8 +40,13 @@ function Dashboard() {
 
 
   useEffect(() => {
-    HomePage()
-    handelTranslate()
+    let timeOut = setTimeout(() => {
+      HomePage();
+      handelTranslate()
+    }, 100);
+    return(() => {
+      clearTimeout(timeOut);
+    })
   }, [isLang,type])
 
 
