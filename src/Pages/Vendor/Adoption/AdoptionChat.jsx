@@ -11,6 +11,8 @@ import { apiheader } from './../../../utils/fetchData';
 
 const AdoptionChat = () => {
 
+  let { isLang } = useContext(VendersContext);
+
   let { id } = useParams()
   const audioRef = useRef(null);
 
@@ -34,12 +36,7 @@ const AdoptionChat = () => {
     return () => {
       clearTimeout(timeOut);
     }
-  }, [id])
-
-
-
-  let { isLang } = useContext(VendersContext);
-
+  }, [id , isLang])
 
 
 

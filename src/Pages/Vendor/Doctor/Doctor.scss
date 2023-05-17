@@ -94,3 +94,20 @@
   .personal-info-edit{
     color:$secondColor !important;
   }
+
+  .img-doc img {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 768px) {
+    .img-doc img {
+      width: 80%;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    .img-doc img {
+      width: 70%;
+      height: 240px !important;
+    }
+  }

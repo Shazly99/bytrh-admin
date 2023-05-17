@@ -13,6 +13,7 @@ import './Doctor.scss';
 
 const DoctorHours = () => {
 
+    let { isLang } = useContext(VendersContext);
 
     const { id } = useParams();
     const apiDoctorHours = `https://bytrh.com/api/admin/doctors/hours`;
@@ -62,11 +63,7 @@ const DoctorHours = () => {
         return(() => {
             clearTimeout(timeOut);
         })
-    }, [])
-
-
-    let { isLang } = useContext(VendersContext);
-
+    }, [isLang])
 
 
     return (

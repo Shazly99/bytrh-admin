@@ -154,7 +154,7 @@ const DoctorService = () => {
         return () => clearTimeout(timeoutId);
 
     }, [page, isLang]);
-    useEffect(() => { }, [page, PagesNumber]);
+    useEffect(() => { }, [PagesNumber]);
 
 
     return (

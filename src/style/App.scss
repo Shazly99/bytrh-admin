@@ -363,14 +363,11 @@ td {
 }
 
 
-.img-doc img,
 .license img {
   height: 180px;
 }
 
 @media screen and (max-width: 500px) {
-
-  .img-doc img,
   .license img {
     height: 150px;
     min-height: 150px;

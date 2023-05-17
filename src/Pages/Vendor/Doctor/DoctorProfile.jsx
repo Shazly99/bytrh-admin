@@ -15,6 +15,8 @@ import Component from './../../../constants/Component';
 
 export default function DoctorProfile() {
 
+  let { isLang } = useContext(VendersContext);
+
   let { id } = useParams();
   const apiDoctoProfile = `https://bytrh.com/api/admin/doctors/profile/${id}`;
 
@@ -53,7 +55,7 @@ export default function DoctorProfile() {
     return (() => {
       clearTimeout(timeOut);
     })
-  }, [])
+  }, [isLang])
 
 
   const [showAdd, setShowAdd] = useState(false);
@@ -200,11 +202,6 @@ export default function DoctorProfile() {
 
 
 
-  let { isLang } = useContext(VendersContext);
-
-
-
-
   return (
     <>
 
@@ -225,15 +222,15 @@ export default function DoctorProfile() {
 
           <div className="row gx-lg-4 gx-0 gy-lg-0 gy-4 d-flex justify-content-lg-start justify-content-center mt-2 mb-4">
 
-            <div className="col-lg-9">
-              <div className="doc-info bg-light shadow-sm rounded-3 p-2 h-100">
-                <div className="row gx-md-3 gx-2 gy-0 d-flex align-items-center">
-                  <div className="col-4">
+            <div className="col-lg-10">
+              <div className="doc-info position-relative bg-light shadow-sm rounded-3 p-2 h-100">
+                <div className="row gx-md-4 gx-2 gy-md-0 gy-3 d-flex align-items-center">
+                  <div className="col-md-4">
                     <div className="img-doc">
-                      <img src={fetchDoctor.DoctorPicture} className='img-fluid d-block rounded-3 w-100' style={{ objectFit: 'fill' }} loading='lazy' alt="doctor" />
+                      <img src={fetchDoctor.DoctorPicture} className='d-block rounded-3 mx-auto' style={{ objectFit: 'fill' , height: '280px' }} loading='lazy' alt="doctor" />
                     </div>
                   </div>
-                  <div className="col-8">
+                  <div className="col-md-8">
                     <div className="personal-info position-relative">
 
                       <div className="row d-flex align-items-center">
@@ -243,30 +240,76 @@ export default function DoctorProfile() {
                               <h6 className='mb-2 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorName}</h6>
                             </div>
                           </div>
-                          {/* <div className="col-6">
+
+                          <div className="col-6">
                             <div className='group'>
-                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'الإسـم' : 'Name'}:</small>
-                              <h6 className='mb-2 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorName}</h6>
+                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'رقـم التليفـون' : 'Mobile Number'}:</small>
+                              <h6 className='mb-2 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorPhone}</h6>
                             </div>
-                          </div> */}
+                          </div>
+
+                          <div className="col-6">
+                            <div className='group'>
+                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'البريد الإلكتروني' : 'Email'}:</small>
+                              <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorEmail}</h6>
+                            </div>
+                          </div>
+                          
+                          <div className="col-6">
+                            <div className='group'>
+                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'الرصيـد' : 'Balance'}:</small>
+                              <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorBalance} {isLang === 'ar' ? 'ريال' : 'SR'}</h6>
+                            </div>
+                          </div>
+
+                          <div className="col-6">
+                            <div className='group'>
+                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'التصنيـف' : 'Type'}:</small>
+                              <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorType}</h6>
+                            </div>
+                          </div>
+
+                          {fetchDoctor.MedicalCenterName &&
+                            <div className="col-6">
+                              <div className='group'>
+                                <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'المركز الطبي' : 'Medical Center'}:</small>
+                                <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.MedicalCenterName}</h6>
+                              </div>
+                            </div>
+                          }
+
+                          <div className="col-6">
+                            <div className='group'>
+                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'الدولـة' : 'Country'}:</small>
+                              <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.Country}</h6>
+                            </div>
+                          </div>
+                          
+                          <div className="col-6">
+                            <div className='group'>
+                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'المنطقـة' : 'Area'}:</small>
+                              <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.City}</h6>
+                            </div>
+                          </div>
+
+                          <div className="col-6">
+                            <div className='group'>
+                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'المدينـة' : 'City'}:</small>
+                              <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.Area}</h6>
+                            </div>
+                          </div>
+                          
                       </div>
-                      
-                      <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'رقـم التليفـون' : 'Mobile Number'}:</small>
-                      <h6 className='mb-2 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorPhone}</h6>
 
-                      <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'البريد الإلكتروني' : 'Email'}:</small>
-                      <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorEmail}</h6>
-
-                      <Link to={`../editDoctor/${id}`} className='my-0 text-decoration-underline secondColor' style={{fontWeight: '500' , cursor: 'pointer'}}>{isLang === 'ar' ? 'تغيير كلمة السر' : 'Change Password'}</Link>
-
-                      <Link to={`../editDoctor/${id}`} className={`personal-info-edit position-absolute top-0 ${isLang === 'ar' ? 'start-0' : 'end-0'} secondColor`} style={{ cursor: 'pointer', whiteSpace: 'nowrap' }}>
-                        <FiEdit3 className='me-1' />
-                        <small className='my-0' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'تعديـل' : 'Edit'}</small>
-                      </Link>
+                      <Link to={`../editDoctor/${id}`} className='text-decoration-underline secondColor' style={{fontWeight: '500' , cursor: 'pointer'}}>{isLang === 'ar' ? 'تغيير كلمة السر' : 'Change Password'}</Link>
 
                     </div>
                   </div>
                 </div>
+                <Link to={`../editDoctor/${id}`} className={`personal-info-edit position-absolute top-0 ${isLang === 'ar' ? 'start-0' : 'end-0'} secondColor`} style={{ cursor: 'pointer', whiteSpace: 'nowrap' }}>
+                  <FiEdit3 className='me-1' />
+                  <small className='my-0' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'تعديـل' : 'Edit'}</small>
+                </Link>
               </div>
             </div>
 

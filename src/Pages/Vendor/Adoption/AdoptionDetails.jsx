@@ -12,6 +12,8 @@ import './Adoption.scss';
 
 export default function AdoptionDetails() {
 
+  let { isLang } = useContext(VendersContext);
+
   let {id} = useParams();
 
   const apiAdoptionDetails = `https://bytrh.com/api/admin/adoptions/details/${id}`;
@@ -44,7 +46,7 @@ export default function AdoptionDetails() {
     return(() => {
       clearTimeout(timeOut);
     })
-  }, [])
+  }, [isLang])
   
 
   // useEffect(() => {
@@ -55,10 +57,6 @@ export default function AdoptionDetails() {
   //   $('body').addClass('d-block');
   //   $('body').removeClass('d-none')
   // }, [loading]);
-
-
-  let { isLang } = useContext(VendersContext);
-
 
 
   return (

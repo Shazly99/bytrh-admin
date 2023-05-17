@@ -66,7 +66,7 @@ const EditService = () => {
     return () => {
       clearTimeout(timeOut);
     }
-  }, [id])
+  }, [id , isLang])
   
   return (
       <Container fluid>

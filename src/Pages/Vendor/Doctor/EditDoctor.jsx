@@ -190,6 +190,7 @@ const EditDoctor = ( ) => {
             :
             <Component.SubNav sub__nav={[{ name: "Doctors", path: '/doctors' }, { name: "Edit Doctor", path: `/doctors/editDoctor/${id}` }]} />
           }
+
           <div className="app__addprodects__header ">
             <Component.BaseHeader h1={isLang === 'ar' ? 'تعديـل بيانـات الطبيـب' : 'Edit Doctor information'} />
             <div className="app__addOrder-form">
@@ -370,7 +371,7 @@ const EditDoctor = ( ) => {
                       <div className="group-add">
                         <label className="fs-5" htmlFor="DoctorPass">{isLang === 'ar' ? 'كلمة الســر الجديدة' : 'New Password'}</label>
                         <div className="input-group">
-                          <input type="password" ref={pass} className='form-control mx-auto py-2' required name="DoctorPass" id="DoctorPass" />
+                          <input type="password" ref={pass} className='form-control mx-auto py-2' name="DoctorPass" id="DoctorPass" placeholder={isLang === 'ar' ? 'إضافة كلمة سر جديدة' : 'add a new password'} required />
                         </div>
                       </div>
                     </div>
@@ -378,7 +379,7 @@ const EditDoctor = ( ) => {
                       <div className="group-add">
                         <label className="fs-5" htmlFor="ConfirmPass">{isLang === 'ar' ? 'تأكيد كلمة الســر' : 'Confirm the password'}</label>
                         <div className="input-group">
-                          <input type="password" ref={confirm} className='form-control mx-auto py-2' required name="ConfirmPass" id="ConfirmPass" />
+                          <input type="password" ref={confirm} className='form-control mx-auto py-2' name="ConfirmPass" id="ConfirmPass" placeholder={isLang === 'ar' ? 'تأكيد كلمة السر' : 'confirm the password'} required />
                         </div>
                       </div>
                     </div>
@@ -400,6 +401,7 @@ const EditDoctor = ( ) => {
               </div>
             </div>
           </div>
+
         </div>
       </Container>
     </>

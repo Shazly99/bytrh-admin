@@ -42,7 +42,8 @@ const SingleHour = ({ DoctorTime, getDoctorHours }) => {
                 }
             })
             .catch(err => {
-             })
+                console.log(err);
+            })
     }
 
 

@@ -21,10 +21,8 @@ const EditDoctorDocuments = () => {
 
     const EditPage = async () => {
         let data = await GetData(`${process.env.REACT_APP_API_URL}/admin/doctors/documents/edit/page/${idDocument}`, apiheader)
-        console.log(data.Response);
         setEditPage(data.Response);
         setSelectedDate(data?.Response?.DoctorDocumentExpireDate?.split(" ")[0])
-        console.log();
     }
     // TODO:: select image
     const [selectedImage, setSelectedImage] = useState(null);
@@ -69,11 +67,13 @@ const EditDoctorDocuments = () => {
     }
     useEffect(() => {
 
-        EditPage()
+        let timeOut = setTimeout(() => {
+            EditPage()
+        }, 100);
         return () => {
-
+            clearTimeout(timeOut)
         }
-    }, [])
+    }, [isLang])
 
     return (
         <>

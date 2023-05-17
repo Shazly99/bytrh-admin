@@ -9,6 +9,9 @@ import { apiheader } from './../../../utils/fetchData';
 
 
 export default function DoctorCategory() { 
+
+  let { isLang } = useContext(VendersContext);
+
   // get doctor info
   const { id } = useParams();
   const apiInfos = `https://bytrh.com/api/admin/doctors/doctoranimalfields/${id}`;
@@ -36,7 +39,7 @@ export default function DoctorCategory() {
     return(() => {
       clearTimeout(timeOut);
     })
-  }, [])
+  }, [isLang])
 
 
 
@@ -81,10 +84,6 @@ export default function DoctorCategory() {
   const goToBack = () => {
     window.history.go(-1);
   }
-
-
-  let { isLang } = useContext(VendersContext);
-
 
 
   return (
