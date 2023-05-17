@@ -18,7 +18,7 @@ function Dashboard() {
   }
 
   const [dashbordData, setDashborddata] = useState(null);
-  const [type, setFilterType] = useState('TODAY');
+  const [type, setFilterType] = useState('YEAR');
   const [isLoader, setIsloader] = useState(false);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -226,11 +226,11 @@ function Dashboard() {
           <Modal.Body>
             <div className="d-flex flex-column gap-3">
               <Form.Group controlId="formBasicEmail"  >
-                <Form.Label className='home__labelDate'>Start Date</Form.Label>
+                <Form.Label className='home__labelDate'>{translate[isLang]?.filter?.startDate}</Form.Label>
                 <Form.Control size="sm" type="date"  ref={startDate} />
               </Form.Group>
               <Form.Group controlId="formBasicEmail"  >
-                <Form.Label className='home__labelDate'>End Date</Form.Label>
+                <Form.Label className='home__labelDate'>{translate[isLang]?.filter?.endDate}  </Form.Label>
                 <Form.Control size="sm" type="date" ref={endDate} />
               </Form.Group>
             </div>
@@ -238,7 +238,7 @@ function Dashboard() {
           </Modal.Body>
           <Modal.Footer className='d-flex justify-content-center align-items-center  p-0 m-0 '>
             <div className='p-3'>
-              <Button variant='outlined' color='secondary' onClick={() => filterByDate()}>{translate[isLang]?.filter?.btnDate}</Button>,
+              <Button variant='outlined' color='secondary' onClick={() => filterByDate()}>{translate[isLang]?.filter?.btnDate2}</Button>,
             </div>
 
 

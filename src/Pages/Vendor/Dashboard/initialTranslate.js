@@ -33,8 +33,12 @@ let initialTranslate = {
             btnWeek:'أسبـــوع',
             btnMonth:'شهـــر',
             btnYear:'سنـــة',
-            btnDate:'تــاريخ',
-            modelDateFilter:'تصفية حسب التاريخ'
+            btnDate:'تاريخ',
+
+            btnDate2:'ابحث عن البيانات',
+            modelDateFilter:'تصفية حسب التاريخ',
+            startDate:'تاريخ البدء',
+            endDate:'تاريخ الانتهاء',
 
         }
     },
@@ -75,7 +79,10 @@ let initialTranslate = {
             btnMonth:'Month',
             btnYear:'Year',
             btnDate:'Date',
-            modelDateFilter:'Filter by date'
+            btnDate2:'Find Data',
+            modelDateFilter:'Filter by date',
+            startDate:'Start Date',
+            endDate:'End Date',
         }
     }
 }
