@@ -5,7 +5,7 @@ let initialTranslate = {
             IncomeMoney: 'أموال الدخل',
             doctorsIncomeMoney: 'دخل الأطباء من المال',
             totalProfit: 'اجمالي الربح',
-            WalletAmount: 'مبلغ المحفظة'
+            WalletAmount: 'مبلغ المحافظ'
         },
         Circle: {
             label1: '  العملاء',
@@ -34,8 +34,9 @@ let initialTranslate = {
             btnMonth:'شهـــر',
             btnYear:'سنـــة',
             btnDate:'تاريخ',
+            btnDate3:'إلغـــاء',
 
-            btnDate2:'ابحث عن البيانات',
+            btnDate2:'  تــأكيد  ',
             modelDateFilter:'تصفية حسب التاريخ',
             startDate:'تاريخ البدء',
             endDate:'تاريخ الانتهاء',
@@ -79,7 +80,8 @@ let initialTranslate = {
             btnMonth:'Month',
             btnYear:'Year',
             btnDate:'Date',
-            btnDate2:'Find Data',
+            btnDate2:'Confirm',
+            btnDate3:'Cancel',
             modelDateFilter:'Filter by date',
             startDate:'Start Date',
             endDate:'End Date',

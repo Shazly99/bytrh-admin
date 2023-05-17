@@ -26,15 +26,15 @@ function Dashboard() {
 
 
   const buttons = [
-    <Button variant={`${type === 'TODAY' ? 'contained' : 'outlined'}`} size='large' key="one" onClick={() => setFilterType('TODAY')} >{translate[isLang]?.filter?.btnToday}</Button>,
-    <Button variant={`${type === 'WEEK' ? 'contained' : 'outlined'}`} size='large' key="two" onClick={() => setFilterType('WEEK')}>{translate[isLang]?.filter?.btnWeek}</Button>,
-    <Button variant={`${type === 'MONTH' ? 'contained' : 'outlined'}`} size='large' key="three" onClick={() => setFilterType('MONTH')}>{translate[isLang]?.filter?.btnMonth}</Button>,
-    <Button variant={`${type === 'YEAR' ? 'contained' : 'outlined'}`} size='large' key="fore" onClick={() => setFilterType('YEAR')}>{translate[isLang]?.filter?.btnYear}</Button>,
-    <Button variant={`${type === 'DATE' ? 'contained' : 'outlined'}`} size='large' key="five" onClick={() => handleShow()}>{translate[isLang]?.filter?.btnDate}</Button>,
+    <Button style={{ textTransform: 'capitalize' }} variant={`${type === 'TODAY' ? 'contained' : 'outlined'}`} size='large' key="one" onClick={() => setFilterType('TODAY')} >{translate[isLang]?.filter?.btnToday}</Button>,
+    <Button style={{ textTransform: 'capitalize' }} variant={`${type === 'WEEK' ? 'contained' : 'outlined'}`} size='large' key="two" onClick={() => setFilterType('WEEK')}>{translate[isLang]?.filter?.btnWeek}</Button>,
+    <Button style={{ textTransform: 'capitalize' }} variant={`${type === 'MONTH' ? 'contained' : 'outlined'}`} size='large' key="three" onClick={() => setFilterType('MONTH')}>{translate[isLang]?.filter?.btnMonth}</Button>,
+    <Button style={{ textTransform: 'capitalize' }} variant={`${type === 'YEAR' ? 'contained' : 'outlined'}`} size='large' key="fore" onClick={() => setFilterType('YEAR')}>{translate[isLang]?.filter?.btnYear}</Button>,
+    <Button style={{ textTransform: 'capitalize' }} variant={`${type === 'DATE' ? 'contained' : 'outlined'}`} size='large' key="five" onClick={() => handleShow()}>{translate[isLang]?.filter?.btnDate}</Button>,
   ];
 
   const HomePage = async () => {
-    await PostData(`${process.env.REACT_APP_API_URL}/admin/home`, { FilterType: type  }, apiheader).then(({ data }) => {
+    await PostData(`${process.env.REACT_APP_API_URL}/admin/home`, { FilterType: type }, apiheader).then(({ data }) => {
       setDashborddata(data.Response);
       const timeoutId = setTimeout(() => {
         setIsloader(true)
@@ -46,10 +46,10 @@ function Dashboard() {
   // !Filter by start date and end date
   let startDate = useRef();
   let endDate = useRef();
-  const filterByDate = async(e) => { 
+  const filterByDate = async (e) => {
     handleClose()
-    setFilterType('DATE') 
-    if (type==='DATE') {      
+    setFilterType('DATE')
+    if (type === 'DATE') {
       await PostData(`${process.env.REACT_APP_API_URL}/admin/home`, { FilterType: type, StartDate: startDate.current.value, EndDate: endDate.current.value }, apiheader).then(({ data }) => {
         setDashborddata(data.Response);
         const timeoutId = setTimeout(() => {
@@ -58,12 +58,12 @@ function Dashboard() {
         return () => clearTimeout(timeoutId);
       });
     }
-  } 
+  }
 
 
   useEffect(() => {
     let timeOut = setTimeout(() => {
-      if(type !== 'DATE'){
+      if (type !== 'DATE') {
         HomePage();
       }
       handelTranslate()
@@ -76,14 +76,14 @@ function Dashboard() {
 
   useEffect(() => {
     let timeOut = setTimeout(() => {
-      if (type ==='DATE') {
-        filterByDate(); 
+      if (type === 'DATE') {
+        filterByDate();
       }
     }, 100);
     return (() => {
       clearTimeout(timeOut);
     })
-  }, [isLang,  startDate,endDate,type])
+  }, [isLang, startDate, endDate, type])
 
 
 
@@ -223,11 +223,11 @@ function Dashboard() {
           <Modal.Title className=' w-100 text-center home__labelTitle' >{translate[isLang]?.filter?.modelDateFilter}  </Modal.Title>
         </Modal.Header>
         <form onSubmit={filterByDate}>
-          <Modal.Body>
+          <Modal.Body dir={isLang === "ar" ? 'rtl' : 'ltr'}>
             <div className="d-flex flex-column gap-3">
               <Form.Group controlId="formBasicEmail"  >
                 <Form.Label className='home__labelDate'>{translate[isLang]?.filter?.startDate}</Form.Label>
-                <Form.Control size="sm" type="date"  ref={startDate} />
+                <Form.Control size="sm" type="date" ref={startDate} />
               </Form.Group>
               <Form.Group controlId="formBasicEmail"  >
                 <Form.Label className='home__labelDate'>{translate[isLang]?.filter?.endDate}  </Form.Label>
@@ -237,8 +237,9 @@ function Dashboard() {
 
           </Modal.Body>
           <Modal.Footer className='d-flex justify-content-center align-items-center  p-0 m-0 '>
-            <div className='p-3'>
-              <Button variant='outlined' color='secondary' onClick={() => filterByDate()}>{translate[isLang]?.filter?.btnDate2}</Button>,
+            <div className='p-3 d-flex gap-2'>
+              <Button variant='outlined' color='secondary' onClick={() => filterByDate()}>{translate[isLang]?.filter?.btnDate2}</Button>
+              <Button variant='outlined' color='secondary' onClick={() => handleClose()}>{translate[isLang]?.filter?.btnDate3}</Button>
             </div>
 
 

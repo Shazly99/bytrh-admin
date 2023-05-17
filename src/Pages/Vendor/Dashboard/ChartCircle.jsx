@@ -43,10 +43,9 @@ const CircleChart = ({ client, doctor, label1, label2, title, typeChart }) => {
     return (
         <div id="chart" >
             <h2 className='ps-3 bolder'> {title}</h2>
-            {/* <Chart options={chartData.options} series={chartData.series} type='donut' width={300} /> */}
+      
             <Row className='leftSummary'>
-      {/*           {
-                    client && */}
+    
                     <Col xl={6} lg={6} md={6} sm={6} className='w-100'>
                         <div className="chartSummry">
                             <div className="title">
@@ -57,9 +56,7 @@ const CircleChart = ({ client, doctor, label1, label2, title, typeChart }) => {
                             </div>
                         </div>
                     </Col>
-             {/*    } */}
-      {/*           {
-                    doctor && */}
+ 
                     <Col xl={6} lg={6} md={6} sm={6} className='w-100'>
                         <div className="chartSummry">
                             <div className="title">
@@ -70,7 +67,7 @@ const CircleChart = ({ client, doctor, label1, label2, title, typeChart }) => {
                             </div>
                         </div>
                     </Col>
-         {/*        } */}
+   
             </Row>
         </div>
     );
