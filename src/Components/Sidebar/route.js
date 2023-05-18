@@ -290,6 +290,13 @@ const routes = [
     icon: <LogoSvg.Adoption className="logoSvg" style={{ width: 19 }} />,
     Roles: [2],
   },
+  {
+    path: "/services",
+    nameAr: "الخدمــات",
+    nameEn: "Reports",
+    icon: <LogoSvg.Adoption className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1],
+  },
 ];
 
 export default routes
