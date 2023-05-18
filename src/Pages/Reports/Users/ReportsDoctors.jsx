@@ -148,7 +148,7 @@ const ReportsDoctors = () => {
                                                         <span className='ClientName'>{item?.UserName?.charAt(0).toUpperCase() + item?.UserName?.slice(1).toLowerCase()}</span>
                                                     </td> 
                                                     <td >
-                                                        <span className='ClientName'>{item?.LedgerLinkType?.charAt(0).toUpperCase() + item?.LedgerLinkType?.slice(1).toLowerCase()}</span>
+                                                        <span className='ClientName'>{item?.LedgerTransactionType?.charAt(0).toUpperCase() + item?.LedgerTransactionType?.slice(1).toLowerCase()}</span>
                                                     </td> 
                                                     <td >
                                                         <span className='ClientName'>{item?.LedgerSource?.charAt(0).toUpperCase() + item?.LedgerSource?.slice(1).toLowerCase().replace('_'," ")}</span>
@@ -156,9 +156,7 @@ const ReportsDoctors = () => {
                                                     <td >
                                                         <span className='ClientName'>{item?.LedgerDestination?.charAt(0).toUpperCase() + item?.LedgerDestination?.slice(1).toLowerCase()}</span>
                                                     </td> 
-                                                    <td >
-                                                        <span className='ClientName'>{item?.LedgerTransactionType?.charAt(0).toUpperCase() + item?.LedgerTransactionType?.slice(1).toLowerCase()}</span>
-                                                    </td> 
+
                                                     <td >
                                                         <span className='ClientName'>{item?.LedgerAmount }</span>
                                                     </td> 

@@ -1,32 +1,32 @@
 let initialTranslation = {
     "ar": { 
         TableHeader: [
-            "معلومات العميل",
-            "معلومات المركز الطبي",
-            "معلومات الطبيب",
-            "سعر الزيارة",
-            "نوع الزيارة",
-            "حالة ",
-            "تاريخ بدء الزيارة ",
-            "الإجراء",
-            "تفاصبل الزيارة"
+            "اسم الطبيب", 
+            "نوع المعاملة",
+            "مصدر",
+            "وجهة",
+            "مبلغ",
+            "الرصيد الافتتاحي",
+            "الرصيد النهائي",
+            "تاريخ"
 
         ], 
-
+        ClientTransactions:'معاملات العميل',
+        DoctorTransactions:'معاملات الطبيب'
     },
     "en": { 
         TableHeader: [
-            "Doctor Name",
-            "Link Type",
+            "Doctor Name", 
+            "Transaction Type",
             "Source",
             "Destination",
-            "Transaction Type",
             "Amount",
             "Initial Balance",
             "Final Balance",
             "Date"
         ], 
-
+        ClientTransactions:'Client Transactions',
+        DoctorTransactions:'Doctor Transactions'
     }
 }
 
