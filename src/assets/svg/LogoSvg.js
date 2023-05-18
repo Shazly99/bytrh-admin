@@ -15,6 +15,7 @@ import { ReactComponent as Bidding } from '../../assets/svg/auction_icon.svg';
 import { ReactComponent as Adoption } from '../../assets/svg/adoption.svg';
 import { ReactComponent as Settings } from '../../assets/svg/setting-2.svg';
 import { ReactComponent as Contact } from '../../assets/svg/call-calling.svg';
+import { ReactComponent as Report } from '../../assets/svg/repor.svg';
 // ===========================================================================
 import { ReactComponent as ArrowRight } from '../../assets/svg/arrow-right.svg';
 import { ReactComponent as view } from '../../assets/svg/view.svg';
@@ -41,6 +42,7 @@ const LogoSvg = {
     Adoption,
     Settings,
     Contact,
+    Report,
     // ===========================================================================
     ArrowRight,
     view,

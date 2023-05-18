@@ -294,7 +294,7 @@ const routes = [
     path: "/services",
     nameAr: "الخدمــات",
     nameEn: "Reports",
-    icon: <LogoSvg.Adoption className="logoSvg" style={{ width: 19 }} />,
+    icon: <LogoSvg.Report className="logoSvg" style={{ width: 19 }} />,
     Roles: [1],
   },
 ];
