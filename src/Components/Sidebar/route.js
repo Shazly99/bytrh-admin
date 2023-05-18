@@ -266,6 +266,26 @@ const routes = [
         nameEn: "Contact",
         icon: <Icons.Dote size={19} />,
       },
+      {
+        nameAr: "اتصال",
+        nameEn: "Reports",
+        icon: <Icons.Dote size={19} />,
+        subsetRoutes: [
+          {
+            path: "/settings/general",
+            nameAr: "إعدادات",
+            nameEn: "Repots visit",
+            icon: <Icons.Dote size={19} />,
+          }, 
+          {
+            path: "/settings/general",
+            nameAr: "إعدادات",
+            nameEn: "Reports",
+            icon: <Icons.Dote size={19} />,
+          }, 
+    
+        ],
+      },
 
     ],
   },

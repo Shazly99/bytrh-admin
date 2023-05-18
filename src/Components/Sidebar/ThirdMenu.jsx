@@ -1,8 +1,8 @@
+ 
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-import ThirdMenu from "./ThirdMenu";
 
 const menuAnimation = {
   hidden: {
@@ -36,7 +36,7 @@ const menuItemAnimation = {
   }),
 };
 
-const SidebarMenu = ({ isLang, route, onClick, showAnimation, isOpen, setIsOpen }) => {
+const ThirdMenu = ({ isLang, route, onClick, showAnimation, isOpen, setIsOpen }) => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
@@ -97,34 +97,18 @@ const SidebarMenu = ({ isLang, route, onClick, showAnimation, isOpen, setIsOpen 
             className="menu_container "
           // style={{marginTop:'0.5px'}}
           >
-            {route.subRoutes.map((subRoute, i) => {
-              if (subRoute.subsetRoutes) {
-                return (
-                  <ThirdMenu
-                    key={i}
-                    setIsOpen={setIsOpen}
-                    route={subRoute}
-                    showAnimation={showAnimation}
-                    isOpen={isOpen}
-                    open={isOpen}
-                    isLang={isLang}
-                  />
-                );
-              }
-              return (
-                <motion.div variants={menuItemAnimation} key={i} custom={i}>
-                  <NavLink to={subRoute.path} onClick={onClick} className="link" style={{ [isLang === 'ar' ? 'marginRight' : 'marginLeft']: '12px' }} >
+            {route.subsetRoutes.map((subRoute, i) => (
+              <motion.div variants={menuItemAnimation} key={i} custom={i}>
+                <NavLink to={subRoute.path} onClick={onClick} className="link" style={{ [isLang === 'ar' ? 'marginRight' : 'marginLeft']: '12px' }} >
 
-                    <div className="icon">{subRoute.icon}</div>
-                    <motion.div className="link_text " style={{ fontSize: 16 }}>{subRoute.name}
-                      {isLang === 'ar' ? subRoute.nameAr : subRoute.nameEn}
+                  <div className="icon">{subRoute.icon}</div>
+                  <motion.div className="link_text " style={{ fontSize: 16 }}>{subRoute.name}
+                    {isLang === 'ar' ? subRoute.nameAr : subRoute.nameEn}
 
-                    </motion.div>
-                  </NavLink>
-                </motion.div>
-              )
-            }
-            )}
+                  </motion.div>
+                </NavLink>
+              </motion.div>
+            ))}
           </motion.div>
         )}{" "}
       </AnimatePresence>
@@ -132,4 +116,4 @@ const SidebarMenu = ({ isLang, route, onClick, showAnimation, isOpen, setIsOpen 
   );
 };
 
-export default SidebarMenu;
+export default ThirdMenu;
