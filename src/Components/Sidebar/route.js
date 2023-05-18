@@ -241,6 +241,23 @@ const routes = [
     Roles: [1],
 
   },
+  { 
+    nameAr: "تقـــارير",
+    nameEn: "Reports",
+    icon: <LogoSvg.Report className="logoSvg" style={{ width: 19 }} />,
+    Roles: [1],
+
+    
+    subRoutes: [
+      {
+        path: "/settings/general",
+        nameAr: "إعدادات",
+        nameEn: "Reports",
+        icon: <Icons.Dote size={19} />,
+      }, 
+
+    ],
+  },
   {
     nameAr: "الاعدادات العامة ",
     nameEn: "General settings ",
@@ -290,13 +307,7 @@ const routes = [
     icon: <LogoSvg.Adoption className="logoSvg" style={{ width: 19 }} />,
     Roles: [2],
   },
-  {
-    path: "/services",
-    nameAr: "الخدمــات",
-    nameEn: "Reports",
-    icon: <LogoSvg.Report className="logoSvg" style={{ width: 19 }} />,
-    Roles: [1],
-  },
+
 ];
 
 export default routes
