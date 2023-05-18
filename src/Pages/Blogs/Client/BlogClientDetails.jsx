@@ -14,7 +14,7 @@ const BlogClientDetails = () => {
   let { isLang } = useContext(VendersContext);
   const [translate, setTranslate] = useState(initialTranslation)
   const handelTranslate = () => {
-      setTranslate(initialTranslation)
+    setTranslate(initialTranslation)
   }
   let { id } = useParams()
   const [lgShow, setLgShow] = useState(false);
@@ -74,7 +74,7 @@ const BlogClientDetails = () => {
     BlogList()
     window.scrollTo(0, 0);
     handelTranslate()
-  }, [id,isLang])
+  }, [id, isLang])
 
   return (
 
@@ -84,14 +84,14 @@ const BlogClientDetails = () => {
           <div className='app__blog'>
             <Container fluid>
               <div className="app__addprodects">
-                <Component.SubNav sub__nav={[{ name: translate[isLang]?.blogDetails?.nav1, path: '/blogs/client' }, { name:translate[isLang]?.blogDetails?.nav2, path: `/blogs/client/details/${id}` }]} />
+                <Component.SubNav sub__nav={[{ name: translate[isLang]?.blogDetails?.nav1, path: '/blogs/client' }, { name: translate[isLang]?.blogDetails?.nav2, path: `/blogs/client/details/${id}` }]} />
                 {clientBlogGallery?.length > 0 &&
                   <>
                     <div className="app__addprodects__header ">
                       <Component.BaseHeader h2={translate[isLang]?.blogDetails?.galleryTitle} />
                       <a onClick={() => setLgShow(true)} className='blog__popup'>{translate[isLang]?.blogDetails?.galleryBtn}  </a>
                       <Modal
-                      dir={isLang === "ar"?'rtl':'ltr'}
+                        dir={isLang === "ar" ? 'rtl' : 'ltr'}
                         size="xl"
                         show={lgShow}
                         onHide={() => setLgShow(false)}
@@ -100,7 +100,7 @@ const BlogClientDetails = () => {
                       >
                         <Modal.Header closeButton>
                           <Modal.Title id="example-custom-modal-styling-title">
-                          {translate[isLang]?.blogDetails?.galleryTitle}
+                            {translate[isLang]?.blogDetails?.galleryTitle}
                           </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
@@ -112,7 +112,9 @@ const BlogClientDetails = () => {
                                     className='rounded-2 image'
                                     loading="lazy"
                                     src={item.ClientBlogGalleryPath} // use normal <img> attributes as props
-                                    width={"100%"} />
+                                    width={"100%"} 
+                                    height={'270px'} 
+                                  />
                                 </div>
                               </Col>
                             ))}
@@ -134,6 +136,7 @@ const BlogClientDetails = () => {
                                 className='rounded-2  image'
                                 src={item.ClientBlogGalleryPath} // use normal <img> attributes as props
                                 width={clientBlogGallery?.length < 2 ? "20%" : '100%'}
+                                height={'270px'}
                               />
                             </Col>
                           )) :
@@ -149,6 +152,8 @@ const BlogClientDetails = () => {
                                   className='rounded-2  image'
                                   src={item.ClientBlogGalleryPath} // use normal <img> attributes as props
                                   width={"100%"}
+                                  height={'270px'}
+
                                 />
                               </Col>
                             ))
@@ -217,7 +222,7 @@ const BlogClientDetails = () => {
                                 <div className="header__comment">
                                   <div className='info gap-2'>
                                     <span>{item?.Name}</span>
-                                    <span className='Comment__User'>({item?.CommentUser.charAt(0).toUpperCase() + item?.CommentUser.slice(1).toLowerCase() })</span>
+                                    <span className='Comment__User'>({item?.CommentUser.charAt(0).toUpperCase() + item?.CommentUser.slice(1).toLowerCase()})</span>
                                   </div>
 
                                   <div className="action">
@@ -226,13 +231,13 @@ const BlogClientDetails = () => {
                                     </div>
                                     <div className="delete">
                                       <DropdownButton
-                                        title={<img src={Img.dropdown}   />}
+                                        title={<img src={Img.dropdown} />}
                                         id="dropdown-menu"
                                         onClick={() => setShowDropdown(!showDropdown)}
                                       >
                                         <Dropdown.Item onClick={() => handleModalOpenEdit(index)}>{translate[isLang]?.blogDetails?.deleteBtn}</Dropdown.Item>
                                         <Modal
-                                        dir={isLang ==="ar"?'rtl':'ltr'}
+                                          dir={isLang === "ar" ? 'rtl' : 'ltr'}
                                           show={modalShowEdit && modalIndexEdit === index}
                                           onHide={handleModalCloseEdit}
                                           centered
@@ -249,7 +254,7 @@ const BlogClientDetails = () => {
                                               {translate[isLang]?.blogDetails?.cancel}
                                             </Button>
                                             <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => handleDelete(item.IDClientBlogComment)}>
-                                             {translate[isLang]?.blogDetails?.deleteBtn}
+                                              {translate[isLang]?.blogDetails?.deleteBtn}
                                             </Button>
                                           </Modal.Footer>
                                         </Modal>

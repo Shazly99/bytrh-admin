@@ -92,8 +92,7 @@ const BlogDoctorDetails = () => {
                       <Component.BaseHeader h2={translate[isLang]?.blogDetails?.galleryTitle} />
                       <a onClick={() => setLgShow(true)} className='blog__popup'>{translate[isLang]?.blogDetails?.galleryBtn}  </a>
                       <Modal
-                        dir={isLang === "ar" ? 'rtl' : 'ltr'}
-
+                        dir={isLang === "ar" ? 'rtl' : 'ltr'} 
                         size="xl"
                         show={lgShow}
                         onHide={() => setLgShow(false)}
@@ -102,8 +101,7 @@ const BlogDoctorDetails = () => {
                       >
                         <Modal.Header closeButton>
                           <Modal.Title id="example-custom-modal-styling-title">
-                            {translate[isLang]?.blogDetails?.galleryTitle}
-
+                            {translate[isLang]?.blogDetails?.galleryTitle} 
                           </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
@@ -137,6 +135,7 @@ const BlogDoctorDetails = () => {
                                 className='rounded-2  image'
                                 src={item.DoctorBlogGalleryPath} // use normal <img> attributes as props
                                 width={"100%"}
+                                height={'270px'} 
                               />
                             </Col>
                           )) :
@@ -152,6 +151,7 @@ const BlogDoctorDetails = () => {
                                   src={item.DoctorBlogGalleryPath} // use normal <img> attributes as props
                                   width={DoctorBlogGallery?.length < 2 ? "20%" : '100%'}
                                   loading="lazy"
+                                  height={'270px'} 
                                 />
                               </Col>
                             ))

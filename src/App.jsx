@@ -293,6 +293,11 @@ function App() {
           ]
         },
         {
+          path: '/reports', children: [
+            { index: true, element: <ProtectedRoutes allowedRoles={['1' ]}><Component.ReportsUsers /> </ProtectedRoutes> }, 
+          ]
+        },
+        {
           path: '*', element: <Component.Error />
         }
       ],

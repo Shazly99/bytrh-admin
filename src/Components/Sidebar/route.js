@@ -250,9 +250,9 @@ const routes = [
     
     subRoutes: [
       {
-        path: "/settings/general",
-        nameAr: "إعدادات",
-        nameEn: "Reports",
+        path: "/reports",
+        nameAr: "تقارير المستخدمين",
+        nameEn: "Users reports",
         icon: <Icons.Dote size={19} />,
       }, 
 

@@ -123,6 +123,9 @@ import AddDoctorDocuments from './../Pages/Vendor/Doctor/AddDoctorDocuments';
 import ChartCircle from './../Pages/Vendor/Dashboard/ChartCircle';
 import ChatOneLine from './../Pages/Vendor/Dashboard/ChatOneLine';
 import ChartColumn2 from './../Pages/Vendor/Dashboard/ChartColumn2';
+import ReportsUsers from '../Pages/Reports/Users/ReportsUsers';
+import ReportsClients from './../Pages/Reports/Users/ReportsClients';
+import ReportsDoctors from './../Pages/Reports/Users/ReportsDoctors';
 
  
 
@@ -276,7 +279,13 @@ const Component= {
     
     // DoctorService
     DoctorService,
-    AddDoctorService
+    AddDoctorService,
+
+
+    // Reports
+    ReportsUsers,
+    ReportsClients,
+    ReportsDoctors
 }
 
 export default Component
