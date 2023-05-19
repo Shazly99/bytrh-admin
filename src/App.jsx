@@ -298,6 +298,11 @@ function App() {
           ]
         },
         {
+          path: '/visitsreports', children: [
+            { index: true, element: <ProtectedRoutes allowedRoles={['1' ]}><Component.VisitsReports /> </ProtectedRoutes> }, 
+          ]
+        },
+        {
           path: '*', element: <Component.Error />
         }
       ],

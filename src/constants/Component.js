@@ -126,6 +126,7 @@ import ChartColumn2 from './../Pages/Vendor/Dashboard/ChartColumn2';
 import ReportsUsers from '../Pages/Reports/Users/ReportsUsers';
 import ReportsClients from './../Pages/Reports/Users/ReportsClients';
 import ReportsDoctors from './../Pages/Reports/Users/ReportsDoctors';
+import VisitsReports from './../Pages/Reports/Visits/VisitsReports';
 
  
 
@@ -285,7 +286,8 @@ const Component= {
     // Reports
     ReportsUsers,
     ReportsClients,
-    ReportsDoctors
+    ReportsDoctors,
+    VisitsReports
 }
 
 export default Component

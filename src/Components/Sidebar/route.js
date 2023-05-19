@@ -255,6 +255,12 @@ const routes = [
         nameEn: "Users reports",
         icon: <Icons.Dote size={19} />,
       }, 
+      {
+        path: "/visitsreports",
+        nameAr: "تقارير الزيـارات",
+        nameEn: "Visits reports",
+        icon: <Icons.Dote size={19} />,
+      }, 
 
     ],
   },
