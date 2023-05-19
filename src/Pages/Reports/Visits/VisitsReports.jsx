@@ -17,7 +17,8 @@ function VisitsReports() {
     setTranslate(initialTranslate)
   }
 
-  const [type, setFilterType] = useState('Apr');
+
+  const [type, setFilterType] = useState('Jan');
 
   const buttons = [
     <Button style={{ textTransform: 'capitalize' }} variant={`${type === 'Jan' ? 'contained' : 'outlined'}`} size='large' key="one" onClick={() => setFilterType('Jan')}>{translate[isLang]?.months[0]}</Button>,
