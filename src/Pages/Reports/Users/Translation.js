@@ -1,7 +1,7 @@
 let initialTranslation = {
     "ar": {
         TableHeader: [
-            "اسم الطبيب",
+            "اسم  ",
             "نوع المعاملة",
             "مصدر",
             "وجهة",
@@ -21,7 +21,7 @@ let initialTranslation = {
     },
     "en": {
         TableHeader: [
-            "Doctor Name",
+            "  Name",
             "Transaction Type",
             "Source",
             "Destination",
