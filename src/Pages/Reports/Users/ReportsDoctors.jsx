@@ -82,7 +82,9 @@ const ReportsDoctors = () => {
                                     size='sm'
                                     defaultValue={selectedItem}
                                     type="text"
-                                    placeholder="Select an item"
+                                    placeholder={translate[isLang]?.placeholder1}
+                                // placeholder="choose doctors name"
+
                                 />
 
                                 <Dropdown.Menu style={{ width: '100%', maxHeight: '200px', overflowY: 'auto' }}>
@@ -91,7 +93,8 @@ const ReportsDoctors = () => {
                                             id="my-dropdown"
                                             autoFocus
                                             className="filter__dropdown mx-3 my-2 "
-                                            placeholder="Type to filter..."
+                                            placeholder={translate[isLang]?.placeholder3}
+
                                             onChange={(e) => setSearchTerm(e.target.value)}
                                             value={searchTerm}
                                         />
@@ -121,7 +124,7 @@ const ReportsDoctors = () => {
                     </Col>
 
                     <Col xl={2} lg={2} md={6} sm={12} >
-                        <Button onClick={doctorsTransactions} variant="outline-primary" size="sm" className="w-100 mt-2">{isLang === 'en' ? 'Finded Reports' : '    العثور على التقارير'}</Button>
+                        <Button onClick={doctorsTransactions} variant="outline-primary" size="sm" className="w-100 mt-2">{isLang === 'en' ? 'Search  ' : '    العثور على التقارير'}</Button>
                     </Col>
                 </Row>
             </div>
@@ -146,30 +149,30 @@ const ReportsDoctors = () => {
                                                 <tr key={index}>
                                                     <td >
                                                         <span className='ClientName'>{item?.UserName?.charAt(0).toUpperCase() + item?.UserName?.slice(1).toLowerCase()}</span>
-                                                    </td> 
+                                                    </td>
                                                     <td >
                                                         <span className='ClientName'>{item?.LedgerTransactionType?.charAt(0).toUpperCase() + item?.LedgerTransactionType?.slice(1).toLowerCase()}</span>
-                                                    </td> 
+                                                    </td>
                                                     <td >
-                                                        <span className='ClientName'>{item?.LedgerSource?.charAt(0).toUpperCase() + item?.LedgerSource?.slice(1).toLowerCase().replace('_'," ")}</span>
-                                                    </td> 
+                                                        <span className='ClientName'>{item?.LedgerSource?.charAt(0).toUpperCase() + item?.LedgerSource?.slice(1).toLowerCase().replace('_', " ")}</span>
+                                                    </td>
                                                     <td >
                                                         <span className='ClientName'>{item?.LedgerDestination?.charAt(0).toUpperCase() + item?.LedgerDestination?.slice(1).toLowerCase()}</span>
-                                                    </td> 
+                                                    </td>
 
                                                     <td >
-                                                        <span className='ClientName'>{item?.LedgerAmount }</span>
-                                                    </td> 
+                                                        <span className='ClientName'>{item?.LedgerAmount}</span>
+                                                    </td>
                                                     <td >
-                                                        <span className='ClientName'>{item?.LedgerInitialBalance }</span>
-                                                    </td> 
+                                                        <span className='ClientName'>{item?.LedgerInitialBalance}</span>
+                                                    </td>
 
                                                     <td >
-                                                        <span className='ClientName'>{item?.LedgerFinalBalance }</span>
-                                                    </td> 
+                                                        <span className='ClientName'>{item?.LedgerFinalBalance}</span>
+                                                    </td>
                                                     <td >
-                                                        <span className='ClientName'>{item?.LedgerDate.split(" ")[0] }</span>
-                                                    </td> 
+                                                        <span className='ClientName'>{item?.LedgerDate.split(" ")[0]}</span>
+                                                    </td>
                                                 </tr>
                                             ))
                                         }
@@ -182,7 +185,7 @@ const ReportsDoctors = () => {
                         }
                     </>
                 </> :
-                    SkeletonTable()
+                    <Component.ReportsLoading reportName="doctor"/>
                 }
             </div>
         </dic>

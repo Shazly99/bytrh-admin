@@ -1,7 +1,7 @@
 let initialTranslation = {
-    "ar": { 
+    "ar": {
         TableHeader: [
-            "اسم الطبيب", 
+            "اسم الطبيب",
             "نوع المعاملة",
             "مصدر",
             "وجهة",
@@ -10,13 +10,18 @@ let initialTranslation = {
             "الرصيد النهائي",
             "تاريخ"
 
-        ], 
-        ClientTransactions:'معاملات العميل',
-        DoctorTransactions:'معاملات الطبيب'
+        ],
+        ClientTransactions: 'معاملات العميل',
+        DoctorTransactions: 'معاملات الطبيب',
+        DoctorTransactions: 'معاملات الطبيب',
+        placeholder1: 'أخـــتر إسم الدكتور ',
+        placeholder2: 'أخـــتر إسم العميل ', 
+        placeholder3: 'أخـــتر إسم الدكتور ',
+        placeholder4: 'أخـــتر إسم العميل ', 
     },
-    "en": { 
+    "en": {
         TableHeader: [
-            "Doctor Name", 
+            "Doctor Name",
             "Transaction Type",
             "Source",
             "Destination",
@@ -24,9 +29,13 @@ let initialTranslation = {
             "Initial Balance",
             "Final Balance",
             "Date"
-        ], 
-        ClientTransactions:'Client Transactions',
-        DoctorTransactions:'Doctor Transactions'
+        ],
+        ClientTransactions: 'Client Transactions',
+        DoctorTransactions: 'Doctor Transactions',
+        placeholder1: ' choose doctor name     ',
+        placeholder2: ' choose client name     ',
+        placeholder3: ' filter doctor name     ',
+        placeholder4: ' filter client name     ',
     }
 }
 

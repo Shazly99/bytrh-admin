@@ -67,7 +67,7 @@ function App() {
               ]
             },
 
- 
+
           ]
         },
         {
@@ -294,12 +294,13 @@ function App() {
         },
         {
           path: '/reports', children: [
-            { index: true, element: <ProtectedRoutes allowedRoles={['1' ]}><Component.ReportsUsers /> </ProtectedRoutes> }, 
+            { path: 'doctors', element: <ProtectedRoutes allowedRoles={['1']}><Component.ReportsDoctors /> </ProtectedRoutes> },
+            { path: 'clients', element: <ProtectedRoutes allowedRoles={['1']}><Component.ReportsClients /> </ProtectedRoutes> },
           ]
         },
         {
           path: '/visitsreports', children: [
-            { index: true, element: <ProtectedRoutes allowedRoles={['1' ]}><Component.VisitsReports /> </ProtectedRoutes> }, 
+            { index: true, element: <ProtectedRoutes allowedRoles={['1']}><Component.VisitsReports /> </ProtectedRoutes> },
           ]
         },
         {

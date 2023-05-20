@@ -8,8 +8,8 @@ const routes = [
     nameAr: "لوحة القيادة",
     icon: <LogoSvg.Dashboard className="logoSvg" style={{ width: 19 }} />,
     Roles: [1]
-  }, 
-   {
+  },
+  {
     path: "/user",
     nameAr: "المستخدمين",
     nameEn: "Users",
@@ -50,7 +50,7 @@ const routes = [
       },
 
     ],
-  }, 
+  },
 
   {
     path: "/medicalcenter",
@@ -148,7 +148,7 @@ const routes = [
     Roles: [1],
 
     subRoutes: [
-  
+
       {
         path: "/consult",
         nameAr: "استشـارات",
@@ -241,26 +241,30 @@ const routes = [
     Roles: [1],
 
   },
-  { 
+  {
     nameAr: "تقـــارير",
     nameEn: "Reports",
     icon: <LogoSvg.Report className="logoSvg" style={{ width: 19 }} />,
     Roles: [1],
-
-    
     subRoutes: [
       {
-        path: "/reports",
-        nameAr: "تقارير المستخدمين",
-        nameEn: "Users reports",
+        path: "/reports/doctors",
+        nameAr: "تقارير الدكاترة ",
+        nameEn: "Doctors Reports",
         icon: <Icons.Dote size={19} />,
-      }, 
+      },
+      {
+        path: "/reports/clients",
+        nameAr: "تقارير العملاء  ",
+        nameEn: "Clients Reports",
+        icon: <Icons.Dote size={19} />,
+      },
       {
         path: "/visitsreports",
         nameAr: "تقارير الزيـارات",
         nameEn: "Visits reports",
         icon: <Icons.Dote size={19} />,
-      }, 
+      },
 
     ],
   },
