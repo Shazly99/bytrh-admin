@@ -36,9 +36,10 @@ function VisitsReports() {
 
 
   const [type, setFilterType] = useState('all');
+//   const [typeText, setFilterTypeText] = useState('all');
 
 
-  useEffect(() => {
+  useEffect((e) => {
     let timeOut = setTimeout(() => {
         handelTranslate();
     }, 100);
@@ -58,6 +59,7 @@ function VisitsReports() {
                 <label htmlFor="selectMonth" className="fs-5 fw-semibold mb-2 color-red">{isLang === 'ar' ? 'اختـر شهـر' : 'Select a Month'}</label>
                 <select name="selectMonth" id="selectMonth" defaultValue={'all'} dir='ltr' onChange={(e) => {
                     setFilterType(e.target.value);
+                    // setFilterTypeText(e.nativeEvent.target[e.nativeEvent.target.selectedIndex].text);
                 }} className=' p-2 form-select w-50 fw-semibold color-red'>
                     <option value="all">{isLang === 'ar' ? 'كل الشهــور' : 'All'}</option>
                     <option value="jan">{isLang === 'ar' ? 'ينـايـر' : 'Jan'}</option>
@@ -106,7 +108,7 @@ function VisitsReports() {
                                         <VisitsCharts
                                             isLang={isLang}
                                             color={'#8054A1'}
-                                            title={translate[isLang]?.Column?.titleDays}
+                                            title={`${translate[isLang]?.Column?.titleDays}`}
                                             labels={translate[isLang]?.days}
                                         />
                                     </Container>

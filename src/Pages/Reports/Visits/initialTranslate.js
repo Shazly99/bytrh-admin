@@ -29,8 +29,8 @@ let initialTranslate = {
             // label7: ' استشارة عاجلة',
             // label8: 'استشارات اجلة ',
             // titleConsulting: 'إحصائية استشارية',
-            titleMonths: 'شهـور',
-            titleDays: 'أيـام',
+            titleMonths: 'كل الشهـور',
+            titleDays: 'أيـام الشهر',
         },
         // filter:{
         //     btnToday:'يــوم',
@@ -104,8 +104,8 @@ let initialTranslate = {
             // label7: 'Urgent Consulting',
             // label8: 'Normal Consulting ',
             // titleConsulting: 'Consulting Statistic',
-            titleMonths: 'Months',
-            titleDays: 'Days',
+            titleMonths: 'All Months',
+            titleDays: 'Days of month',
         },
         // filter:{
         //     btnToday:'Today',
