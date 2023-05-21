@@ -66,6 +66,7 @@ function App() {
                 { path: 'edit/:idDoc/:idDocument', element: <ProtectedRoutes allowedRoles={['1', '2']}>  <Component.EditDoctorDocuments /> </ProtectedRoutes> },
               ]
             },
+            { path: 'withdraw/:id', element: <ProtectedRoutes allowedRoles={['1', '2']}> <Component.Withdraw /></ProtectedRoutes> },
 
 
           ]

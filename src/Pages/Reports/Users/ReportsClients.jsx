@@ -7,6 +7,7 @@ import { VendersContext } from '../../../context/Store';
 import initialTranslation from './Translation';
 import Component from '../../../constants/Component';
 import useSkeletonTable from '../../../utils/useSkeletonTable';
+import moment from 'moment';
 
 const ReportsClients = () => {
   const [translate, setTranslate] = useState(initialTranslation)
@@ -61,6 +62,10 @@ const ReportsClients = () => {
   }
 
   useEffect(() => {
+    const currentDate = moment().format('YYYY-MM-DD');
+    startDate.current.value = currentDate;
+    endDate.current.value = currentDate;
+
     doctorsAjax()
     handelTranslate()
     return () => {

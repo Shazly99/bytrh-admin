@@ -128,6 +128,7 @@ import ReportsClients from './../Pages/Reports/Users/ReportsClients';
 import ReportsDoctors from './../Pages/Reports/Users/ReportsDoctors';
 import VisitsReports from './../Pages/Reports/Visits/VisitsReports';
 import ReportsLoading from './../Components/Shared/ReportsLoading/ReportsLoading';
+import Withdraw from './../Pages/Vendor/Doctor/Withdraw/Withdraw';
 
  
 
@@ -176,7 +177,7 @@ const Component= {
     ChatDoctors,
     DoctorList,
     LiveChatDoc,
-
+    Withdraw,
     ChatConsult,
     LiveConsult,
 

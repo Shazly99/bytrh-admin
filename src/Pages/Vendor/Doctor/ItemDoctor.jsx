@@ -194,6 +194,9 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                 <Dropdown.Item as={Link} to={`/doctors/doctorHours/${id}`}>
                                     {isLang === 'ar' ? 'أوقـات العمـل' : 'Doctor Hours'}
                                 </Dropdown.Item>
+                                <Dropdown.Item as={Link} to={`/doctors/withdraw/${id}`}>
+                                    {isLang === 'ar' ? '  طلبات سحب الطبيب' : 'Doctor Withdraw Requests'}
+                                </Dropdown.Item>
                                 <Dropdown.Item eventKey="balance" onClick={handleShowModal}>
                                     {isLang === 'ar' ? 'ضبـط التوازن' : 'Set Balance'}
                                 </Dropdown.Item>
