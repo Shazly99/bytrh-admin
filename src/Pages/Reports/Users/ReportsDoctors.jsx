@@ -156,10 +156,11 @@ const ReportsDoctors = () => {
                                                         <span className='ClientName'>{item?.LedgerTransactionType?.charAt(0).toUpperCase() + item?.LedgerTransactionType?.slice(1).toLowerCase()}</span>
                                                     </td>
                                                     <td >
-                                                        <span className='ClientName'>{item?.LedgerSource?.charAt(0).toUpperCase() + item?.LedgerSource?.slice(1).toLowerCase().replace('_', " ")}</span>
+                                                        <span className='ClientName'>{item?.LedgerSource?.replace('_', " ").split("_").join(" ").charAt(0).toUpperCase() + item?.LedgerSource?.slice(1).toLowerCase().replace('_', " ").split("_").join(" ") }</span>
                                                     </td>
                                                     <td >
-                                                        <span className='ClientName'>{item?.LedgerDestination?.charAt(0).toUpperCase() + item?.LedgerDestination?.slice(1).toLowerCase()}</span>
+                                                        <span className='ClientName'>{item?.LedgerDestination?.replace('_', " ").split("_").join(" ").charAt(0).toUpperCase() + item?.LedgerDestination?.slice(1).toLowerCase().replace('_', " ").split("_").join(" ") }</span>
+
                                                     </td>
 
                                                     <td >
