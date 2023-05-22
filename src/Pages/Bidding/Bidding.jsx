@@ -383,7 +383,7 @@ const Bidding = () => {
                   <Col xl={2} lg={2} md={6} sm={12} className='mt-2' >
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail" >
-                        <Form.Select aria-label="Default select example"size="sm" onChange={handelSelectCountry} ref={countryRef} >
+                        <Form.Select aria-label="Default select example" size="sm" onChange={handelSelectCountry} ref={countryRef} >
                           <option selected disabled hidden value={'Select Country'}>{translate[isLang]?.filter?.Country}  </option>
                           <option value={'country'} >{translate[isLang]?.filter?.allCountry}</option>
                           {
@@ -449,7 +449,7 @@ const Bidding = () => {
                     {isLoader ? <>
                       <Form.Group controlId="formBasicEmail"  >
                         {/* <Form.Label  >Product Type </Form.Label> */}
-                        <Form.Select aria-label="Default select example" ref={animalProductTypeRef } size="sm" onChange={handelAdvertisement} >
+                        <Form.Select aria-label="Default select example" ref={animalProductTypeRef} size="sm" onChange={handelAdvertisement} >
                           <option selected disabled hidden value={'Product Type'}> {translate[isLang]?.filter?.Product} </option>
                           {
                             translate[isLang]?.Filtertype?.map((Status, index) => (
@@ -618,7 +618,7 @@ const Bidding = () => {
                               {
                                 item?.AnimalProductRejectReason &&
                                 <div className="app__reason">
-                                  <a onClick={() => handleModalOpenReason(item?.IDAnimalProduct)} >Reason</a>
+                                  <a onClick={() => handleModalOpenReason(item?.IDAnimalProduct)} >  {isLang == "ar" ? '   الســبب ' : 'Reason '}</a>
                                 </div>
                               }
                             </div>
@@ -631,7 +631,7 @@ const Bidding = () => {
                             dir={isLang === 'ar' ? 'rtl' : 'ltr'}
                           >
                             <Modal.Header closeButton>
-                              <Modal.Title className='  w-100 '>  Reason</Modal.Title>
+                              <Modal.Title className='  w-100 '> {isLang == "ar" ? '   الســبب ' : 'Reason '}</Modal.Title>
                             </Modal.Header>
                             <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
                               <textarea className="form-control" rows="5" defaultValue={item?.AnimalProductRejectReason} />
@@ -640,7 +640,7 @@ const Bidding = () => {
                             <Modal.Footer className="d-flex justify-content-center align-items-center">
 
                               <Button onClick={handleModalCloseReason}    >
-                                Cancel
+                                {isLang == "ar" ? '   رجوع ' : 'Cancel '}
                               </Button>
                             </Modal.Footer>
                           </Modal>
@@ -652,7 +652,10 @@ const Bidding = () => {
                             dir={isLang === 'ar' ? 'rtl' : 'ltr'}
                           >
                             <Modal.Header closeButton>
-                              <Modal.Title className='  w-100 '> Reject Reason</Modal.Title>
+                              <Modal.Title className='  w-100 '>
+                                {isLang == "ar" ? 'سبب الرفض' : 'Reject Reason   '}
+
+                              </Modal.Title>
                             </Modal.Header>
                             <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
 
@@ -662,10 +665,13 @@ const Bidding = () => {
                             <Modal.Footer className="d-flex justify-content-center align-items-center">
 
                               <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => reasonReject(item.IDAnimalProduct, 'REJECTED')} >
-                                set  Reason
+
+                                {isLang == "ar" ? '   تحديد السبب ' : 'Set Reason '}
+
                               </Button>
                               <Button variant="outline-primary" onClick={handleModalClose}>
-                                Cancel
+                                {isLang == "ar" ? '   رجوع ' : 'Cancel '}
+
                               </Button>
                             </Modal.Footer>
                           </Modal>

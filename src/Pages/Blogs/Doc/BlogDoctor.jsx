@@ -144,7 +144,7 @@ export const BlogDoctor = () => {
         statusRef.current.value = 'Select Status';
         // animalRef.current.value = 'Select Category'; 
 
-        const selectedCountryId = animalRef.current.value;        
+        const selectedCountryId = animalRef.current.value;
         if (selectedCountryId === "All") {
             BlogsList()
         } else if (selectedCountryId === 'Select Category') {
@@ -160,7 +160,7 @@ export const BlogDoctor = () => {
     const animalcategories = async () => {
         let { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/animalcategories`, { IDPage: page }, apiheader)
         setAnimal(data.Response.AnimalCategories)
-        setPagesNumber(data.Response.Pages); 
+        setPagesNumber(data.Response.Pages);
     }
     // !Filter by city and country and area  
     let { countries, areas, cities, getCities, getAreas } = useFetch()
@@ -173,7 +173,7 @@ export const BlogDoctor = () => {
         statusRef.current.value = 'Select Status';
         animalRef.current.value = 'Select Category';
 
-        const selectedCountryId =countryRef.current.value;
+        const selectedCountryId = countryRef.current.value;
         if (selectedCountryId === 'country') {
             BlogsList(page)
         } else if (selectedCountryId === 'Select Country') {
@@ -257,10 +257,10 @@ export const BlogDoctor = () => {
     const handelBlogsStatus = async () => {
         cityRef.current.value = 'Select city';
         areaRef.current.value = 'Select Area';
-        countryRef.current.value = 'Select Country'; 
+        countryRef.current.value = 'Select Country';
         animalRef.current.value = 'Select Category';
 
-        let BlogsStatus = statusRef.current.value        
+        let BlogsStatus = statusRef.current.value
         if (BlogsStatus === 'All') {
             BlogsList(page)
         } else if (BlogsStatus === 'Select Status') {
@@ -275,12 +275,12 @@ export const BlogDoctor = () => {
         }
     }
     useEffect(() => {
-        window.scrollTo(0, 0); 
+        window.scrollTo(0, 0);
         const timeoutId = setTimeout(() => {
             BlogsList()
             animalcategories()
         }, 200);
-        return () => clearTimeout(timeoutId); 
+        return () => clearTimeout(timeoutId);
     }, [isLang])
     useEffect(() => {
     }, [page, PagesNumber])
@@ -339,7 +339,7 @@ export const BlogDoctor = () => {
                             <Col xl={2} lg={2} md={6} sm={12} className='mt-2' >
                                 {isLoader ? <>
                                     <Form.Group controlId="formBasicEmail" >
-                                        <Form.Select aria-label="Default select example"size="sm" onChange={handelSelectCountry} ref={countryRef} >
+                                        <Form.Select aria-label="Default select example" size="sm" onChange={handelSelectCountry} ref={countryRef} >
                                             <option selected disabled hidden value={'Select Country'}>{translate[isLang]?.filter?.Country}  </option>
                                             <option value={'country'} >{translate[isLang]?.filter?.allCountry}</option>
                                             {
@@ -418,7 +418,7 @@ export const BlogDoctor = () => {
 
 
                             </Col>
-                        </Row> 
+                        </Row>
                     </div>
                     <ExcelSheet blogs={blogs} />
                     {isLoader ? <>
@@ -510,7 +510,7 @@ export const BlogDoctor = () => {
                                                             {
                                                                 item?.BlogRejectionReason &&
                                                                 <div className="app__reason">
-                                                                    <a onClick={() => handleModalOpenReason(item?.IDDoctorBlog)} >Reason</a>
+                                                                    <a onClick={() => handleModalOpenReason(item?.IDDoctorBlog)} >  {isLang == "ar" ? '   الســبب ' : 'Reason '}</a>
                                                                 </div>
                                                             }
                                                         </div>
@@ -542,7 +542,7 @@ export const BlogDoctor = () => {
                                                         dir={isLang === 'ar' ? 'rtl' : 'ltr'}
                                                     >
                                                         <Modal.Header closeButton>
-                                                            <Modal.Title className='  w-100 '> Reject Reason</Modal.Title>
+                                                            <Modal.Title className='  w-100 '> {isLang == "ar" ? 'سبب الرفض' : 'Reject Reason   '}</Modal.Title>
                                                         </Modal.Header>
                                                         <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
 
@@ -553,10 +553,10 @@ export const BlogDoctor = () => {
                                                         <Modal.Footer className="d-flex justify-content-center align-items-center">
 
                                                             <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => reasonReject(item.IDDoctorBlog, 'REJECTED')} >
-                                                                set  Reason
+                                                                {isLang == "ar" ? '   تحديد السبب ' : 'Set Reason '}
                                                             </Button>
                                                             <Button variant="outline-primary" onClick={handleModalClose}>
-                                                                Cancel
+                                                                {isLang == "ar" ? '   رجوع ' : 'Cancel '}
                                                             </Button>
                                                         </Modal.Footer>
                                                     </Modal>

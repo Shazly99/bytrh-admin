@@ -269,7 +269,7 @@ const BlogClient = () => {
     const handelBlogsStatus = async () => {
         cityRef.current.value = 'Select city';
         areaRef.current.value = 'Select Area';
-        countryRef.current.value = 'Select Country'; 
+        countryRef.current.value = 'Select Country';
         animalRef.current.value = 'Select Category';
 
         let BlogsStatus = statusRef.current.value
@@ -538,7 +538,7 @@ const BlogClient = () => {
                                                             {
                                                                 item?.BlogRejectionReason &&
                                                                 <div className="app__reason">
-                                                                    <a onClick={() => handleModalOpenReason(item?.IDClientBlog)} >Reason</a>
+                                                                    <a onClick={() => handleModalOpenReason(item?.IDClientBlog)} >  {isLang == "ar" ? '   الســبب ' : 'Reason '}</a>
                                                                 </div>
                                                             }
                                                         </div>
@@ -550,7 +550,8 @@ const BlogClient = () => {
                                                         dir={isLang === 'ar' ? 'rtl' : 'ltr'}
                                                     >
                                                         <Modal.Header closeButton>
-                                                            <Modal.Title className='  w-100 '>  Reason</Modal.Title>
+                                                            <Modal.Title className='  w-100 '>                                                                  
+                                                            {isLang == "ar" ? '   الســبب ' : 'Reason '}</Modal.Title>
                                                         </Modal.Header>
                                                         <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
                                                             <textarea className="form-control" rows="5" defaultValue={item?.BlogRejectionReason} />
@@ -559,7 +560,7 @@ const BlogClient = () => {
                                                         <Modal.Footer className="d-flex justify-content-center align-items-center">
 
                                                             <Button onClick={handleModalCloseReason}    >
-                                                                Cancel
+                                                                {isLang == "ar" ? '   رجوع ' : 'Cancel '} 
                                                             </Button>
                                                         </Modal.Footer>
                                                     </Modal>
@@ -570,7 +571,7 @@ const BlogClient = () => {
                                                         dir={isLang === 'ar' ? 'rtl' : 'ltr'}
                                                     >
                                                         <Modal.Header closeButton>
-                                                            <Modal.Title className='  w-100 '> Reject Reason</Modal.Title>
+                                                            <Modal.Title className='  w-100 '> {isLang == "ar" ? 'سبب الرفض' : 'Reject Reason   '}</Modal.Title>
                                                         </Modal.Header>
                                                         <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
 
@@ -580,10 +581,10 @@ const BlogClient = () => {
                                                         <Modal.Footer className="d-flex justify-content-center align-items-center">
 
                                                             <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => reasonReject(item.IDClientBlog, 'REJECTED')} >
-                                                                Set Reason
+                                                                {isLang == "ar" ? '   تحديد السبب ' : 'Set Reason '}
                                                             </Button>
                                                             <Button variant="outline-primary" onClick={handleModalClose}>
-                                                                Cancel
+                                                                {isLang == "ar" ? '   رجوع ' : 'Cancel '}
                                                             </Button>
                                                         </Modal.Footer>
                                                     </Modal>

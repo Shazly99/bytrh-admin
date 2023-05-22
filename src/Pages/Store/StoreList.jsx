@@ -165,7 +165,7 @@ const StoreList = () => {
         statusRef.current.value = 'Select Status';
         animalProductTypeRef.current.value = 'Product Type';
         animalSubCategoryRef.current.value = 'Select SubCategory';
-        
+
         const selectedCountryId = event.target.value;
         if (selectedCountryId === 'country') {
             store()
@@ -193,7 +193,7 @@ const StoreList = () => {
     const handelSelectCity = async () => {
         // Reset filters
         // cityRef.current.value = 'Select city';
-        areaRef.current.value = 'Select Area'; 
+        areaRef.current.value = 'Select Area';
         statusRef.current.value = 'Select Status';
         animalProductTypeRef.current.value = 'Product Type';
         animalSubCategoryRef.current.value = 'Select SubCategory';
@@ -260,7 +260,7 @@ const StoreList = () => {
         countryRef.current.value = 'Select Country';
         statusRef.current.value = 'Select Status';
         animalSubCategoryRef.current.value = 'Select SubCategory';
-        
+
         let AnimalProductType = animalProductTypeRef.current.value
         if (AnimalProductType === 'All') {
             store()
@@ -293,7 +293,7 @@ const StoreList = () => {
         countryRef.current.value = 'Select Country';
         statusRef.current.value = 'Select Status';
         animalProductTypeRef.current.value = 'Product Type';
- 
+
 
         let AnimalProductType = animalSubCategoryRef.current.value
 
@@ -626,7 +626,7 @@ const StoreList = () => {
                                                             {
                                                                 item?.AnimalProductRejectReason &&
                                                                 <div className="app__reason">
-                                                                    <a onClick={() => handleModalOpenReason(item?.IDAnimalProduct)} >Reason</a>
+                                                                    <a onClick={() => handleModalOpenReason(item?.IDAnimalProduct)} >  {isLang == "ar" ? '   الســبب ' : 'Reason '}</a>
                                                                 </div>
                                                             }
                                                         </div>
@@ -639,7 +639,7 @@ const StoreList = () => {
                                                         dir={isLang === 'ar' ? 'rtl' : 'ltr'}
                                                     >
                                                         <Modal.Header closeButton>
-                                                            <Modal.Title className='  w-100 '>  Reason</Modal.Title>
+                                                            <Modal.Title className='  w-100 '>  {isLang == "ar" ? '   الســبب ' : 'Reason '}</Modal.Title>
                                                         </Modal.Header>
                                                         <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
                                                             <textarea className="form-control" rows="5" defaultValue={item?.AnimalProductRejectReason} />
@@ -648,7 +648,7 @@ const StoreList = () => {
                                                         <Modal.Footer className="d-flex justify-content-center align-items-center">
 
                                                             <Button onClick={handleModalCloseReason}    >
-                                                                Cancel
+                                                                {isLang == "ar" ? '   رجوع ' : 'Cancel '}
                                                             </Button>
                                                         </Modal.Footer>
                                                     </Modal>
@@ -660,7 +660,7 @@ const StoreList = () => {
                                                         dir={isLang === 'ar' ? 'rtl' : 'ltr'}
                                                     >
                                                         <Modal.Header closeButton>
-                                                            <Modal.Title className='  w-100 '> Reject Reason</Modal.Title>
+                                                            <Modal.Title className='  w-100 '> {isLang == "ar" ? 'سبب الرفض ' : 'Reject Reason'}  </Modal.Title>
                                                         </Modal.Header>
                                                         <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
 
@@ -670,10 +670,12 @@ const StoreList = () => {
                                                         <Modal.Footer className="d-flex justify-content-center align-items-center">
 
                                                             <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => reasonReject(item.IDAnimalProduct, 'REJECTED')} >
-                                                                set  Reason
+                                                                {isLang == "ar" ? '   تحديد السبب ' : 'Set Reason'}
+
                                                             </Button>
                                                             <Button variant="outline-primary" onClick={handleModalClose}>
-                                                                Cancel
+                                                                {isLang == "ar" ? '   رجوع ' : 'Cancel '}
+
                                                             </Button>
                                                         </Modal.Footer>
                                                     </Modal>

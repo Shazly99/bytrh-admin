@@ -215,7 +215,9 @@ const Withdraw = () => {
                                                             {
                                                                 item?.WithdrawStatus == "REJECTED" &&
                                                                 <div className="app__reason">
-                                                                    <a onClick={() => handleModalOpen(item?.IDDoctorWithdraw)} >Reason</a>
+                                                                    <a onClick={() => handleModalOpen(item?.IDDoctorWithdraw)} >
+                                                                        {isLang == "ar" ? '   الســبب ' : 'Reason '} 
+                                                                    </a>
                                                                 </div>
                                                             }
 
@@ -292,14 +294,16 @@ const Withdraw = () => {
                                                         dir={isLang === 'ar' ? 'rtl' : 'ltr'}
                                                     >
                                                         <Modal.Header closeButton>
-                                                            <Modal.Title className='  w-100 '>  Reason</Modal.Title>
+                                                            <Modal.Title className='  w-100 '>
+                                                                {isLang == "ar" ? '   الســبب ' : 'Reason '}
+                                                            </Modal.Title>
                                                         </Modal.Header>
                                                         <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
                                                             <textarea className="form-control" rows="5" defaultValue={item?.WithdrawRejectReason} />
                                                         </Modal.Body>
                                                         <Modal.Footer className="d-flex justify-content-center align-items-center">
                                                             <Button onClick={handleModalClose}    >
-                                                                Cancel
+                                                                {isLang == "ar" ? '   رجوع ' : 'Cancel '} 
                                                             </Button>
                                                         </Modal.Footer>
                                                     </Modal>

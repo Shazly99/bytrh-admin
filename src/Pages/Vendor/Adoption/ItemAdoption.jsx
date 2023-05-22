@@ -6,7 +6,7 @@ import { VendersContext } from '../../../context/Store';
 import { PostData, apiheader } from '../../../utils/fetchData';
 
 
-export default function ItemAdoption({ Reason,id, clientName, petName, petStrain, petPicture, cityName, cate, status, getTokenAdoption }) {
+export default function ItemAdoption({ Reason, id, clientName, petName, petStrain, petPicture, cityName, cate, status, getTokenAdoption }) {
 
 
 
@@ -43,7 +43,7 @@ export default function ItemAdoption({ Reason,id, clientName, petName, petStrain
         setModalShow(true);
     }
     const reasonReject = async (id, action) => {
-         await userstatus({
+        await userstatus({
             IDAdoption: id,
             AdoptionStatus: action,
             AdoptionRejectReason: reasonRef.current.value,
@@ -116,9 +116,9 @@ export default function ItemAdoption({ Reason,id, clientName, petName, petStrain
                         {isLang === 'ar' && status === 'REJECTED' ? 'رفض' : ''}
                     </span>
                     {
-                        Reason&&
+                        Reason &&
                         <div className="app__reason">
-                            <a onClick={() => handleModalOpenReason(id)} >Reason</a>
+                            <a onClick={() => handleModalOpenReason(id)} >  {isLang == "ar" ? '   الســبب ' : 'Reason '}</a>
                         </div>
                     }
                 </td>
@@ -186,7 +186,7 @@ export default function ItemAdoption({ Reason,id, clientName, petName, petStrain
                             }
                         </DropdownButton>
                     </span>
-                 
+
                 </td>
                 <Modal
                     show={modalShowReason && modalIndexReason === id}
@@ -195,7 +195,9 @@ export default function ItemAdoption({ Reason,id, clientName, petName, petStrain
                     dir={isLang === 'ar' ? 'rtl' : 'ltr'}
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title className='  w-100 '>  Reason</Modal.Title>
+                        <Modal.Title className='  w-100 '>
+                            {isLang == "ar" ? '   الســبب ' : 'Reason '}
+                        </Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
                         <textarea className="form-control" rows="5" defaultValue={Reason} />
@@ -204,7 +206,8 @@ export default function ItemAdoption({ Reason,id, clientName, petName, petStrain
                     <Modal.Footer className="d-flex justify-content-center align-items-center">
 
                         <Button onClick={handleModalCloseReason}    >
-                            Cancel
+                        {isLang == "ar" ? '   رجوع ' : 'Cancel '}
+
                         </Button>
                     </Modal.Footer>
                 </Modal>
@@ -217,19 +220,20 @@ export default function ItemAdoption({ Reason,id, clientName, petName, petStrain
                     dir={isLang === 'ar' ? 'rtl' : 'ltr'}
                 >
                     <Modal.Header closeButton>
-                        <Modal.Title className='  w-100 '> Reject Reason</Modal.Title>
+                        <Modal.Title className='  w-100 '> {isLang == "ar" ? 'سبب الرفض ' : 'Reject Reason'}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body className="d-flex justify-content-center align-items-center gap-1 flex-column" >
-                    <textarea className="form-control" rows="5" ref={reasonRef} />
+                        <textarea className="form-control" rows="5" ref={reasonRef} />
 
-                     </Modal.Body>
+                    </Modal.Body>
                     <Modal.Footer className="d-flex justify-content-center align-items-center">
 
                         <Button variant="danger" style={{ border: '#dc3545' }} onClick={() => reasonReject(id, 'REJECTED')} >
-                            set  Reason
+                            {isLang == "ar" ? '   تحديد السبب ' : 'Set Reason'}
+
                         </Button>
                         <Button variant="outline-primary" onClick={handleModalClose}>
-                            Cancel
+                            {isLang == "ar" ? '   رجوع ' : 'Cancel '}
                         </Button>
                     </Modal.Footer>
                 </Modal>
