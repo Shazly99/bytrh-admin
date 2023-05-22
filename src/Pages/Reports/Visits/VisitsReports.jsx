@@ -60,7 +60,7 @@ function VisitsReports() {
                 <select name="selectMonth" id="selectMonth" defaultValue={'all'} dir='ltr' onChange={(e) => {
                     setFilterType(e.target.value);
                     // setFilterTypeText(e.nativeEvent.target[e.nativeEvent.target.selectedIndex].text);
-                }} className=' p-2 form-select w-50 fw-semibold color-red'>
+                }} className=' p-2 form-select selectMonth fw-semibold color-red'>
                     <option value="all">{isLang === 'ar' ? 'كل الشهــور' : 'All'}</option>
                     <option value="jan">{isLang === 'ar' ? 'ينـايـر' : 'Jan'}</option>
                     <option value="feb">{isLang === 'ar' ? 'فبرايـر' : 'Feb'}</option>
