@@ -4,10 +4,19 @@ let initialTranslation = {
             "اسم  ",
             "نوع المعاملة",
             "مصدر",
-            "وجهة",
+            "مكان الوصول",
             "مدفوعات العميل",
             "مبلغ  ",
             " عمولة بيطرة",
+            "تاريخ"
+
+        ],
+        TableHeader1: [
+            "اسم  ",
+            "نوع المعاملة",
+            "مصدر",
+            "مكان الوصول", 
+            "مبلغ  ", 
             "تاريخ"
 
         ],
@@ -30,6 +39,14 @@ let initialTranslation = {
             "Client Payment",
             "Amount  ",
             "Bytrh Commission",
+            "Date"
+        ],
+        TableHeader1: [
+            "  Name",
+            "Transaction Type",
+            "Source",
+            "Destination", 
+            "Amount  ", 
             "Date"
         ],
         ClientTransactions: 'Client Transactions',

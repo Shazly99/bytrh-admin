@@ -142,7 +142,7 @@ const ReportsClients = () => {
                   <thead>
                     <tr className='text-center  ' style={{ background: '#F9F9F9' }}>
                       {
-                        translate[isLang]?.TableHeader?.map((item, index) => (
+                        translate[isLang]?.TableHeader1?.map((item, index) => (
                           <th key={index}>{item}</th>
                         ))
                       }
@@ -159,22 +159,30 @@ const ReportsClients = () => {
                             <span className='ClientName'>{item?.LedgerTransactionType?.charAt(0).toUpperCase() + item?.LedgerTransactionType?.slice(1).toLowerCase()}</span>
                           </td>
                           <td >
-                            <span className='ClientName'>{item?.LedgerSource?.charAt(0).toUpperCase() + item?.LedgerSource?.slice(1).toLowerCase().replace('_', " ")}</span>
+                            <span className='ClientName'>{item?.LedgerSource?.replace('_', " ").split("_").join(" ").charAt(0).toUpperCase() + item?.LedgerSource?.slice(1).toLowerCase().replace('_', " ").split("_").join(" ")}</span>
+
                           </td>
                           <td >
-                            <span className='ClientName'>{item?.LedgerDestination?.charAt(0).toUpperCase() + item?.LedgerDestination?.slice(1).toLowerCase()}</span>
+                            <span className='ClientName'>{item?.LedgerDestination?.replace('_', " ").split("_").join(" ").charAt(0).toUpperCase() + item?.LedgerDestination?.slice(1).toLowerCase().replace('_', " ").split("_").join(" ")}</span>
+
                           </td>
 
                           <td >
-                            <span className='ClientName'>{item?.LedgerAmount}</span>
+                            <h6 className="mb-0  pe-2 color-red">
+                              {item?.LedgerAmount}  {translate[isLang]?.currency}
+                            </h6>
                           </td>
-                          <td >
-                            <span className='ClientName'>{item?.LedgerInitialBalance}</span>
-                          </td>
+                  {/*         <td >
+                             <h6 className="mb-0  pe-2 color-red">
+                              {item?.LedgerInitialBalance}  {translate[isLang]?.currency}
+                            </h6>
+                          </td> */}
 
-                          <td >
-                            <span className='ClientName'>{item?.LedgerFinalBalance}</span>
-                          </td>
+               {/*            <td >
+                             <h6 className="mb-0  pe-2 color-red">
+                              {item?.LedgerFinalBalance}  {translate[isLang]?.currency}
+                            </h6>
+                          </td> */}
                           <td >
                             <span className='ClientName'>{item?.LedgerDate.split(" ")[0]}</span>
                           </td>
