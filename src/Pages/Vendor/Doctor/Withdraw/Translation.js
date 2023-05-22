@@ -34,13 +34,14 @@ let initialTranslation = {
         placeholder: 'Search by client name or email or phone.....',
 
         TableHeader: [
-            "Account Number",
+            "Acc. Num",
             "Withdraw Amount",
-            "Account Name ",
+            "Acc. Name ",
             "Bank Name  ",
             " IBAN ",
             "Status   ",
             ' Date',
+            ' File',
             "Action",
 
         ],

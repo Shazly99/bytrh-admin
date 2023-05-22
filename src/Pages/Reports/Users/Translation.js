@@ -5,9 +5,9 @@ let initialTranslation = {
             "نوع المعاملة",
             "مصدر",
             "وجهة",
-            "مبلغ",
-            "الرصيد الافتتاحي",
-            "الرصيد النهائي",
+            "مدفوعات العميل",
+            "مبلغ  ",
+            " عمولة بيطرة",
             "تاريخ"
 
         ],
@@ -18,6 +18,8 @@ let initialTranslation = {
         placeholder2: 'أخـــتر إسم العميل ', 
         placeholder3: 'أخـــتر إسم الدكتور ',
         placeholder4: 'أخـــتر إسم العميل ', 
+        currency:'ريال سعودي'
+
     },
     "en": {
         TableHeader: [
@@ -25,9 +27,9 @@ let initialTranslation = {
             "Transaction Type",
             "Source",
             "Destination",
-            "Amount",
-            "Initial Balance",
-            "Final Balance",
+            "Client Payment",
+            "Amount  ",
+            "Bytrh Commission",
             "Date"
         ],
         ClientTransactions: 'Client Transactions',
@@ -36,6 +38,7 @@ let initialTranslation = {
         placeholder2: ' choose client name     ',
         placeholder3: ' filter doctor name     ',
         placeholder4: ' filter client name     ',
+        currency:'SAR'
     }
 }
 

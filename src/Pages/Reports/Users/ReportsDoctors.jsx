@@ -11,7 +11,7 @@ import moment from 'moment';
 
 const ReportsDoctors = () => {
     const [translate, setTranslate] = useState(initialTranslation)
-    const handelTranslate = () => setTranslate(initialTranslation) 
+    const handelTranslate = () => setTranslate(initialTranslation)
 
 
     const [data, setData] = useState([]);
@@ -97,7 +97,6 @@ const ReportsDoctors = () => {
                                             autoFocus
                                             className="filter__dropdown mx-3 my-2 "
                                             placeholder={translate[isLang]?.placeholder3}
-
                                             onChange={(e) => setSearchTerm(e.target.value)}
                                             value={searchTerm}
                                         />
@@ -164,14 +163,20 @@ const ReportsDoctors = () => {
                                                     </td>
 
                                                     <td >
-                                                        <span className='ClientName'>{item?.LedgerAmount}</span>
+                                                        <h6 className="mb-0  pe-2 color-red">
+                                                            {item?.LedgerAmount}  {translate[isLang]?.currency}
+                                                        </h6>
                                                     </td>
                                                     <td >
-                                                        <span className='ClientName'>{item?.LedgerInitialBalance}</span>
+                                                        <h6 className="mb-0  pe-2 color-red">
+                                                            {item?.LedgerAmount}  {translate[isLang]?.currency}
+                                                        </h6>
                                                     </td>
 
                                                     <td >
-                                                        <span className='ClientName'>{item?.LedgerFinalBalance}</span>
+                                                        <h6 className="mb-0  pe-2 color-red">
+                                                            {item?.BytrhCommission}  {translate[isLang]?.currency}
+                                                        </h6>
                                                     </td>
                                                     <td >
                                                         <span className='ClientName'>{item?.LedgerDate.split(" ")[0]}</span>
@@ -188,7 +193,7 @@ const ReportsDoctors = () => {
                         }
                     </>
                 </> :
-                    <Component.ReportsLoading reportName="doctor"/>
+                    <Component.ReportsLoading reportName="doctor" />
                 }
             </div>
         </dic>

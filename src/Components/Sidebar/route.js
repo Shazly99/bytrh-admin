@@ -174,8 +174,8 @@ const routes = [
     ],
   },
   {
-    nameAr: "عمليات البيع ",
-    nameEn: "Sellings ",
+    nameAr: "  بيع وشراء ",
+    nameEn: "Sell And Buy ",
     icon: <LogoSvg.Store className="logoSvg" style={{ width: 19 }} />,
     Roles: [1],
 
@@ -249,14 +249,14 @@ const routes = [
     subRoutes: [
       {
         path: "/reports/doctors",
-        nameAr: "تقارير الدكاترة ",
-        nameEn: "Doctors Reports",
+        nameAr: "معاملات الطبيب   ",
+        nameEn: "Doctor Transactions  ",
         icon: <Icons.Dote size={19} />,
       },
       {
         path: "/reports/clients",
-        nameAr: "تقارير العملاء  ",
-        nameEn: "Clients Reports",
+        nameAr: "معاملات العملاء  ",
+        nameEn: "  Client Transactions",
         icon: <Icons.Dote size={19} />,
       },
       {

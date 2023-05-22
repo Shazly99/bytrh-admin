@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import axios from 'axios';
 import $ from 'jquery';
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Col, Form, Row, Table , Container } from "react-bootstrap";
+import { Col, Form, Row, Table, Container } from "react-bootstrap";
 import Component from '../../../constants/Component';
 import Icons from '../../../constants/Icons';
 import { VendersContext } from '../../../context/Store';
@@ -56,7 +56,7 @@ export default function Doctors() {
     return (() => {
       clearTimeout(timeOut);
     })
-  }, [countDoctors,isLang]);
+  }, [pagesCountDoctors, countDoctors, isLang]);
 
 
   // useEffect(() => {
@@ -197,90 +197,90 @@ export default function Doctors() {
 
 
 
-    // !Filter by city and country and area  
-    let { countries, areas, cities, getCities, getAreas } = useFetch()
-    const cityRef = useRef(null);
-    const countryRef = useRef(null);
-    const areaRef = useRef(null);
-    const handelSelectCountry = async (event) => {
-      cityRef.current.value = 'Select city';
-      areaRef.current.value = 'Select Area';
-      const selectedCountryId = event.target.value;
-      if (selectedCountryId === 'country') {
-        getTokenDoctors()
-      } else if (selectedCountryId === 'Select Country') {
-        return false
-      } else {
-        getCities(selectedCountryId)
-        try {
-          await axios.post(URL_Doctors, { IDPage: countDoctors, IDCountry: selectedCountryId }, apiheader).then((res) => {
-            if (res.status === 200 && res.request.readyState === 4) {
-              setFetchDoctors(res.data.Response.Doctors);
-              setPagesCountDoctors(res.data.Response.Pages);
-            }
-          })
-        } catch (error) {
-          if (error.response && error.response.status === 429) {
-            const retryAfter = error.response.headers['retry-after'];
-            setTimeout(() => {
-              getTokenDoctors();
-            }, (retryAfter || 30) * 1000);
+  // !Filter by city and country and area  
+  let { countries, areas, cities, getCities, getAreas } = useFetch()
+  const cityRef = useRef(null);
+  const countryRef = useRef(null);
+  const areaRef = useRef(null);
+  const handelSelectCountry = async (event) => {
+    cityRef.current.value = 'Select city';
+    areaRef.current.value = 'Select Area';
+    const selectedCountryId = event.target.value;
+    if (selectedCountryId === 'country') {
+      getTokenDoctors()
+    } else if (selectedCountryId === 'Select Country') {
+      return false
+    } else {
+      getCities(selectedCountryId)
+      try {
+        await axios.post(URL_Doctors, { IDPage: countDoctors, IDCountry: selectedCountryId }, apiheader).then((res) => {
+          if (res.status === 200 && res.request.readyState === 4) {
+            setFetchDoctors(res.data.Response.Doctors);
+            setPagesCountDoctors(res.data.Response.Pages);
           }
+        })
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = error.response.headers['retry-after'];
+          setTimeout(() => {
+            getTokenDoctors();
+          }, (retryAfter || 30) * 1000);
         }
       }
     }
+  }
 
-    const handelSelectCity = async () => {
-      areaRef.current.value = 'Select Area';
-      let city = cityRef.current.value
-      if (city === 'cities') {
-        getTokenDoctors()
-      } else if (city === 'Select city') {
-        return true
-      } else {
-        getAreas(city)
-        try {
-          await axios.post(URL_Doctors, { IDPage: countDoctors, IDCity: city }, apiheader).then((res) => {
-            if (res.status === 200 && res.request.readyState === 4) {
-              setFetchDoctors(res.data.Response.Doctors);
-              setPagesCountDoctors(res.data.Response.Pages);
-            }
-          })
-        } catch (error) {
-          if (error.response && error.response.status === 429) {
-            const retryAfter = error.response.headers['retry-after'];
-            setTimeout(() => {
-              getTokenDoctors();
-            }, (retryAfter || 30) * 1000);
+  const handelSelectCity = async () => {
+    areaRef.current.value = 'Select Area';
+    let city = cityRef.current.value
+    if (city === 'cities') {
+      getTokenDoctors()
+    } else if (city === 'Select city') {
+      return true
+    } else {
+      getAreas(city)
+      try {
+        await axios.post(URL_Doctors, { IDPage: countDoctors, IDCity: city }, apiheader).then((res) => {
+          if (res.status === 200 && res.request.readyState === 4) {
+            setFetchDoctors(res.data.Response.Doctors);
+            setPagesCountDoctors(res.data.Response.Pages);
           }
+        })
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = error.response.headers['retry-after'];
+          setTimeout(() => {
+            getTokenDoctors();
+          }, (retryAfter || 30) * 1000);
         }
       }
     }
+  }
 
-    const handelSelectArea = async () => {
-      let city = areaRef.current.value
-      if (city === 'Areas') {
-        getTokenDoctors()
-      } else if (city === 'Select Area') {
-        return false
-      } else {
-        try {
-          await axios.post(URL_Doctors, { IDPage: countDoctors, IDArea: city }, apiheader).then((res) => {
-            if (res.status === 200 && res.request.readyState === 4) {
-              setFetchDoctors(res.data.Response.Doctors);
-              setPagesCountDoctors(res.data.Response.Pages);
-            }
-          })
-        } catch (error) {
-          if (error.response && error.response.status === 429) {
-            const retryAfter = error.response.headers['retry-after'];
-            setTimeout(() => {
-              getTokenDoctors();
-            }, (retryAfter || 30) * 1000);
+  const handelSelectArea = async () => {
+    let city = areaRef.current.value
+    if (city === 'Areas') {
+      getTokenDoctors()
+    } else if (city === 'Select Area') {
+      return false
+    } else {
+      try {
+        await axios.post(URL_Doctors, { IDPage: countDoctors, IDArea: city }, apiheader).then((res) => {
+          if (res.status === 200 && res.request.readyState === 4) {
+            setFetchDoctors(res.data.Response.Doctors);
+            setPagesCountDoctors(res.data.Response.Pages);
           }
+        })
+      } catch (error) {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = error.response.headers['retry-after'];
+          setTimeout(() => {
+            getTokenDoctors();
+          }, (retryAfter || 30) * 1000);
         }
       }
-    } 
+    }
+  }
 
 
 
@@ -296,7 +296,7 @@ export default function Doctors() {
             <Component.ButtonBase title={isLang === 'ar' ? 'إضـافة' : 'Add'} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/doctors/addDoctor" />
           </div>
 
-          {loadingDoctors ? 
+          {loadingDoctors ?
             SkeletonSearch(40, "60%")
             :
             <div className="search-container">
@@ -396,64 +396,64 @@ export default function Doctors() {
           }
 
 
-        <div className=' app__addOrder-form '>
-          <Row className='d-flex flex-row justify-content-between'>
-            <Col xl={4} lg={4} md={6} sm={12} className='mt-2' >
-              {!loadingDoctors ? <>
-                <Form.Group controlId="formBasicEmail" onChange={handelSelectCountry} ref={countryRef}>
-                  <Form.Select size="sm"aria-label="Default select example" >
-                    <option selected disabled hidden value={'Select Country'}>{translate[isLang]?.filter?.Country}  </option>
-                    <option value={'country'} >{translate[isLang]?.filter?.allCountry}</option>
+          <div className=' app__addOrder-form '>
+            <Row className='d-flex flex-row justify-content-between'>
+              <Col xl={4} lg={4} md={6} sm={12} className='mt-2' >
+                {!loadingDoctors ? <>
+                  <Form.Group controlId="formBasicEmail" onChange={handelSelectCountry} ref={countryRef}>
+                    <Form.Select size="sm" aria-label="Default select example" >
+                      <option selected disabled hidden value={'Select Country'}>{translate[isLang]?.filter?.Country}  </option>
+                      <option value={'country'} >{translate[isLang]?.filter?.allCountry}</option>
 
-                    {
-                      countries?.map((item, index) => (
-                        <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
-                      ))
-                    }
-                  </Form.Select>
-                </Form.Group>
-              </> : SkeletonFilter()}
-            </Col>
+                      {
+                        countries?.map((item, index) => (
+                          <option key={index} value={item?.IDCountry}  >{item?.CountryName}</option>
+                        ))
+                      }
+                    </Form.Select>
+                  </Form.Group>
+                </> : SkeletonFilter()}
+              </Col>
 
-            <Col xl={4} lg={4} md={6} sm={12} className='mt-2'>
-              {!loadingDoctors ? <>
-                <Form.Group controlId="formBasicEmail"   >
-                  <Form.Select size="sm"aria-label="Default select example" onChange={handelSelectCity} ref={cityRef}>
-                    <option selected disabled hidden value={'Select city'}> {translate[isLang]?.filter?.city}  </option>
+              <Col xl={4} lg={4} md={6} sm={12} className='mt-2'>
+                {!loadingDoctors ? <>
+                  <Form.Group controlId="formBasicEmail"   >
+                    <Form.Select size="sm" aria-label="Default select example" onChange={handelSelectCity} ref={cityRef}>
+                      <option selected disabled hidden value={'Select city'}> {translate[isLang]?.filter?.city}  </option>
 
-                    <option value={'cities'} >{translate[isLang]?.filter?.allCity}</option>
+                      <option value={'cities'} >{translate[isLang]?.filter?.allCity}</option>
 
-                    {
-                      cities?.map((item, index) => (
-                        <option key={index} value={item?.IDCity}>{item?.CityName}</option>
-                      ))
-                    }
-                  </Form.Select>
+                      {
+                        cities?.map((item, index) => (
+                          <option key={index} value={item?.IDCity}>{item?.CityName}</option>
+                        ))
+                      }
+                    </Form.Select>
 
-                </Form.Group>
-              </> : SkeletonFilter()}
-            </Col>
+                  </Form.Group>
+                </> : SkeletonFilter()}
+              </Col>
 
-            <Col xl={4} lg={4} md={6} sm={12} className='mt-2'>
-              {!loadingDoctors ? <>
-                <Form.Group controlId="formBasicEmail"   >
-                  <Form.Select size="sm"aria-label="Default select example" onChange={handelSelectArea} ref={areaRef}>
-                    <option selected disabled hidden value={'Select Area'}>  {translate[isLang]?.filter?.area}  </option>
+              <Col xl={4} lg={4} md={6} sm={12} className='mt-2'>
+                {!loadingDoctors ? <>
+                  <Form.Group controlId="formBasicEmail"   >
+                    <Form.Select size="sm" aria-label="Default select example" onChange={handelSelectArea} ref={areaRef}>
+                      <option selected disabled hidden value={'Select Area'}>  {translate[isLang]?.filter?.area}  </option>
 
-                    <option value={'Areas'} > {translate[isLang]?.filter?.allarea} </option>
+                      <option value={'Areas'} > {translate[isLang]?.filter?.allarea} </option>
 
-                    {
-                      areas?.map((item, index) => (
-                        <option key={index} value={item?.IDArea}>{item?.AreaName}</option>
-                      ))
-                    }
-                  </Form.Select>
+                      {
+                        areas?.map((item, index) => (
+                          <option key={index} value={item?.IDArea}>{item?.AreaName}</option>
+                        ))
+                      }
+                    </Form.Select>
 
-                </Form.Group>
-              </> : SkeletonFilter()}
-            </Col>
-          </Row>
-        </div>
+                  </Form.Group>
+                </> : SkeletonFilter()}
+              </Col>
+            </Row>
+          </div>
 
 
           <ExcelSheet fetchDoctors={fetchDoctors} />
