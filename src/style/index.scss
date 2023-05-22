@@ -237,3 +237,13 @@ td {
 .nav-pills .nav-item button.active {
   color: #fff;
 }
+
+.selectMonth {
+  width: 60% !important;
+}
+
+@media screen and (max-width: 768px) {
+  .selectMonth {
+    width: 80% !important;
+  }
+}
