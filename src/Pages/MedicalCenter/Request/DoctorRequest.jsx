@@ -137,33 +137,33 @@ const DoctorRequest = () => {
     <>
       <div className="app__Users ">
         <div className="app__Users-table">
-          <div className="search-container">
+  {/*         <div className="search-container">
             <div className='  w-100'>
 
               <div className=' app__addOrder-form '>
                 <Row className='d-flex  flex-row justify-content-between'>
 
-                  {/* <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
-                  {isLoader ? <>
-                    <Form.Group controlId="formBasicEmail"  >
-                      <Form.Select aria-label="Default select example" ref={medicalCenterTypeRef} onClick={handelMedicalCenterType} >
-                        <option selected disabled hidden value={'Select Product Type'}> {translate[isLang]?.filter?.Product} </option>
-                        {
-                          translate[isLang]?.Filtertype?.map((Status, index) => (
-                            <>
-                              <option key={index} value={Status.value}  >{Status.text}</option>
-                            </>
-                          ))
-                        }
-                      </Form.Select>
-                    </Form.Group>
-                  </> : SkeletonFilter()}
-                </Col> */}
+                  <Col xl={2} lg={2} md={6} sm={12} className='mt-2'>
+                    {isLoader ? <>
+                      <Form.Group controlId="formBasicEmail"  >
+                        <Form.Select aria-label="Default select example" ref={medicalCenterTypeRef} onClick={handelMedicalCenterType} >
+                          <option selected disabled hidden value={'Select Product Type'}> {translate[isLang]?.filter?.Product} </option>
+                          {
+                            translate[isLang]?.Filtertype?.map((Status, index) => (
+                              <>
+                                <option key={index} value={Status.value}  >{Status.text}</option>
+                              </>
+                            ))
+                          }
+                        </Form.Select>
+                      </Form.Group>
+                    </> : SkeletonFilter()}
+                  </Col>
 
                 </Row>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {isLoader ? <>
             <>
@@ -293,7 +293,7 @@ const DoctorRequest = () => {
           </> : SkeletonTable()}
         </div>
       </div>
-      <div className="pagination " dir="ltr">
+ {/*      <div className="pagination " dir="ltr">
         {
           pageCount &&
           <Box
@@ -310,7 +310,7 @@ const DoctorRequest = () => {
             />
           </Box>
         }
-      </div>
+      </div> */}
     </>
   )
 }
