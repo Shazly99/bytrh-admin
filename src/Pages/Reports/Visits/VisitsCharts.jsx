@@ -1,15 +1,14 @@
 import React from 'react'
 import ReactApexChart from 'react-apexcharts'
 
-const VisitsCharts = ({ isLang, color, title, labels }) => {
+const VisitsCharts = ({ isLang, color, title, labels , values , type }) => {
 
-    let labelsValue = Object.values(labels);
 
     // Data
     let series = [{
         name: `${title}`,
         // data: [Consults, UrgentConsults]
-        data: [5, 10, 12, 15, 8, 11, 7, 10, 15, 18, 13, 9]
+        data: [...values]
     }]
     
     let options = {
@@ -49,7 +48,7 @@ const VisitsCharts = ({ isLang, color, title, labels }) => {
                 },
               },
               // Custom column styles
-              columnWidth: '60px', // Adjust the width of the columns
+              columnWidth: type === '0' ? '60px' : '30px', // Adjust the width of the columns
               colors: { 
                 ranges: [
                   {
@@ -68,7 +67,7 @@ const VisitsCharts = ({ isLang, color, title, labels }) => {
             type: 'type',
             categories: [
                 // label1, label2 
-                ...labelsValue
+                ...labels
             ],
         },
         legend: {

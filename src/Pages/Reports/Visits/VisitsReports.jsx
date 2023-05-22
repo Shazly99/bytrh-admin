@@ -1,17 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
-// import { useRef } from 'react';
+import axios from 'axios';
 import { Container, Row, Col } from 'react-bootstrap'
 import '../../Vendor/Dashboard/Dashboard.scss'
 import { VendersContext } from '../../../context/Store';
-// import { PostData, apiheader } from '../../../utils/fetchData';
+import { apiheader } from '../../../utils/fetchData';
 import initialTranslate from './initialTranslate';
 import VisitsCharts from './VisitsCharts';
-// import Button from '@mui/material/Button';
-// import Box from '@mui/material/Box';
-// import ButtonGroup from '@mui/material/ButtonGroup';
+import Select from "react-select";
 
 
 function VisitsReports() {
+
   let { isLang } = useContext(VendersContext);
   const [translate, setTranslate] = useState(initialTranslate)
   const handelTranslate = () => {
@@ -19,34 +18,63 @@ function VisitsReports() {
   }
 
 
-//   const buttons = [
-//     <Button style={{ textTransform: 'capitalize' }} variant={`${type === 'Jan' ? 'contained' : 'outlined'}`} size='large' key="one" onClick={() => setFilterType('Jan')}>{translate[isLang]?.months[0]}</Button>,
-//     <Button style={{ textTransform: 'capitalize' }} variant={`${type === 'Feb' ? 'contained' : 'outlined'}`} size='large' key="two" onClick={() => setFilterType('Feb')}>{translate[isLang]?.months[1]}</Button>,
-//     <Button style={{ textTransform: 'capitalize' }} variant={`${type === 'Mar' ? 'contained' : 'outlined'}`} size='large' key="three" onClick={() => setFilterType('Mar')}>{translate[isLang]?.months[2]}</Button>,
-//     <Button style={{ textTransform: 'capitalize' }} variant={`${type === 'Apr' ? 'contained' : 'outlined'}`} size='large' key="fore" onClick={() => setFilterType('Apr')}>{translate[isLang]?.months[3]}</Button>,
-//     <Button style={{ textTransform: 'capitalize' }} variant={`${type === 'May' ? 'contained' : 'outlined'}`} size='large' key="five" onClick={() => setFilterType('May')}>{translate[isLang]?.months[4]}</Button>,
-//     <Button style={{ textTransform: 'capitalize' }} variant={`${type === 'Jun' ? 'contained' : 'outlined'}`} size='large' key="sex" onClick={() => setFilterType('Jun')}>{translate[isLang]?.months[5]}</Button>,
-//     <Button style={{ textTransform: 'capitalize' }} variant={`${type === 'Jul' ? 'contained' : 'outlined'}`} size='large' key="seven" onClick={() => setFilterType('Jul')}>{translate[isLang]?.months[6]}</Button>,
-//     <Button style={{ textTransform: 'capitalize' }} variant={`${type === 'Aug' ? 'contained' : 'outlined'}`} size='large' key="eight" onClick={() => setFilterType('Aug')}>{translate[isLang]?.months[7]}</Button>,
-//     <Button style={{ textTransform: 'capitalize' }} variant={`${type === 'Sep' ? 'contained' : 'outlined'}`} size='large' key="nine" onClick={() => setFilterType('Sep')}>{translate[isLang]?.months[8]}</Button>,
-//     <Button style={{ textTransform: 'capitalize' }} variant={`${type === 'Oct' ? 'contained' : 'outlined'}`} size='large' key="ten" onClick={() => setFilterType('Oct')}>{translate[isLang]?.months[9]}</Button>,
-//     <Button style={{ textTransform: 'capitalize' }} variant={`${type === 'Nov' ? 'contained' : 'outlined'}`} size='large' key="eleven" onClick={() => setFilterType('Nov')}>{translate[isLang]?.months[10]}</Button>,
-//     <Button style={{ textTransform: 'capitalize' }} variant={`${type === 'Dec' ? 'contained' : 'outlined'}`} size='large' key="twelve" onClick={() => setFilterType('Dec')}>{translate[isLang]?.months[11]}</Button>,
-//   ];
-
-
-  const [type, setFilterType] = useState('all');
+  const [type, setFilterType] = useState('0');
 //   const [typeText, setFilterTypeText] = useState('all');
 
+  const typeVisits = [
+    { value: "HOME_VISIT", label: isLang === 'en' ? "Home Visits" : 'زيارات منزلية' },
+    { value: "URGENT_HOME_VISIT", label: isLang === 'en' ? "Urgent Visits" : 'زيارات عاجلة' },
+    { value: "CENTER_VISIT", label: isLang === 'en' ? "Center Visits" : 'زيارات المركز' },
+  ];
 
-  useEffect((e) => {
+  const [selectedValues, setSelectedValues] = useState([]);
+  const [groupTypes, setGroupTypes] = useState(["HOME_VISIT" , "URGENT_HOME_VISIT" , "CENTER_VISIT"]);
+
+  let typesList = [];
+
+  function handleChangeType (selectedOptions) {
+    setSelectedValues(selectedOptions);
+    for (let i of selectedOptions) {
+      typesList.push(i.value);
+    }
+    setGroupTypes(typesList);
+  };
+
+
+ const api = `https://bytrh.com/api/admin/reports/visits`
+
+  const [loading, setLoading] = useState(false);
+  const [fetchLabels, setFetchLabels] = useState([]);
+  const [fetchValues, setFetchValues] = useState([]);
+
+  async function getData() {
+    setLoading(true);
+    await axios.post(api , {
+        FilterType: type,
+        VisitType: groupTypes.length < 1 ? ["HOME_VISIT" , "URGENT_HOME_VISIT" , "CENTER_VISIT"] : groupTypes,
+    } , apiheader )
+      .then(res => {
+        if (res.status === 200 && res.request.readyState === 4) {
+          setFetchLabels(res.data.Response.map(el => el.Name));
+          setFetchValues(res.data.Response.map(el => el.Amount));
+          setLoading(false);
+        }
+      })
+      .catch(err => { 
+        console.log(err);
+      })
+  }
+
+
+  useEffect(() => {
     let timeOut = setTimeout(() => {
         handelTranslate();
+        getData()
     }, 100);
     return (() => {
         clearTimeout(timeOut);
     })
-  }, [isLang])
+  }, [isLang , type , groupTypes])
 
 
 
@@ -55,50 +83,73 @@ function VisitsReports() {
       <Container fluid>
         <div className="app__dashboard">
         
-            <div className="mt-5">
-                <label htmlFor="selectMonth" className="fs-5 fw-semibold mb-2 color-red">{isLang === 'ar' ? 'اختـر شهـر' : 'Select a Month'}</label>
-                <select name="selectMonth" id="selectMonth" defaultValue={'all'} dir='ltr' onChange={(e) => {
-                    setFilterType(e.target.value);
-                    // setFilterTypeText(e.nativeEvent.target[e.nativeEvent.target.selectedIndex].text);
-                }} className=' p-2 form-select selectMonth fw-semibold color-red'>
-                    <option value="all">{isLang === 'ar' ? 'كل الشهــور' : 'All'}</option>
-                    <option value="jan">{isLang === 'ar' ? 'ينـايـر' : 'Jan'}</option>
-                    <option value="feb">{isLang === 'ar' ? 'فبرايـر' : 'Feb'}</option>
-                    <option value="mar">{isLang === 'ar' ? 'مـارس' : 'Mar'}</option>
-                    <option value="apr">{isLang === 'ar' ? 'ابريـل' : 'Apr'}</option>
-                    <option value="may">{isLang === 'ar' ? 'مايـو' : 'May'}</option>
-                    <option value="jun">{isLang === 'ar' ? 'يونيـو' : 'Jun'}</option>
-                    <option value="jul">{isLang === 'ar' ? 'يوليـو' : 'Jul'}</option>
-                    <option value="aug">{isLang === 'ar' ? 'اغسـطـس' : 'Aug'}</option>
-                    <option value="sep">{isLang === 'ar' ? 'سبتمبـر' : 'Sep'}</option>
-                    <option value="oct">{isLang === 'ar' ? 'اكتوبــر' : 'Oct'}</option>
-                    <option value="nov">{isLang === 'ar' ? 'نوفمبــر' : 'Nov'}</option>
-                    <option value="dec">{isLang === 'ar' ? 'ديسمبــر' : 'Dec'}</option>
-                </select>
+            <div className="mt-5 row d-flex justify-content-center align-items-center gy-3 gy-md-0">
+                <div className="col-md-6">
+                    <div className="group-reports">
+                        <label htmlFor="selectMonth" className="fs-5 fw-semibold mb-2 color-red">{isLang === 'ar' ? 'اختـر شهـر' : 'Select a Month'}</label>
+                        <select name="selectMonth" id="selectMonth" defaultValue={'all'} dir='ltr' onChange={(e) => {
+                            setFilterType(e.target.value);
+                            // setFilterTypeText(e.nativeEvent.target[e.nativeEvent.target.selectedIndex].text);
+                        }} className=' p-2 form-select fw-semibold color-red'>
+                            <option value="0">{isLang === 'ar' ? 'كل الشهــور' : 'All'}</option>
+                            <option value="01">{isLang === 'ar' ? 'ينـايـر' : 'Jan'}</option>
+                            <option value="02">{isLang === 'ar' ? 'فبرايـر' : 'Feb'}</option>
+                            <option value="03">{isLang === 'ar' ? 'مـارس' : 'Mar'}</option>
+                            <option value="04">{isLang === 'ar' ? 'ابريـل' : 'Apr'}</option>
+                            <option value="05">{isLang === 'ar' ? 'مايـو' : 'May'}</option>
+                            <option value="06">{isLang === 'ar' ? 'يونيـو' : 'Jun'}</option>
+                            <option value="07">{isLang === 'ar' ? 'يوليـو' : 'Jul'}</option>
+                            <option value="08">{isLang === 'ar' ? 'اغسـطـس' : 'Aug'}</option>
+                            <option value="09">{isLang === 'ar' ? 'سبتمبـر' : 'Sep'}</option>
+                            <option value="010">{isLang === 'ar' ? 'اكتوبــر' : 'Oct'}</option>
+                            <option value="011">{isLang === 'ar' ? 'نوفمبــر' : 'Nov'}</option>
+                            <option value="012">{isLang === 'ar' ? 'ديسمبــر' : 'Dec'}</option>
+                        </select>
+                    </div>
+                </div>
+                <div className="col-md-6">
+                    <div className="group-reports">
+                        <label htmlFor="selectMonth" className="fs-5 fw-semibold mb-2 color-red">{isLang === 'ar' ? 'نوع الزيـارة / الزيارات' : 'Select Visits Type'}</label>
+                        <Select
+                            defaultValue={[...typeVisits]}
+                            isMulti
+                            name="type-visits"
+                            id="type-visits"
+                            options={typeVisits}
+                            className="basic-multi-select w-100 py-0 color-red"
+                            classNamePrefix="select"
+                            placeholder={isLang === 'ar' ? 'نوع الزيـارة / الزيارات' : 'Select Visits Type..'}
+                            onChange={handleChangeType}
+                            value={selectedValues}
+                        />
+                    </div>
+                </div>
             </div>
             
-            <ul className="nav nav-pills mt-5 mb-0" id="pills-tab" role="tablist">
+            {/* <ul className="nav nav-pills mt-5 mb-0" id="pills-tab" role="tablist">
                 <li className="nav-item" role="presentation">
                     <button className="nav-link fw-semibold active" id="pills-income-tab" data-bs-toggle="pill" data-bs-target="#pills-income" type="button" role="tab" aria-controls="pills-income" aria-selected="true">{translate[isLang]?.income}</button>
                 </li>
                 <li className="nav-item" role="presentation">
                     <button className="nav-link fw-semibold" id="pills-profit-tab" data-bs-toggle="pill" data-bs-target="#pills-profit" type="button" role="tab" aria-controls="pills-profit" aria-selected="false">{translate[isLang]?.profit}</button>
                 </li>
-            </ul>
+            </ul> */}
 
-            <div className="tab-content" id="pills-tabContent">
-                <div className="tab-pane fade show active" id="pills-income" role="tabpanel" aria-labelledby="pills-income-tab" tabindex="0">
+            {/* <div className="tab-content" id="pills-tabContent"> */}
+                {/* <div className="tab-pane fade show active" id="pills-income" role="tabpanel" aria-labelledby="pills-income-tab" tabindex="0"> */}
                     <Row>
                         <Col xl={12} lg={12} md={12} sm={12}>
 
-                            {type === 'all' ?
+                            {type === '0' ?
                                 <div className="app__dashboard_chart"  >
                                     <Container >
                                         <VisitsCharts
                                             isLang={isLang}
                                             color={'#8054A1'}
                                             title={translate[isLang]?.Column?.titleMonths}
-                                            labels={translate[isLang]?.months}
+                                            labels={fetchLabels}
+                                            values={fetchValues}
+                                            type={type}
                                         />
                                     </Container>
                                 </div>
@@ -109,7 +160,9 @@ function VisitsReports() {
                                             isLang={isLang}
                                             color={'#8054A1'}
                                             title={`${translate[isLang]?.Column?.titleDays}`}
-                                            labels={translate[isLang]?.days}
+                                            labels={fetchLabels}
+                                            values={fetchValues}
+                                            type={type}
                                         />
                                     </Container>
                                 </div>
@@ -180,9 +233,9 @@ function VisitsReports() {
                         </Col> */}
                         
                     </Row>
-                </div>
-                <div className="tab-pane fade" id="pills-profit" role="tabpanel" aria-labelledby="pills-profit-tab" tabindex="0">...</div>
-            </div>
+                {/* </div> */}
+                {/* <div className="tab-pane fade" id="pills-profit" role="tabpanel" aria-labelledby="pills-profit-tab" tabindex="0">...</div> */}
+            {/* </div> */}
 
         </div>
       </Container>
