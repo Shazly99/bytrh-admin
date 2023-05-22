@@ -71,7 +71,7 @@ export default function Doctors() {
   // }, [loadingDoctors]);
 
 
-  const handleChange = (value) => {
+  const handleChange = (event, value) => {
     setCountDoctors(value);
   };
 
@@ -505,7 +505,7 @@ export default function Doctors() {
                     {
                       pagesCountDoctors &&
                       <Box sx={{ margin: "auto", width: "fit-content", alignItems: "center", }}>
-                        <Pagination count={pagesCountDoctors} page={countDoctors} onChange={() => handleChange(countDoctors)} />
+                        <Pagination count={pagesCountDoctors} page={countDoctors} onChange={handleChange} />
                       </Box>
                     }
                   </div>
