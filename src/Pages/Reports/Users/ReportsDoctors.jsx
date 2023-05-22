@@ -5,8 +5,7 @@ import { PostData, apiheader } from '../../../utils/fetchData';
 import { useContext } from 'react';
 import { VendersContext } from '../../../context/Store';
 import initialTranslation from './Translation';
-import Component from '../../../constants/Component';
-import useSkeletonTable from '../../../utils/useSkeletonTable';
+import Component from '../../../constants/Component'; 
 import moment from 'moment';
 
 const ReportsDoctors = () => {
@@ -36,7 +35,10 @@ const ReportsDoctors = () => {
         const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/doctors/ajax`, {}, apiheader);
         setData(data.Response)
     }
-
+    const cacheDoctorsAjax = async () => {
+        const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/cache`, {CachePage:'DOCTOR_TRANSACTION'}, apiheader);
+        setTransactions(data.Response)
+    }
     const doctorsTransactions = async () => {
         const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/reports/doctor/transactions`,
             {
@@ -44,7 +46,7 @@ const ReportsDoctors = () => {
                 StartDate: startDate.current.value,
                 EndDate: endDate.current.value
             }, apiheader).then(({ data }) => {
-                setTransactions(data.Response)
+                setTransactions(data.Response) 
                 const timeoutId = setTimeout(() => {
                     setIsloader(true)
                 }, 0);
@@ -56,11 +58,12 @@ const ReportsDoctors = () => {
                         doctorsTransactions();
                     }, (retryAfter || 60) * 1000);
                 }
-            })
-        console.log(data);
+            }) 
+
     }
 
     useEffect(() => {
+        cacheDoctorsAjax()  
         doctorsAjax()
         handelTranslate()
         const currentDate = moment().format('YYYY-MM-DD');
@@ -156,10 +159,10 @@ const ReportsDoctors = () => {
                                                         <span className='ClientName'>{item?.LedgerTransactionType?.charAt(0).toUpperCase() + item?.LedgerTransactionType?.slice(1).toLowerCase()}</span>
                                                     </td>
                                                     <td >
-                                                        <span className='ClientName'>{item?.LedgerSource?.replace('_', " ").split("_").join(" ").charAt(0).toUpperCase() + item?.LedgerSource?.slice(1).toLowerCase().replace('_', " ").split("_").join(" ") }</span>
+                                                        <span className='ClientName'>{item?.LedgerSource?.replace('_', " ").split("_").join(" ").charAt(0).toUpperCase() + item?.LedgerSource?.slice(1).toLowerCase().replace('_', " ").split("_").join(" ")}</span>
                                                     </td>
                                                     <td >
-                                                        <span className='ClientName'>{item?.LedgerDestination?.replace('_', " ").split("_").join(" ").charAt(0).toUpperCase() + item?.LedgerDestination?.slice(1).toLowerCase().replace('_', " ").split("_").join(" ") }</span>
+                                                        <span className='ClientName'>{item?.LedgerDestination?.replace('_', " ").split("_").join(" ").charAt(0).toUpperCase() + item?.LedgerDestination?.slice(1).toLowerCase().replace('_', " ").split("_").join(" ")}</span>
 
                                                     </td>
 

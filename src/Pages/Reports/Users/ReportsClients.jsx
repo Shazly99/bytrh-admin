@@ -60,8 +60,13 @@ const ReportsClients = () => {
       })
     console.log(data);
   }
-
+  const cacheCLIENTAjax = async () => {
+    const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/cache`, { CachePage: 'CLIENT_TRANSACTION' }, apiheader);
+    setTransactions(data.Response)
+  }
   useEffect(() => {
+    cacheCLIENTAjax()
+
     const currentDate = moment().format('YYYY-MM-DD');
     startDate.current.value = currentDate;
     endDate.current.value = currentDate;
@@ -172,13 +177,13 @@ const ReportsClients = () => {
                               {item?.LedgerAmount}  {translate[isLang]?.currency}
                             </h6>
                           </td>
-                  {/*         <td >
+                          {/*         <td >
                              <h6 className="mb-0  pe-2 color-red">
                               {item?.LedgerInitialBalance}  {translate[isLang]?.currency}
                             </h6>
                           </td> */}
 
-               {/*            <td >
+                          {/*            <td >
                              <h6 className="mb-0  pe-2 color-red">
                               {item?.LedgerFinalBalance}  {translate[isLang]?.currency}
                             </h6>
