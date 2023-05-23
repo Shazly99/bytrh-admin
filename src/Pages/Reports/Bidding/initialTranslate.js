@@ -4,8 +4,8 @@ let initialTranslate = {
         income: 'الدخـل',
         profit: 'الربـح',
         Column: {
-            titleMonths: 'إجمالي الدخـل',
-            titleDays: 'إجمالي الدخـل',
+            titleMonths: 'إجمالي المـزادات',
+            titleDays: 'إجمالي المـزادات',
         },
         LabelMonths: 'اختـر شهـر',
         OptionMonths: [
@@ -68,8 +68,8 @@ let initialTranslate = {
         income: 'Income',
         profit: 'Profit',
         Column: {
-            titleMonths: 'Total Income',
-            titleDays: 'Total Income',
+            titleMonths: 'Total Auctions',
+            titleDays: 'Total Auctions',
         },
         LabelMonths: 'Select a Month',
         OptionMonths: [
