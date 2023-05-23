@@ -5,7 +5,7 @@ import { PostData, apiheader } from '../../../utils/fetchData';
 import { useContext } from 'react';
 import { VendersContext } from '../../../context/Store';
 import initialTranslation from './Translation';
-import Component from '../../../constants/Component'; 
+import Component from '../../../constants/Component';
 import moment from 'moment';
 
 const ReportsDoctors = () => {
@@ -36,44 +36,75 @@ const ReportsDoctors = () => {
         setData(data.Response)
     }
     const cacheDoctorsAjax = async () => {
-        const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/cache`, {CachePage:'DOCTOR_TRANSACTION'}, apiheader);
+        const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/cache`, { CachePage: 'DOCTOR_TRANSACTION' }, apiheader);
         setTransactions(data.Response)
-    }
-    const doctorsTransactions = async () => {
-        const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/reports/doctor/transactions`,
-            {
+        if (data.Response === null) {
+            doctorsTransactions({
                 IDDoctor: doctorRef.current.value,
                 StartDate: startDate.current.value,
                 EndDate: endDate.current.value
-            }, apiheader).then(({ data }) => {
-                setTransactions(data.Response) 
-                const timeoutId = setTimeout(() => {
-                    setIsloader(true)
-                }, 0);
-                return () => clearTimeout(timeoutId);
-            }).catch((error) => {
-                if (error.response && error.response.status === 429) {
-                    const retryAfter = error.response.headers['retry-after'];
-                    setTimeout(() => {
-                        doctorsTransactions();
-                    }, (retryAfter || 60) * 1000);
-                }
-            }) 
+            })
+        } else {
+            startDate.current.value = data.Response.StartDate.split(" ")[0];
+            endDate.current.value = data.Response.EndDate.split(" ")[0];
+            // setSelectedItem(data.Response.IDDoctor)
 
+            doctorsTransactions({
+                IDDoctor: data.Response.IDDoctor,
+                StartDate: data.Response.StartDate.split(" ")[0],
+                EndDate: data.Response.EndDate.split(" ")[0]
+            })
+        }
+    }
+    const doctorsTransactions = async (dataDoctorsTransactions) => {
+        return await PostData(`${process.env.REACT_APP_API_URL}/admin/reports/doctor/transactions`, dataDoctorsTransactions, apiheader).then(({ data }) => {
+            setTransactions(data.Response)
+            const timeoutId = setTimeout(() => {
+                setIsloader(true)
+            }, 0);
+            return () => clearTimeout(timeoutId);
+        }).catch((error) => {
+            if (error.response && error.response.status === 429) {
+                const retryAfter = error.response.headers['retry-after'];
+                setTimeout(() => {
+                    doctorsTransactions();
+                }, (retryAfter || 60) * 1000);
+            }
+        })
     }
 
     useEffect(() => {
-        cacheDoctorsAjax()  
         doctorsAjax()
         handelTranslate()
         const currentDate = moment().format('YYYY-MM-DD');
         startDate.current.value = currentDate;
         endDate.current.value = currentDate;
+        cacheDoctorsAjax()
         return () => {
             doctorsAjax()
         }
     }, [])
 
+    const doctorsTransactionsClick = async () => {
+        return await PostData(`${process.env.REACT_APP_API_URL}/admin/reports/doctor/transactions`, {
+            IDDoctor: doctorRef.current.value,
+            StartDate: startDate.current.value,
+            EndDate: endDate.current.value
+        }, apiheader).then(({ data }) => {
+            setTransactions(data.Response)
+            const timeoutId = setTimeout(() => {
+                setIsloader(true)
+            }, 0);
+            return () => clearTimeout(timeoutId);
+        }).catch((error) => {
+            if (error.response && error.response.status === 429) {
+                const retryAfter = error.response.headers['retry-after'];
+                setTimeout(() => {
+                    doctorsTransactions();
+                }, (retryAfter || 60) * 1000);
+            }
+        })
+    }
     return (
         <dic className='h-100'>
             <div className="app__addOrder-form ">
@@ -129,7 +160,7 @@ const ReportsDoctors = () => {
                     </Col>
 
                     <Col xl={2} lg={2} md={6} sm={12} >
-                        <Button onClick={doctorsTransactions} variant="outline-primary" size="sm" className="w-100 mt-2">{isLang === 'en' ? 'Search  ' : '    العثور على التقارير'}</Button>
+                        <Button onClick={doctorsTransactionsClick} variant="outline-primary" size="sm" className="w-100 mt-2">{isLang === 'en' ? 'Search  ' : '    العثور على التقارير'}</Button>
                     </Col>
                 </Row>
             </div>

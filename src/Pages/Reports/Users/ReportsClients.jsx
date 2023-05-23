@@ -12,7 +12,6 @@ import moment from 'moment';
 const ReportsClients = () => {
   const [translate, setTranslate] = useState(initialTranslation)
   const handelTranslate = () => setTranslate(initialTranslation)
-  let { SkeletonTable, SkeletonFilters, SkeletonSearchsingel } = useSkeletonTable();
 
 
   const [data, setData] = useState([]);
@@ -37,8 +36,54 @@ const ReportsClients = () => {
     const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/clients/ajax`, {}, apiheader);
     setData(data.Response)
   }
+  const cacheCLIENTAjax = async () => {
+    const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/cache`, { CachePage: 'CLIENT_TRANSACTION' }, apiheader);
+    setTransactions(data.Response)
+    if (data.Response === null) { 
+      doctorsTransactions({
+          IDClient: doctorRef.current.value,
+          StartDate: startDate.current.value,
+          EndDate: endDate.current.value
+      })
+} else { 
+   doctorsTransactions({
+        IDClient: data.Response.IDClient,
+        StartDate: data.Response.StartDate.split(" ")[0],
+        EndDate: data.Response.EndDate.split(" ")[0]
+    }) 
+}
+  }
+  const doctorsTransactions = async (dataDoctorsTransactions) => {
+    const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/reports/client/transactions`,dataDoctorsTransactions, apiheader).then(({ data }) => {
+        setTransactions(data.Response)
+        const timeoutId = setTimeout(() => {
+          setIsloader(true)
+        }, 0);
+        return () => clearTimeout(timeoutId);
+      }).catch((error) => {
+        if (error.response && error.response.status === 429) {
+          const retryAfter = error.response.headers['retry-after'];
+          setTimeout(() => {
+            doctorsTransactions();
+          }, (retryAfter || 60) * 1000);
+        }
+      }) 
+  }
 
-  const doctorsTransactions = async () => {
+  useEffect(() => {
+    doctorsAjax()
+    handelTranslate()
+    const currentDate = moment().format('YYYY-MM-DD');
+    startDate.current.value = currentDate;
+    endDate.current.value = currentDate;
+    
+    cacheCLIENTAjax()
+    return () => {
+      doctorsAjax()
+    }
+  }, [])
+
+  const doctorsTransactionsClick = async () => {
     const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/reports/client/transactions`,
       {
         IDClient: doctorRef.current.value,
@@ -60,24 +105,6 @@ const ReportsClients = () => {
       })
     console.log(data);
   }
-  const cacheCLIENTAjax = async () => {
-    const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/cache`, { CachePage: 'CLIENT_TRANSACTION' }, apiheader);
-    setTransactions(data.Response)
-  }
-  useEffect(() => {
-    cacheCLIENTAjax()
-
-    const currentDate = moment().format('YYYY-MM-DD');
-    startDate.current.value = currentDate;
-    endDate.current.value = currentDate;
-
-    doctorsAjax()
-    handelTranslate()
-    return () => {
-      doctorsAjax()
-    }
-  }, [])
-
   return (
     <dic className='h-100'>
       <div className="app__addOrder-form ">
@@ -134,7 +161,7 @@ const ReportsClients = () => {
           </Col>
 
           <Col xl={2} lg={2} md={6} sm={12} >
-            <Button onClick={doctorsTransactions} variant="outline-primary" size="sm" className="w-100 mt-2">{isLang === 'en' ? 'Search  ' : '    العثور على التقارير'}</Button>
+            <Button onClick={doctorsTransactionsClick} variant="outline-primary" size="sm" className="w-100 mt-2">{isLang === 'en' ? 'Search  ' : '    العثور على التقارير'}</Button>
           </Col>
         </Row>
       </div>
