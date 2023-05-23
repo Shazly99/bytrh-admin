@@ -305,6 +305,21 @@ function App() {
           ]
         },
         {
+          path: '/consultsreports', children: [
+            { index: true, element: <ProtectedRoutes allowedRoles={['1']}><Component.ConsultsReports /> </ProtectedRoutes> },
+          ]
+        },
+        {
+          path: '/salesreports', children: [
+            { index: true, element: <ProtectedRoutes allowedRoles={['1']}><Component.SalesReports /> </ProtectedRoutes> },
+          ]
+        },
+        {
+          path: '/biddingreports', children: [
+            { index: true, element: <ProtectedRoutes allowedRoles={['1']}><Component.BiddingReports /> </ProtectedRoutes> },
+          ]
+        },
+        {
           path: '*', element: <Component.Error />
         }
       ],

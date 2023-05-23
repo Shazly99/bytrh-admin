@@ -262,7 +262,25 @@ const routes = [
       {
         path: "/visitsreports",
         nameAr: "تقارير الزيـارات",
-        nameEn: "Visits reports",
+        nameEn: "Visits Reports",
+        icon: <Icons.Dote size={19} />,
+      },
+      {
+        path: "/consultsreports",
+        nameAr: "تقارير الإستشـارات",
+        nameEn: "Consults Reports",
+        icon: <Icons.Dote size={19} />,
+      },
+      {
+        path: "/salesreports",
+        nameAr: "تقارير المبيعـات",
+        nameEn: "Sales Reports",
+        icon: <Icons.Dote size={19} />,
+      },
+      {
+        path: "/biddingreports",
+        nameAr: "تقارير المزادات",
+        nameEn: "Bidding Reports",
         icon: <Icons.Dote size={19} />,
       },
 

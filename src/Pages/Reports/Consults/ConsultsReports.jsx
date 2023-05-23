@@ -5,11 +5,11 @@ import '../../Vendor/Dashboard/Dashboard.scss'
 import { VendersContext } from '../../../context/Store';
 import { apiheader } from '../../../utils/fetchData';
 import initialTranslate from './initialTranslate';
-import VisitsCharts from './VisitsCharts';
+import ConsultsCharts from './ConsultsCharts';
 import Select from "react-select";
 
 
-function VisitsReports() {
+function ConsultsReports() {
 
   let { isLang } = useContext(VendersContext);
   const [translate, setTranslate] = useState(initialTranslate)
@@ -21,14 +21,13 @@ function VisitsReports() {
   const [type, setFilterType] = useState('0');
 //   const [typeText, setFilterTypeText] = useState('all');
 
-  const typeVisits = [
-    { value: "HOME_VISIT", label: translate[isLang]?.TypeVisits[0] },
-    { value: "URGENT_HOME_VISIT", label: translate[isLang]?.TypeVisits[1] },
-    { value: "CENTER_VISIT", label: translate[isLang]?.TypeVisits[2] },
+  const typeCosults = [
+    { value: "URGENT_CONSULT", label: translate[isLang]?.TypeCosults[0] },
+    { value: "CONSULT", label: translate[isLang]?.TypeCosults[1] },
   ];
 
   const [selectedValues, setSelectedValues] = useState([]);
-  const [groupTypes, setGroupTypes] = useState(["HOME_VISIT" , "URGENT_HOME_VISIT" , "CENTER_VISIT"]);
+  const [groupTypes, setGroupTypes] = useState(["URGENT_CONSULT" , "CONSULT"]);
 
   let typesList = [];
 
@@ -41,7 +40,7 @@ function VisitsReports() {
   };
 
 
- const api = `https://bytrh.com/api/admin/reports/visits`
+ const api = `https://bytrh.com/api/admin/reports/consults`
 
   const [loading, setLoading] = useState(false);
   const [fetchLabels, setFetchLabels] = useState([]);
@@ -51,7 +50,7 @@ function VisitsReports() {
     setLoading(true);
     await axios.post(api , {
         FilterType: type,
-        VisitType: groupTypes.length < 1 ? ["HOME_VISIT" , "URGENT_HOME_VISIT" , "CENTER_VISIT"] : groupTypes,
+        ConsultType: groupTypes.length < 1 ? ["URGENT_CONSULT" , "CONSULT"] : groupTypes,
     } , apiheader )
       .then(res => {
         if (res.status === 200 && res.request.readyState === 4) {
@@ -101,11 +100,11 @@ function VisitsReports() {
                     <div className="group-reports">
                         <label htmlFor="type-visits" className="fs-5 fw-semibold mb-2 color-red">{translate[isLang]?.LabelTypes}</label>
                         <Select
-                            defaultValue={[...typeVisits]}
+                            defaultValue={[...typeCosults]}
                             isMulti
                             name="type-visits"
                             id="type-visits"
-                            options={typeVisits}
+                            options={typeCosults}
                             className="basic-multi-select w-100 py-0 color-red"
                             classNamePrefix="select"
                             placeholder={translate[isLang]?.LabelTypes}
@@ -133,7 +132,7 @@ function VisitsReports() {
                             {type === '0' ?
                                 <div className="app__dashboard_chart"  >
                                     <Container >
-                                        <VisitsCharts
+                                        <ConsultsCharts
                                             isLang={isLang}
                                             color={'#8054A1'}
                                             title={translate[isLang]?.Column?.titleMonths}
@@ -146,7 +145,7 @@ function VisitsReports() {
                                 :
                                 <div className="app__dashboard_chart"  >
                                     <Container >
-                                        <VisitsCharts
+                                        <ConsultsCharts
                                             isLang={isLang}
                                             color={'#8054A1'}
                                             title={`${translate[isLang]?.Column?.titleDays}`}
@@ -172,5 +171,5 @@ function VisitsReports() {
   )
 }
 
-export default VisitsReports
+export default ConsultsReports
 

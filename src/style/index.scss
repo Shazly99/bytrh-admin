@@ -238,12 +238,25 @@ td {
   color: #fff;
 }
 
-.selectMonth {
-  width: 60% !important;
+.group-reports .css-13cymwt-control {
+  background-color: white!important;
 }
 
-@media screen and (max-width: 768px) {
-  .selectMonth {
-    width: 80% !important;
-  }
+.group-reports .css-b62m3t-container {
+  border: 1px solid #00000030 !important;
+  border-radius: 10px !important;
 }
+
+.group-reports .css-qbdosj-Input {
+  padding: 8px 0 !important;
+}
+
+// .selectMonth {
+//   width: 60% !important;
+// }
+
+// @media screen and (max-width: 768px) {
+//   .selectMonth {
+//     width: 80% !important;
+//   }
+// }
