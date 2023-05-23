@@ -4,8 +4,8 @@ let initialTranslate = {
         income: 'الدخـل',
         profit: 'الربـح',
         Column: {
-            titleMonths: 'كل الشهـور',
-            titleDays: 'أيـام الشهر',
+            titleMonths: 'إجمالي الدخـل',
+            titleDays: 'إجمالي الدخـل',
         },
         TypeCosults: {
             0: 'استشـارات عاجلة',
@@ -73,8 +73,8 @@ let initialTranslate = {
         income: 'Income',
         profit: 'Profit',
         Column: {
-            titleMonths: 'All Months',
-            titleDays: 'Days of month',
+            titleMonths: 'Total Income',
+            titleDays: 'Total Income',
         },
         TypeCosults: {
             0: "Urgent Consults",
