@@ -7,13 +7,7 @@ let initialTranslate = {
             titleMonths: 'كل الشهـور',
             titleDays: 'أيـام الشهر',
         },
-        TypeVisits: {
-            0: 'زيارات منزلية',
-            1: 'زيارات عاجلة',
-            2: 'زيارات المركز'
-        },
         LabelMonths: 'اختـر شهـر',
-        LabelTypes: 'نوع الزيـارة / الزيارات',
         OptionMonths: [
             {
                 val: '0',
@@ -77,13 +71,7 @@ let initialTranslate = {
             titleMonths: 'All Months',
             titleDays: 'Days of month',
         },
-        TypeVisits: {
-            0: "Home Visits",
-            1: "Urgent Visits",
-            2: "Center Visits"
-        },
         LabelMonths: 'Select a Month',
-        LabelTypes: 'Select Visits Type',
         OptionMonths: [
             {
                 val: '0',

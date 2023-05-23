@@ -5,11 +5,10 @@ import '../../Vendor/Dashboard/Dashboard.scss'
 import { VendersContext } from '../../../context/Store';
 import { apiheader } from '../../../utils/fetchData';
 import initialTranslate from './initialTranslate';
-import VisitsCharts from './VisitsCharts';
-import Select from "react-select";
+import BiddingCharts from './BiddingCharts';
 
 
-function VisitsReports() {
+function BiddingReports() {
 
   let { isLang } = useContext(VendersContext);
   const [translate, setTranslate] = useState(initialTranslate)
@@ -21,27 +20,8 @@ function VisitsReports() {
   const [type, setFilterType] = useState('0');
 //   const [typeText, setFilterTypeText] = useState('all');
 
-  const typeVisits = [
-    { value: "HOME_VISIT", label: translate[isLang]?.TypeVisits[0] },
-    { value: "URGENT_HOME_VISIT", label: translate[isLang]?.TypeVisits[1] },
-    { value: "CENTER_VISIT", label: translate[isLang]?.TypeVisits[2] },
-  ];
 
-  const [selectedValues, setSelectedValues] = useState([]);
-  const [groupTypes, setGroupTypes] = useState(["HOME_VISIT" , "URGENT_HOME_VISIT" , "CENTER_VISIT"]);
-
-  let typesList = [];
-
-  function handleChangeType (selectedOptions) {
-    setSelectedValues(selectedOptions);
-    for (let i of selectedOptions) {
-      typesList.push(i.value);
-    }
-    setGroupTypes(typesList);
-  };
-
-
- const api = `https://bytrh.com/api/admin/reports/visits`
+ const api = `https://bytrh.com/api/admin/reports/bidding`
 
   const [loading, setLoading] = useState(false);
   const [fetchLabels, setFetchLabels] = useState([]);
@@ -51,7 +31,6 @@ function VisitsReports() {
     setLoading(true);
     await axios.post(api , {
         FilterType: type,
-        VisitType: groupTypes.length < 1 ? ["HOME_VISIT" , "URGENT_HOME_VISIT" , "CENTER_VISIT"] : groupTypes,
     } , apiheader )
       .then(res => {
         if (res.status === 200 && res.request.readyState === 4) {
@@ -74,7 +53,7 @@ function VisitsReports() {
     return (() => {
         clearTimeout(timeOut);
     })
-  }, [isLang , type , groupTypes])
+  }, [isLang , type])
 
 
 
@@ -83,8 +62,8 @@ function VisitsReports() {
       <Container fluid>
         <div className="app__dashboard">
         
-            <div className="mt-5 row d-flex justify-content-center align-items-center gy-3 gy-md-0">
-                <div className="col-md-6">
+            <div className="mt-5 row d-flex align-items-center gy-3 gy-md-0">
+                <div className="col-md-7 col-8">
                     <div className="group-reports">
                         <label htmlFor="selectMonth" className="fs-5 fw-semibold mb-2 color-red">{translate[isLang]?.LabelMonths}</label>
                         <select name="selectMonth" id="selectMonth" defaultValue={'0'} dir='ltr' onChange={(e) => {
@@ -95,23 +74,6 @@ function VisitsReports() {
                                 return <option key={i} value={el.val}>{el.label}</option>
                             })}
                         </select>
-                    </div>
-                </div>
-                <div className="col-md-6">
-                    <div className="group-reports">
-                        <label htmlFor="type-visits" className="fs-5 fw-semibold mb-2 color-red">{translate[isLang]?.LabelTypes}</label>
-                        <Select
-                            defaultValue={[...typeVisits]}
-                            isMulti
-                            name="type-visits"
-                            id="type-visits"
-                            options={typeVisits}
-                            className="basic-multi-select w-100 py-0 color-red"
-                            classNamePrefix="select"
-                            placeholder={translate[isLang]?.LabelTypes}
-                            onChange={handleChangeType}
-                            value={selectedValues}
-                        />
                     </div>
                 </div>
             </div>
@@ -133,7 +95,7 @@ function VisitsReports() {
                             {type === '0' ?
                                 <div className="app__dashboard_chart"  >
                                     <Container >
-                                        <VisitsCharts
+                                        <BiddingCharts
                                             isLang={isLang}
                                             color={'#8054A1'}
                                             title={translate[isLang]?.Column?.titleMonths}
@@ -146,7 +108,7 @@ function VisitsReports() {
                                 :
                                 <div className="app__dashboard_chart"  >
                                     <Container >
-                                        <VisitsCharts
+                                        <BiddingCharts
                                             isLang={isLang}
                                             color={'#8054A1'}
                                             title={`${translate[isLang]?.Column?.titleDays}`}
@@ -172,5 +134,4 @@ function VisitsReports() {
   )
 }
 
-export default VisitsReports
-
+export default BiddingReports

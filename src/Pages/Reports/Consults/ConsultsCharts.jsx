@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactApexChart from 'react-apexcharts'
 
-const VisitsCharts = ({ isLang, color, title, labels , values , type }) => {
+const ConsultsCharts = ({ isLang, color, title, labels , values , type }) => {
 
 
     // Data
@@ -88,4 +88,4 @@ const VisitsCharts = ({ isLang, color, title, labels , values , type }) => {
     )
 }
 
-export default VisitsCharts
+export default ConsultsCharts

@@ -129,6 +129,9 @@ import ReportsDoctors from './../Pages/Reports/Users/ReportsDoctors';
 import VisitsReports from './../Pages/Reports/Visits/VisitsReports';
 import ReportsLoading from './../Components/Shared/ReportsLoading/ReportsLoading';
 import Withdraw from './../Pages/Vendor/Doctor/Withdraw/Withdraw';
+import ConsultsReports from '../Pages/Reports/Consults/ConsultsReports';
+import SalesReports from '../Pages/Reports/Sales/SalesReports';
+import BiddingReports from '../Pages/Reports/Bidding/BiddingReports';
 
  
 
@@ -290,7 +293,10 @@ const Component= {
     ReportsClients,
     ReportsDoctors,
     VisitsReports,
-    ReportsLoading
+    ReportsLoading,
+    ConsultsReports,
+    SalesReports,
+    BiddingReports
 }
 
 export default Component
