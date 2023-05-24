@@ -54,15 +54,35 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
     }
 
     let changeBalance = useRef();
+        const [messageBalance, setMessageBalance] = useState('');
 
     const changeWallet = async (el) => {
-        await PostData(`https://bytrh.com/api/admin/doctors/wallet/add`, { 
-            IDDoctor: id, 
-            Amount: el === 'add' ? changeBalance.current.value : -changeBalance.current.value 
-        }, apiheader)
-        await getTokenDoctors()
-
+        if(changeBalance.current.value < 0) {
+            if(isLang === 'ar') {
+                setMessageBalance('غير مسموح بإضافة قيمة سالبة..')
+            }
+            else {
+                setMessageBalance("It's not allowed to add a negative value..")
+            }
+        }
+        if((balance - changeBalance.current.value) < 0 && el === 'lose') {
+            if(isLang === 'ar') {
+                setMessageBalance('غير مسموح ان يصبح الرصيد بالسـالب..')
+            }
+            else {
+                setMessageBalance("The balance is not allowed to become negative..")
+            }
+        }
+        else {
+            await PostData(`https://bytrh.com/api/admin/doctors/wallet/add`, { 
+                IDDoctor: id, 
+                Amount: el === 'add' ? changeBalance.current.value : -changeBalance.current.value 
+            }, apiheader)
+            await getTokenDoctors();
+            setMessageBalance('')
+        }
     }
+
     const userstatus = async (status) => {
         await PostData(`https://bytrh.com/api/admin/doctors/status`, status, apiheader)
     }
@@ -204,7 +224,10 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                     {isLang === 'ar' ? 'ضبـط التوازن' : 'Set Balance'}
                                 </Dropdown.Item>
                                 <div className="w-100 bg-dark opacity-25" style={{ height: '1px' }}></div>
-                                <Modal show={showModal} onHide={handleCloseModal} centered dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
+                                <Modal show={showModal} onHide={() => {
+                                    handleCloseModal();
+                                    setMessageBalance('');
+                                }} centered dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
                                     <Modal.Header closeButton>
                                         <Modal.Title>
                                             {`${isLang === 'ar' ? `ضبـط التوازن ل ${nameDoc}` : `Set ${nameDoc} Balance`}`}
@@ -213,10 +236,11 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                     <Modal.Body>
                                         <Form.Control type="number" defaultValue={balance} ref={changeBalance} />
                                     </Modal.Body>
+                                    {messageBalance.length > 0 ? <p id="alertBalanse" className={`alert alert-danger fs-6 py-2 my-2 w-75 text-center mx-auto`}>{messageBalance}</p> : ''}
                                     <Modal.Footer className="d-flex justify-content-center align-items-center">
-                                        <Button variant="outline-primary" onClick={handleCloseModal}>
+                                        {/* <Button variant="outline-primary" onClick={handleCloseModal}>
                                             {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
-                                        </Button>
+                                        </Button> */}
                                         <Button variant="primary" onClick={() => {
                                                 changeWallet('add');
                                         }}>
