@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Component from '../../../constants/Component';
 import { VendersContext } from '../../../context/Store';
 import { PostData, apiheader } from '../../../utils/fetchData';
+import { toast } from 'react-hot-toast';
 
 
 export default function ItemDoctor({ nameDoc, email, phone, country, type, balance, create, status, item, id, getTokenDoctors }) {
@@ -54,7 +55,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
     }
 
     let changeBalance = useRef();
-        const [messageBalance, setMessageBalance] = useState('');
+    const [messageBalance, setMessageBalance] = useState('');
 
     const changeWallet = async (el) => {
         if(changeBalance.current.value < 0) {
@@ -77,9 +78,23 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
             await PostData(`https://bytrh.com/api/admin/doctors/wallet/add`, { 
                 IDDoctor: id, 
                 Amount: el === 'add' ? changeBalance.current.value : -changeBalance.current.value 
-            }, apiheader)
-            await getTokenDoctors();
-            setMessageBalance('')
+            }, apiheader).then((res) => {
+                if (res.data.Success === true) {
+                        toast.success(<strong>{isLang === 'ar' ? 'تم التعديـل بنجــاح..' : 'Modified successfully'}</strong>, {
+                            duration: 3000,
+                            position: 'top-center',
+                            iconTheme: {
+                            primary: '#0a0',
+                            secondary: '#fff',
+                            },
+                        });
+                            getTokenDoctors();
+                            setMessageBalance('')
+                    } 
+                    else {
+                        toast.error(res.data.ApiMsg)
+                    }
+                })
         }
     }
 
@@ -156,7 +171,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                     </div>
                 </td>
                 <td>
-                    <div>{balance}</div>
+                    <div>{balance} {isLang === 'ar' ? 'ريال سعودي' : 'SAR'}</div>
                 </td>
                 <td className='text-center d-flex '>
                     <div>

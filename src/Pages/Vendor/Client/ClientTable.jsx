@@ -19,8 +19,12 @@ const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTr
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState({});
   let changeBalance = useRef()
+  const [messageBalance, setMessageBalance] = useState('');
+  const [balance, setBalance] = useState();
+
 
   // !change client status
+  
   const handleActionSelect = async (id, action) => {
     if (action === "BLOCKED" || action === "ACTIVE" || action === "INACTIVE") {
       await userstatus({ IDClient: id, ClientStatus: action }).then((res) => {
@@ -48,24 +52,69 @@ const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTr
   const userstatus = async (status) => {
     return await PostData(`https://bytrh.com/api/admin/clients/status`, status, apiheader)
   }
-  const changeWallet = async () => {
-    await PostData(`https://bytrh.com/api/admin/clients/wallet/add`, { IDClient: id, Amount: changeBalance.current.value }, apiheader).then((res) => {
-      if (res.data.Success === true) {
-        toast.success(<strong>{toastTranslate.wallet}</strong>, {
-          duration: 4000,
-          position: 'bottom-center',
-          iconTheme: {
-            primary: '#0a0',
-            secondary: '#fff',
-          },
-        });
-        userList()
-        handleCloseModal()
-      } else {
-        toast.error(res.data.ApiMsg)
-      }
-    })
-  }
+
+  // const changeWallet = async () => {
+  //   await PostData(`https://bytrh.com/api/admin/clients/wallet/add`, { 
+  //     IDClient: id, 
+  //     Amount: changeBalance.current.value 
+  //   }, apiheader).then((res) => {
+  //     if (res.data.Success === true) {
+  //       toast.success(<strong>{toastTranslate.wallet}</strong>, {
+  //         duration: 4000,
+  //         position: 'bottom-center',
+  //         iconTheme: {
+  //           primary: '#0a0',
+  //           secondary: '#fff',
+  //         },
+  //       });
+  //       userList()
+  //       handleCloseModal()
+  //     } else {
+  //       toast.error(res.data.ApiMsg)
+  //     }
+  //   })
+  // }
+
+  const changeWallet = async (el) => {
+    if(changeBalance.current.value < 0) {
+        if(isLang === 'ar') {
+            setMessageBalance('غير مسموح بإضافة قيمة سالبة..')
+        }
+        else {
+            setMessageBalance("It's not allowed to add a negative value..")
+        }
+    }
+    if((balance - changeBalance.current.value) < 0 && el === 'lose') {
+        if(isLang === 'ar') {
+            setMessageBalance('غير مسموح ان يصبح الرصيد بالسـالب..')
+        }
+        else {
+            setMessageBalance("The balance is not allowed to become negative..")
+        }
+    }
+    else {
+        await PostData(`https://bytrh.com/api/admin/clients/wallet/add`, { 
+            IDClient: id, 
+            Amount: el === 'add' ? changeBalance.current.value : -changeBalance.current.value 
+        }, apiheader).then((res) => {
+            if (res.data.Success === true) {
+              toast.success(<strong>{toastTranslate.wallet}</strong>, {
+                duration: 4000,
+                position: 'top-center',
+                iconTheme: {
+                  primary: '#0a0',
+                  secondary: '#fff',
+                },
+              });
+              userList();
+              handleCloseModal();
+              setMessageBalance('')
+            } else {
+              toast.error(res.data.ApiMsg)
+            }
+          })
+    }
+}
 
   // client reset Password api Balance
   const resetPassword = async (idClient) => {
@@ -176,20 +225,38 @@ const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTr
                                 className="DropdownButton "
                               >
                                 <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="reset">{actionsTranslate[1].name}</Dropdown.Item>
-                                <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="balance" onClick={handleShowModal}>{actionsTranslate[2].name}</Dropdown.Item>
-                                <Modal dir={isLang === "ar" ? "rtl" : "ltr"} show={showModal} onHide={handleCloseModal} centered >
+                                <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="balance" onClick={() => {
+                                  handleShowModal();
+                                  setBalance(item.ClientBalance);
+                                }}>{actionsTranslate[2].name}</Dropdown.Item>
+                                <Modal dir={isLang === "ar" ? "rtl" : "ltr"} show={showModal} onHide={() => {
+                                    handleCloseModal();
+                                    setMessageBalance('');
+                                }} centered >
                                   <Modal.Header closeButton>
                                     <Modal.Title>{actionsTranslate[2].titleModel} {' '} {item?.ClientName} </Modal.Title>
                                   </Modal.Header>
                                   <Modal.Body>
                                     <Form.Control type="number" defaultValue={item.ClientBalance} ref={changeBalance} />
                                   </Modal.Body>
+                                  {messageBalance.length > 0 ? <p id="alertBalanse" className={`alert alert-danger fs-6 py-2 my-2 w-75 text-center mx-auto`}>{messageBalance}</p> : ''}
                                   <Modal.Footer className="d-flex justify-content-center align-items-center">
-                                    <Button variant="outline-primary" onClick={handleCloseModal}>
+                                    {/* <Button variant="outline-primary" onClick={handleCloseModal}>
                                       {actionsTranslate[2].btn2}
                                     </Button>
                                     <Button variant="primary" onClick={changeWallet}>
-                                      {actionsTranslate[2].btn1}                              </Button>
+                                      {actionsTranslate[2].btn1}                              
+                                    </Button> */}
+                                    <Button variant="primary" onClick={() => {
+                                        changeWallet('add');
+                                    }}>
+                                        {isLang === 'ar' ? 'زيادة التوازن' : 'Increase Balance'}
+                                    </Button>
+                                    <Button variant="primary" onClick={() => {
+                                        changeWallet('lose');
+                                    }}>
+                                        {isLang === 'ar' ? 'تقليل التوازن' : 'Decrease Balance'}
+                                    </Button>
                                   </Modal.Footer>
                                 </Modal>
                                 <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="DELETED">{actionsTranslate[3].name}</Dropdown.Item>
