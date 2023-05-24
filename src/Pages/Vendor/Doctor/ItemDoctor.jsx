@@ -14,9 +14,15 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
 
 
     // const [idDoc, setId] = useState(null);
-    const [showModal, setShowModal] = useState(false);
-    const handleShowModal = () => setShowModal(true);
-    const handleCloseModal = () => setShowModal(false);
+
+    const [showModalInc, setShowModalInc] = useState(false);
+    const handleShowModalInc = () => setShowModalInc(true);
+    const handleCloseModalInc = () => setShowModalInc(false);
+
+    const [showModalDec, setShowModalDec] = useState(false);
+    const handleShowModalDec = () => setShowModalDec(true);
+    const handleCloseModalDec = () => setShowModalDec(false);
+
     const handleActionSelect = async (id, action) => {
         if (action === "PENDING") {
             await userstatus({ IDDoctor: id, DoctorStatus: action })
@@ -68,10 +74,10 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
         }
         if((balance - changeBalance.current.value) < 0 && el === 'lose') {
             if(isLang === 'ar') {
-                setMessageBalance('غير مسموح ان يصبح الرصيد بالسـالب..')
+                setMessageBalance('غير مسموح ان يصبح الرصيد أقل من صفر (سالب)..')
             }
             else {
-                setMessageBalance("The balance is not allowed to become negative..")
+                setMessageBalance("It's not allowed to be less than zero (negative)..")
             }
         }
         else {
@@ -235,31 +241,55 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                 <Dropdown.Item as={Link} to={`/doctors/withdraw/${id}`}>
                                     {isLang === 'ar' ? '  طلبات سحب الطبيب' : 'Doctor Withdraw Requests'}
                                 </Dropdown.Item>
-                                <Dropdown.Item eventKey="balance" onClick={handleShowModal}>
-                                    {isLang === 'ar' ? 'ضبـط التوازن' : 'Set Balance'}
+                                <Dropdown.Item eventKey="addBalance" onClick={handleShowModalInc}>
+                                    {isLang === 'ar' ? 'زيادة التوازن' : 'Increase Balance'}
+                                </Dropdown.Item>
+                                <Dropdown.Item eventKey="loseBalance" onClick={handleShowModalDec}>
+                                    {isLang === 'ar' ? 'تقليل التوازن' : 'Decrease Balance'}
                                 </Dropdown.Item>
                                 <div className="w-100 bg-dark opacity-25" style={{ height: '1px' }}></div>
-                                <Modal show={showModal} onHide={() => {
-                                    handleCloseModal();
+
+                                <Modal show={showModalInc} onHide={() => {
+                                    handleCloseModalInc();
                                     setMessageBalance('');
                                 }} centered dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
                                     <Modal.Header closeButton>
                                         <Modal.Title>
-                                            {`${isLang === 'ar' ? `ضبـط التوازن ل ${nameDoc}` : `Set ${nameDoc} Balance`}`}
+                                            {`${isLang === 'ar' ? `زيادة التوازن ل ${nameDoc}` : `Increase ${nameDoc} Balance`}`}
                                         </Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
-                                        <Form.Control type="number" defaultValue={balance} ref={changeBalance} />
+                                        <Form.Control type="number" ref={changeBalance} />
                                     </Modal.Body>
                                     {messageBalance.length > 0 ? <p id="alertBalanse" className={`alert alert-danger fs-6 py-2 my-2 w-75 text-center mx-auto`}>{messageBalance}</p> : ''}
                                     <Modal.Footer className="d-flex justify-content-center align-items-center">
-                                        {/* <Button variant="outline-primary" onClick={handleCloseModal}>
+                                        <Button variant="outline-primary" onClick={handleCloseModalInc}>
                                             {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
-                                        </Button> */}
+                                        </Button>
                                         <Button variant="primary" onClick={() => {
                                                 changeWallet('add');
                                         }}>
                                             {isLang === 'ar' ? 'زيادة التوازن' : 'Increase Balance'}
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
+
+                                <Modal show={showModalDec} onHide={() => {
+                                    handleCloseModalDec();
+                                    setMessageBalance('');
+                                }} centered dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title>
+                                            {`${isLang === 'ar' ? `تقليل التوازن ل ${nameDoc}` : `Decrease ${nameDoc} Balance`}`}
+                                        </Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <Form.Control type="number" ref={changeBalance} />
+                                    </Modal.Body>
+                                    {messageBalance.length > 0 ? <p id="alertBalanse" className={`alert alert-danger fs-6 py-2 my-2 w-75 text-center mx-auto`}>{messageBalance}</p> : ''}
+                                    <Modal.Footer className="d-flex justify-content-center align-items-center">
+                                        <Button variant="outline-primary" onClick={handleCloseModalDec}>
+                                            {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                                         </Button>
                                         <Button variant="primary" onClick={() => {
                                                 changeWallet('lose');
@@ -268,6 +298,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                         </Button>
                                     </Modal.Footer>
                                 </Modal>
+
                                 {
                                     status === "ACTIVE" ? '' :
                                         <Dropdown.Item eventKey="ACTIVE">
