@@ -2,8 +2,10 @@ let initialTranslation = {
     "ar": {
         FilterStatus: [
             { value: "All", text: "الكل" },
-            { ServiceActivated: 1, value: "ACTIVE", text: "نشط" },
-            { ServiceActivated: 0, value: "INACTIVE", text: "غير نشط" },
+            { ServiceStatus: 'ACTIVE', value: "ACTIVE", text: "نشط" },
+            { ServiceStatus: 'INACTIVE', value: "INACTIVE", text: "غير نشط" },
+            { ServiceStatus: "PENDING", value: "PENDING", text: "قيد الانتظار" },
+
         ],
         TableHeader: [
             "إسم الخدمة",
@@ -38,8 +40,9 @@ let initialTranslation = {
     "en": {
         FilterStatus: [
             { value: "All", text: "All" },
-            { ServiceActivated: 1, value: "ACTIVE", text: "Active" },
-            { ServiceActivated: 0, value: "INACTIVE", text: "InActive" },
+            { ServiceStatus:  "ACTIVE", value: "ACTIVE", text: "Active" },
+            { ServiceStatus: "INACTIVE", value: "INACTIVE", text: "InActive" },
+            { ServiceStatus: "PENDING", value: "PENDING", text: "Pending" },
         ],
         TableHeader: [
             "Service Name",
