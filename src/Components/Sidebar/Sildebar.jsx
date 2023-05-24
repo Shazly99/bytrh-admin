@@ -34,7 +34,7 @@ const Sidebar = ({ children }) => {
         <motion.div
           dir={isLang === 'ar' ? 'rtl' : 'ltr'}
           animate={{
-            width: isOpen ? "270px" : "50px",
+            width: isOpen ? "250px" : "50px",
             background: '#000',
             transition: {
               duration: 0.7,

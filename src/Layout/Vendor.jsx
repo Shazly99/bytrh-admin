@@ -21,7 +21,7 @@ function Vendor() {
           <motion.div
             className='adminLayout'
             animate={{
-              width: isOpen ? `calc(100% - 270px)` : `calc( 100% - 50px )`,
+              width: isOpen ? `calc(100% - 250px)` : `calc( 100% - 50px )`,
               transition: {
                 duration: 0.5,
                 type: "spring",
