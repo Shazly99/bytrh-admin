@@ -258,7 +258,7 @@ export default function DoctorProfile() {
                           <div className="col-6">
                             <div className='group'>
                               <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'الرصيـد' : 'Balance'}:</small>
-                              <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorBalance} {isLang === 'ar' ? 'ريال' : 'SR'}</h6>
+                              <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorBalance} {isLang === 'ar' ? 'ريال' : 'SAR'}</h6>
                             </div>
                           </div>
 
