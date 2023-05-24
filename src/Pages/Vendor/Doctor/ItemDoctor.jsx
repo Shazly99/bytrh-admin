@@ -53,10 +53,13 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
         await getTokenDoctors();
     }
 
-    let changeBalance = useRef()
+    let changeBalance = useRef();
 
-    const changeWallet = async () => {
-        await PostData(`https://bytrh.com/api/admin/doctors/wallet/add`, { IDDoctor: id, Amount: changeBalance.current.value }, apiheader)
+    const changeWallet = async (el) => {
+        await PostData(`https://bytrh.com/api/admin/doctors/wallet/add`, { 
+            IDDoctor: id, 
+            Amount: el === 'add' ? changeBalance.current.value : -changeBalance.current.value 
+        }, apiheader)
         await getTokenDoctors()
 
     }
@@ -214,8 +217,15 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                         <Button variant="outline-primary" onClick={handleCloseModal}>
                                             {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                                         </Button>
-                                        <Button variant="primary" onClick={changeWallet}>
-                                            {isLang === 'ar' ? 'ضبـط التوازن' : 'Set Balance'}
+                                        <Button variant="primary" onClick={() => {
+                                                changeWallet('add');
+                                        }}>
+                                            {isLang === 'ar' ? 'زيادة التوازن' : 'Increase Balance'}
+                                        </Button>
+                                        <Button variant="primary" onClick={() => {
+                                                changeWallet('lose');
+                                        }}>
+                                            {isLang === 'ar' ? 'تقليل التوازن' : 'Decrease Balance'}
                                         </Button>
                                     </Modal.Footer>
                                 </Modal>
