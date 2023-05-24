@@ -12,10 +12,16 @@ const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTr
   let { SkeletonTable } = useSkeletonTable();
   let { isLang } = useContext(VendersContext);
 
-  const [showModal, setShowModal] = useState(false);
   const [id, setId] = useState(null);
-  const handleShowModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
+
+  const [showModalInc, setShowModalInc] = useState(false);
+  const handleShowModalInc = () => setShowModalInc(true);
+  const handleCloseModalInc = () => setShowModalInc(false);
+
+  const [showModalDec, setShowModalDec] = useState(false);
+  const handleShowModalDec = () => setShowModalDec(true);
+  const handleCloseModalDec = () => setShowModalDec(false);
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState({});
   let changeBalance = useRef()
@@ -45,7 +51,7 @@ const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTr
     } else if (action === "reset") {
       await resetPassword(id)
       await userList()
-    } else if (action === "balance") {
+    } else if (action === "addBalance" || action === 'loseBalance') {
       setId(id)
     }
   };
@@ -102,6 +108,7 @@ const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTr
         }
     }
     if((balance - changeBalance.current.value) < 0 && el === 'lose') {
+ 
         if(isLang === 'ar') {
             // setMessageBalance('غير مسموح ان يصبح الرصيد بالسـالب..')
             toast.success(<strong>غير مسموح ان يصبح الرصيد بالسـالب..</strong>, {
@@ -124,6 +131,7 @@ const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTr
               },
             });
         }
+ 
     }
     else {
         await PostData(`https://bytrh.com/api/admin/clients/wallet/add`, { 
@@ -140,8 +148,9 @@ const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTr
                 },
               });
               userList();
-              handleCloseModal();
-              setMessageBalance('')
+              setMessageBalance('');
+              handleCloseModalInc();
+              handleCloseModalDec();
             } else {
               toast.error(res.data.ApiMsg)
             }
@@ -258,26 +267,39 @@ const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTr
                                 className="DropdownButton "
                               >
                                 <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="reset">{actionsTranslate[1].name}</Dropdown.Item>
-                                <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="balance" onClick={() => {
-                                  handleShowModal();
+                                <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="addBalance" onClick={() => {
+                                  handleShowModalInc();
                                   setBalance(item.ClientBalance);
-                                }}>{actionsTranslate[2].name}</Dropdown.Item>
-                                <Modal dir={isLang === "ar" ? "rtl" : "ltr"} show={showModal} onHide={() => {
-                                    handleCloseModal();
+                                }}>
+                                  {/* {actionsTranslate[2].name} */}
+                                  {isLang === 'ar' ? 'زيادة التوازن' : 'Increase Balance'}
+                                </Dropdown.Item>
+
+                                <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="loseBalance" onClick={() => {
+                                  handleShowModalDec();
+                                  setBalance(item.ClientBalance);
+                                }}>
+                                  {/* {actionsTranslate[2].name} */}
+                                  {isLang === 'ar' ? 'تقليل التوازن' : 'Decrease Balance'}
+                                </Dropdown.Item>
+
+                                <Modal dir={isLang === "ar" ? "rtl" : "ltr"} show={showModalInc} onHide={() => {
+                                    handleCloseModalInc();
                                     setMessageBalance('');
                                 }} centered >
                                   <Modal.Header closeButton>
-                                    <Modal.Title>{actionsTranslate[2].titleModel} {' '} {item?.ClientName} </Modal.Title>
+                                    {/* <Modal.Title>{actionsTranslate[2].titleModel} {' '} {item?.ClientName} </Modal.Title> */}
+                                    <Modal.Title>{`${isLang === 'ar' ? `زيادة التوازن ل ${item?.ClientName}` : `Increase ${item?.ClientName} Balance`}`}</Modal.Title>
                                   </Modal.Header>
                                   <Modal.Body>
-                                    <Form.Control type="number" defaultValue={item.ClientBalance} ref={changeBalance} />
+                                    <Form.Control type="number" ref={changeBalance} />
                                   </Modal.Body>
                                   {messageBalance.length > 0 ? <p id="alertBalanse" className={`alert alert-danger fs-6 py-2 my-2 w-75 text-center mx-auto`}>{messageBalance}</p> : ''}
                                   <Modal.Footer className="d-flex justify-content-center align-items-center">
-                                    {/* <Button variant="outline-primary" onClick={handleCloseModal}>
+                                    <Button variant="outline-primary" onClick={handleCloseModalInc}>
                                       {actionsTranslate[2].btn2}
                                     </Button>
-                                    <Button variant="primary" onClick={changeWallet}>
+                                    {/* <Button variant="primary" onClick={changeWallet}>
                                       {actionsTranslate[2].btn1}                              
                                     </Button> */}
                                     <Button variant="primary" onClick={() => {
@@ -285,6 +307,28 @@ const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTr
                                     }}>
                                         {isLang === 'ar' ? 'زيادة التوازن' : 'Increase Balance'}
                                     </Button>
+                                  </Modal.Footer>
+                                </Modal>
+
+                                <Modal dir={isLang === "ar" ? "rtl" : "ltr"} show={showModalDec} onHide={() => {
+                                    handleCloseModalDec();
+                                    setMessageBalance('');
+                                }} centered >
+                                  <Modal.Header closeButton>
+                                    {/* <Modal.Title>{actionsTranslate[2].titleModel} {' '} {item?.ClientName} </Modal.Title> */}
+                                    <Modal.Title>{`${isLang === 'ar' ? `تقليل التوازن ل ${item?.ClientName}` : `Decrease ${item?.ClientName} Balance`}`}</Modal.Title>
+                                  </Modal.Header>
+                                  <Modal.Body>
+                                    <Form.Control type="number" ref={changeBalance} />
+                                  </Modal.Body>
+                                  {messageBalance.length > 0 ? <p id="alertBalanse" className={`alert alert-danger fs-6 py-2 my-2 w-75 text-center mx-auto`}>{messageBalance}</p> : ''}
+                                  <Modal.Footer className="d-flex justify-content-center align-items-center">
+                                    <Button variant="outline-primary" onClick={handleCloseModalDec}>
+                                      {actionsTranslate[2].btn2}
+                                    </Button>
+                                    {/* <Button variant="primary" onClick={changeWallet}>
+                                      {actionsTranslate[2].btn1}                              
+                                    </Button> */}
                                     <Button variant="primary" onClick={() => {
                                         changeWallet('lose');
                                     }}>
@@ -292,6 +336,7 @@ const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTr
                                     </Button>
                                   </Modal.Footer>
                                 </Modal>
+
                                 <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="DELETED">{actionsTranslate[3].name}</Dropdown.Item>
                                 <Modal dir={isLang === "ar" ? "rtl" : "ltr"} show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
                                   <Modal.Header closeButton>
