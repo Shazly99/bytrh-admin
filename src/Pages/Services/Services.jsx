@@ -31,8 +31,8 @@ const Services = () => {
     }
 
     const handleActionSelect = async (id, action) => {
-        if (action === "ACTIVE" || action === "INACTIVE") {
-            await ServicesDataStatus(id).then((res) => {
+        if (action === "ACTIVE" || action === "INACTIVE" || action === 'PENDING') {
+            await ServicesDataStatus(id, action).then((res) => {
                 toast.success(<strong>{translate[isLang].toast.update}</strong>, {
                     duration: 4000,
                     position: 'bottom-center',
@@ -46,8 +46,8 @@ const Services = () => {
         }
     };
 
-    const ServicesDataStatus = async (id) => {
-        return await GetData(`${process.env.REACT_APP_API_URL}/admin/services/status/${id}`, apiheader)
+    const ServicesDataStatus = async (id, action) => {
+        return await PostData(`${process.env.REACT_APP_API_URL}/admin/services/status`, { IDService: id, ServiceStatus: action }, apiheader)
     }
 
 
@@ -72,7 +72,7 @@ const Services = () => {
                             <Component.ButtonBase title={translate[isLang].add.btn} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="./add" />
                         </div>
                     </div>
-                    {!isLoader ? 
+                    {!isLoader ?
                         <>
                             <Table responsive={true} className='rounded-3 '>
                                 <thead>
@@ -96,14 +96,13 @@ const Services = () => {
 
                                                 <td >
                                                     <div>
-                                                        <span style={{ height: 'fit-content !important' }} className={`  ${item?.ServiceActivated === 1 && 'txt_delivered'}  ${item?.ServiceActivated === 0 && 'txt_rejected'} `} >
+                                                        <span style={{ height: 'fit-content !important' }} className={`  ${item?.ServiceStatus === 'ACTIVE' && 'txt_delivered'} ${item?.ServiceStatus === 'PENDING' && 'txt_pending'}   ${item?.ServiceStatus === 'INACTIVE' && 'txt_rejected'} `} >
                                                             {
-                                                                translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.ServiceActivated === item?.ServiceActivated)
-                                                                    .map((status, index) => (
-                                                                        <React.Fragment key={index}>
-                                                                            {item?.ServiceActivated === status.ServiceActivated ? status.text : ''}
-                                                                        </React.Fragment>
-                                                                    ))
+                                                                translate[isLang].FilterStatus?.filter((itemfilter) => itemfilter.value === item?.ServiceStatus).map((status, index) => (
+                                                                    <React.Fragment key={index}>
+                                                                        {item?.ServiceStatus === status.value ? status.text : ''}
+                                                                    </React.Fragment>
+                                                                ))
                                                             }
                                                         </span>
                                                     </div>
@@ -128,7 +127,11 @@ const Services = () => {
                                                                 {
                                                                     translate[isLang].FilterStatus?.filter?.((item) => item.value !== "All").map((status, index) => (
                                                                         <React.Fragment key={index}>
-                                                                            {item?.ServiceActivated === status.ServiceActivated ? '' : item?.UserStatus === status.value ? '' : <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey={status.value}>{status.text}</Dropdown.Item>}
+
+                                                                            {
+                                                                                item?.ServiceStatus === status.value ? '' :
+                                                                                    <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey={status.value}>{status.text !== "Pending" ? status.text : ''}</Dropdown.Item>
+                                                                            }
                                                                         </React.Fragment>
                                                                     ))
                                                                 }
@@ -143,8 +146,8 @@ const Services = () => {
                                 </tbody>
 
                             </Table>
-                        </> 
-                        : 
+                        </>
+                        :
                         SkeletonTable()
                     }
                 </div>

@@ -78,18 +78,51 @@ const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTr
   const changeWallet = async (el) => {
     if(changeBalance.current.value < 0) {
         if(isLang === 'ar') {
-            setMessageBalance('غير مسموح بإضافة قيمة سالبة..')
+            // setMessageBalance('غير مسموح بإضافة قيمة سالبة..')
+            toast.success(<strong>غير مسموح بإضافة قيمة سالبة..</strong>, {
+              duration: 4000,
+              position: 'top-center',
+              iconTheme: {
+                primary: '#E20000',
+                secondary: '#fff',
+              },
+            });
         }
         else {
-            setMessageBalance("It's not allowed to add a negative value..")
+            // setMessageBalance("It's not allowed to add a negative value..")
+            toast.success(<strong>It's not allowed to add a negative value..</strong>, {
+              duration: 4000,
+              position: 'top-center',
+              iconTheme: {
+                primary: '#E20000',
+                secondary: '#fff',
+              },
+            });
+            
         }
     }
     if((balance - changeBalance.current.value) < 0 && el === 'lose') {
         if(isLang === 'ar') {
-            setMessageBalance('غير مسموح ان يصبح الرصيد بالسـالب..')
+            // setMessageBalance('غير مسموح ان يصبح الرصيد بالسـالب..')
+            toast.success(<strong>غير مسموح ان يصبح الرصيد بالسـالب..</strong>, {
+              duration: 4000,
+              position: 'top-center',
+              iconTheme: {
+                primary: '#E20000',
+                secondary: '#fff',
+              },
+            });
         }
         else {
-            setMessageBalance("The balance is not allowed to become negative..")
+            // setMessageBalance("The balance is not allowed to become negative..")
+            toast.success(<strong>The balance is not allowed to become negative..</strong>, {
+              duration: 4000,
+              position: 'top-center',
+              iconTheme: {
+                primary: '#E20000',
+                secondary: '#fff',
+              },
+            });
         }
     }
     else {
