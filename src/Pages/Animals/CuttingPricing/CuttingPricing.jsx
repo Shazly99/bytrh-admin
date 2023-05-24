@@ -138,18 +138,18 @@ const CuttingPricing = () => {
     <>
       <div className="app__Users ">
         <div className="app__Users-table">
-          {isLoader ? <>
+          {/* {isLoader ? <> */}
             <Component.ButtonBase
               title={translateCuttingPrice[isLang]?.addBTN}
               bg={"primary"}
               icon={<Icons.Add size={21} color={"#ffffffb4"} />}
               path="/animals/cuttingprice/addcuttingprice"
             />
-          </> :
+          {/* </> :
             <div className="mt-3 p-2">
               {SkeletonFilters(40, 150)}
             </div>
-          }
+          } */}
 
           {isLoader ? <>
             <Table responsive={true} className="rounded-3 ">

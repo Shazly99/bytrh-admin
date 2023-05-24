@@ -156,8 +156,8 @@ const Cities = () => {
         <div className="app__Users-table">
           <div className="search-container">
             <div className="search_and__btn w-100">
-              {isLoader ? <>
                 <Component.ButtonBase title={translate[isLang].add.btn} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/location/cities/addcity" />
+              {isLoader ? <>
                 <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
 
                   <input type="text" placeholder={translate[isLang].placeholder} name="search" value={searchValue} onChange={handleInputChange} />

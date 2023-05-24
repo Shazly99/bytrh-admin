@@ -271,10 +271,10 @@ const AdsList = () => {
     <>
       <div className="app__Users ">
         <div className="app__Users-table">
-          {isLoader ? <>
+          {/* {isLoader ? <> */}
             <Component.ButtonBase title={translateADS[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/ads/add" />
-          </> : <Skeleton variant='rounded' animation='pulse' height={50} width={150} />
-          }
+   {/*        </> : <Skeleton variant='rounded' animation='pulse' height={50} width={150} />
+          } */}
           <div className="search-container">
             <div className={`${isLang === 'ar' ? ' search__groupAr  w-100' : 'search__group w-100  '}  `}>
               <div className=' app__addOrder-form'>

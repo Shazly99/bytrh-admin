@@ -135,8 +135,8 @@ const AnimalCat = () => {
         <div className="app__Users-table">
           <div className="search-container">
             <div className="search_and__btn w-100" >
-              {isLoader ? <>
                 <Component.ButtonBase title={translateCategories[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/categories/addAnimal" />
+              {isLoader ? <>
                 <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
                   <input type="text" placeholder={translateCategories[isLang]?.placeholder} name="search" value={searchValue} onChange={handleInputChange} />
                   <button type="submit" onClick={handleSearchClick}>
