@@ -83,7 +83,7 @@ const SidebarMenu = ({ isLang, route, onClick, showAnimation, isOpen, setIsOpen 
                 : { rotate: 0 }
             }
           >
-            <FaAngleDown size={20} />
+            <FaAngleDown size={17} />
           </motion.div>
         )}
       </div>{" "}

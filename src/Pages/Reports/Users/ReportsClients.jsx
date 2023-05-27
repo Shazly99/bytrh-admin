@@ -8,6 +8,7 @@ import initialTranslation from './Translation';
 import Component from '../../../constants/Component';
 import useSkeletonTable from '../../../utils/useSkeletonTable';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 const ReportsClients = () => {
   const [translate, setTranslate] = useState(initialTranslation)
@@ -39,35 +40,35 @@ const ReportsClients = () => {
   const cacheCLIENTAjax = async () => {
     const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/cache`, { CachePage: 'CLIENT_TRANSACTION' }, apiheader);
     setTransactions(data.Response)
-    if (data.Response === null) { 
+    if (data.Response === null) {
       doctorsTransactions({
-          IDClient: doctorRef.current.value,
-          StartDate: startDate.current.value,
-          EndDate: endDate.current.value
+        IDClient: doctorRef.current.value,
+        StartDate: startDate.current.value,
+        EndDate: endDate.current.value
       })
-} else { 
-   doctorsTransactions({
+    } else {
+      doctorsTransactions({
         IDClient: data.Response.IDClient,
         StartDate: data.Response.StartDate.split(" ")[0],
         EndDate: data.Response.EndDate.split(" ")[0]
-    }) 
-}
+      })
+    }
   }
   const doctorsTransactions = async (dataDoctorsTransactions) => {
-    const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/reports/client/transactions`,dataDoctorsTransactions, apiheader).then(({ data }) => {
-        setTransactions(data.Response)
-        const timeoutId = setTimeout(() => {
-          setIsloader(true)
-        }, 0);
-        return () => clearTimeout(timeoutId);
-      }).catch((error) => {
-        if (error.response && error.response.status === 429) {
-          const retryAfter = error.response.headers['retry-after'];
-          setTimeout(() => {
-            doctorsTransactions();
-          }, (retryAfter || 60) * 1000);
-        }
-      }) 
+    const { data } = await PostData(`${process.env.REACT_APP_API_URL}/admin/reports/client/transactions`, dataDoctorsTransactions, apiheader).then(({ data }) => {
+      setTransactions(data.Response)
+      const timeoutId = setTimeout(() => {
+        setIsloader(true)
+      }, 0);
+      return () => clearTimeout(timeoutId);
+    }).catch((error) => {
+      if (error.response && error.response.status === 429) {
+        const retryAfter = error.response.headers['retry-after'];
+        setTimeout(() => {
+          doctorsTransactions();
+        }, (retryAfter || 60) * 1000);
+      }
+    })
   }
 
   useEffect(() => {
@@ -76,7 +77,7 @@ const ReportsClients = () => {
     const currentDate = moment().format('YYYY-MM-DD');
     startDate.current.value = currentDate;
     endDate.current.value = currentDate;
-    
+
     cacheCLIENTAjax()
     return () => {
       doctorsAjax()
@@ -185,7 +186,10 @@ const ReportsClients = () => {
                       transactionsData?.map((item, index) => (
                         <tr key={index}>
                           <td >
-                            <span className='ClientName'>{item?.UserName?.charAt(0)?.toUpperCase() + item?.UserName?.slice(1)?.toLowerCase()}</span>
+                            <Link to={`/reports/clients/clientTransactionsDetails/${item.IDLedger}`}>
+                              <span className='ClientName'>{item?.UserName?.charAt(0)?.toUpperCase() + item?.UserName?.slice(1)?.toLowerCase()}</span>
+                            </Link>
+
                           </td>
                           <td >
                             <span className='ClientName'>{item?.LedgerTransactionType?.charAt(0).toUpperCase() + item?.LedgerTransactionType?.slice(1).toLowerCase()}</span>

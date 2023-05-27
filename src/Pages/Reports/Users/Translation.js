@@ -27,8 +27,33 @@ let initialTranslation = {
         placeholder2: 'أخـــتر إسم العميل ', 
         placeholder3: 'أخـــتر إسم الدكتور ',
         placeholder4: 'أخـــتر إسم العميل ', 
-        currency:'ريال سعودي'
+        currency:'ريال سعودي',
+        payment:{
+            title:'معــامـــلات الــدفـع',
+            label1:'اسم العميل',
+            label2:'دفع العميل',
+            label3:'شارك دكتور',
+            label4:'نوع دفتر الحسابات ',
+            label5:'وقت البدء',
+            label6:'وقت النهاية',
+            label7:'عمولة بيطرة'
 
+        },
+        nav:{
+            navDoctor1:'معاملات الطبيب',
+            navDoctor2:'تفاصيل',
+        },
+        paymentClient:{
+            title:'معــامـــلات الــدفـع',
+            label1:'اسم الطبيب',
+            label2:'دفع العميل',
+            label3:'شارك دكتور',
+            label4:'نوع دفتر الحسابات ',
+            label5:'وقت البدء',
+            label6:'وقت النهاية',
+            label7:'عمولة بيطرة'
+
+        }
     },
     "en": {
         TableHeader: [
@@ -55,7 +80,32 @@ let initialTranslation = {
         placeholder2: ' choose client name     ',
         placeholder3: ' filter doctor name     ',
         placeholder4: ' filter client name     ',
-        currency:'SAR'
+        currency:'SAR' ,
+        payment:{
+            title:'Payment Transactions',
+            label1:'Client Name ',
+            label2:'Client Payment ',
+            label3:'Doctor Share ',
+            label4:'Ledger Type ',
+            label5:'Start Time ',
+            label6:'End Time ',
+            label7:'Bytrh Commission'
+        },
+        paymentClient:{
+            title:'Payment Transactions',
+            label1:'Doctor Name ',
+            label2:'Client Payment ',
+            label3:'Doctor Share ',
+            label4:'Ledger Type ',
+            label5:'Start Time ',
+            label6:'End Time ',
+            label7:'Bytrh Commission'
+        },
+        nav:{
+            navDoctor1:'Doctor Transactions',
+            navDoctor3:'Client Transactions',
+            navDoctor2:'Details',
+        }
     }
 }
 

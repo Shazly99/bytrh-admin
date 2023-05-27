@@ -7,6 +7,7 @@ import { VendersContext } from '../../../context/Store';
 import initialTranslation from './Translation';
 import Component from '../../../constants/Component';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 const ReportsDoctors = () => {
     const [translate, setTranslate] = useState(initialTranslation)
@@ -182,9 +183,12 @@ const ReportsDoctors = () => {
                                     <tbody className='text-center'>
                                         {
                                             transactionsData?.map((item, index) => (
+
                                                 <tr key={index}>
                                                     <td >
-                                                        <span className='ClientName'>{item?.UserName?.charAt(0).toUpperCase() + item?.UserName?.slice(1).toLowerCase()}</span>
+                                                        <Link to={`/reports/doctors/doctorTransactionsDetails/${item.IDLedger}`}>
+                                                            <span className='ClientName'>{item?.UserName?.charAt(0).toUpperCase() + item?.UserName?.slice(1).toLowerCase()}</span>
+                                                        </Link>
                                                     </td>
                                                     <td >
                                                         <span className='ClientName'>{item?.LedgerTransactionType?.charAt(0).toUpperCase() + item?.LedgerTransactionType?.slice(1).toLowerCase()}</span>

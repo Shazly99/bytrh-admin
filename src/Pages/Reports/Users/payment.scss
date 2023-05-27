@@ -1,0 +1,62 @@
+@import '../../../style/_varibale.scss';
+.payment-container {
+    background-color: #f5f7fa;
+    border-radius: 5px;
+    // box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    // max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif; 
+    // box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+  }
+  
+  .payment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .payment-icon {
+    color: $colorGreen;
+    font-size: 24px;
+    margin-right: 10px;
+  }
+  
+  .payment-type {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .payment-details {
+
+  }
+  
+  .payment-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 4px;
+    // box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    margin-top: 5px;
+  }
+  
+  .payment-label {
+    font-weight: bold;
+    margin-right: 10px;
+    width: 150px;
+  }
+  
+  .payment-value {
+    color: #333333;
+  }
+  
+  @media (max-width: 600px) {
+    // .payment-container {
+    //   padding: 10px;
+    // }
+  }
+  

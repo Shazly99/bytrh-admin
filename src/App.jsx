@@ -295,8 +295,19 @@ function App() {
         },
         {
           path: '/reports', children: [
-            { path: 'doctors', element: <ProtectedRoutes allowedRoles={['1']}><Component.ReportsDoctors /> </ProtectedRoutes> },
-            { path: 'clients', element: <ProtectedRoutes allowedRoles={['1']}><Component.ReportsClients /> </ProtectedRoutes> },
+            {
+              path: 'doctors', children: [
+                { index: true, element: <ProtectedRoutes allowedRoles={['1']}> <Component.ReportsDoctors /> </ProtectedRoutes>, },
+                { path: 'doctorTransactionsDetails/:id', element: <ProtectedRoutes allowedRoles={['1']}><Component.DoctorTransactionsDetails /> </ProtectedRoutes> },
+              ]
+            },
+
+            {
+              path: 'clients', children: [
+                { index: true, element: <ProtectedRoutes allowedRoles={['1']}> <Component.ReportsClients /> </ProtectedRoutes>, },
+                { path: 'clientTransactionsDetails/:id', element: <ProtectedRoutes allowedRoles={['1']}><Component.ClientTransactionsDetails /> </ProtectedRoutes> },
+              ]
+            }, 
           ]
         },
         {
