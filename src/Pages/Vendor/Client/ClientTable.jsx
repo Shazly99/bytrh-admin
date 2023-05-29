@@ -272,7 +272,7 @@ const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTr
                                   setBalance(item.ClientBalance);
                                 }}>
                                   {/* {actionsTranslate[2].name} */}
-                                  {isLang === 'ar' ? 'زيادة التوازن' : 'Increase Balance'}
+                                  {isLang === 'ar' ? 'زيادة الرصيد  ' : 'Increase Balance'}
                                 </Dropdown.Item>
 
                                 <Dropdown.Item className={isLang === "ar" ? "dropdown-itemAr" : "dropdown-itemEn"} eventKey="loseBalance" onClick={() => {
@@ -280,7 +280,7 @@ const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTr
                                   setBalance(item.ClientBalance);
                                 }}>
                                   {/* {actionsTranslate[2].name} */}
-                                  {isLang === 'ar' ? 'تقليل التوازن' : 'Decrease Balance'}
+                                  {isLang === 'ar' ? 'تقليل الرصيد' : 'Decrease Balance'}
                                 </Dropdown.Item>
 
                                 <Modal dir={isLang === "ar" ? "rtl" : "ltr"} show={showModalInc} onHide={() => {
@@ -289,7 +289,7 @@ const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTr
                                 }} centered >
                                   <Modal.Header closeButton>
                                     {/* <Modal.Title>{actionsTranslate[2].titleModel} {' '} {item?.ClientName} </Modal.Title> */}
-                                    <Modal.Title>{`${isLang === 'ar' ? `زيادة التوازن ل ${item?.ClientName}` : `Increase ${item?.ClientName} Balance`}`}</Modal.Title>
+                                    <Modal.Title>{`${isLang === 'ar' ? `زيادة الرصيد ل ${item?.ClientName}` : `Increase ${item?.ClientName} Balance`}`}</Modal.Title>
                                   </Modal.Header>
                                   <Modal.Body>
                                     <Form.Control type="number" ref={changeBalance} />
@@ -305,7 +305,7 @@ const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTr
                                     <Button variant="primary" onClick={() => {
                                         changeWallet('add');
                                     }}>
-                                        {isLang === 'ar' ? 'زيادة التوازن' : 'Increase Balance'}
+                                        {isLang === 'ar' ? 'زيادة الرصيد' : 'Increase Balance'}
                                     </Button>
                                   </Modal.Footer>
                                 </Modal>
@@ -316,7 +316,7 @@ const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTr
                                 }} centered >
                                   <Modal.Header closeButton>
                                     {/* <Modal.Title>{actionsTranslate[2].titleModel} {' '} {item?.ClientName} </Modal.Title> */}
-                                    <Modal.Title>{`${isLang === 'ar' ? `تقليل التوازن ل ${item?.ClientName}` : `Decrease ${item?.ClientName} Balance`}`}</Modal.Title>
+                                    <Modal.Title>{`${isLang === 'ar' ? `تقليل الرصيد ل ${item?.ClientName}` : `Decrease ${item?.ClientName} Balance`}`}</Modal.Title>
                                   </Modal.Header>
                                   <Modal.Body>
                                     <Form.Control type="number" ref={changeBalance} />
@@ -332,7 +332,7 @@ const ClientTable = ({ usersList, userList, isLoading, actionsTranslate, toastTr
                                     <Button variant="primary" onClick={() => {
                                         changeWallet('lose');
                                     }}>
-                                        {isLang === 'ar' ? 'تقليل التوازن' : 'Decrease Balance'}
+                                        {isLang === 'ar' ? 'تقليل الرصيد' : 'Decrease Balance'}
                                     </Button>
                                   </Modal.Footer>
                                 </Modal>

@@ -242,10 +242,10 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                     {isLang === 'ar' ? '  طلبات سحب الطبيب' : 'Doctor Withdraw Requests'}
                                 </Dropdown.Item>
                                 <Dropdown.Item eventKey="addBalance" onClick={handleShowModalInc}>
-                                    {isLang === 'ar' ? 'زيادة التوازن' : 'Increase Balance'}
+                                    {isLang === 'ar' ? 'زيادة الرصيد' : 'Increase Balance'}
                                 </Dropdown.Item>
                                 <Dropdown.Item eventKey="loseBalance" onClick={handleShowModalDec}>
-                                    {isLang === 'ar' ? 'تقليل التوازن' : 'Decrease Balance'}
+                                    {isLang === 'ar' ? 'تقليل الرصيد' : 'Decrease Balance'}
                                 </Dropdown.Item>
                                 <div className="w-100 bg-dark opacity-25" style={{ height: '1px' }}></div>
 
@@ -255,7 +255,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                 }} centered dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
                                     <Modal.Header closeButton>
                                         <Modal.Title>
-                                            {`${isLang === 'ar' ? `زيادة التوازن ل ${nameDoc}` : `Increase ${nameDoc} Balance`}`}
+                                            {`${isLang === 'ar' ? `زيادة الرصيد ل ${nameDoc}` : `Increase ${nameDoc} Balance`}`}
                                         </Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
@@ -269,7 +269,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                         <Button variant="primary" onClick={() => {
                                                 changeWallet('add');
                                         }}>
-                                            {isLang === 'ar' ? 'زيادة التوازن' : 'Increase Balance'}
+                                            {isLang === 'ar' ? 'زيادة الرصيد' : 'Increase Balance'}
                                         </Button>
                                     </Modal.Footer>
                                 </Modal>
@@ -280,7 +280,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                 }} centered dir={isLang === 'ar' ? 'rtl' : 'ltr'}>
                                     <Modal.Header closeButton>
                                         <Modal.Title>
-                                            {`${isLang === 'ar' ? `تقليل التوازن ل ${nameDoc}` : `Decrease ${nameDoc} Balance`}`}
+                                            {`${isLang === 'ar' ? `تقليل الرصيد ل ${nameDoc}` : `Decrease ${nameDoc} Balance`}`}
                                         </Modal.Title>
                                     </Modal.Header>
                                     <Modal.Body>
@@ -294,7 +294,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                         <Button variant="primary" onClick={() => {
                                                 changeWallet('lose');
                                         }}>
-                                            {isLang === 'ar' ? 'تقليل التوازن' : 'Decrease Balance'}
+                                            {isLang === 'ar' ? 'تقليل الرصيد' : 'Decrease Balance'}
                                         </Button>
                                     </Modal.Footer>
                                 </Modal>
