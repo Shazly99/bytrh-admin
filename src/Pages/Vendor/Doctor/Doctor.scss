@@ -111,3 +111,146 @@
       height: 240px !important;
     }
   }
+
+
+
+  .search-container.doctor {
+
+    margin-bottom: 20px !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    gap: 10px;
+    @media screen and (max-width:850px) {
+        flex-direction: column;
+        gap:20px;
+    }
+
+    .filter__group {
+        display: flex;
+        height: 100%;
+        gap: 15px;
+        width: 60%;
+        @media screen and (max-width:950px) {
+          width: 100%;
+          gap: 2px;
+        }
+        >label {
+            display: flex;
+            gap: 5px;
+            font-size: 18px !important;
+            font-weight: 500 !important;
+            cursor: pointer !important;
+            .form-check-input:checked {
+                background-color: #0d6efd !important;
+                border-color: #0d6efd !important;
+            } 
+            input {
+                cursor: pointer !important;
+            } 
+            .form-check-input:checked[type=radio] {
+                background-image: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%272%27 fill=%27%23fff%27/%3e%3c/svg%3e') !important;
+            } 
+        } 
+    }
+}
+ 
+
+.filter__group__stats {
+    display: flex;
+    height: 100%;
+    gap: 15px;
+    width: 100%;
+
+    >label {
+        display: flex;
+        gap: 5px;
+        font-size: 18px !important;
+        font-weight: 500 !important;
+        cursor: pointer !important;
+        .form-check-input:checked {
+            background-color: #0d6efd !important;
+            border-color: #0d6efd !important;
+        } 
+        .form-check-input:checked {
+            background-color: #0d6efd !important;
+            border-color: #0d6efd !important;
+        } 
+        input {
+            cursor: pointer !important;
+        }
+
+        .form-check-input:checked[type=radio] {
+            background-image: url('data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%272%27 fill=%27%23fff%27/%3e%3c/svg%3e') !important;
+        }
+    }
+}
+
+
+
+.txt_blocked_doctor,
+.txt_delivery_doctor,
+.txt_delivered_doctor,
+.txt_pending_doctor,
+.txt_shipped_doctor,
+.txt_cancel_doctor,
+.txt_rejected_doctor,
+.txt__status_doctor {
+  /* Button */
+  // font-weight: 600 !important;
+  // display: inline-flex;
+  // align-items: center;
+  // font-size: 13px !important;
+  width: fit-content;
+  padding: 0.1rem .4rem;
+  border-radius: 0.425rem;
+  white-space: nowrap;
+  vertical-align: baseline;
+  line-height: normal !important
+}
+
+.txt_pending_doctor {
+  color: #FFC107;
+  background-color: rgba($color: #FFC107, $alpha: 0.1);
+}
+
+.txt_blocked_doctor {
+  color: black;
+  background-color: rgba($color: #000, $alpha: 0.2);
+}
+
+.txt_shipped_doctor {
+  color: #9804F0;
+  background-color: rgba($color: #9804F0, $alpha: 0.1);
+}
+
+.txt_delivery_doctor {
+  color: #006300;
+  background-color: rgba($color: #006300, $alpha: 0.1);
+}
+
+.txt_delivered_doctor {
+  color: #40AB45;
+  background-color: rgba($color: #40AB45, $alpha: 0.1);
+}
+
+.txt__status_doctor {
+  color: #009ef7;
+  background-color: rgba($color: #009ef7, $alpha: 0.1);
+}
+
+.txt_rejected_doctor {
+  color: #E20000;
+  background-color: rgba($color: #E20000, $alpha: 0.1) !important;
+}
+
+.txt_cancel_doctor {
+  color: #BF1E30;
+  background-color: rgba($color: #BF1E30, $alpha: 0.1);
+}
+
+.spw {
+  width: 0 !important;
+}

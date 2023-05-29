@@ -100,7 +100,7 @@ export default function Doctors() {
     setSelectedOption(selectedValue);
 
     // filter your content based on the selected option 
-    if (selectedValue === "ACTIVE" || selectedValue === "INACTIVE" || selectedValue === "BLOCKED" || selectedValue === "OFFLINE") {
+    if (selectedValue === "ACTIVE" || selectedValue === "INACTIVE" || selectedValue === "BLOCKED" || selectedValue === "OFFLINE" || selectedValue === "PENDING") {
       // setLoadingDoctors(true);
       await axios.post(URL_Doctors, {
         // IDPage: countDoctors,
@@ -299,7 +299,7 @@ export default function Doctors() {
           {loadingDoctors ? 
             SkeletonSearch(40, "60%")
             :
-            <div className="search-container">
+            <div className="search-container doctor">
               <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}`}>
                 {/* <div className='search__group'> */}
                 <input
@@ -354,6 +354,18 @@ export default function Doctors() {
                     className="active-radio form-check-input"
                   />
                   {isLang === 'ar' ? 'نشط' : 'Active'}
+                </label>
+
+                <label className='pending'>
+                  <input
+                    type="radio"
+                    name="filter"
+                    value="PENDING"
+                    checked={selectedOption === "PENDING"}
+                    onChange={handleOptionChange}
+                    className="pending-radio form-check-input"
+                  />
+                  {isLang === 'ar' ? 'معلـق' : 'Pending'}
                 </label>
 
                 <label style={{ whiteSpace: 'nowrap' }}>
