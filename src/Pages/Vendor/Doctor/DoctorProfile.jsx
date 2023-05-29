@@ -1,6 +1,6 @@
 import CircularProgress from '@mui/material/CircularProgress';
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { BiMessageRoundedAdd } from 'react-icons/bi';
@@ -8,8 +8,8 @@ import { FiEdit3 } from 'react-icons/fi';
 import { Link, useParams } from 'react-router-dom';
 import Loader from '../../../Components/Shared/Loader/Loader';
 import { VendersContext } from '../../../context/Store';
-import { apiheader } from '../../../utils/fetchData';
 import Component from './../../../constants/Component';
+import { PostData, apiheader } from '../../../utils/fetchData';
 
 
 
@@ -201,6 +201,35 @@ export default function DoctorProfile() {
   }
 
 
+  const myStatus = useRef();
+
+  const handleStatusSelect = async () => {
+    if (myStatus.current.value === "PENDING") {
+        await doctorStatus({ IDDoctor: id, DoctorStatus: myStatus.current.value })
+        await getDoctorData()
+    } else if (myStatus.current.value === "ACTIVE") {
+        await doctorStatus({ IDDoctor: id, DoctorStatus: myStatus.current.value })
+        await getDoctorData()
+    } else if (myStatus.current.value === "OFFLINE") {
+        await doctorStatus({ IDDoctor: id, DoctorStatus: myStatus.current.value })
+        await getDoctorData()
+    } else if (myStatus.current.value === "BLOCKED") {
+        await doctorStatus({ IDDoctor: id, DoctorStatus: myStatus.current.value })
+        await getDoctorData()
+    } else if (myStatus.current.value === "INACTIVE") {
+        await doctorStatus({ IDDoctor: id, DoctorStatus: myStatus.current.value })
+        await getDoctorData()
+    } else if (myStatus.current.value === "NOT_VERIFIED") {
+        await doctorStatus({ IDDoctor: id, DoctorStatus: myStatus.current.value })
+        await getDoctorData()
+    }
+  };
+
+
+  const doctorStatus = async (status) => {
+    await PostData(`https://bytrh.com/api/admin/doctors/status`, status, apiheader)
+}
+
 
   return (
     <>
@@ -277,6 +306,40 @@ export default function DoctorProfile() {
                               </div>
                             </div>
                           }
+
+                          <div className="col-6">
+                            <div className='group d-flex align-items-center'>
+                              <div>
+                                <small className='my-0 text-black-50 d-block' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'الحالـة' : 'Status'}:</small>
+                                <small className={`mb-2 mb-lg-3
+                                    ${fetchDoctor.DoctorStatus === 'PENDING' && 'txt_pending_doctor'} 
+                                    ${fetchDoctor.DoctorStatus === 'NOT_VERIFIED' && 'txt_shipped_doctor'}
+                                    ${fetchDoctor.DoctorStatus === 'BLOCKED' && 'txt_blocked_doctor'}
+                                    ${fetchDoctor.DoctorStatus === 'ACTIVE' && 'txt_delivered_doctor'}
+                                    ${fetchDoctor.DoctorStatus === 'OFFLINE' && 'txt_rejected_doctor'}
+                                    ${fetchDoctor.DoctorStatus === 'INACTIVE' && 'txt_rejected_doctor'}`} 
+                                  style={{ fontWeight: '700', wordWrap: 'break-word' }}>
+                                    {isLang === 'en' && fetchDoctor.DoctorStatus && fetchDoctor.DoctorStatus[0].toUpperCase()}{isLang === 'en' && fetchDoctor.DoctorStatus && fetchDoctor.DoctorStatus.slice(1).toLowerCase().replace('_', ' ')}
+                                    {isLang === 'ar' && fetchDoctor.DoctorStatus === 'ACTIVE' ? 'نشــط' : ''}
+                                    {isLang === 'ar' && fetchDoctor.DoctorStatus === 'PENDING' ? 'قيـد الإنتظـار' : ''}
+                                    {isLang === 'ar' && fetchDoctor.DoctorStatus === 'BLOCKED' ? 'محظــور' : ''}
+                                    {isLang === 'ar' && fetchDoctor.DoctorStatus === 'OFFLINE' ? 'مغلـق' : ''}
+                                    {isLang === 'ar' && fetchDoctor.DoctorStatus === 'INACTIVE' ? 'غير نشـط' : ''}
+                                    {isLang === 'ar' && fetchDoctor.DoctorStatus === 'NOT_VERIFIED' ? 'غير مثبـت' : ''}
+                                </small>
+                              </div>
+                              <div className={`spw ${isLang === 'ar' ? 'me-3' : 'ms-3'}`}>
+                                <select name="status" id="status" defaultValue={fetchDoctor.DoctorStatus} ref={myStatus} onChange={handleStatusSelect} className='form-select px-4 py-1'>
+                                  <option value="ACTIVE">{isLang === 'ar' ? 'نشــط' : 'Active'}</option>
+                                  <option value="PENDING">{isLang === 'ar' ? 'قيـد الإنتظـار' : 'Pending'}</option>
+                                  <option value="BLOCKED">{isLang === 'ar' ? 'محظــور' : 'Blocked'}</option>
+                                  <option value="OFFLINE">{isLang === 'ar' ? 'مغلـق' : 'Offline'}</option>
+                                  <option value="INACTIVE">{isLang === 'ar' ? 'غير نشـط' : 'Inactive'}</option>
+                                  <option value="NOT_VERIFIED">{isLang === 'ar' ? 'غير مثبـت' : 'Not verified'}</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
 
                           <div className="col-6">
                             <div className='group'>

@@ -25,19 +25,19 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
 
     const handleActionSelect = async (id, action) => {
         if (action === "PENDING") {
-            await userstatus({ IDDoctor: id, DoctorStatus: action })
+            await doctorStatus({ IDDoctor: id, DoctorStatus: action })
             await getTokenDoctors()
         } else if (action === "ACTIVE") {
-            await userstatus({ IDDoctor: id, DoctorStatus: action })
+            await doctorStatus({ IDDoctor: id, DoctorStatus: action })
             await getTokenDoctors()
         } else if (action === "OFFLINE") {
-            await userstatus({ IDDoctor: id, DoctorStatus: action })
+            await doctorStatus({ IDDoctor: id, DoctorStatus: action })
             await getTokenDoctors()
         } else if (action === "BLOCKED") {
-            await userstatus({ IDDoctor: id, DoctorStatus: action })
+            await doctorStatus({ IDDoctor: id, DoctorStatus: action })
             await getTokenDoctors()
         } else if (action === "DELETED") {
-            // await userstatus({ IDDoctor: id, DoctorStatus: action })
+            // await doctorStatus({ IDDoctor: id, DoctorStatus: action })
             // await getTokenDoctors()
             handleShowRemove();
         }
@@ -56,7 +56,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
     const handleShowRemove = () => setShowRemove(true);
 
     async function removeConfirm() {
-        await userstatus({ IDDoctor: id, DoctorStatus: "DELETED" });
+        await doctorStatus({ IDDoctor: id, DoctorStatus: "DELETED" });
         await getTokenDoctors();
     }
 
@@ -104,7 +104,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
         }
     }
 
-    const userstatus = async (status) => {
+    const doctorStatus = async (status) => {
         await PostData(`https://bytrh.com/api/admin/doctors/status`, status, apiheader)
     }
 
@@ -187,7 +187,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                 ${status === 'BLOCKED' && 'txt_blocked'}
                                 ${status === 'ACTIVE' && 'txt_delivered'}
                                 ${status === 'OFFLINE' && 'txt_rejected'}
-                                ${status === 'OFFLINE' || status === 'INACTIVE' && 'txt_rejected'}`} >
+                                ${status === 'INACTIVE' && 'txt_rejected'}`} >
                             {isLang === 'en' && status && status[0].toUpperCase()}{isLang === 'en' && status && status.slice(1).toLowerCase().replace('_', ' ')}
                             {isLang === 'ar' && status === 'ACTIVE' ? 'نشــط' : ''}
                             {isLang === 'ar' && status === 'PENDING' ? 'قيـد الإنتظـار' : ''}
