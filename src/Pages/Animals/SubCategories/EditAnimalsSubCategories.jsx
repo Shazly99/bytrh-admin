@@ -65,8 +65,8 @@ const EditAnimalsSubCategories = () => {
   async function editCategory(category) {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/animalsubcategories/edit`, category, apiheader).then((res) => {
 
-      if (res.data.Success === true) {
-        toast.success('Animal Category  has been updated!', {
+      if (res.data.Success === true) { 
+        toast.success(<strong> {translateSubCategories[isLang]?.toastEdit}   </strong>, {
           duration: 4000,
           position: 'top-center',
           icon: <Icons.Added color='#40AB45' size={25} />,

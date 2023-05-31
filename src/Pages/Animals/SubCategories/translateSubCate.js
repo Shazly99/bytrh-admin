@@ -12,6 +12,7 @@ let translateSubCategories = {
             "Image",
             "Category",
             "Sub Category",
+            " Adoption",
             "Status",
             "Action",
         ],
@@ -23,12 +24,16 @@ let translateSubCategories = {
         LabelAddCate: 'Category',
         optionCate: 'choose a category',
         LabelAddBag: 'Bagging',
+        LabelAddAdoption: 'Adoption Status',
         optionBag: 'choose your option',
         LabelAddCut: 'Cutting',
         optionCut: 'choose your option',
         SaveBTN: 'Save',
         CancelBTN: 'Cancel',
         LabelEditPage: 'Edit Animal Sub Category',
+        toastAdd:'Animal subcategorie added successfully!',
+        toastEdit:'Animal Category  has been updated!',
+        toastStaus:'Updated Successfully'
     },
     'ar' :
     {
@@ -43,6 +48,7 @@ let translateSubCategories = {
             "الصـورة",
             "الفئـة",
             "الفئـة الفرعيـة",
+            "التبني",
             "الحالــة",
             "الإجـراء",
         ],
@@ -55,11 +61,17 @@ let translateSubCategories = {
         optionCate: 'اختر فئـة',
         LabelAddBag: 'التعبئــة',
         optionBag: 'اختر من ضمن الخيـارات',
+        LabelAddAdoption: 'حالة التبني', 
         LabelAddCut: 'التقطيــع',
         optionCut: 'اختر من ضمن الخيـارات',
         SaveBTN: 'حفـظ',
         CancelBTN: 'رجـوع',
         LabelEditPage: 'تعديــل فئـة الحيـوان الفرعية',
+        toastAdd:'تمت إضافة فئة الحيوانات الفرعية جديدة بنجاح!',
+        toastEdit:'تم تحديث فئة الحيوان!',
+        toastStaus:'تم التحديث بنجاح'
+
+
     }
 }
 

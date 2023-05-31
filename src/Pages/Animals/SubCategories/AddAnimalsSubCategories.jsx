@@ -16,6 +16,7 @@ const AddAnimalsSubCategories = () => {
   const animalCategoryRef = useRef();
   const animalBaggingRef = useRef();
   const animalCutRef = useRef();
+  const adoption = useRef();
 
 
   // TODO:: select image
@@ -53,7 +54,8 @@ const AddAnimalsSubCategories = () => {
       AnimalSubCategoryImage: selectedImage,
       AnimalCut: animalCutRef.current.value,
       AnimalBagging: animalBaggingRef.current.value,
-      IDAnimalCategory: animalCategoryRef.current.value
+      IDAnimalCategory: animalCategoryRef.current.value,
+      SubCategoryAdoption: adoption.current.value
     })
   }
 
@@ -61,7 +63,7 @@ const AddAnimalsSubCategories = () => {
     await PostData(`${process.env.REACT_APP_API_URL}/admin/animalsubcategories/add`, category, apiheader).then((res) => {
 
       if (res.data.Success === true) {
-        toast.success('New user added successfully!', {
+        toast.success(<strong> {translateSubCategories[isLang]?.toastAdd}   </strong>, {
           duration: 4000,
           position: 'top-center',
           icon: <Icons.Added color='#40AB45' size={25} />,
@@ -99,9 +101,9 @@ const AddAnimalsSubCategories = () => {
     <Container fluid>
       <div className="app__addprodects">
         {isLang === 'ar' ?
-            <Component.SubNav sub__nav={[{ name: "إضافـة فئـة", path: '/animals/subcategories/addsubcategories' } , { name: "قائمــة الفئـات الفرعيـة", path: '/animals/subcategories' }]} />
-            :
-            <Component.SubNav sub__nav={[{ name: "Animal Sub Categories", path: '/animals/subcategories' }, { name: "Add Sub Category ", path: '/animals/subcategories/addsubcategories' }]} />
+          <Component.SubNav sub__nav={[{ name: "إضافـة فئـة", path: '/animals/subcategories/addsubcategories' }, { name: "قائمــة الفئـات الفرعيـة", path: '/animals/subcategories' }]} />
+          :
+          <Component.SubNav sub__nav={[{ name: "Animal Sub Categories", path: '/animals/subcategories' }, { name: "Add Sub Category ", path: '/animals/subcategories/addsubcategories' }]} />
         }
         <div className="app__addprodects__header ">
           <Component.BaseHeader h1={translateSubCategories[isLang]?.LabelAddPage} />
@@ -135,7 +137,7 @@ const AddAnimalsSubCategories = () => {
                           />
                         )}
                       </div>
-                    </Form.Group> 
+                    </Form.Group>
                   </Col>
                 </Row>
                 <Row>
@@ -164,8 +166,11 @@ const AddAnimalsSubCategories = () => {
                       <Form.Select aria-label="Default select example" ref={animalCutRef}>
                         <option>{translateSubCategories[isLang]?.optionCut}</option>
                         {
-                          [{IDCutting:1,CuttingName:'Yes'},{IDCutting:0,CuttingName:'No'}]?.map((item, index) => (
-                            <option key={index} value={item?.IDCutting}>{item?.CuttingName}</option>
+                          [{ IDCutting: 1, CuttingName: 'Yes' ,CuttingNameAr: 'نــعم' }, 
+                          { IDCutting: 0, CuttingName: 'No' ,CuttingNameAr: 'لا'}]?.map((item, index) => (
+                            <option key={index} value={item?.IDCutting}>
+                              {isLang === 'en' ? item?.CuttingName : item?.CuttingNameAr}
+                            </option>
                           ))
                         }
                         {/* <option value="0">InActive</option> */}
@@ -180,20 +185,41 @@ const AddAnimalsSubCategories = () => {
                       <Form.Control type="text" name='email' ref={CategoryNameAr} style={{ direction: 'rtl' }} />
                     </Form.Group>
 
-                    <Form.Group controlId="formBasicEmail" className='mt-3'>
-                      <Form.Label>{translateSubCategories[isLang]?.LabelAddBag}</Form.Label>
 
-                      <Form.Select aria-label="Default select example" ref={animalBaggingRef}>
+                    <Form.Group controlId="formBasicEmail" className='mt-3'>
+                      <Form.Label>{translateSubCategories[isLang]?.LabelAddAdoption}</Form.Label>
+
+                      <Form.Select aria-label="Default select example" ref={adoption}>
                         <option>{translateSubCategories[isLang]?.optionBag}</option>
                         {
-                          [{IDBagging:1,BaggingName:'Yes'},{IDBagging:0,BaggingName:'No'}]?.map((item, index) => (
-                            <option key={index} value={item?.IDBagging}>{item?.BaggingName}</option>
+                          [{ SubCategoryAdoption: 1, BaggingName: 'Allow adopt', BaggingNameAr: 'السماح بالتبني' },
+                          { SubCategoryAdoption: 0, BaggingName: 'Don’t allow adopt', BaggingNameAr: 'لا تسمح بالتبني', }]?.map((item, index) => (
+                            <option key={index} value={item?.SubCategoryAdoption}>{isLang === 'en' ? item?.BaggingName : item?.BaggingNameAr}</option>
                           ))
                         }
                         {/* <option value="0">InActive</option> */}
                       </Form.Select>
 
                     </Form.Group>
+
+                    <Form.Group controlId="formBasicEmail" className='mt-3'>
+                      <Form.Label>{translateSubCategories[isLang]?.LabelAddBag}</Form.Label>
+
+                      <Form.Select aria-label="Default select example" ref={animalBaggingRef}>
+                        <option>{translateSubCategories[isLang]?.optionBag}</option>
+                        {
+                          [{ IDBagging: 1, BaggingName: 'Yes', BaggingNameAr: 'نــعم' },
+                          { IDBagging: 0, BaggingName: 'No', BaggingNameAr: 'لا' }]?.map((item, index) => (
+                            <option key={index} value={item?.IDBagging}>{isLang === 'en' ? item?.BaggingName : item?.BaggingNameAr}</option>
+                          ))
+                        }
+                        {/* <option value="0">InActive</option> */}
+                      </Form.Select>
+
+                    </Form.Group>
+
+
+
                   </Col>
                   <div className='d-flex justify-content-center align-content-center my-5'>
 

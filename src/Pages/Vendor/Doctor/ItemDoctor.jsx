@@ -64,16 +64,16 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
     const [messageBalance, setMessageBalance] = useState('');
 
     const changeWallet = async (el) => {
-        if(changeBalance.current.value < 0) {
-            if(isLang === 'ar') {
+        if (changeBalance.current.value < 0) {
+            if (isLang === 'ar') {
                 setMessageBalance('غير مسموح بإضافة قيمة سالبة..')
             }
             else {
                 setMessageBalance("It's not allowed to add a negative value..")
             }
         }
-        if((balance - changeBalance.current.value) < 0 && el === 'lose') {
-            if(isLang === 'ar') {
+        if ((balance - changeBalance.current.value) < 0 && el === 'lose') {
+            if (isLang === 'ar') {
                 setMessageBalance('غير مسموح ان يصبح الرصيد أقل من صفر (سالب)..')
             }
             else {
@@ -81,26 +81,26 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
             }
         }
         else {
-            await PostData(`https://bytrh.com/api/admin/doctors/wallet/add`, { 
-                IDDoctor: id, 
-                Amount: el === 'add' ? changeBalance.current.value : -changeBalance.current.value 
+            await PostData(`https://bytrh.com/api/admin/doctors/wallet/add`, {
+                IDDoctor: id,
+                Amount: el === 'add' ? changeBalance.current.value : -changeBalance.current.value
             }, apiheader).then((res) => {
                 if (res.data.Success === true) {
-                        toast.success(<strong>{isLang === 'ar' ? 'تم التعديـل بنجــاح..' : 'Modified successfully'}</strong>, {
-                            duration: 3000,
-                            position: 'top-center',
-                            iconTheme: {
+                    toast.success(<strong>{isLang === 'ar' ? 'تم التعديـل بنجــاح..' : 'Modified successfully'}</strong>, {
+                        duration: 3000,
+                        position: 'top-center',
+                        iconTheme: {
                             primary: '#0a0',
                             secondary: '#fff',
-                            },
-                        });
-                            getTokenDoctors();
-                            setMessageBalance('')
-                    } 
-                    else {
-                        toast.error(res.data.ApiMsg)
-                    }
-                })
+                        },
+                    });
+                    getTokenDoctors();
+                    setMessageBalance('')
+                }
+                else {
+                    toast.error(res.data.ApiMsg)
+                }
+            })
         }
     }
 
@@ -161,10 +161,13 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
         <>
             <tr>
                 <td>
-                    <div className='d-flex flex-column justify-content-center align-content-center' onClick={() => goToDoctorProfile(id)} style={{ gap: '0', cursor: 'pointer' }}>
-                        <span className='ClientName'> {nameDoc} </span>
-                        <span className='ClientPhone'> {phone} </span>
-                    </div>
+                    <Link to={`/doctors/doctorProfile/${id}`} target="_blank">
+                        <div className='d-flex flex-column w-100 h-100 justify-content-center align-content-center' style={{ gap: '0', cursor: 'pointer' }}>
+                            <span className='ClientName text-center color-red '> {nameDoc} </span>
+                            <span className='ClientPhone text-center color-red '> {phone} </span>
+                        </div>
+                    </Link>
+
                 </td>
                 {/* <td>{email}</td> */}
                 {/* <td>{phone}</td> */}
@@ -212,7 +215,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                             {create.split(" ")[1]}
                         </span>
                     </div>
-                 </td>
+                </td>
                 <td>
                     <div>
                         <span>
@@ -267,7 +270,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                             {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                                         </Button>
                                         <Button variant="primary" onClick={() => {
-                                                changeWallet('add');
+                                            changeWallet('add');
                                         }}>
                                             {isLang === 'ar' ? 'زيادة الرصيد' : 'Increase Balance'}
                                         </Button>
@@ -292,7 +295,7 @@ export default function ItemDoctor({ nameDoc, email, phone, country, type, balan
                                             {isLang === 'ar' ? 'رجـوع' : 'Cancel'}
                                         </Button>
                                         <Button variant="primary" onClick={() => {
-                                                changeWallet('lose');
+                                            changeWallet('lose');
                                         }}>
                                             {isLang === 'ar' ? 'تقليل الرصيد' : 'Decrease Balance'}
                                         </Button>

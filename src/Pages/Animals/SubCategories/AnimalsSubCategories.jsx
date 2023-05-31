@@ -53,7 +53,7 @@ const AnimalsSubCategories = () => {
     const handleActionSelect = async (id, action) => {
         if (action === "ACTIVE") {
             await AnimalSubCategoriesStatus(id).then((res) => {
-                toast.success('Updated Successfully', {
+                toast.success(<strong> {translateSubCategories[isLang]?.toastStaus}   </strong>, {
                     duration: 4000,
                     position: 'top-center',
                     icon: <Icons.UploadItem color='#3182CE' size={20} />,
@@ -66,12 +66,46 @@ const AnimalsSubCategories = () => {
             await AnimalSubCategories()
         } else if (action === "INACTIVE") {
             await AnimalSubCategoriesStatus(id).then((res) => {
-                toast.success('Updated Successfully', {
+                toast.success(<strong> {translateSubCategories[isLang]?.toastStaus}   </strong>, {
+
                     duration: 4000,
                     position: 'top-center',
-                    icon: <Icons.UploadItem color='#3182CE' size={20} />,
                     iconTheme: {
-                        primary: '#0a0',
+                        primary: '#3182CE',
+                        secondary: '#fff',
+                    },
+                });
+            })
+            await AnimalSubCategories()
+        } else if (action === 'AllowAdoption') {
+            console.log(action);
+            await AnimalSubCategoriesAdoption({
+                IDAnimalSubCategory: id,
+                SubCategoryAdoption: 1
+            }).then((res) => {
+                toast.success(<strong> {translateSubCategories[isLang]?.toastStaus}   </strong>, { 
+
+                    duration: 4000,
+                    position: 'top-center',
+                    iconTheme: {
+                        primary: '#3182CE',
+                        secondary: '#fff',
+                    },
+                });
+            })
+            await AnimalSubCategories()
+        } else if (action === 'NotAllowAdoption') {
+            console.log(action);
+            await AnimalSubCategoriesAdoption({
+                IDAnimalSubCategory: id,
+                SubCategoryAdoption: 0
+            }).then((res) => {
+                toast.success(<strong> {translateSubCategories[isLang]?.toastStaus}   </strong>, { 
+                
+                    duration: 4000,
+                    position: 'top-center',
+                    iconTheme: {
+                        primary: '#3182CE',
                         secondary: '#fff',
                     },
                 });
@@ -81,6 +115,9 @@ const AnimalsSubCategories = () => {
     };
     const AnimalSubCategoriesStatus = async (id) => {
         return await GetData(`${process.env.REACT_APP_API_URL}/admin/animalsubcategories/status/${id}`, apiheader)
+    }
+    const AnimalSubCategoriesAdoption = async (id_Data) => {
+        return await PostData(`${process.env.REACT_APP_API_URL}/admin/animalsubcategories/edit`, id_Data, apiheader)
     }
 
     // search and filter 
@@ -123,8 +160,8 @@ const AnimalsSubCategories = () => {
             window.scrollTo(0, 0);
         }, 200);
         return () => clearTimeout(timeoutId);
-    
-    }, [page,isLang])
+
+    }, [page, isLang])
     useEffect(() => {
     }, [page, PagesNumber])
 
@@ -136,7 +173,7 @@ const AnimalsSubCategories = () => {
                 <div className="app__Users-table">
                     <div className="search-container">
                         <div className="search_and__btn w-100">
-                                <Component.ButtonBase title={translateSubCategories[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/subcategories/addsubcategories" />
+                            <Component.ButtonBase title={translateSubCategories[isLang]?.addBTN} bg={"primary"} icon={<Icons.Add size={21} color={'#ffffffb4'} />} path="/animals/subcategories/addsubcategories" />
                             {isLoader ? <>
                                 <div className={`${isLang === 'ar' ? ' search__groupAr  ' : 'search__group'}  `}>
                                     <input type="text" placeholder={translateSubCategories[isLang]?.placeholder} name="search" value={searchValue} onChange={handleInputChange} />
@@ -242,6 +279,18 @@ const AnimalsSubCategories = () => {
 
                                             <td >
                                                 <div>
+                                                    <span style={{ height: 'fit-content !important' }} className={`  ${item?.SubCategoryAdoption === 1 && 'txt__status'}  ${item?.SubCategoryAdoption === 0 && 'txt_shipped'} `} >
+                                                        {item?.SubCategoryAdoption === 1 ?
+                                                            isLang === 'ar' ? 'مسموح بالتبني' : 'Allow Adopt'
+                                                            :
+                                                            isLang === 'ar' ? '  غير مسموح بالتبني' : 'Don’t Allow Adopt'
+                                                        }
+                                                    </span>
+                                                </div>
+                                            </td>
+
+                                            <td >
+                                                <div>
                                                     <span style={{ height: 'fit-content !important' }} className={`  ${item?.AnimalSubCategorActive === 1 && 'txt_delivered'}  ${item?.AnimalSubCategorActive === 0 && 'txt_rejected'} `} >
                                                         {item?.AnimalSubCategorActive === 1 ?
                                                             isLang === 'ar' ? 'نشــط' : 'Active'
@@ -278,6 +327,23 @@ const AnimalsSubCategories = () => {
                                                             {
                                                                 item?.AnimalSubCategorActive === 0 ? '' : item?.AnimalSubCategorActive === "INACTIVE" ? '' : <Dropdown.Item eventKey="INACTIVE">
                                                                     {isLang === 'ar' ? 'غير نشـط' : 'InActive'}
+                                                                </Dropdown.Item>
+                                                            }
+
+
+                                                            {
+                                                                item?.SubCategoryAdoption === 1 ? '' : item?.SubCategoryAdoption === "1" ? '' : <Dropdown.Item eventKey="AllowAdoption">
+                                                                    {
+                                                                        isLang === 'ar' ? 'السماح بالتبني' : '  Allow Adopt'
+                                                                    }
+                                                                </Dropdown.Item>
+                                                            }
+                                                            {
+                                                                item?.SubCategoryAdoption === 0 ? '' : item?.SubCategoryAdoption === "0" ? '' : <Dropdown.Item eventKey="NotAllowAdoption">
+                                                                    {
+                                                                        isLang === 'ar' ? 'لا تسمح بالتبني': '    Don’t Allow Adopt'
+
+                                                                    }
                                                                 </Dropdown.Item>
                                                             }
                                                         </DropdownButton>
