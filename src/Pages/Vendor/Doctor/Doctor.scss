@@ -254,3 +254,17 @@
 .spw {
   width: 0 !important;
 }
+
+.NextDoctor{
+  color: $mainColor;
+  font-weight: 700;
+
+  letter-spacing: .06em;
+
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+  font-size: larger;
+  &:hover{
+    color: $secondColor;
+  }
+}

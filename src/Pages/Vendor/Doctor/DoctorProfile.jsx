@@ -26,13 +26,14 @@ export default function DoctorProfile() {
   const [fetchDoctorAnimalCategories, setFetchDoctorAnimalCategories] = useState([]);
   const [fetchDoctorPricing, setFetchDoctorPricing] = useState([]);
   const [DoctorDocument, setDoctorDocuments] = useState([]);
-
+  const [NextDoctorID, setNextDoctorID] = useState([]);
   const [loading, setLoading] = useState(false);
 
   async function getDoctorData() {
     setLoading(true);
     await axios.get(apiDoctoProfile, apiheader)
       .then(res => {
+        console.log(res.data.Response.NextDoctorID);
         if (res.status === 200 && res.request.readyState === 4) {
           setDoctorDocuments(res.data.Response.DoctorDocuments);
           setFetchDoctor(res.data.Response);
@@ -40,6 +41,7 @@ export default function DoctorProfile() {
           setFetchDoctorPricing(res.data.Response.DoctorPricing);
           setFetchDoctorAnimalCategories(res.data.Response.AnimalCategories);
           setFetchDoctorMedicalFields(res.data.Response.MedicalFields);
+          setNextDoctorID(res.data.Response.NextDoctorID)
           setLoading(false);
         }
       })
@@ -55,7 +57,7 @@ export default function DoctorProfile() {
     return (() => {
       clearTimeout(timeOut);
     })
-  }, [isLang])
+  }, [isLang, NextDoctorID])
 
 
   const [showAdd, setShowAdd] = useState(false);
@@ -205,30 +207,30 @@ export default function DoctorProfile() {
 
   const handleStatusSelect = async () => {
     if (myStatus.current.value === "PENDING") {
-        await doctorStatus({ IDDoctor: id, DoctorStatus: myStatus.current.value })
-        await getDoctorData()
+      await doctorStatus({ IDDoctor: id, DoctorStatus: myStatus.current.value })
+      await getDoctorData()
     } else if (myStatus.current.value === "ACTIVE") {
-        await doctorStatus({ IDDoctor: id, DoctorStatus: myStatus.current.value })
-        await getDoctorData()
+      await doctorStatus({ IDDoctor: id, DoctorStatus: myStatus.current.value })
+      await getDoctorData()
     } else if (myStatus.current.value === "OFFLINE") {
-        await doctorStatus({ IDDoctor: id, DoctorStatus: myStatus.current.value })
-        await getDoctorData()
+      await doctorStatus({ IDDoctor: id, DoctorStatus: myStatus.current.value })
+      await getDoctorData()
     } else if (myStatus.current.value === "BLOCKED") {
-        await doctorStatus({ IDDoctor: id, DoctorStatus: myStatus.current.value })
-        await getDoctorData()
+      await doctorStatus({ IDDoctor: id, DoctorStatus: myStatus.current.value })
+      await getDoctorData()
     } else if (myStatus.current.value === "INACTIVE") {
-        await doctorStatus({ IDDoctor: id, DoctorStatus: myStatus.current.value })
-        await getDoctorData()
+      await doctorStatus({ IDDoctor: id, DoctorStatus: myStatus.current.value })
+      await getDoctorData()
     } else if (myStatus.current.value === "NOT_VERIFIED") {
-        await doctorStatus({ IDDoctor: id, DoctorStatus: myStatus.current.value })
-        await getDoctorData()
+      await doctorStatus({ IDDoctor: id, DoctorStatus: myStatus.current.value })
+      await getDoctorData()
     }
   };
 
 
   const doctorStatus = async (status) => {
     await PostData(`https://bytrh.com/api/admin/doctors/status`, status, apiheader)
-}
+  }
 
 
   return (
@@ -237,18 +239,26 @@ export default function DoctorProfile() {
       {!loading ?
         <div className="container-fluid py-2">
 
-          {isLang === 'ar' ?
-            <Component.SubNav sub__nav={[
-              { name: 'قائمـة الأطبـاء', path: `/doctors` },
-              { name: 'صفحـة الطبيـب الشخصيـة', path: `/doctors/doctorProfile/${id}` }
-            ]} />
-            :
-            <Component.SubNav sub__nav={[
-              { name: 'Doctors', path: `/doctors` },
-              { name: 'Doctor Profile', path: `/doctors/doctorProfile/${id}` }
-            ]} />
-          }
+          <div className="d-flex justify-content-between align-items-center ">
 
+            {isLang === 'ar' ?
+              <Component.SubNav sub__nav={[
+                { name: 'قائمـة الأطبـاء', path: `/doctors` },
+                { name: 'صفحـة الطبيـب الشخصيـة', path: `/doctors/doctorProfile/${id}` }
+              ]} />
+              :
+              <Component.SubNav sub__nav={[
+                { name: 'Doctors', path: `/doctors` },
+                { name: 'Doctor Profile', path: `/doctors/doctorProfile/${id}` },
+                // { name: '', path: `/doctors/doctorProfile/${}` }
+              ]} />
+            }
+
+            <Link className='NextDoctor ' to={`/doctors/doctorProfile/${NextDoctorID}`} target="_blank">
+              {isLang === 'en' ? 'Next Profile' : 'الملف الشخصي التالي'}
+            </Link>
+
+          </div>
           <div className="row gx-lg-4 gx-0 gy-lg-0 gy-4 d-flex justify-content-lg-start justify-content-center mt-2 mb-4">
 
             <div className="col-lg-10">
@@ -256,115 +266,115 @@ export default function DoctorProfile() {
                 <div className="row gx-md-4 gx-2 gy-md-0 gy-3 d-flex align-items-center">
                   <div className="col-md-4">
                     <div className="img-doc">
-                      <img src={fetchDoctor.DoctorPicture} className='d-block rounded-3 mx-auto' style={{ objectFit: 'fill' , height: '280px' }} loading='lazy' alt="doctor" />
+                      <img src={fetchDoctor.DoctorPicture} className='d-block rounded-3 mx-auto' style={{ objectFit: 'fill', height: '280px' }} loading='lazy' alt="doctor" />
                     </div>
                   </div>
                   <div className="col-md-8">
                     <div className="personal-info position-relative">
 
                       <div className="row d-flex align-items-center">
+                        <div className="col-6">
+                          <div className='group'>
+                            <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'الإسـم' : 'Name'}:</small>
+                            <h6 className='mb-2 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorName}</h6>
+                          </div>
+                        </div>
+
+                        <div className="col-6">
+                          <div className='group'>
+                            <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'رقـم التليفـون' : 'Mobile Number'}:</small>
+                            <h6 className='mb-2 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorPhone}</h6>
+                          </div>
+                        </div>
+
+                        <div className="col-6">
+                          <div className='group'>
+                            <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'البريد الإلكتروني' : 'Email'}:</small>
+                            <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorEmail}</h6>
+                          </div>
+                        </div>
+
+                        <div className="col-6">
+                          <div className='group'>
+                            <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'الرصيـد' : 'Balance'}:</small>
+                            <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorBalance} {isLang === 'ar' ? 'ريال' : 'SAR'}</h6>
+                          </div>
+                        </div>
+
+                        <div className="col-6">
+                          <div className='group'>
+                            <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'التصنيـف' : 'Type'}:</small>
+                            <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorType}</h6>
+                          </div>
+                        </div>
+
+                        {fetchDoctor.MedicalCenterName &&
                           <div className="col-6">
                             <div className='group'>
-                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'الإسـم' : 'Name'}:</small>
-                              <h6 className='mb-2 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorName}</h6>
+                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'المركز الطبي' : 'Medical Center'}:</small>
+                              <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.MedicalCenterName}</h6>
                             </div>
                           </div>
+                        }
 
-                          <div className="col-6">
-                            <div className='group'>
-                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'رقـم التليفـون' : 'Mobile Number'}:</small>
-                              <h6 className='mb-2 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorPhone}</h6>
-                            </div>
-                          </div>
-
-                          <div className="col-6">
-                            <div className='group'>
-                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'البريد الإلكتروني' : 'Email'}:</small>
-                              <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorEmail}</h6>
-                            </div>
-                          </div>
-                          
-                          <div className="col-6">
-                            <div className='group'>
-                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'الرصيـد' : 'Balance'}:</small>
-                              <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorBalance} {isLang === 'ar' ? 'ريال' : 'SAR'}</h6>
-                            </div>
-                          </div>
-
-                          <div className="col-6">
-                            <div className='group'>
-                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'التصنيـف' : 'Type'}:</small>
-                              <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.DoctorType}</h6>
-                            </div>
-                          </div>
-
-                          {fetchDoctor.MedicalCenterName &&
-                            <div className="col-6">
-                              <div className='group'>
-                                <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'المركز الطبي' : 'Medical Center'}:</small>
-                                <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.MedicalCenterName}</h6>
-                              </div>
-                            </div>
-                          }
-
-                          <div className="col-6">
-                            <div className='group d-flex align-items-center'>
-                              <div>
-                                <small className='my-0 text-black-50 d-block' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'الحالـة' : 'Status'}:</small>
-                                <small className={`mb-2 mb-lg-3
+                        <div className="col-6">
+                          <div className='group d-flex align-items-center'>
+                            <div>
+                              <small className='my-0 text-black-50 d-block' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'الحالـة' : 'Status'}:</small>
+                              <small className={`mb-2 mb-lg-3
                                     ${fetchDoctor.DoctorStatus === 'PENDING' && 'txt_pending_doctor'} 
                                     ${fetchDoctor.DoctorStatus === 'NOT_VERIFIED' && 'txt_shipped_doctor'}
                                     ${fetchDoctor.DoctorStatus === 'BLOCKED' && 'txt_blocked_doctor'}
                                     ${fetchDoctor.DoctorStatus === 'ACTIVE' && 'txt_delivered_doctor'}
                                     ${fetchDoctor.DoctorStatus === 'OFFLINE' && 'txt_rejected_doctor'}
-                                    ${fetchDoctor.DoctorStatus === 'INACTIVE' && 'txt_rejected_doctor'}`} 
-                                  style={{ fontWeight: '700', wordWrap: 'break-word' }}>
-                                    {isLang === 'en' && fetchDoctor.DoctorStatus && fetchDoctor.DoctorStatus[0].toUpperCase()}{isLang === 'en' && fetchDoctor.DoctorStatus && fetchDoctor.DoctorStatus.slice(1).toLowerCase().replace('_', ' ')}
-                                    {isLang === 'ar' && fetchDoctor.DoctorStatus === 'ACTIVE' ? 'نشــط' : ''}
-                                    {isLang === 'ar' && fetchDoctor.DoctorStatus === 'PENDING' ? 'قيـد الإنتظـار' : ''}
-                                    {isLang === 'ar' && fetchDoctor.DoctorStatus === 'BLOCKED' ? 'محظــور' : ''}
-                                    {isLang === 'ar' && fetchDoctor.DoctorStatus === 'OFFLINE' ? 'مغلـق' : ''}
-                                    {isLang === 'ar' && fetchDoctor.DoctorStatus === 'INACTIVE' ? 'غير نشـط' : ''}
-                                    {isLang === 'ar' && fetchDoctor.DoctorStatus === 'NOT_VERIFIED' ? 'غير مثبـت' : ''}
-                                </small>
-                              </div>
-                              <div className={`spw ${isLang === 'ar' ? 'me-3' : 'ms-3'}`}>
-                                <select name="status" id="status" defaultValue={fetchDoctor.DoctorStatus} ref={myStatus} onChange={handleStatusSelect} className='form-select px-4 py-1'>
-                                  <option value="ACTIVE">{isLang === 'ar' ? 'نشــط' : 'Active'}</option>
-                                  <option value="PENDING">{isLang === 'ar' ? 'قيـد الإنتظـار' : 'Pending'}</option>
-                                  <option value="BLOCKED">{isLang === 'ar' ? 'محظــور' : 'Blocked'}</option>
-                                  <option value="OFFLINE">{isLang === 'ar' ? 'مغلـق' : 'Offline'}</option>
-                                  <option value="INACTIVE">{isLang === 'ar' ? 'غير نشـط' : 'Inactive'}</option>
-                                  <option value="NOT_VERIFIED">{isLang === 'ar' ? 'غير مثبـت' : 'Not verified'}</option>
-                                </select>
-                              </div>
+                                    ${fetchDoctor.DoctorStatus === 'INACTIVE' && 'txt_rejected_doctor'}`}
+                                style={{ fontWeight: '700', wordWrap: 'break-word' }}>
+                                {isLang === 'en' && fetchDoctor.DoctorStatus && fetchDoctor.DoctorStatus[0].toUpperCase()}{isLang === 'en' && fetchDoctor.DoctorStatus && fetchDoctor.DoctorStatus.slice(1).toLowerCase().replace('_', ' ')}
+                                {isLang === 'ar' && fetchDoctor.DoctorStatus === 'ACTIVE' ? 'نشــط' : ''}
+                                {isLang === 'ar' && fetchDoctor.DoctorStatus === 'PENDING' ? 'قيـد الإنتظـار' : ''}
+                                {isLang === 'ar' && fetchDoctor.DoctorStatus === 'BLOCKED' ? 'محظــور' : ''}
+                                {isLang === 'ar' && fetchDoctor.DoctorStatus === 'OFFLINE' ? 'مغلـق' : ''}
+                                {isLang === 'ar' && fetchDoctor.DoctorStatus === 'INACTIVE' ? 'غير نشـط' : ''}
+                                {isLang === 'ar' && fetchDoctor.DoctorStatus === 'NOT_VERIFIED' ? 'غير مثبـت' : ''}
+                              </small>
+                            </div>
+                            <div className={`spw ${isLang === 'ar' ? 'me-3' : 'ms-3'}`}>
+                              <select name="status" id="status" defaultValue={fetchDoctor.DoctorStatus} ref={myStatus} onChange={handleStatusSelect} className='form-select px-4 py-1'>
+                                <option value="ACTIVE">{isLang === 'ar' ? 'نشــط' : 'Active'}</option>
+                                <option value="PENDING">{isLang === 'ar' ? 'قيـد الإنتظـار' : 'Pending'}</option>
+                                <option value="BLOCKED">{isLang === 'ar' ? 'محظــور' : 'Blocked'}</option>
+                                <option value="OFFLINE">{isLang === 'ar' ? 'مغلـق' : 'Offline'}</option>
+                                <option value="INACTIVE">{isLang === 'ar' ? 'غير نشـط' : 'Inactive'}</option>
+                                <option value="NOT_VERIFIED">{isLang === 'ar' ? 'غير مثبـت' : 'Not verified'}</option>
+                              </select>
                             </div>
                           </div>
+                        </div>
 
-                          <div className="col-6">
-                            <div className='group'>
-                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'الدولـة' : 'Country'}:</small>
-                              <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.Country}</h6>
-                            </div>
+                        <div className="col-6">
+                          <div className='group'>
+                            <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'الدولـة' : 'Country'}:</small>
+                            <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.Country}</h6>
                           </div>
-                          
-                          <div className="col-6">
-                            <div className='group'>
-                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'المنطقـة' : 'Area'}:</small>
-                              <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.City}</h6>
-                            </div>
-                          </div>
+                        </div>
 
-                          <div className="col-6">
-                            <div className='group'>
-                              <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'المدينـة' : 'City'}:</small>
-                              <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.Area}</h6>
-                            </div>
+                        <div className="col-6">
+                          <div className='group'>
+                            <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'المنطقـة' : 'Area'}:</small>
+                            <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.City}</h6>
                           </div>
-                          
+                        </div>
+
+                        <div className="col-6">
+                          <div className='group'>
+                            <small className='my-0 text-black-50' style={{ fontWeight: '500' }}>{isLang === 'ar' ? 'المدينـة' : 'City'}:</small>
+                            <h6 className='mb-2 mb-lg-3 text-black' style={{ fontWeight: '700', wordWrap: 'break-word' }}>{fetchDoctor.Area}</h6>
+                          </div>
+                        </div>
+
                       </div>
 
-                      <Link to={`../editDoctor/${id}`} className='text-decoration-underline secondColor' style={{fontWeight: '500' , cursor: 'pointer'}}>{isLang === 'ar' ? 'تغيير كلمة السر' : 'Change Password'}</Link>
+                      <Link to={`../editDoctor/${id}`} className='text-decoration-underline secondColor' style={{ fontWeight: '500', cursor: 'pointer' }}>{isLang === 'ar' ? 'تغيير كلمة السر' : 'Change Password'}</Link>
 
                     </div>
                   </div>
@@ -670,6 +680,7 @@ export default function DoctorProfile() {
         :
         <Loader />
       }
+
 
     </>
   )

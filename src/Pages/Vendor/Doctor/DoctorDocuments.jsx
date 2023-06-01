@@ -10,18 +10,18 @@ function DoctorDocuments({ DoctorDocument, id }) {
     const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
     return (
         <>
-            {
-                DoctorDocument?.length > 0 &&
-                <div className="shadow-sm  p-3 mt-4  border-2" style={{ borderRadius: '5px', background: '#F9F9F9' }}>
-                    <div className="d-flex " style={{ justifyContent: 'space-between' }}>
-                        <label className='Sign__Up-header text-dark'> {isLang === 'ar' ? '  وثيقة الطبيب' : 'Doctor Document'}  </label>
-                        <Link to={`/doctors/document/add/${id}`} >
-                            <span className='upload__doc'>
-                                <LogoSvg.DocumentUpload />
-                                {isLang === 'ar' ? '   إضــافة وثيقة للدكتور' : 'Add Document'}
-                            </span>
-                        </Link>
-                    </div>
+            <div className="shadow-sm  p-3 mt-4  border-2" style={{ borderRadius: '5px', background: '#F9F9F9' }}>
+                <div className="d-flex " style={{ justifyContent: 'space-between' }}>
+                    <label className='Sign__Up-header text-dark'> {isLang === 'ar' ? '  وثيقة الطبيب' : 'Doctor Document'}  </label>
+                    <Link to={`/doctors/document/add/${id}`} >
+                        <span className='upload__doc'>
+                            <LogoSvg.DocumentUpload />
+                            {isLang === 'ar' ? '   إضــافة وثيقة للدكتور' : 'Add Document'}
+                        </span>
+                    </Link>
+                </div>
+                {
+                    DoctorDocument?.length > 0 &&
                     <div className="d-flex flex-wrap justify-content-between align-items-center">
 
                         {
@@ -56,8 +56,8 @@ function DoctorDocuments({ DoctorDocument, id }) {
                             ))
                         }
                     </div>
-                </div>
-            }
+                }
+            </div>
         </>
     )
 }
