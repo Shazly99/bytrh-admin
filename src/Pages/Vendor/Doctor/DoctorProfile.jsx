@@ -253,10 +253,12 @@ export default function DoctorProfile() {
                 // { name: '', path: `/doctors/doctorProfile/${}` }
               ]} />
             }
-
-            <Link className='NextDoctor ' to={`/doctors/doctorProfile/${NextDoctorID}`} target="_blank">
-              {isLang === 'en' ? 'Next Profile' : 'الملف الشخصي التالي'}
-            </Link>
+            {
+              NextDoctorID &&
+              <Link className='NextDoctor ' to={`/doctors/doctorProfile/${NextDoctorID}`} target="_blank">
+                {isLang === 'en' ? 'Next Profile' : 'الملف الشخصي التالي'}
+              </Link>
+            }
 
           </div>
           <div className="row gx-lg-4 gx-0 gy-lg-0 gy-4 d-flex justify-content-lg-start justify-content-center mt-2 mb-4">
