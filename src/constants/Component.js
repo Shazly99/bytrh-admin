@@ -134,6 +134,10 @@ import SalesReports from '../Pages/Reports/Sales/SalesReports';
 import BiddingReports from '../Pages/Reports/Bidding/BiddingReports';
 import DoctorTransactionsDetails from './../Pages/Reports/Users/DoctorTransactionsDetails';
 import ClientTransactionsDetails from './../Pages/Reports/Users/ClientTransactionsDetails';
+import AdoptionsAnimals from './../Pages/Animals/AdoptionsAnimals/AdoptionsAnimals';
+import AddAdoptionsAnimals from './../Pages/Animals/AdoptionsAnimals/AddAdoptionsAnimals';
+import EditAdoptionsAnimals from './../Pages/Animals/AdoptionsAnimals/EditAdoptionsAnimals';
+import Requests from './../Pages/Requests/Requests';
 
  
 
@@ -147,6 +151,7 @@ const Component= {
     Contact, 
     // Vendor Components User 1
     Dashboard,  
+    Requests,
     ChartLine,
     ChartColumn,
     ChatOneLine,
@@ -209,6 +214,9 @@ const Component= {
     AnimalsCutting,
     AddAnimalsCutting,
     EditAnimalsCutting,
+    AdoptionsAnimals,
+    AddAdoptionsAnimals,
+    EditAdoptionsAnimals,
     Bagging,
     AddBagging,
     EditBagging,

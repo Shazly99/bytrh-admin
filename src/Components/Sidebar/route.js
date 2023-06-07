@@ -10,6 +10,14 @@ const routes = [
     Roles: [1]
   },
   {
+    path: "/request",
+    nameAr: "الطلبــات",
+    nameEn: "Requests",
+    icon: <LogoSvg.Requests className="logoSvg" style={{ width: 17 }} />,
+    Roles: [1, 2]
+
+  },
+  {
     path: "/user",
     nameAr: "المستخدمين",
     nameEn: "Users",
@@ -17,6 +25,7 @@ const routes = [
     Roles: [1, 2]
 
   },
+
   {
     path: "/client",
     nameEn: "Clients",
@@ -25,31 +34,32 @@ const routes = [
     Roles: [1]
   },
   {
+    path: "/doctors",
     nameAr: "الأطباء",
     nameEn: "Doctors",
     icon: <LogoSvg.Doctors className="logoSvg" style={{ width: 17 }} />,
     Roles: [1, 2],
-    subRoutes: [
-      {
-        path: "/doctors",
-        nameAr: "قائمة الأطباء ",
-        nameEn: "List",
-        icon: <Icons.Dote size={17} />,
-      },
-      {
-        path: "/doctorfree",
-        nameAr: "الطبيب الحر",
-        nameEn: "Free",
-        icon: <Icons.Dote size={17} />,
-      },
-      {
-        path: "/doctor/request",
-        nameAr: "طلبات",
-        nameEn: "Request",
-        icon: <Icons.Dote size={17} />,
-      },
+    // subRoutes: [
+    //   {
+    //     path: "/doctors",
+    //     nameAr: "قائمة الأطباء ",
+    //     nameEn: "List",
+    //     icon: <Icons.Dote size={17} />,
+    //   },
+    //   {
+    //     path: "/doctorfree",
+    //     nameAr: "الطبيب الحر",
+    //     nameEn: "Free",
+    //     icon: <Icons.Dote size={17} />,
+    //   },
+    //   {
+    //     path: "/doctor/request",
+    //     nameAr: "طلبات",
+    //     nameEn: "Request",
+    //     icon: <Icons.Dote size={17} />,
+    //   },
 
-    ],
+    // ],
   },
 
   {
@@ -85,6 +95,13 @@ const routes = [
         path: "/animals/subcategories",
         nameAr: "الفئات الفرعية ",
         nameEn: "Sub Categories ",
+        icon: <Icons.Dote size={17} />,
+      },
+
+      {
+        path: "/animals/adoptionsSubcategories",
+        nameAr: "      الفئات الفرعية للتبني  ",
+        nameEn: "Adoption Categories ",
         icon: <Icons.Dote size={17} />,
       },
       {

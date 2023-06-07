@@ -110,6 +110,14 @@ function App() {
                 { path: 'editsubcategories/:id', element: <ProtectedRoutes allowedRoles={['1']}>  <Component.EditAnimalsSubCategories /> </ProtectedRoutes> },
               ]
             },
+
+            {
+              path: 'adoptionsSubcategories', children: [
+                { index: true, element: <ProtectedRoutes allowedRoles={['1']}>  <Component.AdoptionsAnimals /> </ProtectedRoutes> },
+                { path: 'addsubcategories', element: <ProtectedRoutes allowedRoles={['1']}>  <Component.AddAdoptionsAnimals /> </ProtectedRoutes> },
+                { path: 'editsubcategories/:id', element: <ProtectedRoutes allowedRoles={['1']}>  <Component.EditAdoptionsAnimals /> </ProtectedRoutes> },
+              ]
+            },
             {
               path: 'cutting', children: [
                 { index: true, element: <ProtectedRoutes allowedRoles={['1']}>  <Component.AnimalsCutting /> </ProtectedRoutes>, },
@@ -267,6 +275,11 @@ function App() {
         {
           path: '/doctor', children: [
             { path: 'request', element: <ProtectedRoutes allowedRoles={['1', '2']}><Component.DoctorRequest /> </ProtectedRoutes> },
+          ]
+        },
+        {
+          path: '/request', children: [
+            { index:true, element: <ProtectedRoutes allowedRoles={['1' ]}><Component.Requests /> </ProtectedRoutes> },
           ]
         },
         {

@@ -1,7 +1,7 @@
 let translateSubCategories = {
     'en' :
     {
-        placeholder : 'Search by animal sub category..',
+        placeholder : 'Search by  animal adoption sub category..',
         addBTN: 'Add',
         FilterStatus: [
             { value: "All", text: "All" },
@@ -12,11 +12,11 @@ let translateSubCategories = {
             "Image",
             "Category",
             "Sub Category",
-            "Status",
+            " Adoption", 
             "Action",
         ],
         ActionsLabel: 'Actions',
-        LabelAddPage: 'Add Sub Category',
+        LabelAddPage: 'Add Adoption Categories',
         LabelAddImage: 'Image Pet',
         LabelAddNameAR: 'Name Pet (Arabic)',
         LabelAddNameEN: 'Name Pet (English)',
@@ -29,14 +29,14 @@ let translateSubCategories = {
         optionCut: 'choose your option',
         SaveBTN: 'Save',
         CancelBTN: 'Cancel',
-        LabelEditPage: 'Edit Animal Sub Category',
+        LabelEditPage: 'Edit Adoption Categories',
         toastAdd:'Animal subcategorie added successfully!',
         toastEdit:'Animal Category  has been updated!',
         toastStaus:'Updated Successfully'
     },
     'ar' :
     {
-        placeholder : 'البحـث بواسطة فئـة الحيـوان الفرعيـة..',
+        placeholder : 'البحث حسب الفئة الفرعية لتبني الحيوانات ..',
         addBTN: 'إضافـة',
         FilterStatus: [
             { value: "All", text: "الكـل" },
@@ -47,11 +47,11 @@ let translateSubCategories = {
             "الصـورة",
             "الفئـة",
             "الفئـة الفرعيـة",
-            "الحالــة",
+            "التبني", 
             "الإجـراء",
         ],
         ActionsLabel: 'الإجـراءات',
-        LabelAddPage: 'إضافـة فئـة فرعيـة جديـدة',
+        LabelAddPage: 'إضافة فئات التبني الفرعية ',
         LabelAddImage: 'صورة الحيـوان',
         LabelAddNameAR: 'اسـم الحيوان بالعربي',
         LabelAddNameEN: 'اسـم الحيوان بالإنجليزي',
@@ -64,7 +64,7 @@ let translateSubCategories = {
         optionCut: 'اختر من ضمن الخيـارات',
         SaveBTN: 'حفـظ',
         CancelBTN: 'رجـوع',
-        LabelEditPage: 'تعديــل فئـة الحيـوان الفرعية',
+        LabelEditPage: 'تعديــل الفئات الفرعية للتبني',
         toastAdd:'تمت إضافة فئة الحيوانات الفرعية جديدة بنجاح!',
         toastEdit:'تم تحديث فئة الحيوان!',
         toastStaus:'تم التحديث بنجاح'

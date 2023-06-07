@@ -79,7 +79,9 @@ let initialTranslation = {
             allStatus: 'كل الحالة',
             SubCategory: 'حدد الفئة الفرعية',
             allSubCategory: 'فئة الحيوانات',
-            currency: 'ريال سعودي'
+            currency: 'ريال سعودي',
+            loginBy:'حدد نوع الدكتور '
+
 
         },
         ExcelHeader: [
@@ -92,7 +94,12 @@ let initialTranslation = {
             "حالة ",
             "تاريخ الإنشاء ",
         ],
-
+        loginBy: [
+            { value: "All", text: "كل الاطباء "},
+            { value: 'FREE ', text: 'طبيب مجاني' },
+            { value: 'CLINIC ', text: 'عيادة' },
+            { value: 'CENTER', text: 'مركز' },
+        ],
         excelSheet: ' تصدير إلى ملف إكسل',
         filename: '  بيانات الأطباء الحرة',
     },
@@ -178,7 +185,7 @@ let initialTranslation = {
             SubCategory: 'Select SubCategory',
             allSubCategory: 'Animals SubCategory',
             currency: 'SAR',
-
+            loginBy:'Select Doctor type'
         },
         excelSheet: 'Export to excel sheet',
         filename: 'Doctors free data',
@@ -191,6 +198,13 @@ let initialTranslation = {
             "Doctor Balance",
             "Status ",
             "Create Date ",
+        ],
+
+        loginBy: [
+            { value: "All", text: "All Doctor "},
+            { value: 'FREE ', text: 'Free' },
+            { value: 'CLINIC ', text: 'Clinic' },
+            { value: 'CENTER', text: 'Center' },
         ],
     }
 }
