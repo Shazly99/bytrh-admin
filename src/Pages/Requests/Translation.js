@@ -7,6 +7,11 @@ let initialTranslation = {
             { ServiceStatus: "PENDING", value: "PENDING", text: "قيد الانتظار" },
 
         ],
+        FilterStatus2: [
+            { value: "PROCESSED", text: "تمت المعالجة " },
+            { value: "PENDING", text: "قيد الانتظار   " },
+            { value: "REJECTED", text: " مرفوض" },
+        ],
         TableHeader: [
             "نوع الطلب",
             "عنوان الطلب",
@@ -15,12 +20,12 @@ let initialTranslation = {
             'تفاصيل '
 
         ],
-        Actions:   { action: "الإجراءات" ,edit: "تعديل" },
-            
+        Actions: { action: "الإجراءات", edit: "تعديل" },
+
         add: {
             btn: 'إضافه', nav1: 'الخدمات', nav2: 'إضافة خدمة',
             header: 'إضافه خدمة جديد',
-            Label3: 'إسم الخدمة (Ar)', 
+            Label3: 'إسم الخدمة (Ar)',
             Label1: 'إسم الخدمة (En)',
             save: "حفظ", cancel: 'رجــوع'
         },
@@ -28,7 +33,7 @@ let initialTranslation = {
         edit: {
             nav1: 'الخدمــات', nav2: 'تعديل الخدمة',
             header: 'تعديل بيانات  الخدمة ',
-            Label3: 'إسم الخدمة (Ar)', 
+            Label3: 'إسم الخدمة (Ar)',
             Label1: 'إسم الخدمة (En)',
             save: "حفظ", cancel: 'رجــوع'
         },
@@ -43,10 +48,19 @@ let initialTranslation = {
     "en": {
         FilterStatus: [
             { value: "All", text: "All" },
-            { ServiceStatus:  "ACTIVE", value: "ACTIVE", text: "Active" },
+            { ServiceStatus: "ACTIVE", value: "ACTIVE", text: "Active" },
             { ServiceStatus: "INACTIVE", value: "INACTIVE", text: "InActive" },
             { ServiceStatus: "PENDING", value: "PENDING", text: "Pending" },
         ],
+
+        StatusWithdrow: [
+            { value: "All", text: "All" },
+            { ServiceStatus: "ACTIVE", value: "ACTIVE", text: "Active" },
+            { ServiceStatus: "INACTIVE", value: "INACTIVE", text: "InActive" },
+            { ServiceStatus: "PENDING", value: "PENDING", text: "Pending" },
+        ],
+
+
         TableHeader: [
             "Request Type",
             "Request Title",
@@ -54,8 +68,8 @@ let initialTranslation = {
             "Date",
             'Details'
         ],
-        Actions:  { action: "Actions" , edit: "Edit"},
-        
+        Actions: { action: "Actions", edit: "Edit" },
+
         add: {
             btn: 'Add', nav1: 'Services', nav2: 'Add Service ',
             header: 'Add New Service',
@@ -66,9 +80,9 @@ let initialTranslation = {
         },
         edit: {
             nav1: 'Services', nav2: 'Edit Services',
-            header: 'Edit Service ', 
-            Label1: 'Name (En)', 
-            Label3: 'Name (Ar)', 
+            header: 'Edit Service ',
+            Label1: 'Name (En)',
+            Label3: 'Name (Ar)',
             save: "Save", cancel: 'Cancel'
         },
         toast: {
