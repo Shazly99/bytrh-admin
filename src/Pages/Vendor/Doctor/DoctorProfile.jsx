@@ -10,6 +10,7 @@ import Loader from '../../../Components/Shared/Loader/Loader';
 import { VendersContext } from '../../../context/Store';
 import Component from './../../../constants/Component';
 import { PostData, apiheader } from '../../../utils/fetchData';
+import img from '../../../assets/Img';
 
 
 
@@ -24,7 +25,7 @@ export default function DoctorProfile() {
   const [fetchDoctorLicense, setFetchDoctorLicense] = useState([]);
   const [fetchDoctorMedicalFields, setFetchDoctorMedicalFields] = useState([]);
   const [fetchDoctorAnimalCategories, setFetchDoctorAnimalCategories] = useState([]);
-  const [fetchDoctorPricing, setFetchDoctorPricing] = useState([]);
+  const [fetchDoctorPricing, setFetchDoctorPricing] = useState(null);
   const [DoctorDocument, setDoctorDocuments] = useState([]);
   const [NextDoctorID, setNextDoctorID] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -268,7 +269,16 @@ export default function DoctorProfile() {
                 <div className="row gx-md-4 gx-2 gy-md-0 gy-3 d-flex align-items-center">
                   <div className="col-md-4">
                     <div className="img-doc">
-                      <img src={fetchDoctor.DoctorPicture} className='d-block rounded-3 mx-auto' style={{ objectFit: 'fill', height: '280px' }} loading='lazy' alt="doctor" />
+                      {
+                        fetchDoctor.DoctorPicture?
+                        <img src={fetchDoctor.DoctorPicture} className='d-block rounded-3 mx-auto' style={{ objectFit: 'fill', height: '280px' }} loading='lazy' alt="doctor" />:
+                        <img 
+                          loading="lazy"
+                          src={img.defaultImg} // use normal <img> attributes as props
+                          className=" rounded-2"
+                          width={'250px'}
+                          height={'150px'} /> 
+                      } 
                     </div>
                   </div>
                   <div className="col-md-8">
@@ -415,7 +425,7 @@ export default function DoctorProfile() {
                 </h6>
                 <div className="row gx-sm-4 gx-0 gy-4 d-flex justify-content-sm-start justify-content-center">
 
-                  {fetchDoctorPricing.map((price, i) => (
+                  {fetchDoctorPricing?.map((price, i) => (
                     <div key={i} className="col-sm-6">
 
                       {price.IDDoctorPricing ?
@@ -659,7 +669,7 @@ export default function DoctorProfile() {
                         {isLang === 'ar' ? 'الأقسـام' : 'Categories'}
                       </h6>
 
-                      {fetchDoctorAnimalCategories.map((cate, i) => (
+                      {fetchDoctorAnimalCategories?.map((cate, i) => (
                         <h6 key={i} className='mb-2 color-red'>{cate.AnimalCategoryName}</h6>
                       ))}
 

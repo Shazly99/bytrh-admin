@@ -164,7 +164,7 @@ const ActionsRequests = ({ RequestType, idType, RequestStatus, RequestsList }) =
                         drop={'down-centered'}
                     >
                         {
-                            initialTranslation2[isLang].FilterStatus?.filter?.((item) => item.value !== "All").map((status, index) => (
+                            initialTranslation[isLang].FilterStatus?.filter?.((item) => item.value !== "All").map((status, index) => (
                                 <React.Fragment key={index}>
 
                                     {

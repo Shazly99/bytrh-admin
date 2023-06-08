@@ -45,7 +45,7 @@ const Requests = () => {
 
         return () => clearTimeout(timeOut);
 
-    }, [isLang])
+    }, [isLang , page])
 
     return (
         <>
