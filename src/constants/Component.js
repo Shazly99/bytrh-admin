@@ -138,6 +138,8 @@ import AdoptionsAnimals from './../Pages/Animals/AdoptionsAnimals/AdoptionsAnima
 import AddAdoptionsAnimals from './../Pages/Animals/AdoptionsAnimals/AddAdoptionsAnimals';
 import EditAdoptionsAnimals from './../Pages/Animals/AdoptionsAnimals/EditAdoptionsAnimals';
 import Requests from './../Pages/Requests/Requests';
+import ContactUsClient from './../Pages/ContactUs/Cli/ContactUsClient';
+import ContactUsDoctor from './../Pages/ContactUs/Doc/ContactUsDoctor';
 
  
 
@@ -267,8 +269,9 @@ const Component= {
     AdoptionChat,
     HandelDelete,
     Error,
-
-
+    // Contact us 
+    ContactUsClient,
+    ContactUsDoctor,
     // Visits
     Visits,
     VisitDetails,

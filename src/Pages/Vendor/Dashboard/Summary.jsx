@@ -25,26 +25,26 @@ const Summary = ({ IncomeMoney, doctorsIncomeMoney, totalProfit, isLang, WalletA
                 <Col xl={3} lg={3} md={6} sm={12}>
                     <div className="app__summary mt-4">
                         <h5> {translate[isLang]?.Summary?.IncomeMoney} </h5>
-                        <span>{IncomeMoney} {' '} {translate[isLang]?.currency}</span>
+                        <span>{Math.round(IncomeMoney)} {' '} {translate[isLang]?.currency}</span>
                     </div>
                 </Col>
                 <Col xl={3} lg={3} md={6} sm={12}>
                     <div className="app__summary mt-4">
                         <h5> {translate[isLang]?.Summary?.doctorsIncomeMoney} </h5>
-                        <span>{doctorsIncomeMoney}{' '} {translate[isLang]?.currency} </span>
+                        <span>{Math.round(doctorsIncomeMoney)}{' '} {translate[isLang]?.currency} </span>
                     </div>
                 </Col>
                 <Col xl={3} lg={3} md={6} sm={12}>
                     <div className="app__summary mt-4">
                         <h5>{translate[isLang]?.Summary?.totalProfit} </h5>
-                        <span>{totalProfit} {' '} {translate[isLang]?.currency} </span>
+                        <span>{Math.round(totalProfit)} {' '} {translate[isLang]?.currency} </span>
                     </div>
                 </Col>
 
                 <Col xl={3} lg={3} md={6} sm={12}>
                     <div className="app__summary mt-4">
                         <h5>{translate[isLang]?.Summary?.WalletAmount} </h5>
-                        <span>{WalletAmount} {' '} {translate[isLang]?.currency} </span>
+                        <span>{Math.round(WalletAmount)} {' '} {translate[isLang]?.currency} </span>
                     </div>
                 </Col>
             </Row>

@@ -1,18 +1,14 @@
- 
-
-import React, { useContext } from 'react'
-import { Table, DropdownButton, Dropdown, NavDropdown } from "react-bootstrap";
-import Component from '../../../constants/Component'
-import Icons from '../../../constants/Icons'
-import { GetData, PostData, apiheader } from './../../../utils/fetchData';
-import { useEffect } from 'react';
-import { useState } from 'react';
 import { Pagination } from "@mui/material";
 import Box from "@mui/material/Box";
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Dropdown, DropdownButton, Table } from "react-bootstrap";
 import { toast } from 'react-hot-toast';
-import useSkeletonTable from '../../../utils/useSkeletonTable';
+import { Link } from 'react-router-dom';
+import Component from '../../../constants/Component';
+import Icons from '../../../constants/Icons';
 import { VendersContext } from '../../../context/Store';
+import useSkeletonTable from '../../../utils/useSkeletonTable';
+import { GetData, PostData, apiheader } from './../../../utils/fetchData';
 import translateSubCategories from './translateSubCate';
 
 
@@ -30,7 +26,7 @@ const AdoptionsAnimals = () => {
 
     // get AnimalSubCategories
     const AnimalSubCategories = async (page) => {
-        await PostData(`${process.env.REACT_APP_API_URL}/admin/animalsubcategories`, { IDPage: page }, apiheader).then(({ data }) => {
+        await PostData(`${process.env.REACT_APP_API_URL}/admin/animalsubcategories`, { IDPage: page, IDAnimalCategory: 16 }, apiheader).then(({ data }) => {
             setAnimal(data.Response.AnimalSubCategories)
             setPagesNumber(data.Response.Pages);
             const timeoutId = setTimeout(() => {
@@ -85,7 +81,7 @@ const AdoptionsAnimals = () => {
                 IDAnimalSubCategory: id,
                 SubCategoryAdoption: 1
             }).then((res) => {
-                toast.success(<strong> {translateSubCategories[isLang]?.toastStaus}   </strong>, { 
+                toast.success(<strong> {translateSubCategories[isLang]?.toastStaus}   </strong>, {
 
                     duration: 4000,
                     position: 'top-center',
@@ -102,8 +98,8 @@ const AdoptionsAnimals = () => {
                 IDAnimalSubCategory: id,
                 SubCategoryAdoption: 0
             }).then((res) => {
-                toast.success(<strong> {translateSubCategories[isLang]?.toastStaus}   </strong>, { 
-                
+                toast.success(<strong> {translateSubCategories[isLang]?.toastStaus}   </strong>, {
+
                     duration: 4000,
                     position: 'top-center',
                     iconTheme: {
@@ -185,7 +181,7 @@ const AdoptionsAnimals = () => {
                                 </div>
                             </> : SkeletonSearch(40, "100%")}
                         </div>
-                  {/*       <div className='filter__group'>
+                        {/*       <div className='filter__group'>
                             {isLoader ? <>
                                 <label>
                                     {
@@ -255,7 +251,7 @@ const AdoptionsAnimals = () => {
                                 {
                                     animal?.map((item, index) => (
                                         <tr key={index}>
-                                            <td >
+                                            {/* <td >
                                                 <div  >
                                                     <img
                                                         src={item?.AnimalSubCategoryImage}
@@ -271,7 +267,7 @@ const AdoptionsAnimals = () => {
                                                 <div>
                                                     {item?.AnimalCategoryName}
                                                 </div>
-                                            </td>
+                                            </td> */}
 
                                             <td >
                                                 <div>
@@ -283,14 +279,14 @@ const AdoptionsAnimals = () => {
                                                 <div>
                                                     <span style={{ height: 'fit-content !important' }} className={`  ${item?.SubCategoryAdoption === 1 && 'txt__status'}  ${item?.SubCategoryAdoption === 0 && 'txt_shipped'} `} >
                                                         {item?.SubCategoryAdoption === 1 ?
-                                                            isLang === 'ar' ? 'مسموح بالتبني' : 'Allow Adopt'
+                                                            isLang === 'ar' ? ' نشـــط' : 'Active'
                                                             :
-                                                            isLang === 'ar' ? '  غير مسموح بالتبني' : 'Don’t Allow Adopt'
+                                                            isLang === 'ar' ? '  غير  نشــط' : 'InActive'
                                                         }
                                                     </span>
                                                 </div>
                                             </td>
- 
+
 
                                             <td>
                                                 <div>
@@ -310,20 +306,20 @@ const AdoptionsAnimals = () => {
 
                                                             <div className="w-100 bg-dark opacity-25" style={{ height: '1px' }}></div>
 
-                                              
+
 
 
                                                             {
                                                                 item?.SubCategoryAdoption === 1 ? '' : item?.SubCategoryAdoption === "1" ? '' : <Dropdown.Item eventKey="AllowAdoption">
                                                                     {
-                                                                        isLang === 'ar' ? 'السماح بالتبني' : '  Allow Adopt'
+                                                                        isLang === 'ar' ? ' نشـــط' : 'Active'
                                                                     }
                                                                 </Dropdown.Item>
                                                             }
                                                             {
                                                                 item?.SubCategoryAdoption === 0 ? '' : item?.SubCategoryAdoption === "0" ? '' : <Dropdown.Item eventKey="NotAllowAdoption">
                                                                     {
-                                                                        isLang === 'ar' ? 'لا تسمح بالتبني': '    Don’t Allow Adopt'
+                                                                        isLang === 'ar' ? '  غير  نشــط' : 'InActive'
 
                                                                     }
                                                                 </Dropdown.Item>

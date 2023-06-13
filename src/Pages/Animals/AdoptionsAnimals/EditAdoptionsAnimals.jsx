@@ -56,9 +56,9 @@ const EditAdoptionsAnimals = () => {
     editCategory({
       AnimalSubCategoryNameEn: CategoryNameEn.current.value,
       AnimalSubCategoryNameAr: CategoryNameAr.current.value,
-      AnimalSubCategoryImage: selectedImage,
+      // AnimalSubCategoryImage: selectedImage,
       IDAnimalSubCategory: id,
-      IDAnimalCategory: animalCategoryRef.current.value,
+      IDAnimalCategory: 16,
       // AnimalBagging: animalBaggingRef.current.value,
       // AnimalCutting: animalCutRef.current.value,
     })
@@ -120,7 +120,7 @@ const EditAdoptionsAnimals = () => {
           <div className="app__addOrder-form">
             <div className="app__addprodects-form">
               <form onSubmit={submit}>
-                <Row>
+                {/* <Row>
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
                     <Form.Group>
                       <Form.Label>{translateSubCategories[isLang]?.LabelAddImage}</Form.Label>
@@ -155,7 +155,7 @@ const EditAdoptionsAnimals = () => {
                       </div>
                     </Form.Group>
                   </Col>
-                </Row>
+                </Row> */}
                 <Row>
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
@@ -165,7 +165,7 @@ const EditAdoptionsAnimals = () => {
                     </Form.Group>
 
 
-                    <Form.Group controlId="formBasicEmail" className='mt-3'>
+  {/*                   <Form.Group controlId="formBasicEmail" className='mt-3'>
                       <Form.Label>{translateSubCategories[isLang]?.LabelAddCate}</Form.Label>
 
                       <Form.Select aria-label="Default select example" ref={animalCategoryRef}>
@@ -176,7 +176,7 @@ const EditAdoptionsAnimals = () => {
                         }
                       </Form.Select>
 
-                    </Form.Group>
+                    </Form.Group> */}
  {/*                    <Form.Group controlId="formBasicEmail" className='mt-3'>
                       <Form.Label>{translateSubCategories[isLang]?.LabelAddCut}</Form.Label>
 
@@ -218,7 +218,7 @@ const EditAdoptionsAnimals = () => {
                     </div>
 
                     <div className='baseBtn w-auto'>
-                      <Link to={'/animals/subcategories'}>
+                      <Link to={'/animals/adoptionsSubcategories'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                           {translateSubCategories[isLang]?.CancelBTN}
                         </Button>

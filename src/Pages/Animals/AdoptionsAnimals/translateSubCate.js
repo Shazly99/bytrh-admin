@@ -1,7 +1,7 @@
 let translateSubCategories = {
     'en' :
     {
-        placeholder : 'Search by  animal adoption sub category..',
+        placeholder : 'Search by animal adoption category..',
         addBTN: 'Add',
         FilterStatus: [
             { value: "All", text: "All" },
@@ -9,9 +9,9 @@ let translateSubCategories = {
             { value: "INACTIVE", text: " InActive  " },
         ],
         TableHeader: [
-            "Image",
+  /*           "Image",
+            "Category", */
             "Category",
-            "Sub Category",
             " Adoption", 
             "Action",
         ],
@@ -36,7 +36,7 @@ let translateSubCategories = {
     },
     'ar' :
     {
-        placeholder : 'البحث حسب الفئة الفرعية لتبني الحيوانات ..',
+        placeholder : 'البحث حسب الفئه  لتبني الحيوانات ..',
         addBTN: 'إضافـة',
         FilterStatus: [
             { value: "All", text: "الكـل" },
@@ -44,9 +44,9 @@ let translateSubCategories = {
             { value: "INACTIVE", text: "غير نشـط" },
         ],
         TableHeader: [
-            "الصـورة",
+            // "الصـورة",
             "الفئـة",
-            "الفئـة الفرعيـة",
+            // "الفئـة الفرعيـة",
             "التبني", 
             "الإجـراء",
         ],

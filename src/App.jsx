@@ -241,6 +241,14 @@ function App() {
             },
           ]
         },
+        // ToDO :: ContactApp
+
+        {
+          path: '/contactUs', children: [
+            { path: 'client', element: <ProtectedRoutes allowedRoles={['1']}> <Component.ContactUsClient /> </ProtectedRoutes> },
+            { path: 'doctor', element: <ProtectedRoutes allowedRoles={['1']}> <Component.ContactUsDoctor /> </ProtectedRoutes> },
+          ]
+        },
         // ToDO :: consult
         {
           path: '/consult', children: [
@@ -279,7 +287,7 @@ function App() {
         },
         {
           path: '/request', children: [
-            { index:true, element: <ProtectedRoutes allowedRoles={['1' ]}><Component.Requests /> </ProtectedRoutes> },
+            { index: true, element: <ProtectedRoutes allowedRoles={['1']}><Component.Requests /> </ProtectedRoutes> },
           ]
         },
         {
@@ -320,7 +328,7 @@ function App() {
                 { index: true, element: <ProtectedRoutes allowedRoles={['1']}> <Component.ReportsClients /> </ProtectedRoutes>, },
                 { path: 'clientTransactionsDetails/:id', element: <ProtectedRoutes allowedRoles={['1']}><Component.ClientTransactionsDetails /> </ProtectedRoutes> },
               ]
-            }, 
+            },
           ]
         },
         {

@@ -242,6 +242,30 @@ const routes = [
 
     ],
   },
+
+
+  {
+    nameAr: "اتصل بنا",
+    nameEn: "Contact us",
+    icon: <LogoSvg.Contact className="logoSvg" style={{ width: 17 }} />,
+    Roles: [1],
+
+    subRoutes: [
+      {
+        path: "/contactUs/client",
+        nameAr: " عميل ",
+        nameEn: " Client ",
+        icon: <Icons.Dote size={17} />,
+      },
+      {
+        path: "/contactUs/doctor",
+        nameAr: " طبيب ",
+        nameEn: " Doctor ",
+        icon: <Icons.Dote size={17} />,
+      },
+
+    ],
+  },
   {
     path: "/blogs/doctor",
     nameAr: "المدونات ",

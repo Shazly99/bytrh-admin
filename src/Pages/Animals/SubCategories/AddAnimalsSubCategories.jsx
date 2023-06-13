@@ -55,7 +55,7 @@ const AddAnimalsSubCategories = () => {
       AnimalCut: animalCutRef.current.value,
       AnimalBagging: animalBaggingRef.current.value,
       IDAnimalCategory: animalCategoryRef.current.value,
-      SubCategoryAdoption: adoption.current.value
+      // SubCategoryAdoption: adoption.current.value
     })
   }
 
@@ -186,7 +186,7 @@ const AddAnimalsSubCategories = () => {
                     </Form.Group>
 
 
-                    <Form.Group controlId="formBasicEmail" className='mt-3'>
+                    {/* <Form.Group controlId="formBasicEmail" className='mt-3'>
                       <Form.Label>{translateSubCategories[isLang]?.LabelAddAdoption}</Form.Label>
 
                       <Form.Select aria-label="Default select example" ref={adoption}>
@@ -196,11 +196,10 @@ const AddAnimalsSubCategories = () => {
                           { SubCategoryAdoption: 0, BaggingName: 'Don’t allow adopt', BaggingNameAr: 'لا تسمح بالتبني', }]?.map((item, index) => (
                             <option key={index} value={item?.SubCategoryAdoption}>{isLang === 'en' ? item?.BaggingName : item?.BaggingNameAr}</option>
                           ))
-                        }
-                        {/* <option value="0">InActive</option> */}
+                        } 
                       </Form.Select>
 
-                    </Form.Group>
+                    </Form.Group> */}
 
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
                       <Form.Label>{translateSubCategories[isLang]?.LabelAddBag}</Form.Label>

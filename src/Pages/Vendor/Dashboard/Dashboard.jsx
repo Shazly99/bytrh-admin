@@ -110,10 +110,10 @@ function Dashboard() {
           <div className="app__dashboard_summary">
             <Component.Summary
               isLang={isLang}
-              IncomeMoney={dashbordData?.IncomeAmount}
-              doctorsIncomeMoney={dashbordData?.DoctorsIncomeAmount}
-              totalProfit={dashbordData?.TotalProfit}
-              WalletAmount={dashbordData?.WalletAmount}
+              IncomeMoney={Number(dashbordData?.IncomeAmount)}
+              doctorsIncomeMoney={Number(dashbordData?.DoctorsIncomeAmount)}
+              totalProfit={Number(dashbordData?.TotalProfit)}
+              WalletAmount={Number(dashbordData?.WalletAmount)}
             />
           </div>
 

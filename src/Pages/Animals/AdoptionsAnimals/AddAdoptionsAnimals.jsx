@@ -53,10 +53,10 @@ const AddAdoptionsAnimals = () => {
     addNewCategory({
       AnimalSubCategoryNameEn: CategoryNameEn.current.value,
       AnimalSubCategoryNameAr: CategoryNameAr.current.value,
-      AnimalSubCategoryImage: selectedImage,
+      // AnimalSubCategoryImage: selectedImage,
       // AnimalCut: animalCutRef.current.value,
       // AnimalBagging: animalBaggingRef.current.value,
-      IDAnimalCategory: animalCategoryRef.current.value,
+      IDAnimalCategory:16,
       // SubCategoryAdoption: adoption.current.value
     })
   }
@@ -112,7 +112,7 @@ const AddAdoptionsAnimals = () => {
           <div className="app__addOrder-form">
             <div className="app__addprodects-form">
               <form onSubmit={submit}>
-                <Row>
+     {/*            <Row>
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
                     <Form.Group>
                       <Form.Label>{translateSubCategories[isLang]?.LabelAddImage}</Form.Label>
@@ -141,7 +141,7 @@ const AddAdoptionsAnimals = () => {
                       </div>
                     </Form.Group>
                   </Col>
-                </Row>
+                </Row> */}
                 <Row>
                   <Col xl={6} lg={6} md={6} sm={12} className="app__addprodects-form-en">
 
@@ -149,7 +149,7 @@ const AddAdoptionsAnimals = () => {
                       <Form.Label>{translateSubCategories[isLang]?.LabelAddNameEN}</Form.Label>
                       <Form.Control type="text" name='firstname' ref={CategoryNameEn} />
                     </Form.Group>
-                    <Form.Group controlId="formBasicEmail" className='mt-3'>
+         {/*            <Form.Group controlId="formBasicEmail" className='mt-3'>
                       <Form.Label>{translateSubCategories[isLang]?.LabelAddCate}</Form.Label>
 
                       <Form.Select aria-label="Default select example" ref={animalCategoryRef}>
@@ -161,7 +161,7 @@ const AddAdoptionsAnimals = () => {
                         }
                       </Form.Select>
 
-                    </Form.Group>
+                    </Form.Group> */}
                     {/**
                      * 
                     <Form.Group controlId="formBasicEmail" className='mt-3'>
@@ -232,7 +232,7 @@ const AddAdoptionsAnimals = () => {
                     </div>
 
                     <div className='baseBtn w-auto'>
-                      <Link to={'/animals/subcategories'}>
+                      <Link to={'/animals/adoptionsSubcategories'}>
                         <Button variant={'primary'} className='d-flex align-items-center justify-content-center'>
                           {translateSubCategories[isLang]?.CancelBTN}
                         </Button>
