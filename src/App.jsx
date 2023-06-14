@@ -419,7 +419,7 @@ function App() {
       />
       <ChatStore>
         <VenderContext>
-          <RouterProvider router={root} />
+          <RouterProvider router={root}  />
         </VenderContext>
       </ChatStore>
 
