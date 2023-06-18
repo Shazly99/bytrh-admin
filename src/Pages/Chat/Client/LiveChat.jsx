@@ -61,7 +61,7 @@ function LiveChat() {
             try {
                 const { data } = await PostData(`https://bytrh.com/api/admin/chat/client/receive`, { IDClientChatSupport: id, IDChatSupportDetails: IdChatSupport }, apiheader);
                 if (clientChatSupport !== []) {
-                    setClientChatSupport([])
+                    // setClientChatSupport([])
                     setClientChatSupport([...clientChatSupport, ...data.Response]);
                 }
             } catch (error) {
@@ -140,7 +140,7 @@ function LiveChat() {
                             </div>
                         </div>
                         {
-                            chatStatus === 'ONGOING' ?
+                            chatStatus === 'ONGOING' || chatStatus === 'PENDING' ?
                                 <ScrollToBottom dir='ltr'className="message-container">
                                     {clientChatSupport?.map((messageContent, index) => {
                                         return (

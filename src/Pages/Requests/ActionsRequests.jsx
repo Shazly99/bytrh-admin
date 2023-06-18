@@ -4,9 +4,10 @@ import LogoSvg from '../../assets/svg/LogoSvg'
 import initialTranslation from "../Services/Translation.js";
 import { toast } from 'react-hot-toast';
 import { PostData, apiheader } from '../../utils/fetchData';
-import { Dropdown, DropdownButton, Modal,Form,Row,Col,FormControl,Button } from 'react-bootstrap';
+import { Dropdown, DropdownButton, Modal, Form, Row, Col, FormControl, Button } from 'react-bootstrap';
 import { VendersContext } from '../../context/Store';
 import initialTranslation2 from '../Vendor/Doctor/Withdraw/Translation'
+import AdoptionRequests from './AdoptionRequests';
 
 const ActionsRequests = ({ RequestType, idType, RequestStatus, RequestsList }) => {
     let { isLang } = useContext(VendersContext);
@@ -181,7 +182,6 @@ const ActionsRequests = ({ RequestType, idType, RequestStatus, RequestsList }) =
 
             {
                 RequestType === 'DOCTOR_WITHDRAW' &&
-
                 <span>
                     <DropdownButton
                         id={`dropdown-${idType}`}
@@ -201,8 +201,14 @@ const ActionsRequests = ({ RequestType, idType, RequestStatus, RequestsList }) =
                         }
                     </DropdownButton>
                 </span>
-
-
+            }
+            {
+                RequestType === 'ADOPTION' &&
+                <AdoptionRequests
+                    RequestStatus={RequestStatus}
+                    RequestsList={() => RequestsList(1)}
+                    idType={idType}
+                />
             }
 
 

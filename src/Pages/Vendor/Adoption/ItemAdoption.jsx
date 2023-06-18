@@ -33,12 +33,10 @@ export default function ItemAdoption({ Reason, id, clientName, petName, petStrai
     function handleModalOpenReason(index) {
         setModalIndexReason(index);
         setModalShowReason(true);
-    }    //!Modal 
-    function handleModalClose() {
-        setModalShow(false);
     }
+    //!Modal 
+    const handleModalClose = () => setModalShow(false);
     function handleModalOpen(index) {
-
         setModalIndex(index);
         setModalShow(true);
     }
@@ -206,7 +204,7 @@ export default function ItemAdoption({ Reason, id, clientName, petName, petStrai
                     <Modal.Footer className="d-flex justify-content-center align-items-center">
 
                         <Button onClick={handleModalCloseReason}    >
-                        {isLang == "ar" ? '   رجوع ' : 'Cancel '}
+                            {isLang == "ar" ? '   رجوع ' : 'Cancel '}
 
                         </Button>
                     </Modal.Footer>

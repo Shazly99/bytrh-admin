@@ -137,7 +137,7 @@ const LiveChatDoc = () => {
         </div>
       </div>
       {
-        chatStatus === 'ONGOING' ?
+        chatStatus === 'ONGOING' || chatStatus === 'PENDING'  ?
           <ScrollToBottom  dir='ltr'className="message-container">
             {clientChatSupport?.map((messageContent, index) => {
               return (
